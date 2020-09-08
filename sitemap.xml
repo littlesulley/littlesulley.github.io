@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sulley.cc/2020/09/ac-odyssey-impression/</loc>
+    
+    <lastmod>2020-09-08</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sulley.cc/2020/09/%E7%94%B5%E5%BD%B1%E3%80%8A%E8%AF%AF%E6%9D%80%E3%80%8B%E7%9F%AD%E8%AF%84/</loc>
     
     <lastmod>2020-09-08</lastmod>
@@ -60,14 +67,14 @@
 
   
   <url>
-    <loc>http://sulley.cc/tags/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>http://sulley.cc/tags/%E6%B8%B8%E6%88%8F/</loc>
     <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://sulley.cc/tags/%E5%BD%B1%E8%AF%84/</loc>
+    <loc>http://sulley.cc/tags/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -80,7 +87,21 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>http://sulley.cc/tags/%E5%BD%B1%E8%AF%84/</loc>
+    <lastmod>2020-09-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
+  
+  <url>
+    <loc>http://sulley.cc/categories/%E6%B8%B8%E6%88%8F-%E5%88%BA%E5%AE%A2%E4%BF%A1%E6%9D%A1/</loc>
+    <lastmod>2020-09-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
   
   <url>
     <loc>http://sulley.cc/categories/%E7%94%B5%E5%BD%B1-%E5%9B%BD%E4%BA%A7%E7%94%B5%E5%BD%B1/</loc>
