@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>无穷连根式求极限的充要条件</title>
+      <link href="/2020/09/infinite-radicals/"/>
+      <url>/2020/09/infinite-radicals/</url>
+      
+        <content type="html"><![CDATA[<p>在习题集或者考试的时候我们经常会遇到诸如$\sqrt{1+\sqrt{2+\sqrt{3}+\cdots}}$或者$\sqrt{2+\sqrt{2+\sqrt{2}+\cdots}}$的极限求解或极限存在性证明。解决此类问题的方法有很多，但都可以归结为一点：缩放。要么是两端缩放然后夹逼定理，要么是证明有界然后两边取极限。本文记录此类问题极限存在的一个充要条件，以供参阅。</p><a id="more"></a><h1 id="Ramanujan’s-Problem"><a href="#Ramanujan’s-Problem" class="headerlink" title="Ramanujan’s Problem"></a>Ramanujan’s Problem</h1><p>这类问题最著名的是拉马努金（Ramanujan）所提出的恒等式：</p><blockquote><p>证明:<br>$$3=\sqrt{1+2\sqrt{1+3\sqrt{1+\cdots}}}\tag{1}$$</p></blockquote><p>这个等式的证明是简单而有趣的：</p><p>$$3=\sqrt{1+2\cdot 4}=\sqrt{1+2\sqrt{1+3\cdot 5}}=\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}$$</p><p>同时，Ramanujan还断言下面的结论：</p><p>$$\lim_{n\to\infty}\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=3$$</p><p>这个的证明也是容易的。首先把上式和(1)式比较，就发现上式以3为上界，并且由单调性可知，其极限是存在的。为了证明$a_n=\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}$的极限就是3，我们证明：对任意的$3&gt;\epsilon&gt;0$，都存在$N$，使得所有的$n&gt;N$都有$a_n&gt;3-\epsilon$。</p><p>现在任取$0&lt;\epsilon&lt;3$，令$3-\epsilon=3r$，故$0&lt;r=1-\epsilon/3&lt;1$，故有：</p><p>$$3-\epsilon=3r=r\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}$$ </p><p>把$r$乘进去，就有：</p><p>$$3-\epsilon=\sqrt{r^2+2\sqrt{r^{2^2}+\cdots+n\sqrt{r^{2^n}[1+(n+1)(n+3)]}}}\tag{2}$$</p><p>由于$1&gt;r^{2^i},\forall i=1,2,\cdots$，且存在$N$，当$n&gt;N$时，有</p><p>$$1&gt;r^{2^n}[1+(n+1)(n+2)]=r^{2^n}(n+2)^2$$</p><p>把这些全部带入(2)式，就可以证明：</p><p>$$3-\epsilon=\sqrt{r^2+2\sqrt{r^{2^2}+\cdots+n\sqrt{r^{2^n}[1+(n+1)(n+3)]}}}\&lt;\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=a_n,n&gt;N$$</p><p>从而完成证明。</p><h1 id="Herschfeld’s-Convergence-Theorem-（Herschfeld收敛定理）"><a href="#Herschfeld’s-Convergence-Theorem-（Herschfeld收敛定理）" class="headerlink" title="Herschfeld’s Convergence Theorem （Herschfeld收敛定理）"></a>Herschfeld’s Convergence Theorem （Herschfeld收敛定理）</h1><p><a href="https://www.tandfonline.com/doi/abs/10.1080/00029890.1935.11987745?journalCode=uamm20">Herschfeld’s Convergence Theorem</a> 告诉我们了一个无穷根式收敛的充要条件：</p><blockquote><p>设序列$a_n=(a_1+(a_2+(\cdots+a_n^{r_n}))^{r_2})^{r_1} (a_i\ge 0,0&lt;r_i\le 1)$且级数$S=\sum_{i=1}^\infty r_1r_2\cdots r_i$，则序列${a_n}$收敛的充分必要条件式：<br>$$\overline{\lim_{n\to\infty}}a_n^{r_1r_2\cdots r_n}&lt;+\infty$$</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数学 - 数学分析 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 随笔 </tag>
+            
+            <tag> 数学 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>《Assissan&#39;s Creed Odyssey》玩后感</title>
       <link href="/2020/09/ac-odyssey-impression/"/>
       <url>/2020/09/ac-odyssey-impression/</url>
