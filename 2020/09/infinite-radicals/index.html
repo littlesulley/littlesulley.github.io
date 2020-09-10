@@ -33,7 +33,7 @@ ga('create','UA-177457412-1','auto');ga('send','pageview');
 <p>从而完成证明。</p>
 <h1 id="Polya’s-Criterion（Polya准则）"><a href="#Polya’s-Criterion（Polya准则）" class="headerlink" title="Polya’s Criterion（Polya准则）"></a>Polya’s Criterion（Polya准则）</h1><p>在考虑普遍情况下首先来观察一些特例，一个典型的特例就是形如$\sqrt{a_1+\sqrt{a_2+\cdots}}$的无穷根式，每个根号的次数都是$2$，或者幂次都是$2^{-1}$。对于$a_1$来看，控制它的幂次是$\frac{1}{2}$，对于$a_2$来说，控制它的幂次是$2^{-2}$，对于$a_n$来说，控制它的幂次是$2^{-n}$。假设这个无穷根式极限存在，那么我们关心的肯定是$n$足够大时，它被什么控制，显然是$a_n$及控制它的$2^{-n}$的幂次。所以，一个合理的猜测是，如果$a_n^{2^{-n}}$极限存在，那么该根式就收敛。下面我们将看到，这个猜测已经非常接近“真相”，甚至是真相的一部分。</p>
 <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>设序列$u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}$，则${u_n}$可以用下述条件判定：</p>
-<p>$$<br>\begin{cases}<br>\text{converges},&amp;\text{if}; \overline{\lim}_{n\to\infty}\frac{\log\log a_n}{n}&lt;\log 2\<br>\text{diverges},&amp;\text{if}; \overline{\lim}_{n\to\infty}\frac{\log\log a_n}{n}&gt;\log 2<br>\end{cases}<br>$$</p>
+<p>$$<br>\begin{cases}<br>\text{converges},&amp;\text{if}\; \overline{\lim}_{n\to\infty}\frac{\log\log a_n}{n}&lt;\log 2\\<br>\text{diverges},&amp;\text{if}\; \overline{\lim}_{n\to\infty}\frac{\log\log a_n}{n}&gt;\log 2<br>\end{cases}<br>$$</p>
 <p>上述准则还可以进一步推广为：</p>
 <blockquote>
 <p>序列${u_n}$收敛的充要条件是：<br>$$\overline{\lim_{n\to\infty}} n \left( \frac{\log\log a_n}{n}-\log2 \right) &lt;+\infty\tag{3}$$</p>
