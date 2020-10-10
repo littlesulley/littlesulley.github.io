@@ -6,7 +6,7 @@
   <link href="http://sulley.cc/atom.xml" rel="self"/>
   
   <link href="http://sulley.cc/"/>
-  <updated>2020-09-10T11:31:34.335Z</updated>
+  <updated>2020-10-09T12:23:16.478Z</updated>
   <id>http://sulley.cc/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>巫师三：一个告诉你原来游戏可以是艺术品的神作</title>
+    <link href="http://sulley.cc/2020/10/witcher-impression/"/>
+    <id>http://sulley.cc/2020/10/witcher-impression/</id>
+    <published>2020-10-09T11:34:13.000Z</published>
+    <updated>2020-10-09T12:23:16.478Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;</summary>
+      
+    
+    
+    
+    <category term="游戏 - 巫师" scheme="http://sulley.cc/categories/%E6%B8%B8%E6%88%8F-%E5%B7%AB%E5%B8%88/"/>
+    
+    
+    <category term="随笔" scheme="http://sulley.cc/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+    <category term="生活" scheme="http://sulley.cc/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+    <category term="游戏" scheme="http://sulley.cc/tags/%E6%B8%B8%E6%88%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>无穷连根式求极限的充要条件</title>
