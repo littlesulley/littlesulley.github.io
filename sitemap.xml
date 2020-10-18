@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sulley.cc/2020/10/Bresenham%E7%AE%97%E6%B3%95%E7%94%BB%E7%9B%B4%E7%BA%BF/</loc>
+    
+    <lastmod>2020-10-18</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sulley.cc/2020/10/witcher-impression/</loc>
     
     <lastmod>2020-10-10</lastmod>
@@ -74,43 +81,57 @@
 
   <url>
     <loc>http://sulley.cc/</loc>
-    <lastmod>2020-10-10</lastmod>
+    <lastmod>2020-10-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>http://sulley.cc/tags/%E6%95%B0%E5%AD%A6/</loc>
-    <lastmod>2020-10-10</lastmod>
+    <loc>http://sulley.cc/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/</loc>
+    <lastmod>2020-10-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://sulley.cc/tags/%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2020-10-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://sulley.cc/tags/%E9%9A%8F%E7%AC%94/</loc>
-    <lastmod>2020-10-10</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://sulley.cc/tags/%E5%BD%B1%E8%AF%84/</loc>
-    <lastmod>2020-10-10</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://sulley.cc/tags/%E7%94%9F%E6%B4%BB/</loc>
-    <lastmod>2020-10-10</lastmod>
+    <lastmod>2020-10-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://sulley.cc/tags/%E6%B8%B8%E6%88%8F/</loc>
-    <lastmod>2020-10-10</lastmod>
+    <lastmod>2020-10-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://sulley.cc/tags/%E7%94%9F%E6%B4%BB/</loc>
+    <lastmod>2020-10-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://sulley.cc/tags/%E6%95%B0%E5%AD%A6/</loc>
+    <lastmod>2020-10-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://sulley.cc/tags/%E5%BD%B1%E8%AF%84/</loc>
+    <lastmod>2020-10-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -118,29 +139,36 @@
 
   
   <url>
-    <loc>http://sulley.cc/categories/%E6%95%B0%E5%AD%A6-%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/</loc>
-    <lastmod>2020-10-10</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://sulley.cc/categories/%E7%94%B5%E5%BD%B1-%E5%9B%BD%E4%BA%A7%E7%94%B5%E5%BD%B1/</loc>
-    <lastmod>2020-10-10</lastmod>
+    <loc>http://sulley.cc/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/</loc>
+    <lastmod>2020-10-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://sulley.cc/categories/%E6%B8%B8%E6%88%8F-%E5%B7%AB%E5%B8%88/</loc>
-    <lastmod>2020-10-10</lastmod>
+    <lastmod>2020-10-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://sulley.cc/categories/%E6%95%B0%E5%AD%A6-%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/</loc>
+    <lastmod>2020-10-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://sulley.cc/categories/%E7%94%B5%E5%BD%B1-%E5%9B%BD%E4%BA%A7%E7%94%B5%E5%BD%B1/</loc>
+    <lastmod>2020-10-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://sulley.cc/categories/%E6%B8%B8%E6%88%8F-%E5%88%BA%E5%AE%A2%E4%BF%A1%E6%9D%A1/</loc>
-    <lastmod>2020-10-10</lastmod>
+    <lastmod>2020-10-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
