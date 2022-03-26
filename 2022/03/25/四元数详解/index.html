@@ -33,7 +33,7 @@
 <meta property="og:description" content="图形学中的旋转（Rotation）非常重要，用欧拉角（Euler Angle）旋转非常简单，但是却存在 万向锁（Gimbal Lock） 的问题；同时，用欧拉角插值也不尽方便。基于四元数（Quaternion）的旋转既解决了万向锁的问题，又能非常便利地插值。本文将从概念出发，对四元数的定义、推导、性质、应用，以及它与欧拉角之间的联系进行介绍。本文主要参考了Krasjet的《四元数与三维旋转》。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-24T17:00:33.000Z">
-<meta property="article:modified_time" content="2022-03-26T07:06:33.782Z">
+<meta property="article:modified_time" content="2022-03-26T12:45:01.849Z">
 <meta property="article:author" content="Sulley">
 <meta property="article:tag" content="计算机">
 <meta property="article:tag" content="随笔">
@@ -279,7 +279,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-26 15:06:33" itemprop="dateModified" datetime="2022-03-26T15:06:33+08:00">2022-03-26</time>
+      <time title="修改时间：2022-03-26 20:45:01" itemprop="dateModified" datetime="2022-03-26T20:45:01+08:00">2022-03-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -319,14 +319,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5k</span>
+      <span>4.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
+      <span>4 分钟</span>
     </span>
 </div>
 
@@ -359,9 +359,9 @@ class="math inline">\(b\)</span>称为复数的虚部 (Imaginary
 Part)，表达为<span class="math inline">\(b=\text{Im}(z)\)</span>。</p>
 <p>从线性代数的角度来看，复数<span
 class="math inline">\(z=a+bi\)</span>可以看成是基 (Basis) <span
-class="math inline">\(\\{1,i\\}\)</span>上的线性组合，因此也可以把复数<span
+class="math inline">\(\{1,i\}\)</span>上的线性组合，因此也可以把复数<span
 class="math inline">\(z\)</span>写成一个向量：</p>
-<p><span class="math display">\[z=\begin{bmatrix}a\\\\b
+<p><span class="math display">\[z=\begin{bmatrix}a\\b
 \end{bmatrix}\]</span></p>
 <h2 id="复数的加法与乘法">复数的加法与乘法</h2>
 <h3 id="复数的加法">复数的加法</h3>
@@ -374,56 +374,56 @@ class="math display">\[z_1z_2=(a+bi)(c+di)=(ac-bd)+(bc+ad)i\]</span></p>
 <p>利用上面讲过的复数的向量形式，可以把上式写成矩阵乘向量的形式：</p>
 <p><span class="math display">\[z_1z_2=(ac-bd)+(bc+ad)i=
 \begin{bmatrix}
-ac-bd\\\\
+ac-bd\\
 bc+ad
 \end{bmatrix}=
 \begin{bmatrix}
-a &amp; -b\\\\
+a &amp; -b\\
 b &amp; a
 \end{bmatrix}
 \begin{bmatrix}
-c\\\\
+c\\
 d
 \end{bmatrix}\]</span></p>
-右侧的向量<span
-class="math inline">\(\begin{bmatrix}c\\\\d\end{bmatrix}\)</span>就是向量形式下的$
-z_2<span class="math inline">\(，而左侧的矩阵\)</span>
-<span
-class="math display">\[\begin{bmatrix}a&amp;-b\\\\b&amp;a\end{bmatrix}\]</span>
-<p><span
-class="math inline">\(则是\)</span>z_1$在乘法时的<strong>矩阵形式</strong>，矩阵的第一列就是自身的向量形式，而第二列进行了交换并对虚部取负。</p>
+<p>右侧的向量<span
+class="math inline">\(\begin{bmatrix}c\\d\end{bmatrix}\)</span>就是向量形式下的<span
+class="math inline">\(z_2\)</span>，而左侧的矩阵<span
+class="math inline">\(\begin{bmatrix}a&amp;-b\\b&amp;a\end{bmatrix}\)</span>则是<span
+class="math inline">\(z_1\)</span>在乘法时的<strong>矩阵形式</strong>，矩阵的第一列就是自身的向量形式，而第二列进行了交换并对虚部取负。</p>
 <p>所以，我们可以把<span
 class="math inline">\(z_2\)</span>也写成矩阵形式，然后与<span
 class="math inline">\(z_1\)</span>相乘：</p>
 <p><span class="math display">\[z_1z_2=
 \begin{bmatrix}
-a &amp; -b\\\\
+a &amp; -b\\
 b &amp; a
 \end{bmatrix}
 \begin{bmatrix}
-c &amp; -d\\\\
+c &amp; -d\\
 d &amp; c
 \end{bmatrix}=
 \begin{bmatrix}
-ac-bd &amp; -(bc+ad)\\\\
+ac-bd &amp; -(bc+ad)\\
 bc+ad &amp; ac-bd
 \end{bmatrix}\]</span></p>
-<p>所以，我们现在可以用至少三种形式去表达一个复数了（具体用哪种形式取决于我们的需要）：
-- 代数形式：<span class="math inline">\(z=a+bi\)</span>; -
-向量形式：<span
-class="math inline">\(z=\begin{bmatrix}a\\\\b\end{bmatrix}\)</span>; -
-矩阵形式：<span class="math inline">\(z=\begin{bmatrix}a &amp; -b\\\\b
-&amp; a\end{bmatrix}\)</span>.</p>
+<p>所以，我们现在可以用至少三种形式去表达一个复数了（具体用哪种形式取决于我们的需要）：</p>
+<ul>
+<li>代数形式：<span class="math inline">\(z=a+bi\)</span>;</li>
+<li>向量形式：<span
+class="math inline">\(z=\begin{bmatrix}a\\b\end{bmatrix}\)</span>;</li>
+<li>矩阵形式：<span class="math inline">\(z=\begin{bmatrix}a &amp; -b\\b
+&amp; a\end{bmatrix}\)</span>.</li>
+</ul>
 <p>有两个特殊的复数<span
 class="math inline">\(1,i\)</span>，它们的矩阵形式不难得到是：</p>
 <p><span class="math display">\[1=\begin{bmatrix}
-1 &amp; 0\\\\
+1 &amp; 0\\
 0 &amp; 1
-\end{bmatrix}=I\\;(a=1, b=0)\]</span></p>
+\end{bmatrix}=I\;(a=1, b=0)\]</span></p>
 <p><span class="math display">\[i=\begin{bmatrix}
-0 &amp; -1\\\\
+0 &amp; -1\\
 1 &amp; 0
-\end{bmatrix}\\;(a=0, b=1)\]</span></p>
+\end{bmatrix}\;(a=0, b=1)\]</span></p>
 <p>对复数<span
 class="math inline">\(i\)</span>的矩阵形式进行平方，发现它就是<span
 class="math inline">\(-I\)</span>，从代数形式来看，就等价于<span
@@ -431,63 +431,68 @@ class="math inline">\(i^2=-1\)</span>。这说明复数的矩阵形式是良定�
 <h2 id="复数的模长">复数的模长</h2>
 <p>复数<span
 class="math inline">\(z=a+bi\)</span>的模长（Magnitude）定义为:</p>
-<p><span class="math display">\[\\|z\\| =\sqrt{a\^2+b\^2}\]</span></p>
+<p><span class="math display">\[\|z\| =\sqrt{a^2+b^2}\]</span></p>
 <p>这可以用它的共轭（Conjugate）表示：</p>
-<p><span class="math display">\[\\|z\\| =\sqrt{z\bar{z}},\\;
+<p><span class="math display">\[\|z\| =\sqrt{z\bar{z}},\\;
 \bar{z}=a-bi\]</span></p>
 <h2 id="复数与二维旋转-1">复数与二维旋转</h2>
 <h3 id="从复数矩阵形式导出旋转关系">从复数矩阵形式导出旋转关系</h3>
 <p>下面将重点引出复数与二维旋转的关系。</p>
 <p>注意观察复数<span class="math inline">\(z\)</span>的矩阵形式<span
-class="math inline">\(\begin{bmatrix}a &amp; -b\\\\b &amp;
+class="math inline">\(\begin{bmatrix}a &amp; -b\\b &amp;
 a\end{bmatrix}\)</span>，我们可以把它变换为下述形式：</p>
 <p><span class="math display">\[\begin{bmatrix}
-a &amp; -b\\\\
+a &amp; -b\\
 b &amp; a
-\end{bmatrix}=\sqrt{a\^2+b\^2}
+\end{bmatrix}=\sqrt{a^2+b^2}
 \begin{bmatrix}
-\frac{a}{\sqrt{a\^2+b\^2}} &amp; \frac{-b}{\sqrt{a\^2+b\^2}}\\\\
-\frac{b}{\sqrt{a\^2+b\^2}} &amp; \frac{a}{\sqrt{a\^2+b\^2}}
+\frac{a}{\sqrt{a^2+b^2}} &amp; \frac{-b}{\sqrt{a^2+b^2}}\\
+\frac{b}{\sqrt{a^2+b^2}} &amp; \frac{a}{\sqrt{a^2+b^2}}
 \end{bmatrix}\]</span></p>
 <p>矩阵中的每一项都被模长<span
-class="math inline">\(\\|z\\|\)</span>缩放了，此时注意到<span
-class="math inline">\(\frac{a}{\sqrt{a\^2+b\^2}}\)</span>就是复数<span
+class="math inline">\(\|z\|\)</span>缩放了，此时注意到<span
+class="math inline">\(\frac{a}{\sqrt{a^2+b^2}}\)</span>就是复数<span
 class="math inline">\(z\)</span>在复平面与实轴形成夹角<span
 class="math inline">\(\theta\)</span>的余弦值<span
 class="math inline">\(\cos(\theta)\)</span>，而<span
-class="math inline">\(\frac{b}{\sqrt{a\^2+b\^2}}\)</span>正好对应了正弦值<span
+class="math inline">\(\frac{b}{\sqrt{a^2+b^2}}\)</span>正好对应了正弦值<span
 class="math inline">\(\sin(\theta)\)</span>，而这个夹角<span
 class="math inline">\(\theta\)</span>就是<span
 class="math inline">\(\arctan(b/a)\)</span>。</p>
 <p>这样一来，我们就可以把上式写成：</p>
-<p><span class="math display">\[\begin{bmatrix}
-a &amp; -b\\\\
-b &amp; a
-\end{bmatrix}=\\|z\\|
+<p><span class="math display">\[
+\begin{equation}
+\label{eq1}
 \begin{bmatrix}
-\cos(\theta) &amp; -\sin(\theta)\\\\
+a &amp; -b\\
+b &amp; a
+\end{bmatrix}=\|z\|
+\begin{bmatrix}
+\cos(\theta) &amp; -\sin(\theta)\\
 \sin(\theta) &amp; \cos(\theta)
 \end{bmatrix}=
 \begin{bmatrix}
-\\|z\\| &amp; 0\\\\
-0 &amp; \\|z\\|
+\|z\| &amp; 0\\
+0 &amp; \|z\|
 \end{bmatrix}
 \begin{bmatrix}
-\cos(\theta) &amp; -\sin(\theta)\\\\
+\cos(\theta) &amp; -\sin(\theta)\\
 \sin(\theta) &amp; \cos(\theta)
-\end{bmatrix}\tag{1}\]</span></p>
+\end{bmatrix}
+\end{equation}
+\]</span></p>
 <p>这样一来，任意复数<span
 class="math inline">\(z=a+bi\)</span>都可以表示为两个矩阵的乘积，一个缩放矩阵<span
-class="math inline">\(\begin{bmatrix}\\|z\\| &amp; 0\\\\0 &amp;
-\\|z\\|\end{bmatrix}\)</span>和一个（我们熟悉的）旋转矩阵<span
+class="math inline">\(\begin{bmatrix}\|z\| &amp; 0\\0 &amp;
+\|z\|\end{bmatrix}\)</span>和一个（我们熟悉的）旋转矩阵<span
 class="math inline">\(\begin{bmatrix}\cos(\theta) &amp;
--\sin(\theta)\\\\\sin(\theta) &amp;
+-\sin(\theta)\\\sin(\theta) &amp;
 \cos(\theta)\end{bmatrix}\)</span>的复合。换句话说，<strong>复数的几何意义就是进行旋转与缩放，旋转角度为<span
 class="math inline">\(\theta=\arctan(b/a)\)</span>，缩放大小为复数的模长。</strong>
 如果复数的模长为1，那么它的几何意义就只有旋转。</p>
 <p>所以，对复数<span class="math inline">\(p\)</span>的旋转：</p>
 <p><span class="math display">\[p&#39;=\begin{bmatrix}
-\cos(\theta) &amp; -\sin(\theta)\\\\
+\cos(\theta) &amp; -\sin(\theta)\\
 \sin(\theta) &amp; \cos(\theta)
 \end{bmatrix}p\]</span></p>
 <p>我们可以构造一个复数<span
@@ -496,16 +501,17 @@ class="math inline">\(p\)</span>相乘表示旋转：</p>
 <p><span
 class="math display">\[p&#39;=zp=(\cos(\theta)+i\sin(\theta))p\]</span></p>
 <h3 id="复数的极坐标形式">复数的极坐标形式</h3>
-<p>当我们看到(1)式的时候，我们立马可以得到复数的另一种代数形式：</p>
+<p>当我们看到<span
+class="math inline">\(\eqref{eq1}\)</span>式的时候，我们立马可以得到复数的另一种代数形式：</p>
 <p><span
-class="math display">\[z=\\|z\\|(\cos(\theta)+i\sin(\theta))\]</span></p>
+class="math display">\[z=\|z\|(\cos(\theta)+i\sin(\theta))\]</span></p>
 <p>再根据欧拉公式（Euler's Formula）：</p>
 <p><span
 class="math display">\[\cos(\theta)+i\sin(\theta)=\mathrm{e}^{i\theta}\]</span></p>
 <p>可以立得复数的<strong>极坐标形式</strong>：</p>
 <p><span
-class="math display">\[z=\\|z\\|\mathrm{e}\^{i\theta}=r\mathrm{e}\^{i\theta},\;
-r=\\|z\\|\]</span></p>
+class="math display">\[z=\|z\|\mathrm{e}^{i\theta}=r\mathrm{e}^{i\theta},\;
+r=\|z\|\]</span></p>
 <p>现在，复数<span
 class="math inline">\(z\)</span>不再通过它的实部和虚部表示，而且通过一个旋转角<span
 class="math inline">\(\theta\)</span>与缩放因子<span
@@ -515,30 +521,36 @@ class="math inline">\(p\)</span>的旋转，都可以表示为：</p>
 class="math display">\[p&#39;=r\mathrm{e}^{i\theta}p\]</span></p>
 <p>如果仅需表示旋转，则令<span
 class="math inline">\(r=1\)</span>即可。</p>
-<blockquote>
-<p><strong>补充</strong>：欧拉公式的证明。 令<span
-class="math inline">\(f(\theta)=\frac{\cos(\theta)+i\sin(\theta)}{\mathrm{e}\^{i\theta}}=\mathrm{e}\^{-i\theta}(\cos(\theta)+i\sin(\theta))\)</span>，对实数<span
+<details class="note success no-icon"><summary><p>Proof of Euler's Formula</p>
+</summary>
+<p>令<span
+class="math inline">\(f(\theta)=\frac{\cos(\theta)+i\sin(\theta)}{\mathrm{e}^{i\theta}}=\mathrm{e}^{-i\theta}(\cos(\theta)+i\sin(\theta))\)</span>，对实数<span
 class="math inline">\(\theta\)</span>，对<span
 class="math inline">\(f(\theta)\)</span>求导，得到<span
-class="math inline">\(f&#39;(\theta)=\mathrm{e}\^{-i\theta}(i\cos(\theta)-\sin(\theta))-i\mathrm{e}\^{-i\theta}(\cos(\theta)+i\sin(\theta))=0\)</span>，因此<span
+class="math inline">\(f&#39;(\theta)=\mathrm{e}^{-i\theta}(i\cos(\theta)-\sin(\theta))-i\mathrm{e}^{-i\theta}(\cos(\theta)+i\sin(\theta))=0\)</span>，因此<span
 class="math inline">\(f(\theta)\)</span>是常数。又因为<span
 class="math inline">\(f(0)=1\)</span>，所以<span
 class="math inline">\(f(\theta)\equiv 1\)</span>。欧拉公式得证。</p>
-</blockquote>
+
+</details>
 <h3 id="复数的几种表示形式总结">复数的几种表示形式总结</h3>
 <p>现在我们已经得到了如下几种复数<span
-class="math inline">\(z=a+bi\)</span>的表示形式： - 代数形式一：<span
-class="math inline">\(z=a+bi\)</span>; - 向量形式：<span
-class="math inline">\(z=\begin{bmatrix}a\\\\b\end{bmatrix}\)</span>; -
-矩阵形式一：<span class="math inline">\(z=\begin{bmatrix}a &amp; -b\\\\b
-&amp; a\end{bmatrix}\)</span>; - 矩阵形式二：<span
-class="math inline">\(z=\begin{bmatrix}\\|z\\| &amp; 0\\\\0 &amp;
-\\|z\\|\end{bmatrix}\begin{bmatrix}\cos(\theta) &amp;
--\sin(\theta)\\\sin(\theta) &amp; \cos(\theta)\end{bmatrix}\)</span>; -
-代数形式二：<span
-class="math inline">\(z=r(\cos(\theta)+i\sin(\theta))\)</span>; -
-极坐标形式：<span
-class="math inline">\(z=r\mathrm{e}^{i\theta}\)</span>.</p>
+class="math inline">\(z=a+bi\)</span>的表示形式：</p>
+<ul>
+<li>代数形式一：<span class="math inline">\(z=a+bi\)</span>;</li>
+<li>向量形式：<span
+class="math inline">\(z=\begin{bmatrix}a\\b\end{bmatrix}\)</span>;</li>
+<li>矩阵形式一：<span class="math inline">\(z=\begin{bmatrix}a &amp;
+-b\\b &amp; a\end{bmatrix}\)</span>;</li>
+<li>矩阵形式二：<span class="math inline">\(z=\begin{bmatrix}\|z\| &amp;
+0\\0 &amp; \|z\|\end{bmatrix}\begin{bmatrix}\cos(\theta) &amp;
+-\sin(\theta)\\\sin(\theta) &amp;
+\cos(\theta)\end{bmatrix}\)</span>;</li>
+<li>代数形式二：<span
+class="math inline">\(z=r(\cos(\theta)+i\sin(\theta))\)</span>;</li>
+<li>极坐标形式：<span
+class="math inline">\(z=r\mathrm{e}^{i\theta}\)</span>.</li>
+</ul>
 <p>这几种形式是完全等价的。</p>
 <h2 id="旋转复合">旋转复合</h2>
 <p>假设我们现在有两个仅表示旋转的复数<span

@@ -238,8 +238,12 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
 <h1 id="测试">测试</h1>
 <h2 id="代码">代码</h2>
 <p>现在来测试一下代码</p>
-<div class="note info"><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
-</div>
+<details class="note info no-icon"><summary><p>This is a code test</p>
+</summary>
+<h4 id="details-and-code">Details and code</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
+
+</details>
 <h2 id="latex">Latex</h2>
 <p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
 ]]></content>
@@ -278,41 +282,41 @@ class="math inline">\(0&lt;r=1-\epsilon/3&lt;1\)</span>，故有：</p>
 class="math display">\[3-\epsilon=3r=r\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}\]</span></p>
 <p>把<span class="math inline">\(r\)</span>乘进去，就有：</p>
 <p><span
-class="math display">\[3-\epsilon=\sqrt{r\^2+2\sqrt{r\^{2\^2}+\cdots+n\sqrt{r\^{2\^n}[1+(n+1)(n+3)]}}}\tag{2}\]</span></p>
-<p>由于<span class="math inline">\(1&gt;r\^{2\^i},\forall
+class="math display">\[3-\epsilon=\sqrt{r^2+2\sqrt{r^{2^2}+\cdots+n\sqrt{r^{2^n}[1+(n+1)(n+3)]}}}\tag{2}\]</span></p>
+<p>由于<span class="math inline">\(1&gt;r^{2^i},\forall
 i=1,2,\cdots\)</span>，且存在<span
 class="math inline">\(N\)</span>，当<span
 class="math inline">\(n&gt;N\)</span>时，有</p>
 <p><span
-class="math display">\[1&gt;r\^{2\^n}[1+(n+1)(n+2)]=r\^{2\^n}(n+2)\^2\]</span></p>
+class="math display">\[1&gt;r^{2^n}[1+(n+1)(n+2)]=r^{2^n}(n+2)^2\]</span></p>
 <p>把这些全部带入（2）式，就可以证明：</p>
 <p><span
-class="math display">\[3-\epsilon=\sqrt{r\^2+2\sqrt{r\^{2\^2}+\cdots+n\sqrt{r\^{2\^n}[1+(n+1)(n+3)]}}}&lt;\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=a_n,n&gt;N\]</span></p>
+class="math display">\[3-\epsilon=\sqrt{r^2+2\sqrt{r^{2^2}+\cdots+n\sqrt{r^{2^n}[1+(n+1)(n+3)]}}}&lt;\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=a_n,n&gt;N\]</span></p>
 <p>从而完成证明。</p>
 <h1 id="polyas-criterionpolya准则">Polya's Criterion（Polya准则）</h1>
 <p>在考虑普遍情况下首先来观察一些特例，一个典型的特例就是形如<span
 class="math inline">\(\sqrt{a_1+\sqrt{a_2+\cdots}}\)</span>的无穷根式，每个根号的次数都是<span
 class="math inline">\(2\)</span>，或者幂次都是<span
-class="math inline">\(2\^{-1}\)</span>。对于<span
+class="math inline">\(2^{-1}\)</span>。对于<span
 class="math inline">\(a_1\)</span>来看，控制它的幂次是<span
 class="math inline">\(\frac{1}{2}\)</span>，对于<span
 class="math inline">\(a_2\)</span>来说，控制它的幂次是<span
-class="math inline">\(2\^{-2}\)</span>，对于<span
+class="math inline">\(2^{-2}\)</span>，对于<span
 class="math inline">\(a_n\)</span>来说，控制它的幂次是<span
-class="math inline">\(2\^{-n}\)</span>。假设这个无穷根式极限存在，那么我们关心的肯定是<span
+class="math inline">\(2^{-n}\)</span>。假设这个无穷根式极限存在，那么我们关心的肯定是<span
 class="math inline">\(n\)</span>足够大时，它被什么控制，显然是<span
 class="math inline">\(a_n\)</span>及控制它的<span
-class="math inline">\(2\^{-n}\)</span>的幂次。所以，一个合理的猜测是，如果<span
-class="math inline">\(a_n\^{2\^{-n}}\)</span>极限存在，那么该根式就收敛。下面我们将看到，这个猜测已经非常接近“真相”，甚至是真相的一部分。</p>
+class="math inline">\(2^{-n}\)</span>的幂次。所以，一个合理的猜测是，如果<span
+class="math inline">\(a_n^{2^{-n}}\)</span>极限存在，那么该根式就收敛。下面我们将看到，这个猜测已经非常接近“真相”，甚至是真相的一部分。</p>
 <h2 id="description">Description</h2>
 <p>设序列<span
 class="math inline">\(u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}\)</span>，则<span
 class="math inline">\(\{u_n\}\)</span>可以用下述条件判定：</p>
 <p><span class="math display">\[
 \begin{cases}
-\text{converges},&amp;\text{if}\\;
-\overline{\lim}\_{n\to\infty}\frac{\log\log a_n}{n}&lt;\log 2\\\\
-\text{diverges},&amp;\text{if}\\;
+\text{converges},&amp;\text{if}\;
+\overline{\lim}\_{n\to\infty}\frac{\log\log a_n}{n}&lt;\log 2\\
+\text{diverges},&amp;\text{if}\;
 \overline{\lim}\_{n\to\infty}\frac{\log\log a_n}{n}&gt;\log 2
 \end{cases}
 \]</span></p>
@@ -327,20 +331,20 @@ class="math inline">\(\{u_n\}\)</span>可以用下述条件判定：</p>
 <p><strong>（定理一）</strong> 序列<span
 class="math inline">\(u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}\)</span>收敛当且仅当存在有限上极限
 <span
-class="math display">\[\overline{\lim_{n\to\infty}}a_n\^{2\^{-n}}&lt;+\infty\]</span></p>
+class="math display">\[\overline{\lim_{n\to\infty}}a_n^{2^{-n}}&lt;+\infty\]</span></p>
 </blockquote>
 <p>首先证明<em>必要性</em>，即假定<span
 class="math inline">\(\{u_n\}\)</span>收敛。因为<span
-class="math inline">\(u_n\ge a_n\^{2\^{-n}}\)</span>，故<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n\^{2\^{-n}}\)</span>一定是有限的，得证。</p>
+class="math inline">\(u_n\ge a_n^{2^{-n}}\)</span>，故<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}\)</span>一定是有限的，得证。</p>
 <p>再来证明<em>充分性</em>。假定<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n\^{2\^{-n}}&lt;+\infty\)</span>，则存在<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}&lt;+\infty\)</span>，则存在<span
 class="math inline">\(G&gt;0\)</span>使得对所有<span
 class="math inline">\(n&gt;0\)</span>，有<span
-class="math inline">\(a_n\^{2\^{-n}}\le G\)</span>，因此<span
-class="math inline">\(a_n\le G\^{2\^n}\)</span>。从而有：</p>
+class="math inline">\(a_n^{2^{-n}}\le G\)</span>，因此<span
+class="math inline">\(a_n\le G^{2^n}\)</span>。从而有：</p>
 <p><span class="math display">\[u_n\le
-\sqrt{G\^2+\sqrt{G\^{2\^2}+\cdots+\sqrt{G\^{2\^n}}}}=G\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
+\sqrt{G^2+\sqrt{G^{2^2}+\cdots+\sqrt{G^{2^n}}}}=G\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
 <p>同时又因为</p>
 <p><span
 class="math display">\[2=\sqrt{2+2}=\sqrt{2+\sqrt{2+2}}=\cdots=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+2}}}&gt;\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
@@ -356,7 +360,7 @@ a_n}{n}&lt;\log 2\)</span>时，存在<span
 class="math inline">\(N\)</span>，当<span
 class="math inline">\(n&gt;N\)</span>时<span
 class="math inline">\((\log\log a_n)/n&lt;\log 2\)</span>，也即<span
-class="math inline">\(a_n\^{2\^{-n}}&lt;\mathrm{e}\)</span>，由<strong>定理一</strong>知<span
+class="math inline">\(a_n^{2^{-n}}&lt;\mathrm{e}\)</span>，由<strong>定理一</strong>知<span
 class="math inline">\(\{u_n\}\)</span>收敛。</p>
 <p>当<span
 class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
@@ -364,21 +368,21 @@ a_n}{n}&gt;\log 2\)</span>时，存在某个<span
 class="math inline">\(a&gt;1\)</span>，对某些无限的<span
 class="math inline">\(n\)</span>，使得<span
 class="math inline">\((\log\log a_n)/n&gt;a\log 2\)</span>，也即<span
-class="math inline">\(\log a_n&gt;2\^{an}\)</span>。因此，对这些<span
+class="math inline">\(\log a_n&gt;2^{an}\)</span>。因此，对这些<span
 class="math inline">\(n\)</span>而言：</p>
 <p><span
-class="math display">\[a_n\^{2\^{-n}}&gt;e\^{2\^{(a-1)n}}\]</span></p>
+class="math display">\[a_n^{2^{-n}}&gt;e^{2^{(a-1)n}}\]</span></p>
 <p>因此<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n\^{2\^{-n}}=+\infty\)</span>.</p>
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}=+\infty\)</span>.</p>
 <p>最后考虑<span
 class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
 a_n}{n}=\log 2\)</span>。</p>
 <p>若<span class="math inline">\(\{u_n\}\)</span>收敛，则<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n\^{2\^{-n}}\)</span>有限，即存在<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}\)</span>有限，即存在<span
 class="math inline">\(G&gt;1\)</span>对所有<span
 class="math inline">\(n\)</span>成立<span
-class="math inline">\(a_n\^{2\^{-n}}&lt;G\)</span>，因而<span
-class="math inline">\(\log a_n&lt;2\^n\log G\)</span>。此时若<span
+class="math inline">\(a_n^{2^{-n}}&lt;G\)</span>，因而<span
+class="math inline">\(\log a_n&lt;2^n\log G\)</span>。此时若<span
 class="math inline">\(a_n&gt;1\)</span>，则</p>
 <p><span class="math display">\[n\left(\frac{\log\log
 a_n}{n}-\log2\right)&lt;\log\log G\]</span></p>
@@ -387,11 +391,11 @@ class="math inline">\((\log\log
 a_n)/n=-\infty\)</span>，则综上公式（3）的必要性得证。</p>
 <p>同时公式（3）也是充分的。假定条件成立但<span
 class="math inline">\(\{u_n\}\)</span>不收敛，则由<strong>定理一</strong>知<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n\^{2\^{-n}}=+\infty\)</span>，则对任意的<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}=+\infty\)</span>，则对任意的<span
 class="math inline">\(G&gt;\mathrm{e}\)</span>，有充分大的<span
 class="math inline">\(n\)</span>使得<span
-class="math inline">\(a_n\^{2\^{-n}}&gt;G\)</span>，从而<span
-class="math inline">\(\log a_n&gt;2\^n\log G\)</span>，于是有</p>
+class="math inline">\(a_n^{2^{-n}}&gt;G\)</span>，从而<span
+class="math inline">\(\log a_n&gt;2^n\log G\)</span>，于是有</p>
 <p><span class="math display">\[n\left(\frac{\log\log
 a_n}{n}-\log2\right)&gt;\log\log G\]</span></p>
 <p>这说明上极限是无穷大，与假设矛盾。充分性得证。</p>
@@ -403,52 +407,57 @@ class="math inline">\(x&lt;1\)</span>的时候，它的上界是<span
 class="math inline">\(\sqrt{1+\sqrt{1+\cdots}}\)</span>，而后者我们上面已经证明了它的上界是2。现在我们考虑<span
 class="math inline">\(x&gt;1\)</span>的情景。此时有：</p>
 <p><span
-class="math display">\[u_n&lt;\sqrt{x\^2+\sqrt{x\^{2\^2}+\cdots+\sqrt{x\^{2\^n}}}}&lt;2x\]</span></p>
+class="math display">\[u_n&lt;\sqrt{x^2+\sqrt{x^{2^2}+\cdots+\sqrt{x^{2^n}}}}&lt;2x\]</span></p>
 <p>所以我们证明了，对<span
 class="math inline">\(x&gt;0\)</span>，序列<span
 class="math inline">\(\{u_n\}\)</span>都是收敛的，并且没有使用<strong>定理一</strong>。</p>
 <h3 id="例二">例二</h3>
 <p>现在考虑下述恒等式：</p>
 <p><span
-class="math display">\[x(2\^n+x)=x\sqrt{2\^{2n}+x(2\^{n+1}+x)}\]</span></p>
+class="math display">\[x(2^n+x)=x\sqrt{2^{2n}+x(2^{n+1}+x)}\]</span></p>
 <p>于是可以立即得到：</p>
-<p><span
-class="math display">\[x(2+x)=x\sqrt{2\^2+x(2\^2+x)}=x\sqrt{2\^2+x\sqrt{2\^4+x(2\^4+x)}}=\cdots=\\\\
-x\sqrt{2\^2+x\sqrt{2\^4+\cdots+x\sqrt{2\^{2n}+x(2\^{n+1}+x)}}}\\\\
-=x\sqrt{2\^2+x\sqrt{2\^4+x\sqrt{\cdots}}}\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+x(2+x)&amp;=x\sqrt{2^2+x(2^2+x)}\\
+&amp;=x\sqrt{2^2+x\sqrt{2^4+x(2^4+x)}}\\
+&amp;=\cdots\\
+&amp;=x\sqrt{2^2+x\sqrt{2^4+\cdots+x\sqrt{2^{2n}+x(2^{n+1}+x)}}}\\
+&amp;=x\sqrt{2^2+x\sqrt{2^4+x\sqrt{\cdots}}}
+\end{aligned}
+\]</span></p>
 <p>现在令<span class="math inline">\(x=1\)</span>，就有：</p>
 <p><span
-class="math display">\[3=\sqrt{2\^2+\sqrt{2\^4+\cdots}}\]</span></p>
+class="math display">\[3=\sqrt{2^2+\sqrt{2^4+\cdots}}\]</span></p>
 <p>用<span class="math inline">\(x/2\)</span>替换<span
 class="math inline">\(x\)</span>，有：</p>
 <p><span
-class="math display">\[2+\frac{x}{2}=\sqrt{2\^2+\frac{x}{2}\sqrt{2\^4+\frac{x}{2}\sqrt{2\^6+\cdots}}}\]</span></p>
+class="math display">\[2+\frac{x}{2}=\sqrt{2^2+\frac{x}{2}\sqrt{2^4+\frac{x}{2}\sqrt{2^6+\cdots}}}\]</span></p>
 <p>两边约去2，就有：</p>
 <p><span
-class="math display">\[1+\frac{x}{4}=\sqrt{1+\frac{x}{2}\sqrt{1+\frac{x}{2\^2}\sqrt{1+\cdots}}}\]</span></p>
+class="math display">\[1+\frac{x}{4}=\sqrt{1+\frac{x}{2}\sqrt{1+\frac{x}{2^2}\sqrt{1+\cdots}}}\]</span></p>
 <h3 id="例三">例三</h3>
 <p>由余弦二倍角公式<span
-class="math inline">\(\cos2\theta=2\cos\^2\theta-1\)</span>可知：</p>
+class="math inline">\(\cos2\theta=2\cos^2\theta-1\)</span>可知：</p>
 <p><span
 class="math display">\[2\cos\theta=\sqrt{2+2\cos2\theta}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+2\cos
-2\^n\theta}}}\]</span></p>
+2^n\theta}}}\]</span></p>
 <p>此时令<span
-class="math inline">\(\theta=\frac{\pi}{2\^{n+1}}\)</span>，就有：</p>
+class="math inline">\(\theta=\frac{\pi}{2^{n+1}}\)</span>，就有：</p>
 <p><span
-class="math display">\[2\cos\frac{\pi}{2\^{n+1}}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+0}}}\Rightarrow\\\\
-\cos\frac{\pi}{2\^{n+1}}=\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\]</span></p>
+class="math display">\[2\cos\frac{\pi}{2^{n+1}}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+0}}}\Rightarrow\\\\
+\cos\frac{\pi}{2^{n+1}}=\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\]</span></p>
 <p>所以可以立刻得到下式的极限：</p>
 <p><span
-class="math display">\[\lim_{n\to\infty}4\^n\left(1-\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\right)\\\\
-=\lim_{n\to\infty}4\^n\left(1-\cos\frac{\pi}{2\^{n+1}}\right)\\\\
-=\lim_{n\to\infty}4\^n\cdot\frac{\pi\^2}{2\^{2n+2+1}} (1-\cos x\sim
-\frac{1}{2}x\^2)\\\\
-=\frac{\pi\^2}{8}\]</span></p>
+class="math display">\[\lim_{n\to\infty}4^n\left(1-\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\right)\\\\
+=\lim_{n\to\infty}4^n\left(1-\cos\frac{\pi}{2^{n+1}}\right)\\\\
+=\lim_{n\to\infty}4^n\cdot\frac{\pi^2}{2^{2n+2+1}} (1-\cos x\sim
+\frac{1}{2}x^2)\\\\
+=\frac{\pi^2}{8}\]</span></p>
 <h1 id="herschfelds-convergence-theorem-herschfeld收敛定理">Herschfeld’s
 Convergence Theorem （Herschfeld收敛定理）</h1>
 <p>Polya's Criterion只考虑了指数为<span
 class="math inline">\(\frac{1}{2}\)</span>的情况，对于更加普遍的情况，即形如<span
-class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n\^{r_n}))\^{r_2})\^{r_1}
+class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n^{r_n}))^{r_2})^{r_1}
 (a_i\ge 0,0&lt;r_i\le 1)\)</span>的序列，Herschfeld’s Convergence
 Theorem给出了一个其收敛的充要条件。</p>
 <p><a
@@ -456,12 +465,12 @@ href="https://www.tandfonline.com/doi/abs/10.1080/00029890.1935.11987745?journal
 Convergence Theorem</a> 告诉我们了一个无穷根式收敛的充要条件：</p>
 <blockquote>
 <p>设序列<span
-class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n\^{r_n}))\^{r_2})\^{r_1}
+class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n^{r_n}))^{r_2})^{r_1}
 (a_i\ge 0,0&lt;r_i\le 1)\)</span>且级数<span
-class="math inline">\(S=\sum_{i=1}\^\infty r_1r_2\cdots
+class="math inline">\(S=\sum_{i=1}^\infty r_1r_2\cdots
 r_i\)</span>收敛，则序列<span
 class="math inline">\(\{u_n\}\)</span>收敛的充分必要条件是： <span
-class="math display">\[\overline{\lim_{n\to\infty}}a_n\^{r_1r_2\cdots
+class="math display">\[\overline{\lim_{n\to\infty}}a_n^{r_1r_2\cdots
 r_n}&lt;+\infty\]</span></p>
 </blockquote>
 <p>这个定理的证明之后有空了补充。</p>
@@ -743,6 +752,22 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
       </tags>
   </entry>
   <entry>
+    <title>十二月的花</title>
+    <url>/2020/12/22/%E5%8D%81%E4%BA%8C%E6%9C%88%E7%9A%84%E8%8A%B1/</url>
+    <content><![CDATA[<p>埙吹响了海岸 琴穿梭叶间 笛在天空啼鸣 伴奏着雪花片片</p>
+<p>孩子们欢笑着相聚 踏着雪 吱吱嘎嘎</p>
+<p>把欢乐捏成一团团棉 随风起舞 在阳光下 雪爱上了花</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>向量绕任意轴旋转的简单推导</title>
     <url>/2021/06/07/%E5%90%91%E9%87%8F%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E7%AE%80%E5%8D%95%E6%8E%A8%E5%AF%BC/</url>
     <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
@@ -758,24 +783,23 @@ class="math inline">\(\mathbf{p}&#39;\)</span>。</p>
 class="math inline">\(\mathbf{p}\)</span>分解为两个向量，一个平行于<span
 class="math inline">\(\mathbf{n}\)</span>，另一个垂直于<span
 class="math inline">\(\mathbf{n}\)</span>，即： <span
-class="math display">\[\mathbf{p}=\mathbf{p}\_\perp+\mathbf{p}\_\parallel\]</span>
+class="math display">\[\mathbf{p}=\mathbf{p}_\perp+\mathbf{p}_\parallel\]</span>
 容易知道，平行于<span
 class="math inline">\(\mathbf{n}\)</span>的分向量<span
-class="math inline">\(\mathbf{p}\_\parallel\)</span>就是<span
+class="math inline">\(\mathbf{p}_\parallel\)</span>就是<span
 class="math inline">\(\mathbf{p}\)</span>在<span
 class="math inline">\(\mathbf{n}\)</span>上的投影（推导过程略）： <span
-class="math display">\[\mathbf{p}\_\parallel=(\mathbf{n}\cdot\mathbf{p})\mathbf{n}\]</span>
-从而就能得到<span class="math inline">\(\mathbf{p}\_\perp\)</span>：
+class="math display">\[\mathbf{p}_\parallel=(\mathbf{n}\cdot\mathbf{p})\mathbf{n}\]</span>
+从而就能得到<span class="math inline">\(\mathbf{p}_\perp\)</span>：
 <span
-class="math display">\[\mathbf{p}\_\perp=\mathbf{p}-\mathbf{p}\_\parallel\]</span>
+class="math display">\[\mathbf{p}_\perp=\mathbf{p}-\mathbf{p}_\parallel\]</span>
 同样地可以将旋转后的向量分解： <span
-class="math display">\[\mathbf{p}&#39;=\mathbf{p}&#39;\_\perp+\mathbf{p}&#39;\_\parallel\]</span>
+class="math display">\[\mathbf{p}&#39;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\]</span>
 显然，旋转后的向量对应的平行分量<span
-class="math inline">\(\mathbf{p}&#39;\_\parallel\)</span>是不变的：
-<span
-class="math display">\[\mathbf{p}&#39;\_\parallel=\mathbf{p}\_\parallel\]</span>
+class="math inline">\(\mathbf{p}&#39;_\parallel\)</span>是不变的： <span
+class="math display">\[\mathbf{p}&#39;_\parallel=\mathbf{p}_\parallel\]</span>
 这里的关键在于求垂直分量<span
-class="math inline">\(\mathbf{p}&#39;\_\perp\)</span>。</p>
+class="math inline">\(\mathbf{p}&#39;_\perp\)</span>。</p>
 <figure>
 <img data-src="/images/arbitrary_rotation/1.png"
 alt="将向量分解为一个平行向量和一个垂直向量" />
@@ -788,33 +812,38 @@ class="math inline">\(V\)</span>，而向量<span
 class="math inline">\(\mathbf{p}\)</span>与<span
 class="math inline">\(\mathbf{p}&#39;\)</span>的垂直分量就在该平面内。该平面的维度是2，因此只需要找到两个基向量，就可以通过这两个基向量的线性组合表示该平面的任意向量。</p>
 <p>其中一个基向量我们已经找到了，就是<span
-class="math inline">\(\mathbf{p}\_\perp\)</span>，而另一个我们可以通过<span
+class="math inline">\(\mathbf{p}_\perp\)</span>，而另一个我们可以通过<span
 class="math inline">\(\mathbf{n}\)</span>与<span
-class="math inline">\(\mathbf{p}\_\perp\)</span>的叉乘实现，得到的向量与<span
+class="math inline">\(\mathbf{p}_\perp\)</span>的叉乘实现，得到的向量与<span
 class="math inline">\(\mathbf{n}\)</span>和<span
-class="math inline">\(\mathbf{p}\_\perp\)</span>垂直，且在平面<span
+class="math inline">\(\mathbf{p}_\perp\)</span>垂直，且在平面<span
 class="math inline">\(V\)</span>内。且注意到： <span
 class="math display">\[\mathbf{n}\times
-\mathbf{p}\_\perp=\mathbf{n}\times(\mathbf{p}-\mathbf{p}\_\parallel)=\mathbf{n}\times\mathbf{p}-\mathbf{n}\times\mathbf{p}\_\parallel=\mathbf{n}\times\mathbf{p}\]</span>
+\mathbf{p}_\perp=\mathbf{n}\times(\mathbf{p}-\mathbf{p}_\parallel)=\mathbf{n}\times\mathbf{p}-\mathbf{n}\times\mathbf{p}_\parallel=\mathbf{n}\times\mathbf{p}\]</span>
 并且有： <span class="math display">\[\|\mathbf{n}\times
 \mathbf{p}\|=\|\mathbf{n}\times
-\mathbf{p}\_\perp\|=\|\mathbf{n}\|\cdot\|\mathbf{p}\_\perp\|\cdot\sin(\pi/2)=\|\mathbf{p}\_\perp\|\]</span>
+\mathbf{p}_\perp\|=\|\mathbf{n}\|\cdot\|\mathbf{p}_\perp\|\cdot\sin(\pi/2)=\|\mathbf{p}_\perp\|\]</span>
 进而我们能导出旋转后的垂直分量<span
-class="math inline">\(\mathbf{p}&#39;\_\perp\)</span>： <span
-class="math display">\[\mathbf{p}&#39;\_\perp=\cos(\theta)\|\mathbf{p}\_\perp\|\cdot\frac{\mathbf{p}\_\perp}{\|\mathbf{p}\_\perp\|}+\sin(\theta)\|\mathbf{p}\_\perp\|\cdot\frac{\mathbf{n}\times\mathbf{p}}{\|\mathbf{n}\times\mathbf{p}\|}=\cos(\theta)\mathbf{p}\_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})\]</span>
+class="math inline">\(\mathbf{p}&#39;_\perp\)</span>： <span
+class="math display">\[\mathbf{p}&#39;_\perp=\cos(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{p}_\perp}{\|\mathbf{p}_\perp\|}+\sin(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{n}\times\mathbf{p}}{\|\mathbf{n}\times\mathbf{p}\|}=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})\]</span>
 最后，我们得到旋转后的向量<span
-class="math inline">\(\mathbf{p}&#39;\)</span>： <span
-class="math display">\[\mathbf{p}&#39;=\mathbf{p}&#39;\_\perp+\mathbf{p}&#39;\_\parallel=\cos(\theta)\mathbf{p}\_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})+\mathbf{p}\_\parallel\\\\
-=\cos(\theta)(\mathbf{p}-\mathbf{p}\_\parallel)+\mathbf{p}\_\parallel+\sin(\theta)(\mathbf{n}\times\mathbf{p})\\\\
-=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p})
-\]</span> 搞定！</p>
+class="math inline">\(\mathbf{p}&#39;\)</span>：</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbf{p}&#39;&amp;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\\
+&amp;=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})+\mathbf{p}_\parallel\\
+&amp;=\cos(\theta)(\mathbf{p}-\mathbf{p}_\parallel)+\mathbf{p}_\parallel+\sin(\theta)(\mathbf{n}\times\mathbf{p})\\
+&amp;=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p})
+\end{aligned}
+\]</span></p>
+<p>搞定！</p>
 <h2 id="矩阵形式">矩阵形式</h2>
 <p>我们知道向量的叉乘可以表示为： <span class="math display">\[
 \mathbf{n}\times\mathbf{p}=
 \begin{bmatrix}
-0,&amp;-n\_z,&amp;n\_y\\\\
-n\_z,&amp;0,&amp;-n\_x\\\\
--n\_y,&amp;n\_x,&amp;0
+0&amp;-n_z&amp;n_y\\
+n_z&amp;0&amp;-n_x\\
+-n_y&amp;n_x&amp;0
 \end{bmatrix}
 \mathbf{p}=\mathbf{N}\mathbf{p}
 \]</span> 注意到，矩阵<span
@@ -823,10 +852,10 @@ class="math display">\[\mathbf{N}(\mathbf{N}\mathbf{p})=\mathbf{N}^2\mathbf{p}=\
 所以我们可以把旋转公式写成下述形式： <span
 class="math display">\[\mathbf{p}&#39;=\mathbf{p}+(1-\cos(\theta))\mathbf{N}^2\mathbf{p}+\sin(\theta)\mathbf{N}\mathbf{p}=\mathbf{R}\mathbf{p}\]</span>
 其中<span
-class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}\^2\)</span>。上面的等式需要注意到<span
+class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>。上面的等式需要注意到<span
 class="math inline">\((\mathbf{n}\cdot\mathbf{p})\mathbf{n}=\mathbf{p}+\mathbf{N}^2\mathbf{p}\)</span>。</p>
 <p>所以，使用Rodrigues'旋转公式，只需要首先令<span
-class="math inline">\(\mathbf{N}=\begin{bmatrix}0,&amp;-n\_z,&amp;n\_y\\\\n\_z,&amp;0,&amp;-n\_x\\\\-n\_y&amp;,n\_x,&amp;0\end{bmatrix}\)</span>，然后再计算<span
+class="math inline">\(\mathbf{N}=\begin{bmatrix}0&amp;-n_z&amp;n_y\\n_z&amp;0&amp;-n_x\\-n_y&amp;n_x&amp;0\end{bmatrix}\)</span>，然后再计算<span
 class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>，就能得到旋转后的向量为<span
 class="math inline">\(\mathbf{p}&#39;=\mathbf{R}\mathbf{p}\)</span>。</p>
 <h1 id="方法二坐标轴对齐">方法二：坐标轴对齐</h1>
@@ -849,19 +878,19 @@ class="math inline">\(\mathbf{x},\mathbf{y},\mathbf{z}\)</span>的位置，这�
 <p><span class="math display">\[
 \mathbf{Q}=
 \begin{bmatrix}
-\mathbf{u}\\\\
-\mathbf{v}\\\\
+\mathbf{u}\\
+\mathbf{v}\\
 \mathbf{w}
 \end{bmatrix}=
 \begin{bmatrix}
-x\_u&amp;y\_u&amp;z\_u\\\\
-x\_v&amp;y\_v&amp;z\_v\\\\
-x\_w&amp;y\_w&amp;z\_w
+x_u&amp;y_u&amp;z_u\\
+x_v&amp;y_v&amp;z_v\\
+x_w&amp;y_w&amp;z_w
 \end{bmatrix}
 \]</span></p>
 <p>很容易验证：<span
 class="math inline">\(\mathbf{x}=\mathbf{Q}\mathbf{u},\mathbf{y}=\mathbf{Q}\mathbf{v},\mathbf{z}=\mathbf{Q}\mathbf{w}\)</span>，从而就有<span
-class="math inline">\(\mathbf{I}=\mathbf{Q}\mathbf{Q}\^\top=\mathbf{Q}\^\top\mathbf{Q}\)</span>，这就验证了<span
+class="math inline">\(\mathbf{I}=\mathbf{Q}\mathbf{Q}^\top=\mathbf{Q}^\top\mathbf{Q}\)</span>，这就验证了<span
 class="math inline">\(\mathbf{Q}\)</span>是正交的。</p>
 <p>现在，原来的向量<span
 class="math inline">\(\mathbf{p}\)</span>就变成了<span
@@ -874,15 +903,15 @@ class="math inline">\(\theta\)</span>的旋转矩阵是： <span
 class="math display">\[
 \mathbf{T}=
 \begin{bmatrix}
-1&amp;0&amp;0\\\\
-0&amp;\cos(\theta)&amp;-\sin(\theta)\\\\
+1&amp;0&amp;0\\
+0&amp;\cos(\theta)&amp;-\sin(\theta)\\
 0&amp;\sin(\theta)&amp;\cos(\theta)
 \end{bmatrix}
 \]</span> 因此，旋转后的向量就是<span
 class="math inline">\(\mathbf{T}\mathbf{Q}\mathbf{p}\)</span>。现在，只需要把旋转后的向量再旋转回原来的位置就好了，我们只需要再乘以<span
 class="math inline">\(\mathbf{Q}\)</span>的逆即可。由于<span
 class="math inline">\(\mathbf{Q}\)</span>是正交的，所以有<span
-class="math inline">\(\mathbf{Q}\^{-1}=\mathbf{Q}\^\top\)</span>。把上面的结果合起来，就能得到最终的结果是：
+class="math inline">\(\mathbf{Q}^{-1}=\mathbf{Q}^\top\)</span>。把上面的结果合起来，就能得到最终的结果是：
 <span class="math display">\[\mathbf{p}&#39;=\mathbf{Q}^\top
 \mathbf{T}\mathbf{Q}\mathbf{p}\]</span></p>
 <h1 id="检验">检验</h1>
@@ -890,7 +919,7 @@ class="math inline">\(\mathbf{Q}\^{-1}=\mathbf{Q}\^\top\)</span>。把上面的�
 1. 向量分解-向量形式 2. 向量分解-矩阵形式 3. 对标轴对齐</p>
 <p>程序在虚拟机上运行，RAM为4G，硬盘20G，处理器为2个Intel Core i5-10400F
 CPU @ 2.90GHz。</p>
-<p>代码如下： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;eigen3/Eigen/Eigen&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> PI = <span class="number">3.1415926</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the vector form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeVector</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high\_resolution\_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f rotatedVector = <span class="built_in">cos</span>(rotationAngle) * p </span><br><span class="line">                                + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * (n.<span class="built_in">dot</span>(p)) * n </span><br><span class="line">                                + <span class="built_in">sin</span>(rotationAngle) * (n.<span class="built_in">cross</span>(p));</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high\_resolution\_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the vector form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the matrix form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeMatrix</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high\_resolution\_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Matrix3f N = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">N &lt;&lt; <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">2</span>), <span class="built_in">n</span>(<span class="number">1</span>),</span><br><span class="line">     <span class="built_in">n</span>(<span class="number">2</span>), <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">0</span>),</span><br><span class="line">     -<span class="built_in">n</span>(<span class="number">1</span>), <span class="built_in">n</span>(<span class="number">0</span>), <span class="number">0</span>;</span><br><span class="line">Eigen::Matrix3f R = Eigen::Matrix3f::<span class="built_in">Identity</span>() + <span class="built_in">sin</span>(rotationAngle) * N + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * N * N;</span><br><span class="line">Eigen::Vector3f rotatedVector = R * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high\_resolution\_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the matrix form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using axis coordination</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AxisCoordination</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high\_resolution\_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f crossed = n.<span class="built_in">cross</span>(p);</span><br><span class="line">Eigen::Vector3f u = n;</span><br><span class="line">Eigen::Vector3f v = crossed / crossed.<span class="built_in">norm</span>();</span><br><span class="line">Eigen::Vector3f w = n.<span class="built_in">cross</span>(v);</span><br><span class="line">Eigen::Matrix3f Q = Eigen::Matrix3f::<span class="built_in">Identity</span>(), T = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">0</span>) = u;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">1</span>) = v;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">2</span>) = w;</span><br><span class="line">T &lt;&lt; <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">cos</span>(rotationAngle), -<span class="built_in">sin</span>(rotationAngle),</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">sin</span>(rotationAngle), <span class="built_in">cos</span>(rotationAngle);</span><br><span class="line">Eigen::Vector3f rotatedVector = Q.<span class="built_in">transpose</span>() * T * Q * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high\_resolution\_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: axis coordination. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> angle = <span class="number">60</span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">p</span><span class="params">(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>)</span></span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">n</span><span class="params">(<span class="number">2.0</span>, <span class="number">8.6</span>, <span class="number">-3.1</span>)</span></span>;</span><br><span class="line">    n.<span class="built_in">normalize</span>(); </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// execute functions</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The vector p is (&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;The rotation axis n is (&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">DecomposeVector</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">DecomposeMatrix</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">AxisCoordination</span>(n, p, angle);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 输出是： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.213724</span>,<span class="number">0.919011</span>,<span class="number">-0.331271</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.016354</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">3.57449</span>,<span class="number">0.643966</span>,<span class="number">0.899062</span>). The time used is <span class="number">0.016642</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.021062</span></span></span><br></pre></td></tr></table></figure> 再多试几组：
+<p>代码如下： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;eigen3/Eigen/Eigen&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> PI = <span class="number">3.1415926</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the vector form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeVector</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f rotatedVector = <span class="built_in">cos</span>(rotationAngle) * p </span><br><span class="line">                                + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * (n.<span class="built_in">dot</span>(p)) * n </span><br><span class="line">                                + <span class="built_in">sin</span>(rotationAngle) * (n.<span class="built_in">cross</span>(p));</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the vector form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the matrix form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeMatrix</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Matrix3f N = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">N &lt;&lt; <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">2</span>), <span class="built_in">n</span>(<span class="number">1</span>),</span><br><span class="line">     <span class="built_in">n</span>(<span class="number">2</span>), <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">0</span>),</span><br><span class="line">     -<span class="built_in">n</span>(<span class="number">1</span>), <span class="built_in">n</span>(<span class="number">0</span>), <span class="number">0</span>;</span><br><span class="line">Eigen::Matrix3f R = Eigen::Matrix3f::<span class="built_in">Identity</span>() + <span class="built_in">sin</span>(rotationAngle) * N + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * N * N;</span><br><span class="line">Eigen::Vector3f rotatedVector = R * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the matrix form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using axis coordination</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AxisCoordination</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f crossed = n.<span class="built_in">cross</span>(p);</span><br><span class="line">Eigen::Vector3f u = n;</span><br><span class="line">Eigen::Vector3f v = crossed / crossed.<span class="built_in">norm</span>();</span><br><span class="line">Eigen::Vector3f w = n.<span class="built_in">cross</span>(v);</span><br><span class="line">Eigen::Matrix3f Q = Eigen::Matrix3f::<span class="built_in">Identity</span>(), T = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">0</span>) = u;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">1</span>) = v;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">2</span>) = w;</span><br><span class="line">T &lt;&lt; <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">cos</span>(rotationAngle), -<span class="built_in">sin</span>(rotationAngle),</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">sin</span>(rotationAngle), <span class="built_in">cos</span>(rotationAngle);</span><br><span class="line">Eigen::Vector3f rotatedVector = Q.<span class="built_in">transpose</span>() * T * Q * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: axis coordination. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> angle = <span class="number">60</span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">p</span><span class="params">(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>)</span></span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">n</span><span class="params">(<span class="number">2.0</span>, <span class="number">8.6</span>, <span class="number">-3.1</span>)</span></span>;</span><br><span class="line">    n.<span class="built_in">normalize</span>(); </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// execute functions</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The vector p is (&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;The rotation axis n is (&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">DecomposeVector</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">DecomposeMatrix</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">AxisCoordination</span>(n, p, angle);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 输出是： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.213724</span>,<span class="number">0.919011</span>,<span class="number">-0.331271</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.016354</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">3.57449</span>,<span class="number">0.643966</span>,<span class="number">0.899062</span>). The time used is <span class="number">0.016642</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.021062</span></span></span><br></pre></td></tr></table></figure> 再多试几组：
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">-654.1</span>,<span class="number">12.88</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.995044</span>,<span class="number">0.0136933</span>,<span class="number">-0.0984901</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.015503</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">-59.7309</span>,<span class="number">-338.298</span>,<span class="number">-556.777</span>). The time used is <span class="number">0.015297</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.021547</span></span></span><br></pre></td></tr></table></figure></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">32.5</span>,<span class="number">45.1</span>,<span class="number">-2.2</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.57735</span>,<span class="number">0.57735</span>,<span class="number">0.57735</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.015558</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">5.16667</span>,<span class="number">52.4667</span>,<span class="number">17.7667</span>). The time used is <span class="number">0.015215</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.020841</span></span></span><br></pre></td></tr></table></figure>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">666</span>,<span class="number">0</span>,<span class="number">0</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.01517</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">0</span>,<span class="number">666</span>,<span class="number">0</span>). The time used is <span class="number">0.015402</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.020898</span></span></span><br></pre></td></tr></table></figure>
@@ -931,9 +960,9 @@ class="math inline">\(b\)</span>称为复数的虚部 (Imaginary
 Part)，表达为<span class="math inline">\(b=\text{Im}(z)\)</span>。</p>
 <p>从线性代数的角度来看，复数<span
 class="math inline">\(z=a+bi\)</span>可以看成是基 (Basis) <span
-class="math inline">\(\\{1,i\\}\)</span>上的线性组合，因此也可以把复数<span
+class="math inline">\(\{1,i\}\)</span>上的线性组合，因此也可以把复数<span
 class="math inline">\(z\)</span>写成一个向量：</p>
-<p><span class="math display">\[z=\begin{bmatrix}a\\\\b
+<p><span class="math display">\[z=\begin{bmatrix}a\\b
 \end{bmatrix}\]</span></p>
 <h2 id="复数的加法与乘法">复数的加法与乘法</h2>
 <h3 id="复数的加法">复数的加法</h3>
@@ -946,56 +975,56 @@ class="math display">\[z_1z_2=(a+bi)(c+di)=(ac-bd)+(bc+ad)i\]</span></p>
 <p>利用上面讲过的复数的向量形式，可以把上式写成矩阵乘向量的形式：</p>
 <p><span class="math display">\[z_1z_2=(ac-bd)+(bc+ad)i=
 \begin{bmatrix}
-ac-bd\\\\
+ac-bd\\
 bc+ad
 \end{bmatrix}=
 \begin{bmatrix}
-a &amp; -b\\\\
+a &amp; -b\\
 b &amp; a
 \end{bmatrix}
 \begin{bmatrix}
-c\\\\
+c\\
 d
 \end{bmatrix}\]</span></p>
-右侧的向量<span
-class="math inline">\(\begin{bmatrix}c\\\\d\end{bmatrix}\)</span>就是向量形式下的$
-z_2<span class="math inline">\(，而左侧的矩阵\)</span>
-<span
-class="math display">\[\begin{bmatrix}a&amp;-b\\\\b&amp;a\end{bmatrix}\]</span>
-<p><span
-class="math inline">\(则是\)</span>z_1$在乘法时的<strong>矩阵形式</strong>，矩阵的第一列就是自身的向量形式，而第二列进行了交换并对虚部取负。</p>
+<p>右侧的向量<span
+class="math inline">\(\begin{bmatrix}c\\d\end{bmatrix}\)</span>就是向量形式下的<span
+class="math inline">\(z_2\)</span>，而左侧的矩阵<span
+class="math inline">\(\begin{bmatrix}a&amp;-b\\b&amp;a\end{bmatrix}\)</span>则是<span
+class="math inline">\(z_1\)</span>在乘法时的<strong>矩阵形式</strong>，矩阵的第一列就是自身的向量形式，而第二列进行了交换并对虚部取负。</p>
 <p>所以，我们可以把<span
 class="math inline">\(z_2\)</span>也写成矩阵形式，然后与<span
 class="math inline">\(z_1\)</span>相乘：</p>
 <p><span class="math display">\[z_1z_2=
 \begin{bmatrix}
-a &amp; -b\\\\
+a &amp; -b\\
 b &amp; a
 \end{bmatrix}
 \begin{bmatrix}
-c &amp; -d\\\\
+c &amp; -d\\
 d &amp; c
 \end{bmatrix}=
 \begin{bmatrix}
-ac-bd &amp; -(bc+ad)\\\\
+ac-bd &amp; -(bc+ad)\\
 bc+ad &amp; ac-bd
 \end{bmatrix}\]</span></p>
-<p>所以，我们现在可以用至少三种形式去表达一个复数了（具体用哪种形式取决于我们的需要）：
-- 代数形式：<span class="math inline">\(z=a+bi\)</span>; -
-向量形式：<span
-class="math inline">\(z=\begin{bmatrix}a\\\\b\end{bmatrix}\)</span>; -
-矩阵形式：<span class="math inline">\(z=\begin{bmatrix}a &amp; -b\\\\b
-&amp; a\end{bmatrix}\)</span>.</p>
+<p>所以，我们现在可以用至少三种形式去表达一个复数了（具体用哪种形式取决于我们的需要）：</p>
+<ul>
+<li>代数形式：<span class="math inline">\(z=a+bi\)</span>;</li>
+<li>向量形式：<span
+class="math inline">\(z=\begin{bmatrix}a\\b\end{bmatrix}\)</span>;</li>
+<li>矩阵形式：<span class="math inline">\(z=\begin{bmatrix}a &amp; -b\\b
+&amp; a\end{bmatrix}\)</span>.</li>
+</ul>
 <p>有两个特殊的复数<span
 class="math inline">\(1,i\)</span>，它们的矩阵形式不难得到是：</p>
 <p><span class="math display">\[1=\begin{bmatrix}
-1 &amp; 0\\\\
+1 &amp; 0\\
 0 &amp; 1
-\end{bmatrix}=I\\;(a=1, b=0)\]</span></p>
+\end{bmatrix}=I\;(a=1, b=0)\]</span></p>
 <p><span class="math display">\[i=\begin{bmatrix}
-0 &amp; -1\\\\
+0 &amp; -1\\
 1 &amp; 0
-\end{bmatrix}\\;(a=0, b=1)\]</span></p>
+\end{bmatrix}\;(a=0, b=1)\]</span></p>
 <p>对复数<span
 class="math inline">\(i\)</span>的矩阵形式进行平方，发现它就是<span
 class="math inline">\(-I\)</span>，从代数形式来看，就等价于<span
@@ -1003,63 +1032,68 @@ class="math inline">\(i^2=-1\)</span>。这说明复数的矩阵形式是良定�
 <h2 id="复数的模长">复数的模长</h2>
 <p>复数<span
 class="math inline">\(z=a+bi\)</span>的模长（Magnitude）定义为:</p>
-<p><span class="math display">\[\\|z\\| =\sqrt{a\^2+b\^2}\]</span></p>
+<p><span class="math display">\[\|z\| =\sqrt{a^2+b^2}\]</span></p>
 <p>这可以用它的共轭（Conjugate）表示：</p>
-<p><span class="math display">\[\\|z\\| =\sqrt{z\bar{z}},\\;
+<p><span class="math display">\[\|z\| =\sqrt{z\bar{z}},\\;
 \bar{z}=a-bi\]</span></p>
 <h2 id="复数与二维旋转-1">复数与二维旋转</h2>
 <h3 id="从复数矩阵形式导出旋转关系">从复数矩阵形式导出旋转关系</h3>
 <p>下面将重点引出复数与二维旋转的关系。</p>
 <p>注意观察复数<span class="math inline">\(z\)</span>的矩阵形式<span
-class="math inline">\(\begin{bmatrix}a &amp; -b\\\\b &amp;
+class="math inline">\(\begin{bmatrix}a &amp; -b\\b &amp;
 a\end{bmatrix}\)</span>，我们可以把它变换为下述形式：</p>
 <p><span class="math display">\[\begin{bmatrix}
-a &amp; -b\\\\
+a &amp; -b\\
 b &amp; a
-\end{bmatrix}=\sqrt{a\^2+b\^2}
+\end{bmatrix}=\sqrt{a^2+b^2}
 \begin{bmatrix}
-\frac{a}{\sqrt{a\^2+b\^2}} &amp; \frac{-b}{\sqrt{a\^2+b\^2}}\\\\
-\frac{b}{\sqrt{a\^2+b\^2}} &amp; \frac{a}{\sqrt{a\^2+b\^2}}
+\frac{a}{\sqrt{a^2+b^2}} &amp; \frac{-b}{\sqrt{a^2+b^2}}\\
+\frac{b}{\sqrt{a^2+b^2}} &amp; \frac{a}{\sqrt{a^2+b^2}}
 \end{bmatrix}\]</span></p>
 <p>矩阵中的每一项都被模长<span
-class="math inline">\(\\|z\\|\)</span>缩放了，此时注意到<span
-class="math inline">\(\frac{a}{\sqrt{a\^2+b\^2}}\)</span>就是复数<span
+class="math inline">\(\|z\|\)</span>缩放了，此时注意到<span
+class="math inline">\(\frac{a}{\sqrt{a^2+b^2}}\)</span>就是复数<span
 class="math inline">\(z\)</span>在复平面与实轴形成夹角<span
 class="math inline">\(\theta\)</span>的余弦值<span
 class="math inline">\(\cos(\theta)\)</span>，而<span
-class="math inline">\(\frac{b}{\sqrt{a\^2+b\^2}}\)</span>正好对应了正弦值<span
+class="math inline">\(\frac{b}{\sqrt{a^2+b^2}}\)</span>正好对应了正弦值<span
 class="math inline">\(\sin(\theta)\)</span>，而这个夹角<span
 class="math inline">\(\theta\)</span>就是<span
 class="math inline">\(\arctan(b/a)\)</span>。</p>
 <p>这样一来，我们就可以把上式写成：</p>
-<p><span class="math display">\[\begin{bmatrix}
-a &amp; -b\\\\
-b &amp; a
-\end{bmatrix}=\\|z\\|
+<p><span class="math display">\[
+\begin{equation}
+\label{eq1}
 \begin{bmatrix}
-\cos(\theta) &amp; -\sin(\theta)\\\\
+a &amp; -b\\
+b &amp; a
+\end{bmatrix}=\|z\|
+\begin{bmatrix}
+\cos(\theta) &amp; -\sin(\theta)\\
 \sin(\theta) &amp; \cos(\theta)
 \end{bmatrix}=
 \begin{bmatrix}
-\\|z\\| &amp; 0\\\\
-0 &amp; \\|z\\|
+\|z\| &amp; 0\\
+0 &amp; \|z\|
 \end{bmatrix}
 \begin{bmatrix}
-\cos(\theta) &amp; -\sin(\theta)\\\\
+\cos(\theta) &amp; -\sin(\theta)\\
 \sin(\theta) &amp; \cos(\theta)
-\end{bmatrix}\tag{1}\]</span></p>
+\end{bmatrix}
+\end{equation}
+\]</span></p>
 <p>这样一来，任意复数<span
 class="math inline">\(z=a+bi\)</span>都可以表示为两个矩阵的乘积，一个缩放矩阵<span
-class="math inline">\(\begin{bmatrix}\\|z\\| &amp; 0\\\\0 &amp;
-\\|z\\|\end{bmatrix}\)</span>和一个（我们熟悉的）旋转矩阵<span
+class="math inline">\(\begin{bmatrix}\|z\| &amp; 0\\0 &amp;
+\|z\|\end{bmatrix}\)</span>和一个（我们熟悉的）旋转矩阵<span
 class="math inline">\(\begin{bmatrix}\cos(\theta) &amp;
--\sin(\theta)\\\\\sin(\theta) &amp;
+-\sin(\theta)\\\sin(\theta) &amp;
 \cos(\theta)\end{bmatrix}\)</span>的复合。换句话说，<strong>复数的几何意义就是进行旋转与缩放，旋转角度为<span
 class="math inline">\(\theta=\arctan(b/a)\)</span>，缩放大小为复数的模长。</strong>
 如果复数的模长为1，那么它的几何意义就只有旋转。</p>
 <p>所以，对复数<span class="math inline">\(p\)</span>的旋转：</p>
 <p><span class="math display">\[p&#39;=\begin{bmatrix}
-\cos(\theta) &amp; -\sin(\theta)\\\\
+\cos(\theta) &amp; -\sin(\theta)\\
 \sin(\theta) &amp; \cos(\theta)
 \end{bmatrix}p\]</span></p>
 <p>我们可以构造一个复数<span
@@ -1068,16 +1102,17 @@ class="math inline">\(p\)</span>相乘表示旋转：</p>
 <p><span
 class="math display">\[p&#39;=zp=(\cos(\theta)+i\sin(\theta))p\]</span></p>
 <h3 id="复数的极坐标形式">复数的极坐标形式</h3>
-<p>当我们看到(1)式的时候，我们立马可以得到复数的另一种代数形式：</p>
+<p>当我们看到<span
+class="math inline">\(\eqref{eq1}\)</span>式的时候，我们立马可以得到复数的另一种代数形式：</p>
 <p><span
-class="math display">\[z=\\|z\\|(\cos(\theta)+i\sin(\theta))\]</span></p>
+class="math display">\[z=\|z\|(\cos(\theta)+i\sin(\theta))\]</span></p>
 <p>再根据欧拉公式（Euler's Formula）：</p>
 <p><span
 class="math display">\[\cos(\theta)+i\sin(\theta)=\mathrm{e}^{i\theta}\]</span></p>
 <p>可以立得复数的<strong>极坐标形式</strong>：</p>
 <p><span
-class="math display">\[z=\\|z\\|\mathrm{e}\^{i\theta}=r\mathrm{e}\^{i\theta},\;
-r=\\|z\\|\]</span></p>
+class="math display">\[z=\|z\|\mathrm{e}^{i\theta}=r\mathrm{e}^{i\theta},\;
+r=\|z\|\]</span></p>
 <p>现在，复数<span
 class="math inline">\(z\)</span>不再通过它的实部和虚部表示，而且通过一个旋转角<span
 class="math inline">\(\theta\)</span>与缩放因子<span
@@ -1087,30 +1122,36 @@ class="math inline">\(p\)</span>的旋转，都可以表示为：</p>
 class="math display">\[p&#39;=r\mathrm{e}^{i\theta}p\]</span></p>
 <p>如果仅需表示旋转，则令<span
 class="math inline">\(r=1\)</span>即可。</p>
-<blockquote>
-<p><strong>补充</strong>：欧拉公式的证明。 令<span
-class="math inline">\(f(\theta)=\frac{\cos(\theta)+i\sin(\theta)}{\mathrm{e}\^{i\theta}}=\mathrm{e}\^{-i\theta}(\cos(\theta)+i\sin(\theta))\)</span>，对实数<span
+<details class="note success no-icon"><summary><p>Proof of Euler's Formula</p>
+</summary>
+<p>令<span
+class="math inline">\(f(\theta)=\frac{\cos(\theta)+i\sin(\theta)}{\mathrm{e}^{i\theta}}=\mathrm{e}^{-i\theta}(\cos(\theta)+i\sin(\theta))\)</span>，对实数<span
 class="math inline">\(\theta\)</span>，对<span
 class="math inline">\(f(\theta)\)</span>求导，得到<span
-class="math inline">\(f&#39;(\theta)=\mathrm{e}\^{-i\theta}(i\cos(\theta)-\sin(\theta))-i\mathrm{e}\^{-i\theta}(\cos(\theta)+i\sin(\theta))=0\)</span>，因此<span
+class="math inline">\(f&#39;(\theta)=\mathrm{e}^{-i\theta}(i\cos(\theta)-\sin(\theta))-i\mathrm{e}^{-i\theta}(\cos(\theta)+i\sin(\theta))=0\)</span>，因此<span
 class="math inline">\(f(\theta)\)</span>是常数。又因为<span
 class="math inline">\(f(0)=1\)</span>，所以<span
 class="math inline">\(f(\theta)\equiv 1\)</span>。欧拉公式得证。</p>
-</blockquote>
+
+</details>
 <h3 id="复数的几种表示形式总结">复数的几种表示形式总结</h3>
 <p>现在我们已经得到了如下几种复数<span
-class="math inline">\(z=a+bi\)</span>的表示形式： - 代数形式一：<span
-class="math inline">\(z=a+bi\)</span>; - 向量形式：<span
-class="math inline">\(z=\begin{bmatrix}a\\\\b\end{bmatrix}\)</span>; -
-矩阵形式一：<span class="math inline">\(z=\begin{bmatrix}a &amp; -b\\\\b
-&amp; a\end{bmatrix}\)</span>; - 矩阵形式二：<span
-class="math inline">\(z=\begin{bmatrix}\\|z\\| &amp; 0\\\\0 &amp;
-\\|z\\|\end{bmatrix}\begin{bmatrix}\cos(\theta) &amp;
--\sin(\theta)\\\sin(\theta) &amp; \cos(\theta)\end{bmatrix}\)</span>; -
-代数形式二：<span
-class="math inline">\(z=r(\cos(\theta)+i\sin(\theta))\)</span>; -
-极坐标形式：<span
-class="math inline">\(z=r\mathrm{e}^{i\theta}\)</span>.</p>
+class="math inline">\(z=a+bi\)</span>的表示形式：</p>
+<ul>
+<li>代数形式一：<span class="math inline">\(z=a+bi\)</span>;</li>
+<li>向量形式：<span
+class="math inline">\(z=\begin{bmatrix}a\\b\end{bmatrix}\)</span>;</li>
+<li>矩阵形式一：<span class="math inline">\(z=\begin{bmatrix}a &amp;
+-b\\b &amp; a\end{bmatrix}\)</span>;</li>
+<li>矩阵形式二：<span class="math inline">\(z=\begin{bmatrix}\|z\| &amp;
+0\\0 &amp; \|z\|\end{bmatrix}\begin{bmatrix}\cos(\theta) &amp;
+-\sin(\theta)\\\sin(\theta) &amp;
+\cos(\theta)\end{bmatrix}\)</span>;</li>
+<li>代数形式二：<span
+class="math inline">\(z=r(\cos(\theta)+i\sin(\theta))\)</span>;</li>
+<li>极坐标形式：<span
+class="math inline">\(z=r\mathrm{e}^{i\theta}\)</span>.</li>
+</ul>
 <p>这几种形式是完全等价的。</p>
 <h2 id="旋转复合">旋转复合</h2>
 <p>假设我们现在有两个仅表示旋转的复数<span
@@ -1155,22 +1196,6 @@ href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <tag>计算机</tag>
         <tag>随笔</tag>
         <tag>数学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>十二月的花</title>
-    <url>/2020/12/22/%E5%8D%81%E4%BA%8C%E6%9C%88%E7%9A%84%E8%8A%B1/</url>
-    <content><![CDATA[<p>埙吹响了海岸 琴穿梭叶间 笛在天空啼鸣 伴奏着雪花片片</p>
-<p>孩子们欢笑着相聚 踏着雪 吱吱嘎嘎</p>
-<p>把欢乐捏成一团团棉 随风起舞 在阳光下 雪爱上了花</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -1258,6 +1283,20 @@ key）。</p>
         <tag>随笔</tag>
         <tag>生活</tag>
         <tag>影评</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>西湖夜歌</title>
+    <url>/2021/07/09/%E8%A5%BF%E6%B9%96%E5%A4%9C%E6%AD%8C/</url>
+    <content><![CDATA[<p>霓光半遮影 湖波轻颤合韵起 半句寻谁去</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -1356,14 +1395,14 @@ class="math display">\[(x,y,z,1)\Rightarrow(\frac{nx}{z},\frac{ny}{z},?,1)\]</sp
 <p>现在把每个元素都乘以<span class="math inline">\(z\)</span>，得到<span
 class="math inline">\((nx,ny,?,z)\)</span>。这时候，就有下述方程：</p>
 <p><span
-class="math display">\[\mathbf{M}(x,y,z,1)\^\text{T}=(nx,ny,?,z)\^\text{T}
+class="math display">\[\mathbf{M}(x,y,z,1)^\text{T}=(nx,ny,?,z)^\text{T}
 \]</span></p>
 <p>所以可以解得矩阵<span
 class="math inline">\(\mathbf{M}\)</span>是：</p>
 <p><span class="math display">\[\mathbf{M}=\begin{pmatrix}
-  n &amp; 0 &amp; 0 &amp; 0\\\\
-  0 &amp; n &amp; 0 &amp; 0\\\\
-  ? &amp; ? &amp; ? &amp; ?\\\\
+  n &amp; 0 &amp; 0 &amp; 0\\
+  0 &amp; n &amp; 0 &amp; 0\\
+  ? &amp; ? &amp; ? &amp; ?\\
   0 &amp; 0 &amp; 1 &amp; 0
 \end{pmatrix}\]</span></p>
 <p>为什么这里的第三维<span
@@ -1403,22 +1442,22 @@ class="math inline">\((0,0,f,1)\Rightarrow(0,0,f,1)\Rightarrow(0,0,f^2,f)\)</spa
 <p>如果把矩阵<span
 class="math inline">\(\mathbf{M}\)</span>未知的四个量分别设为<span
 class="math inline">\(a,b,c,d\)</span>，那么通过<span
-class="math inline">\(\mathbf{M}(x,y,n,1)\^\text{T}=(nx,ny,n^2,n)\)</span>我们有：</p>
+class="math inline">\(\mathbf{M}(x,y,n,1)^\text{T}=(nx,ny,n^2,n)\)</span>我们有：</p>
 <p><span class="math display">\[ax+by+cn+d=n^2\]</span></p>
 <p>因为右式不包含<span class="math inline">\(x,y\)</span>，所以<span
 class="math inline">\(a=b=0\)</span>且<span
 class="math inline">\(cn+d=n^2\)</span>。</p>
 <p>同时，由<span
-class="math inline">\(\mathbf{M}(0,0,f,1)\^\text{T}=(0,0,f^2,f)\)</span>得到：</p>
+class="math inline">\(\mathbf{M}(0,0,f,1)^\text{T}=(0,0,f^2,f)\)</span>得到：</p>
 <p><span class="math display">\[cf+d=f^2\]</span></p>
 <p>与<span class="math inline">\(cn+d=n^2\)</span>联立求解，就得到<span
 class="math inline">\(c=n+f,d=-nf\)</span>。</p>
 <p>所以，最终就解得透视投影矩阵<span
 class="math inline">\(\mathbf{M}\)</span>为：</p>
 <p><span class="math display">\[\mathbf{M}=\begin{pmatrix}
-  n &amp; 0 &amp; 0 &amp; 0\\\\
-  0 &amp; n &amp; 0 &amp; 0\\\\
-  0 &amp; 0 &amp; n+f &amp; -nf\\\\
+  n &amp; 0 &amp; 0 &amp; 0\\
+  0 &amp; n &amp; 0 &amp; 0\\
+  0 &amp; 0 &amp; n+f &amp; -nf\\
   0 &amp; 0 &amp; 1 &amp; 0
 \end{pmatrix}\]</span></p>
 <p>这是一个典型的线性变换，把三维空间中的一个点<span
@@ -1663,20 +1702,6 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <tag>计算机</tag>
         <tag>随笔</tag>
         <tag>数学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>西湖夜歌</title>
-    <url>/2021/07/09/%E8%A5%BF%E6%B9%96%E5%A4%9C%E6%AD%8C/</url>
-    <content><![CDATA[<p>霓光半遮影 湖波轻颤合韵起 半句寻谁去</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -2184,7 +2209,7 @@ src="/images/hades-AI/bomb.png" /></p></li>
 发射前向高速移动的Bomb，撞到墙才会停止，其他机制与发射Bomb相同。该技能的作用同上，但是由于该技能伤害更高，更难躲避，因此更加考验玩家的反应和观察力。
 <img data-src="/images/hades-AI/bomb-Ex.png" /></p></li>
 <li><p>召唤
-在第一阶段2/3和1/3血量处时使用召唤技能，进入短暂无敌状态并随机召唤几个较为强力的小怪。每一次召唤之后上述所有技能的使用频率都会发生变化。<strong>假设为三个子阶段，在第一个子阶段，回旋击、突刺击和突刺击-Ex使用较多，遁形、发射Bomb和发射Bomb-Ex使用较少，且整体的攻击频率很低（也即一个连续的攻击集合中包含的攻击技能较少，一般只有1<sub>2个，集合之间通过Idle、遁形实现暂停）。在第二个子阶段，依旧以回旋击、突刺击和突刺击-Ex为主，但是发射Bomb和发射Bomb-Ex频率开始增加，整体攻击频率开始增加（一个攻击集合中的技能数量增加，为2</sub>4个，集合之间的Idle持续时间开始缩短）。在第三个子阶段，所有技能的使用频率基本相同，变得更有节奏感，即使用一套技能之后进行遁形，然后再使用一套技能（此时一个攻击集合中的技能数量变为2~5个，集合之间的Idle持续时间进一步缩短）</strong>。该技能的作用本质和发射Bomb是一致的，但是Battlefield
+在第一阶段2/3和1/3血量处时使用召唤技能，进入短暂无敌状态并随机召唤几个较为强力的小怪。每一次召唤之后上述所有技能的使用频率都会发生变化。<strong>假设为三个子阶段，在第一个子阶段，回旋击、突刺击和突刺击-Ex使用较多，遁形、发射Bomb和发射Bomb-Ex使用较少，且整体的攻击频率很低（也即一个连续的攻击集合中包含的攻击技能较少，一般只有1~2个，集合之间通过Idle、遁形实现暂停）。在第二个子阶段，依旧以回旋击、突刺击和突刺击-Ex为主，但是发射Bomb和发射Bomb-Ex频率开始增加，整体攻击频率开始增加（一个攻击集合中的技能数量增加，为2~4个，集合之间的Idle持续时间开始缩短）。在第三个子阶段，所有技能的使用频率基本相同，变得更有节奏感，即使用一套技能之后进行遁形，然后再使用一套技能（此时一个攻击集合中的技能数量变为2~5个，集合之间的Idle持续时间进一步缩短）</strong>。该技能的作用本质和发射Bomb是一致的，但是Battlefield
 clear的意图更加明显，玩家这时候不得不优先清理小怪而不是像对待Bomb那样可选可不选，因为小怪非常强力并且极具干扰。在Battlefield
 clear期间，BOSS也会照常攻击玩家，这个时候是最紧张刺激的阶段，直到清理完所有小怪。
 <img data-src="/images/hades-AI/summon.png" /></p></li>
