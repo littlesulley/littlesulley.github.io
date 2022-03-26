@@ -2556,7 +2556,7 @@ mark.search-keyword {
 }
 mjx-container[jax='CHTML'][display='true'],
 .has-jax {
-  overflow: auto hidden;
+  overflow: scroll hidden;
 }
 mjx-container[display='true'] + br {
   display: none;
