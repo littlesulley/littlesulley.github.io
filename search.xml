@@ -1,31 +1,2410 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2022/03/26/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
-first post. Check <a href="https://hexo.io/docs/">documentation</a> for
-more info. If you get any problems when using Hexo, you can find the
-answer in <a
-href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
-you can ask me on <a
-href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a
-href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <title>Bresenham算法画直线</title>
+    <url>/2020/10/18/Bresenham%E7%AE%97%E6%B3%95%E7%94%BB%E7%9B%B4%E7%BA%BF/</url>
+    <content><![CDATA[<p>Bresenham's
+Algorithm是计算机图形学中用于画直线的算法，它只涉及整型数值的乘法和加法，在底层运算上提高了效率。本文介绍Bresenham算法的思路与扩展。</p>
+<span id="more"></span>
+<p>我们用显示器看到的各种图像都是由一个一个像素组成的，比如计算机要在显示器上显示一条线段，那么就要决定哪些像素填色，哪些不填色，如下图所示。下面我们假定像素点坐标为<span
+class="math inline">\((x_i,y_i)\)</span>且坐标为整数，所给线段的两端点为<span
+class="math inline">\((x&#39;,y&#39;),(x&#39;&#39;,y&#39;&#39;)\)</span>，且坐标也为整数。</p>
+<p><img data-src="/images/bresenham/1.png" /></p>
+<h1 id="naive-algorithm">Naive Algorithm</h1>
+<p>显然，线段所在的直线的斜率是<span
+class="math inline">\(k=\frac{y&#39;&#39;-y&#39;}{x&#39;&#39;-x&#39;}\)</span>，直线的方程就能够显式地写出来：<span
+class="math inline">\(y=kx+b\)</span>，其中<span
+class="math inline">\(b=y&#39;-kx&#39;\)</span>。</p>
+<p>于是我们可以得到一个非常朴素的算法：从点<span
+class="math inline">\((x_1,y_1)=(x&#39;,y&#39;)\)</span>开始，每次让横坐标加一，即<span
+class="math inline">\(x_2=x_1+1,x_3=x_2+1,\cdots\)</span>，然后依次把横坐标代入到直线方程中，得到纵坐标<span
+class="math inline">\(f(x_i)=kx_i+b\)</span>，然后去找离它最近的<span
+class="math inline">\(y_i\)</span>，可以表达为<span
+class="math inline">\(y_i=\lfloor
+f(x_i)+0.5\rfloor\)</span>，从而点<span
+class="math inline">\((x_i,y_i)\)</span>就是要填色的像素。接下来考虑<span
+class="math inline">\(f(x_{i+1})\)</span>，重复这个过程，直到<span
+class="math inline">\(x_i\ge x&#39;&#39;+1\)</span>。</p>
+<p>这个方法如下图所示，注意红色线段和蓝色线段部分是直线上的变化：</p>
+<figure>
+<img data-src="/images/bresenham/2.png"
+alt="给定线段的两点，可以得到它的直线方程，然后依次增大像素点的横坐标，求出对应横坐标的函数值，判断它的纵坐标是什么，得到填充点" />
+<figcaption
+aria-hidden="true">给定线段的两点，可以得到它的直线方程，然后依次增大像素点的横坐标，求出对应横坐标的函数值，判断它的纵坐标是什么，得到填充点</figcaption>
+</figure>
+<p>当然这个算法可以再高效一点，因为上面在算<span
+class="math inline">\(f(x_i)\)</span>的时候是用直线方程去算，每次计算都有一个加法和一个乘法，我们可以迭代地去做：<span
+class="math inline">\(f(x_i)=kx_i+b=k(x_{i-1}+1)+b=f(x_{i-1})+k\)</span>。现在，计算<span
+class="math inline">\(f(x_i)\)</span>就只需要一次加法即可。</p>
+<p>这个算法的好处在于，只要直线不是<span
+class="math inline">\(x=a\)</span>，无论<span
+class="math inline">\(k\)</span>是多少，两个点的位置如何，这个算法都适用。当然，<span
+class="math inline">\(x=a\)</span>的情况特殊考虑即可，问题不大。</p>
+<p>但是这个算法的问题在于，斜率<span
+class="math inline">\(k\)</span>往往是浮点数（即使端点都是整型），而计算机计算浮点数的效率远没有计算整型快，而在图形学中，需要进行大量的即时演算，我们希望能够尽量避免浮点运算。而且，在求<span
+class="math inline">\(y_i=\lfloor
+f(x_i)+0.5\rfloor\)</span>时必不可少需要取整，这进一步降低了运算的效率。</p>
+<h1 id="bresenham-algorithm">Bresenham Algorithm</h1>
+<p>下面我们介绍Bresenham算法，一种基于Naive算法的改进版本，它不需要使用取整函数，而且大部分的加法与乘法运算都是基于整型，在运算效率上大大提高。下面我们假设直线斜率<span
+class="math inline">\(0&lt;k\le 1\)</span>且<span
+class="math inline">\(x&#39;&lt;x&#39;&#39;\)</span>，原因及一般的情况我们在下面会介绍。</p>
+<p>现在我们仔细观察Naive算法，会发现其计算瓶颈主要由<span
+class="math inline">\(f(x_i)=f(x_{i+1})+k\)</span>和<span
+class="math inline">\(\lfloor
+f(x_i)+0.5\rfloor\)</span>带来，换句话说，Naive算法假定我们对每一个<span
+class="math inline">\(x_i\)</span>都要去计算它在直线上的精确位置<span
+class="math inline">\(f(x_i)\)</span>，而且还要直接计算它离哪个纵坐标更近。</p>
+<p>假定我们现在已经着色了点<span
+class="math inline">\((x_i,y_i)\)</span>，如下图所示。</p>
+<figure>
+<img data-src="/images/bresenham/3.png"
+alt="Bresenhan算法相比Naive算法的改进之处在于，在求像素纵坐标的时候，不直接用取整函数，而是考虑上下相邻两个像素点与函数值的距离，小的那个才是真正需要着色的，于是就把问题转为了两段距离的大小比较" />
+<figcaption
+aria-hidden="true">Bresenhan算法相比Naive算法的改进之处在于，在求像素纵坐标的时候，不直接用取整函数，而是考虑上下相邻两个像素点与函数值的距离，小的那个才是真正需要着色的，于是就把问题转为了两段距离的大小比较</figcaption>
+</figure>
+<p>由于我们的假定<span
+class="math inline">\(k&lt;1\)</span>，所以下一个要着色的点只能是<span
+class="math inline">\((x_{i+1},y_i)\)</span>或者<span
+class="math inline">\((x_{i+1},y_{i+1})\)</span>，也就等价于计算<span
+class="math inline">\(y_{i+1}-f(x_{i+1})\)</span>和<span
+class="math inline">\(f(x_{i+1})-y_i\)</span>的大小，我们把它们分别记为<span
+class="math inline">\(d_\text{upper}\)</span>和<span
+class="math inline">\(d_\text{lower}\)</span>。现在对它们做差，就得到：</p>
+<p><span
+class="math display">\[d_\text{upper}-d_\text{lower}=y_{i+1}+y_i-2f(x_{i+1})=2y_i+1-2[k(x_i+1)+b]=2y_i-2kx_i+B\]</span></p>
+<p>上面，<span class="math inline">\(B=1-2k-2b\)</span>是与<span
+class="math inline">\(x_i,y_i\)</span>无关的常量。所以，现在我们就只关心<span
+class="math inline">\(d_\text{upper}-d_\text{lower}\)</span>的正负如何，但是上式还是有<span
+class="math inline">\(k\)</span>，我们记<span
+class="math inline">\(\Delta y=y&#39;&#39;-y&#39;,\Delta
+x=x&#39;&#39;-x&#39;\)</span>，于是<span class="math inline">\(k=\Delta
+y/\Delta x\)</span>，代入到上式，就得到了：</p>
+<p><span
+class="math display">\[d_\text{upper}-d_\text{lower}=2y_i-2\frac{\Delta
+y}{\Delta x}x_i+B\Rightarrow \Delta
+x(d_\text{upper}-d_\text{lower})=2\Delta x y_i-2\Delta y x_i+\Delta
+xB\]</span></p>
+<p>由于我们又假设了<span
+class="math inline">\(x&#39;&lt;x&#39;&#39;\)</span>，所以<span
+class="math inline">\(\Delta x\)</span>为正，要判断<span
+class="math inline">\(d_\text{upper}-d_\text{lower}\)</span>的符号也就是要判断<span
+class="math inline">\(2\Delta x y_i-2\Delta y x_i+\Delta
+xB\)</span>的符号，此刻我们记<span class="math inline">\(p_i=2\Delta x
+y_i-2\Delta y x_i+\Delta xB\)</span>。所以，只要判断<span
+class="math inline">\(p_i\)</span>是大于0还是小于0，就可以判断对横坐标<span
+class="math inline">\(x_{i+1}\)</span>而言，是要选<span
+class="math inline">\(y_i\)</span>还是<span
+class="math inline">\(y_{i+1}\)</span>为纵坐标了。</p>
+<p>现在我们把<span
+class="math inline">\(x&#39;\)</span>代入，就得到初始值<span
+class="math inline">\(p_0\)</span>: <span class="math display">\[
+p_0=2\Delta x(kx&#39;+b)-2\Delta y x&#39;+\Delta x(1-2k-2b)=2\Delta
+xkx&#39;+2\Delta x b-2\Delta yx&#39;+\Delta x-2\Delta xk-2\Delta x b\\\\
+=2x&#39;\Delta y-2x&#39;\Delta y+\Delta x-2\Delta y=\Delta x-2\Delta y
+\]</span></p>
+<p>虽然上式已经成功去掉了计算<span
+class="math inline">\(f(x_{i+1})\)</span>，但是要计算<span
+class="math inline">\(p_i\)</span>还需要每次都加常数项<span
+class="math inline">\(B\)</span>，而它仍然包含了浮点数<span
+class="math inline">\(k,b\)</span>，我们还是想要不计算它们。但是我们观察到，<span
+class="math inline">\(p_{i+1},p_i\)</span>都包含常数项<span
+class="math inline">\(\Delta x
+B\)</span>，所以我们对它们做差就可以消去常数项，得到:</p>
+<p><span class="math display">\[p_{i+1}-p_i=(2\Delta xy_i-2\Delta
+yx_i)-(2\Delta xy_{i+1}-2\Delta yx_{i+1})=2\Delta x(y_i-y_{i+1})-2\Delta
+y\]</span></p>
+<p>或者写成下面的递推形式：</p>
+<p><span class="math display">\[p_{i+1}=p_i+2\Delta
+x(y_i-y_{i+1})-2\Delta y\]</span></p>
+<p>现在，已经不用再计算浮点数<span
+class="math inline">\(k,b\)</span>了。我们前面已经说了，可以用<span
+class="math inline">\(p_i\)</span>去判断<span
+class="math inline">\(y_{i+1}\)</span>和<span
+class="math inline">\(y_i\)</span>的关系，然后，就可以把<span
+class="math inline">\(y_{i+1}-y_i\)</span>代入上式，计算出<span
+class="math inline">\(p_{i+1}\)</span>了。</p>
+<p><strong>所以</strong>，当<span
+class="math inline">\(p_i&gt;0\)</span>的时候，<span
+class="math inline">\(d_\text{upper}&gt;d_\text{lower}\)</span>，<span
+class="math inline">\(y_{i+1}\)</span>等于<span
+class="math inline">\(y_i\)</span>，此时计算得<span
+class="math inline">\(p_{i+1}=p_i-2\Delta y\)</span>；当<span
+class="math inline">\(p_i&lt;0\)</span>时，<span
+class="math inline">\(d_\text{upper}&lt;d_\text{lower}\)</span>，<span
+class="math inline">\(y_{i+1}=y_i+1\)</span>，此时计算得<span
+class="math inline">\(p_{i+1}=p_i+2\Delta x-2\Delta
+y\)</span>。然后再用<span
+class="math inline">\(p_{i+1}\)</span>去判断<span
+class="math inline">\(y_{i+2}\)</span>，从而可以计算<span
+class="math inline">\(p_{i+2}\)</span>，一直下去，直到<span
+class="math inline">\(x_i\ge x&#39;&#39;+1\)</span>。</p>
+<p>注意我们的两个前提<span class="math inline">\(k&lt;1\)</span>和<span
+class="math inline">\(x&#39;&lt;x&#39;&#39;\)</span>，前者保证了<span
+class="math inline">\(y_i\)</span>每次最多增加1，后者保证了<span
+class="math inline">\(\Delta x\)</span>为正。</p>
+<p>总结来说，Bresenham算法的流程是： <span class="math display">\[
+p_0 \rightarrow(x_1,\hat{y}\_1) \rightarrow p_1
+\rightarrow(x_2,\hat{y}\_2) \rightarrow \cdots \rightarrow p_n
+\rightarrow (x_{n+1},\hat{y}_{n+1})
+\]</span> 这里的<span
+class="math inline">\(\hat{y}_i\)</span>根据计算结果选择。</p>
+<p>下面是一个例子，设给定的两点是<span
+class="math inline">\((1,3),(10,5)\)</span>，从而<span
+class="math inline">\(\Delta x=9,\Delta y=2, p_0=\Delta-2\Delta
+y=5,2\Delta y=4, 2\Delta x-2\Delta
+y=14\)</span>，把这些都计算好之后，首先填充<span
+class="math inline">\((1,3)\)</span>这个像素，然后发现<span
+class="math inline">\(p_0=5&gt;0\)</span>，则下一个点的纵坐标还是3，于是填色像素<span
+class="math inline">\((2,3)\)</span>，计算<span
+class="math inline">\(p_1=p_0-2\Delta
+y=1&gt;0\)</span>；发现又为正，则下一个像素是<span
+class="math inline">\((3,3)\)</span>，计算<span
+class="math inline">\(p_2=p_1-2\Delta
+y=-3\)</span>；此时发现为负，则向上移动一格，要填充的像素是<span
+class="math inline">\((4,4)\)</span>，再计算<span
+class="math inline">\(p_3=p_2+2\Delta x-2\Delta
+y=11\)</span>；以此类推。</p>
+<figure>
+<img data-src="/images/bresenham/4.png"
+alt="一个使用Bresenhan算法画线的实例" />
+<figcaption
+aria-hidden="true">一个使用Bresenhan算法画线的实例</figcaption>
+</figure>
+<p>由于线段没有方向性，所以我们可以始终将第一个点设为第二个点的左侧，即<span
+class="math inline">\(x&#39;&lt;x&#39;&#39;\)</span>。那么现在的问题就是要解决<span
+class="math inline">\(k\le 0\)</span>和<span
+class="math inline">\(k&gt;1\)</span>的问题了。可以发现，不同的<span
+class="math inline">\(k\)</span>其实对应了平面的不同区域，根据对角线与坐标轴可以分为四个区域。现在，只需要对<span
+class="math inline">\(k\le 0\)</span>和<span
+class="math inline">\(k&gt;1\)</span>对应的线段进行对称操作，就可以转换为<span
+class="math inline">\(0&lt;k\le
+1\)</span>的情况。在求得所有填色的像素之后，再把这些像素对称回去即可。</p>
 ]]></content>
+      <categories>
+        <category>CS - 图形学</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>算法</tag>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《Assassain&#39;s Creed Valhalla》玩后感</title>
+    <url>/2020/11/12/acv-impression-md/</url>
+    <content><![CDATA[<p><code>刺客信条：英灵殿</code>（Assassin's Creed
+Valhalla，下称<code>英灵殿</code>）无疑是刺客信条“神话三部曲”中最成功的一部，无论是从游戏的质量上，还是从销售成绩上。在80个小时的主线与10多个小时的“内置DLC”游玩后，我个人对英灵殿的评价可以总结为“自我突破，承前启后”。说它自我突破是因为它革除了起源和奥德赛中的绝大部分缺点，在自我的改进中完成了里程碑式的跨越；说它承前启后式因为它标志着刺客信条系列一次华丽而成功的转型与过渡，是游戏特色与市场充分交合后的最佳发展方向，是游戏缺点自我祓除与优点渐进式凸显的结果。本文将重点从游戏的任务系统、剧情节奏和人物刻画这三个方面介绍英灵殿的蜕变，至于游戏画面和风景，<del>还有育碧特色BUG，</del>都是刺客信条系列经典的历史特征了，在本文不再赘述。</p>
+<span id="more"></span>
+<h1
+id="任务系统众星捧月映空青稀光散落满夜明">任务系统：众星捧月映空青，稀光散落满夜明</h1>
+<h1
+id="剧情节奏一马平川驰此间峰峦叠嶂牛羊见">剧情节奏：一马平川驰此间，峰峦叠嶂牛羊见</h1>
+<h1
+id="人物刻画穷极千里观百态瓦泥滂沱照众生">人物刻画：穷极千里观百态，瓦泥滂沱照众生。</h1>
+<h1
+id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终将至，共邀朝阳行远方。</h1>
+<p><img data-src="/images/acv-impression/1.png" /></p>
+<p><img data-src="/images/acv-impression/2.png" /></p>
+<p><img data-src="/images/acv-impression/3.png" /></p>
+<p><img data-src="/images/acv-impression/4.png" /></p>
+<p><img data-src="/images/acv-impression/5.png" /></p>
+<p><img data-src="/images/acv-impression/6.png" /></p>
+<p><img data-src="/images/acv-impression/7.png" /></p>
+<p><img data-src="/images/acv-impression/8.png" /></p>
+<p><img data-src="/images/acv-impression/9.png" /></p>
+<p><img data-src="/images/acv-impression/10.png" /></p>
+<p><img data-src="/images/acv-impression/11.png" /></p>
+<p><img data-src="/images/acv-impression/12.png" /></p>
+<p><img data-src="/images/acv-impression/13.png" /></p>
+<p><img data-src="/images/acv-impression/14.png" /></p>
+<p><img data-src="/images/acv-impression/15.png" /></p>
+<p><img data-src="/images/acv-impression/16.png" /></p>
+<p><img data-src="/images/acv-impression/17.png" /></p>
+]]></content>
+      <categories>
+        <category>游戏 - 刺客信条</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>游戏</tag>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/09/07/hello-world/</url>
+    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
+<span id="more"></span>
+<h1 id="测试">测试</h1>
+<h2 id="代码">代码</h2>
+<p>现在来测试一下代码</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
+<h2 id="latex">Latex</h2>
+<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>无穷连根式求极限的充要条件</title>
+    <url>/2020/09/09/infinite-radicals/</url>
+    <content><![CDATA[<p>在刷习题集或者考试的时候我们经常会遇到诸如<span
+class="math inline">\(\sqrt{1+\sqrt{2+\sqrt{3+\cdots}}}\)</span>或者<span
+class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解或极限存在性证明。解决此类问题的方法有很多，但都可以归结为一点：缩放。要么是两端缩放然后夹逼定理，要么是证明有界然后两边取极限。本文记录此类问题极限存在的一个充要条件，以供参阅。</p>
+<span id="more"></span>
+<h1 id="ramanujans-problem">Ramanujan's Problem</h1>
+<p>这类问题最著名的是拉马努金（Ramanujan）所提出的恒等式：</p>
+<blockquote>
+<p>证明: <span
+class="math display">\[3=\sqrt{1+2\sqrt{1+3\sqrt{1+\cdots}}}\tag{1}\]</span></p>
+</blockquote>
+<p>这个等式的证明是简单而有趣的：</p>
+<p><span class="math display">\[3=\sqrt{1+2\cdot
+4}=\sqrt{1+2\sqrt{1+3\cdot
+5}}=\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}\]</span></p>
+<p>同时，Ramanujan还断言下面的结论：</p>
+<p><span
+class="math display">\[\lim_{n\to\infty}\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=3\]</span></p>
+<p>这个的证明也是容易的。首先把上式和（1）式比较，就发现上式以3为上界，并且由单调性可知，其极限是存在的。为了证明<span
+class="math inline">\(a_n=\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}\)</span>的极限就是3，我们证明：对任意的<span
+class="math inline">\(3&gt;\epsilon&gt;0\)</span>，都存在<span
+class="math inline">\(N\)</span>，使得所有的<span
+class="math inline">\(n&gt;N\)</span>都有<span
+class="math inline">\(a_n&gt;3-\epsilon\)</span>。</p>
+<p>现在任取<span
+class="math inline">\(0&lt;\epsilon&lt;3\)</span>，令<span
+class="math inline">\(3-\epsilon=3r\)</span>，故<span
+class="math inline">\(0&lt;r=1-\epsilon/3&lt;1\)</span>，故有：</p>
+<p><span
+class="math display">\[3-\epsilon=3r=r\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}\]</span></p>
+<p>把<span class="math inline">\(r\)</span>乘进去，就有：</p>
+<p><span
+class="math display">\[3-\epsilon=\sqrt{r\^2+2\sqrt{r\^{2\^2}+\cdots+n\sqrt{r\^{2\^n}[1+(n+1)(n+3)]}}}\tag{2}\]</span></p>
+<p>由于<span class="math inline">\(1&gt;r\^{2\^i},\forall
+i=1,2,\cdots\)</span>，且存在<span
+class="math inline">\(N\)</span>，当<span
+class="math inline">\(n&gt;N\)</span>时，有</p>
+<p><span
+class="math display">\[1&gt;r\^{2\^n}[1+(n+1)(n+2)]=r\^{2\^n}(n+2)\^2\]</span></p>
+<p>把这些全部带入（2）式，就可以证明：</p>
+<p><span
+class="math display">\[3-\epsilon=\sqrt{r\^2+2\sqrt{r\^{2\^2}+\cdots+n\sqrt{r\^{2\^n}[1+(n+1)(n+3)]}}}&lt;\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=a_n,n&gt;N\]</span></p>
+<p>从而完成证明。</p>
+<h1 id="polyas-criterionpolya准则">Polya's Criterion（Polya准则）</h1>
+<p>在考虑普遍情况下首先来观察一些特例，一个典型的特例就是形如<span
+class="math inline">\(\sqrt{a_1+\sqrt{a_2+\cdots}}\)</span>的无穷根式，每个根号的次数都是<span
+class="math inline">\(2\)</span>，或者幂次都是<span
+class="math inline">\(2\^{-1}\)</span>。对于<span
+class="math inline">\(a_1\)</span>来看，控制它的幂次是<span
+class="math inline">\(\frac{1}{2}\)</span>，对于<span
+class="math inline">\(a_2\)</span>来说，控制它的幂次是<span
+class="math inline">\(2\^{-2}\)</span>，对于<span
+class="math inline">\(a_n\)</span>来说，控制它的幂次是<span
+class="math inline">\(2\^{-n}\)</span>。假设这个无穷根式极限存在，那么我们关心的肯定是<span
+class="math inline">\(n\)</span>足够大时，它被什么控制，显然是<span
+class="math inline">\(a_n\)</span>及控制它的<span
+class="math inline">\(2\^{-n}\)</span>的幂次。所以，一个合理的猜测是，如果<span
+class="math inline">\(a_n\^{2\^{-n}}\)</span>极限存在，那么该根式就收敛。下面我们将看到，这个猜测已经非常接近“真相”，甚至是真相的一部分。</p>
+<h2 id="description">Description</h2>
+<p>设序列<span
+class="math inline">\(u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}\)</span>，则<span
+class="math inline">\(\{u_n\}\)</span>可以用下述条件判定：</p>
+<p><span class="math display">\[
+\begin{cases}
+\text{converges},&amp;\text{if}\\;
+\overline{\lim}\_{n\to\infty}\frac{\log\log a_n}{n}&lt;\log 2\\\\
+\text{diverges},&amp;\text{if}\\;
+\overline{\lim}\_{n\to\infty}\frac{\log\log a_n}{n}&gt;\log 2
+\end{cases}
+\]</span></p>
+<p>上述准则还可以进一步推广为：</p>
+<blockquote>
+<p>序列<span class="math inline">\(\{u_n\}\)</span>收敛的充要条件是：
+<span class="math display">\[\overline{\lim_{n\to\infty}} n \left(
+\frac{\log\log a_n}{n}-\log2 \right) &lt;+\infty\tag{3}\]</span></p>
+</blockquote>
+<p>注意到，这个极限可以取有限数或者负无穷。我们将在陈述下面的<strong>定理一</strong>之后进行证明。</p>
+<blockquote>
+<p><strong>（定理一）</strong> 序列<span
+class="math inline">\(u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}\)</span>收敛当且仅当存在有限上极限
+<span
+class="math display">\[\overline{\lim_{n\to\infty}}a_n\^{2\^{-n}}&lt;+\infty\]</span></p>
+</blockquote>
+<p>首先证明<em>必要性</em>，即假定<span
+class="math inline">\(\{u_n\}\)</span>收敛。因为<span
+class="math inline">\(u_n\ge a_n\^{2\^{-n}}\)</span>，故<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n\^{2\^{-n}}\)</span>一定是有限的，得证。</p>
+<p>再来证明<em>充分性</em>。假定<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n\^{2\^{-n}}&lt;+\infty\)</span>，则存在<span
+class="math inline">\(G&gt;0\)</span>使得对所有<span
+class="math inline">\(n&gt;0\)</span>，有<span
+class="math inline">\(a_n\^{2\^{-n}}\le G\)</span>，因此<span
+class="math inline">\(a_n\le G\^{2\^n}\)</span>。从而有：</p>
+<p><span class="math display">\[u_n\le
+\sqrt{G\^2+\sqrt{G\^{2\^2}+\cdots+\sqrt{G\^{2\^n}}}}=G\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
+<p>同时又因为</p>
+<p><span
+class="math display">\[2=\sqrt{2+2}=\sqrt{2+\sqrt{2+2}}=\cdots=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+2}}}&gt;\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
+<p>从而有<span class="math inline">\(u_n&lt;2G,\forall
+n&gt;0\)</span>，又由<span
+class="math inline">\(\{u_n\}\)</span>的单调性知收敛。</p>
+<p>到此为止，我们发现<strong>定理一</strong>和开始我们的猜测是非常相似的，只是<strong>定理一</strong>只需要上极限，这比我们的猜测更加宽松。下面我们利用此定理证明Polya's
+Criterion.</p>
+<h2 id="proof-of-polyas-criterion">Proof of Polya's Criterion</h2>
+<p>当<span
+class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
+a_n}{n}&lt;\log 2\)</span>时，存在<span
+class="math inline">\(N\)</span>，当<span
+class="math inline">\(n&gt;N\)</span>时<span
+class="math inline">\((\log\log a_n)/n&lt;\log 2\)</span>，也即<span
+class="math inline">\(a_n\^{2\^{-n}}&lt;\mathrm{e}\)</span>，由<strong>定理一</strong>知<span
+class="math inline">\(\{u_n\}\)</span>收敛。</p>
+<p>当<span
+class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
+a_n}{n}&gt;\log 2\)</span>时，存在某个<span
+class="math inline">\(a&gt;1\)</span>，对某些无限的<span
+class="math inline">\(n\)</span>，使得<span
+class="math inline">\((\log\log a_n)/n&gt;a\log 2\)</span>，也即<span
+class="math inline">\(\log a_n&gt;2\^{an}\)</span>。因此，对这些<span
+class="math inline">\(n\)</span>而言：</p>
+<p><span
+class="math display">\[a_n\^{2\^{-n}}&gt;e\^{2\^{(a-1)n}}\]</span></p>
+<p>因此<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n\^{2\^{-n}}=+\infty\)</span>.</p>
+<p>最后考虑<span
+class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
+a_n}{n}=\log 2\)</span>。</p>
+<p>若<span class="math inline">\(\{u_n\}\)</span>收敛，则<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n\^{2\^{-n}}\)</span>有限，即存在<span
+class="math inline">\(G&gt;1\)</span>对所有<span
+class="math inline">\(n\)</span>成立<span
+class="math inline">\(a_n\^{2\^{-n}}&lt;G\)</span>，因而<span
+class="math inline">\(\log a_n&lt;2\^n\log G\)</span>。此时若<span
+class="math inline">\(a_n&gt;1\)</span>，则</p>
+<p><span class="math display">\[n\left(\frac{\log\log
+a_n}{n}-\log2\right)&lt;\log\log G\]</span></p>
+<p>而当<span class="math inline">\(a_n\le 1\)</span>时，按照约定有<span
+class="math inline">\((\log\log
+a_n)/n=-\infty\)</span>，则综上公式（3）的必要性得证。</p>
+<p>同时公式（3）也是充分的。假定条件成立但<span
+class="math inline">\(\{u_n\}\)</span>不收敛，则由<strong>定理一</strong>知<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n\^{2\^{-n}}=+\infty\)</span>，则对任意的<span
+class="math inline">\(G&gt;\mathrm{e}\)</span>，有充分大的<span
+class="math inline">\(n\)</span>使得<span
+class="math inline">\(a_n\^{2\^{-n}}&gt;G\)</span>，从而<span
+class="math inline">\(\log a_n&gt;2\^n\log G\)</span>，于是有</p>
+<p><span class="math display">\[n\left(\frac{\log\log
+a_n}{n}-\log2\right)&gt;\log\log G\]</span></p>
+<p>这说明上极限是无穷大，与假设矛盾。充分性得证。</p>
+<h2 id="examples">Examples</h2>
+<h3 id="例一">例一</h3>
+<p>现在我们考虑一个序列<span
+class="math inline">\(u_n=\sqrt{x+\sqrt{x+\cdots+\sqrt{x}}}\)</span>，当<span
+class="math inline">\(x&lt;1\)</span>的时候，它的上界是<span
+class="math inline">\(\sqrt{1+\sqrt{1+\cdots}}\)</span>，而后者我们上面已经证明了它的上界是2。现在我们考虑<span
+class="math inline">\(x&gt;1\)</span>的情景。此时有：</p>
+<p><span
+class="math display">\[u_n&lt;\sqrt{x\^2+\sqrt{x\^{2\^2}+\cdots+\sqrt{x\^{2\^n}}}}&lt;2x\]</span></p>
+<p>所以我们证明了，对<span
+class="math inline">\(x&gt;0\)</span>，序列<span
+class="math inline">\(\{u_n\}\)</span>都是收敛的，并且没有使用<strong>定理一</strong>。</p>
+<h3 id="例二">例二</h3>
+<p>现在考虑下述恒等式：</p>
+<p><span
+class="math display">\[x(2\^n+x)=x\sqrt{2\^{2n}+x(2\^{n+1}+x)}\]</span></p>
+<p>于是可以立即得到：</p>
+<p><span
+class="math display">\[x(2+x)=x\sqrt{2\^2+x(2\^2+x)}=x\sqrt{2\^2+x\sqrt{2\^4+x(2\^4+x)}}=\cdots=\\\\
+x\sqrt{2\^2+x\sqrt{2\^4+\cdots+x\sqrt{2\^{2n}+x(2\^{n+1}+x)}}}\\\\
+=x\sqrt{2\^2+x\sqrt{2\^4+x\sqrt{\cdots}}}\]</span></p>
+<p>现在令<span class="math inline">\(x=1\)</span>，就有：</p>
+<p><span
+class="math display">\[3=\sqrt{2\^2+\sqrt{2\^4+\cdots}}\]</span></p>
+<p>用<span class="math inline">\(x/2\)</span>替换<span
+class="math inline">\(x\)</span>，有：</p>
+<p><span
+class="math display">\[2+\frac{x}{2}=\sqrt{2\^2+\frac{x}{2}\sqrt{2\^4+\frac{x}{2}\sqrt{2\^6+\cdots}}}\]</span></p>
+<p>两边约去2，就有：</p>
+<p><span
+class="math display">\[1+\frac{x}{4}=\sqrt{1+\frac{x}{2}\sqrt{1+\frac{x}{2\^2}\sqrt{1+\cdots}}}\]</span></p>
+<h3 id="例三">例三</h3>
+<p>由余弦二倍角公式<span
+class="math inline">\(\cos2\theta=2\cos\^2\theta-1\)</span>可知：</p>
+<p><span
+class="math display">\[2\cos\theta=\sqrt{2+2\cos2\theta}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+2\cos
+2\^n\theta}}}\]</span></p>
+<p>此时令<span
+class="math inline">\(\theta=\frac{\pi}{2\^{n+1}}\)</span>，就有：</p>
+<p><span
+class="math display">\[2\cos\frac{\pi}{2\^{n+1}}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+0}}}\Rightarrow\\\\
+\cos\frac{\pi}{2\^{n+1}}=\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\]</span></p>
+<p>所以可以立刻得到下式的极限：</p>
+<p><span
+class="math display">\[\lim_{n\to\infty}4\^n\left(1-\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\right)\\\\
+=\lim_{n\to\infty}4\^n\left(1-\cos\frac{\pi}{2\^{n+1}}\right)\\\\
+=\lim_{n\to\infty}4\^n\cdot\frac{\pi\^2}{2\^{2n+2+1}} (1-\cos x\sim
+\frac{1}{2}x\^2)\\\\
+=\frac{\pi\^2}{8}\]</span></p>
+<h1 id="herschfelds-convergence-theorem-herschfeld收敛定理">Herschfeld’s
+Convergence Theorem （Herschfeld收敛定理）</h1>
+<p>Polya's Criterion只考虑了指数为<span
+class="math inline">\(\frac{1}{2}\)</span>的情况，对于更加普遍的情况，即形如<span
+class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n\^{r_n}))\^{r_2})\^{r_1}
+(a_i\ge 0,0&lt;r_i\le 1)\)</span>的序列，Herschfeld’s Convergence
+Theorem给出了一个其收敛的充要条件。</p>
+<p><a
+href="https://www.tandfonline.com/doi/abs/10.1080/00029890.1935.11987745?journalCode=uamm20">Herschfeld’s
+Convergence Theorem</a> 告诉我们了一个无穷根式收敛的充要条件：</p>
+<blockquote>
+<p>设序列<span
+class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n\^{r_n}))\^{r_2})\^{r_1}
+(a_i\ge 0,0&lt;r_i\le 1)\)</span>且级数<span
+class="math inline">\(S=\sum_{i=1}\^\infty r_1r_2\cdots
+r_i\)</span>收敛，则序列<span
+class="math inline">\(\{u_n\}\)</span>收敛的充分必要条件是： <span
+class="math display">\[\overline{\lim_{n\to\infty}}a_n\^{r_1r_2\cdots
+r_n}&lt;+\infty\]</span></p>
+</blockquote>
+<p>这个定理的证明之后有空了补充。</p>
+<h1 id="后记">后记</h1>
+<p>实际上无穷根式分为右无穷根式（Right Infinite
+Radicals）和左无穷根式（Left Infinite
+Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷根式可以仿照进行推导。</p>
+]]></content>
+      <categories>
+        <category>数学 - 数学分析</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>十二月的花</title>
+    <url>/2020/12/22/%E5%8D%81%E4%BA%8C%E6%9C%88%E7%9A%84%E8%8A%B1/</url>
+    <content><![CDATA[<p>埙吹响了海岸 琴穿梭叶间 笛在天空啼鸣 伴奏着雪花片片</p>
+<p>孩子们欢笑着相聚 踏着雪 吱吱嘎嘎</p>
+<p>把欢乐捏成一团团棉 随风起舞 在阳光下 雪爱上了花</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《游戏设计的236个技巧》笔记</title>
+    <url>/2021/08/17/%E3%80%8A%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1%E7%9A%84236%E4%B8%AA%E6%8A%80%E5%B7%A7%E3%80%8B%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>本文是《游戏设计的236个技巧：游戏机制、关卡设计和镜头窍门》的笔记。</p>
+<span id="more"></span>
+<h1 id="前言">前言</h1>
+<p>一款优秀的游戏是如何让玩家在某个瞬间感到无比有趣、极度畅快的呢？本书旨在引领读者发现“让游戏更有趣的设计技巧”。
+本书将内容分为“玩家角色”“敌人角色”“关卡设计”“碰撞检测”“镜头”五个部分。</p>
+<h1 id="让3d游戏更有趣的玩家角色技术">让3D游戏更有趣的玩家角色技术</h1>
+<h2
+id="能够吸引2d游戏玩家的3d游戏设计技巧超级马里奥兄弟超级马里奥3d大陆">能够吸引2D游戏玩家的3D游戏设计技巧（《超级马里奥兄弟》《超级马里奥3D大陆》）</h2>
+<ul>
+<li>马里奥飞奔的感觉让人很舒服。
+<ul>
+<li>按住十字键开始加速，即使放开十字键也不会马上停住，而是有惯性。</li>
+<li>按B键冲刺的过程中按反方向键，就会出现一个急刹车的动作。</li>
+</ul></li>
+<li>但是塞尔达中林克就没有惯性，让玩家精准停在想停的位置。</li>
+<li>这是因为游戏想带给玩家的<strong>游戏体验</strong>不同。
+<ul>
+<li>塞尔达的游戏体验是探索与战斗：不需要过多关注奔跑的细节动作。</li>
+<li>超级马里奥的游戏体验是单人挑战障碍赛跑：关注如何更快奔跑、转弯、准确停止并穿越障碍物。将“无法简单停止”作为一种操纵上的风险加入游戏，除了能给游戏带来紧张感之外，还能让玩家在熟悉操作之后获得成就感。</li>
+</ul></li>
+</ul>
+<h3
+id="b键冲刺带来的感官刺激以及风险与回报的趣味性">B键冲刺带来的感官刺激以及风险与回报的趣味性</h3>
+<ul>
+<li>操纵冲刺中的马里奥会给玩家带来畅快感。
+<ul>
+<li>通过运动或动作获得感官上的舒畅体验的过程称为<strong>感官体验</strong>。</li>
+</ul></li>
+<li>有趣秘密还在挑战中蕴含的风险与回报。
+<ul>
+<li>马里奥通过加速的移动实现了风险与回报，玩家按住B是一种主动提高风险与回报的行为。<br />
+</li>
+</ul></li>
+<li>在超级马里奥兄弟之前，动作类游戏的跳跃一直都是跳跃到固定高度，但是超马采用了按键时长与跳跃高度相关的机制。</li>
+<li>在跳跃时按方向键可以控制马里奥在空间左右移动。</li>
+<li>在跳跃过程中碰到墙壁等障碍物不会下落，这虽然有悖物理，但是给了玩家更舒适的游戏体验。</li>
+</ul>
+<h3 id="勾起玩家跳跃冲动的互动式玩法">勾起玩家跳跃冲动的互动式玩法</h3>
+<ul>
+<li>宫本茂说：“我认为互动的乐趣之一在于：一个人对自己的某种想法付诸实践之后，能够获得相应的反馈”。</li>
+<li>《超马》为跳跃这一动作准备了大量的反馈。
+<ul>
+<li><strong>操作复杂度&lt;动作数&lt;反馈数</strong>。</li>
+<li>即用较少的动作获得较多的反馈。</li>
+</ul></li>
+<li>那么《超马》凭什么让人能够不自由自主地想要按下跳跃键呢？
+<ul>
+<li>存在让玩家不由自主想要去实践地机制，称其为“游戏的钓饵”。比如玩家用小马里奥顶砖块，获得的反应是砖块向上被拱起这一动画。
+这一动画会在玩家心中放下一个钓饵，让玩家觉得砖块里藏着什么。</li>
+<li>游戏里一定要有<strong>引诱玩家付诸实践的钓饵</strong>。</li>
+</ul></li>
+</ul>
+<h3 id="从2d马里奥到3d马里奥">从《2D马里奥》到《3D马里奥》</h3>
+<ul>
+<li>《3D马里奥》出乎意料地取消了移动动作的惯性，可能是因为3D视角的距离感相比2D要更难以掌握，加入惯性会使操作难度上升。</li>
+<li>《3D马里奥》中镜头角度局限在了“侧面”“上方”“倾斜”三种固定模式中，而不是像一般3D游戏将视角决定权交给玩家。同时，滑垫也被限制在了16个方向以内，让镜头角度与移动角度保持一致，从而<strong>帮助玩家找回2D游戏的感觉</strong>，同时也避免了因斜向移动导致误判跳跃距离。</li>
+<li>同时，在《超级马里奥3D大陆》中还首次加入了在跳跃过程中改变方向的机制。</li>
+<li>加入了翻滚、远跳、翻滚跳等动作，吸引高端玩家重复挑战关卡。</li>
+</ul>
+<h3 id="小结">小结</h3>
+<ul>
+<li>要给玩家带来“感官刺激”“风险与回报”“动作与反应”和“连环钓饵”。</li>
+<li>游戏体验的真实性并不仅取决于贴图和声效等外观因素，通过游戏内部机制表现出的“互动的乐趣”也有巨大影响。</li>
+</ul>
+<h2
+id="让游戏更具临场感的玩家角色动作设计技巧战神三">让游戏更具临场感的玩家角色动作设计技巧（战神三）</h2>
+<h3 id="不需控制镜头的移动操作机制">不需控制镜头的移动操作机制</h3>
+<ul>
+<li>战神是TPS游戏，角色的移动方向与遥感倾斜方向一致。也会自动选取最佳角度。</li>
+<li>采用自动镜头的3D动作游戏需要很好地处理镜头移动。
+<ul>
+<li>可以<strong>为每个场景设置不同风格的自动镜头</strong>，同时让玩家体验到2D游戏简单而又直观的操作感，以及3D游戏身临其境般的操作感。</li>
+<li>通过自动镜头，战神三创造出了电影般的临场感与魄力。</li>
+</ul></li>
+</ul>
+<h3
+id="实现快节奏战斗的玩家移动动作机制">实现快节奏战斗的玩家移动动作机制</h3>
+<ul>
+<li>要实现快节奏战斗，玩家必须能够灵活转身、迅速静止，因此战神三的静止具有即时性，同时旋转左摇杆可以实现角色的原地旋转。</li>
+<li>《怪猎4》玩家的转身半径要大于战神三，原地回头的时间也略长。
+<ul>
+<li>怪猎4想创造出“狩猎”的感觉。</li>
+</ul></li>
+<li>每个游戏都有一套能让玩家觉得舒服的“<strong>速度</strong>”（转身速度、移动速度、拔刀速度、收刀速度、硬直速度）“<strong>节奏</strong>”（具体的动作设计、动作之间的连贯性）和“<strong>触感</strong>”（动作的打击感）。根据这三点找出合适的玩家角色动作机制，是现代游戏开发的重点。</li>
+</ul>
+<h3 id="不带来烦躁感的地图切换机制">不带来烦躁感的地图切换机制</h3>
+<ul>
+<li>战神三在切换地图之后玩家仍然<strong>继承之前的移动方向</strong>。只要玩家不放开左摇杆方向，就会继续沿着切换前的方向行进。</li>
+<li>3D动作游戏的核心是：<strong>让玩家角色的动作准确反映玩家意图</strong>。</li>
+</ul>
+<h3
+id="让人不由得手指发力的玩家角色动作机制">让人不由得手指发力的玩家角色动作机制</h3>
+<ul>
+<li>为烘托角色服务的动作需要由<strong>互动动作</strong>实现。
+<ul>
+<li>比如开宝箱这个动作需要玩家长按R1，主角运足全身力量掀开宝箱的动画贯彻玩家按键始终，引得玩家下意识加大按键力道。</li>
+<li>开门同理。</li>
+<li>这种称为<strong>互动性演出</strong>。</li>
+</ul></li>
+</ul>
+<h3 id="小结-1">小结</h3>
+<ul>
+<li>战神三在角色动作上的设计创造玩家与玩家角色融为一体的真实游戏体验。</li>
+</ul>
+<h2
+id="让割草游戏更有趣的攻击动作设计技巧战神三">让割草游戏更有趣的攻击动作设计技巧（战神三）</h2>
+<h3 id="让攻击准确命中目标敌人的机制">让攻击准确命中目标敌人的机制</h3>
+<ul>
+<li>战神三并没有锁定操作，实际上，游戏一致在进行锁定和解除锁定，只是玩家没有察觉到而已。
+<ul>
+<li>玩家倾斜左摇杆时，玩家角色会锁定移动方向上最近的敌人。</li>
+<li>锁定过程中，角色会一直面朝敌人。</li>
+<li>可以通过左摇杆锁定其他敌人，如果超出一定距离，锁定会解除。</li>
+<li>消灭敌人后，锁定会自动解除，如果还有其他敌人，会继续自动锁定。</li>
+</ul></li>
+</ul>
+<h3 id="让连击畅快淋漓的机制">让连击畅快淋漓的机制</h3>
+<ul>
+<li>普通攻击以灵活为主，一般会在第三击转换为大范围横向攻击。</li>
+<li>重攻击出招慢，以纵向为主。</li>
+<li>开始以普通攻击震慑周围敌人，再以重击给单个敌人予以重创。</li>
+<li>战神三在设计攻击种类和连击招式时，为每一个攻击动作都分配了固定的用途，玩家能够享受制定战术的乐趣。</li>
+<li>每一个招式都是由<strong>攻击动画</strong>
+、<strong>攻击力</strong>、<strong>攻击方向</strong>、<strong>追踪性能</strong>等要素组合而成。
+<ul>
+<li>所谓“追踪性能”，就是指玩家角色发动攻击招式时，根据已锁定的敌人所在的位置自动进行追踪的功能。</li>
+<li>普通攻击威力小但追踪性能高，重击威力大但追踪性能低。</li>
+<li>如果一款游戏的连击系统能让玩家觉得畅快淋漓，那么其对追踪的调整一定十分到位。</li>
+</ul></li>
+</ul>
+<h3
+id="菜鸟也能轻松上手的畅快的浮空连击机制">菜鸟也能轻松上手的畅快的浮空连击机制</h3>
+<ul>
+<li>割草类游戏都将空中连击的下落设置得比较慢。</li>
+<li>在战神三中，玩家只需长按键就可发动挑空攻击。</li>
+<li>此外，在玩家随挑空攻击后插入了短暂的慢放，相当于一个信号，帮助玩家准确把握发动空中连击的时机。</li>
+</ul>
+<h3 id="用简单操作发动复杂连击的机制">用简单操作发动复杂连击的机制</h3>
+<ul>
+<li>两个攻击键，短按与长按。</li>
+<li>如果连击第一招需要判断长按还是短按，需要在“长按”判定结束之前，所有受影响的连击都应用同一个攻击动画。</li>
+<li>战神三中的连击只有第一招需要判定按键长短，连击过程不需要。《鬼泣》和《猎天使魔女》则支持连击过程长按。</li>
+<li>战神三还可以在连击过程中切换武器。</li>
+</ul>
+<h2
+id="让玩家角色动作更细腻的设计技巧塞尔达传说天空之剑">让玩家角色动作更细腻的设计技巧（《塞尔达传说：天空之剑》）</h2>
+<ul>
+<li>将玩家动作与角色为动作融为一体。 ###
+支撑海量解密内容的玩家角色移动动作</li>
+<li>按下Z键，镜头会自动调整至林克面朝的方向。</li>
+<li>在悬崖边行走不会跌落。</li>
+</ul>
+<h3
+id="让玩家下意识选择合适动作的z注视机制">让玩家下意识选择合适动作的Z注视机制</h3>
+<ul>
+<li>采用“普通移动”“Z注视移动”“Z注视锁定敌人移动”三种移动模式。</li>
+</ul>
+<h3
+id="能单独当游戏玩的移动动作奋力冲刺">能单独当游戏玩的移动动作——奋力冲刺</h3>
+<ul>
+<li>冲刺消耗耐力值，设置了只有奋力冲刺才能通过的斜坡。</li>
+<li>翻滚冲刺、沿墙冲刺等等。</li>
+</ul>
+<h3
+id="没有跳跃键却可以体验真实跳跃的机制">没有跳跃键却可以体验真实跳跃的机制</h3>
+<ul>
+<li>自动触发跳跃，但并没有失去跳跃的乐趣。玩家依然需要掌控距离，需要助跑等等。</li>
+<li>自动跳跃可以避免空气墙。</li>
+</ul>
+<h2
+id="头脑与身体一起享受的剑战动作设计技巧塞尔达传说天空之剑">头脑与身体一起享受的剑战动作设计技巧（《塞尔达传说：天空之剑》）</h2>
+<h3 id="能帅气挥剑的机制">能帅气挥剑的机制</h3>
+<ul>
+<li>要将遥控器当成真剑来操作，带来了前所未有的战斗动作享受。</li>
+<li>Wii将人的动作符号化，让普通玩家也能享受到乐趣。</li>
+</ul>
+<h3 id="攻击与体力的机制">攻击与体力的机制</h3>
+<ul>
+<li>游戏系统设定的连击结束时攻击即结束，最后一招往往动作较大、破绽较多。</li>
+<li>为玩家设置体力参数，归零时攻击结束。</li>
+<li>玩家没有体力或者没有挥动Wii时，攻击结束。</li>
+<li>一般动作游戏是A与B结合，而天空之剑是B与C组合。</li>
+</ul>
+<h3 id="让玩家痛快反击的盾击机制">让玩家痛快反击的盾击机制</h3>
+<ul>
+<li>盾击会让敌人暂时失去平衡，创造反击的机会。</li>
+<li>盾击是通过“玩家盾击动作”与“敌人攻击动作”中设置的“盾击成功判定帧”进行判定的。如果这两个动作中的“盾击成功帧”重合，则判定盾击成功。</li>
+<li>盾牌加入耐久。</li>
+</ul>
+<h3 id="实现剑战动作的机制">实现剑战动作的机制</h3>
+<ul>
+<li>当面对多个敌人时，只集中精力与一名敌人对战，基本上是一对一。</li>
+<li>通过Z注视机制实现剑战。受到Z注视的敌人会先积极攻击。</li>
+</ul>
+<h3 id="剑战动作与割草游戏的区别">剑战动作与割草游戏的区别</h3>
+<ul>
+<li>战斗中的跳跃不同。塞尔达采用了自动跳跃，不会出现跳跃闪避攻击的情况。战神则可以通过跳跃躲避敌人。</li>
+<li>割草游戏有大量的AOE，塞尔达大多为单体攻击。</li>
+</ul>
+<h2
+id="完美演绎英雄的玩家角色动作设计技巧蝙蝠侠阿甘之城">完美演绎英雄的玩家角色动作设计技巧（《蝙蝠侠：阿甘之城》）</h2>
+<h3
+id="能像蝙蝠一样在三维空间自如穿梭的机制">能像蝙蝠一样在三维空间自如穿梭的机制</h3>
+<ul>
+<li>滑翔与抓钩就是“平面+高度”的移动手段，还有其他作用。</li>
+<li>在大楼之间移动时，玩家只需要按住X操作左摇杆，就能根据间隔和高度进行跳跃或自动切换至滑翔状态。不会因为跳跃失误而遭失败。</li>
+<li>抓钩也实现了精准操作和粗略操作。</li>
+</ul>
+<h3
+id="通过简单操作实现高自由度的玩家角色动作的机制">通过简单操作实现高自由度的玩家角色动作的机制</h3>
+<ul>
+<li>玩家角色的移动动作就有很多种，移动动作并不由玩家的手柄决定，而是由玩家触碰的物体决定。（类似刺客信条）</li>
+<li>蝙蝠侠将移动动作特有的难点——时机把握从基本移动操作中剔除，是一款专注功能可供性的动作游戏。</li>
+</ul>
+<h3 id="演绎一名不会轻易死亡的英雄">演绎一名不会轻易死亡的英雄</h3>
+<ul>
+<li>在奔跑中碰到墙壁，移动动画会终止。</li>
+<li>在滑翔时碰到墙壁，蝙蝠侠也不会落下去，而是抓住墙壁。</li>
+</ul>
+<h2
+id="让玩家化身为英雄的设计技巧蝙蝠侠阿甘之城">让玩家化身为英雄的设计技巧（《蝙蝠侠：阿甘之城》）</h2>
+<h3 id="让战术自由度更高的机制">让战术自由度更高的机制</h3>
+<ul>
+<li>潜行动作游戏在游戏中的流程分为“侦察”“制定战术”“捕食战术”“格斗战术”四个阶段。</li>
+<li>蝙蝠侠在捕食战斗阶段能削减敌人多少就成了战斗取胜的关键。</li>
+<li>蝙蝠侠提供了50多种不同的动作，具有极高的自由度。</li>
+</ul>
+<h3 id="让人忍不住要尝试的工具机制">让人忍不住要尝试的工具机制</h3>
+<ul>
+<li>蝙蝠侠中有很多工具，或者道具，一共有20多种。这些工具不会击溃敌人，只会造成负面效果，保证了工具不会打破战斗平衡性。</li>
+<li><strong>工具和战斗动作可以组合，使得产生“有趣的反应”和“新动作”</strong>。</li>
+</ul>
+<h3
+id="让玩家完美演绎蝙蝠侠的捕食者动作的机制">让玩家完美演绎蝙蝠侠的捕食者动作的机制</h3>
+<ul>
+<li>“无声压制”和“转角隐蔽压制”可以无声无息地击溃敌人，所以玩家能够立刻开始下一步动作而不被敌人发现。</li>
+<li>“粉碎重击”和“边缘压制”能产生很大的声响。</li>
+<li>利用有利位置，可以将敌人吊起来剥夺其行动力的“倒吊压制”。</li>
+</ul>
+<h3
+id="改变动作游戏定式的自由流程格斗机制">改变动作游戏定式的自由流程格斗机制</h3>
+<ul>
+<li>在一般的动作游戏种，玩家需要根据周围敌人的情况选择固定的攻击动作或连击，然后输入指令来发动。
+<ul>
+<li>要先考虑与敌人的距离、招式的速度、招式的追踪性能、招式的属性。</li>
+</ul></li>
+<li>自由格斗，玩家输入的不是攻击招式，而是适合周围状况的攻击动作。</li>
+<li>一个按键对应多个攻击招式以及敌人反应。</li>
+<li>蝙蝠侠仍然是一款根据环境自动选择动作的游戏。</li>
+</ul>
+<h2
+id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡灵之神">还原机器人动画的玩家角色动作设计技巧（《终极地带：引导亡灵之神》）</h2>
+]]></content>
+      <categories>
+        <category>游戏 - 游戏理论</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>游戏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>向量绕任意轴旋转的简单推导</title>
+    <url>/2021/06/07/%E5%90%91%E9%87%8F%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E7%AE%80%E5%8D%95%E6%8E%A8%E5%AF%BC/</url>
+    <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
+<span id="more"></span>
+<h1 id="方法一向量分解">方法一：向量分解</h1>
+<h2 id="推导过程">推导过程</h2>
+<p>首先介绍一个最容易理解的方法——向量分解。假设要旋转的向量是<span
+class="math inline">\(\mathbf{p}\)</span>，要旋转的轴是<span
+class="math inline">\(\mathbf{n}\)</span>，是一个单位向量，要旋转的角度是<span
+class="math inline">\(\theta\)</span>。再设旋转后的轴是<span
+class="math inline">\(\mathbf{p}&#39;\)</span>。</p>
+<p>现在我们把<span
+class="math inline">\(\mathbf{p}\)</span>分解为两个向量，一个平行于<span
+class="math inline">\(\mathbf{n}\)</span>，另一个垂直于<span
+class="math inline">\(\mathbf{n}\)</span>，即： <span
+class="math display">\[\mathbf{p}=\mathbf{p}\_\perp+\mathbf{p}\_\parallel\]</span>
+容易知道，平行于<span
+class="math inline">\(\mathbf{n}\)</span>的分向量<span
+class="math inline">\(\mathbf{p}\_\parallel\)</span>就是<span
+class="math inline">\(\mathbf{p}\)</span>在<span
+class="math inline">\(\mathbf{n}\)</span>上的投影（推导过程略）： <span
+class="math display">\[\mathbf{p}\_\parallel=(\mathbf{n}\cdot\mathbf{p})\mathbf{n}\]</span>
+从而就能得到<span class="math inline">\(\mathbf{p}\_\perp\)</span>：
+<span
+class="math display">\[\mathbf{p}\_\perp=\mathbf{p}-\mathbf{p}\_\parallel\]</span>
+同样地可以将旋转后的向量分解： <span
+class="math display">\[\mathbf{p}&#39;=\mathbf{p}&#39;\_\perp+\mathbf{p}&#39;\_\parallel\]</span>
+显然，旋转后的向量对应的平行分量<span
+class="math inline">\(\mathbf{p}&#39;\_\parallel\)</span>是不变的：
+<span
+class="math display">\[\mathbf{p}&#39;\_\parallel=\mathbf{p}\_\parallel\]</span>
+这里的关键在于求垂直分量<span
+class="math inline">\(\mathbf{p}&#39;\_\perp\)</span>。</p>
+<figure>
+<img data-src="/images/arbitrary_rotation/1.png"
+alt="将向量分解为一个平行向量和一个垂直向量" />
+<figcaption
+aria-hidden="true">将向量分解为一个平行向量和一个垂直向量</figcaption>
+</figure>
+<p>根据已知的旋转轴<span
+class="math inline">\(\mathbf{n}\)</span>，我们就知道它对应的平面<span
+class="math inline">\(V\)</span>，而向量<span
+class="math inline">\(\mathbf{p}\)</span>与<span
+class="math inline">\(\mathbf{p}&#39;\)</span>的垂直分量就在该平面内。该平面的维度是2，因此只需要找到两个基向量，就可以通过这两个基向量的线性组合表示该平面的任意向量。</p>
+<p>其中一个基向量我们已经找到了，就是<span
+class="math inline">\(\mathbf{p}\_\perp\)</span>，而另一个我们可以通过<span
+class="math inline">\(\mathbf{n}\)</span>与<span
+class="math inline">\(\mathbf{p}\_\perp\)</span>的叉乘实现，得到的向量与<span
+class="math inline">\(\mathbf{n}\)</span>和<span
+class="math inline">\(\mathbf{p}\_\perp\)</span>垂直，且在平面<span
+class="math inline">\(V\)</span>内。且注意到： <span
+class="math display">\[\mathbf{n}\times
+\mathbf{p}\_\perp=\mathbf{n}\times(\mathbf{p}-\mathbf{p}\_\parallel)=\mathbf{n}\times\mathbf{p}-\mathbf{n}\times\mathbf{p}\_\parallel=\mathbf{n}\times\mathbf{p}\]</span>
+并且有： <span class="math display">\[\|\mathbf{n}\times
+\mathbf{p}\|=\|\mathbf{n}\times
+\mathbf{p}\_\perp\|=\|\mathbf{n}\|\cdot\|\mathbf{p}\_\perp\|\cdot\sin(\pi/2)=\|\mathbf{p}\_\perp\|\]</span>
+进而我们能导出旋转后的垂直分量<span
+class="math inline">\(\mathbf{p}&#39;\_\perp\)</span>： <span
+class="math display">\[\mathbf{p}&#39;\_\perp=\cos(\theta)\|\mathbf{p}\_\perp\|\cdot\frac{\mathbf{p}\_\perp}{\|\mathbf{p}\_\perp\|}+\sin(\theta)\|\mathbf{p}\_\perp\|\cdot\frac{\mathbf{n}\times\mathbf{p}}{\|\mathbf{n}\times\mathbf{p}\|}=\cos(\theta)\mathbf{p}\_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})\]</span>
+最后，我们得到旋转后的向量<span
+class="math inline">\(\mathbf{p}&#39;\)</span>： <span
+class="math display">\[\mathbf{p}&#39;=\mathbf{p}&#39;\_\perp+\mathbf{p}&#39;\_\parallel=\cos(\theta)\mathbf{p}\_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})+\mathbf{p}\_\parallel\\\\
+=\cos(\theta)(\mathbf{p}-\mathbf{p}\_\parallel)+\mathbf{p}\_\parallel+\sin(\theta)(\mathbf{n}\times\mathbf{p})\\\\
+=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p})
+\]</span> 搞定！</p>
+<h2 id="矩阵形式">矩阵形式</h2>
+<p>我们知道向量的叉乘可以表示为： <span class="math display">\[
+\mathbf{n}\times\mathbf{p}=
+\begin{bmatrix}
+0,&amp;-n\_z,&amp;n\_y\\\\
+n\_z,&amp;0,&amp;-n\_x\\\\
+-n\_y,&amp;n\_x,&amp;0
+\end{bmatrix}
+\mathbf{p}=\mathbf{N}\mathbf{p}
+\]</span> 注意到，矩阵<span
+class="math inline">\(\mathbf{N}\)</span>有如下的性质： <span
+class="math display">\[\mathbf{N}(\mathbf{N}\mathbf{p})=\mathbf{N}^2\mathbf{p}=\mathbf{n}\times(\mathbf{n}\times\mathbf{p})\]</span>
+所以我们可以把旋转公式写成下述形式： <span
+class="math display">\[\mathbf{p}&#39;=\mathbf{p}+(1-\cos(\theta))\mathbf{N}^2\mathbf{p}+\sin(\theta)\mathbf{N}\mathbf{p}=\mathbf{R}\mathbf{p}\]</span>
+其中<span
+class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}\^2\)</span>。上面的等式需要注意到<span
+class="math inline">\((\mathbf{n}\cdot\mathbf{p})\mathbf{n}=\mathbf{p}+\mathbf{N}^2\mathbf{p}\)</span>。</p>
+<p>所以，使用Rodrigues'旋转公式，只需要首先令<span
+class="math inline">\(\mathbf{N}=\begin{bmatrix}0,&amp;-n\_z,&amp;n\_y\\\\n\_z,&amp;0,&amp;-n\_x\\\\-n\_y&amp;,n\_x,&amp;0\end{bmatrix}\)</span>，然后再计算<span
+class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>，就能得到旋转后的向量为<span
+class="math inline">\(\mathbf{p}&#39;=\mathbf{R}\mathbf{p}\)</span>。</p>
+<h1 id="方法二坐标轴对齐">方法二：坐标轴对齐</h1>
+<p>既然直接绕着任意轴旋转比较困难，那为啥不先进行整个空间的旋转，把旋转轴旋转为坐标轴，这样就能把向量绕任意轴旋转转化为向量绕标准坐标轴旋转。这就是我们非常熟悉的问题了。</p>
+<p>假定我们考虑的是三维空间的旋转（对更高维的情况容易推论），即标准坐标系为<span
+class="math inline">\(\mathbf{x}=(1,0,0),\mathbf{y}=(0,1,0),\mathbf{z}=(0,0,1)\)</span>。我们有旋转轴<span
+class="math inline">\(\mathbf{n},\Vert\mathbf{n}\Vert=1\)</span>和待旋转向量<span
+class="math inline">\(\mathbf{p}\)</span>。</p>
+<p>首先，我们构建一个坐标系<span
+class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>，该坐标系的一个轴就是<span
+class="math inline">\(\mathbf{n}\)</span>，我们利用叉乘实现：</p>
+<p><span class="math display">\[
+\mathbf{u}=\mathbf{n},\qquad
+\mathbf{v}=\frac{\mathbf{n}\times\mathbf{p}}{\Vert\mathbf{n}\times\mathbf{p}\Vert},\qquad
+\mathbf{w}=\mathbf{n}\times \mathbf{v}
+\]</span></p>
+<p>现在，我们要把坐标轴<span
+class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>分别旋转到坐标轴<span
+class="math inline">\(\mathbf{x},\mathbf{y},\mathbf{z}\)</span>的位置，这可以用下面的旋转矩阵实现：</p>
+<p><span class="math display">\[
+\mathbf{Q}=
+\begin{bmatrix}
+\mathbf{u}\\\\
+\mathbf{v}\\\\
+\mathbf{w}
+\end{bmatrix}=
+\begin{bmatrix}
+x\_u&amp;y\_u&amp;z\_u\\\\
+x\_v&amp;y\_v&amp;z\_v\\\\
+x\_w&amp;y\_w&amp;z\_w
+\end{bmatrix}
+\]</span></p>
+<p>很容易验证：<span
+class="math inline">\(\mathbf{x}=\mathbf{Q}\mathbf{u},\mathbf{y}=\mathbf{Q}\mathbf{v},\mathbf{z}=\mathbf{Q}\mathbf{w}\)</span>，从而就有<span
+class="math inline">\(\mathbf{I}=\mathbf{Q}\mathbf{Q}\^\top=\mathbf{Q}\^\top\mathbf{Q}\)</span>，这就验证了<span
+class="math inline">\(\mathbf{Q}\)</span>是正交的。</p>
+<p>现在，原来的向量<span
+class="math inline">\(\mathbf{p}\)</span>就变成了<span
+class="math inline">\(\mathbf{Q}\mathbf{p}\)</span>，原来绕<span
+class="math inline">\(\mathbf{n}\)</span>旋转（也就是绕<span
+class="math inline">\(\mathbf{u}\)</span>旋转）就变成了绕<span
+class="math inline">\(\mathbf{x}\)</span>旋转，而我们知道绕<span
+class="math inline">\(\mathbf{x}\)</span>轴旋转<span
+class="math inline">\(\theta\)</span>的旋转矩阵是： <span
+class="math display">\[
+\mathbf{T}=
+\begin{bmatrix}
+1&amp;0&amp;0\\\\
+0&amp;\cos(\theta)&amp;-\sin(\theta)\\\\
+0&amp;\sin(\theta)&amp;\cos(\theta)
+\end{bmatrix}
+\]</span> 因此，旋转后的向量就是<span
+class="math inline">\(\mathbf{T}\mathbf{Q}\mathbf{p}\)</span>。现在，只需要把旋转后的向量再旋转回原来的位置就好了，我们只需要再乘以<span
+class="math inline">\(\mathbf{Q}\)</span>的逆即可。由于<span
+class="math inline">\(\mathbf{Q}\)</span>是正交的，所以有<span
+class="math inline">\(\mathbf{Q}\^{-1}=\mathbf{Q}\^\top\)</span>。把上面的结果合起来，就能得到最终的结果是：
+<span class="math display">\[\mathbf{p}&#39;=\mathbf{Q}^\top
+\mathbf{T}\mathbf{Q}\mathbf{p}\]</span></p>
+<h1 id="检验">检验</h1>
+<p>现在我们用代码来检验一下上述三种方法是否能得到同样的结果，以及它们的运算效率如何。比较的方法包括：
+1. 向量分解-向量形式 2. 向量分解-矩阵形式 3. 对标轴对齐</p>
+<p>程序在虚拟机上运行，RAM为4G，硬盘20G，处理器为2个Intel Core i5-10400F
+CPU @ 2.90GHz。</p>
+<p>代码如下： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;eigen3/Eigen/Eigen&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> PI = <span class="number">3.1415926</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the vector form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeVector</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high\_resolution\_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f rotatedVector = <span class="built_in">cos</span>(rotationAngle) * p </span><br><span class="line">                                + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * (n.<span class="built_in">dot</span>(p)) * n </span><br><span class="line">                                + <span class="built_in">sin</span>(rotationAngle) * (n.<span class="built_in">cross</span>(p));</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high\_resolution\_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the vector form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the matrix form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeMatrix</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high\_resolution\_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Matrix3f N = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">N &lt;&lt; <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">2</span>), <span class="built_in">n</span>(<span class="number">1</span>),</span><br><span class="line">     <span class="built_in">n</span>(<span class="number">2</span>), <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">0</span>),</span><br><span class="line">     -<span class="built_in">n</span>(<span class="number">1</span>), <span class="built_in">n</span>(<span class="number">0</span>), <span class="number">0</span>;</span><br><span class="line">Eigen::Matrix3f R = Eigen::Matrix3f::<span class="built_in">Identity</span>() + <span class="built_in">sin</span>(rotationAngle) * N + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * N * N;</span><br><span class="line">Eigen::Vector3f rotatedVector = R * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high\_resolution\_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the matrix form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using axis coordination</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AxisCoordination</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high\_resolution\_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f crossed = n.<span class="built_in">cross</span>(p);</span><br><span class="line">Eigen::Vector3f u = n;</span><br><span class="line">Eigen::Vector3f v = crossed / crossed.<span class="built_in">norm</span>();</span><br><span class="line">Eigen::Vector3f w = n.<span class="built_in">cross</span>(v);</span><br><span class="line">Eigen::Matrix3f Q = Eigen::Matrix3f::<span class="built_in">Identity</span>(), T = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">0</span>) = u;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">1</span>) = v;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">2</span>) = w;</span><br><span class="line">T &lt;&lt; <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">cos</span>(rotationAngle), -<span class="built_in">sin</span>(rotationAngle),</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">sin</span>(rotationAngle), <span class="built_in">cos</span>(rotationAngle);</span><br><span class="line">Eigen::Vector3f rotatedVector = Q.<span class="built_in">transpose</span>() * T * Q * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high\_resolution\_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: axis coordination. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> angle = <span class="number">60</span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">p</span><span class="params">(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>)</span></span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">n</span><span class="params">(<span class="number">2.0</span>, <span class="number">8.6</span>, <span class="number">-3.1</span>)</span></span>;</span><br><span class="line">    n.<span class="built_in">normalize</span>(); </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// execute functions</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The vector p is (&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;The rotation axis n is (&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">DecomposeVector</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">DecomposeMatrix</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">AxisCoordination</span>(n, p, angle);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 输出是： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.213724</span>,<span class="number">0.919011</span>,<span class="number">-0.331271</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.016354</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">3.57449</span>,<span class="number">0.643966</span>,<span class="number">0.899062</span>). The time used is <span class="number">0.016642</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.021062</span></span></span><br></pre></td></tr></table></figure> 再多试几组：
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">-654.1</span>,<span class="number">12.88</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.995044</span>,<span class="number">0.0136933</span>,<span class="number">-0.0984901</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.015503</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">-59.7309</span>,<span class="number">-338.298</span>,<span class="number">-556.777</span>). The time used is <span class="number">0.015297</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.021547</span></span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">32.5</span>,<span class="number">45.1</span>,<span class="number">-2.2</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.57735</span>,<span class="number">0.57735</span>,<span class="number">0.57735</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.015558</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">5.16667</span>,<span class="number">52.4667</span>,<span class="number">17.7667</span>). The time used is <span class="number">0.015215</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.020841</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">666</span>,<span class="number">0</span>,<span class="number">0</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.01517</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">0</span>,<span class="number">666</span>,<span class="number">0</span>). The time used is <span class="number">0.015402</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.020898</span></span></span><br></pre></td></tr></table></figure>
+<p>最后一组出现了精度问题，所以代码中还应该加入判断 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">abs</span>(value - <span class="built_in">round</span>(value)) &lt; epsilon)</span><br><span class="line">     value = <span class="built_in">round</span>(value);</span><br></pre></td></tr></table></figure></p>
+<p>从上面的例子来看，<strong>向量分解-向量形式</strong>与<strong>向量分解-矩阵形式</strong>运行效率是一致的，而<strong>坐标轴对齐</strong>的效率较低，这主要是由计算三次矩阵乘法导致的。</p>
+]]></content>
+      <categories>
+        <category>数学 - 图形学</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>四元数与旋转</title>
+    <url>/2022/03/25/%E5%9B%9B%E5%85%83%E6%95%B0%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<p>图形学中的旋转（Rotation）非常重要，用欧拉角（Euler
+Angle）旋转非常简单，但是却存在 <strong>万向锁（Gimbal Lock）</strong>
+的问题；同时，用欧拉角插值也不尽方便。基于四元数（Quaternion）的旋转既解决了万向锁的问题，又能非常便利地插值。本文将从概念出发，对四元数的定义、推导、性质、应用，以及它与欧拉角之间的联系进行介绍。本文主要参考了Krasjet的《四元数与三维旋转》。<a
+href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a></p>
+<span id="more"></span>
+<h1 id="复数与二维旋转">复数与二维旋转</h1>
+<p>首先我们将简要介绍复数及它与二维旋转的关系，从而可以更加自然地过度到四元数及其与三维旋转的关系。</p>
+<h2 id="定义">定义</h2>
+<p>复空间<span
+class="math inline">\(\mathbb{C}\)</span>中的任一复数<span
+class="math inline">\(z\in\mathbb{C}\)</span>都可以表示为<span
+class="math inline">\(z=a+bi\
+(a,b\in\mathbb{R})\)</span>的形式，且满足<span
+class="math inline">\(i^2=-1\)</span>。此时<span
+class="math inline">\(a\)</span>称为复数<span
+class="math inline">\(z\)</span>的实部 (Real Part)，表达为<span
+class="math inline">\(a=\text{Re}(z)\)</span>；<span
+class="math inline">\(b\)</span>称为复数的虚部 (Imaginary
+Part)，表达为<span class="math inline">\(b=\text{Im}(z)\)</span>。</p>
+<p>从线性代数的角度来看，复数<span
+class="math inline">\(z=a+bi\)</span>可以看成是基 (Basis) <span
+class="math inline">\(\\{1,i\\}\)</span>上的线性组合，因此也可以把复数<span
+class="math inline">\(z\)</span>写成一个向量：</p>
+<p><span class="math display">\[z=\begin{bmatrix}a\\\\b
+\end{bmatrix}\]</span></p>
+<h2 id="复数的加法与乘法">复数的加法与乘法</h2>
+<h3 id="复数的加法">复数的加法</h3>
+<p>复数的加法很简单，分别把实部和虚部相加即可。减法类似，不多赘述。</p>
+<h3 id="复数的乘法">复数的乘法</h3>
+<p>对复数<span
+class="math inline">\(z_1=a+bi,z_2=c+di\)</span>，它们相乘的结果为：</p>
+<p><span
+class="math display">\[z_1z_2=(a+bi)(c+di)=(ac-bd)+(bc+ad)i\]</span></p>
+<p>利用上面讲过的复数的向量形式，可以把上式写成矩阵乘向量的形式：</p>
+<p><span class="math display">\[z_1z_2=(ac-bd)+(bc+ad)i=
+\begin{bmatrix}
+ac-bd\\\\
+bc+ad
+\end{bmatrix}=
+\begin{bmatrix}
+a &amp; -b\\\\
+b &amp; a
+\end{bmatrix}
+\begin{bmatrix}
+c\\\\
+d
+\end{bmatrix}\]</span></p>
+右侧的向量<span
+class="math inline">\(\begin{bmatrix}c\\\\d\end{bmatrix}\)</span>就是向量形式下的$
+z_2<span class="math inline">\(，而左侧的矩阵\)</span>
+<span
+class="math display">\[\begin{bmatrix}a&amp;-b\\\\b&amp;a\end{bmatrix}\]</span>
+<p><span
+class="math inline">\(则是\)</span>z_1$在乘法时的<strong>矩阵形式</strong>，矩阵的第一列就是自身的向量形式，而第二列进行了交换并对虚部取负。</p>
+<p>所以，我们可以把<span
+class="math inline">\(z_2\)</span>也写成矩阵形式，然后与<span
+class="math inline">\(z_1\)</span>相乘：</p>
+<p><span class="math display">\[z_1z_2=
+\begin{bmatrix}
+a &amp; -b\\\\
+b &amp; a
+\end{bmatrix}
+\begin{bmatrix}
+c &amp; -d\\\\
+d &amp; c
+\end{bmatrix}=
+\begin{bmatrix}
+ac-bd &amp; -(bc+ad)\\\\
+bc+ad &amp; ac-bd
+\end{bmatrix}\]</span></p>
+<p>所以，我们现在可以用至少三种形式去表达一个复数了（具体用哪种形式取决于我们的需要）：
+- 代数形式：<span class="math inline">\(z=a+bi\)</span>; -
+向量形式：<span
+class="math inline">\(z=\begin{bmatrix}a\\\\b\end{bmatrix}\)</span>; -
+矩阵形式：<span class="math inline">\(z=\begin{bmatrix}a &amp; -b\\\\b
+&amp; a\end{bmatrix}\)</span>.</p>
+<p>有两个特殊的复数<span
+class="math inline">\(1,i\)</span>，它们的矩阵形式不难得到是：</p>
+<p><span class="math display">\[1=\begin{bmatrix}
+1 &amp; 0\\\\
+0 &amp; 1
+\end{bmatrix}=I\\;(a=1, b=0)\]</span></p>
+<p><span class="math display">\[i=\begin{bmatrix}
+0 &amp; -1\\\\
+1 &amp; 0
+\end{bmatrix}\\;(a=0, b=1)\]</span></p>
+<p>对复数<span
+class="math inline">\(i\)</span>的矩阵形式进行平方，发现它就是<span
+class="math inline">\(-I\)</span>，从代数形式来看，就等价于<span
+class="math inline">\(i^2=-1\)</span>。这说明复数的矩阵形式是良定义的。</p>
+<h2 id="复数的模长">复数的模长</h2>
+<p>复数<span
+class="math inline">\(z=a+bi\)</span>的模长（Magnitude）定义为:</p>
+<p><span class="math display">\[\\|z\\| =\sqrt{a\^2+b\^2}\]</span></p>
+<p>这可以用它的共轭（Conjugate）表示：</p>
+<p><span class="math display">\[\\|z\\| =\sqrt{z\bar{z}},\\;
+\bar{z}=a-bi\]</span></p>
+<h2 id="复数与二维旋转-1">复数与二维旋转</h2>
+<h3 id="从复数矩阵形式导出旋转关系">从复数矩阵形式导出旋转关系</h3>
+<p>下面将重点引出复数与二维旋转的关系。</p>
+<p>注意观察复数<span class="math inline">\(z\)</span>的矩阵形式<span
+class="math inline">\(\begin{bmatrix}a &amp; -b\\\\b &amp;
+a\end{bmatrix}\)</span>，我们可以把它变换为下述形式：</p>
+<p><span class="math display">\[\begin{bmatrix}
+a &amp; -b\\\\
+b &amp; a
+\end{bmatrix}=\sqrt{a\^2+b\^2}
+\begin{bmatrix}
+\frac{a}{\sqrt{a\^2+b\^2}} &amp; \frac{-b}{\sqrt{a\^2+b\^2}}\\\\
+\frac{b}{\sqrt{a\^2+b\^2}} &amp; \frac{a}{\sqrt{a\^2+b\^2}}
+\end{bmatrix}\]</span></p>
+<p>矩阵中的每一项都被模长<span
+class="math inline">\(\\|z\\|\)</span>缩放了，此时注意到<span
+class="math inline">\(\frac{a}{\sqrt{a\^2+b\^2}}\)</span>就是复数<span
+class="math inline">\(z\)</span>在复平面与实轴形成夹角<span
+class="math inline">\(\theta\)</span>的余弦值<span
+class="math inline">\(\cos(\theta)\)</span>，而<span
+class="math inline">\(\frac{b}{\sqrt{a\^2+b\^2}}\)</span>正好对应了正弦值<span
+class="math inline">\(\sin(\theta)\)</span>，而这个夹角<span
+class="math inline">\(\theta\)</span>就是<span
+class="math inline">\(\arctan(b/a)\)</span>。</p>
+<p>这样一来，我们就可以把上式写成：</p>
+<p><span class="math display">\[\begin{bmatrix}
+a &amp; -b\\\\
+b &amp; a
+\end{bmatrix}=\\|z\\|
+\begin{bmatrix}
+\cos(\theta) &amp; -\sin(\theta)\\\\
+\sin(\theta) &amp; \cos(\theta)
+\end{bmatrix}=
+\begin{bmatrix}
+\\|z\\| &amp; 0\\\\
+0 &amp; \\|z\\|
+\end{bmatrix}
+\begin{bmatrix}
+\cos(\theta) &amp; -\sin(\theta)\\\\
+\sin(\theta) &amp; \cos(\theta)
+\end{bmatrix}\tag{1}\]</span></p>
+<p>这样一来，任意复数<span
+class="math inline">\(z=a+bi\)</span>都可以表示为两个矩阵的乘积，一个缩放矩阵<span
+class="math inline">\(\begin{bmatrix}\\|z\\| &amp; 0\\\\0 &amp;
+\\|z\\|\end{bmatrix}\)</span>和一个（我们熟悉的）旋转矩阵<span
+class="math inline">\(\begin{bmatrix}\cos(\theta) &amp;
+-\sin(\theta)\\\\\sin(\theta) &amp;
+\cos(\theta)\end{bmatrix}\)</span>的复合。换句话说，<strong>复数的几何意义就是进行旋转与缩放，旋转角度为<span
+class="math inline">\(\theta=\arctan(b/a)\)</span>，缩放大小为复数的模长。</strong>
+如果复数的模长为1，那么它的几何意义就只有旋转。</p>
+<p>所以，对复数<span class="math inline">\(p\)</span>的旋转：</p>
+<p><span class="math display">\[p&#39;=\begin{bmatrix}
+\cos(\theta) &amp; -\sin(\theta)\\\\
+\sin(\theta) &amp; \cos(\theta)
+\end{bmatrix}p\]</span></p>
+<p>我们可以构造一个复数<span
+class="math inline">\(z=\cos(\theta)+i\sin(\theta)\)</span>，把它与<span
+class="math inline">\(p\)</span>相乘表示旋转：</p>
+<p><span
+class="math display">\[p&#39;=zp=(\cos(\theta)+i\sin(\theta))p\]</span></p>
+<h3 id="复数的极坐标形式">复数的极坐标形式</h3>
+<p>当我们看到(1)式的时候，我们立马可以得到复数的另一种代数形式：</p>
+<p><span
+class="math display">\[z=\\|z\\|(\cos(\theta)+i\sin(\theta))\]</span></p>
+<p>再根据欧拉公式（Euler's Formula）：</p>
+<p><span
+class="math display">\[\cos(\theta)+i\sin(\theta)=\mathrm{e}^{i\theta}\]</span></p>
+<p>可以立得复数的<strong>极坐标形式</strong>：</p>
+<p><span
+class="math display">\[z=\\|z\\|\mathrm{e}\^{i\theta}=r\mathrm{e}\^{i\theta},\;
+r=\\|z\\|\]</span></p>
+<p>现在，复数<span
+class="math inline">\(z\)</span>不再通过它的实部和虚部表示，而且通过一个旋转角<span
+class="math inline">\(\theta\)</span>与缩放因子<span
+class="math inline">\(r\)</span>去表示了，它对任意一个复数<span
+class="math inline">\(p\)</span>的旋转，都可以表示为：</p>
+<p><span
+class="math display">\[p&#39;=r\mathrm{e}^{i\theta}p\]</span></p>
+<p>如果仅需表示旋转，则令<span
+class="math inline">\(r=1\)</span>即可。</p>
+<blockquote>
+<p><strong>补充</strong>：欧拉公式的证明。 令<span
+class="math inline">\(f(\theta)=\frac{\cos(\theta)+i\sin(\theta)}{\mathrm{e}\^{i\theta}}=\mathrm{e}\^{-i\theta}(\cos(\theta)+i\sin(\theta))\)</span>，对实数<span
+class="math inline">\(\theta\)</span>，对<span
+class="math inline">\(f(\theta)\)</span>求导，得到<span
+class="math inline">\(f&#39;(\theta)=\mathrm{e}\^{-i\theta}(i\cos(\theta)-\sin(\theta))-i\mathrm{e}\^{-i\theta}(\cos(\theta)+i\sin(\theta))=0\)</span>，因此<span
+class="math inline">\(f(\theta)\)</span>是常数。又因为<span
+class="math inline">\(f(0)=1\)</span>，所以<span
+class="math inline">\(f(\theta)\equiv 1\)</span>。欧拉公式得证。</p>
+</blockquote>
+<h3 id="复数的几种表示形式总结">复数的几种表示形式总结</h3>
+<p>现在我们已经得到了如下几种复数<span
+class="math inline">\(z=a+bi\)</span>的表示形式： - 代数形式一：<span
+class="math inline">\(z=a+bi\)</span>; - 向量形式：<span
+class="math inline">\(z=\begin{bmatrix}a\\\\b\end{bmatrix}\)</span>; -
+矩阵形式一：<span class="math inline">\(z=\begin{bmatrix}a &amp; -b\\\\b
+&amp; a\end{bmatrix}\)</span>; - 矩阵形式二：<span
+class="math inline">\(z=\begin{bmatrix}\\|z\\| &amp; 0\\\\0 &amp;
+\\|z\\|\end{bmatrix}\begin{bmatrix}\cos(\theta) &amp;
+-\sin(\theta)\\\sin(\theta) &amp; \cos(\theta)\end{bmatrix}\)</span>; -
+代数形式二：<span
+class="math inline">\(z=r(\cos(\theta)+i\sin(\theta))\)</span>; -
+极坐标形式：<span
+class="math inline">\(z=r\mathrm{e}^{i\theta}\)</span>.</p>
+<p>这几种形式是完全等价的。</p>
+<h2 id="旋转复合">旋转复合</h2>
+<p>假设我们现在有两个仅表示旋转的复数<span
+class="math inline">\(z_1=\cos(\theta)+i\sin(\theta),z_2=\cos(\phi)+i\sin(\phi)\)</span>，相继用它们对一个复数<span
+class="math inline">\(p\)</span>旋转：</p>
+<p><span
+class="math display">\[p&#39;=z_2z_1p=(z_2z_1)p=(z_1z_2)p=(\cos(\theta+\phi)+i\sin(\theta+\phi))p\]</span></p>
+<p>所以，用两个复数进行旋转时，所得到的结果仍然是一个旋转，且旋转的角度是两次旋转角度之和。</p>
+<h1 id="三维空间中的旋转">三维空间中的旋转</h1>
+<p>在<a
+href="https://sulley.cc/2021/06/%E5%90%91%E9%87%8F%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E7%AE%80%E5%8D%95%E6%8E%A8%E5%AF%BC/">这篇博客</a>中，我们已经介绍了三维空间中一个向量绕任意轴旋转的公式（被称为<a
+href="https://en.wikipedia.org/wiki/Rodrigues%27_rotation_formula">Rodrigues'
+formula</a>）。因为下文会涉及大量此公式，因此把结论在此重新记述，推导过程请参考原文。</p>
+<p>记<span
+class="math inline">\(\mathbf{p}\)</span>是待旋转的向量，<span
+class="math inline">\(\mathbf{n}\)</span>是被围绕旋转的轴，是一个单位向量，<span
+class="math inline">\(\theta\)</span>是要旋转的角度，<span
+class="math inline">\(\mathbf{p}&#39;\)</span>是旋转后的向量。我们有：</p>
+<p><span
+class="math display">\[\mathbf{p}&#39;=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p})\]</span></p>
+<p>请记住此公式，我们将看到它与四元数之间紧密的联系。</p>
+<h1 id="四元数">四元数</h1>
+<h2 id="定义-1">定义</h2>
+<h2 id="加法与乘法">加法与乘法</h2>
+<h2 id="矩阵形式">矩阵形式</h2>
+<h1 id="四元数与三维旋转">四元数与三维旋转</h1>
+<h1 id="四元数插值">四元数插值</h1>
+<section class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"
+role="doc-endnote"><p>https://krasjet.github.io/quaternion/quaternion.pdf<a
+href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+]]></content>
+      <categories>
+        <category>数学 - 图形学</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>樱花</title>
+    <url>/2021/06/29/%E6%A8%B1%E8%8A%B1/</url>
+    <content><![CDATA[<p>昨夜 我收到一封书札 旧纸上 缀满了一朵樱花 风干的墨迹
+渗透了陌生人的迷茫 我慢慢 把信合上</p>
+<p>昨夜 我写了一封书札 述说着 近日的苦闷衷肠 窗外的灯火 依旧那么辉煌
+我贴上 一朵樱花珍藏</p>
+<p>同样的夜晚 走过了岁月多少锋芒 心中仍 呐喊着一个熟悉人的回响 把信
+随风寄向远方 留给陌生的他 打开新的过往 愿他不要怯懦 续写昨夜的感慨
+还有清晨的阳光</p>
+<p>案台旁 樱花在绽放</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电影《误杀》短评</title>
+    <url>/2020/09/08/%E7%94%B5%E5%BD%B1%E3%80%8A%E8%AF%AF%E6%9D%80%E3%80%8B%E7%9F%AD%E8%AF%84/</url>
+    <content><![CDATA[<p>《误杀》是一部不失水准的悬疑片。实际上，在看完电影得知这是一部翻拍（翻拍自2015年的印度电影《误杀瞒天记》。实际上，它还有更早的来源）后，我竟然有些失落：要是这是我们自己的剧本该多好。但无论如何，本片从剧情、人物、节奏、立意、表现手法等方法，都是在水准线之上的作品，其中的若干不足完全是瑕不掩瑜的。8分是我对本片的总体评价。
+之后我将围绕本片进行，而不讨论有关其原版《误杀瞒天记》的内容。</p>
+<span id="more"></span>
+<h1 id="剧情与讲述">剧情与讲述</h1>
+<p>一言蔽之，本片讲述了一个关于“误杀”的故事。但看到最后，观众会发现，实际上，“误杀”并不成立，称之为“谋杀”，也是不为过的。本片没有直接点明这一点，是为了进一步突出电影的戏剧化效果。</p>
+<p>在剧情方面，电影是成功的。除了讲述男主制造不在场证据和他与局长的博弈之外，男主与家人的心理刻画，两位母亲形象的表现，都是相当具有感染力的。值得一提的是，本片大量致敬了以往的经典电影：《肖申克的救赎》，《活埋》，《蒙太奇》，《控方证人》，
+《天才枪手》，《猫鼠游戏》，《杀人回忆》等。在这里面，需要重点介绍一下《活埋》、《蒙太奇》和《杀人回忆》三部电影在本片中的作用。</p>
+<p>就讲述手段来看，本片仍然有比较显著的缺点，这重点体现了电影的开头和结尾两个部分。如果说本片一开头就致敬《活埋》并且将其作为一个伏笔的话，也未免太过着急或显眼。这段回忆式的致敬，也即对《肖申克的救赎》和《活埋》场景的再现，让观众在看完本片之后，难免会产生着墨过多的冗余感。这导致了两个问题：（1）电影的引入太过生硬；（2）电影的节奏难以统一。在电影结尾部分，导演显然致敬了韩国电影《杀人回忆》，以此将话语权交换给观众，让观众发声。这样的处理自然没有问题，然而，在国产电影标注Happy
+Ending的设定下，影片的结尾部分显然出现了导演表现力上的断裂：一方面，导演想让观众自我评判电影及男主的行为，另一方面，受制于各种不可描述的环境，导演又不得不以“坏人自白”和“好人自首”来草草收尾，这必然导致电影中期紧张的节奏和后期好人齐唱社会好的慢节奏形成冲突，导演再次致敬《杀人回忆》的结尾，就有狗尾续貂之嫌。</p>
+<p>抛开这两点显著的不足来看，本片在故事的讲述上无疑是成功的。中期影片节奏把控得相当精准，既能保持较快的节奏，时刻抓住观众想要知道后续的心，又能娓娓道来，不遗漏重要细节。譬如影片中间，男主到现场看新警察局装修情况的桥段，就在短短几分钟的情节内告诉了观众几个重要的细节：（1）男主仔细观察了地上的坑，再联系最后说尸体埋藏地点不方便透露，观众可以很简单地猜测到埋藏地点；（2）被子弹射死的山羊，是成为“替罪羊”的关键之物；（3）警官公报私仇，与李维杰进一步结怨，成为后面他引发众怒的导火索。</p>
+<p>另外一个值得注意的细节是，本片多次出现白色山羊，这显然是导演有意为之。在此，我引用豆瓣上的一篇影评对此的分析（
+https://movie.douban.com/review/12076729/ ），摘录如下：</p>
+<p>电影中羊的四次出现：第一次在湖边看到男主抛车（知道男主有罪），第二次被警察打死（代替男主受罚），第三次开棺验尸（作为替罪羊，帮男主掩埋真相），第四次男主决定认罪后，活羊重新出现，寺庙响起钟声（都预示着男主释然，已经放下心结，决心认罪接受惩罚）。</p>
+<h1 id="画面与音乐">画面与音乐</h1>
+<p>导演非常擅长使用电影中画面和音乐的技巧。电影中的音乐是烘托气氛和人物内心活动的重要工具，而画面则直接决定了观众的视觉体验。由于笔者缺乏视听的专业知识，难以用简洁明了的话语概括，故在此引用豆瓣另一篇影评对此的分析（
+https://movie.douban.com/review/12090128/ ），摘录如下：</p>
+<h2 id="交叉蒙太奇">交叉蒙太奇</h2>
+<p>这版《误杀》将“听经”改为“泰拳”，在电影前半段，就有一段很精彩的拳赛段落，这段拳赛是和素察上门交叉剪辑在一起的。</p>
+<p>李维杰之所以利用看拳赛为全家制造不在场证明，是因为“误杀”这件事发生的同时，也就是2号晚上，他就在看拳赛。</p>
+<p>李维杰2号出差给罗统的酒店维修网络，晚上完工后看到酒店房间塞的小卡片，决定去看泰拳休闲娱乐。同时，官二代素察来到灿班镇李维杰家里调戏大女儿，并与察觉不对劲的妈妈阿玉产生冲突。</p>
+<p>在这同一时间，不同空间，李维杰在看泰拳纠打，阿玉和大女儿在和素察纠打。导演对这两段戏采用了交叉蒙太奇的手法。</p>
+<p>一边是泰拳拳手踢到肚子，一边素察踢到阿玉，一边拳手倒地，一边素察倒地……而且“拳赛”和“误杀”两边的镜头时长越来越短，镜头切换越来越快，节奏也越来越紧张。</p>
+<p>通过这一手段，导演将李维杰完全不知情的状态，与官二代对妻女的欺凌和误杀剪辑在一起，观众在这段观影过程中是全知视角，神经逐渐被绷紧。</p>
+<p>这段交叉蒙太奇，既完成了误杀官二代的过程，又给后知后觉的李维杰出了一个难题。观众在紧张过后，心理继续被剧情调动：接下来李维杰和全家该怎么办？</p>
+<h2 id="慢镜头">慢镜头</h2>
+<p>《误杀》中的“慢镜头”大概有10次以上。</p>
+<p>尤其是最后在大雨里开棺启尸那场终极对决，几乎整段都使用了慢动作镜头。</p>
+<p>使用慢镜头的目的大概分为“制造滑稽效果”、“强调心理对时间的感受”或“凸显某一重要时刻”等，这部电影多次使用慢镜头的目的肯定是后两个。</p>
+<p>比如李维杰销毁素察的车这段戏，当时人物心理非常紧张。李维杰看到高速路上警察设卡和牧羊人路过时，都用慢镜头来强化李维杰当时紧张的心情。</p>
+<p>最后大雨是全片的高潮。慢镜头配上暴雨的场面调度，雨滴的速度也被放慢，不仅制造出震撼的视觉效果，也通过刻意放慢速度，主观上加长寻找尸体的时间，提升李维杰最后一击的震惊感。</p>
+<h2 id="布光">布光</h2>
+<p>《误杀》中利用布光塑造人物和烘托氛围最明显的，就是陈冲饰演的女警察局长。</p>
+<p>女警察局长这个角色非常复杂，她既要在下属面前树威，又迟迟攻破不了李维杰的手段，还要忍受母亲失去儿子的巨大痛苦，同时还得顾忌丈夫竞选市长。</p>
+<p>所以，导演对陈冲出场戏份的布光特别丰富。有一个镜头是陈冲在灿班镇警察局，脸上是百叶窗投下的如钢锯般的光影。这种非常特殊的光影投射在人物脸上，体现出当时人物内心巨大的痛苦和矛盾。</p>
+<p>除了陈冲，导演对主角李维杰和阿玉的布光也做了精心安排。</p>
+<p>比如李维杰从罗统回到家后，得知大女儿被侮辱，妻女又把素察误杀，从此全片的影调全部变成低调光（low
+key）。</p>
+<p>李维杰在得知这一痛心+震惊的消息时，脸上几乎没有打光。这样处理，非常鲜明地表现了李维杰和一家人的生活从此陷入黑暗。他们要在一点点微光中，找寻希望。</p>
+<p>观影时可以注意，电影仅仅在前15分钟和后15分钟有比较明亮的打光，从误杀案后就再无亮光，全片影调变得非常暗。</p>
+<h2 id="特殊音效">特殊音效</h2>
+<p>如果仔细听，电影在很多重要时刻都加入了特殊音效来渲染气氛。比如电影最后开棺，当镜头中显示的尸体不是素察而是一只羊时，背景音给了一声巨响，用来增强观众此时的心理感受。</p>
+<h1 id="主题与立意">主题与立意</h1>
+<p>关于本片的主题与立意，不同的观众自然有不同的想法。在这里，我认为有以下三点是比较明显的，即“法律正义”、“子女教育”与“选择冲突”。</p>
+<h2 id="法律正义">法律正义</h2>
+<p>法律是不是代表了正义？这是一个没有答案的问题。如果法律保证了正义，那么为什么还会有如此多不正义的事情发生？李维杰一家是受害者，但却不得不背负着杀人偿命的罪煞费心机制造一系列不在场证明（尽管杀人的事实客观成立）；但如果说法律不是正义，那么从客观来讲，它的确是保障社会稳定的最有效方法。警长的公报私仇最终还是遭到了愤怒民众的惩罚，滥用私权的局长拉韫也被撤职，正义还是到了。然而，在这正义之下，我们看到的，只有一个双输的局面：局长方全面溃败，李维杰方全家也将面临牢狱之灾。在这种法律正义的庇护之下，没有任何一方的权益得到了满足，也没有任何一个人获得了切实的好处。</p>
+<p>追根到底，这还是法律正义性的缺陷导致的必然结果。如果素察不是局长的儿子，李维杰一家人会得到应有的正义吗？如果李维杰没有看过那么多电影，或者一开始就束手就擒，平平被侮辱的真相能得到审判吗？尽管我们想要去解决这个问题，但现实是，人性的复杂根本无法用简单的“正义”得以阐释。法律无法接纳家长对子女的爱与纵容，也无法兼容“理性的公义”与“感性的迁就”的平衡。</p>
+<h2 id="子女教育">子女教育</h2>
+<p>子女教育是本片第二个十分明确的立意。小女儿安安目睹了母亲和姐姐杀人埋尸的全过程，然而却在父亲的指导下学会了如何撒谎。这在本片结尾她篡改分数体现得淋漓尽致。本来应该是天真无邪的女儿，却因为自己做的这个事情熟练地学会了如何撒谎、如何欺骗，相比“误杀”，这让男主是更难以接受的。注意到在这个时候，此刻男主一家已经完全不会被追查了：拉韫一家无权无势，所有证据烟消云散，没有人证、没有物证，他完全可以选择逍遥法外。然而，男主最后竟然选择了自首，这岂不是让他之前做的一切都白费了吗？如此说不通的逻辑，是在两件事之后得到的转变：（1）女儿修改成绩的试卷：身为父亲却言传身教教会了女儿最不能学会的恶习，这在男主心中是难以承担的。通过路人的口，我们知道男主自幼丧亲，如何做人是他立身之本，他可以为了家人背叛他的原则（在影片开头，他向僧人布施的情节可以体现他是一个对自身要求很高的人），也可以为了家人（女儿）重拾他的原则；（2）寺庙里的醒悟：寺庙是男主最后的救赎。当他第二次向僧人布施遭到拒绝的时候，他实际上内心是煎熬的。但在最后，为了暴乱不再延续，为了子女成长，他选择了“挡在最前面”，得到内心的自由。</p>
+<p>在素察方面，由于其父亲的疏于管教，母亲的溺爱，其最终的结局无非是“大快人心”的。和现实结合的同时，观众也能感受到父母对子女教育的重要性。身为警长的母亲，掌握着执法权而选择了包庇有过错的儿子；身为政客的父亲，只能责打自己的儿子来管教他。无法用公平的武器制裁亲人的犯罪，无法用有效的裁断约束亲人的叛逆，这样的警官，这样的政客，你们敢信任吗？正如在影片最后，男主在囚车中的自白一样，最后他竟然以这样的方式取得女儿的信任，这是荒诞而遗憾的。无论他之前在教育中出现了如何的问题，至少在现在，他用自己的行为证明了，他是一个伟大的父亲。</p>
+<h2 id="选择冲突">选择冲突</h2>
+<p>另外一个值得注意的点是，男主的选择奠定了本片的基调。本片有一个重复提及的细节：一开始，素察被平平击昏时，并没有当场死去。理由如下：（1）女主推车出去时，镜头给了素察一个手部特写；（2）男主多次凝视棺材；（3）男主第二次向僧人布施时遭到了拒绝，并且镜头显示了男主十分惊慌的表情；（4）影片高潮，揭开棺材时，棺材板上血淋淋的抓痕（这是最直接的证据，这表明素察是活活被憋死，或者被男主直接杀害的）；（5）影片最后，男主对局长夫妇致歉；（6）男主最后自首。结合这些或明或暗的事实，我们不难推出：在仓库素察只是被击昏，而真正导致素察死亡的原因是男主，为了“不让自己的家人受到伤害”，所以他选择了杀死素察，或见死不救。这个地方影片也有充分的暗示，一是影片开头致敬电影《活埋》的桥段，可以认为素察是被“活埋”致死；二是镜头给了被子弹射死的山羊的特写。</p>
+<p>以男主的标准来看，他在救与不救之间是经过了痛苦的煎熬的：小女儿安安用叉子划桌子的声音和素察在棺材里绝望地用手划棺材盖的声音是相似的。但最终，他选择了保护家人，直接或间接地杀死了素察。在影片结尾，他选择自首这点上，他没有欺骗，只是除了他自己之外，任何人都不知道，他只能用这种方式，对局长夫妇、对无辜的被他利用的路人、对自己的家人，表达愧疚，与忏悔。</p>
+<p>男主是纯粹的，而往往纯粹的人最容易陷入万劫不复的矛盾之中。</p>
+]]></content>
+      <categories>
+        <category>电影 - 国产电影</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>影评</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>矫正透视投影插值及属性插值详解</title>
+    <url>/2021/08/14/%E7%9F%AB%E6%AD%A3%E9%80%8F%E8%A7%86%E6%8A%95%E5%BD%B1%E6%8F%92%E5%80%BC%E5%8F%8A%E5%B1%9E%E6%80%A7%E6%8F%92%E5%80%BC%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<p>三角形是图形学的基本几何形状，空间中的三角形<span
+class="math inline">\(ABC\)</span>投射到屏幕空间中为<span
+class="math inline">\(A&#39;B&#39;C&#39;\)</span>。在<span
+class="math inline">\(A&#39;B&#39;C&#39;\)</span>内存在一点<span
+class="math inline">\(P&#39;\)</span>，它的某个属性<span
+class="math inline">\(S_{P&#39;}\)</span>常常用三个顶点的属性<span
+class="math inline">\(S_{A&#39;}, S_{B&#39;},
+S_{C&#39;}\)</span>的插值表示，即<strong>重心坐标</strong>（Barycentric
+coordinates）。然而，在屏幕空间中计算得出的<span
+class="math inline">\(P&#39;\)</span>点在三角形<span
+class="math inline">\(A&#39;B&#39;C&#39;\)</span>内的重心坐标<span
+class="math inline">\((x_{P&#39;},y_{P&#39;},z_{P&#39;})\)</span>却不一定等于投影前三维空间内<span
+class="math inline">\(P&#39;\)</span>对应点<span
+class="math inline">\(P\)</span>在三角形<span
+class="math inline">\(ABC\)</span>内的重心坐标<span
+class="math inline">\((x_{P},y_{P},z_{P})\)</span>。这是因为从三维空间到屏幕空间需要执行<strong>透视投影</strong>（Perspective
+Projection），这个投影是非线性的，因此变换前的重心坐标并不能和变换后的重心坐标保持线性关系，从而对三角形顶点的属性插值也不是线性关系。这就需要对透视投影下的重心坐标插值进行修正。本文从透视投影本身出发，说明其非线性性，并根据论文《Perspective-Correct
+Interpolation》<a href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a> 给出修正插值。</p>
+<span id="more"></span>
+<h1 id="透视投影的非线性性">透视投影的非线性性</h1>
+<h2 id="三维空间点和向量的表示">三维空间点和向量的表示</h2>
+<p>图形学一般关心三维空间，或者三维空间中的点<span
+class="math inline">\((x,y,z)\)</span>。在数学中，<span
+class="math inline">\((x,y,z)\)</span>既可以表示一个点，也可以表示一个向量，但是在图形学中，我们希望能够将二者区分开来，一个优雅的做法是，增加一个“第四维”，将<span
+class="math inline">\((x,y,z)\)</span>变为<span
+class="math inline">\((x,y,z,w)\)</span>。当<span
+class="math inline">\(w=1\)</span>时，原来的<span
+class="math inline">\((x,y,z)\)</span>就表示点，当<span
+class="math inline">\(w=0\)</span>时，<span
+class="math inline">\((x,y,z)\)</span>就表示一个向量。这样做的好处是，两个点相减可以正好得到一个向量：</p>
+<p><span
+class="math display">\[(x_1,y_1,z_1,1)-(x_2,y_2,z_2,1)=(x_1-x_2,y_1-y_2,z_1-z_2,0)\]</span></p>
+<p>以此类推，向量+点=点（可以理解为某个点沿着向量移动到了另一个点），向量+向量=向量，点+点则无定义。</p>
+<p>对点<span
+class="math inline">\((x,y,z,1)\)</span>来说，我们可以把每个元素都乘以系数<span
+class="math inline">\(k\)</span>，成为<span
+class="math inline">\((kx,ky,kz,k)\)</span>，尽管这时候<span
+class="math inline">\(w=k\neq 1\)</span>，但我们依然认为点<span
+class="math inline">\((kx,ky,kz,k)\)</span>和点<span
+class="math inline">\((x,y,z,1)\)</span>是同一个点，这是因为当把<span
+class="math inline">\((kx,ky,kz,k)\)</span>中的每个元素都除以<span
+class="math inline">\(k\)</span>之后，它就是<span
+class="math inline">\((x,y,z,1)\)</span>。</p>
+<p>这里需要注意的是，“等价”不代表“应然”，在实际使用点的时候（即用点的坐标进行运算的时候），我们仍然要用<span
+class="math inline">\(w=1\)</span>的版本，也就是<span
+class="math inline">\((x,y,z,1)\)</span>，而不是<span
+class="math inline">\((kx,ky,kz,k)\)</span>，后者只是为了在一些情况下方便计算。所以在确定好点的空间坐标之后，就要立刻对点进行归一化，把<span
+class="math inline">\(w\)</span>变成1，其他元素都要同样除以<span
+class="math inline">\(w\)</span>。这一点实际上就是透视投影矩阵非线性的根源，下面详细介绍。</p>
+<h2 id="透视投影矩阵">透视投影矩阵</h2>
+<p>（注：以下内容整理、改编自《GAMES101-现代计算机图形学入门-闫令琪》Lecture
+4的内容。<a href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a>）</p>
+<p>上面我们已经介绍了三维空间中的点<span
+class="math inline">\(A=(x,y,z,1)\)</span>，这个点要投影到屏幕空间中形成2D效果，就要经过一系列变换。最简单的变换就是把<span
+class="math inline">\(z\)</span>扔掉，只保留<span
+class="math inline">\((x,y)\)</span>，这个二维向量就是点<span
+class="math inline">\(A\)</span>在屏幕空间<span
+class="math inline">\(xOy\)</span>中对应的位置<span
+class="math inline">\(A&#39;=(x,y)\)</span>。</p>
+<p>但是我们人眼在看的时候具有“透视”效果，也就是远处的物体看起来更小，近处的物体看起来更大，而直接用上述做法会让远处的物体和近处的物体看起来一样大。因此在图形学中，我们还需要对点<span
+class="math inline">\(A=(x,y,z,1)\)</span>做<strong>透视投影</strong>，让它呈现出“近大远小”的效果。</p>
+<p>如果用一个矩阵表示这个透视投影，那么这个“从三维空间变换为屏幕空间”的过程，就可以描述为：</p>
+<p><span class="math display">\[A&#39;=\mathbf{M}A\]</span></p>
+<p>其中<span class="math inline">\(\mathbf{M}\in\mathbb{R}^{4\times
+4}\)</span>就是我们要求的透视投影矩阵。<a href="#fn3"
+class="footnote-ref" id="fnref3"
+role="doc-noteref"><sup>3</sup></a>下面的目标就是如何求出这<span
+class="math inline">\(4\times 4=16\)</span>个矩阵内的元素。</p>
+<p>以下图为例。</p>
+<figure>
+<img data-src="/images/correct-interpolation/1.png"
+alt="三维空间中一个点的x坐标和y坐标满足一定的相似性关系，因此可以直接得出相应的透视投影变换关系。点击图片查看高清原图。" />
+<figcaption
+aria-hidden="true">三维空间中一个点的x坐标和y坐标满足一定的相似性关系，因此可以直接得出相应的透视投影变换关系。点击图片查看高清原图。</figcaption>
+</figure>
+<p>从平面<span
+class="math inline">\(yOZ\)</span>看去，三维空间中的点<span
+class="math inline">\(A=(x,y,z,1)\)</span>经过透视投影后的点，在近平面上的位置是屏幕空间（近平面）中的点<span
+class="math inline">\(A&#39;=(x&#39;,y&#39;,n)\)</span>，这个时候就可以利用相似三角形法则，得到：</p>
+<p><span class="math display">\[\frac{z}{n}=\frac{y}{y&#39;}\Rightarrow
+y&#39;=\frac{n}{z}y\]</span></p>
+<p>同样地，对于<span
+class="math inline">\(xOZ\)</span>平面，也可以得到：</p>
+<p><span class="math display">\[\frac{z}{n}=\frac{x}{x&#39;}\Rightarrow
+x&#39;=\frac{n}{z}x\]</span></p>
+<p>这就是说，透视投影实际上做了下述的变换：</p>
+<p><span
+class="math display">\[(x,y,z,1)\Rightarrow(\frac{nx}{z},\frac{ny}{z},?,1)\]</span></p>
+<p>现在把每个元素都乘以<span class="math inline">\(z\)</span>，得到<span
+class="math inline">\((nx,ny,?,z)\)</span>。这时候，就有下述方程：</p>
+<p><span
+class="math display">\[\mathbf{M}(x,y,z,1)\^\text{T}=(nx,ny,?,z)\^\text{T}
+\]</span></p>
+<p>所以可以解得矩阵<span
+class="math inline">\(\mathbf{M}\)</span>是：</p>
+<p><span class="math display">\[\mathbf{M}=\begin{pmatrix}
+  n &amp; 0 &amp; 0 &amp; 0\\\\
+  0 &amp; n &amp; 0 &amp; 0\\\\
+  ? &amp; ? &amp; ? &amp; ?\\\\
+  0 &amp; 0 &amp; 1 &amp; 0
+\end{pmatrix}\]</span></p>
+<p>为什么这里的第三维<span
+class="math inline">\(z\)</span>不是刚才说的近平面<span
+class="math inline">\(n\)</span>呢？这是因为经过透视投影，也就是把点左乘矩阵<span
+class="math inline">\(\mathbf{M}\)</span>之后，<span
+class="math inline">\(z\)</span>不一定就是<span
+class="math inline">\(n\)</span>，只是说，我们在保持<span
+class="math inline">\(x,y\)</span>不变的情况下，把<span
+class="math inline">\(z\)</span>平移到近平面<span
+class="math inline">\(n\)</span>之后，有上述的相似关系。又或者说，当我们从原点往近平面方向看，把近平面当成一个二维空间的时候，在屏幕空间上显示出来的投影后的点<span
+class="math inline">\(A&#39;\)</span>是<span
+class="math inline">\((x&#39;,y&#39;,n)\)</span>。</p>
+<p>比如下面的图二，点<span
+class="math inline">\(A\)</span>经过透视投影之后真正的位置在蓝色虚线上的某一点，它的<span
+class="math inline">\(z&#39;\)</span>我们目前是不知道的，但是它的<span
+class="math inline">\(x&#39;,y&#39;\)</span>我们可以通过上面的相似关系确定下来。</p>
+<figure>
+<img data-src="/images/correct-interpolation/2.png"
+alt="三维空间中点，如果它在近平面或者或平面上，则它的z坐标不变。可以利用这个性质解出最终的透视投影矩阵\mathbf{M}。点击图片查看高清原图。" />
+<figcaption
+aria-hidden="true">三维空间中点，如果它在近平面或者或平面上，则它的z坐标不变。可以利用这个性质解出最终的透视投影矩阵<span
+class="math inline">\(\mathbf{M}\)</span>。点击图片查看高清原图。</figcaption>
+</figure>
+<p>那么真正的<span
+class="math inline">\(z&#39;\)</span>是什么呢？这就要利用透视投影的两个性质：
+- 如果一个点在近平面<span
+class="math inline">\(z=n\)</span>上，那么经过透视投影之后它的位置不变：
+<span
+class="math display">\[(x,y,n,1)\Rightarrow(x,y,n,1)\Rightarrow(nx,ny,n^2,n)\]</span>
+- 如果一个点在远平面<span
+class="math inline">\(z=f\)</span>上，那么经过透视投影之后它的<span
+class="math inline">\(z\)</span>不变： <span
+class="math display">\[(x,y,f,1)\Rightarrow(x&#39;,y&#39;,f,1)\Rightarrow(fx&#39;,fy&#39;,f^2,f)\]</span>
+特殊地，当<span class="math inline">\(x=y=0\)</span>时有<span
+class="math inline">\((0,0,f,1)\Rightarrow(0,0,f,1)\Rightarrow(0,0,f^2,f)\)</span>。</p>
+<p>如果把矩阵<span
+class="math inline">\(\mathbf{M}\)</span>未知的四个量分别设为<span
+class="math inline">\(a,b,c,d\)</span>，那么通过<span
+class="math inline">\(\mathbf{M}(x,y,n,1)\^\text{T}=(nx,ny,n^2,n)\)</span>我们有：</p>
+<p><span class="math display">\[ax+by+cn+d=n^2\]</span></p>
+<p>因为右式不包含<span class="math inline">\(x,y\)</span>，所以<span
+class="math inline">\(a=b=0\)</span>且<span
+class="math inline">\(cn+d=n^2\)</span>。</p>
+<p>同时，由<span
+class="math inline">\(\mathbf{M}(0,0,f,1)\^\text{T}=(0,0,f^2,f)\)</span>得到：</p>
+<p><span class="math display">\[cf+d=f^2\]</span></p>
+<p>与<span class="math inline">\(cn+d=n^2\)</span>联立求解，就得到<span
+class="math inline">\(c=n+f,d=-nf\)</span>。</p>
+<p>所以，最终就解得透视投影矩阵<span
+class="math inline">\(\mathbf{M}\)</span>为：</p>
+<p><span class="math display">\[\mathbf{M}=\begin{pmatrix}
+  n &amp; 0 &amp; 0 &amp; 0\\\\
+  0 &amp; n &amp; 0 &amp; 0\\\\
+  0 &amp; 0 &amp; n+f &amp; -nf\\\\
+  0 &amp; 0 &amp; 1 &amp; 0
+\end{pmatrix}\]</span></p>
+<p>这是一个典型的线性变换，把三维空间中的一个点<span
+class="math inline">\(A\)</span>变换到了透视投影之后的某个位置<span
+class="math inline">\(\mathbf{M}A\)</span>。</p>
+<p>现在有个有趣的小问题：透视投影之后的新点<span
+class="math inline">\(A&#39;\)</span>（注意不是平移到近平面上的点）的<span
+class="math inline">\(z&#39;\)</span>值和原来的<span
+class="math inline">\(z\)</span>相比，谁大？我们只需要计算一下即可：</p>
+<p><span
+class="math display">\[z&#39;=\frac{(n+f)z-nf}{z}&gt;z\Rightarrow
+z^2-(n+f)z+nf&gt;0\]</span></p>
+<p>分子的<span class="math inline">\((n+f)z-nf\)</span>就是将矩阵<span
+class="math inline">\(\mathbf{M}\)</span>的第三行与三维空间中的点<span
+class="math inline">\(A=(x,y,z,1)\)</span>点乘后的结果，除以<span
+class="math inline">\(z\)</span>是因为矩阵<span
+class="math inline">\(\mathbf{M}\)</span>的实际上是把每个维度都乘了<span
+class="math inline">\(z\)</span>的结果，所以还需要除以<span
+class="math inline">\(z\)</span>还原<strong>真实</strong>的<span
+class="math inline">\(z&#39;\)</span>值（回忆一下我们开始讲的要用真实的值参与计算）。</p>
+<p>把<span
+class="math inline">\(z\)</span>乘到右侧之后符号改变，因为这里的坐标轴默认使用的是朝向<span
+class="math inline">\(-z\)</span>方向，这可以从上面两个图看出，其中<span
+class="math inline">\(f&lt;n&lt;0\)</span>。</p>
+<p>解上面的一元二次方程，就得到：</p>
+<p><span
+class="math display">\[z_{1,2}=\frac{(n+f)\pm\sqrt{(n+f)^2-4nf}}{2}=n~~\text{and}~~f\]</span></p>
+<p>所以，只要当<span class="math inline">\(z&gt;n\)</span>或者<span
+class="math inline">\(z&lt;f\)</span>的时候，变换后的<span
+class="math inline">\(z\)</span>才比原来的<span
+class="math inline">\(z\)</span>大，然而<span
+class="math inline">\(z\)</span>本身就被限制在了<span
+class="math inline">\([f,n]\)</span>内，所以，透视投影后的<span
+class="math inline">\(z&#39;\)</span><strong>永远</strong>比变换前的<span
+class="math inline">\(z\)</span>小。换句话说，透视投影把一个点“拉得离屏幕更远”了。</p>
+<h2
+id="属性插值与透视投影矩阵的非线性性">属性插值与透视投影矩阵的非线性性</h2>
+<p>也许你可能会问了，矩阵<span
+class="math inline">\(\mathbf{M}\)</span>不是个线性变换吗，你怎么说透视投影是非线性的。的确，计算出来的矩阵<span
+class="math inline">\(\mathbf{M}\)</span>只涉及常数，包括<span
+class="math inline">\(0, 1, n,
+f\)</span>，但是别忘了，它计算出来的结果，是把向量的每一维度都乘以<span
+class="math inline">\(z\)</span>之后得到的结果。真正的经过透视投影后得到的点，还要把每个元素除以<span
+class="math inline">\(z\)</span>才行。正是这个“除以<span
+class="math inline">\(z\)</span>”的操作，决定了整个透视投影是非线性的。</p>
+<p>下图是一个例子。三维空间中的线段<span
+class="math inline">\(AB\)</span>，经过透视投影之后，在屏幕空间是<span
+class="math inline">\(A&#39;B&#39;\)</span>（始终注意屏幕空间中点的位置和点的真实位置的区别，它们的<span
+class="math inline">\(z&#39;\)</span>坐标是不同的）。这时候，直接在屏幕空间中计算重心坐标，得到了<span
+class="math inline">\(C&#39;\)</span>点，它正好位于<span
+class="math inline">\(A&#39;B&#39;\)</span>的中间位置，所以，它的属性就应该是<span
+class="math inline">\(A&#39;\)</span>和<span
+class="math inline">\(B&#39;\)</span>属性的简单平均，也就是<span
+class="math inline">\((0.5+1)/2=0.75\)</span>。</p>
+<figure>
+<img data-src="/images/correct-interpolation/3.png"
+alt="屏幕空间的插值不一定与原三维空间的插值保持线性关系。在该图中，A&#39;C&#39;=B&#39;C&#39;，因此C&#39;点的属性就是A&#39;点和B&#39;点的平均，为(0.5+1.0)/2=0.75。但是在原三维空间中，AC的长度不等于BC的长度，因此C点的属性必然不为0.75。然而我们真正关心的是在三维空间中的真实插值，所以需要对屏幕空间中的插值进行修正。" />
+<figcaption
+aria-hidden="true">屏幕空间的插值不一定与原三维空间的插值保持线性关系。在该图中，A'C'=B'C'，因此C'点的属性就是A'点和B'点的平均，为<span
+class="math inline">\((0.5+1.0)/2=0.75\)</span>。但是在原三维空间中，AC的长度不等于BC的长度，因此C点的属性必然不为0.75。然而我们真正关心的是在三维空间中的真实插值，所以需要对屏幕空间中的插值进行修正。</figcaption>
+</figure>
+<p>但是，我们真正关心的不是在屏幕空间中插值，而是在透视投影之前，真正的点<span
+class="math inline">\(C\)</span>它位于线段<span
+class="math inline">\(AB\)</span>的什么位置，在这个位置的基础上插值，才是点<span
+class="math inline">\(C\)</span>，或者点<span
+class="math inline">\(C&#39;\)</span>的属性。这里的属性也包括点<span
+class="math inline">\(C&#39;\)</span>的深度值<span
+class="math inline">\(z&#39;\)</span>。</p>
+<p>从图中可以看到，尽管在屏幕空间中<span
+class="math inline">\(C&#39;\)</span>位于<span
+class="math inline">\(A&#39;B&#39;\)</span>的正中间，但是在原来的线段<span
+class="math inline">\(AB\)</span>中，点<span
+class="math inline">\(C\)</span>却不是在正中间位置，这正是由透视投影的非线性性导致的，或者说，是由“除以<span
+class="math inline">\(z\)</span>”这个操作导致的。</p>
+<h1 id="插值修正">插值修正</h1>
+<p>那么点<span class="math inline">\(C\)</span>，或者点<span
+class="math inline">\(C&#39;\)</span>真正的属性值是多少呢？显然，我们不能再直接用屏幕空间内的插值结果了。</p>
+<p>我们以下图为例说明如何对插值进行修正。设屏幕空间的点<span
+class="math inline">\(A&#39;=(y&#39;_1,n),B&#39;=(y&#39;_2,n)\)</span>以及它们中间的某个点<span
+class="math inline">\(C&#39;=(y&#39;_s,n)\)</span>，其中<span
+class="math inline">\(C&#39;\)</span>离<span
+class="math inline">\(A&#39;\)</span>和<span
+class="math inline">\(B&#39;\)</span>的距离分别是<span
+class="math inline">\(s\)</span>和<span
+class="math inline">\(1-s\)</span>。同理，在三维空间的点<span
+class="math inline">\(A=(y_1,z_1),B=(y_2,z_2)\)</span>，以及它们中的某个点<span
+class="math inline">\(C=(y_t,z_t)\)</span>。<span
+class="math inline">\(C\)</span>离<span
+class="math inline">\(A,B\)</span>的距离分别是<span
+class="math inline">\(t\)</span>和<span
+class="math inline">\(1-t\)</span>。点<span
+class="math inline">\(A,B,C\)</span>的属性分别记为<span
+class="math inline">\(I_A,I_B\)</span>和<span
+class="math inline">\(I_t\)</span>。现在给定<span
+class="math inline">\(t,I_t\)</span>和点<span
+class="math inline">\(C\)</span>之外的值，要求出<span
+class="math inline">\(I_t\)</span>。</p>
+<p>进一步，因为我们知道<span
+class="math inline">\(I_t=t(I_B-I_A)+I_A\)</span>，而<span
+class="math inline">\(I_A,I_B\)</span>又是已知的，所以这里的关键就是求出<span
+class="math inline">\(t\)</span>。</p>
+<figure>
+<img data-src="/images/correct-interpolation/4.png"
+alt="设屏幕空间的点A&#39;=(y&#39;_1,n),B&#39;=(y&#39;_2,n)以及它们中间的某个点C&#39;=(y&#39;_s,n)，其中C&#39;离A&#39;和B&#39;的距离分别是s和1-s。同理，在三维空间的点A=(y_1,z_1),B=(y_2,z_2)，以及它们中的某个点C=(y_t,z_t)。C离A,B的距离分别是t和1-t。点A,B,C的属性分别记为I_A,I_B和I_t。现在给定t,I_t和点C之外的值，要求出I_t。" />
+<figcaption aria-hidden="true">设屏幕空间的点<span
+class="math inline">\(A&#39;=(y&#39;_1,n),B&#39;=(y&#39;_2,n)\)</span>以及它们中间的某个点<span
+class="math inline">\(C&#39;=(y&#39;_s,n)\)</span>，其中<span
+class="math inline">\(C&#39;\)</span>离<span
+class="math inline">\(A&#39;\)</span>和<span
+class="math inline">\(B&#39;\)</span>的距离分别是<span
+class="math inline">\(s\)</span>和<span
+class="math inline">\(1-s\)</span>。同理，在三维空间的点<span
+class="math inline">\(A=(y_1,z_1),B=(y_2,z_2)\)</span>，以及它们中的某个点<span
+class="math inline">\(C=(y_t,z_t)\)</span>。<span
+class="math inline">\(C\)</span>离<span
+class="math inline">\(A,B\)</span>的距离分别是<span
+class="math inline">\(t\)</span>和<span
+class="math inline">\(1-t\)</span>。点<span
+class="math inline">\(A,B,C\)</span>的属性分别记为<span
+class="math inline">\(I_A,I_B\)</span>和<span
+class="math inline">\(I_t\)</span>。现在给定<span
+class="math inline">\(t,I_t\)</span>和点<span
+class="math inline">\(C\)</span>之外的值，要求出<span
+class="math inline">\(I_t\)</span>。</figcaption>
+</figure>
+<p>根据上图，我们可以利用相似三角形得到下述三个方程：</p>
+<p><span class="math display">\[
+\frac{y_1}{y&#39;_1}=\frac{z_1}{n}\Rightarrow
+y_1=\frac{z_1y_1&#39;}{n}\tag{1}
+\]</span></p>
+<p><span class="math display">\[
+\frac{y_t}{y&#39;_s}=\frac{z_t}{n}=z_t=\frac{ny_t}{y_s&#39;}\tag{2}
+\]</span></p>
+<p><span class="math display">\[
+\frac{y_2}{y&#39;_2}=\frac{z_2}{n}\Rightarrow
+y_2=\frac{z_2y_2&#39;}{n}\tag{3}
+\]</span></p>
+<p>同时，根据插值的性质，我们还有下述三个方程：</p>
+<p><span class="math display">\[
+y&#39;_s=s(y&#39;_2-y&#39;_1)+y&#39;_1\tag{4}
+\]</span></p>
+<p><span class="math display">\[
+y_t=t(y_2-y_1)+y_1\tag{5}
+\]</span></p>
+<p><span class="math display">\[
+z_t=t(z_2-z_1)+z_1\tag{6}
+\]</span></p>
+<p>现在，把公式(4)(5)带入公式(2)中，得到：</p>
+<p><span class="math display">\[
+z_t=\frac{n[t(y_2-y_1)+y_1]}{s(y&#39;_2-y&#39;_1)+y&#39;_1}\tag{7}
+\]</span></p>
+<p>再把公式(1)(3)带入公式(7)中，得到：</p>
+<p><span class="math display">\[
+z_t=\frac{t(z_2y_2&#39;-z_1y_1&#39;)+z_1y_1&#39;}{s(y&#39;_2-y&#39;_1)+y&#39;_1}\tag{8}
+\]</span></p>
+<p>再把公式(6)带入公式(8)：</p>
+<p><span class="math display">\[
+t(z_2-z_1)+z_1=\frac{t(z_2y_2&#39;-z_1y_1&#39;)+z_1y_1&#39;}{s(y&#39;_2-y&#39;_1)+y&#39;_1}\tag{9}
+\]</span></p>
+<p>把公式(9)化简，就得到了关于<span
+class="math inline">\(t\)</span>的表达式：</p>
+<p><span class="math display">\[
+t=\frac{sz_1}{sz_1+(1-s)z_2}\tag{10}
+\]</span></p>
+<p>式(10)非常重要，它告诉了我们，使用屏幕空间中的插值<span
+class="math inline">\(s\)</span>与三维空间中的深度值<span
+class="math inline">\(z_1,z_2\)</span>可以得到三维空间中的真实插值<span
+class="math inline">\(t\)</span>。</p>
+<p>由于深度值<span
+class="math inline">\(z_t\)</span>本身就是一种属性，所以自然可以使用插值计算。把式(10)带入式(6)，得到：</p>
+<p><span class="math display">\[
+z_t=z_1+\frac{sz_1}{sz_1+(1-s)z_2}(z_2-z_1)=\frac{1}{\frac{1}{z_1}+s(\frac{1}{z_2}-\frac{1}{z_1})}\tag{11}
+\]</span></p>
+<p>式(11)告诉我们，三维空间中真实的深度值<span
+class="math inline">\(z_t\)</span>的计算方法。那么，真实的深度值，也式(11)，和直接在屏幕空间中插值出来的“虚假”的深度值<span
+class="math inline">\(z&#39;_t=z_1+s(z_2-z_1)\)</span>哪个更大？下面直接令<span
+class="math inline">\(z_t\le z&#39;_t\)</span>:</p>
+<p><span class="math display">\[z_t\le z&#39;_t\Rightarrow
+\frac{1}{\frac{1}{z_1}+s(\frac{1}{z_2}-\frac{1}{z_1})}\le z_1+s(z_2-z_1)
+\Rightarrow s(1-s)(z_1-z_2)^2\le 0\tag{12}\]</span></p>
+<p>当<span class="math inline">\(s=0\)</span>或<span
+class="math inline">\(1\)</span>，即点<span
+class="math inline">\(C\)</span>与点<span
+class="math inline">\(A\)</span>或点<span
+class="math inline">\(B\)</span>重合时，真实的深度值和虚假的深度值相等；否则，真实的深度值永远<strong>大于</strong>虚假的深度值（注意朝向的是<span
+class="math inline">\(-z\)</span>方向，因此在把分母乘到右侧的时候需要变号）。换句话说，<strong>通过屏幕空间插值出来的深度值，比真实的值要偏小，或更远离屏幕</strong>。</p>
+<p>为了得到<span class="math inline">\(I_t\)</span>，把式(10)带入到<span
+class="math inline">\(I_t=t(I_B-I_A)+I_A\)</span>中，就有：</p>
+<p><span class="math display">\[
+I_t=I_A+\frac{sz_1}{sz_1+(1-s)z_2}(I_B-I_A)=\left(\frac{I_A}{z_1}+s\left(\frac{I_B}{z_2}-\frac{I_A}{z_1}\right)\right)\Big/\frac{1}{z_t}\tag{13}
+\]</span></p>
+<p>公式(13)就是要求的真实的插值结果。</p>
+<p>上面是对线段的插值，那么对图形学中更常见的三角形如何插值呢？假定三维空间中三角形三个顶点的属性分别是<span
+class="math inline">\(I_A,I_B,I_C\)</span>，它们的深度值分别是<span
+class="math inline">\(z_A,z_B,z_C\)</span>。三角形内有一点<span
+class="math inline">\(P\)</span>，属性值<span
+class="math inline">\(I_P\)</span>和深度值<span
+class="math inline">\(z_P\)</span>都未知，但是它在屏幕空间的重心坐标（在屏幕空间中<span
+class="math inline">\(P&#39;\)</span>对点<span
+class="math inline">\(A&#39;,B&#39;,C&#39;\)</span>的插值）是<span
+class="math inline">\(a,b,c\)</span>。那么，根据式(11)，点<span
+class="math inline">\(P\)</span>的真实深度值<span
+class="math inline">\(z_P\)</span>就是：</p>
+<p><span
+class="math display">\[z_P=\frac{1}{\frac{a}{z_A}+\frac{b}{z_B}+\frac{c}{z_C}}\]</span></p>
+<p>再根据式(13)，点<span
+class="math inline">\(P\)</span>的真实属性值<span
+class="math inline">\(I_P\)</span>是:</p>
+<p><span
+class="math display">\[I_P=\left(a\frac{I_A}{z_A}+b\frac{I_B}{z_B}+c\frac{I_C}{z_C}\right)\Big/\frac{1}{z_P}\]</span></p>
+<p>这样，就用三维空间中三角形<span
+class="math inline">\(ABC\)</span>的已知量和屏幕空间的重心坐标<span
+class="math inline">\(a,b,c\)</span>求出了点<span
+class="math inline">\(P\)</span>在三维空间中真实的深度值和属性值。</p>
+<h1 id="结论">结论</h1>
+<p>本文从透视投影的概念和推导出发，探究了透视投影的非线性性，进而引出对线段内部和三角形内部点的插值修正。我们真正关心的是在三维空间中对点的插值，而非直接在屏幕空间插值。本文的最后两个公式非常重要，希望读者能够记忆：</p>
+<p><span
+class="math display">\[z_P=\frac{1}{\frac{a}{z_A}+\frac{b}{z_B}+\frac{c}{z_C}}\]</span></p>
+<p><span
+class="math display">\[I_P=\left(a\frac{I_A}{z_A}+b\frac{I_B}{z_B}+c\frac{I_C}{z_C}\right)\Big/\frac{1}{z_P}\]</span></p>
+<section class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>Low K L. Perspective-correct
+interpolation[J]. Technical writing, Department of Computer Science,
+University of North Carolina at Chapel Hill, 2002.<a href="#fnref1"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"
+role="doc-endnote"><p>https://www.bilibili.com/video/BV1X7411F744?p=4<a
+href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"
+role="doc-endnote"><p>实际上，在透视投影变换之后，还需要有<strong>正交投影</strong>变换进一步把点压缩到一个规定好的范围里。但因为正交投影仅仅涉及伸缩和平移操作，不涉及这里要讲的核心内容，故在此略去。有兴趣的读者可以参考GAMES101课程。<a
+href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+]]></content>
+      <categories>
+        <category>数学 - 图形学</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>西湖夜歌</title>
+    <url>/2021/07/09/%E8%A5%BF%E6%B9%96%E5%A4%9C%E6%AD%8C/</url>
+    <content><![CDATA[<p>霓光半遮影 湖波轻颤合韵起 半句寻谁去</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《电脑游戏：文本、叙事与游戏》纪要</title>
+    <url>/2021/08/14/computer-games-text-narrative-play/</url>
+    <content><![CDATA[<p>本文是《电脑游戏：文本、叙事与游戏》的简单纪要，在此备份。</p>
+<span id="more"></span>
+<h1 id="游戏与叙事">游戏与叙事</h1>
+<h2 id="叙事理论">叙事理论</h2>
+<ul>
+<li>每一个叙事都有两个部分：一个是故事，指事件的内容或串联（动作、发生的事），再加上所谓的存在物（角色、场景中的事物等）；二是话语，即内容赖以传达的方法。</li>
+<li>故事的事件在时间和空间上都是按照一定的顺序排列的，这就是所谓的<strong>情节设计</strong>。</li>
+<li>叙事事实的三个方面：故事（内容）、叙事（话语）、叙述。
+<ul>
+<li>童话《灰姑娘》中包含了一系列故事的事件，可以通过很多种不同的方式被呈现出来。</li>
+<li>叙事的关键要素：<strong>对事件加以安排</strong>，使之在话语当中凸显出来，对它们的时间长度、发生频率和次序予以控制。</li>
+</ul></li>
+<li>隐含作者与隐含读者。</li>
+</ul>
+<h2 id="叙事理论与博德之门">叙事理论与《博德之门》</h2>
+<ul>
+<li>游戏包含了一系列由玩家所触发的新事件，允许玩家实时行动；也包含了过去的事件，已经被安排好的。</li>
+<li>事件被提前预制好，玩家是做出情节安排的人。</li>
+<li>同步叙事：向玩家传达屏幕上的行动、事件、得分和对话。</li>
+</ul>
+<h2 id="叙事的限度">叙事的限度</h2>
+<ul>
+<li>叙事理论追问的是：故事情节是从何种角度被描述的，我们是通过谁的眼睛了解叙事当中的事件的，又是谁的声音在传递信息，是谁在策动事件，谁来决定事件的持续时间、发生频率和次序。</li>
+<li>《博德之门》以一种玩家无法操纵的形式讲述事件，以过场动画、NPC的对白和角色简介的方式被编织在一起，并与玩家发生联系。</li>
+<li><strong>已然事件</strong>与<strong>实时事件</strong>。</li>
+</ul>
+<h1 id="游戏与快感">游戏与快感</h1>
+<ul>
+<li>电脑游戏究竟要驱使玩家去做什么。</li>
+</ul>
+<h2 id="角色的生成">角色的生成</h2>
+<ul>
+<li>选择外观、种族、职业、阵营、声音、名字。通过这些选择，让玩家了解游戏玩法与背景，同时限定了一系列数值。</li>
+</ul>
+<h2 id="角色特征和游戏">角色、特征和游戏</h2>
+<ul>
+<li>角色既包含了审美层面和故事层面的偏好，也涉及战略方面的考虑。人物的特征会影响（约束）其行为。</li>
+<li>但是玩家的风格和喜好决定了角色内在的可能性以怎样的形式表达出来，或怎样被压抑。【如果想要增强角色自身的特征，应该限制玩家的可操作性，如从数值、剧情、环境、探索度等层面。】</li>
+<li>在电脑游戏中，玩家的input和游戏所提供的特征描述之间的互动可能引发不可预测的行为，与某个角色表面的扁平性发生矛盾。因此，仅仅按照设定的属性和特征去描述一个游戏化身或角色是错误的。【可以通过“如果不这么做，游戏就难以进行下去”的思路引导玩家进行特定的操作。】</li>
+</ul>
+<h2 id="沉浸卷入与心流体验">沉浸、卷入与“心流”体验</h2>
+<ul>
+<li>玩家将游戏系统看做一个整体，但是在这一游戏系统中，玩家还必须关注一系列次级系统，那就是角色的行动、武器、物品和技能。</li>
+<li>在文学研究中，<strong>沉浸感</strong>是指读者所享受到的放弃批判思考的全神贯注。认知心理学的<strong>图式理论</strong>使我们能够感知周遭的事物并进行有效的处理，这一能力有赖于此前通过阅读、个人经验和别人的建议而建立起来的对类似事件的已有知识储备。【也就是说，沉浸感实际上是一种<strong>记忆唤醒机制</strong>？】</li>
+<li>只要故事、背景和界面保持统一的图式，玩家的审美体验就能在很大程度上保持沉浸感。</li>
+<li><strong>卷入</strong>，是一种经过更多思考的批判式的参与方式。
+<ul>
+<li>当读者面临不熟悉的题材，或者文本很难左右其反应时，他们被驱使着一再重读或反复斟酌其中的信息。</li>
+</ul></li>
+<li>沉浸的快感来源于我们伴随某种熟悉图式的退潮和涌动而完全专注其中。卷入的快感则来自我们从<strong>文本之外的视点</strong>去识别一件作品如何将<strong>互相矛盾</strong>的图式翻转、连接。【“相互矛盾”可以是新的情节、新的人物、新的动作，总之与既有的图式产生了区别之处。】
+<ul>
+<li>当屏幕上的场景要求即时的、固定的反应时——比如思考、凝视、阅读、击打、探索、行走——就促使玩家进入沉浸状态。</li>
+<li>当玩家不得不与屏幕上的行为逐渐拉开距离时，就进入卷入的状态。可能是由于角色的特性、一条迷失的小路、一个强大的敌人等。这时候就要寻求解决之道：重复行为——&gt;重新经历——&gt;查找攻略。</li>
+<li>沉浸和卷入相互依赖，玩家在流动性和安逸心情之间切换，游戏世界由此塑造体验。【战神的战斗、探索、叙事是一种沉浸，而其中的解密、情节、道具、新的敌人又是卷入。<strong>不断创造卷入，然后将卷入转化为沉浸，再创造新的卷入。</strong>】</li>
+</ul></li>
+<li>随着游戏难度的提高，玩家的应对能力也在进步，游戏需要与玩家的水准相匹配。这时候玩家总说自己“处于巅峰状态”。【战神。】</li>
+</ul>
+<h1 id="空间导航与情绪反应">空间、导航与情绪反应</h1>
+<h2 id="异域镇魂曲与寂静岭">《异域镇魂曲》与《寂静岭》</h2>
+<ul>
+<li>《寂静岭》的音效使之恐怖感上升。</li>
+<li>《寂静岭》的<strong>线性结构能让游戏始终保持一定的节奏和紧张感</strong>。</li>
+</ul>
+<h2 id="导航迷阵根茎与迷宫">导航：迷阵、根茎与迷宫</h2>
+<ul>
+<li>空间导航有两种模式：迷阵与根茎。
+<ul>
+<li>迷阵意味着在向唯一的出口有条件地前进，缺点是玩家只能被引导到预先设定的唯一出口。</li>
+<li>根茎并没有特定的方向比其他方向更有利，缺点是结构的缺失。</li>
+<li>游戏当中的迷宫应当处于二者之间：要实现的目标应足够强大，引导玩家前进；同时设定开放式结局，令玩家可自由探索。【巫师三和BOTW的一大共性（实际上Sekiro也是）：<strong>主线分支化</strong>，鼓励玩家自主选择、探索。核心要点是：<strong>自由地引导</strong>。】</li>
+</ul></li>
+<li>恐怖效果地生成总是基于“一个简单而明显地基本公式：<strong>怪物使常态遭到威胁</strong>。”
+<ul>
+<li>《寂静岭》中，常态被怪异之物威胁并摧毁。</li>
+<li>《异域镇魂曲》中，怪物本身就是常态。</li>
+</ul></li>
+</ul>
+<h2 id="游戏文本与遍历函数">游戏文本与遍历函数</h2>
+<ul>
+<li>呈现于受众面前的称为“脚本单元”：是不同玩家将游戏中的信息“玩出来”的。</li>
+<li>存在于文本之中的称为“文本单元”：是游戏提供的所有潜在信息。</li>
+<li>使脚本单元自文本单元中显露或生成并呈现于玩家面前的机制，叫做“<strong>遍历函数</strong>”。</li>
+<li>遍历函数的几种变体：活跃性、可确定性、可访性、连接性。
+<ul>
+<li>活跃性（与文本单元和脚本单元的数量与稳定性有关）：《异域镇魂曲》比《寂静岭》更加活跃少停滞，因为前者任务更多，且一部分是强制性的，而且文本单元更丰富，玩家选择和组建的脚本单元的可能性也都更多。</li>
+<li>可确定性（给定状况相同反应是否总是导致相同的结果）：《异域镇魂曲》比《寂静岭》更加不确定。</li>
+<li>可访性（玩家是否能在游戏中任意一点进入游戏文本）：《异域镇魂曲》比《寂静岭》可访性更强。</li>
+<li>连接性（文本单元间时空的连接）：《异域镇魂曲》比《寂静岭》连接性更强。</li>
+</ul></li>
+<li>《寂静岭》更加稳定、有节制、更具确定性的特点塑造了它迷阵般的结构。《异域镇魂曲》较富于开放性的遍历模式则表现出如根茎般的扩张趋势。</li>
+</ul>
+<h3 id="替身">替身</h3>
+<ul>
+<li>沉浸分为感知层面的沉浸和心理层面的沉浸。
+<ul>
+<li>感知层面：游戏体验垄断了玩家的感觉，如听觉、视觉。</li>
+<li>心理层面：玩家全神贯注地投入到想象中的游戏世界去。</li>
+</ul></li>
+<li>《异域镇魂曲》的等距视角和游戏主角本质上的复合性在感知和行为两方面都大大消解了玩家与化身的同一感（削弱了感知层面的沉浸）。但游戏以另一种方式令玩家沉浸其中：大量描述性文本的阅读，以及关于玩家对游戏主角、其作战团队及其物品的巧妙运用的细节信息的缓慢积累。【古剑三】</li>
+<li>《寂静岭》是感知层面的沉浸，各种即时状态。</li>
+<li>《异域镇魂曲》拒绝被匆忙对待，而《寂静岭》催促着玩家从一个地方到另一个地方，抵达终点。</li>
+</ul>
+<p>（更多细节，侧重代入感，带来感知沉浸）小&lt;---------视距---------&gt;大（更多信息，侧重策略性）</p>
+<h1 id="角色扮演">角色扮演</h1>
+<h2 id="社会符号学视角">社会符号学视角</h2>
+<ul>
+<li>图像语法：再现性（再现这个世界）、互动性（允许文本的作者和读者之间的沟通，以及文本中虚构人物与读者之间的沟通）、组织性（使文本各要素连贯一致，由此组合起来以进一步实现它们承载的含义）。</li>
+<li>多模态理论：文本如何将不同的符号模态——如讲话、书写、声音和图像——组合在一起，游戏是多模态的文本，因此应该思考，动画、视觉设计、音乐、文字文本和声效等多种沟通模态的联合是如何实现前述三个主要功能。</li>
+</ul>
+<h2 id="克劳德大英雄">克劳德——大英雄</h2>
+<ul>
+<li>克劳德这样的角色在相当大的程度上利用了民间文化、口头叙事和罗曼司等传统形式，通过精心构建的寓言故事，为日常生活中的过渡仪式和苦难提供了情感慰藉、道德争论和心灵拷问。</li>
+<li>电脑游戏是被翁称为高科技社会“次级口述”的案例之一，它是口述文化这种思维模式的进化，基础是文学和以技术为媒介的文化。</li>
+</ul>
+<h2 id="克劳德数码傀儡">克劳德——数码傀儡？</h2>
+<ul>
+<li>将克劳德这样的文本建构视为一种固定的对象却可能导致我们忽视玩家—化身这一重联系，甚至是忽略普遍意义上的文本的含义。</li>
+<li>玩家同时也是一种文化资源，是阐释者，也是粉丝艺术和粉丝写作当中对游戏资源进行改编的人。</li>
+</ul>
+<h2 id="化身的操纵">化身的操纵</h2>
+<ul>
+<li>玩家既是化身，又不是化身，这是游戏体验的核心。</li>
+<li>文化研究强调能动性（agency）这一概念，这是读者主动阅读时所具备的积极素质，因此我们可以认为对化身行动的操纵程度可以等同于更为广泛意义上的掌握文化权力的程度。
+<ul>
+<li>我们是自主有力的社会行为者：可以选择为玩家可以参与文本的程度达到前所未有的地步而欢呼。</li>
+<li>我们仅仅是他者的再现：玩家只能接受并操纵由公司设定的游戏文本决定提供给他们的角色。</li>
+</ul></li>
+<li>随着游戏在不同时刻在给予性结构或需求性结构上的转变，玩家的参与方式也将发生变化。战斗可能是最为偏向需求性结构的情况，此时游戏系统似乎称为游戏的全部。</li>
+</ul>
+<h2 id="多模态的给予与需求">多模态的给予与需求</h2>
+<ul>
+<li>文本产生的需求由文本当中的不同模态通过相互组合以不同方式实现。
+<ul>
+<li>如音乐节奏的变化暗示着游戏文本变化。</li>
+<li>如图像的变换预示着危险的迫近。</li>
+<li>此时玩家具有双重身份：一方面，玩家与化身融为一体，二者皆为行动者；另一方面，玩家又像是一个操纵木偶的人，拉着化身的线，甚至是某种类型的作者，作为建立在规则之上的因果结构的一部分，以一种受限语言进行书写。</li>
+</ul></li>
+<li>镜头元素同样有助于文本互动。
+<ul>
+<li>置于较低处，好像和角色并肩作战，去除了需求性结构所产生的木偶操纵般的感觉。如果我们被赋予了操纵能力，同时视角又较高，则操纵的感觉会相当强烈。在需求性结构处于最紧张的时刻，将镜头拉低和拉近能够使玩家不失时机地与角色接近。【战神4】</li>
+<li>镜头通常置于角色上方固定的位置，以提供操纵感，让玩家像对待、培养宠物一样对待化身，提供了给予性结构，并提供一定的稳定性。</li>
+</ul></li>
+<li>对游戏世界的探索感得自一种更弱的需求形式——诱导而非命令。【只能在有强烈需求的时候才能给予玩家强烈的暗示，或命令；而在一般情况下，需求更多给予微弱的引导。这一方面战神做得很好。】</li>
+<li>【游戏需要不断地、交叉地提供需求性结构和给予性结构。】</li>
+</ul>
+<h1 id="文本再创作网络上的粉丝文化">文本再创作：网络上的粉丝文化</h1>
+<ul>
+<li>在游戏的需求性结构（搅动因果链条，推动你跨越失事列车或迷宫实验室的解密关卡，使你陷入紧张情绪之中，让你迷路和让你在面临众多敌人的时候产生焦虑感）和给予性结构（安排前后语境、风景、背景故事、动机和心理，将读者-受众拉入文本的移情网络和想象性延展空间中，和传统叙事中的运作方式一样）之间存在一种辩证关系，正是二者的结合提供了快感，而在以游戏为核心的粉丝创作中，二者将以相当不同的方式结合在一起。</li>
+<li>粉丝是如何使用游戏系统的？游戏攻略、创意性写作、漫画。</li>
+</ul>
+<h2 id="游戏攻略作者">游戏攻略作者</h2>
+<ul>
+<li>这是一种探索游戏系统本身的快感。</li>
+<li>他们用祈使句（第二人称）控制彼此的游戏行为——这是游戏攻略的特征。</li>
+</ul>
+<h2 id="虚构文学写作者">虚构文学写作者</h2>
+<ul>
+<li>过场动画属于给予性结构——它们只作叙事性陈述，并无互动性。过场动画可能表现出作为核心的游戏和外层叙事之间的分离。</li>
+</ul>
+<h2 id="诗人">诗人</h2>
+<ul>
+<li>直接阐释了游戏主角的情感，这是游戏文本无法做到的。【现代游戏在有面捕和动捕之后是可以实现的。】</li>
+</ul>
+<h2 id="三无漫画家">“三无”漫画家</h2>
+<h2 id="结论">结论</h2>
+<ul>
+<li>在围绕《FF7》的粉丝创作当中，再现系统和游戏系统是彼此分离的。</li>
+<li>以再现系统复制对玩家与化身的第一人称认同是可能的，但更为常见的还是借助游戏再现系统所提供的可能性，生产出第三人称的视角、叙事和形象创造，并为了自己获得快乐而对其进行挑选、放大或转换。【采用第一人称就限制了创作空间，而第三人称视角提供了无限大的创作空间，不仅仅限于游戏文本所提供的现有信息。】</li>
+</ul>
+<h1 id="动机与网络游戏">动机与网络游戏</h1>
+<h2 id="再现动机欢迎来到鲁比卡世界">再现动机：欢迎来到鲁比卡世界</h2>
+<ul>
+<li>《混乱在线》以科幻小说为基础进行设定，在游戏网站上，鲁比卡世界的故事片段以各种形式呈现。</li>
+<li>我们借以创建化身的个人标准，远比我们最初所能意识到的更能暴露自身经历及偏好。</li>
+</ul>
+<h2 id="娱乐动机游戏目标与策略">娱乐动机：游戏、目标与策略</h2>
+<ul>
+<li>娱乐动机相关的要素：战略、目标、即时事件、机遇、规则、技能、探险、升级、数值。</li>
+<li>娱乐动机更强调玩家所操纵的游戏中的那个化身作为游戏的一个元素存在，是一个具有战略价值的符号单元，而非一个角色。</li>
+</ul>
+<h2 id="公共动机共享鲁比卡世界">公共动机：共享鲁比卡世界</h2>
+<ul>
+<li>公共动机包括一个游戏和其他游戏之间的关系、玩家由游戏之外带入游戏的期待，以及游戏本身的共享属性。</li>
+</ul>
+<h2 id="结论-1">结论</h2>
+<ul>
+<li>游戏动机的三种类型：再现动机（戏剧性的、表演性的、修饰性的、图像化的、叙事的）、娱乐动机（指向游戏层面的：数值、升级等）和公共动机（共有的期待、广泛的网络文化、游戏所分享的外部世界）。</li>
+</ul>
+<h1 id="社交性的游戏与学习">社交性的游戏与学习</h1>
+<h2 id="探究游戏的社交性">探究游戏的社交性</h2>
+<ul>
+<li>游戏较之更为传统的、只能独自体验的媒介，比如书籍，可能是更适合儿童的娱乐形式。</li>
+<li>游戏文化可以被认为视为这样的一个竞技场：它创建了等级制度，并且欺凌群体当中的弱者。</li>
+</ul>
+<h2 id="观察玩家">观察玩家</h2>
+<ul>
+<li>游戏过程当中与其他玩家之间的互动似乎已经成为游戏乐趣的一个重要部分。</li>
+</ul>
+<h2 id="游戏">游戏</h2>
+<ul>
+<li>《凯恩的遗产：噬魂者》。</li>
+</ul>
+<h2 id="玩游戏">玩游戏</h2>
+<ul>
+<li>玩家与游戏机之间的联系可以在同伴的指导和建议下构成，这产生了一种有效的“中介性合作”。</li>
+<li>无论小组中的不同成员扮演什么角色，我们从男孩们的游戏失败的同步反应中，可以进一步证实合作游戏的集体性本质是显而易见的。</li>
+</ul>
+<h2 id="叙事与游戏">叙事与游戏</h2>
+<ul>
+<li>如何处理游戏角色的死亡对动作冒险游戏而言十分重要。《噬魂者》的处理方式是：死亡不会导致重新开始，而是进入阴间，这使得玩家在相似环境下继续游戏，且包括了许多之前不存在的道路。</li>
+<li>“管控调整”语言明显见于游戏和玩家之间以及玩家和玩家之间所交换的各种问题和命令中，“高手”完全关注于游戏系统以及对操作的指导。</li>
+<li>电脑游戏的试听魅力明显降低了在游戏过程中当面讨论的需要，如果故事已经展现在你眼前，描述故事甚至事无巨细地加以讨论就显得多余。</li>
+<li>“玩后叙事”可以更多地展示出游戏地叙事魅力。</li>
+</ul>
+<h2 id="结论-2">结论</h2>
+<ul>
+<li>作为一种指导性活动，合作性游戏比明确地尝试指导更为有效。</li>
+<li>电脑游戏嵌入了“社交外壳”，单人游戏可以转变为包含有效指导与沟通的社交活动。游戏都是那种可以形成社群和身份认同感的学习形式的绝佳例证。</li>
+<li>互动不仅指玩家和游戏之间的关系，也应包括很多玩游戏这一活动所固有的社会语境和社交关系。</li>
+</ul>
+<h1 id="游戏内外的能动性">游戏内外的能动性</h1>
+<ul>
+<li>“互动性”一次常用以解释电脑游戏的魅力。三种类型的交流模式：声明式交流、反应式交流和互动式交流。从这个角度来看动作冒险游戏，它更像式“反应式交流”而非“互动式交流”。</li>
+</ul>
+<h2 id="进入奇异世界">进入奇异世界</h2>
+<ul>
+<li>“奇异世界”的创造者和设计者表示，他想将生态困境注入作为整体的游戏，让玩家可以与之互动，并最终战胜困境。</li>
+</ul>
+<h2 id="对玩家能动性的研究">对玩家能动性的研究</h2>
+<ul>
+<li>论坛的集体性质还表现在以下事实中：论坛成员对论坛环境负有管理职责，他们鼓励参与者以相互支持而非破坏性的方式参与讨论。</li>
+</ul>
+<h2 id="个人能动性">个人能动性</h2>
+<ul>
+<li>玩家可以以多种方式参与游戏，尽管游戏具有强烈的叙事目标，但它仍可以被从视觉、情感和主题等多个层次加以解读。</li>
+</ul>
+<h2 id="代理能动性">代理能动性</h2>
+<ul>
+<li>代理能动性：人们努力以某种手段争取那些拥有资源或技能的人按照他们的意图行动，，以协助他们获得期望的结果。
+<ul>
+<li>游戏攻略。</li>
+<li>论坛讨论。</li>
+</ul></li>
+</ul>
+<h2 id="集体能动性粉丝作品">集体能动性：粉丝作品</h2>
+<ul>
+<li>文本在粉丝中被认为式一个可以被集体改变、改编和重写的过程，一个未竟的事业，而非静态对象。</li>
+<li>在粉丝艺术家的创作过程中，我们能够看到所有的能动性形式。在某种层次上，帖子表现出个人发挥其能动性和培养个人能力时所带有的焦虑、压力和挑战。粉丝们在对彼此的反馈、建议和专业技能表示支持和学习的过程中，利用了代理能动性。</li>
+</ul>
+<h2 id="结论-3">结论</h2>
+<ul>
+<li>游戏在某种程度上要求甚至依赖玩家能动性的积极发挥。对玩家能动性的关注将引导我们重新评估对以下问题的常规臆断：游戏是什么？谁在生产它？怎样生产？</li>
+</ul>
+<h1 id="电影改编与电脑游戏">电影、改编与电脑游戏</h1>
+<h2 id="恐怖类型从电影到游戏">恐怖类型——从电影到游戏</h2>
+<ul>
+<li>恐怖类型携带者“所有口头叙事的印记：主题和母题的自由转换、原型人物和背景设置，以及不断累积的续集、翻拍和模仿。某种意义上，在这个领域当中，没有原创，没有真实的或正确的文本，而只有变体。”</li>
+</ul>
+<h2 id="改编与突变怪物">改编与《突变怪物》</h2>
+<ul>
+<li>不可预知的威胁乃至有时无法辨识的敌人及其带来的焦虑，正是为玩家提供的挑战，玩过经过训练即可将之战胜。在从电影到游戏的移植中，其功能和意义均发生了改变。</li>
+<li><strong>游戏设计中最为重要的，是对空间和空间当中物品的设置与安排。</strong></li>
+<li>为已经开发出来的游戏增加一个额外关卡是一回事，而尝试去想象一个尚不存在的游戏的某个关卡是另一回事，后者要困难得多。</li>
+</ul>
+<h2 id="人物塑造与过场动画">人物塑造与过场动画</h2>
+<ul>
+<li>一款好的游戏需要为玩家提供有意义的选择，以及相应可觉察的成果。《突变怪物》的叙事性元素给游戏的目标、任务和障碍提供了背景。</li>
+<li>恐怖游戏的操作应当足够简单，因为这会在相当程度上将玩家限制在其所处的环境中，增加游戏的悬念。</li>
+<li>过场动画分为两种：预制的和实时的。必须对带有预制过场动画的游戏进行周密计划，以避免其对游戏世界的真实感造成破坏。</li>
+</ul>
+<h2 id="改编从游戏到游戏">改编——从游戏到游戏</h2>
+<ul>
+<li>目标是开发一个具有足够普适性的游戏引擎。</li>
+</ul>
+<h1 id="游戏与性别">游戏与性别</h1>
+<h2 id="作为再现的游戏">作为再现的游戏</h2>
+<ul>
+<li>有研究者认为，女性对电脑游戏的疏离主要是因为其再现性因素——游戏中女性化身的外形。</li>
+<li>在很多游戏中，被特别标志的或被边缘化以至于缺席的性别，都是女性。</li>
+<li>如果将电脑游戏视为一种文本，那么将玩家定义为一种性别主体并不可行。</li>
+</ul>
+<h2 id="娱乐性与再现性">娱乐性与再现性</h2>
+<ul>
+<li>一些游戏强调视觉呈现和故事讲述方式——它们在引人入胜的细节中呈现游戏的场景和角色，我们将之称为游戏的再现层面。</li>
+</ul>
+<h2 id="性别游戏与语境">性别、游戏与语境</h2>
+<ul>
+<li>游戏开发商或其发行商如果要争取更多的女性玩家，就要面临失去现有男性玩家的危险。</li>
+<li>那种认为女性对电脑游戏不感兴趣的想法和剥夺女性玩游戏权利的做法已经过时了，尽管某些社会因素和文化因素还将因用户的性别而持续对其产生影响。</li>
+</ul>
+<h1 id="游戏分析的实践">游戏分析的实践</h1>
+<h2 id="定义游戏">定义游戏</h2>
+<ul>
+<li>目标、障碍、资源、奖赏和惩罚等是电脑游戏的一些重要元素，同时还有一些可获得的不同种类的信息——不管是对于所有玩家，还是对于个别玩家，抑或对于游戏本身——以及这些信息逐渐显露的诸多方式。</li>
+<li>我们也关注到其他有助于探索游戏要素多样性的理论研究方法，
+<ul>
+<li>例如，可以探究游戏当中的<strong>奖赏与惩罚</strong>（游戏的“经济体系”）或游戏当中玩家可控因素与不可控因素之间的制衡关系。</li>
+<li>同样，也可以探索游戏中不同类型的<strong>障碍物</strong>。</li>
+<li>还可以分析不同类型的<strong>游戏规则</strong>。</li>
+<li>它们为我们发现一款游戏的与众不同之处，并促使我们继续思考这种差异是有意义的创新还是对规范的偏离。</li>
+</ul></li>
+<li>所有的定义都聚焦于被我们所称的游戏的<strong>娱乐层面</strong>或“<strong>游戏系统</strong>”，是它们决定一款游戏是不是可玩，以及游戏活动所遵循的限制。【游戏系统决定了游戏的定义。】</li>
+<li>对电脑游戏的分析既要关注“娱乐性”，也要关注“再现性”，以及二者之间的关系。</li>
+</ul>
+<h2 id="游戏类型">游戏类型</h2>
+<ul>
+<li>在一个典型的动作冒险游戏中，我们通过扮演游戏内设定的化身来进行游戏，该化身通常会依循特定的游戏顺序克服已被设定的的重重困难。游戏目标通常相当明确，其经济体系一般与可量化的特征相关，比如生命值和弹药。游戏玩法中最核心的是速度和精确性。玩家会在游戏过程中学习一些技巧，但化身却不会成长。【游戏路线是既定的，游戏目标是明确的，游戏玩法是速度和精确度。】</li>
+<li>与之相反，RPG游戏的主角可能是玩家通过一系列选择构建出来的，而且围绕该角色通常会有一个具有特定技能的辅助性团队。玩家可以自由地在游戏中探险，展开各种探索，并且可以不用遵照预设地步骤战胜游戏中的各种障碍。虽然游戏最终目标可能非常明确，但通常会有一些与最终目标未必相关的支线目标。以经验值和物品清单呈现出来的经济体系十分重要，但它更倾向于随玩家的表现而浮动。玩游戏的关键在于策略而非速度，而游戏体验往往具有更多反思性。【游戏路线是未定的，游戏目标是多样的，游戏玩法核心是策略。】</li>
+<li>这两者之间的关键性差异与游戏系统有关，而非在再现层面。</li>
+</ul>
+<h2 id="叙事与游戏-1">叙事与游戏</h2>
+<ul>
+<li>沉浸分为<strong>感知</strong>上的沉浸与<strong>心理</strong>上的沉浸，卷入则是玩家被迫在游戏中采用一种更为审慎和具有反思性的态度。</li>
+<li>沉浸和卷入并不互相排斥，二者间的摆动在游戏“心流”体验的产生中处于核心地位。所谓心流体验，就是玩家感到自己此刻“<strong>处在巅峰状态</strong>”，这种及其满足和欲罢不能的感觉部分由玩家在沉浸和卷入之间的转换所触发。</li>
+</ul>
+<h2 id="穿越游戏空间">穿越游戏空间</h2>
+<ul>
+<li>等距视角的RPG游戏更多依赖<strong>心理</strong>上的沉浸，而《寂静岭》中的移动视角和3D效果唤起玩家<strong>感知</strong>沉浸。</li>
+</ul>
+<h2 id="游戏动力学">游戏动力学</h2>
+<ul>
+<li>为什么游戏攻略大多采用第二人称祈使语气？因为游戏攻略大都紧密围绕游戏系统撰写，几乎不会注意<strong>再现层面</strong>，攻略是冷静的和技术性的。粉丝撰写的小说和诗歌都着墨于游戏的再现层面，倾向于借鉴游戏的过场动画，而非游戏本身的互动性元素。</li>
+</ul>
+<h2 id="走向线上">走向线上</h2>
+<ul>
+<li>玩家玩在线游戏的动机与游戏的娱乐层面和再现层面都有关系。
+<ul>
+<li><strong>再现层面</strong>的动机包括操纵视觉形象、创建角色和生成叙事。玩家构建化身的方式将折射出其现实生活的某些方面，或其内在愿望和幻想，而参与游戏的模式反映出不同的社会动机。</li>
+<li><strong>娱乐层面</strong>的动机则更多和游戏活动本身直接相关，涉及竞争、规则和游戏目标。</li>
+<li>此外还有<strong>公共动机</strong>，即玩家之间的互动，这是一种多模态呈现的现象。</li>
+</ul></li>
+</ul>
+<h2 id="游戏中的社会生活">游戏中的社会生活</h2>
+<ul>
+<li>在团队协作中，游戏的<strong>娱乐层面</strong>是主要的。</li>
+<li>游戏具有三个能动性：个人能动性、代理能动性、集体能动性。</li>
+</ul>
+<h2 id="生产游戏生产意义">生产游戏、生产意义</h2>
+<ul>
+<li>游戏设计者最为关心的问题，正是游戏的娱乐性和再现性之间的相关性和互联性。比如，角色具有再现性和娱乐性，过场动画也有娱乐性从（提供了战略上必不可少的信息）。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>游戏 - 游戏理论</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>游戏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>巫师三：一个告诉你原来游戏可以是艺术品的神作</title>
+    <url>/2020/10/09/witcher-impression/</url>
+    <content><![CDATA[<p>巫师三是一款已经被时间证明的，当之无愧的神作。巫师三没有波澜壮阔气势浩天的景致，却有风格迥异人文色彩浓厚的地区特色。威伦的破败荒凉贫穷凄苦，为了一双鞋可以连父母都能出卖；诺威格瑞的大城风范，有日进斗金的土豪乡绅，也有困守城中的穷困百姓，女巫猎人穿梭其中，种族矛盾暗流涌动；史凯利杰群岛的剽悍民风，对外来者的敌视，对入侵者的抵御，捍卫土地的决心让诸多岛屿团结在一起；凯尔莫罕的静谧安详，森林环抱狼堡，猎魔人镇守故乡，仿佛出世的仙境，危机四伏但又简单质朴；陶森特的梦幻美丽，人们自得其乐，生活在这宛若仙境的城都中。不仅仅是景色，巫师三更是以它的剧情和对人物的刻画出名，抛开难以入流的战斗系统，单凭巫师三对剧情的把控、对人物的描写和对画面的雕琢，就足以令这部游戏称为艺术品。在经历了完整的主线和DLC流程后，几乎没有玩家会给巫师三一个低分，尽管它有瑕疵，但是它在剧情、人物和画面上已经到达巅峰造极的水平了，更难能可贵的是，这三者完美融合，在体验游戏的同时，给予玩家美的享受、身心的震撼。这是奥德赛无法比拟的，也是大多数游戏难以企及的高度。</p>
+<span id="more"></span>
+<h1 id="前言">前言</h1>
+<p>由于巫师三的世界观过于宏大，一篇未经雕琢的读后感不能道尽巫师三的所有优点，故本文旨在从宏观上呈现巫师三是如何完美统一任务、节奏与剧情这三者的。至于其他的，我们有机会留在以后再说。我相信，通关巫师三的玩家，一定会承认巫师三在任务的组织和剧情的展开上非常连贯丝滑，而且剧情上的节奏递进、叙述上的跌宕起伏都让人回味无穷。游戏本质是在讲故事，但是巫师三成功地给予了玩家沉浸式的体验，也就是，我们从观众的角色深入到了主角的角色，从游戏外的世界走进了游戏内的世界，仿佛每个人都是真实可及的，都是有血有肉的，都是有情有义的。那么，如何讲好这个故事，把观众代入到游戏中，就是巫师三不同于其他游戏的关键所在，这也是这篇玩后感的主要内容。</p>
+<figure>
+<img data-src="/images/witcher-impression/4.jpg"
+alt="被附身的Geralt帅中泄露出一丝痞气" />
+<figcaption
+aria-hidden="true">被附身的Geralt帅中泄露出一丝痞气</figcaption>
+</figure>
+<h1 id="主线为林支线为溪">主线为林，支线为溪</h1>
+<p>巫师三的一大特色就是它的任务系统非常丰富，从表层看，巫师三的主线只有一个——寻找女儿，但是，在每个地区，都会有非常多的支线为主线提供背景。就好比一个建筑，主线是骨架，支撑起整个游戏的大致轮廓，而支线是钢筋水泥，垒起了整个建筑的最终格局。当然玩家可以只做主线不做支线，但我相信如果不做支线，这个游戏的乐趣就会少一半。</p>
+<figure>
+<img data-src="/images/witcher-impression/5.jpg" alt="父女之间的亲昵" />
+<figcaption aria-hidden="true">父女之间的亲昵</figcaption>
+</figure>
+<p>说到支线繁多，一个典型的对比就是刺客信条奥德赛。同样有非常多的支线，但是从我个人的游玩体验来说，我宁愿无视奥德赛的90%的支线，直接一条路走完主线，但是巫师三的支线不然，玩家会有强烈的意愿去做大部分支线，在做支线的过程中解锁问号，发掘游戏中隐藏的剧情，是巫师三最为亮眼的一大特色。如果要对比巫师三和奥德赛的任务系统，可以从下面几个方面评价：</p>
+<ul>
+<li>支线多样化：巫师三的支线是多样的，支线之间没有重复，猎魔人委托可能会更无聊一点，但生意人的事情嘛，不寒碜。除了猎魔人委托之外，寻宝任务有解密探险要素，区域日常支线有搞笑奇葩要素，重要支线甚至会改变整个巫师三世界格局。然而，奥德赛的支线是单调的，支线的选择不会影响主线的进程，支线品类非常单一，并且缺乏逻辑。巫师三支线给玩家的动力是充分的：委托赚钱，寻宝得装备，日常支线放松一下，重要支线扣人心弦；而奥德赛不是的，除了几个从头到尾都有的支线之外（类似于巫师三的寻宝任务），其他的支线毫无意义，既对主线没有补益，而且也缺乏特色。</li>
+<li>支线重要化：当然，支线多样丰富是一方面，更重要的是，支线是需要起到作用的，有时候甚至是决定性的作用。巫师三的主线和支线的分工相当明确：主线用来推进整个游戏进程，而支线则负责主线缺失的娱乐性与严肃性。这大大补充了单主线的贫乏，让玩家在游戏的时候不会觉得推进主线是无聊的，因为在同时还有大量丰富有趣的支线在支撑游戏的饱满度。而且，巫师三的支线并不是其他游戏中如过往云烟般的支线，而是不同的支线会在主线的不同时间点产生决定性的影响。比如，迪胖的支线会决定整个游戏最终的政治格局，这是从大了讲。从小了讲，如果细心留意，就会发现很多很多支线都涉及到游戏中不同人物的命运，即使是路人，我们也能够感到他们是真实的，而不仅仅是一堆数据。这些都是支线带来的重要积极影响。巫师三赋予了支线游戏的精神内核，并令其成为承载游戏厚度的“实力担当”。</li>
+</ul>
+<figure>
+<img data-src="/images/witcher-impression/13.png"
+alt="这样有趣的小支线在巫师三里不胜枚举" />
+<figcaption
+aria-hidden="true">这样有趣的小支线在巫师三里不胜枚举</figcaption>
+</figure>
+<ul>
+<li>支线惊奇化。巫师三的支线时常给人一种惊奇的感觉，无论是之前无意之中做的支线会在后来的某一天发现原来会产生这样的影响，还是后来做到的支线会发现是之前剧情的关键结果，这种突如其来的“因果”呈现都带给玩家游戏体验上的冲击。重点是，正所谓大音希声，这样的惊奇化支线完全不需要漫长的铺垫，而只需要一个小小的“接口”，把因果串联起来就可以达到这样震撼的效果。一个典型的例子就是在DLC石之心里，拍卖行里的一个小支线展现了维瑟米尔的不为人知的一面，不但极大丰富了人物形象，而且还带给玩家无尽的唏嘘。此类四两拨千斤的支线在巫师三里比比皆是，</li>
+</ul>
+<figure>
+<img data-src="/images/witcher-impression/2.jpg"
+alt="一个非常小的细节，但是却折射出了两个饱满的人物形象" />
+<figcaption
+aria-hidden="true">一个非常小的细节，但是却折射出了两个饱满的人物形象</figcaption>
+</figure>
+<figure>
+<img data-src="/images/witcher-impression/3.jpg"
+alt="一个非常小的细节，但是却折射出了两个饱满的人物形象" />
+<figcaption
+aria-hidden="true">一个非常小的细节，但是却折射出了两个饱满的人物形象</figcaption>
+</figure>
+<p>所以，巫师三成功的一大关键因素就在于他巧思的任务系统，尤以支线为代表，主线与支线的交织，主线推动整个剧情的发展。支线却承载了多样化、重要化和惊奇化的具体内容，让人家流连忘返，深陷其中。</p>
+<h1 id="选择困境人生模拟">选择困境，人生模拟</h1>
+<p>当然，除了巫师三之外，还有很多游戏的支线也很丰富，主线支线的组织也很巧妙，那凭什么巫师三这么牛逼呢？这就是巫师三的第二个牛逼之处：通过合逻辑的选择带给你极尽真实的人生体验。</p>
+<p>巫师三的任务绝大多数都是需要玩家做出选择的，无论主线还是支线，这在从威伦到诺威格瑞之后尤为突出。不同于很多游戏可有可无的“可选项”，巫师三的每一个选项都是经过反复斟酌的，不存在无意义的选项。威伦雷索的选择直接决定了他之后会不会在凯尔莫罕的时候来帮你；凯拉的连续选项直接决定了她的命运，也决定了兰伯特的命运（这个有些小伙伴可能还不知道）；威伦有个狼人的支线直接决定了这个悲惨爱情故事的结局；诺威格瑞迪胖的支线决定了游戏最终的政治格局。对主线来说，这样的决定性选项无处不在：血腥男爵的选项，特莉丝和椰奶的选项，Ciri的一系列选项等等。在巫师三中，选项的重要性直接以前后的因果关系体现出来，也许你的不经意的一个选择，就很有可能在未来决定了不同的世界线，其中的很多选项，你甚至都意识不到是由自己的决定造成的，这是不是有《命运石之门》的感觉了。</p>
+<figure>
+<img data-src="/images/witcher-impression/10.jpg" alt="Ciri猎魔人结局片段" />
+<figcaption aria-hidden="true">Ciri猎魔人结局片段</figcaption>
+</figure>
+<figure>
+<img data-src="/images/witcher-impression/11.jpg" alt="Ciri猎魔人结局" />
+<figcaption aria-hidden="true">Ciri猎魔人结局</figcaption>
+</figure>
+<p>我们之前说了，巫师三带给玩家的是沉浸式的体验，那实现这一点的关键就在“真实”。这里的真实，大部分是成年人的部分：我们会遇到各种各样的决策，尽管有句话是说“小孩子才做选择，成年人全都要”，但实际上，只有小孩子才能全都要，成年人的世界不能兼得鱼和熊掌。有些选择比较简单，但也有很多选择，可以说是直接决定了往后人生的整个发展方向。世界上没有后悔药，所以我们常常看到成年人的无奈与悔恨。但是游戏不一样，我们可以回档，可以重来，可以把现实中无法完成的夙愿转移到游戏中，体味人生抉择的无奈，尝尽人生起伏的精彩，但最爽的，还是能够重来，再走一遭。</p>
+<p>巫师三是在真正意义上模拟了人生： -
+首先，它的选项逻辑是合理的。很多游戏，包括奥德赛在内，它们所谓给出的选项很多都是不合理的。我为什么要这么做？为什么只有这几个选择？策划是不是脑子有坑？正常人会这么做？在选择的时候，不合理、不充分的选项不但不能产生真实的沉浸感，而且还会极大破坏游戏剧情推进的合理性。巫师三不然，它给出的每一个选项都是合理的，都是玩家真的可能在现实生活中面对的两难困境，从而不会让玩家产生“这个选项好弱智”的疑惑。真实的选项才能获得真实的体验，为选择而选择的设置只能适得其反。
+-
+其次，它的选项是有反馈的。所谓反馈，就是无论你选了什么选项，都能在游戏的过程中获得该选择的结果，而且在看到这个结果的时候，玩家是可以或多或少发现它的起源就是那个选项。巫师三的选项就是有始有终的，它可能在有意无意间唤起你的决定，或最近，或久远，那个时候，玩家就会惊叹：原来如此！这是很重要的，因为在现实中，人们会感到“后悔”或者“幸好”，就是这样的“记忆唤醒”在作祟。人是健忘的，但这不是说记忆会消失，而是会被暂时隐藏，所以必须要有一个触发点（Trigger）才能重新唤醒这段记忆，而记忆一旦唤醒，就会有首尾呼应的触动，进而给玩家带来震撼感。这也是巫师三能带来真实体验的一个重要因素。</p>
+<figure>
+<img data-src="/images/witcher-impression/1.jpg" alt="Geralt和夏妮" />
+<figcaption aria-hidden="true">Geralt和夏妮</figcaption>
+</figure>
+<ul>
+<li>最后，它的选项是关键的。所谓关键，就是一些选项会产生极其重大的影响，此类选项在主线中最多，但也不乏一些支线。为什么说一些选项需要具备关键性？其实这就像欣赏任何一个文学作品一样，无论是小说，还是电影，剧情总是需要跌宕起伏。一平到底，或者过于波折，都会给观众造成审美疲劳。这在游戏里也是一样的。如果所有的支线都是做了就做了的那种，那么就不会给人留下深刻印象，反之，只有平淡与冲突交错的支线才会充分勾起玩家的兴趣。上面我们说了巫师三的支线都是有反馈，那么反馈对后续游戏造成的影响就可以定义为该支线的“关键度”。一个比较合理的关键度分布，应该需要满足5:3:2或者6:3:1的比例的，也就是大部分任务都是比较平淡的，立马能得到反馈的，而且对主要剧情没有影响的；少部分任务会在游戏后续呈现出比较重要的影响；而极少的任务会产生决定性的影响。举例来说，委托任务，城中任务，基本上都可以归为第一类，像凯拉、雷索这样的任务可以归为第二类，最后像迪胖、希里这样的就可以归为第三类。可以看到，巫师三的选项是非常有层次的，这样的层次感不会让玩家感到枯燥疲倦，从而更好地代入到游戏中。这也是巫师三让人停不下来的一个原因之一。</li>
+</ul>
+<figure>
+<img data-src="/images/witcher-impression/7.jpg" alt="Geralt的回忆" />
+<figcaption aria-hidden="true">Geralt的回忆</figcaption>
+</figure>
+<h1 id="有条不紊循序渐进">有条不紊，循序渐进</h1>
+<p>在前面的两节中，我们说了很多支线的内容，包括支线的特性、选项的特性，但是在游戏里，决定玩家游戏体验是否“丝滑”的决定因素是主线的推进节奏。巫师三的主线的推进非常顺滑，玩家不会感到节奏上的拖沓或者赶工，从百草园，到威伦，到诺威格瑞，再到Skellig、凯尔莫罕，每个地方的风土人情都在剧情中得以充分展开，每个地方，从开始到结尾，都有明显的渐变，不会造成突兀感。这就是主线承接上的无缝性。</p>
+<p>从整体上来看，巫师三的剧情推进呈现出前期平缓，后期陡峭上升，在最后达到高潮之后迅速下降收尾的趋势，尤其是在最后经过高潮后的突然结束，让玩家回味无穷。从百草园到是Skellig是整个游戏的平缓期，在这个时期，玩家更多地是在品味一个新地点的独有风格，所以游戏没有安排太波折的剧情，只是一点一点让玩家代入到整个游戏的剧情中。之后从凯尔莫罕开始，剧情开始迅速推进，寻找Ciri——&gt;找到Ciri——&gt;凯尔莫罕保卫战——&gt;决战狂猎——&gt;真相浮出——&gt;Ciri献身，这一系列重要剧情节点被安排地非常紧凑，这是因为经过前中期长时间的铺垫，玩家已经全然进入到角色，当前最期待的是一波快节奏的剧情轰炸。笔者在出Skellig之后，就有预感剧情一定会出现巨大转折，从乌马开始，到狂猎结束，整个线非常完整，发展也非常迅速。但在这样的快节奏下，游戏不是混乱的，而是始终围绕着一个线索在有序地推进（找Ciri——&gt;干狂猎），这样一来，即使游戏的节奏突然加快，玩家也没有不适感。</p>
+<figure>
+<img data-src="/images/witcher-impression/8.jpg" alt="老爷子战逝" />
+<figcaption aria-hidden="true">老爷子战逝</figcaption>
+</figure>
+<figure>
+<img data-src="/images/witcher-impression/6.jpg" alt="老爷子死去Ciri流泪" />
+<figcaption aria-hidden="true">老爷子死去Ciri流泪</figcaption>
+</figure>
+<p>巫师三的三个时期“平缓——上升——下降”是处理得很好的。平缓期大概占了整个游戏进度的50%左右，在这个期间，游戏的主要内容缓慢推进。注意，不是没有推进，而是以叙述的方式娓娓道来，逐渐营造引人入胜的氛围。上升期大概占了45%的内容，在这个阶段内，游戏的剧情迅速发展，剧情节点迅速变化，游戏状态迅速切换，然而玩家没有任何的不适应，反而更加乐在其中，停不下来。这是因为前50%的铺垫已经将玩家去完全代入到游戏中，仿佛你就是Geralt，你的使命就在眼前。在上升期的末尾，游戏戛然而止，来到下降期。巫师三的下降期非常短暂，我认为大致可以从Ciri献身开始算做下降期，在这个节点，玩家之前所有的选择都会体现在不同的结局上，突然结尾更加凸显了玩家之前决策带来的种种后果。显然，CDPR没有采取让游戏慢慢结束，而且一下子就关闭了游戏主线剧情，带来了一种“惊愕感”：“这游戏结束了！？”这样的设计是很巧妙的，但也是建立在之前的平缓期与上升期的铺垫之上的。可以说，巫师三这种有条不紊、循序渐进的三阶段推进方式，是它能够取得沉浸式体验的另一大重要原因。</p>
+<figure>
+<img data-src="/images/witcher-impression/12.jpg"
+alt="通关主线，从空荡的凯尔莫罕重新出发，寂寥涌上心头" />
+<figcaption
+aria-hidden="true">通关主线，从空荡的凯尔莫罕重新出发，寂寥涌上心头</figcaption>
+</figure>
+<h1 id="写在最后">写在最后</h1>
+<p>尽管本文的目的在于从任务系统上简要感受一下巫师三为什么能带给人沉浸式的体验，但是对于巫师三来说，画面、人物、音乐等等其他方面都是促成巫师三能成为神作的重要因素，尤其是巫师三的音乐，直击人心，给人带来的沉浸感不亚于剧情，在此强烈推荐。</p>
+<figure>
+<img data-src="/images/witcher-impression/9.jpg" alt="Geralt太可爱了吧" />
+<figcaption aria-hidden="true">Geralt太可爱了吧</figcaption>
+</figure>
+<p>之后我会介绍一下英灵殿和12月份的赛博朋克2077，到时候再来看看，巫师三这款5年前的游戏是否仍有一战之力。</p>
+<figure>
+<img data-src="/images/witcher-impression/14.png" alt="陶森特美丽的风光" />
+<figcaption aria-hidden="true">陶森特美丽的风光</figcaption>
+</figure>
+]]></content>
+      <categories>
+        <category>游戏 - 巫师</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>游戏</tag>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浅谈Hades最终BOSS的AI设计</title>
+    <url>/2021/09/22/%E6%B5%85%E8%B0%88Hades%E6%9C%80%E7%BB%88BOSS%E7%9A%84AI%E8%AE%BE%E8%AE%A1/</url>
+    <content><![CDATA[<p>作为一个典型的ROUGE-like
+ACT游戏，BOSS在Hades的游戏体验中占据非常重要的地位。一次完整的游戏流程需要经历四个BOSS：复仇三姐妹中的一个，九头蛇，装逼双雄和最终BOSS
+Hades。每个BOSS的设计都很有特色，</p>
+<span id="more"></span>
+<h1 id="核心技能与玩家体验">核心技能与玩家体验</h1>
+<p>Hades分为两个阶段，第二阶段在第一阶段的基础上删减/增加了若干技能。下面介绍两个阶段的核心技能与对应的玩家体验。这里暂时没有逐帧拆解动作，之后有时间了会更新。</p>
+<h2 id="第一阶段">第一阶段</h2>
+<ul>
+<li><p>站立（Idle）
+站在原地不动，一般是在释放技能后。该技能的作用有三：（1）成为其他伤害型技能释放的中继点，避免一直释放技能造成难度较大，带给玩家不好的游戏体验；（2）木桩模式为玩家提供free
+attack的时间窗口，是得到输出正反馈的最佳时间段；（3）等待恢复技能CD或Counter。
+<img data-src="/images/hades-AI/idle.png" /></p></li>
+<li><p>移动冲刺（Move）
+向前移动一段距离。作用有二：（1）等待恢复技能CD或Counter；（2）缩小与玩家之间的距离（该技能只出现在与玩家距离过远时），提升BOSS战的压迫与紧张感。
+<img data-src="/images/hades-AI/move.png" /></p></li>
+<li><p>回旋击
+以自身为圆心挥舞两圈武器，范围较大，发动后不会改变前进方向。大范围AOE，并且有连续两次连击，因此如果玩家在两次攻击的范围内，用闪避不能全部躲过去，至少吃一发，换句话说，“回旋击的攻击时间&gt;闪避的无敌时间”。但该技能的特性在于，在较长的技能前摇，在前摇期内BOSS会锁定当前玩家的方向，然后两次攻击都会向着那个方向前进。所以躲避这个技能的关键在于：较快地判断BOSS攻击的方向并朝着反方向闪避移动。这实际上考验了玩家的观察能力和反应能力，并且由于该技能攻击范围较大，所以又提高了对玩家的要求。除了这一点玩家体验之外，这个技能还有一个作用：逼迫玩家拉远与BOSS的距离，避免长时间与BOSS肉搏（当然这个还与武器有关），形成较好的攻防节奏。
+<img data-src="/images/hades-AI/spin.png" /></p></li>
+<li><p>突刺击
+向前突刺，距离较短，普通的伤害技能。该技能要求玩家有一定的闪避技巧，但难度不大。
+<img data-src="/images/hades-AI/spike.png" /></p></li>
+<li><p>突刺击-Ex 距离较远的突刺击。同上，对闪避有一定要求，但难度不大。
+<img data-src="/images/hades-AI/spike-Ex.png" /></p></li>
+<li><p>遁形
+进入隐身状态持续一段时间，之后在雪地上连续出现两次脚印，标志着BOSS的移动轨迹，最后将在角色附近突然出现并执行单次大范围回旋击。该主要考核了玩家观察BOSS行为轨迹并进行预判的能力，需要提前使用闪避快速远离可能的目标地点。注意这个技能最后的回旋击范围是所有技能中最大的，如果不幸BOSS就闪现在身边，单次闪避是没有办法逃离AOE范围的，除非是连续多次闪避或提前预判位置走开。这个技能的作用有：（1）长时间BOSS的无攻击期方便BOSS重置技能CD或Counter；（2）方便玩家清理场上的小怪或者Bomb；（3）形成一个较长时间的Combat
+break，缓解了一下紧张的战斗节奏。 <img
+src="/images/hades-AI/escape-1.png" /> <img
+src="/images/hades-AI/escape-2.png" /></p></li>
+<li><p>发射Bomb
+向前发射一个Bomb，如果直接撞到主角会产生伤害并附带“沸腾之血”Debuff，否则经过一段时间的滑行或撞到墙之后停下，并开始5秒倒计时。如果没在倒计时结束前打破Bomb，则Bomb会爆炸产生超大范围的缓慢全屏光圈攻击，需要闪避躲过去或远离Bomb。该技能和前面的纯粹伤害型技能都不同，它产生了一个额外的敌人，而在已知该敌人会造成较大威胁的前提下，驱使玩家转而攻击Bomb，当然玩家如果对自己的技术有信心，也可以无视它继续攻击Boss，这就增强了游戏的策略性：如果自己当前状态不健康，上策必然是打掉Bomb；否则攻击BOSS会更快结束战斗。这个技能还有一个比较特殊的地方在于，它往往是连续多次出现的，这就进一步增强了玩家临时的决策要求：多个Bomb存在时会指数级地增大游戏的风险，这时候即使自己状态比较健康也会更加慎重地进行选择。该技能的另外一个好处在于，它将单纯的BOSS
+combat转为了Battlefield
+clear模式，即优先清理小怪。两种战斗模式的切换也能增强游戏的多样性。 <img
+src="/images/hades-AI/bomb.png" /></p></li>
+<li><p>发射Bomb-Ex
+发射前向高速移动的Bomb，撞到墙才会停止，其他机制与发射Bomb相同。该技能的作用同上，但是由于该技能伤害更高，更难躲避，因此更加考验玩家的反应和观察力。
+<img data-src="/images/hades-AI/bomb-Ex.png" /></p></li>
+<li><p>召唤
+在第一阶段2/3和1/3血量处时使用召唤技能，进入短暂无敌状态并随机召唤几个较为强力的小怪。每一次召唤之后上述所有技能的使用频率都会发生变化。<strong>假设为三个子阶段，在第一个子阶段，回旋击、突刺击和突刺击-Ex使用较多，遁形、发射Bomb和发射Bomb-Ex使用较少，且整体的攻击频率很低（也即一个连续的攻击集合中包含的攻击技能较少，一般只有1<sub>2个，集合之间通过Idle、遁形实现暂停）。在第二个子阶段，依旧以回旋击、突刺击和突刺击-Ex为主，但是发射Bomb和发射Bomb-Ex频率开始增加，整体攻击频率开始增加（一个攻击集合中的技能数量增加，为2</sub>4个，集合之间的Idle持续时间开始缩短）。在第三个子阶段，所有技能的使用频率基本相同，变得更有节奏感，即使用一套技能之后进行遁形，然后再使用一套技能（此时一个攻击集合中的技能数量变为2~5个，集合之间的Idle持续时间进一步缩短）</strong>。该技能的作用本质和发射Bomb是一致的，但是Battlefield
+clear的意图更加明显，玩家这时候不得不优先清理小怪而不是像对待Bomb那样可选可不选，因为小怪非常强力并且极具干扰。在Battlefield
+clear期间，BOSS也会照常攻击玩家，这个时候是最紧张刺激的阶段，直到清理完所有小怪。
+<img data-src="/images/hades-AI/summon.png" /></p></li>
+</ul>
+<h2 id="第一阶段总结">第一阶段总结</h2>
+<p>总的来说，BOSS的第一阶段攻击招式非常多样，不但有直接伤害型技能，还有召唤型技能，不但有持续的攻击输出，还有间或出现的木桩模式、Attack
+break模式，给持续紧张的战斗带来一点点休息的空隙。即使在同一个技能模板下，也有两个不同的强弱版本，这当然不是制作组偷懒（或许也有这个因素），更多的是同一套技能模板下的不同变体既能帮助玩家辨识该技能的前摇、释放、后摇是怎样的，又能增强玩家在游戏体验上的丰富度，何乐而不为呢。</p>
+<p>BOSS的第一阶段尤其值得注意的是，所有技能都对玩家使用“闪避”的能力提出了较高的要求，无论是直截了当的突刺击、突刺击-Ex，还是遁形后的回旋击、发射Bomb、发射Bomb-Ex，都要求玩家能在极短时间内做出闪避这个动作。并且随着BOSS第一阶段的血量降低，BOSS发动上述技能的频率会显著增加，即木桩模式的持续时间几乎趋于零，更多地是以遁形代替，这样的设计充满了游戏开发者的恶意：“想靠遁形休息一下？没门儿！接着闪避吧。”</p>
+<h2 id="第二阶段">第二阶段</h2>
+<p>第二阶段没有第一阶段“遁形”、
+“召唤”、“突刺击”、“发射Bomb”这四个技能，其他技能都有。除了第一阶段的技能之外，第二阶段增加了四个新技能（不算初始爆发），介绍如下：</p>
+<ul>
+<li><p>初始爆发
+在第二阶段一开始会以自身为圆心创造缓慢全屏光圈攻击，需要闪避躲过去。这个不多说了，只是一个阶段变化的标志而已。
+<img data-src="/images/hades-AI/init.png" /></p></li>
+<li><p>局部光束
+在面朝的方向发射三个光束，缓慢旋转，幅度大约为90度。该技能前摇非常明显，主要考察玩家的观察能力，甚至不太考察玩家的反应、闪避能力。
+<img data-src="/images/hades-AI/local.png" /></p></li>
+<li><p>全局光束
+发射全屏光束。该技能前摇时间较长，约为2秒左右，因此玩家在看到前摇动作的时候，需要快速找到掩体进行防御，因此考察了玩家的反应能力。该技能的另外一个作用和遁形类似：创造一段时间的Combat
+break，缓解高强度战斗节奏。 <img
+src="/images/hades-AI/global.png" /></p></li>
+<li><p>阴间柱子
+在地图上随机生成9个绿色阴间柱子，打破后会有地狱之手将角色控制，持续约2秒。在打掉所有柱子之前不会再产生新的阴间柱子。在产生柱子之后，会有一定的时间间隔释放基本技能，之后会释放局部光束或全局光束。然后继续释放基本技能，直到下次阴间柱子的产生，循环此过程。光束和阴间柱子这两个技能是BOSS第二阶段的核心，在下面的总结部分进行详细介绍。
+<img data-src="/images/hades-AI/pillar-1.png" /> <img
+src="/images/hades-AI/pillar-2.png" /></p></li>
+<li><p>斩击
+向前发动两次较大范围的斩击。该技能和“回旋击”基本是一致的，只不过每次斩击的范围只局限在前半身而不是360度范围。该技能同样考察了玩家的闪避和反应能力，但难度较低。
+<img data-src="/images/hades-AI/slash.png" /></p></li>
+</ul>
+<h2 id="第二阶段总结">第二阶段总结</h2>
+<p>如果是BOSS第一阶段重点考察了玩家的闪避能力，那么BOSS第二阶段就考察了玩家的综合能力：观察、反应、策略，当然还有要求更高的闪避。这是因为，第二阶段取消的技能非常有代表性，除了“召唤”之外，“遁形”“突刺击”“发射Bomb”都是在考察玩家的基本闪避能力，这时候只需要使用它们的Ex版本就好了。取而代之的技能有“局部光束”“全局光束”“阴间柱子”“斩击”。“斩击”相当于是另一个版本的“回旋击”，同样考察了玩家的观察、反应和闪避能力，实际上这个技能我个人认为做的比较失败，因为在定位上和回旋击是基本一致的。接下来就是很关键的“局部光束”“全局光束”“阴间柱子”，这三个技能，或者说两个，往往是搭配出现的，这就是第二阶段重策略和反应的核心。</p>
+<p>BOSS的释放逻辑是：（1）首先召唤9个阴间柱子；（2）上来对玩家进行一套技能；（3）突然释放“局部光束”或者“全局光束”。这一套逻辑的点在于：（1）召唤的9个阴间柱子不能马上打掉，一是因为数量比较多，二是BOSS在骚扰；（2）BOSS的骚扰会被迫让玩家进入与BOSS的战斗节奏而没有及时清理周围的阴间柱子；（3）BOSS突然释放伤害极高的光束，会让玩家迅速寻找掩体，但是由于玩家之前被BOSS拖住没有及时清理柱子，所以就有相当的概率会在寻找掩体的过程中失误，被阴间柱子缠住，这时候BOSS的光束打中玩家，造成大量伤害甚至秒杀。</p>
+<p>可以发现，上面的一套逻辑下来，目的就是要让玩家“第一时间打掉阴间柱子”，即使这个BOSS在骚扰，也要尽可能无视它优先尽快清理柱子，否则之后BOSS释放光束会非常棘手。如果玩家没有意识到这一点，就一定会被BOSS屡试不爽，这也就考察了玩家的反应和决策能力。当然阴间柱子怎么清理呢，如果是远程武器就很简单了，但是如果是拳套，就可以通过丢标或者闪避伤害去清理，当然也可以引导BOSS去打掉柱子。选择很多，关键还是要临场反应。其他剩下的技能就是在更多地考察进阶的闪避能力了，本质上和BOSS第一阶段是一样的。
+<img data-src="/images/hades-AI/summary.png" /></p>
+<h1 id="实现逻辑">实现逻辑</h1>
+<p>通过观察可以猜测下面的（可能的）AI设计逻辑。 ## 第一阶段
+整体的技能AI涉及到几个参数：技能集合大小随机数randomSetSize，每个技能出现在技能集合中的概率p[i]（i=回旋击、突刺击、突刺击-Ex、发射Bomb、发射Bomb-Ex）及对应的最大出现次数t[i]，Idle持续时间idleTime，技能集合之间的过渡选择概率p[move]、p[Idle]和p[escape]，分别表示用“冲刺移动”、“站立”和“遁形”承接两个相邻的技能集合。</p>
+<p>具体的AI逻辑如下： - 血量判断：当分别为2/3,
+1/3血量的时候，释放技能“召唤”并进入下一个子阶段。每个子阶段上述的所有参数都会有所变动。
+-
+距离判断：当玩家和BOSS的距离超过一定距离的时候，会依据p[move]来接近玩家。
+- 第一个子阶段：在满足血量和距离的前提下，生成随机数randomSetSize
+∈[1,2]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。之后，根据idleTime执行站立动作（此时没有用到p[Idle]，因为这个阶段idle是一定执行的）。然后根据p[escape]选择是否执行“遁形”技能。最后回到距离判断。
+- 第二个子阶段：在满足血量和距离的前提下，生成随机数randomSetSize
+∈[2,4]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。注意这个时候p[i]应该有所调整，具体来说，是将发射Bomb和发射Bomb-Ex的概率增大，突刺击和突刺击-Ex的概率降低，回旋击不变或适度增大。之后，根据idleTime执行站立动作（此时没有用到p[Idle]，因为这个阶段idle是一定执行的，同时相比第一个子阶段，idleTime适当减小）。然后根据p[escape]选择是否执行“遁形”技能，p[escape]此时相比上一个子阶段适当增大。最后回到距离判断。
+- 第三个子阶段：在满足血量和距离的前提下，生成随机数randomSetSize
+∈[2,5]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。注意这个时候p[i]应该相比上一个子阶段进一步调整，具体来说，是将发射Bomb和发射Bomb-Ex的概率进一步增大，突刺击和突刺击-Ex的概率进一步降低，回旋击不变或适度增大，最终效果应以Bomb为主，回旋击次之，突刺击为辅。之后，根据p[Idle]决定是否执行站立动作，站立时间为idleTime，相比上一个子阶段时间再次适当缩短。p[Idle]原则上应该比较大(&gt;=80%)。之后，执行“遁形”技能。最后回到距离判断。</p>
+<h2 id="第二阶段-1">第二阶段</h2>
+<p>由于第二阶段内部只包含一个子阶段，因此AI逻辑相比第一阶段更加简单。</p>
+<p>整体的技能AI涉及几个参数：技能集合大小随机数randomSetSize，每个技能出现在技能集合中的概率p[i]（i=回旋击、突刺击-Ex、发射Bomb-Ex、斩击）及对应的最大出现次数t[i]，发射局部光束的概率p[local]，发射全局光束的概率p[global]，发动阴间柱子的概率p[hell]，站立的概率p[Idle]，移动的概率p[move]，站立的持续时间idleTime。</p>
+<p>具体的AI逻辑如下（不考虑进入第二阶段开始的初始爆发）： -
+距离判断：当玩家和BOSS的距离超过一定距离的时候，会依据p[move]来接近玩家。
+-
+根据p[hell]决定是否释放阴间柱子。如果释放，则进入“阴间模式”，否则为“普通模式”。
+- 在“阴间模式”下，生成随机数randomSetSize
+∈[2,5]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。之后，根据p[local]和p[global]选择执行“局部光束”或者“全局光束”。之后，根据p[Idle]决定是否执行站立动作，站立时间为idleTime，该值小于BOSS第一阶段的对应值。“阴间模式”结束，减小p[hell]，如果当前是第三次释放阴间柱子，则设置p[hell]=0。最后回到距离判断。
+- 在“普通模式”下，生成随机数randomSetSize
+∈[2,5]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。之后，根据p[Idle]决定是否执行站立动作，站立时间为idleTime，该值小于BOSS第一阶段的对应值。“普通模式”结束，回到距离判断。</p>
+<h1 id="用behavior-designer画一个简单的行为树">用Behavior
+Designer画一个简单的行为树</h1>
+<p>按照上述逻辑可以设计如下的简化版BD，直接展现图，就不过多文字描述了。</p>
+<h2 id="第一阶段-1">第一阶段</h2>
+<p><img data-src="/images/hades-AI/bt-1.png" /></p>
+<h2 id="第二阶段-2">第二阶段</h2>
+<p><img data-src="/images/hades-AI/bt-2.png" /></p>
+]]></content>
+      <categories>
+        <category>游戏 - 游戏分析</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>游戏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《Assassain&#39;s Creed Odyssey》玩后感</title>
+    <url>/2020/09/08/ac-odyssey-impression/</url>
+    <content><![CDATA[<p>115小时，主线+两个DLC通关。奥德赛是一个优秀的游戏，但不是神作，在走向RPG的道路上是系列作品的里程碑。人物塑造方面，奥德赛无疑是成功的，由于我选择的是温情
+路线，所以我看到的马拉卡的内心是无比渴望家庭的温暖的，正如奥德赛音乐集的“Odyssey(Modern
+Version)”中的歌词"Travel in path alone, back to the warmth of
+home"一般，踏在异乡的每一步无一不通往家。本作两个主要配角Phoibe和Brasidas，都令人印象深刻。在画面上，优良的美工沿袭了育碧式BUG，有可能在欣赏风景的时候会卡到墙里面，有时候还挺扫兴的。值得一提的是，奥德赛对希腊风情的刻画非常优秀，每一个同步点都可以疯狂截图作壁纸。本作比较难受的地方是剧情，三条主线除了家庭线比较完整之外，另外两条主线都虎头蛇尾，过多的无用支线严重稀释了主线的紧凑感，让人在玩到一半之后想去玩巫师三。DLC1的整体剧情我个人比较喜欢，但是一些细节处理尤其不妥，动机不足导致DLC1评分降低。DLC2流程很长，总体来说冥界剧情好于亚特兰蒂斯剧情好于极乐世界，不过对神之领域的描绘总体来说很精彩。如果说我对11.10发售的英灵殿有什么值得期待的话，可以用几句话总结：剧情不要拉跨，任务尽量优化；BUG可以少些，卡墙不动尴尬；风景依旧如画，壮汉赶紧来吧！</p>
+<span id="more"></span>
+<h1 id="剧情整体精彩细节拉跨">剧情：整体精彩，细节拉跨</h1>
+<p>自奥德赛发行以来，“剧情”一直是被玩家广为诟病的一点，但是在做完所有任务（包括两个DLC）、体验完所有剧情之后，我倒是觉得奥德赛的剧情<strong>整体上</strong>非常优秀，但是和大多数玩家一样，我也想吐槽其中非常多的细节，我思考了一下，这大概是出于一种“恨铁不成钢”的心理。明明奥德赛的剧情可以做得非常棒，可以几无瑕疵，可以触及巫师三，但是阿育就是把这么一个差一点点就堪比完美的剧本甩到玩家脸上，香还是香的，但就是不情愿，被迫品尝一桌盛宴中编剧埋下的一坨坨屎。</p>
+<h2 id="世界观">世界观</h2>
+<p>奥德赛的世界观是建立在希腊伯罗奔尼撒战争期间，但显然，奥德赛不完全是一部纪实游戏，战争只是游戏的大背景，也是游戏开始的一个引子而已，到了后面，游戏的进展其实和战争已经没什么太大关系了。在这个大背景下，著名的时代人物，如伯里克利、苏格拉底、布拉西达斯都会悉数出场并成为推进主线过程中重要的人物，而另一大群体，“神教”，正贯穿了整个主线的发展。主角的冒险由神教展开，也从神教结束，神教作为核心暗线而存在，我们把它称为<strong>神教线</strong>。而剧情的实际主线则是马拉卡找家人的旅程，在途中，主角会踏遍希腊，经历诸多精彩的故事，最终找到家人，在若干年后再次相聚，我们把它称为<strong>家庭线</strong>。除此之外，奥德赛中还引入了很多神话元素，比如传奇动物、传奇生物、神之领域（主要在DLC2），它们以“神器”联系起来，游戏进行到中后期会出现一条新的主线，也就是让主角去搜集神器，我们称之为<strong>神器线</strong>。</p>
+<figure>
+<img data-src="/images/ac-odyssey-impression/1.png" alt="奥德赛的地图很大" />
+<figcaption aria-hidden="true">奥德赛的地图很大</figcaption>
+</figure>
+<p>所以，总的来说，奥德赛的世界观就是在希腊伯罗奔尼撒战争的时代大背景下，以家庭线为明线，以神教线为暗线，以神器线为辅线而展开的。在游戏进行过程中，主角会见证真实的历史，会体验各地的风俗，会欣赏希腊的风光，会体验人生的波折。奥德赛的世界观即是如此的宏大，在游戏策划的精心编排下将希腊的大观悉数摆在我们面前，同时又让玩家以小人物的视角代入到如画的场景中，如此结合，让玩家一旦进入到角色里，就很难立刻停下来。</p>
+<p>然而，相比起源把一桌菜一股脑全给你端上来又不介绍菜品让你细细琢磨、品尝，奥德赛更像是古典西餐厅里的一盘盘端上精心调制的菜品并为你介绍菜的制作方式、选用食材、食用步骤，甚至还要告诉你在品尝之前要沐浴更衣精心打扮，这就会产生下面要说的一个问题，大而不精，野心太大但却没有把握住剧情开展的主次，导致剧情上连贯性的断裂，这进而引发一个很严重的问题：游戏进展到后期同质化严重，玩家的游戏热情被大幅度削减。就好比前几道菜都详细介绍，食客会觉得很高端很优秀，但是如果有几十道菜，每个都如此呢？食客就会厌烦。</p>
+<h2 id="任务">任务</h2>
+<p>剧情是通过任务推进的。任何一个游戏，都有任务，完成了任务，尤其是主线任务，才能顺利推进到下一个剧情节点。可以说，任务是推进主线的首要手段（并非唯一，比如在奥德赛中，满屏幕的问号“？”也是一个手段）。</p>
+<p>上面我们已经简单说了，奥德赛的主线可以分为三条：家庭线、神教线和神器线。家庭线和神教线是从头贯穿到尾的，二者并行，一明一暗互为依托，这样的设计是很好的：它既不会让游戏快速陷入单线游戏的乏味，也能营造剧情上汹波暗涌的气氛，很快抓住玩家让玩家进入角色。这里值得表扬的是本作家庭线和神教线的融合是非常到位的，二者不但是并行关系，而且是交叉关系，如同螺旋前进的两条线一样，共同推动了游戏剧情的发展。但是，第三条线神器线的出现大大打破了这一节奏，甚至是原本剧情的美感。在家庭线达到关键节点找到母亲后，本来以来父亲的出现会解释玩家所有的疑问，但是没想到，老父亲一出场就让玩家莫名其妙地搜集神器，没有半点前因后果的交代；在找到神器之后，又莫名其妙出现了古代与现代的时空错乱和穿越，我们的主角马拉卡又莫名其妙地活到了现代穿上了西服最终溘然长逝。说实话，我当时玩到这一段的时候几乎是快进过的，没有丝毫欣赏剧情的欲望。这一条线从一开始，到最后，只能用四个字去总结：说的是啥？尽管这一主线流程很短，但它的出现极大割裂了另外两条主线的连续感，也造成了马拉卡精分的错觉，让玩家搞不明白奥德赛的时间线究竟是如何排布的。</p>
+<p>当然，家庭线和神教线不是没有问题，而且在很多细节之处都有槽点。比如家庭线的一大槽点就是，如果你走的是大团圆路线，你就会发现马拉卡过于圣母（没错，就是我）。诚然马拉卡是一个呆萌渴望家庭温暖外表冷漠内心火热的失足少年，但是当自己的妹妹残忍地杀害基友Brasidas，造了无数的孽后，马拉卡依然选择了原谅她，最后还能和继父、表弟在一个桌子上吃饭，我的内心无疑是充满了问号。你可以说，这是你自己选择的剧情啊！对，但是当玩家选择了这个剧情之后，我们会明显感觉到这个剧情是不尽合理的，也就是说，制作人在设计这一剧情路线的时候就没有仔细推敲其合理性，所以这个锅还要阿育来背。神教线的槽点就更多了，各种奇葩的神教成员（包括那个自爆身份好像老子不怕你的那个）一个接一个，最后鬼魅那段单口相声真的是漏洞百出，竟然还可以选择相信她，而且无论你选择什么，神教线都会到此为止，那又何必再做选项呢。</p>
+<figure>
+<img data-src="/images/ac-odyssey-impression/8.png"
+alt="鬼魅的最后一个线索才是“女性”，不然很好猜" />
+<figcaption
+aria-hidden="true">鬼魅的最后一个线索才是“女性”，不然很好猜</figcaption>
+</figure>
+<p>除了主线之外，奥德赛的一大尤为突出的问题是，支线任务过多，而且过于无聊。在奥德赛中，除了标有黄色感叹号的关键支线之外，其他大部分支线都是在端茶倒水、洞穴找人、团灭兵营，基本上可以概括为：“我丈夫/妻子/兄弟/孩子不听我话跑出去不见了/被强盗抓住了，他可能在某某树林/洞穴/兵营里，你能帮我找到他吗”。刚开始玩用来点亮地图确实还不错，而且可以熟悉技能，提高操作，但是当游戏进行到中后期时，满屏幕的感叹号让你没有丝毫欲望去清空，因为你知道打不打都无所谓，对主线毫无影响，给的物品也毫无吸引力。也许制作者的初衷就是让玩家在打完主线之后再慢慢清支线，但实际上，对于一部分强迫症玩家来说，满屏幕没清又强行按捺自己去清欲望的想法的确是非常痛苦的，最终的归宿可能只有隐藏地图标记才能解救他们。尽管对总的剧情没有太大影响，然而过多的冗余支线就好比蒙娜丽莎嘴角沾了米粒，赫拉脸上长满痘痘，人还是那个人，但味道总觉得变了。</p>
+<p>但另一方面，也不得不表扬一些支线的确做得很有意思。比如“失落的希腊神话”系列任务就很有意思（尤其是“倒霉的一天”），此外，雅典区的一系列支线也很有特色（苏格拉底与雅典炮王的任务），还有一开始瘟疫的支线，这些支线要么本来在内容上非常丰富、有趣，要么会影响后续的剧情，这就回到了支线的作用：需要给予玩家一定的反馈。如果做完一个支线，玩家什么都没有得到，什么反馈都没有，那做这个支线干什么呢？看风景吗？所以，我认为如果把神器线做成一个系列支线，那效果可能就会好很多。如果删掉其中80%的无用的没有任何反馈的支线，说不定奥德赛的IGN评分又会更高。</p>
+<p>可以看得出来，奥德赛在任务系统上有浓重的借鉴巫师三的痕迹，主要体现在剧情选项和支线系统。支线系统我们已经上面已经说了，和巫师三一样都有很多支线，但是巫师三的支线是它被称为神作的原因，奥德赛的支线只有东施效颦的副作用，究其原因，还是二者对支线作用的理解不同。</p>
+<p>剧情可选是奥德赛在整个刺客细条系列中的一大突破，也是效仿巫师三最典型的一个要素。为什么我们需要可选剧情？因为这可以给玩家更多的自由度，让玩家能够更好地带入剧情，玩家需要为每一个决定负责，从而就要深思熟虑，剧情选择引发的蝴蝶效应足以在游戏结局的时候升华玩家对整个游戏的评价和感悟。巫师三做到了，奥德赛没做到。这有几点：</p>
+<ul>
+<li>奥德赛大部分选项不会对后面的游戏剧情有所影响；</li>
+<li>可选项非常少，玩家可能面对哪个都不想选但又不得不选的尴尬境地；</li>
+<li>选择之后的剧情推进和想象的不一样。</li>
+</ul>
+<p>从我个人的游戏体验来说，上面三点是奥德赛在“剧情开放”尝试中最为突出的问题，我相信也是大部分玩家承认的问题。奥德赛的最终结局只有几种，而决定这几种结局的选项在几十个小时的游戏中只有寥寥几个地方，那其他的无数选项的作用是什么呢？第二，奥德赛每次可选的大概在3~5个选项之间，而给出的所有选项有时候又都非常智障，明明哪个都不想选却偏要选一个，这对玩家非常不友好，有种强行喂食的感觉。第三，剧情总是朝着意料之外的发展。比如有个任务是关于贩夫的未婚妻，这个时候就不能骗她说贩夫被干掉了，否则直接导致任务失败；而有的时候又需要你假惺惺地欺骗一下NPC才能完成任务，这种任务设定毫无规律可循，遇到了大概率就是一脸懵逼然后呵呵一笑。综上，剧情上的自由可选，就奥德赛的表现来看，反而是禁锢了玩家的自由度，看似让玩家有更多决定剧情走向的权利，但实际上是画地为牢，无论怎么选，都圈定在了编剧预先定义好的条条框框里了。显然，这是一种非常不成熟、宁可没有的设计。当然了，作为向巫师三学习并处于刺客信条系列发展史的一部过渡作品，奥德赛牛刀小试也无可厚非，只是希望英灵殿能够在这上面进行改进。</p>
+<p>最后来说一下两个DLC。网上普遍对DLC1的剧情诟病颇深，对DLC2倒是赞誉更多，不过我个人倒是觉得，DLC1的剧情高度比DLC2更高，但是下限也比DLC2低，而DLC2发挥整体非常平稳。但从剧情上讲，我个人更喜欢DLC1，尽管它有非常突出的硬伤。</p>
+<p>DLC1的剧情整体上非常棒，前提你玩的是Alexios（据说Cassandra体验非常不好）。游戏流程不长，十个小时以内可以打完，但是任务节奏很紧凑，内容相对丰富，关键是剧本很给力，讲述了马拉卡遇到真爱但是又被命运无情摧毁的故事。在这个DLC里，我看到了马拉卡内心的脆弱，尤其是他对家庭温暖的渴望与期盼。其实，在玩游戏本体的时候，我们会经常听到马拉卡感慨自己的命运，我印象中比较深刻的是“要是我不离开凯法隆尼亚岛就好了”，再回忆片头马拉卡独自坐在房上抚摸着断矛，他一定非常渴望再见到亲人吧。虽然在凯法隆尼亚岛上，他可能永远也见不到亲人，但是，有Markos，有Phoibe，还有岛上其他的伙伴，这样的小日子，不也很美好吗，正如他与DLC1的女主相遇相知相爱后，与岳父大流士、自己的孩子四人一起生活在村里，平淡而温馨，甜蜜又幸福，不也正是马拉卡一直想要的生活吗。做一个漂流在外四海为家的佣兵并不可怕，可怕的是这样的人却时刻想要有一个稳定幸福的小家庭，这简直是一种无法企及的奢望。当上古维序者干掉女主，马拉卡在火海中呼唤着她的名字时，当马拉卡来到家门口的她的坟墓前时，当马拉卡之后到他们相知的三个地方寻找纪念物时，当最后马拉卡把孩子托付给岳父大流士看着他乘帆远去时，当最后的最后马拉卡仍旧时孤身一人时，我心中的确是被深深触动了。这是我非常喜欢DLC1的点。</p>
+<p>但是也正如上面所说，DLC1的上限很高，下限也很低，主要仍然体现在细节不到位。比如火海救岳父的情节，作为一个久经沙场的佣兵，他应该是完全能够意识到将妻子儿子丢在船边会有什么后果，就算不能两边兼顾，也应该知道孰轻孰重。再有最后送走儿子的桥段结束得过于仓促，上古维序者这个组织的行为动机也不够充分，在很多地方，玩家是没有办法选择剧情的走向的，也就不得不被迫喂屎，这也是DLC1被广大玩家吐槽的原因所在。但我个人认为，DLC1仍然是瑕不掩瑜的，对于部分玩家而言依旧有非常高的可玩性。</p>
+<figure>
+<img data-src="/images/ac-odyssey-impression/10.jpg"
+alt="这一段还是非常感人的，我流下了130滴眼泪" />
+<figcaption
+aria-hidden="true">这一段还是非常感人的，我流下了130滴眼泪</figcaption>
+</figure>
+<p>相比之下，DLC2的流程就非常非常长了，目前需要30个小时左右才能全部通关。DLC2分为三个章节，每个章节的流程都很长，相互独立但又通过“神话”这一线索串联起来，大概是寻找亚特兰蒂斯并探索神杖的用法。这个DLC把正作的神器线联系在了一起，在希腊和现代两个时间点之间不停穿越，目的就是要给玩家解释这个神器是怎么一回事儿。说实话，我也不知道他解没解释清楚，反正我基本都是快进过了，因为实在是过于无聊。</p>
+<p>在剧情上来看这个DLC没啥有意思的，我总结一下，第一个章节是神秘四角恋上演姐妹撕逼大战，第二个章节是冥王海王打赌以虐待死者为乐，第三个章节是主角化身正义使者最终颠覆亚特兰蒂斯政权。总之就是云里雾里、莫名其妙。不过值得表扬的是，每个章节的特色地图都非常不错，极乐世界的花花草草，冥界的幽暗阴森感，亚特兰蒂斯的宏伟高科技，给人耳目一新的感觉。我印象最深的还是冥界的Phoibe剧情和Brasidas基友剧情，还是有点感人的，到了最后也特别想痛扁冥王。极乐世界充当双面间谍的感觉也不错，只是亚特兰蒂斯过于平平无奇，除了最后的BOSS有点恶心之外，也没有什么比较让人能够记住的点了。</p>
+<p>这里特别吐槽一下冥界Brasidas的剧情，实在非常无语和狗血，把编剧的圣母心态体现得淋漓尽致。作为一个从小接受战士教育的将军，在战场杀敌是本分；当敌人杀向你，举起武器反击是本能；只是推开挡路的女人而没有将其杀死，是本心；无论从哪个角度讲，Brasidas都没有做错，战争也好，斯巴达的荣耀也好，还是出于自己的意志也好，Brasidas的做法都是无可非议的。但是，编剧强行要通过这个故事去虐Brasidas，本来都死得那么惨了，还要让他做出痛苦的抉择，实在是非常过分。在这里，我心疼基友三秒钟。</p>
+<figure>
+<img data-src="/images/ac-odyssey-impression/11.png" alt="基友太惨了" />
+<figcaption aria-hidden="true">基友太惨了</figcaption>
+</figure>
+<figure>
+<img data-src="/images/ac-odyssey-impression/3.png" alt="我恨这个女人" />
+<figcaption aria-hidden="true">我恨这个女人</figcaption>
+</figure>
+<h1 id="画面时代顶尖bug难掩">画面：时代顶尖，BUG难掩</h1>
+<p>奥德赛延续了起源优秀的画面，在刻画希腊风光上做到了无出其右，以至于获得了“旅游模拟器”的美称。<strong>画面</strong>其实是一个比较笼统的概念，当我们在说一个游戏的画面的时候，我们一般是在说这个游戏带给我们的所有视觉体验，包括光影效果、水和火的模拟、各种材质的清晰度真实度、整个画面的比例、画面的色彩等等等等，只要是我们能直观感受到的，都可以归入画面里。</p>
+<p>从画面整体来看，奥德赛做到了时代的顶尖。优秀的光影、逼真的水波、温暖的色调、协调的比例、真实的场景，包括人物的建模等，都非常优秀。最难能可贵的是，奥德赛给我们生动地呈现出了波澜壮阔、风光迤逦、特色鲜明的古希腊景象，尽管可能不是最真实的历史，但是当我们置身其中时，仍然可以感到非常的震撼，仿佛自己就是那个时代的人，经历着相同的事。所以，奥德赛的画面不仅是技术上的时代顶尖，而且他还能带给我们一种沉浸式的体验，这对一个优秀的3A游戏来说，是必不可少的。</p>
+<figure>
+<img data-src="/images/ac-odyssey-impression/9.jpg" alt="光影效果非常不错" />
+<figcaption aria-hidden="true">光影效果非常不错</figcaption>
+</figure>
+<p>当然，对奥德赛来说，他还是沿袭了“育碧特色”——各种神奇的BUG，虽然已经比起源好很多了（起源的BUG可以看<a
+href="https://www.bilibili.com/video/BV19x411j7dp">这里</a>）。比如，你会卡到一个地方无法动弹然后“失去同步”，会在地上皆若空游无所依，会有各种各种严重不严重的穿模。其中最为蛋疼的，其实不算BUG的地方就是，自动寻路。这个简直是噩梦，很多时候系统会绕很大一圈，甚至是本来已经绕了很大一圈了，结果来了个“无法跟随道路”，这是坠痛苦的。不过好在可能是阿育经历了起源雪崩式的BUG，在奥德赛里BUG已经不是一个很严重的问题了，至少可以完成任务不是。</p>
+<figure>
+<img data-src="/images/ac-odyssey-impression/12.png"
+alt="欣赏一下马拉卡的盛世美颜" />
+<figcaption aria-hidden="true">欣赏一下马拉卡的盛世美颜</figcaption>
+</figure>
+<h1 id="人物形象丰满行为骨感">人物：形象丰满，行为骨感</h1>
+<p>谈到剧情就不得不稍微说一下人物了。奥德赛对人物的刻画是非常到位的，作为一部史诗大作，奥德赛不仅对主角马拉卡和一些主要人物进行了细致入微的刻画，并且对一些关键配角也有非常到位的描写！</p>
+<p>首先说一下主要人物：马拉卡、妈和妹妹。马拉卡无疑是最核心的人物了，玩家在关键剧情上的不同选择会呈现出多面的马拉卡形象，由于我选择的是真情圣母路线，所以就按照这个形象说。马拉卡给人的最大印象，在上面已经说了，作为一个铁血真汉子、无情雇佣兵，他的内心其实是非常渴望亲情的，无论是一直心心念念想要找到妈，想要挽回失足妹妹，还是对Phoibe如待女儿一般的呵护与关爱，抑或是对Markos的帮助，都体现了一个流浪在外无家可归的人向往亲情、渴望家庭的内心最真切的期盼。马拉卡不滥杀无辜，同情战争下家破人亡的底层百姓，路见不平也能拔刀相助，时而放荡不羁，时而收敛拘束，就好似武侠小说里的绝世大侠，执剑走江湖，四海皆为家。在游戏的时候，左下角的提示会出现“xx号是你的家，记得常回来看看”（大意如此），不禁让人唏嘘，马拉卡总是在外漂泊，以船为家，在注定不平凡的寻亲之路上经历这么多人生的坎坷，着实让人心疼！另外，马拉卡这个角色还透露着呆萌的气质，一方面是来自配音+动补演员本身的气质，另一方面就是在游戏中，马拉卡的确也很幽默，经常开一些黄腔，引发一些笑话。这些对丰富和塑造人物形象都非常有帮助。</p>
+<figure>
+<img data-src="/images/ac-odyssey-impression/7.jpg" alt="性感吗？我可以" />
+<figcaption aria-hidden="true">性感吗？我可以</figcaption>
+</figure>
+<p>然后再说说一些关键配角，这里说几个人：妈、后爸、Phoibe、基友Brasidas、炮王阿尔西比亚迪斯、苏格拉底。这几个人应该是除了主角之外给我留下印象最深刻的几个人了。</p>
+<p>奥德赛对妈的刻画是非常到位的：坚强独立、能力突出，同时也和马拉卡一样渴望完整幸福的家庭。在找妈的路上，我们已经通过几个支线知道了妈是如何去找妹妹，如何带着她逃跑，又是如何在失去她之后绝望，到她最后重新振作成为一岛的领袖的。在这个过程中，妈的形象跃然纸上，后来和马拉卡一起挽救妹妹更是突出了她追寻亲情的一面。</p>
+<p>对后爸的笔墨虽然不多，但是也能大致勾勒出一个教子严厉但关怀备至、有些教条但也饱含感情的一个将军形象。作为一个将军，他当初在悬崖边没有办法与神教抗衡，但是他也在一直懊悔。在几个CG里，我们都看出来，尽管他是继父，但是他仍然对马拉卡和妹妹视如己出，教导和关爱也都无微不至。</p>
+<p>Phoibe和Brasidas应该是马拉卡人生中非常关键的两个人了。一个在他的生活中和他超越了朋友的关系，一个在他的斗争中给予了莫大的帮助。可以说，Phoibe与Brasidas是马拉卡少年时和成年时的两个缩影，一个象征着无邪的天真烂漫，一个象征着成熟的稳重冷静。站在马拉卡的视角，他想要紧紧地把握住他们，不但是对朋友的珍惜，更是对自己这两面的珍视，在他的心里，永远有一个小孩子，愿意陪着Phoibe一起长大，也永远有一个大人，能够和Brasidas并肩作战。</p>
+<figure>
+<img data-src="/images/ac-odyssey-impression/6.jpg"
+alt="马拉卡对Phoibe非常关心，因为她是最亲密的人" />
+<figcaption
+aria-hidden="true">马拉卡对Phoibe非常关心，因为她是最亲密的人</figcaption>
+</figure>
+<p>其实说实话，我对Phoibe是又爱又恨的，爱的是她的善良机智，恨的是她的自作聪明，无视马拉卡警告对自己的能力没有清晰的判断，导致自己身死他手，实在让人惋惜。显然，既然作为一个玩家，我已经能够对她产生这样的情感了，那么无疑，奥德赛对Phoibe的塑造也是相当成功的，虽然不那么讨喜，但是至少她是真实的。</p>
+<p>基友的镜头没有Phoibe那么多，但是当他在贩夫仓库第一次出场时，就注定他有一个悲剧式英雄的解决了。在熊熊燃烧的大火中单挑对方几个好汉，与马拉卡多次在战场上默契配合，在斯巴达时多次帮助主角一家恢复名誉，以至于最后也是战死在战场上的，这样一个人物，实在令人肃然起敬。而且，基友不但是一个优秀的将军战士，他其实也很善良，他在能不杀人的时候是尽量不杀人的，从贩夫，到后来的斯巴达剧情，乃至到DLC的冥界，都体现了基友刚毅且善良的一面。然而，在DLC冥界那里，只要选错一个选项Brasidas就会留在冥界，这个行为这个剧情无非就是编剧强行喂屎表达泛滥圣母心的一面，实在是为这个角色抹黑！</p>
+<figure>
+<img data-src="/images/ac-odyssey-impression/5.jpg" alt="基友真的太帅了" />
+<figcaption aria-hidden="true">基友真的太帅了</figcaption>
+</figure>
+<p>最后，炮王阿尔西比亚迪斯和苏格拉底的刻画也是相当有意思。在游戏后半段这两个人都会有很多任务，炮王会不断地让你去帮他约炮，或者和他约炮，而苏格拉底就是不断和你<del>强行抬杠</del>探讨哲学，总的来说，这两个人物的刻画也非常鲜明。其他的包括船长、鬼魅、斯巴达领袖、表弟，甚至是那个性欲很强的老女人，奥德赛对他们的刻画也都有所突出，所谓众生各相，让玩家在走剧情、赏风景的同时还是感受古希腊多姿多彩的人文特色。</p>
+<p>但是，正如这一节的标题所说的，很多人物的形象是很丰满，但是在一些细节方面，人物的行为动机是严重匮乏的，以至于玩家会觉得“为什么非要这么做”，这样的设计对人物的刻画是有害的。举个典型的例子，亲爸毕达哥拉斯，莫名其妙找到一个神器，然后莫名其妙又觉得自己无敌了，最后又莫名其妙地挂了，过完剧情玩家只会觉得这个人脑子有点不正常，至于其他的性格、形象、心理活动？不不不，脑子有问题就是了。人物行为骨感集中体现在DLC1，这也是DLC1被大家广为诟病之所在。上面已经说过这个问题了，这里不再赘述。</p>
+<p>最后的最后，在游戏结局时马拉卡与苏格拉底在墓园的对话让人感慨万千，在此摘录如下：</p>
+<blockquote>
+<p>Alexios：Phoibe，她从没有过小女孩的时光，我总是以成人的方式与她对话。
+苏格拉底：这是因为你尊重她。你可以问问自己为何这么选择，Alexios，但千万不要质疑自己的决定。
+Alexios：谢谢你给了她该有的葬礼。
+苏格拉底：在极乐世界中还有无数的人，这些受到祝福的人已经获得了永恒的喜乐，其中一个就是我们伟大的伯里克利。
+Alexios：基于他的一切作为，全雅典都欠他一份情。
+苏格拉底：我们会称他为“雅典第一公民”不是没有道理的。他是个有很多贡献的人，但也是个孤僻的人。
+Alexios：要是他肯让我们分担他的重担就好了……
+苏格拉底：我们只能从他表现出来的部分来了解他，但谁敢说那就不是他真正的自我呢？
+Alexios：这场战争牺牲太多人了，就连布拉西达斯都陨落了。
+苏格拉底：或许如此。但身为一个斯巴达人，他已经尽了自己的义务并战死沙场了。
+Alexios：我当时也有尽全力帮助他。他是我的朋友。
+苏格拉底：你还活着就是他最好的复仇，人们会将他作为英雄来尊敬的。
+Alexios：人们会记得我们是如何打垮克勒翁的。</p>
+</blockquote>
+<h1 id="类型转型成功平衡欠佳">类型：转型成功，平衡欠佳</h1>
+<p>起源之前的刺客信条属于传统意义上的ACT游戏，从起源开始，逐渐向RPG转型，到了奥德赛，已经形成了ARPG的初步格局。尽管现代游戏ACT、RPG、ARPG的界限已经趋于模糊化，但是我认为我们还是有必要对游戏进行一个粗略的分类，以更好地对游戏整体的类型风格进行评价。</p>
+<p>如果用ACT的视角审视奥德赛，那么奥德赛显然是不合格的。这体现在以下几点：</p>
+<ul>
+<li>正如<a
+href="#剧情：整体精彩，细节拉跨">剧情</a>一节所述，奥德赛非常侧重剧情的讲述，大量的CG、对话、支线任务就是为了铺垫剧情、描绘人物形象，这和传统的ACT游戏淡化剧情是相悖的；</li>
+<li>奥德赛的养成元素非常多，这体现在等级压制、等级上限、装备体系、技能体系上，尽管游戏默认的是等级跟随，但是等级提高带来的技能点收益是非常重要的，尤其在打传奇动物和传奇生物的时候更为显著；</li>
+<li>奥德赛的装备体系决定了它不是一个纯粹的ACT游戏，游戏的蓝装、紫装、黄装品类非常多，并且，极品装备是满属性的紫装，这就意味着玩家可以追求极致一刀99999，尽管奥德赛没有刻意去引导玩家这么做，但是显然，很多玩家已经开始爆肝了。</li>
+</ul>
+<p>但是另一方面，我们也不能纯粹从RPG的视角去看待奥德赛，因为游戏尽管整体上非常看重技能，但是如果你没有极品装备而只有黄色套装，那在很多时候，你还是要通过射箭、刺杀或开启无双模型与敌人硬刚，这对你的手法还是有所要求，比如闪避、防反、换装、流派，如果你不想“失去同步”，在高难度下还是需要一定的熟练程度才能手起刀落斩敌人于马下。尽管和起源的防反、马战比起来这都是小儿科，但手残玩家挑战奥德赛的噩梦难度也还是颇有难度的。从这个意义上讲，奥德赛还是保留了一些ACT的元素。</p>
+<p>其实，当前纯粹的ACT游戏已经是难以走下去了，这是因为游戏作为一种艺术作品，随着时代的发展玩家越发看重它的精神内核。一个游戏可以不要高难度的战斗操作，只要它有足够优秀的剧本，那么它依然可以是神作；但是，一个游戏如果只要求高难度的操作，以及精心设计的关卡，而没有剧情或者足够有说服力的剧情，那么今天的大部分玩家是不会买账的。ACT游戏的RPG化是时代下游戏发展的一个趋势，但对刺客信条这个具有ACT传统的系列游戏来说，如何在这样的趋势下顺利转型是一大难题。</p>
+<p>就我的体验来说，如果说起源是刺客信条转型的初步尝试，那么奥德赛就是转型的成功探索，它是一次探索，并且整体上成功了。如果你玩过起源和奥德赛，你会发现它们之间有莫名的相似性，但是给你的游戏体验又是完全不同的。上面讲到，起源的剧情是比较破碎的，而在很多地方，你不得不进行战斗，又加之战斗本身的难度，你会觉得剧情反而不那么重要，干掉敌人完成任务这个过程反而才是重点；同时，起源较少支线为主线让路的这个做法本身也是突出战斗的一大考量。如果把起源当成一个ARPG游戏，那么它“A”的成分还是更多一些。但是反观奥德赛，它的战斗就进一步简化了，没有马战，防反简单，刺客的飞雷神简直开挂，后期技能及其变态，甚至凑齐极品紫装后就是一刀一个小朋友，战斗本身就成了服务剧情的工具，玩家玩得爽就完事了。但是，仍然作为<strong>刺客信条</strong>系列游戏的奥德赛，总不能全是过剧情吧，那怎么办，疯狂增加要塞、兵营、洞穴就好了！再给你设计无穷多的支线，每个支线都让你去打怪，难度不够，数量来凑，这不动作的成分一下子就高上来了。</p>
+<p>这是一个简单且聪明的想法，但对于奥德赛的定位来说，不够明智。我们可以体会到制作人想要保留APRG的动作成分和角色扮演成分，并且都要做大做强。这当然是可能的，如果做的时间足够久。但是，对于奥德赛来说却不可能，理由如下：</p>
+<ul>
+<li>开发时间短。尽管实际的开发时间我们不能精确得知，但是奥德赛发行于2018年10月，它的上一作发行于2017年10月，两作中间仅间隔一年，是标准的年货游戏。虽然奥德赛是魁北克工作室开发的，而起源是蒙特利尔工作室开发的，但是二者在整个系列的表现形式上具体显著的承接关系，故姑且认为奥德赛的实际开发周期约为2年，这个时间对3A游戏来说不算长；</li>
+<li>奥德赛的定位。奥德赛位于刺客信条系列从ACT向PRG转型的过渡阶段，是比起源更具标志性的一部作品。我个人认为，奥德赛的定位就是一部不成熟的ARPG过渡作品；</li>
+<li>经验的缺乏。显然，阿育对如何结合刺客信条系列传统的ACT元素与RPG元素的经验还有所缺乏，在短时间内要做一部顶级APRG游戏是非常困难的。记得是谁说过，“奥德赛就是想让你玩两年，直到下一部作品问世”，于是，他们把奥德赛的内容强行用问号、感叹号去填充，让玩家去爆肝刷装备，然后体验一刀99999的快感，但实际上，这种大而空的填鸭式内容对大部分骨灰级单机游戏玩家都没有吸引力，有的只是机械重复式的屠杀敌人，毫无乐趣。</li>
+</ul>
+<p>所以说，在奥德赛的游戏类型上（ARPG），平衡性是不够优秀的。大到动作成分与角色扮演成分的平衡，小到装备的平衡、技能的平衡、数值的平衡等多方面，奥德赛的“全都要”战略俨然对大部分玩家来说只是一个噱头。如果只把奥德赛玩成体验剧情、模拟旅游，那奥德赛是再好不过的，可是一旦要玩操作、玩养成，奥德赛好像就走向了低配版的国产网游之路。游戏类型的平衡，是奥德赛的一大不足。</p>
+<h1 id="总结育碧特色系列之巅">总结：育碧特色，系列之巅</h1>
+<p>总的来说，和以往的刺客信条年货作品不同，奥德赛算得上是一部精心打磨的作品，无论是剧情、画面，还是人物、音乐，抑或是育碧特色BUG，都看得出来是经过仔细调教了的。我个人认为奥德赛是综合看来刺客信条系列的巅峰之作，IGN评分9.2也算是比较中肯的评价了（对比起源9.0和巫师三9.3的评分）。如果要我来打分的话，我会打一个9.0分，要是阿育能够在剧情上再多打磨打磨，就可以给到9.5分。如果要说和巫师三差在哪儿，就差在剧情上。</p>
+<p>另外，在本文中我没有谈到奥德赛的音乐，但这并不意味着它不出色，相反，我非常喜欢奥德赛的配乐，对比起源阴间的配乐，奥德赛的整体音乐风格就显得非常阳光和带感。OST可以在<a
+href="https://www.bilibili.com/video/BV17W4111738">B站</a>或者<a
+href="https://y.qq.com/n/yqq/album/0022kx9O4Oy0d9.html">QQ音乐</a>搜到，我已经循环很多天了，强烈推荐大家也去听一听。</p>
+<p>对于11.10号即将发售的英灵殿来说，我个人还是非常期待的，<del>一是可以亲手操作猛男</del>，二是从试玩片段来看，它革除了奥德赛中饱受诟病的一些要素（比如剧情、满屏幕的问号、又臭又多的支线，过于强调等级和装备等），同时还保留了优良的画面。从这两点来看，英灵殿无疑是让人期待的。不管你预卜预购，我反正是已经预购了<del>（还是等打骨折更划算一些/(ㄒoㄒ)/~~）</del>。</p>
+]]></content>
+      <categories>
+        <category>游戏 - 刺客信条</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>游戏</tag>
+        <tag>生活</tag>
+      </tags>
   </entry>
 </search>
