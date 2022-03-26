@@ -1926,11 +1926,11 @@ pre code {
 .post-body .image-caption,
 .post-body img + figcaption,
 .post-body .fancybox + figcaption {
-  color: #999;
+  color: #ccc;
   font-size: 0.875em;
-  font-weight: bold;
-  line-height: 1;
-  margin: -20px auto 15px;
+  font-weight: normal;
+  line-height: 1.5;
+  margin: 0px auto 15px;
   text-align: center;
 }
 .post-body iframe,
