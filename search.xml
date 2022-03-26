@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>《Assassain&#39;s Creed Valhalla》玩后感</title>
+    <url>/2020/11/12/acv-impression-md/</url>
+    <content><![CDATA[<p><code>刺客信条：英灵殿</code>（Assassin's Creed
+Valhalla，下称<code>英灵殿</code>）无疑是刺客信条“神话三部曲”中最成功的一部，无论是从游戏的质量上，还是从销售成绩上。在80个小时的主线与10多个小时的“内置DLC”游玩后，我个人对英灵殿的评价可以总结为“自我突破，承前启后”。说它自我突破是因为它革除了起源和奥德赛中的绝大部分缺点，在自我的改进中完成了里程碑式的跨越；说它承前启后式因为它标志着刺客信条系列一次华丽而成功的转型与过渡，是游戏特色与市场充分交合后的最佳发展方向，是游戏缺点自我祓除与优点渐进式凸显的结果。本文将重点从游戏的任务系统、剧情节奏和人物刻画这三个方面介绍英灵殿的蜕变，至于游戏画面和风景，<del>还有育碧特色BUG，</del>都是刺客信条系列经典的历史特征了，在本文不再赘述。</p>
+<span id="more"></span>
+<h1
+id="任务系统众星捧月映空青稀光散落满夜明">任务系统：众星捧月映空青，稀光散落满夜明</h1>
+<h1
+id="剧情节奏一马平川驰此间峰峦叠嶂牛羊见">剧情节奏：一马平川驰此间，峰峦叠嶂牛羊见</h1>
+<h1
+id="人物刻画穷极千里观百态瓦泥滂沱照众生">人物刻画：穷极千里观百态，瓦泥滂沱照众生。</h1>
+<h1
+id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终将至，共邀朝阳行远方。</h1>
+<p><img data-src="/images/acv-impression/1.png" /></p>
+<p><img data-src="/images/acv-impression/2.png" /></p>
+<p><img data-src="/images/acv-impression/3.png" /></p>
+<p><img data-src="/images/acv-impression/4.png" /></p>
+<p><img data-src="/images/acv-impression/5.png" /></p>
+<p><img data-src="/images/acv-impression/6.png" /></p>
+<p><img data-src="/images/acv-impression/7.png" /></p>
+<p><img data-src="/images/acv-impression/8.png" /></p>
+<p><img data-src="/images/acv-impression/9.png" /></p>
+<p><img data-src="/images/acv-impression/10.png" /></p>
+<p><img data-src="/images/acv-impression/11.png" /></p>
+<p><img data-src="/images/acv-impression/12.png" /></p>
+<p><img data-src="/images/acv-impression/13.png" /></p>
+<p><img data-src="/images/acv-impression/14.png" /></p>
+<p><img data-src="/images/acv-impression/15.png" /></p>
+<p><img data-src="/images/acv-impression/16.png" /></p>
+<p><img data-src="/images/acv-impression/17.png" /></p>
+]]></content>
+      <categories>
+        <category>游戏 - 刺客信条</category>
+      </categories>
+      <tags>
+        <tag>游戏</tag>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Bresenham算法画直线</title>
     <url>/2020/10/18/Bresenham%E7%AE%97%E6%B3%95%E7%94%BB%E7%9B%B4%E7%BA%BF/</url>
     <content><![CDATA[<p>Bresenham's
@@ -184,50 +225,9 @@ class="math inline">\(0&lt;k\le
         <category>CS - 图形学</category>
       </categories>
       <tags>
+        <tag>随笔</tag>
         <tag>计算机</tag>
         <tag>算法</tag>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《Assassain&#39;s Creed Valhalla》玩后感</title>
-    <url>/2020/11/12/acv-impression-md/</url>
-    <content><![CDATA[<p><code>刺客信条：英灵殿</code>（Assassin's Creed
-Valhalla，下称<code>英灵殿</code>）无疑是刺客信条“神话三部曲”中最成功的一部，无论是从游戏的质量上，还是从销售成绩上。在80个小时的主线与10多个小时的“内置DLC”游玩后，我个人对英灵殿的评价可以总结为“自我突破，承前启后”。说它自我突破是因为它革除了起源和奥德赛中的绝大部分缺点，在自我的改进中完成了里程碑式的跨越；说它承前启后式因为它标志着刺客信条系列一次华丽而成功的转型与过渡，是游戏特色与市场充分交合后的最佳发展方向，是游戏缺点自我祓除与优点渐进式凸显的结果。本文将重点从游戏的任务系统、剧情节奏和人物刻画这三个方面介绍英灵殿的蜕变，至于游戏画面和风景，<del>还有育碧特色BUG，</del>都是刺客信条系列经典的历史特征了，在本文不再赘述。</p>
-<span id="more"></span>
-<h1
-id="任务系统众星捧月映空青稀光散落满夜明">任务系统：众星捧月映空青，稀光散落满夜明</h1>
-<h1
-id="剧情节奏一马平川驰此间峰峦叠嶂牛羊见">剧情节奏：一马平川驰此间，峰峦叠嶂牛羊见</h1>
-<h1
-id="人物刻画穷极千里观百态瓦泥滂沱照众生">人物刻画：穷极千里观百态，瓦泥滂沱照众生。</h1>
-<h1
-id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终将至，共邀朝阳行远方。</h1>
-<p><img data-src="/images/acv-impression/1.png" /></p>
-<p><img data-src="/images/acv-impression/2.png" /></p>
-<p><img data-src="/images/acv-impression/3.png" /></p>
-<p><img data-src="/images/acv-impression/4.png" /></p>
-<p><img data-src="/images/acv-impression/5.png" /></p>
-<p><img data-src="/images/acv-impression/6.png" /></p>
-<p><img data-src="/images/acv-impression/7.png" /></p>
-<p><img data-src="/images/acv-impression/8.png" /></p>
-<p><img data-src="/images/acv-impression/9.png" /></p>
-<p><img data-src="/images/acv-impression/10.png" /></p>
-<p><img data-src="/images/acv-impression/11.png" /></p>
-<p><img data-src="/images/acv-impression/12.png" /></p>
-<p><img data-src="/images/acv-impression/13.png" /></p>
-<p><img data-src="/images/acv-impression/14.png" /></p>
-<p><img data-src="/images/acv-impression/15.png" /></p>
-<p><img data-src="/images/acv-impression/16.png" /></p>
-<p><img data-src="/images/acv-impression/17.png" /></p>
-]]></content>
-      <categories>
-        <category>游戏 - 刺客信条</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>游戏</tag>
-        <tag>生活</tag>
       </tags>
   </entry>
   <entry>
@@ -747,8 +747,8 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
         <category>游戏 - 游戏理论</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>游戏</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -930,8 +930,8 @@ CPU @ 2.90GHz。</p>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>计算机</tag>
         <tag>随笔</tag>
+        <tag>计算机</tag>
         <tag>数学</tag>
       </tags>
   </entry>
@@ -1193,30 +1193,9 @@ href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
+        <tag>随笔</tag>
         <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>樱花</title>
-    <url>/2021/06/29/%E6%A8%B1%E8%8A%B1/</url>
-    <content><![CDATA[<p>昨夜 我收到一封书札 旧纸上 缀满了一朵樱花 风干的墨迹
-渗透了陌生人的迷茫 我慢慢 把信合上</p>
-<p>昨夜 我写了一封书札 述说着 近日的苦闷衷肠 窗外的灯火 依旧那么辉煌
-我贴上 一朵樱花珍藏</p>
-<p>同样的夜晚 走过了岁月多少锋芒 心中仍 呐喊着一个熟悉人的回响 把信
-随风寄向远方 留给陌生的他 打开新的过往 愿他不要怯懦 续写昨夜的感慨
-还有清晨的阳光</p>
-<p>案台旁 樱花在绽放</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -1283,6 +1262,27 @@ key）。</p>
         <tag>随笔</tag>
         <tag>生活</tag>
         <tag>影评</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>樱花</title>
+    <url>/2021/06/29/%E6%A8%B1%E8%8A%B1/</url>
+    <content><![CDATA[<p>昨夜 我收到一封书札 旧纸上 缀满了一朵樱花 风干的墨迹
+渗透了陌生人的迷茫 我慢慢 把信合上</p>
+<p>昨夜 我写了一封书札 述说着 近日的苦闷衷肠 窗外的灯火 依旧那么辉煌
+我贴上 一朵樱花珍藏</p>
+<p>同样的夜晚 走过了岁月多少锋芒 心中仍 呐喊着一个熟悉人的回响 把信
+随风寄向远方 留给陌生的他 打开新的过往 愿他不要怯懦 续写昨夜的感慨
+还有清晨的阳光</p>
+<p>案台旁 樱花在绽放</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -1699,8 +1699,8 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>计算机</tag>
         <tag>随笔</tag>
+        <tag>计算机</tag>
         <tag>数学</tag>
       </tags>
   </entry>
@@ -2053,8 +2053,8 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <category>游戏 - 游戏理论</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>游戏</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -2164,8 +2164,8 @@ aria-hidden="true">通关主线，从空荡的凯尔莫罕重新出发，寂寥�
         <category>游戏 - 巫师</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>游戏</tag>
+        <tag>随笔</tag>
         <tag>生活</tag>
       </tags>
   </entry>
@@ -2248,27 +2248,32 @@ src="/images/hades-AI/pillar-2.png" /></p></li>
 <h1 id="实现逻辑">实现逻辑</h1>
 <p>通过观察可以猜测下面的（可能的）AI设计逻辑。 ## 第一阶段
 整体的技能AI涉及到几个参数：技能集合大小随机数randomSetSize，每个技能出现在技能集合中的概率p[i]（i=回旋击、突刺击、突刺击-Ex、发射Bomb、发射Bomb-Ex）及对应的最大出现次数t[i]，Idle持续时间idleTime，技能集合之间的过渡选择概率p[move]、p[Idle]和p[escape]，分别表示用“冲刺移动”、“站立”和“遁形”承接两个相邻的技能集合。</p>
-<p>具体的AI逻辑如下： - 血量判断：当分别为2/3,
-1/3血量的时候，释放技能“召唤”并进入下一个子阶段。每个子阶段上述的所有参数都会有所变动。
--
-距离判断：当玩家和BOSS的距离超过一定距离的时候，会依据p[move]来接近玩家。
-- 第一个子阶段：在满足血量和距离的前提下，生成随机数randomSetSize
-∈[1,2]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。之后，根据idleTime执行站立动作（此时没有用到p[Idle]，因为这个阶段idle是一定执行的）。然后根据p[escape]选择是否执行“遁形”技能。最后回到距离判断。
-- 第二个子阶段：在满足血量和距离的前提下，生成随机数randomSetSize
-∈[2,4]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。注意这个时候p[i]应该有所调整，具体来说，是将发射Bomb和发射Bomb-Ex的概率增大，突刺击和突刺击-Ex的概率降低，回旋击不变或适度增大。之后，根据idleTime执行站立动作（此时没有用到p[Idle]，因为这个阶段idle是一定执行的，同时相比第一个子阶段，idleTime适当减小）。然后根据p[escape]选择是否执行“遁形”技能，p[escape]此时相比上一个子阶段适当增大。最后回到距离判断。
-- 第三个子阶段：在满足血量和距离的前提下，生成随机数randomSetSize
-∈[2,5]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。注意这个时候p[i]应该相比上一个子阶段进一步调整，具体来说，是将发射Bomb和发射Bomb-Ex的概率进一步增大，突刺击和突刺击-Ex的概率进一步降低，回旋击不变或适度增大，最终效果应以Bomb为主，回旋击次之，突刺击为辅。之后，根据p[Idle]决定是否执行站立动作，站立时间为idleTime，相比上一个子阶段时间再次适当缩短。p[Idle]原则上应该比较大(&gt;=80%)。之后，执行“遁形”技能。最后回到距离判断。</p>
+<p>具体的AI逻辑如下：</p>
+<ul>
+<li>血量判断：当分别为2/3,
+1/3血量的时候，释放技能“召唤”并进入下一个子阶段。每个子阶段上述的所有参数都会有所变动。</li>
+<li>距离判断：当玩家和BOSS的距离超过一定距离的时候，会依据p[move]来接近玩家。</li>
+<li>第一个子阶段：在满足血量和距离的前提下，生成随机数randomSetSize
+∈[1,2]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。之后，根据idleTime执行站立动作（此时没有用到p[Idle]，因为这个阶段idle是一定执行的）。然后根据p[escape]选择是否执行“遁形”技能。最后回到距离判断。</li>
+<li>第二个子阶段：在满足血量和距离的前提下，生成随机数randomSetSize
+∈[2,4]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。注意这个时候p[i]应该有所调整，具体来说，是将发射Bomb和发射Bomb-Ex的概率增大，突刺击和突刺击-Ex的概率降低，回旋击不变或适度增大。之后，根据idleTime执行站立动作（此时没有用到p[Idle]，因为这个阶段idle是一定执行的，同时相比第一个子阶段，idleTime适当减小）。然后根据p[escape]选择是否执行“遁形”技能，p[escape]此时相比上一个子阶段适当增大。最后回到距离判断。</li>
+<li>第三个子阶段：在满足血量和距离的前提下，生成随机数randomSetSize
+∈[2,5]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。注意这个时候p[i]应该相比上一个子阶段进一步调整，具体来说，是将发射Bomb和发射Bomb-Ex的概率进一步增大，突刺击和突刺击-Ex的概率进一步降低，回旋击不变或适度增大，最终效果应以Bomb为主，回旋击次之，突刺击为辅。之后，根据p[Idle]决定是否执行站立动作，站立时间为idleTime，相比上一个子阶段时间再次适当缩短。p[Idle]原则上应该比较大(&gt;=80%)。之后，执行“遁形”技能。最后回到距离判断。</li>
+</ul>
 <h2 id="第二阶段-1">第二阶段</h2>
 <p>由于第二阶段内部只包含一个子阶段，因此AI逻辑相比第一阶段更加简单。</p>
 <p>整体的技能AI涉及几个参数：技能集合大小随机数randomSetSize，每个技能出现在技能集合中的概率p[i]（i=回旋击、突刺击-Ex、发射Bomb-Ex、斩击）及对应的最大出现次数t[i]，发射局部光束的概率p[local]，发射全局光束的概率p[global]，发动阴间柱子的概率p[hell]，站立的概率p[Idle]，移动的概率p[move]，站立的持续时间idleTime。</p>
-<p>具体的AI逻辑如下（不考虑进入第二阶段开始的初始爆发）： -
-距离判断：当玩家和BOSS的距离超过一定距离的时候，会依据p[move]来接近玩家。
--
-根据p[hell]决定是否释放阴间柱子。如果释放，则进入“阴间模式”，否则为“普通模式”。
-- 在“阴间模式”下，生成随机数randomSetSize
-∈[2,5]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。之后，根据p[local]和p[global]选择执行“局部光束”或者“全局光束”。之后，根据p[Idle]决定是否执行站立动作，站立时间为idleTime，该值小于BOSS第一阶段的对应值。“阴间模式”结束，减小p[hell]，如果当前是第三次释放阴间柱子，则设置p[hell]=0。最后回到距离判断。
-- 在“普通模式”下，生成随机数randomSetSize
-∈[2,5]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。之后，根据p[Idle]决定是否执行站立动作，站立时间为idleTime，该值小于BOSS第一阶段的对应值。“普通模式”结束，回到距离判断。</p>
+<p>具体的AI逻辑如下（不考虑进入第二阶段开始的初始爆发）：</p>
+<ul>
+<li>距离判断：当玩家和BOSS的距离超过一定距离的时候，会依据p[move]来接近玩家。</li>
+<li>根据p[hell]决定是否释放阴间柱子。如果释放，则进入“阴间模式”，否则为“普通模式”。
+<ul>
+<li>在“阴间模式”下，生成随机数randomSetSize
+∈[2,5]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。之后，根据p[local]和p[global]选择执行“局部光束”或者“全局光束”。之后，根据p[Idle]决定是否执行站立动作，站立时间为idleTime，该值小于BOSS第一阶段的对应值。“阴间模式”结束，减小p[hell]，如果当前是第三次释放阴间柱子，则设置p[hell]=0。最后回到距离判断。</li>
+<li>在“普通模式”下，生成随机数randomSetSize
+∈[2,5]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。之后，根据p[Idle]决定是否执行站立动作，站立时间为idleTime，该值小于BOSS第一阶段的对应值。“普通模式”结束，回到距离判断。</li>
+</ul></li>
+</ul>
 <h1 id="用behavior-designer画一个简单的行为树">用Behavior
 Designer画一个简单的行为树</h1>
 <p>按照上述逻辑可以设计如下的简化版BD，直接展现图，就不过多文字描述了。</p>
@@ -2281,8 +2286,8 @@ Designer画一个简单的行为树</h1>
         <category>游戏 - 游戏分析</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>游戏</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -2428,8 +2433,8 @@ href="https://y.qq.com/n/yqq/album/0022kx9O4Oy0d9.html">QQ音乐</a>搜到，我
         <category>游戏 - 刺客信条</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>游戏</tag>
+        <tag>随笔</tag>
         <tag>生活</tag>
       </tags>
   </entry>
