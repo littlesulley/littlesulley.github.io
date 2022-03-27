@@ -99,9 +99,16 @@
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">11</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">16</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a></li>
+        
+            
+  <li class="menu-item menu-item-相册"><a href="/photos/" rel="section"><i class="fa fa-camera fa-fw"></i>相册</a></li>
+
+
+      
+        <li class="menu-item menu-item-资源"><a href="/resources/" rel="section"><i class="fa fa-book fa-fw"></i>资源</a></li>
         <li class="menu-item menu-item-留言"><a href="/comments/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
       <li class="menu-item menu-item-search">
@@ -175,7 +182,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -186,7 +193,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -536,6 +543,13 @@ class="math inline">\((x_{P},y_{P},z_{P})\)</span>。这是因为从三维空间
 Projection），这个投影是非线性的，因此变换前的重心坐标并不能和变换后的重心坐标保持线性关系，从而对三角形顶点的属性插值也不是线性关系。这就需要对透视投影下的重心坐标插值进行修正。本文从透视投影本身出发，说明其非线性性，并根据论文《Perspective-Correct
 Interpolation》<a href="#fn1" class="footnote-ref" id="fnref1"
 role="doc-noteref"><sup>1</sup></a> 给出修正插值。</p></p></div>
+    </li>
+    <li class="popular-posts-item">
+        <div class="popular-posts-date">2020-09-09</div>
+      <div class="popular-posts-title"><a href="2020/09/09/infinite-radicals/" rel="bookmark">无穷连根式求极限的充要条件</a></div>
+        <div class="popular-posts-excerpt"><p><p>在刷习题集或者考试的时候我们经常会遇到诸如<span
+class="math inline">\(\sqrt{1+\sqrt{2+\sqrt{3+\cdots}}}\)</span>或者<span
+class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解或极限存在性证明。解决此类问题的方法有很多，但都可以归结为一点：缩放。要么是两端缩放然后夹逼定理，要么是证明有界然后两边取极限。本文记录此类问题极限存在的一个充要条件，以供参阅。</p></p></div>
     </li>
   </ul>
 
