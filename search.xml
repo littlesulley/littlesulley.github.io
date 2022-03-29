@@ -1271,16 +1271,72 @@ class="math inline">\(kj=-i\)</span>, <span
 class="math inline">\(ji=-k\)</span>, <span
 class="math inline">\(ik=-j\)</span></p>
 <p>于是能够得到下表：</p>
-<p><span class="math display">\[
-\begin{tabular}{|c|c|c|c|c|}
-  \hline
-  \times &amp; 1 &amp; i &amp; j &amp; k\\\hline
-  1 &amp; 1 &amp; i &amp; j &amp; k\\\hline
-  i &amp; i &amp; -1 &amp; k &amp; -j\\\hline
-  j &amp; j &amp; -k &amp; -1 &amp; i\\\hline
-  k &amp; k &amp; j &amp; -i &amp; -1\\\hline
-\end{tabular}
-\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span
+class="math inline">\(\times\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(1\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(i\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(j\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(i\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(j\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(k\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span
+class="math inline">\(i\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(i\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(k\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-j\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span
+class="math inline">\(j\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(j\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-k\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(i\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span
+class="math inline">\(k\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(k\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(j\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-i\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-1\)</span></td>
+</tr>
+</tbody>
+</table>
 <p>容易观察到交换律并不成立，即<span class="math inline">\(ij\neq
 ji\)</span>。利用这个表格，我们能够对四元数之间的乘法进行归纳简化：</p>
 <p><span class="math display">\[
@@ -1517,22 +1573,6 @@ key）。</p>
         <tag>随笔</tag>
         <tag>生活</tag>
         <tag>影评</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>西湖夜歌</title>
-    <url>/2021/07/09/%E8%A5%BF%E6%B9%96%E5%A4%9C%E6%AD%8C/</url>
-    <content><![CDATA[<p>霓光半遮影<br />
-湖波轻颤合韵起<br />
-半句寻谁去</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -1938,6 +1978,22 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <tag>计算机</tag>
         <tag>随笔</tag>
         <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>西湖夜歌</title>
+    <url>/2021/07/09/%E8%A5%BF%E6%B9%96%E5%A4%9C%E6%AD%8C/</url>
+    <content><![CDATA[<p>霓光半遮影<br />
+湖波轻颤合韵起<br />
+半句寻谁去</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
