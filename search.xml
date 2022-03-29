@@ -965,523 +965,6 @@ CPU @ 2.90GHz。</p>
       </tags>
   </entry>
   <entry>
-    <title>四元数与旋转</title>
-    <url>/2022/03/25/%E5%9B%9B%E5%85%83%E6%95%B0%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<p>图形学中的旋转（Rotation）非常重要，用欧拉角（Euler
-Angle）旋转非常简单，但是却存在 <strong>万向锁（Gimbal Lock）</strong>
-的问题；同时，用欧拉角插值也不尽方便。基于四元数（Quaternion）的旋转既解决了万向锁的问题，又能非常便利地插值。本文将从概念出发，对四元数的定义、推导、性质、应用，以及它与欧拉角之间的联系进行介绍。本文主要参考了Krasjet的《四元数与三维旋转》。<a
-href="#fn1" class="footnote-ref" id="fnref1"
-role="doc-noteref"><sup>1</sup></a></p>
-<span id="more"></span>
-<h1 id="复数与二维旋转">复数与二维旋转</h1>
-<p>首先我们将简要介绍复数及它与二维旋转的关系，从而可以更加自然地过度到四元数及其与三维旋转的关系。</p>
-<h2 id="定义">定义</h2>
-<p>复空间<span
-class="math inline">\(\mathbb{C}\)</span>中的任一复数<span
-class="math inline">\(z\in\mathbb{C}\)</span>都可以表示为<span
-class="math inline">\(z=a+bi\
-(a,b\in\mathbb{R})\)</span>的形式，且满足<span
-class="math inline">\(i^2=-1\)</span>。此时<span
-class="math inline">\(a\)</span>称为复数<span
-class="math inline">\(z\)</span>的实部 (Real Part)，表达为<span
-class="math inline">\(a=\text{Re}(z)\)</span>；<span
-class="math inline">\(b\)</span>称为复数的虚部 (Imaginary
-Part)，表达为<span class="math inline">\(b=\text{Im}(z)\)</span>。</p>
-<p>从线性代数的角度来看，复数<span
-class="math inline">\(z=a+bi\)</span>可以看成是基 (Basis) <span
-class="math inline">\(\{1,i\}\)</span>上的线性组合，因此也可以把复数<span
-class="math inline">\(z\)</span>写成一个向量：</p>
-<p><span class="math display">\[z=\begin{bmatrix}a\\b
-\end{bmatrix}\]</span></p>
-<h2 id="复数的加法与乘法">复数的加法与乘法</h2>
-<h3 id="复数的加法">复数的加法</h3>
-<p>复数的加法很简单，分别把实部和虚部相加即可。减法类似，不多赘述。</p>
-<h3 id="复数的乘法">复数的乘法</h3>
-<p>对复数<span
-class="math inline">\(z_1=a+bi,z_2=c+di\)</span>，它们相乘的结果为：</p>
-<p><span
-class="math display">\[z_1z_2=(a+bi)(c+di)=(ac-bd)+(bc+ad)i\]</span></p>
-<p>利用上面讲过的复数的向量形式，可以把上式写成矩阵乘向量的形式：</p>
-<p><span class="math display">\[z_1z_2=(ac-bd)+(bc+ad)i=
-\begin{bmatrix}
-ac-bd\\
-bc+ad
-\end{bmatrix}=
-\begin{bmatrix}
-a &amp; -b\\
-b &amp; a
-\end{bmatrix}
-\begin{bmatrix}
-c\\
-d
-\end{bmatrix}\]</span></p>
-<p>右侧的向量<span
-class="math inline">\(\begin{bmatrix}c\\d\end{bmatrix}\)</span>就是向量形式下的<span
-class="math inline">\(z_2\)</span>，而左侧的矩阵<span
-class="math inline">\(\begin{bmatrix}a&amp;-b\\b&amp;a\end{bmatrix}\)</span>则是<span
-class="math inline">\(z_1\)</span>在乘法时的<strong>矩阵形式</strong>，矩阵的第一列就是自身的向量形式，而第二列进行了交换并对虚部取负。</p>
-<p>所以，我们可以把<span
-class="math inline">\(z_2\)</span>也写成矩阵形式，然后与<span
-class="math inline">\(z_1\)</span>相乘：</p>
-<p><span class="math display">\[z_1z_2=
-\begin{bmatrix}
-a &amp; -b\\
-b &amp; a
-\end{bmatrix}
-\begin{bmatrix}
-c &amp; -d\\
-d &amp; c
-\end{bmatrix}=
-\begin{bmatrix}
-ac-bd &amp; -(bc+ad)\\
-bc+ad &amp; ac-bd
-\end{bmatrix}\]</span></p>
-<p>所以，我们现在可以用至少三种形式去表达一个复数了（具体用哪种形式取决于我们的需要）：</p>
-<ul>
-<li>代数形式：<span class="math inline">\(z=a+bi\)</span>;</li>
-<li>向量形式：<span
-class="math inline">\(z=\begin{bmatrix}a\\b\end{bmatrix}\)</span>;</li>
-<li>矩阵形式：<span class="math inline">\(z=\begin{bmatrix}a &amp; -b\\b
-&amp; a\end{bmatrix}\)</span>.</li>
-</ul>
-<p>有两个特殊的复数<span
-class="math inline">\(1,i\)</span>，它们的矩阵形式不难得到是：</p>
-<p><span class="math display">\[1=\begin{bmatrix}
-1 &amp; 0\\
-0 &amp; 1
-\end{bmatrix}=I\;(a=1, b=0)\]</span></p>
-<p><span class="math display">\[i=\begin{bmatrix}
-0 &amp; -1\\
-1 &amp; 0
-\end{bmatrix}\;(a=0, b=1)\]</span></p>
-<p>对复数<span
-class="math inline">\(i\)</span>的矩阵形式进行平方，发现它就是<span
-class="math inline">\(-I\)</span>，从代数形式来看，就等价于<span
-class="math inline">\(i^2=-1\)</span>。这说明复数的矩阵形式是良定义的。</p>
-<h2 id="复数的模长">复数的模长</h2>
-<p>复数<span
-class="math inline">\(z=a+bi\)</span>的模长（Magnitude）定义为:</p>
-<p><span class="math display">\[\|z\| =\sqrt{a^2+b^2}\]</span></p>
-<p>这可以用它的共轭（Conjugate）表示：</p>
-<p><span class="math display">\[\|z\| =\sqrt{z\bar{z}},\\;
-\bar{z}=a-bi\]</span></p>
-<h2 id="复数与二维旋转-1">复数与二维旋转</h2>
-<h3 id="从复数矩阵形式导出旋转关系">从复数矩阵形式导出旋转关系</h3>
-<p>下面将重点引出复数与二维旋转的关系。</p>
-<p>注意观察复数<span class="math inline">\(z\)</span>的矩阵形式<span
-class="math inline">\(\begin{bmatrix}a &amp; -b\\b &amp;
-a\end{bmatrix}\)</span>，我们可以把它变换为下述形式：</p>
-<p><span class="math display">\[\begin{bmatrix}
-a &amp; -b\\
-b &amp; a
-\end{bmatrix}=\sqrt{a^2+b^2}
-\begin{bmatrix}
-\frac{a}{\sqrt{a^2+b^2}} &amp; \frac{-b}{\sqrt{a^2+b^2}}\\
-\frac{b}{\sqrt{a^2+b^2}} &amp; \frac{a}{\sqrt{a^2+b^2}}
-\end{bmatrix}\]</span></p>
-<p>矩阵中的每一项都被模长<span
-class="math inline">\(\|z\|\)</span>缩放了，此时注意到<span
-class="math inline">\(\frac{a}{\sqrt{a^2+b^2}}\)</span>就是复数<span
-class="math inline">\(z\)</span>在复平面与实轴形成夹角<span
-class="math inline">\(\theta\)</span>的余弦值<span
-class="math inline">\(\cos(\theta)\)</span>，而<span
-class="math inline">\(\frac{b}{\sqrt{a^2+b^2}}\)</span>正好对应了正弦值<span
-class="math inline">\(\sin(\theta)\)</span>，而这个夹角<span
-class="math inline">\(\theta\)</span>就是<span
-class="math inline">\(\arctan(b/a)\)</span>。</p>
-<p>这样一来，我们就可以把上式写成：</p>
-<p><span class="math display">\[
-\begin{align}
-\begin{bmatrix}
-a &amp; -b\\
-b &amp; a
-\end{bmatrix}&amp;=\|z\|
-\begin{bmatrix}
-\cos(\theta) &amp; -\sin(\theta)\\
-\sin(\theta) &amp; \cos(\theta)
-\end{bmatrix}=
-\begin{bmatrix}
-\|z\| &amp; 0\\
-0 &amp; \|z\|
-\end{bmatrix}
-\begin{bmatrix}
-\cos(\theta) &amp; -\sin(\theta)\\
-\sin(\theta) &amp; \cos(\theta)
-\end{bmatrix}
-\label{eq1}
-\end{align}
-\]</span></p>
-<p>这样一来，任意复数<span
-class="math inline">\(z=a+bi\)</span>都可以表示为两个矩阵的乘积，一个缩放矩阵<span
-class="math inline">\(\begin{bmatrix}\|z\| &amp; 0\\0 &amp;
-\|z\|\end{bmatrix}\)</span>和一个（我们熟悉的）旋转矩阵<span
-class="math inline">\(\begin{bmatrix}\cos(\theta) &amp;
--\sin(\theta)\\\sin(\theta) &amp;
-\cos(\theta)\end{bmatrix}\)</span>的复合。换句话说，<strong>复数的几何意义就是进行旋转与缩放，旋转角度为<span
-class="math inline">\(\theta=\arctan(b/a)\)</span>，缩放大小为复数的模长。</strong>
-如果复数的模长为1，那么它的几何意义就只有旋转。</p>
-<p>所以，对复数<span class="math inline">\(p\)</span>的旋转：</p>
-<p><span class="math display">\[p&#39;=\begin{bmatrix}
-\cos(\theta) &amp; -\sin(\theta)\\
-\sin(\theta) &amp; \cos(\theta)
-\end{bmatrix}p\]</span></p>
-<p>我们可以构造一个复数<span
-class="math inline">\(z=\cos(\theta)+i\sin(\theta)\)</span>，把它与<span
-class="math inline">\(p\)</span>相乘表示旋转：</p>
-<p><span
-class="math display">\[p&#39;=zp=(\cos(\theta)+i\sin(\theta))p\]</span></p>
-<h3 id="复数的极坐标形式">复数的极坐标形式</h3>
-<p>当我们看到<span
-class="math inline">\(\eqref{eq1}\)</span>式的时候，我们立马可以得到复数的另一种代数形式：</p>
-<p><span
-class="math display">\[z=\|z\|(\cos(\theta)+i\sin(\theta))\]</span></p>
-<p>再根据欧拉公式（Euler's Formula）：</p>
-<p><span
-class="math display">\[\cos(\theta)+i\sin(\theta)=\mathrm{e}^{i\theta}\]</span></p>
-<p>可以立得复数的<strong>极坐标形式</strong>：</p>
-<p><span
-class="math display">\[z=\|z\|\mathrm{e}^{i\theta}=r\mathrm{e}^{i\theta},\;
-r=\|z\|\]</span></p>
-<p>现在，复数<span
-class="math inline">\(z\)</span>不再通过它的实部和虚部表示，而且通过一个旋转角<span
-class="math inline">\(\theta\)</span>与缩放因子<span
-class="math inline">\(r\)</span>去表示了，它对任意一个复数<span
-class="math inline">\(p\)</span>的旋转，都可以表示为：</p>
-<p><span
-class="math display">\[p&#39;=r\mathrm{e}^{i\theta}p\]</span></p>
-<p>如果仅需表示旋转，则令<span
-class="math inline">\(r=1\)</span>即可。</p>
-<details class="note success no-icon"><summary><p>Proof of Euler's Formula</p>
-</summary>
-<p>令<span
-class="math inline">\(f(\theta)=\frac{\cos(\theta)+i\sin(\theta)}{\mathrm{e}^{i\theta}}=\mathrm{e}^{-i\theta}(\cos(\theta)+i\sin(\theta))\)</span>，对实数<span
-class="math inline">\(\theta\)</span>，对<span
-class="math inline">\(f(\theta)\)</span>求导，得到<span
-class="math inline">\(f&#39;(\theta)=\mathrm{e}^{-i\theta}(i\cos(\theta)-\sin(\theta))-i\mathrm{e}^{-i\theta}(\cos(\theta)+i\sin(\theta))=0\)</span>，因此<span
-class="math inline">\(f(\theta)\)</span>是常数。又因为<span
-class="math inline">\(f(0)=1\)</span>，所以<span
-class="math inline">\(f(\theta)\equiv 1\)</span>。欧拉公式得证。</p>
-
-</details>
-<h3 id="复数的几种表示形式总结">复数的几种表示形式总结</h3>
-<p>现在我们已经得到了如下几种复数<span
-class="math inline">\(z=a+bi\)</span>的表示形式：</p>
-<ul>
-<li>代数形式一：<span class="math inline">\(z=a+bi\)</span>;</li>
-<li>向量形式：<span
-class="math inline">\(z=\begin{bmatrix}a\\b\end{bmatrix}\)</span>;</li>
-<li>矩阵形式一：<span class="math inline">\(z=\begin{bmatrix}a &amp;
--b\\b &amp; a\end{bmatrix}\)</span>;</li>
-<li>矩阵形式二：<span class="math inline">\(z=\begin{bmatrix}\|z\| &amp;
-0\\0 &amp; \|z\|\end{bmatrix}\begin{bmatrix}\cos(\theta) &amp;
--\sin(\theta)\\\sin(\theta) &amp;
-\cos(\theta)\end{bmatrix}\)</span>;</li>
-<li>代数形式二：<span
-class="math inline">\(z=r(\cos(\theta)+i\sin(\theta))\)</span>;</li>
-<li>极坐标形式：<span
-class="math inline">\(z=r\mathrm{e}^{i\theta}\)</span>.</li>
-</ul>
-<p>这几种形式是完全等价的。</p>
-<h2 id="旋转复合">旋转复合</h2>
-<p>假设我们现在有两个仅表示旋转的复数<span
-class="math inline">\(z_1=\cos(\theta)+i\sin(\theta),z_2=\cos(\phi)+i\sin(\phi)\)</span>，相继用它们对一个复数<span
-class="math inline">\(p\)</span>旋转：</p>
-<p><span
-class="math display">\[p&#39;=z_2z_1p=(z_2z_1)p=(z_1z_2)p=(\cos(\theta+\phi)+i\sin(\theta+\phi))p\]</span></p>
-<p>所以，用两个复数进行旋转时，所得到的结果仍然是一个旋转，且旋转的角度是两次旋转角度之和。</p>
-<h1 id="三维空间中的旋转">三维空间中的旋转</h1>
-<p>在<a
-href="https://sulley.cc/2021/06/07/%E5%90%91%E9%87%8F%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E7%AE%80%E5%8D%95%E6%8E%A8%E5%AF%BC/">这篇博客</a>中，我们已经介绍了三维空间中一个向量绕任意轴旋转的公式（被称为<a
-href="https://en.wikipedia.org/wiki/Rodrigues%27_rotation_formula">Rodrigues'
-formula</a>）。因为下文会涉及大量此公式，因此把结论在此重新记述，推导过程请参考原文。</p>
-<p>记<span
-class="math inline">\(\mathbf{p}\)</span>是待旋转的向量，<span
-class="math inline">\(\mathbf{n}\)</span>是被围绕旋转的轴，是一个单位向量，<span
-class="math inline">\(\theta\)</span>是要旋转的角度，<span
-class="math inline">\(\mathbf{p}&#39;\)</span>是旋转后的向量。我们有：</p>
-<p><span
-class="math display">\[\mathbf{p}&#39;=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p})\]</span></p>
-<p>请记住此公式，我们将看到它与四元数之间紧密的联系。</p>
-<h1 id="欧拉角与万向锁gimbal-lock问题">欧拉角与万向锁（Gimbal
-Lock）问题</h1>
-<p>在正式进入四元数之前，我们介绍欧拉角及其引发的万向锁问题。</p>
-<h1 id="四元数">四元数</h1>
-<h2 id="定义-1">定义</h2>
-<p>四元数可以定义为如下形式：</p>
-<p><span class="math display">\[q=a+bi+cj+dk
-\;(a,b,c,d\in\mathbb{R})\]</span></p>
-<p>这个定义和复数非常相似，只不过四元数有三个“虚部” (<span
-class="math inline">\(i,j,k\)</span>)，而复数只有一个“虚部” (<span
-class="math inline">\(i\)</span>)。</p>
-<p>上述的<span class="math inline">\(i,j,k\)</span>满足如下性质：</p>
-<p><span class="math display">\[i^2=j^2=k^2=ijk=-1\]</span></p>
-<p>如果把上式称为四元数的<strong>代数形式</strong>，那么同样地，它也可以有对应的<strong>向量形式一</strong>：</p>
-<p><span class="math display">\[q=\begin{bmatrix}
-  a\\b\\c\\d
-\end{bmatrix}\]</span></p>
-<p>如果把四元数<span
-class="math inline">\(q\)</span>的“实部”和“虚部”拆开，那么四元数还可以表示为下述的<strong>向量形式二</strong>：</p>
-<p><span class="math display">\[q=[s,\mathbf{v}],\;
-(\mathbf{v}=\begin{bmatrix}
-  x\\
-  y\\
-  z
-\end{bmatrix},s,x,y,z\in\mathbb{R})\]</span></p>
-<p>所以，仅仅从定义来看，四元数就有如下三种等价的形式：</p>
-<ul>
-<li><strong>代数形式</strong>：<span
-class="math inline">\(q=a+bi+cj+dk\)</span>;</li>
-<li><strong>向量形式一</strong>：<span
-class="math inline">\(q=\begin{bmatrix}a\\b\\c\\d\end{bmatrix}\)</span>;</li>
-<li><strong>向量形式二</strong>：<span
-class="math inline">\(q=[s,\mathbf{v}]\)</span>.</li>
-</ul>
-<h2 id="加法乘法模长">加法、乘法、模长</h2>
-<h3 id="加法">加法</h3>
-<p>给定两个四元数<span
-class="math inline">\(q_1=a_1+b_1i+c_1j+d_1k\)</span>与<span
-class="math inline">\(q_2=a_2+b_2i+c_2j+d_2k\)</span>，定义四元数的加法为：</p>
-<p><span
-class="math display">\[q_1+q_2=(a_1+a_2)+(b_1+b_2)i+(c_1+c_2)j+(d_1+d_2)k\]</span></p>
-<p>用四元数的向量形式<span
-class="math inline">\(q_1=[a_1,\mathbf{v}_1],q_2=[a_2,\mathbf{v}_2]\)</span>，可以把上式简化为：</p>
-<p><span class="math display">\[q_1\pm q_2=[a_1\pm a_2, \mathbf{v}_1\pm
-\mathbf{v}_2]\]</span></p>
-<h3 id="乘法">乘法</h3>
-<p>四元数的标量乘法和实数、复数一样，可以定义为：</p>
-<p><span class="math display">\[sq=s(a+bi+cj+dk)\]</span></p>
-<p>然而四元数之间的乘积可以通过如下步骤定义：</p>
-<p><span class="math display">\[
-\begin{equation}
-  \begin{aligned}
-  q_1q_2=&amp;(a_1+b_1i+c_1j+d_1k)(a_2+b_2i+c_2j+d_2k)\\
-        =&amp;a_1a_2+a_1b_2i+a_1c_2j+a_1d_2k+\\
-        &amp;b_1a_2i+b_1b_2i^2+b_1c_2ij+b_1d_2ik+\\
-        &amp;c_1a_2j+c_1b_2ji+c_1c_2j^2+c_1d_2jk+\\
-        &amp;d_1a_2k+d_1b_2ki+d_1c_2kj+d_1d_2k^2
-  \end{aligned}
-\end{equation}
-\]</span></p>
-<p>我们可以从性质<span
-class="math inline">\(i^2=j^2=k^2=ijk=-1\)</span>推导出如下的性质：</p>
-<p><span class="math inline">\(jk=i\)</span>, <span
-class="math inline">\(ij=k\)</span>, <span
-class="math inline">\(ki=j\)</span>, <span
-class="math inline">\(kj=-i\)</span>, <span
-class="math inline">\(ji=-k\)</span>, <span
-class="math inline">\(ik=-j\)</span></p>
-<p>于是能够得到下表：</p>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;"><span
-class="math inline">\(\times\)</span></th>
-<th style="text-align: center;"><span
-class="math inline">\(1\)</span></th>
-<th style="text-align: center;"><span
-class="math inline">\(i\)</span></th>
-<th style="text-align: center;"><span
-class="math inline">\(j\)</span></th>
-<th style="text-align: center;"><span
-class="math inline">\(k\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"><span
-class="math inline">\(1\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(1\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(i\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(j\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(k\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><span
-class="math inline">\(i\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(i\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(-1\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(k\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(-j\)</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"><span
-class="math inline">\(j\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(j\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(-k\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(-1\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(i\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><span
-class="math inline">\(k\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(k\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(j\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(-i\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(-1\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>容易观察到交换律并不成立，即<span class="math inline">\(ij\neq
-ji\)</span>。利用这个表格，我们能够对四元数之间的乘法进行归纳简化：</p>
-<p><span class="math display">\[
-\begin{equation}
-  \begin{aligned}
-  q_1q_2=&amp;(a_1+b_1i+c_1j+d_1k)(a_2+b_2i+c_2j+d_2k)\\
-        =&amp;(a_1a_2-b_1b_2-c_1c_2-d_1d_2)+\\
-        &amp;(a_1b_2+b_1a_2+c_1d_2-d_1c_2)i+\\
-        &amp;(a_1c_2-b_1d_2+c_1a_2+d_1b_2)j+\\
-        &amp;(a_1d_2+b_1c_2-c_1b_2+d_1a_2)k
-  \end{aligned}
-\end{equation}
-\]</span></p>
-<p>现在，得到的这个新四元数<span
-class="math inline">\(q_0=q_1q_2\)</span>的四个分量都表示了出来，即：</p>
-<p><span class="math display">\[q_0=a_0+b_0i+c_0j+d_0k,\; \begin{cases}
-  a_0=a_1a_2-b_1b_2-c_1c_2-d_1d_2\\
-  b_0=a_1b_2+b_1a_2+c_1d_2-d_1c_2\\
-  c_0=a_1c_2-b_1d_2+c_1a_2+d_1b_2\\
-  d_0=a_1d_2+b_1c_2-c_1b_2+d_1a_2
-\end{cases}\]</span></p>
-<p>或者可以写成下述的<strong>矩阵形式</strong>：</p>
-<p><span class="math display">\[q_0=q_1q_2=\begin{bmatrix}
-  a_0\\
-  b_0\\
-  c_0\\
-  d_0
-\end{bmatrix}=\begin{bmatrix}
-  a_2 &amp; -b_2 &amp; -c_2 &amp; -d_2\\
-  b_2 &amp; a_2 &amp; d_2 &amp; -c_2\\
-  c_2 &amp; -d_2 &amp; a_2 &amp; b_2\\
-  d_2 &amp; c_2 &amp; -b_2 &amp; a_2
-\end{bmatrix}\begin{bmatrix}
-  a_1\\
-  b_1\\
-  c_1\\
-  d_1
-\end{bmatrix}\]</span></p>
-<p>这样一来，我们就把两个四元数的乘积写成了矩阵与向量的乘积，并且由于四元数的乘法不可交换，<span
-class="math inline">\(q_0=q_1q_2\)</span>代表的仅仅是<span
-class="math inline">\(q_1\)</span>为左乘数、<span
-class="math inline">\(q_2\)</span>为右乘数时的结果。我们把矩阵<span
-class="math inline">\(\begin{bmatrix}a_2 &amp; -b_2 &amp; -c_2 &amp;
--d_2\\b_2 &amp; a_2 &amp; d_2 &amp; -c_2\\c_2 &amp; -d_2 &amp; a_2 &amp;
-b_2\\d_2 &amp; c_2 &amp; -b_2 &amp;
-a_2\end{bmatrix}\)</span>称为四元数<span
-class="math inline">\(q_2\)</span>当右乘子时的变换矩阵，或<strong>矩阵形式</strong>。</p>
-<h3 id="graßmann积">Graßmann积</h3>
-<p>显然矩阵形式又臭又长，我们希望用一种更简单的形式——Graßmann积——去表示四元数乘法。</p>
-<p>重新整理之前的乘法结果：</p>
-<p><span class="math display">\[
-\begin{equation}
-  \begin{aligned}
-q_0=q_1q_2=&amp;(a_1a_2-(b_1b_2+c_1c_2+d_1d_2))+\\
-          &amp;({\color{pink}{a_1}}b_2+{\color{teal}{a_2}}b_1+{\color{violet}{c_1d_2-d_1c_2}})i+\\
-          &amp;({\color{pink}{a_1}}c_2+{\color{teal}{a_2}}c_1+{\color{violet}{d_1b_2-b_1d_2}})j\\
-          &amp;({\color{pink}{a_1}}d_2+{\color{teal}{a_2}}d_1+{\color{violet}{b_1c_2-c_1b_2}})k
-  \end{aligned}
-\end{equation}
-\]</span></p>
-<p>如果令<span
-class="math inline">\(q_1=[a_1,\mathbf{v}_1],q_2=[a_2,\mathbf{v}_2]\)</span>，则有：</p>
-<p><span class="math display">\[
-\begin{aligned}
-  \mathbf{v}_1\cdot \mathbf{v}_2&amp;=b_1b_2+c_1c_2+d_1d_2\\
-  \mathbf{v}_1\times\mathbf{v}_2&amp;=\begin{bmatrix}
-    \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k}\\
-    b_1 &amp; c_1 &amp; d_1\\
-    b_2 &amp; c_2 &amp; d_2
-  \end{bmatrix}=({\color{violet}{c_1d_2-d_1c_2}})\mathbf{i}+({\color{violet}{d_1b_2-b_1d_2}})\mathbf{j}+({\color{violet}{b_1c_2-c_1b_2}})\mathbf{k}
-\end{aligned}
-\]</span></p>
-<p>这样一来，我们就可以用点乘和叉乘的形式表示四元数的乘积：</p>
-<p><span class="math display">\[\begin{aligned}
-  q_0=q_1q_2=[a_1a_2-\mathbf{v}_1\cdot\mathbf{v}_2,a_1\mathbf{v}_2+a_2\mathbf{v}_1+\mathbf{v}_1\times\mathbf{v}_2]
-\end{aligned}\]</span></p>
-<p>这就是所谓的Graßmann积（Graßmann
-Product）。所以，从Graßmann积也可能看到两个四元数的乘积一般是不可交换的，因为叉乘一般不可交换。</p>
-<h3 id="模长">模长</h3>
-<p>四元数的模长和向量的模长定义一样：</p>
-<p><span class="math display">\[\|q\|
-=\sqrt{a^2+b^2+c^2+d^2}=\sqrt{a^2+\mathbf{v}\cdot
-\mathbf{v}}\]</span></p>
-<h3 id="纯四元数">纯四元数</h3>
-<p>定义“实部”为零的四元数为<strong>纯四元数</strong>，即：</p>
-<p><span class="math display">\[q=[0,\mathbf{v}]\]</span></p>
-<p>对于两个纯四元数<span
-class="math inline">\(q_1=[0,\mathbf{v}_1],q_2=[0,\mathbf{v}_2]\)</span>，它们的乘积为：</p>
-<p><span
-class="math display">\[q_1q_2=[-\mathbf{v}_1\cdot\mathbf{v}_2,\mathbf{v}_1\times
-\mathbf{v}_2]\]</span></p>
-<h3 id="共轭">共轭</h3>
-<p>四元数的共轭（Conjugation）与复数的共轭类似，可以定义为：</p>
-<p><span
-class="math display">\[q^*=[a,-\mathbf{v}]=[a,-b,-c,-d]=a-bi-cj-dk\]</span></p>
-<p>四元数与它自己的共轭相乘可以得到一个标量：</p>
-<p><span
-class="math display">\[qq^*=[a^2+\mathbf{v}\cdot\mathbf{v},-a\mathbf{v}+a\mathbf{v}+\mathbf{v}\times(-\mathbf{v})]=[a^2+\mathbf{v}\cdot\mathbf{v},0]=\|q\|^2\]</span></p>
-<p>正好是四元数模长的平方。同时：</p>
-<p><span
-class="math display">\[q^*q=(q^*)(q^*)^*=\|q^*\|^2=\|q\|^2\]</span></p>
-<p>这表明四元数与它共轭的乘法是可交换的。这是一个非常好的性质。</p>
-<h3 id="逆">逆</h3>
-<p>有了共轭，我们最后就可以来定义四元数的逆（Inverse）了。记四元数<span
-class="math inline">\(q\)</span>的逆为<span
-class="math inline">\(q^{-1}\)</span>，则<span
-class="math inline">\(q^{-1}\)</span>是满足下述性质的四元数：</p>
-<p><span class="math display">\[qq^{-1}=q^{-1}q=1,\; (q\neq
-0)\]</span></p>
-<p>利用共轭，我们可以进行如下推导：</p>
-<p><span class="math display">\[
-\begin{aligned}
-  qq^{-1}&amp;=1\\
-  q^*qq^{-1}&amp;=q^*\\
-  \|q\|^2q^{-1}&amp;=q^*\\
-  q^{-1}&amp;=\frac{q^*}{\|q\|^2}
-\end{aligned}
-\]</span></p>
-<p>所以，四元数的逆就是它的共轭除以它模长的平方。如果<span
-class="math inline">\(\|q\|=1\)</span>，那么它的逆就是它的共轭，此时称<span
-class="math inline">\(q\)</span>为一个<strong>单位四元数</strong> (Unit
-Quaternion)。</p>
-<h1 id="四元数与三维旋转">四元数与三维旋转</h1>
-<p>现在我们正式考察四元数与三维旋转之间的关系。</p>
-<h1 id="四元数插值">四元数插值</h1>
-<section class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"
-role="doc-endnote"><p>https://krasjet.github.io/quaternion/quaternion.pdf<a
-href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
-]]></content>
-      <categories>
-        <category>数学 - 图形学</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>随笔</tag>
-        <tag>数学</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>樱花</title>
     <url>/2021/06/29/%E6%A8%B1%E8%8A%B1/</url>
     <content><![CDATA[<p>昨夜 我收到一封书札<br />
@@ -2460,6 +1943,626 @@ aria-hidden="true">通关主线，从空荡的凯尔莫罕重新出发，寂寥�
         <tag>游戏</tag>
         <tag>生活</tag>
         <tag>巫师三</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>四元数与旋转</title>
+    <url>/2022/03/25/%E5%9B%9B%E5%85%83%E6%95%B0%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<p>图形学中的旋转（Rotation）非常重要，用欧拉角（Euler
+Angle）旋转非常简单，但是却存在 <strong>万向锁（Gimbal Lock）</strong>
+的问题；同时，用欧拉角插值也不尽方便。基于四元数（Quaternion）的旋转既解决了万向锁的问题，又能非常便利地插值。本文将从概念出发，对四元数的定义、推导、性质、应用，以及它与欧拉角之间的联系进行介绍。本文主要参考了Krasjet的《四元数与三维旋转》。<a
+href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a></p>
+<span id="more"></span>
+<h1 id="复数与二维旋转">复数与二维旋转</h1>
+<p>首先我们将简要介绍复数及它与二维旋转的关系，从而可以更加自然地过度到四元数及其与三维旋转的关系。</p>
+<h2 id="定义">定义</h2>
+<p>复空间<span
+class="math inline">\(\mathbb{C}\)</span>中的任一复数<span
+class="math inline">\(z\in\mathbb{C}\)</span>都可以表示为<span
+class="math inline">\(z=a+bi\
+(a,b\in\mathbb{R})\)</span>的形式，且满足<span
+class="math inline">\(i^2=-1\)</span>。此时<span
+class="math inline">\(a\)</span>称为复数<span
+class="math inline">\(z\)</span>的实部 (Real Part)，表达为<span
+class="math inline">\(a=\text{Re}(z)\)</span>；<span
+class="math inline">\(b\)</span>称为复数的虚部 (Imaginary
+Part)，表达为<span class="math inline">\(b=\text{Im}(z)\)</span>。</p>
+<p>从线性代数的角度来看，复数<span
+class="math inline">\(z=a+bi\)</span>可以看成是基 (Basis) <span
+class="math inline">\(\{1,i\}\)</span>上的线性组合，因此也可以把复数<span
+class="math inline">\(z\)</span>写成一个向量：</p>
+<p><span class="math display">\[z=\begin{bmatrix}a\\b
+\end{bmatrix}\]</span></p>
+<h2 id="复数的加法与乘法">复数的加法与乘法</h2>
+<h3 id="复数的加法">复数的加法</h3>
+<p>复数的加法很简单，分别把实部和虚部相加即可。减法类似，不多赘述。</p>
+<h3 id="复数的乘法">复数的乘法</h3>
+<p>对复数<span
+class="math inline">\(z_1=a+bi,z_2=c+di\)</span>，它们相乘的结果为：</p>
+<p><span
+class="math display">\[z_1z_2=(a+bi)(c+di)=(ac-bd)+(bc+ad)i\]</span></p>
+<p>利用上面讲过的复数的向量形式，可以把上式写成矩阵乘向量的形式：</p>
+<p><span class="math display">\[z_1z_2=(ac-bd)+(bc+ad)i=
+\begin{bmatrix}
+ac-bd\\
+bc+ad
+\end{bmatrix}=
+\begin{bmatrix}
+a &amp; -b\\
+b &amp; a
+\end{bmatrix}
+\begin{bmatrix}
+c\\
+d
+\end{bmatrix}\]</span></p>
+<p>右侧的向量<span
+class="math inline">\(\begin{bmatrix}c\\d\end{bmatrix}\)</span>就是向量形式下的<span
+class="math inline">\(z_2\)</span>，而左侧的矩阵<span
+class="math inline">\(\begin{bmatrix}a&amp;-b\\b&amp;a\end{bmatrix}\)</span>则是<span
+class="math inline">\(z_1\)</span>在乘法时的<strong>矩阵形式</strong>，矩阵的第一列就是自身的向量形式，而第二列进行了交换并对虚部取负。</p>
+<p>所以，我们可以把<span
+class="math inline">\(z_2\)</span>也写成矩阵形式，然后与<span
+class="math inline">\(z_1\)</span>相乘：</p>
+<p><span class="math display">\[z_1z_2=
+\begin{bmatrix}
+a &amp; -b\\
+b &amp; a
+\end{bmatrix}
+\begin{bmatrix}
+c &amp; -d\\
+d &amp; c
+\end{bmatrix}=
+\begin{bmatrix}
+ac-bd &amp; -(bc+ad)\\
+bc+ad &amp; ac-bd
+\end{bmatrix}\]</span></p>
+<p>所以，我们现在可以用至少三种形式去表达一个复数了（具体用哪种形式取决于我们的需要）：</p>
+<ul>
+<li>代数形式：<span class="math inline">\(z=a+bi\)</span>;</li>
+<li>向量形式：<span
+class="math inline">\(z=\begin{bmatrix}a\\b\end{bmatrix}\)</span>;</li>
+<li>矩阵形式：<span class="math inline">\(z=\begin{bmatrix}a &amp; -b\\b
+&amp; a\end{bmatrix}\)</span>.</li>
+</ul>
+<p>有两个特殊的复数<span
+class="math inline">\(1,i\)</span>，它们的矩阵形式不难得到是：</p>
+<p><span class="math display">\[1=\begin{bmatrix}
+1 &amp; 0\\
+0 &amp; 1
+\end{bmatrix}=I\;(a=1, b=0)\]</span></p>
+<p><span class="math display">\[i=\begin{bmatrix}
+0 &amp; -1\\
+1 &amp; 0
+\end{bmatrix}\;(a=0, b=1)\]</span></p>
+<p>对复数<span
+class="math inline">\(i\)</span>的矩阵形式进行平方，发现它就是<span
+class="math inline">\(-I\)</span>，从代数形式来看，就等价于<span
+class="math inline">\(i^2=-1\)</span>。这说明复数的矩阵形式是良定义的。</p>
+<h2 id="复数的模长">复数的模长</h2>
+<p>复数<span
+class="math inline">\(z=a+bi\)</span>的模长（Magnitude）定义为:</p>
+<p><span class="math display">\[\|z\| =\sqrt{a^2+b^2}\]</span></p>
+<p>这可以用它的共轭（Conjugate）表示：</p>
+<p><span class="math display">\[\|z\| =\sqrt{z\bar{z}},\\;
+\bar{z}=a-bi\]</span></p>
+<h2 id="复数与二维旋转-1">复数与二维旋转</h2>
+<h3 id="从复数矩阵形式导出旋转关系">从复数矩阵形式导出旋转关系</h3>
+<p>下面将重点引出复数与二维旋转的关系。</p>
+<p>注意观察复数<span class="math inline">\(z\)</span>的矩阵形式<span
+class="math inline">\(\begin{bmatrix}a &amp; -b\\b &amp;
+a\end{bmatrix}\)</span>，我们可以把它变换为下述形式：</p>
+<p><span class="math display">\[\begin{bmatrix}
+a &amp; -b\\
+b &amp; a
+\end{bmatrix}=\sqrt{a^2+b^2}
+\begin{bmatrix}
+\frac{a}{\sqrt{a^2+b^2}} &amp; \frac{-b}{\sqrt{a^2+b^2}}\\
+\frac{b}{\sqrt{a^2+b^2}} &amp; \frac{a}{\sqrt{a^2+b^2}}
+\end{bmatrix}\]</span></p>
+<p>矩阵中的每一项都被模长<span
+class="math inline">\(\|z\|\)</span>缩放了，此时注意到<span
+class="math inline">\(\frac{a}{\sqrt{a^2+b^2}}\)</span>就是复数<span
+class="math inline">\(z\)</span>在复平面与实轴形成夹角<span
+class="math inline">\(\theta\)</span>的余弦值<span
+class="math inline">\(\cos(\theta)\)</span>，而<span
+class="math inline">\(\frac{b}{\sqrt{a^2+b^2}}\)</span>正好对应了正弦值<span
+class="math inline">\(\sin(\theta)\)</span>，而这个夹角<span
+class="math inline">\(\theta\)</span>就是<span
+class="math inline">\(\arctan(b/a)\)</span>。</p>
+<p>这样一来，我们就可以把上式写成：</p>
+<p><span class="math display">\[
+\begin{align}
+\begin{bmatrix}
+a &amp; -b\\
+b &amp; a
+\end{bmatrix}&amp;=\|z\|
+\begin{bmatrix}
+\cos(\theta) &amp; -\sin(\theta)\\
+\sin(\theta) &amp; \cos(\theta)
+\end{bmatrix}=
+\begin{bmatrix}
+\|z\| &amp; 0\\
+0 &amp; \|z\|
+\end{bmatrix}
+\begin{bmatrix}
+\cos(\theta) &amp; -\sin(\theta)\\
+\sin(\theta) &amp; \cos(\theta)
+\end{bmatrix}
+\label{eq1}
+\end{align}
+\]</span></p>
+<p>这样一来，任意复数<span
+class="math inline">\(z=a+bi\)</span>都可以表示为两个矩阵的乘积，一个缩放矩阵<span
+class="math inline">\(\begin{bmatrix}\|z\| &amp; 0\\0 &amp;
+\|z\|\end{bmatrix}\)</span>和一个（我们熟悉的）旋转矩阵<span
+class="math inline">\(\begin{bmatrix}\cos(\theta) &amp;
+-\sin(\theta)\\\sin(\theta) &amp;
+\cos(\theta)\end{bmatrix}\)</span>的复合。换句话说，<strong>复数的几何意义就是进行旋转与缩放，旋转角度为<span
+class="math inline">\(\theta=\arctan(b/a)\)</span>，缩放大小为复数的模长。</strong>
+如果复数的模长为1，那么它的几何意义就只有旋转。</p>
+<p>所以，对复数<span class="math inline">\(p\)</span>的旋转：</p>
+<p><span class="math display">\[p&#39;=\begin{bmatrix}
+\cos(\theta) &amp; -\sin(\theta)\\
+\sin(\theta) &amp; \cos(\theta)
+\end{bmatrix}p\]</span></p>
+<p>我们可以构造一个复数<span
+class="math inline">\(z=\cos(\theta)+i\sin(\theta)\)</span>，把它与<span
+class="math inline">\(p\)</span>相乘表示旋转：</p>
+<p><span
+class="math display">\[p&#39;=zp=(\cos(\theta)+i\sin(\theta))p\]</span></p>
+<h3 id="复数的极坐标形式">复数的极坐标形式</h3>
+<p>当我们看到<span
+class="math inline">\(\eqref{eq1}\)</span>式的时候，我们立马可以得到复数的另一种代数形式：</p>
+<p><span
+class="math display">\[z=\|z\|(\cos(\theta)+i\sin(\theta))\]</span></p>
+<p>再根据欧拉公式（Euler's Formula）：</p>
+<p><span
+class="math display">\[\cos(\theta)+i\sin(\theta)=\mathrm{e}^{i\theta}\]</span></p>
+<p>可以立得复数的<strong>极坐标形式</strong>：</p>
+<p><span
+class="math display">\[z=\|z\|\mathrm{e}^{i\theta}=r\mathrm{e}^{i\theta},\;
+r=\|z\|\]</span></p>
+<p>现在，复数<span
+class="math inline">\(z\)</span>不再通过它的实部和虚部表示，而且通过一个旋转角<span
+class="math inline">\(\theta\)</span>与缩放因子<span
+class="math inline">\(r\)</span>去表示了，它对任意一个复数<span
+class="math inline">\(p\)</span>的旋转，都可以表示为：</p>
+<p><span
+class="math display">\[p&#39;=r\mathrm{e}^{i\theta}p\]</span></p>
+<p>如果仅需表示旋转，则令<span
+class="math inline">\(r=1\)</span>即可。</p>
+<details class="note success no-icon"><summary><p>Proof of Euler's Formula</p>
+</summary>
+<p>令<span
+class="math inline">\(f(\theta)=\frac{\cos(\theta)+i\sin(\theta)}{\mathrm{e}^{i\theta}}=\mathrm{e}^{-i\theta}(\cos(\theta)+i\sin(\theta))\)</span>，对实数<span
+class="math inline">\(\theta\)</span>，对<span
+class="math inline">\(f(\theta)\)</span>求导，得到<span
+class="math inline">\(f&#39;(\theta)=\mathrm{e}^{-i\theta}(i\cos(\theta)-\sin(\theta))-i\mathrm{e}^{-i\theta}(\cos(\theta)+i\sin(\theta))=0\)</span>，因此<span
+class="math inline">\(f(\theta)\)</span>是常数。又因为<span
+class="math inline">\(f(0)=1\)</span>，所以<span
+class="math inline">\(f(\theta)\equiv 1\)</span>。欧拉公式得证。</p>
+
+</details>
+<h3 id="复数的几种表示形式总结">复数的几种表示形式总结</h3>
+<p>现在我们已经得到了如下几种复数<span
+class="math inline">\(z=a+bi\)</span>的表示形式：</p>
+<ul>
+<li>代数形式一：<span class="math inline">\(z=a+bi\)</span>;</li>
+<li>向量形式：<span
+class="math inline">\(z=\begin{bmatrix}a\\b\end{bmatrix}\)</span>;</li>
+<li>矩阵形式一：<span class="math inline">\(z=\begin{bmatrix}a &amp;
+-b\\b &amp; a\end{bmatrix}\)</span>;</li>
+<li>矩阵形式二：<span class="math inline">\(z=\begin{bmatrix}\|z\| &amp;
+0\\0 &amp; \|z\|\end{bmatrix}\begin{bmatrix}\cos(\theta) &amp;
+-\sin(\theta)\\\sin(\theta) &amp;
+\cos(\theta)\end{bmatrix}\)</span>;</li>
+<li>代数形式二：<span
+class="math inline">\(z=r(\cos(\theta)+i\sin(\theta))\)</span>;</li>
+<li>极坐标形式：<span
+class="math inline">\(z=r\mathrm{e}^{i\theta}\)</span>.</li>
+</ul>
+<p>这几种形式是完全等价的。</p>
+<h2 id="旋转复合">旋转复合</h2>
+<p>假设我们现在有两个仅表示旋转的复数<span
+class="math inline">\(z_1=\cos(\theta)+i\sin(\theta),z_2=\cos(\phi)+i\sin(\phi)\)</span>，相继用它们对一个复数<span
+class="math inline">\(p\)</span>旋转：</p>
+<p><span
+class="math display">\[p&#39;=z_2z_1p=(z_2z_1)p=(z_1z_2)p=(\cos(\theta+\phi)+i\sin(\theta+\phi))p\]</span></p>
+<p>所以，用两个复数进行旋转时，所得到的结果仍然是一个旋转，且旋转的角度是两次旋转角度之和。</p>
+<h1 id="三维空间中的旋转">三维空间中的旋转</h1>
+<p>在<a
+href="https://sulley.cc/2021/06/07/%E5%90%91%E9%87%8F%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E7%AE%80%E5%8D%95%E6%8E%A8%E5%AF%BC/">这篇博客</a>中，我们已经介绍了三维空间中一个向量绕任意轴旋转的公式（被称为<a
+href="https://en.wikipedia.org/wiki/Rodrigues%27_rotation_formula">Rodrigues'
+formula</a>）。因为下文会涉及大量此公式，因此把结论在此重新记述，推导过程请参考原文。</p>
+<p>记<span
+class="math inline">\(\mathbf{p}\)</span>是待旋转的向量，<span
+class="math inline">\(\mathbf{n}\)</span>是被围绕旋转的轴，是一个单位向量，<span
+class="math inline">\(\theta\)</span>是要旋转的角度，<span
+class="math inline">\(\mathbf{p}&#39;\)</span>是旋转后的向量。我们有：</p>
+<p><span
+class="math display">\[\mathbf{p}&#39;=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p})\]</span></p>
+<p>请记住此公式，我们将看到它与四元数之间紧密的联系。</p>
+<h1 id="欧拉角与万向锁gimbal-lock问题">欧拉角与万向锁（Gimbal
+Lock）问题</h1>
+<p>在正式进入四元数之前，我们介绍欧拉角及其引发的万向锁问题。</p>
+<h1 id="四元数">四元数</h1>
+<h2 id="定义-1">定义</h2>
+<p>四元数可以定义为如下形式：</p>
+<p><span class="math display">\[q=a+bi+cj+dk
+\;(a,b,c,d\in\mathbb{R})\]</span></p>
+<p>这个定义和复数非常相似，只不过四元数有三个“虚部” (<span
+class="math inline">\(i,j,k\)</span>)，而复数只有一个“虚部” (<span
+class="math inline">\(i\)</span>)。</p>
+<p>上述的<span class="math inline">\(i,j,k\)</span>满足如下性质：</p>
+<p><span class="math display">\[i^2=j^2=k^2=ijk=-1\]</span></p>
+<p>如果把上式称为四元数的<strong>代数形式</strong>，那么同样地，它也可以有对应的<strong>向量形式一</strong>：</p>
+<p><span class="math display">\[q=\begin{bmatrix}
+  a\\b\\c\\d
+\end{bmatrix}\]</span></p>
+<p>如果把四元数<span
+class="math inline">\(q\)</span>的“实部”和“虚部”拆开，那么四元数还可以表示为下述的<strong>向量形式二</strong>：</p>
+<p><span class="math display">\[q=[s,\mathbf{v}],\;
+(\mathbf{v}=\begin{bmatrix}
+  x\\
+  y\\
+  z
+\end{bmatrix},s,x,y,z\in\mathbb{R})\]</span></p>
+<p>所以，仅仅从定义来看，四元数就有如下三种等价的形式：</p>
+<ul>
+<li><strong>代数形式</strong>：<span
+class="math inline">\(q=a+bi+cj+dk\)</span>;</li>
+<li><strong>向量形式一</strong>：<span
+class="math inline">\(q=\begin{bmatrix}a\\b\\c\\d\end{bmatrix}\)</span>;</li>
+<li><strong>向量形式二</strong>：<span
+class="math inline">\(q=[s,\mathbf{v}]\)</span>.</li>
+</ul>
+<h2 id="加法乘法模长">加法、乘法、模长</h2>
+<h3 id="加法">加法</h3>
+<p>给定两个四元数<span
+class="math inline">\(q_1=a_1+b_1i+c_1j+d_1k\)</span>与<span
+class="math inline">\(q_2=a_2+b_2i+c_2j+d_2k\)</span>，定义四元数的加法为：</p>
+<p><span
+class="math display">\[q_1+q_2=(a_1+a_2)+(b_1+b_2)i+(c_1+c_2)j+(d_1+d_2)k\]</span></p>
+<p>用四元数的向量形式<span
+class="math inline">\(q_1=[a_1,\mathbf{v}_1],q_2=[a_2,\mathbf{v}_2]\)</span>，可以把上式简化为：</p>
+<p><span class="math display">\[q_1\pm q_2=[a_1\pm a_2, \mathbf{v}_1\pm
+\mathbf{v}_2]\]</span></p>
+<h3 id="乘法">乘法</h3>
+<p>四元数的标量乘法和实数、复数一样，可以定义为：</p>
+<p><span class="math display">\[sq=s(a+bi+cj+dk)\]</span></p>
+<p>然而四元数之间的乘积可以通过如下步骤定义：</p>
+<p><span class="math display">\[
+\begin{equation}
+  \begin{aligned}
+  q_1q_2=&amp;(a_1+b_1i+c_1j+d_1k)(a_2+b_2i+c_2j+d_2k)\\
+        =&amp;a_1a_2+a_1b_2i+a_1c_2j+a_1d_2k+\\
+        &amp;b_1a_2i+b_1b_2i^2+b_1c_2ij+b_1d_2ik+\\
+        &amp;c_1a_2j+c_1b_2ji+c_1c_2j^2+c_1d_2jk+\\
+        &amp;d_1a_2k+d_1b_2ki+d_1c_2kj+d_1d_2k^2
+  \end{aligned}
+\end{equation}
+\]</span></p>
+<p>我们可以从性质<span
+class="math inline">\(i^2=j^2=k^2=ijk=-1\)</span>推导出如下的性质：</p>
+<p><span class="math inline">\(jk=i\)</span>, <span
+class="math inline">\(ij=k\)</span>, <span
+class="math inline">\(ki=j\)</span>, <span
+class="math inline">\(kj=-i\)</span>, <span
+class="math inline">\(ji=-k\)</span>, <span
+class="math inline">\(ik=-j\)</span></p>
+<p>于是能够得到下表：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span
+class="math inline">\(\times\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(1\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(i\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(j\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(i\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(j\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(k\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span
+class="math inline">\(i\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(i\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(k\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-j\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span
+class="math inline">\(j\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(j\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-k\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(i\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span
+class="math inline">\(k\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(k\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(j\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-i\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>容易观察到交换律并不成立，即<span class="math inline">\(ij\neq
+ji\)</span>。利用这个表格，我们能够对四元数之间的乘法进行归纳简化：</p>
+<p><span class="math display">\[
+\begin{equation}
+  \begin{aligned}
+  q_1q_2=&amp;(a_1+b_1i+c_1j+d_1k)(a_2+b_2i+c_2j+d_2k)\\
+        =&amp;(a_1a_2-b_1b_2-c_1c_2-d_1d_2)+\\
+        &amp;(a_1b_2+b_1a_2+c_1d_2-d_1c_2)i+\\
+        &amp;(a_1c_2-b_1d_2+c_1a_2+d_1b_2)j+\\
+        &amp;(a_1d_2+b_1c_2-c_1b_2+d_1a_2)k
+  \end{aligned}
+\end{equation}
+\]</span></p>
+<p>现在，得到的这个新四元数<span
+class="math inline">\(q_0=q_1q_2\)</span>的四个分量都表示了出来，即：</p>
+<p><span class="math display">\[q_0=a_0+b_0i+c_0j+d_0k,\; \begin{cases}
+  a_0=a_1a_2-b_1b_2-c_1c_2-d_1d_2\\
+  b_0=a_1b_2+b_1a_2+c_1d_2-d_1c_2\\
+  c_0=a_1c_2-b_1d_2+c_1a_2+d_1b_2\\
+  d_0=a_1d_2+b_1c_2-c_1b_2+d_1a_2
+\end{cases}\]</span></p>
+<p>或者可以写成下述的<strong>矩阵形式</strong>：</p>
+<p><span class="math display">\[q_0=q_1q_2=\begin{bmatrix}
+  a_0\\
+  b_0\\
+  c_0\\
+  d_0
+\end{bmatrix}=\begin{bmatrix}
+  a_2 &amp; -b_2 &amp; -c_2 &amp; -d_2\\
+  b_2 &amp; a_2 &amp; d_2 &amp; -c_2\\
+  c_2 &amp; -d_2 &amp; a_2 &amp; b_2\\
+  d_2 &amp; c_2 &amp; -b_2 &amp; a_2
+\end{bmatrix}\begin{bmatrix}
+  a_1\\
+  b_1\\
+  c_1\\
+  d_1
+\end{bmatrix}\]</span></p>
+<p>这样一来，我们就把两个四元数的乘积写成了矩阵与向量的乘积，并且由于四元数的乘法不可交换，<span
+class="math inline">\(q_0=q_1q_2\)</span>代表的仅仅是<span
+class="math inline">\(q_1\)</span>为左乘数、<span
+class="math inline">\(q_2\)</span>为右乘数时的结果。我们把矩阵<span
+class="math inline">\(\begin{bmatrix}a_2 &amp; -b_2 &amp; -c_2 &amp;
+-d_2\\b_2 &amp; a_2 &amp; d_2 &amp; -c_2\\c_2 &amp; -d_2 &amp; a_2 &amp;
+b_2\\d_2 &amp; c_2 &amp; -b_2 &amp;
+a_2\end{bmatrix}\)</span>称为四元数<span
+class="math inline">\(q_2\)</span>当右乘子时的变换矩阵，或<strong>矩阵形式</strong>。</p>
+<h3 id="graßmann积">Graßmann积</h3>
+<p>显然矩阵形式又臭又长，我们希望用一种更简单的形式——Graßmann积——去表示四元数乘法。</p>
+<p>重新整理之前的乘法结果：</p>
+<p><span class="math display">\[
+\begin{equation}
+  \begin{aligned}
+q_0=q_1q_2=&amp;(a_1a_2-(b_1b_2+c_1c_2+d_1d_2))+\\
+          &amp;({\color{pink}{a_1}}b_2+{\color{teal}{a_2}}b_1+{\color{violet}{c_1d_2-d_1c_2}})i+\\
+          &amp;({\color{pink}{a_1}}c_2+{\color{teal}{a_2}}c_1+{\color{violet}{d_1b_2-b_1d_2}})j\\
+          &amp;({\color{pink}{a_1}}d_2+{\color{teal}{a_2}}d_1+{\color{violet}{b_1c_2-c_1b_2}})k
+  \end{aligned}
+\end{equation}
+\]</span></p>
+<p>如果令<span
+class="math inline">\(q_1=[a_1,\mathbf{v}_1],q_2=[a_2,\mathbf{v}_2]\)</span>，则有：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \mathbf{v}_1\cdot \mathbf{v}_2&amp;=b_1b_2+c_1c_2+d_1d_2\\
+  \mathbf{v}_1\times\mathbf{v}_2&amp;=\begin{bmatrix}
+    \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k}\\
+    b_1 &amp; c_1 &amp; d_1\\
+    b_2 &amp; c_2 &amp; d_2
+  \end{bmatrix}=({\color{violet}{c_1d_2-d_1c_2}})\mathbf{i}+({\color{violet}{d_1b_2-b_1d_2}})\mathbf{j}+({\color{violet}{b_1c_2-c_1b_2}})\mathbf{k}
+\end{aligned}
+\]</span></p>
+<p>这样一来，我们就可以用点乘和叉乘的形式表示四元数的乘积：</p>
+<p><span class="math display">\[\begin{aligned}
+  q_0=q_1q_2=[a_1a_2-\mathbf{v}_1\cdot\mathbf{v}_2,a_1\mathbf{v}_2+a_2\mathbf{v}_1+\mathbf{v}_1\times\mathbf{v}_2]
+\end{aligned}\]</span></p>
+<p>这就是所谓的Graßmann积（Graßmann
+Product）。所以，从Graßmann积也可能看到两个四元数的乘积一般是不可交换的，因为叉乘一般不可交换。</p>
+<h3 id="模长">模长</h3>
+<p>四元数的模长和向量的模长定义一样：</p>
+<p><span class="math display">\[\|q\|
+=\sqrt{a^2+b^2+c^2+d^2}=\sqrt{a^2+\mathbf{v}\cdot
+\mathbf{v}}\]</span></p>
+<h3 id="纯四元数">纯四元数</h3>
+<p>定义“实部”为零的四元数为<strong>纯四元数</strong>，即：</p>
+<p><span class="math display">\[q=[0,\mathbf{v}]\]</span></p>
+<p>对于两个纯四元数<span
+class="math inline">\(q_1=[0,\mathbf{v}_1],q_2=[0,\mathbf{v}_2]\)</span>，它们的乘积为：</p>
+<p><span
+class="math display">\[q_1q_2=[-\mathbf{v}_1\cdot\mathbf{v}_2,\mathbf{v}_1\times
+\mathbf{v}_2]\]</span></p>
+<h3 id="共轭">共轭</h3>
+<p>四元数的共轭（Conjugation）与复数的共轭类似，可以定义为：</p>
+<p><span
+class="math display">\[q^*=[a,-\mathbf{v}]=[a,-b,-c,-d]=a-bi-cj-dk\]</span></p>
+<p>四元数与它自己的共轭相乘可以得到一个标量：</p>
+<p><span
+class="math display">\[qq^*=[a^2+\mathbf{v}\cdot\mathbf{v},-a\mathbf{v}+a\mathbf{v}+\mathbf{v}\times(-\mathbf{v})]=[a^2+\mathbf{v}\cdot\mathbf{v},0]=\|q\|^2\]</span></p>
+<p>正好是四元数模长的平方。同时：</p>
+<p><span
+class="math display">\[q^*q=(q^*)(q^*)^*=\|q^*\|^2=\|q\|^2\]</span></p>
+<p>这表明四元数与它共轭的乘法是可交换的。这是一个非常好的性质。</p>
+<h3 id="逆">逆</h3>
+<p>有了共轭，我们最后就可以来定义四元数的逆（Inverse）了。记四元数<span
+class="math inline">\(q\)</span>的逆为<span
+class="math inline">\(q^{-1}\)</span>，则<span
+class="math inline">\(q^{-1}\)</span>是满足下述性质的四元数：</p>
+<p><span class="math display">\[qq^{-1}=q^{-1}q=1,\; (q\neq
+0)\]</span></p>
+<p>利用共轭，我们可以进行如下推导：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  qq^{-1}&amp;=1\\
+  q^*qq^{-1}&amp;=q^*\\
+  \|q\|^2q^{-1}&amp;=q^*\\
+  q^{-1}&amp;=\frac{q^*}{\|q\|^2}
+\end{aligned}
+\]</span></p>
+<p>所以，四元数的逆就是它的共轭除以它模长的平方。如果<span
+class="math inline">\(\|q\|=1\)</span>，那么它的逆就是它的共轭，此时称<span
+class="math inline">\(q\)</span>为一个<strong>单位四元数</strong> (Unit
+Quaternion)。</p>
+<h1 id="四元数与三维旋转">四元数与三维旋转</h1>
+<h2 id="从三维旋转公式到四元数表示">从三维旋转公式到四元数表示</h2>
+<p>现在我们正式考察四元数与三维旋转之间的关系。首先，让我们回忆一下普通3D旋转的推导过程：</p>
+<details class="note success"><summary><p>A sketch derivation of Rodrigues' formula</p>
+</summary>
+<p>记<span
+class="math inline">\(\mathbf{p}\)</span>是待旋转的向量，<span
+class="math inline">\(\mathbf{n}\)</span>是被围绕旋转的轴，是一个单位向量，<span
+class="math inline">\(\theta\)</span>是要旋转的角度，<span
+class="math inline">\(\mathbf{p}&#39;\)</span>是旋转后的向量。则：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \mathbf{p}&#39;&amp;=\mathbf{p}&#39;_\parallel+\mathbf{p}&#39;_\perp\\
+             &amp;=\mathbf{p}_\parallel+\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p}_\perp)\\
+             &amp;(=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p}))\;(\text{omit
+this line)}
+\end{aligned}
+\]</span></p>
+
+</details>
+<p>现在我们想要找到四元数与上式的关系，我们自然地想到能不能像推导四元数乘法的<strong>矩阵形式</strong>那样，把上面所有的向量都用四元数去表示。于是我们可以定义：</p>
+<p><span class="math display">\[p&#39;=[0,\mathbf{p}&#39;],\
+p&#39;_\parallel=[0, \mathbf{p}&#39;_\parallel],\ p&#39;_\perp=[0,
+\mathbf{p}&#39;_\perp],\ p=[0, \mathbf{p}], p_\parallel=[0,
+\mathbf{p}_\parallel],\ p_\perp=[0, \mathbf{p}_\perp],\ n=[0,
+\mathbf{n}]\]</span></p>
+<p>从而我们有：</p>
+<p><span class="math display">\[
+\begin{equation}
+\label{eq2}
+  p&#39;=p_\parallel+\cos(\theta)p_\perp+\sin(\theta)(\mathbf{n}\times
+\mathbf{p}_\perp)
+\end{equation}
+\]</span></p>
+<p>前面两项我们已经顺利地用四元数表示出来了，但是第三项的叉乘怎么办？我们先尝试一下用对应的四元数相乘看看：</p>
+<p><span
+class="math display">\[np_\perp=[0,\mathbf{n}]\cdot[0,\mathbf{p}_\perp]=[0,\mathbf{n}\times\mathbf{p}_\perp]=\mathbf{n}\times\mathbf{p}_\perp\]</span></p>
+<p>这里就用到了纯四元数的概念。不管怎样，我们很“幸运”地用四元数的乘法把最后的叉乘表示了出来，代入<span
+class="math inline">\(\eqref{eq2}\)</span>中，就有：</p>
+<p><span class="math display">\[
+p&#39;=p_\parallel+\cos(\theta)p_\perp+\sin(\theta)np_\perp=p_\parallel+qp_\perp,\;
+(q=\cos(\theta)+\sin(\theta)n)
+\]</span></p>
+<p>这里的<span
+class="math inline">\(q\)</span>用四元数的向量就可以表示为<span
+class="math inline">\(q=[\cos(\theta),\sin(\theta)\mathbf{n}]\)</span>，而且还可以验证它是一个单位四元数（模长为1）！</p>
+<h2 id="四元数旋转公式的简化">四元数旋转公式的简化</h2>
+<p>现在我们也可以像之前那样，分别把<span
+class="math inline">\(p_\parallel,p_\perp,q\)</span>代入，但是我们想要更好的形式。为了进一步化简上式，我们需要证明三个引理。</p>
+<h3 id="引理一">引理一</h3>
+<details class="note primary"><summary><p>Lemma 1</p>
+</summary>
+<p>如果<span
+class="math inline">\(q=[\cos(\theta),\sin(\theta)\mathbf{n}]\)</span>，且<span
+class="math inline">\(\mathbf{n}\)</span>为单位向量，则<span
+class="math inline">\(q^2=qq=[\cos(2\theta),\sin(2\theta)\mathbf{n}]\)</span>.</p>
+
+</details>
+<p>证明从略。</p>
+<p>现在我们引入一个新的四元数<span
+class="math inline">\(w=[\cos(\frac{1}{2}\theta),\sin(\frac{1}{2}\theta)\mathbf{n}]\)</span>，根据引理一，我们显然有<span
+class="math inline">\(w^2=q\)</span>，并且<span
+class="math inline">\(w\)</span>也是单位四元数，从而<span
+class="math inline">\(w^{-1}=w^*\)</span>。</p>
+<p>所以，之前的结果现在就可以重写为：</p>
+<p><span
+class="math display">\[p&#39;=p_\parallel+qp_\perp=ww^*p_\parallel+wwp_\perp\]</span></p>
+<p>这里用<span
+class="math inline">\(w\)</span>的原因就是要把两项都表示为三个因子的乘积。但是这种形式还是不能简化右式，我们需要下面的<strong>引理二</strong>。</p>
+<h3 id="引理二">引理二</h3>
+<details class="note primary"><summary><p>Lemma 2</p>
+</summary>
+<p>如果<span
+class="math inline">\(p_\parallel=[0,\mathbf{p}_\parallel]\)</span>是一个纯四元数，<span
+class="math inline">\(w=[\alpha,\beta \mathbf{n}]\)</span>，其中<span
+class="math inline">\(\mathbf{n}\)</span>是单位向量，<span
+class="math inline">\(\alpha,\beta\in\mathbb{R}\)</span>。若<span
+class="math inline">\(\mathbf{p}_\parallel\)</span>平行于<span
+class="math inline">\(\mathbf{n}\)</span>，则<span
+class="math inline">\(p_\parallel w=wp_\parallel\)</span>.</p>
+
+</details>
+<p>该引理证明如下：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \text{LHS}&amp;=[0,\mathbf{p}_\parallel]\cdot[\alpha,\beta
+\mathbf{n}]\\
+  &amp;=[-\beta \mathbf{p}_\parallel\cdot \mathbf{n},\alpha
+\mathbf{p}_\parallel]
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+  \text{RHS}&amp;=[\alpha,\beta
+\mathbf{n}]\cdot[0,\mathbf{p}_\parallel]\\
+  &amp;=[-\beta \mathbf{p}_\parallel\cdot \mathbf{n}, \alpha
+\mathbf{p}_\parallel]\\
+  &amp;=\text{LHS}
+\end{aligned}
+\]</span></p>
+<p>根据引理二，我们就可以把上式的第一项最后两个因子交换，得到：</p>
+<p><span class="math display">\[p&#39;=wp_\parallel
+w^*+wwp_\perp\]</span></p>
+<p>最后我们再使用<strong>引理三</strong>进行最后的化简。</p>
+<h3 id="引理三">引理三</h3>
+<h1 id="四元数插值">四元数插值</h1>
+<section class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"
+role="doc-endnote"><p>https://krasjet.github.io/quaternion/quaternion.pdf<a
+href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+]]></content>
+      <categories>
+        <category>数学 - 图形学</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
