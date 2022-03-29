@@ -33,11 +33,11 @@
 <meta property="og:description" content="图形学中的旋转（Rotation）非常重要，用欧拉角（Euler Angle）旋转非常简单，但是却存在 万向锁（Gimbal Lock） 的问题；同时，用欧拉角插值也不尽方便。基于四元数（Quaternion）的旋转既解决了万向锁的问题，又能非常便利地插值。本文将从概念出发，对四元数的定义、推导、性质、应用，以及它与欧拉角之间的联系进行介绍。本文主要参考了Krasjet的《四元数与三维旋转》。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-24T17:00:33.000Z">
-<meta property="article:modified_time" content="2022-03-27T16:56:52.102Z">
+<meta property="article:modified_time" content="2022-03-29T03:15:28.625Z">
 <meta property="article:author" content="Sulley">
+<meta property="article:tag" content="数学">
 <meta property="article:tag" content="随笔">
 <meta property="article:tag" content="计算机">
-<meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
 
 
@@ -165,8 +165,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E4%B8%8E%E4%BA%8C%E7%BB%B4%E6%97%8B%E8%BD%AC"><span class="nav-number">1.</span> <span class="nav-text">复数与二维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E5%8A%A0%E6%B3%95%E4%B8%8E%E4%B9%98%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">复数的加法与乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E5%8A%A0%E6%B3%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">复数的加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E4%B9%98%E6%B3%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">复数的乘法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E6%A8%A1%E9%95%BF"><span class="nav-number">1.3.</span> <span class="nav-text">复数的模长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E4%B8%8E%E4%BA%8C%E7%BB%B4%E6%97%8B%E8%BD%AC-1"><span class="nav-number">1.4.</span> <span class="nav-text">复数与二维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E5%A4%8D%E6%95%B0%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F%E5%AF%BC%E5%87%BA%E6%97%8B%E8%BD%AC%E5%85%B3%E7%B3%BB"><span class="nav-number">1.4.1.</span> <span class="nav-text">从复数矩阵形式导出旋转关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E6%9E%81%E5%9D%90%E6%A0%87%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.4.2.</span> <span class="nav-text">复数的极坐标形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E5%87%A0%E7%A7%8D%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.3.</span> <span class="nav-text">复数的几种表示形式总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E5%A4%8D%E5%90%88"><span class="nav-number">1.5.</span> <span class="nav-text">旋转复合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E7%A9%BA%E9%97%B4%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC"><span class="nav-number">2.</span> <span class="nav-text">三维空间中的旋转</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E8%A7%92%E4%B8%87%E5%90%91%E9%94%81gimbal-lock%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">欧拉角万向锁（Gimbal
-Lock）问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">四元数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E4%B8%8E%E4%B9%98%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">加法与乘法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F"><span class="nav-number">4.3.</span> <span class="nav-text">矩阵形式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E4%B8%8E%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC"><span class="nav-number">5.</span> <span class="nav-text">四元数与三维旋转</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E6%8F%92%E5%80%BC"><span class="nav-number">6.</span> <span class="nav-text">四元数插值</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E4%B8%8E%E4%BA%8C%E7%BB%B4%E6%97%8B%E8%BD%AC"><span class="nav-number">1.</span> <span class="nav-text">复数与二维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E5%8A%A0%E6%B3%95%E4%B8%8E%E4%B9%98%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">复数的加法与乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E5%8A%A0%E6%B3%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">复数的加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E4%B9%98%E6%B3%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">复数的乘法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E6%A8%A1%E9%95%BF"><span class="nav-number">1.3.</span> <span class="nav-text">复数的模长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E4%B8%8E%E4%BA%8C%E7%BB%B4%E6%97%8B%E8%BD%AC-1"><span class="nav-number">1.4.</span> <span class="nav-text">复数与二维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E5%A4%8D%E6%95%B0%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F%E5%AF%BC%E5%87%BA%E6%97%8B%E8%BD%AC%E5%85%B3%E7%B3%BB"><span class="nav-number">1.4.1.</span> <span class="nav-text">从复数矩阵形式导出旋转关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E6%9E%81%E5%9D%90%E6%A0%87%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.4.2.</span> <span class="nav-text">复数的极坐标形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E5%87%A0%E7%A7%8D%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.3.</span> <span class="nav-text">复数的几种表示形式总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E5%A4%8D%E5%90%88"><span class="nav-number">1.5.</span> <span class="nav-text">旋转复合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E7%A9%BA%E9%97%B4%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC"><span class="nav-number">2.</span> <span class="nav-text">三维空间中的旋转</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E8%A7%92%E4%B8%8E%E4%B8%87%E5%90%91%E9%94%81gimbal-lock%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">欧拉角与万向锁（Gimbal
+Lock）问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">四元数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E4%B9%98%E6%B3%95%E6%A8%A1%E9%95%BF"><span class="nav-number">4.2.</span> <span class="nav-text">加法、乘法、模长</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95"><span class="nav-number">4.2.1.</span> <span class="nav-text">加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%98%E6%B3%95"><span class="nav-number">4.2.2.</span> <span class="nav-text">乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gra%C3%9Fmann%E7%A7%AF"><span class="nav-number">4.2.3.</span> <span class="nav-text">Graßmann积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E9%95%BF"><span class="nav-number">4.2.4.</span> <span class="nav-text">模长</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%AF%E5%9B%9B%E5%85%83%E6%95%B0"><span class="nav-number">4.2.5.</span> <span class="nav-text">纯四元数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B1%E8%BD%AD"><span class="nav-number">4.2.6.</span> <span class="nav-text">共轭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86"><span class="nav-number">4.2.7.</span> <span class="nav-text">逆</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E4%B8%8E%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC"><span class="nav-number">5.</span> <span class="nav-text">四元数与三维旋转</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E6%8F%92%E5%80%BC"><span class="nav-number">6.</span> <span class="nav-text">四元数插值</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -289,7 +289,7 @@ Lock）问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-28 00:56:52" itemprop="dateModified" datetime="2022-03-28T00:56:52+08:00">2022-03-28</time>
+      <time title="修改时间：2022-03-29 11:15:28" itemprop="dateModified" datetime="2022-03-29T11:15:28+08:00">2022-03-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -329,14 +329,14 @@ Lock）问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5k</span>
+      <span>9.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
+      <span>9 分钟</span>
     </span>
 </div>
 
@@ -582,14 +582,265 @@ class="math inline">\(\mathbf{p}&#39;\)</span>是旋转后的向量。我们有�
 <p><span
 class="math display">\[\mathbf{p}&#39;=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p})\]</span></p>
 <p>请记住此公式，我们将看到它与四元数之间紧密的联系。</p>
-<h1 id="欧拉角万向锁gimbal-lock问题">欧拉角万向锁（Gimbal
+<h1 id="欧拉角与万向锁gimbal-lock问题">欧拉角与万向锁（Gimbal
 Lock）问题</h1>
 <p>在正式进入四元数之前，我们介绍欧拉角及其引发的万向锁问题。</p>
 <h1 id="四元数">四元数</h1>
 <h2 id="定义-1">定义</h2>
-<h2 id="加法与乘法">加法与乘法</h2>
-<h2 id="矩阵形式">矩阵形式</h2>
+<p>四元数可以定义为如下形式：</p>
+<p><span class="math display">\[q=a+bi+cj+dk
+\;(a,b,c,d\in\mathbb{R})\]</span></p>
+<p>这个定义和复数非常相似，只不过四元数有三个“虚部” (<span
+class="math inline">\(i,j,k\)</span>)，而复数只有一个“虚部” (<span
+class="math inline">\(i\)</span>)。</p>
+<p>上述的<span class="math inline">\(i,j,k\)</span>满足如下性质：</p>
+<p><span class="math display">\[i^2=j^2=k^2=ijk=-1\]</span></p>
+<p>如果把上式称为四元数的<strong>代数形式</strong>，那么同样地，它也可以有对应的<strong>向量形式一</strong>：</p>
+<p><span class="math display">\[q=\begin{bmatrix}
+  a\\b\\c\\d
+\end{bmatrix}\]</span></p>
+<p>如果把四元数<span
+class="math inline">\(q\)</span>的“实部”和“虚部”拆开，那么四元数还可以表示为下述的<strong>向量形式二</strong>：</p>
+<p><span class="math display">\[q=[s,\mathbf{v}],\;
+(\mathbf{v}=\begin{bmatrix}
+  x\\
+  y\\
+  z
+\end{bmatrix},s,x,y,z\in\mathbb{R})\]</span></p>
+<p>所以，仅仅从定义来看，四元数就有如下三种等价的形式：</p>
+<ul>
+<li><strong>代数形式</strong>：<span
+class="math inline">\(q=a+bi+cj+dk\)</span>;</li>
+<li><strong>向量形式一</strong>：<span
+class="math inline">\(q=\begin{bmatrix}a\\b\\c\\d\end{bmatrix}\)</span>;</li>
+<li><strong>向量形式二</strong>：<span
+class="math inline">\(q=[s,\mathbf{v}]\)</span>.</li>
+</ul>
+<h2 id="加法乘法模长">加法、乘法、模长</h2>
+<h3 id="加法">加法</h3>
+<p>给定两个四元数<span
+class="math inline">\(q_1=a_1+b_1i+c_1j+d_1k\)</span>与<span
+class="math inline">\(q_2=a_2+b_2i+c_2j+d_2k\)</span>，定义四元数的加法为：</p>
+<p><span
+class="math display">\[q_1+q_2=(a_1+a_2)+(b_1+b_2)i+(c_1+c_2)j+(d_1+d_2)k\]</span></p>
+<p>用四元数的向量形式<span
+class="math inline">\(q_1=[a_1,\mathbf{v}_1],q_2=[a_2,\mathbf{v}_2]\)</span>，可以把上式简化为：</p>
+<p><span class="math display">\[q_1\pm q_2=[a_1\pm a_2, \mathbf{v}_1\pm
+\mathbf{v}_2]\]</span></p>
+<h3 id="乘法">乘法</h3>
+<p>四元数的标量乘法和实数、复数一样，可以定义为：</p>
+<p><span class="math display">\[sq=s(a+bi+cj+dk)\]</span></p>
+<p>然而四元数之间的乘积可以通过如下步骤定义：</p>
+<p><span class="math display">\[
+\begin{equation}
+  \begin{aligned}
+  q_1q_2=&amp;(a_1+b_1i+c_1j+d_1k)(a_2+b_2i+c_2j+d_2k)\\
+        =&amp;a_1a_2+a_1b_2i+a_1c_2j+a_1d_2k+\\
+        &amp;b_1a_2i+b_1b_2i^2+b_1c_2ij+b_1d_2ik+\\
+        &amp;c_1a_2j+c_1b_2ji+c_1c_2j^2+c_1d_2jk+\\
+        &amp;d_1a_2k+d_1b_2ki+d_1c_2kj+d_1d_2k^2
+  \end{aligned}
+\end{equation}
+\]</span></p>
+<p>我们可以从性质<span
+class="math inline">\(i^2=j^2=k^2=ijk=-1\)</span>推导出如下的性质：</p>
+<p><span class="math inline">\(jk=i\)</span>, <span
+class="math inline">\(ij=k\)</span>, <span
+class="math inline">\(ki=j\)</span>, <span
+class="math inline">\(kj=-i\)</span>, <span
+class="math inline">\(ji=-k\)</span>, <span
+class="math inline">\(ik=-j\)</span></p>
+<p>于是能够得到下表：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span
+class="math inline">\(\times\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(1\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(i\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(j\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(i\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(j\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(k\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span
+class="math inline">\(i\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(i\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(k\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-j\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span
+class="math inline">\(j\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(j\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-k\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(i\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span
+class="math inline">\(k\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(k\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(j\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-i\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>容易观察到交换律并不成立，即<span class="math inline">\(ij\neq
+ji\)</span>。利用这个表格，我们能够对四元数之间的乘法进行归纳简化：</p>
+<p><span class="math display">\[
+\begin{equation}
+  \begin{aligned}
+  q_1q_2=&amp;(a_1+b_1i+c_1j+d_1k)(a_2+b_2i+c_2j+d_2k)\\
+        =&amp;(a_1a_2-b_1b_2-c_1c_2-d_1d_2)+\\
+        &amp;(a_1b_2+b_1a_2+c_1d_2-d_1c_2)i+\\
+        &amp;(a_1c_2-b_1d_2+c_1a_2+d_1b_2)j+\\
+        &amp;(a_1d_2+b_1c_2-c_1b_2+d_1a_2)k
+  \end{aligned}
+\end{equation}
+\]</span></p>
+<p>现在，得到的这个新四元数<span
+class="math inline">\(q_0=q_1q_2\)</span>的四个分量都表示了出来，即：</p>
+<p><span class="math display">\[q_0=a_0+b_0i+c_0j+d_0k,\; \begin{cases}
+  a_0=a_1a_2-b_1b_2-c_1c_2-d_1d_2\\
+  b_0=a_1b_2+b_1a_2+c_1d_2-d_1c_2\\
+  c_0=a_1c_2-b_1d_2+c_1a_2+d_1b_2\\
+  d_0=a_1d_2+b_1c_2-c_1b_2+d_1a_2
+\end{cases}\]</span></p>
+<p>或者可以写成下述的<strong>矩阵形式</strong>：</p>
+<p><span class="math display">\[q_0=q_1q_2=\begin{bmatrix}
+  a_0\\
+  b_0\\
+  c_0\\
+  d_0
+\end{bmatrix}=\begin{bmatrix}
+  a_2 &amp; -b_2 &amp; -c_2 &amp; -d_2\\
+  b_2 &amp; a_2 &amp; d_2 &amp; -c_2\\
+  c_2 &amp; -d_2 &amp; a_2 &amp; b_2\\
+  d_2 &amp; c_2 &amp; -b_2 &amp; a_2
+\end{bmatrix}\begin{bmatrix}
+  a_1\\
+  b_1\\
+  c_1\\
+  d_1
+\end{bmatrix}\]</span></p>
+<p>这样一来，我们就把两个四元数的乘积写成了矩阵与向量的乘积，并且由于四元数的乘法不可交换，<span
+class="math inline">\(q_0=q_1q_2\)</span>代表的仅仅是<span
+class="math inline">\(q_1\)</span>为左乘数、<span
+class="math inline">\(q_2\)</span>为右乘数时的结果。我们把矩阵<span
+class="math inline">\(\begin{bmatrix}a_2 &amp; -b_2 &amp; -c_2 &amp;
+-d_2\\b_2 &amp; a_2 &amp; d_2 &amp; -c_2\\c_2 &amp; -d_2 &amp; a_2 &amp;
+b_2\\d_2 &amp; c_2 &amp; -b_2 &amp;
+a_2\end{bmatrix}\)</span>称为四元数<span
+class="math inline">\(q_2\)</span>当右乘子时的变换矩阵，或<strong>矩阵形式</strong>。</p>
+<h3 id="graßmann积">Graßmann积</h3>
+<p>显然矩阵形式又臭又长，我们希望用一种更简单的形式——Graßmann积——去表示四元数乘法。</p>
+<p>重新整理之前的乘法结果：</p>
+<p><span class="math display">\[
+\begin{equation}
+  \begin{aligned}
+q_0=q_1q_2=&amp;(a_1a_2-(b_1b_2+c_1c_2+d_1d_2))+\\
+          &amp;({\color{pink}{a_1}}b_2+{\color{teal}{a_2}}b_1+{\color{violet}{c_1d_2-d_1c_2}})i+\\
+          &amp;({\color{pink}{a_1}}c_2+{\color{teal}{a_2}}c_1+{\color{violet}{d_1b_2-b_1d_2}})j\\
+          &amp;({\color{pink}{a_1}}d_2+{\color{teal}{a_2}}d_1+{\color{violet}{b_1c_2-c_1b_2}})k
+  \end{aligned}
+\end{equation}
+\]</span></p>
+<p>如果令<span
+class="math inline">\(q_1=[a_1,\mathbf{v}_1],q_2=[a_2,\mathbf{v}_2]\)</span>，则有：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \mathbf{v}_1\cdot \mathbf{v}_2&amp;=b_1b_2+c_1c_2+d_1d_2\\
+  \mathbf{v}_1\times\mathbf{v}_2&amp;=\begin{bmatrix}
+    \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k}\\
+    b_1 &amp; c_1 &amp; d_1\\
+    b_2 &amp; c_2 &amp; d_2
+  \end{bmatrix}=({\color{violet}{c_1d_2-d_1c_2}})\mathbf{i}+({\color{violet}{d_1b_2-b_1d_2}})\mathbf{j}+({\color{violet}{b_1c_2-c_1b_2}})\mathbf{k}
+\end{aligned}
+\]</span></p>
+<p>这样一来，我们就可以用点乘和叉乘的形式表示四元数的乘积：</p>
+<p><span class="math display">\[\begin{aligned}
+  q_0=q_1q_2=[a_1a_2-\mathbf{v}_1\cdot\mathbf{v}_2,a_1\mathbf{v}_2+a_2\mathbf{v}_1+\mathbf{v}_1\times\mathbf{v}_2]
+\end{aligned}\]</span></p>
+<p>这就是所谓的Graßmann积（Graßmann
+Product）。所以，从Graßmann积也可能看到两个四元数的乘积一般是不可交换的，因为叉乘一般不可交换。</p>
+<h3 id="模长">模长</h3>
+<p>四元数的模长和向量的模长定义一样：</p>
+<p><span class="math display">\[\|q\|
+=\sqrt{a^2+b^2+c^2+d^2}=\sqrt{a^2+\mathbf{v}\cdot
+\mathbf{v}}\]</span></p>
+<h3 id="纯四元数">纯四元数</h3>
+<p>定义“实部”为零的四元数为<strong>纯四元数</strong>，即：</p>
+<p><span class="math display">\[q=[0,\mathbf{v}]\]</span></p>
+<p>对于两个纯四元数<span
+class="math inline">\(q_1=[0,\mathbf{v}_1],q_2=[0,\mathbf{v}_2]\)</span>，它们的乘积为：</p>
+<p><span
+class="math display">\[q_1q_2=[-\mathbf{v}_1\cdot\mathbf{v}_2,\mathbf{v}_1\times
+\mathbf{v}_2]\]</span></p>
+<h3 id="共轭">共轭</h3>
+<p>四元数的共轭（Conjugation）与复数的共轭类似，可以定义为：</p>
+<p><span
+class="math display">\[q^*=[a,-\mathbf{v}]=[a,-b,-c,-d]=a-bi-cj-dk\]</span></p>
+<p>四元数与它自己的共轭相乘可以得到一个标量：</p>
+<p><span
+class="math display">\[qq^*=[a^2+\mathbf{v}\cdot\mathbf{v},-a\mathbf{v}+a\mathbf{v}+\mathbf{v}\times(-\mathbf{v})]=[a^2+\mathbf{v}\cdot\mathbf{v},0]=\|q\|^2\]</span></p>
+<p>正好是四元数模长的平方。同时：</p>
+<p><span
+class="math display">\[q^*q=(q^*)(q^*)^*=\|q^*\|^2=\|q\|^2\]</span></p>
+<p>这表明四元数与它共轭的乘法是可交换的。这是一个非常好的性质。</p>
+<h3 id="逆">逆</h3>
+<p>有了共轭，我们最后就可以来定义四元数的逆（Inverse）了。记四元数<span
+class="math inline">\(q\)</span>的逆为<span
+class="math inline">\(q^{-1}\)</span>，则<span
+class="math inline">\(q^{-1}\)</span>是满足下述性质的四元数：</p>
+<p><span class="math display">\[qq^{-1}=q^{-1}q=1,\; (q\neq
+0)\]</span></p>
+<p>利用共轭，我们可以进行如下推导：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  qq^{-1}&amp;=1\\
+  q^*qq^{-1}&amp;=q^*\\
+  \|q\|^2q^{-1}&amp;=q^*\\
+  q^{-1}&amp;=\frac{q^*}{\|q\|^2}
+\end{aligned}
+\]</span></p>
+<p>所以，四元数的逆就是它的共轭除以它模长的平方。如果<span
+class="math inline">\(\|q\|=1\)</span>，那么它的逆就是它的共轭，此时称<span
+class="math inline">\(q\)</span>为一个<strong>单位四元数</strong> (Unit
+Quaternion)。</p>
 <h1 id="四元数与三维旋转">四元数与三维旋转</h1>
+<p>现在我们正式考察四元数与三维旋转之间的关系。</p>
 <h1 id="四元数插值">四元数插值</h1>
 <section class="footnotes footnotes-end-of-document"
 role="doc-endnotes">
@@ -615,13 +866,6 @@ href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <div class="popular-posts-excerpt"><p><p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p></p></div>
     </li>
     <li class="popular-posts-item">
-        <div class="popular-posts-date">2020-09-09</div>
-      <div class="popular-posts-title"><a href="2020/09/09/infinite-radicals/" rel="bookmark">无穷连根式求极限的充要条件</a></div>
-        <div class="popular-posts-excerpt"><p><p>在刷习题集或者考试的时候我们经常会遇到诸如<span
-class="math inline">\(\sqrt{1+\sqrt{2+\sqrt{3+\cdots}}}\)</span>或者<span
-class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解或极限存在性证明。解决此类问题的方法有很多，但都可以归结为一点：缩放。要么是两端缩放然后夹逼定理，要么是证明有界然后两边取极限。本文记录此类问题极限存在的一个充要条件，以供参阅。</p></p></div>
-    </li>
-    <li class="popular-posts-item">
         <div class="popular-posts-date">2021-08-14</div>
       <div class="popular-posts-title"><a href="2021/08/14/矫正透视投影插值及属性插值详解/" rel="bookmark">矫正透视投影插值及属性插值详解</a></div>
         <div class="popular-posts-excerpt"><p><p>三角形是图形学的基本几何形状，空间中的三角形<span
@@ -643,6 +887,13 @@ class="math inline">\((x_{P},y_{P},z_{P})\)</span>。这是因为从三维空间
 Projection），这个投影是非线性的，因此变换前的重心坐标并不能和变换后的重心坐标保持线性关系，从而对三角形顶点的属性插值也不是线性关系。这就需要对透视投影下的重心坐标插值进行修正。本文从透视投影本身出发，说明其非线性性，并根据论文《Perspective-Correct
 Interpolation》<a href="#fn1" class="footnote-ref" id="fnref1"
 role="doc-noteref"><sup>1</sup></a> 给出修正插值。</p></p></div>
+    </li>
+    <li class="popular-posts-item">
+        <div class="popular-posts-date">2020-09-09</div>
+      <div class="popular-posts-title"><a href="2020/09/09/infinite-radicals/" rel="bookmark">无穷连根式求极限的充要条件</a></div>
+        <div class="popular-posts-excerpt"><p><p>在刷习题集或者考试的时候我们经常会遇到诸如<span
+class="math inline">\(\sqrt{1+\sqrt{2+\sqrt{3+\cdots}}}\)</span>或者<span
+class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解或极限存在性证明。解决此类问题的方法有很多，但都可以归结为一点：缩放。要么是两端缩放然后夹逼定理，要么是证明有界然后两边取极限。本文记录此类问题极限存在的一个充要条件，以供参阅。</p></p></div>
     </li>
   </ul>
 
@@ -666,9 +917,9 @@ role="doc-noteref"><sup>1</sup></a> 给出修正插值。</p></p></div>
 </div>
 
           <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
               <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
               <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
-              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
           </div>
 
         
@@ -719,13 +970,13 @@ role="doc-noteref"><sup>1</sup></a> 给出修正插值。</p></p></div>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">74k</span>
+    <span title="站点总字数">79k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:08</span>
+    <span title="站点阅读时长">1:12</span>
   </span>
 </div>
 <div class="busuanzi-count">
