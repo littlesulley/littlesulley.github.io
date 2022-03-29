@@ -1,86 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Motion Matching -- 概念与发展</title>
-    <url>/2022/03/27/Motion%20Matching%20-%20%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%8F%91%E5%B1%95/</url>
-    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
-Matching基本知识的介绍，放在此备份。</p>
-<span id="more"></span>
-<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
-]]></content>
-      <categories>
-        <category>计算机 - 动画</category>
-      </categories>
-      <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
-        <tag>计算机</tag>
-        <tag>动画</tag>
-        <tag>机器学习</tag>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《Assassain&#39;s Creed Valhalla》玩后感</title>
-    <url>/2020/11/12/acv-impression-md/</url>
-    <content><![CDATA[<p><code>刺客信条：英灵殿</code>（Assassin's Creed
-Valhalla，下称<code>英灵殿</code>）无疑是刺客信条“神话三部曲”中最成功的一部，无论是从游戏的质量上，还是从销售成绩上。在80个小时的主线与10多个小时的“内置DLC”游玩后，我个人对英灵殿的评价可以总结为“自我突破，承前启后”。说它自我突破是因为它革除了起源和奥德赛中的绝大部分缺点，在自我的改进中完成了里程碑式的跨越；说它承前启后式因为它标志着刺客信条系列一次华丽而成功的转型与过渡，是游戏特色与市场充分交合后的最佳发展方向，是游戏缺点自我祓除与优点渐进式凸显的结果。本文将重点从游戏的任务系统、剧情节奏和人物刻画这三个方面介绍英灵殿的蜕变，至于游戏画面和风景，<del>还有育碧特色BUG，</del>都是刺客信条系列经典的历史特征了，在本文不再赘述。</p>
-<span id="more"></span>
-<h1
-id="任务系统众星捧月映空青稀光散落满夜明">任务系统：众星捧月映空青，稀光散落满夜明</h1>
-<h1
-id="剧情节奏一马平川驰此间峰峦叠嶂牛羊见">剧情节奏：一马平川驰此间，峰峦叠嶂牛羊见</h1>
-<h1
-id="人物刻画穷极千里观百态瓦泥滂沱照众生">人物刻画：穷极千里观百态，瓦泥滂沱照众生。</h1>
-<h1
-id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终将至，共邀朝阳行远方。</h1>
-<p><img data-src="/images/acv-impression/1.png" /></p>
-<p><img data-src="/images/acv-impression/2.png" /></p>
-<p><img data-src="/images/acv-impression/3.png" /></p>
-<p><img data-src="/images/acv-impression/4.png" /></p>
-<p><img data-src="/images/acv-impression/5.png" /></p>
-<p><img data-src="/images/acv-impression/6.png" /></p>
-<p><img data-src="/images/acv-impression/7.png" /></p>
-<p><img data-src="/images/acv-impression/8.png" /></p>
-<p><img data-src="/images/acv-impression/9.png" /></p>
-<p><img data-src="/images/acv-impression/10.png" /></p>
-<p><img data-src="/images/acv-impression/11.png" /></p>
-<p><img data-src="/images/acv-impression/12.png" /></p>
-<p><img data-src="/images/acv-impression/13.png" /></p>
-<p><img data-src="/images/acv-impression/14.png" /></p>
-<p><img data-src="/images/acv-impression/15.png" /></p>
-<p><img data-src="/images/acv-impression/16.png" /></p>
-<p><img data-src="/images/acv-impression/17.png" /></p>
-]]></content>
-      <categories>
-        <category>游戏 - 玩后感</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>游戏</tag>
-        <tag>生活</tag>
-        <tag>刺客细条</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/09/07/hello-world/</url>
-    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
-<span id="more"></span>
-<h1 id="测试">测试</h1>
-<h2 id="代码">代码</h2>
-<p>现在来测试一下代码</p>
-<details class="note info no-icon"><summary><p>This is a code test</p>
-</summary>
-<h4 id="details-and-code">Details and code</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
-
-</details>
-<h2 id="latex">Latex</h2>
-<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
-]]></content>
-  </entry>
-  <entry>
     <title>Bresenham算法画直线</title>
     <url>/2020/10/18/Bresenham%E7%AE%97%E6%B3%95%E7%94%BB%E7%9B%B4%E7%BA%BF/</url>
     <content><![CDATA[<p>Bresenham's
@@ -264,10 +184,90 @@ class="math inline">\(0&lt;k\le
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>计算机</tag>
         <tag>算法</tag>
+        <tag>随笔</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Motion Matching -- 概念与发展</title>
+    <url>/2022/03/27/Motion%20Matching%20-%20%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%8F%91%E5%B1%95/</url>
+    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
+Matching基本知识的介绍，放在此备份。</p>
+<span id="more"></span>
+<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
+]]></content>
+      <categories>
+        <category>计算机 - 动画</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+        <tag>动画</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《Assassain&#39;s Creed Valhalla》玩后感</title>
+    <url>/2020/11/12/acv-impression-md/</url>
+    <content><![CDATA[<p><code>刺客信条：英灵殿</code>（Assassin's Creed
+Valhalla，下称<code>英灵殿</code>）无疑是刺客信条“神话三部曲”中最成功的一部，无论是从游戏的质量上，还是从销售成绩上。在80个小时的主线与10多个小时的“内置DLC”游玩后，我个人对英灵殿的评价可以总结为“自我突破，承前启后”。说它自我突破是因为它革除了起源和奥德赛中的绝大部分缺点，在自我的改进中完成了里程碑式的跨越；说它承前启后式因为它标志着刺客信条系列一次华丽而成功的转型与过渡，是游戏特色与市场充分交合后的最佳发展方向，是游戏缺点自我祓除与优点渐进式凸显的结果。本文将重点从游戏的任务系统、剧情节奏和人物刻画这三个方面介绍英灵殿的蜕变，至于游戏画面和风景，<del>还有育碧特色BUG，</del>都是刺客信条系列经典的历史特征了，在本文不再赘述。</p>
+<span id="more"></span>
+<h1
+id="任务系统众星捧月映空青稀光散落满夜明">任务系统：众星捧月映空青，稀光散落满夜明</h1>
+<h1
+id="剧情节奏一马平川驰此间峰峦叠嶂牛羊见">剧情节奏：一马平川驰此间，峰峦叠嶂牛羊见</h1>
+<h1
+id="人物刻画穷极千里观百态瓦泥滂沱照众生">人物刻画：穷极千里观百态，瓦泥滂沱照众生。</h1>
+<h1
+id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终将至，共邀朝阳行远方。</h1>
+<p><img data-src="/images/acv-impression/1.png" /></p>
+<p><img data-src="/images/acv-impression/2.png" /></p>
+<p><img data-src="/images/acv-impression/3.png" /></p>
+<p><img data-src="/images/acv-impression/4.png" /></p>
+<p><img data-src="/images/acv-impression/5.png" /></p>
+<p><img data-src="/images/acv-impression/6.png" /></p>
+<p><img data-src="/images/acv-impression/7.png" /></p>
+<p><img data-src="/images/acv-impression/8.png" /></p>
+<p><img data-src="/images/acv-impression/9.png" /></p>
+<p><img data-src="/images/acv-impression/10.png" /></p>
+<p><img data-src="/images/acv-impression/11.png" /></p>
+<p><img data-src="/images/acv-impression/12.png" /></p>
+<p><img data-src="/images/acv-impression/13.png" /></p>
+<p><img data-src="/images/acv-impression/14.png" /></p>
+<p><img data-src="/images/acv-impression/15.png" /></p>
+<p><img data-src="/images/acv-impression/16.png" /></p>
+<p><img data-src="/images/acv-impression/17.png" /></p>
+]]></content>
+      <categories>
+        <category>游戏 - 玩后感</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>游戏</tag>
+        <tag>生活</tag>
+        <tag>刺客细条</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/09/07/hello-world/</url>
+    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
+<span id="more"></span>
+<h1 id="测试">测试</h1>
+<h2 id="代码">代码</h2>
+<p>现在来测试一下代码</p>
+<details class="note info no-icon"><summary><p>This is a code test</p>
+</summary>
+<h4 id="details-and-code">Details and code</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
+
+</details>
+<h2 id="latex">Latex</h2>
+<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
+]]></content>
   </entry>
   <entry>
     <title>无穷连根式求极限的充要条件</title>
@@ -504,8 +504,8 @@ Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷
         <category>数学 - 数学分析</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>随笔</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -773,6 +773,30 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
       </tags>
   </entry>
   <entry>
+    <title>十二月的花</title>
+    <url>/2020/12/22/%E5%8D%81%E4%BA%8C%E6%9C%88%E7%9A%84%E8%8A%B1/</url>
+    <content><![CDATA[<p>埙吹响了海岸<br />
+琴穿梭叶间<br />
+笛在天空啼鸣<br />
+伴奏着雪花片片</p>
+<p>孩子们欢笑着相聚<br />
+踏着雪<br />
+吱吱嘎嘎</p>
+<p>把欢乐捏成一团团棉<br />
+随风起舞<br />
+在阳光下<br />
+雪爱上了花</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>向量绕任意轴旋转的简单推导</title>
     <url>/2021/06/07/%E5%90%91%E9%87%8F%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E7%AE%80%E5%8D%95%E6%8E%A8%E5%AF%BC/</url>
     <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
@@ -935,9 +959,9 @@ CPU @ 2.90GHz。</p>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
         <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -1247,72 +1271,16 @@ class="math inline">\(kj=-i\)</span>, <span
 class="math inline">\(ji=-k\)</span>, <span
 class="math inline">\(ik=-j\)</span></p>
 <p>于是能够得到下表：</p>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;"><span
-class="math inline">\(\times\)</span></th>
-<th style="text-align: center;"><span
-class="math inline">\(1\)</span></th>
-<th style="text-align: center;"><span
-class="math inline">\(i\)</span></th>
-<th style="text-align: center;"><span
-class="math inline">\(j\)</span></th>
-<th style="text-align: center;"><span
-class="math inline">\(k\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"><span
-class="math inline">\(1\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(1\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(i\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(j\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(k\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><span
-class="math inline">\(i\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(i\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(-1\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(k\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(-j\)</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"><span
-class="math inline">\(j\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(j\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(-k\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(-1\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(i\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><span
-class="math inline">\(k\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(k\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(j\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(-i\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(-1\)</span></td>
-</tr>
-</tbody>
-</table>
+<p><span class="math display">\[
+\begin{tabular}{|c|c|c|c|c|}
+  \hline
+  \times &amp; 1 &amp; i &amp; j &amp; k\\\hline
+  1 &amp; 1 &amp; i &amp; j &amp; k\\\hline
+  i &amp; i &amp; -1 &amp; k &amp; -j\\\hline
+  j &amp; j &amp; -k &amp; -1 &amp; i\\\hline
+  k &amp; k &amp; j &amp; -i &amp; -1\\\hline
+\end{tabular}
+\]</span></p>
 <p>容易观察到交换律并不成立，即<span class="math inline">\(ij\neq
 ji\)</span>。利用这个表格，我们能够对四元数之间的乘法进行归纳简化：</p>
 <p><span class="math display">\[
@@ -1452,9 +1420,37 @@ href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
         <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>樱花</title>
+    <url>/2021/06/29/%E6%A8%B1%E8%8A%B1/</url>
+    <content><![CDATA[<p>昨夜 我收到一封书札<br />
+旧纸上 缀满了一朵樱花<br />
+风干的墨迹 渗透了陌生人的迷茫<br />
+我慢慢 把信合上</p>
+<p>昨夜 我写了一封书札<br />
+述说着 近日的苦闷衷肠<br />
+窗外的灯火 依旧那么辉煌<br />
+我贴上 一朵樱花珍藏</p>
+<p>同样的夜晚 走过了岁月多少锋芒<br />
+心中仍 呐喊着一个熟悉人的回响<br />
+把信 随风寄向远方<br />
+留给陌生的他 打开新的过往<br />
+愿他不要怯懦 续写昨夜的感慨<br />
+还有清晨的阳光</p>
+<p>案台旁 樱花在绽放</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -1524,47 +1520,11 @@ key）。</p>
       </tags>
   </entry>
   <entry>
-    <title>十二月的花</title>
-    <url>/2020/12/22/%E5%8D%81%E4%BA%8C%E6%9C%88%E7%9A%84%E8%8A%B1/</url>
-    <content><![CDATA[<p>埙吹响了海岸<br />
-琴穿梭叶间<br />
-笛在天空啼鸣<br />
-伴奏着雪花片片</p>
-<p>孩子们欢笑着相聚<br />
-踏着雪<br />
-吱吱嘎嘎</p>
-<p>把欢乐捏成一团团棉<br />
-随风起舞<br />
-在阳光下<br />
-雪爱上了花</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>樱花</title>
-    <url>/2021/06/29/%E6%A8%B1%E8%8A%B1/</url>
-    <content><![CDATA[<p>昨夜 我收到一封书札<br />
-旧纸上 缀满了一朵樱花<br />
-风干的墨迹 渗透了陌生人的迷茫<br />
-我慢慢 把信合上</p>
-<p>昨夜 我写了一封书札<br />
-述说着 近日的苦闷衷肠<br />
-窗外的灯火 依旧那么辉煌<br />
-我贴上 一朵樱花珍藏</p>
-<p>同样的夜晚 走过了岁月多少锋芒<br />
-心中仍 呐喊着一个熟悉人的回响<br />
-把信 随风寄向远方<br />
-留给陌生的他 打开新的过往<br />
-愿他不要怯懦 续写昨夜的感慨<br />
-还有清晨的阳光</p>
-<p>案台旁 樱花在绽放</p>
+    <title>西湖夜歌</title>
+    <url>/2021/07/09/%E8%A5%BF%E6%B9%96%E5%A4%9C%E6%AD%8C/</url>
+    <content><![CDATA[<p>霓光半遮影<br />
+湖波轻颤合韵起<br />
+半句寻谁去</p>
 ]]></content>
       <categories>
         <category>随笔</category>
@@ -1975,25 +1935,9 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
         <tag>计算机</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>西湖夜歌</title>
-    <url>/2021/07/09/%E8%A5%BF%E6%B9%96%E5%A4%9C%E6%AD%8C/</url>
-    <content><![CDATA[<p>霓光半遮影<br />
-湖波轻颤合韵起<br />
-半句寻谁去</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
         <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
