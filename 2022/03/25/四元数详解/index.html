@@ -33,11 +33,11 @@
 <meta property="og:description" content="图形学中的旋转（Rotation）非常重要，用欧拉角（Euler Angle）旋转非常简单，但是却存在 万向锁（Gimbal Lock） 的问题；同时，用欧拉角插值也不尽方便。基于四元数（Quaternion）的旋转既解决了万向锁的问题，又能非常便利地插值。本文将从概念出发，对四元数的定义、推导、性质、应用，以及它与欧拉角之间的联系进行介绍。本文主要参考了Krasjet的《四元数与三维旋转》。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-24T17:00:33.000Z">
-<meta property="article:modified_time" content="2022-03-29T16:18:35.576Z">
+<meta property="article:modified_time" content="2022-03-30T05:42:40.685Z">
 <meta property="article:author" content="Sulley">
-<meta property="article:tag" content="计算机">
-<meta property="article:tag" content="随笔">
 <meta property="article:tag" content="数学">
+<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="计算机">
 <meta name="twitter:card" content="summary">
 
 
@@ -166,7 +166,7 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E4%B8%8E%E4%BA%8C%E7%BB%B4%E6%97%8B%E8%BD%AC"><span class="nav-number">1.</span> <span class="nav-text">复数与二维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E5%8A%A0%E6%B3%95%E4%B8%8E%E4%B9%98%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">复数的加法与乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E5%8A%A0%E6%B3%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">复数的加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E4%B9%98%E6%B3%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">复数的乘法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E6%A8%A1%E9%95%BF"><span class="nav-number">1.3.</span> <span class="nav-text">复数的模长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E4%B8%8E%E4%BA%8C%E7%BB%B4%E6%97%8B%E8%BD%AC-1"><span class="nav-number">1.4.</span> <span class="nav-text">复数与二维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E5%A4%8D%E6%95%B0%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F%E5%AF%BC%E5%87%BA%E6%97%8B%E8%BD%AC%E5%85%B3%E7%B3%BB"><span class="nav-number">1.4.1.</span> <span class="nav-text">从复数矩阵形式导出旋转关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E6%9E%81%E5%9D%90%E6%A0%87%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.4.2.</span> <span class="nav-text">复数的极坐标形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E5%87%A0%E7%A7%8D%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.3.</span> <span class="nav-text">复数的几种表示形式总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E5%A4%8D%E5%90%88"><span class="nav-number">1.5.</span> <span class="nav-text">旋转复合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E7%A9%BA%E9%97%B4%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC"><span class="nav-number">2.</span> <span class="nav-text">三维空间中的旋转</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E8%A7%92%E4%B8%8E%E4%B8%87%E5%90%91%E9%94%81gimbal-lock%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">欧拉角与万向锁（Gimbal
-Lock）问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">四元数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E4%B9%98%E6%B3%95%E6%A8%A1%E9%95%BF"><span class="nav-number">4.2.</span> <span class="nav-text">加法、乘法、模长</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95"><span class="nav-number">4.2.1.</span> <span class="nav-text">加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%98%E6%B3%95"><span class="nav-number">4.2.2.</span> <span class="nav-text">乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gra%C3%9Fmann%E7%A7%AF"><span class="nav-number">4.2.3.</span> <span class="nav-text">Graßmann积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E9%95%BF"><span class="nav-number">4.2.4.</span> <span class="nav-text">模长</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%AF%E5%9B%9B%E5%85%83%E6%95%B0"><span class="nav-number">4.2.5.</span> <span class="nav-text">纯四元数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B1%E8%BD%AD"><span class="nav-number">4.2.6.</span> <span class="nav-text">共轭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86"><span class="nav-number">4.2.7.</span> <span class="nav-text">逆</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E4%B8%8E%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC"><span class="nav-number">5.</span> <span class="nav-text">四元数与三维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F%E5%88%B0%E5%9B%9B%E5%85%83%E6%95%B0%E8%A1%A8%E7%A4%BA"><span class="nav-number">5.1.</span> <span class="nav-text">从三维旋转公式到四元数表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F%E7%9A%84%E7%AE%80%E5%8C%96"><span class="nav-number">5.2.</span> <span class="nav-text">四元数旋转公式的简化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%B8%80"><span class="nav-number">5.2.1.</span> <span class="nav-text">引理一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%BA%8C"><span class="nav-number">5.2.2.</span> <span class="nav-text">引理二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%B8%89"><span class="nav-number">5.2.3.</span> <span class="nav-text">引理三</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E6%8F%92%E5%80%BC"><span class="nav-number">6.</span> <span class="nav-text">四元数插值</span></a></li></ol></div>
+Lock）问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">四元数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E4%B9%98%E6%B3%95%E6%A8%A1%E9%95%BF"><span class="nav-number">4.2.</span> <span class="nav-text">加法、乘法、模长</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95"><span class="nav-number">4.2.1.</span> <span class="nav-text">加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%98%E6%B3%95"><span class="nav-number">4.2.2.</span> <span class="nav-text">乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gra%C3%9Fmann%E7%A7%AF"><span class="nav-number">4.2.3.</span> <span class="nav-text">Graßmann积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E9%95%BF"><span class="nav-number">4.2.4.</span> <span class="nav-text">模长</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%AF%E5%9B%9B%E5%85%83%E6%95%B0"><span class="nav-number">4.2.5.</span> <span class="nav-text">纯四元数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B1%E8%BD%AD"><span class="nav-number">4.2.6.</span> <span class="nav-text">共轭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86"><span class="nav-number">4.2.7.</span> <span class="nav-text">逆</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E4%B8%8E%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC"><span class="nav-number">5.</span> <span class="nav-text">四元数与三维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F%E5%88%B0%E5%9B%9B%E5%85%83%E6%95%B0%E8%A1%A8%E7%A4%BA"><span class="nav-number">5.1.</span> <span class="nav-text">从三维旋转公式到四元数表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F%E7%9A%84%E7%AE%80%E5%8C%96"><span class="nav-number">5.2.</span> <span class="nav-text">四元数旋转公式的简化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%B8%80"><span class="nav-number">5.2.1.</span> <span class="nav-text">引理一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%BA%8C"><span class="nav-number">5.2.2.</span> <span class="nav-text">引理二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%B8%89"><span class="nav-number">5.2.3.</span> <span class="nav-text">引理三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%AE%9A%E7%90%86%E5%9B%9B%E5%85%83%E6%95%B0%E5%9E%8B"><span class="nav-number">5.2.4.</span> <span class="nav-text">三维旋转定理（四元数型）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%9B%9B%E5%85%83%E6%95%B0%E5%9E%8B%E7%9A%84%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F"><span class="nav-number">5.2.5.</span> <span class="nav-text">三维旋转（四元数型）的矩阵形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%9B%9B%E5%85%83%E6%95%B0%E5%9E%8B%E7%9A%84%E6%8C%87%E6%95%B0%E5%BD%A2%E5%BC%8F"><span class="nav-number">5.2.6.</span> <span class="nav-text">三维旋转（四元数型）的指数形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E5%A4%8D%E5%90%88-1"><span class="nav-number">5.2.7.</span> <span class="nav-text">旋转复合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E5%80%8D%E8%A6%86%E7%9B%96"><span class="nav-number">5.2.8.</span> <span class="nav-text">双倍覆盖</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E6%8F%92%E5%80%BC"><span class="nav-number">6.</span> <span class="nav-text">四元数插值</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -299,7 +299,7 @@ Lock）问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-30 00:18:35" itemprop="dateModified" datetime="2022-03-30T00:18:35+08:00">2022-03-30</time>
+      <time title="修改时间：2022-03-30 13:42:40" itemprop="dateModified" datetime="2022-03-30T13:42:40+08:00">2022-03-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -339,14 +339,14 @@ Lock）问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>12k</span>
+      <span>17k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>11 分钟</span>
+      <span>15 分钟</span>
     </span>
 </div>
 
@@ -917,7 +917,13 @@ class="math inline">\(w^{-1}=w^*\)</span>。</p>
 <p><span
 class="math display">\[p&#39;=p_\parallel+qp_\perp=ww^*p_\parallel+wwp_\perp\]</span></p>
 <p>这里用<span
-class="math inline">\(w\)</span>的原因就是要把两项都表示为三个因子的乘积。但是这种形式还是不能简化右式，我们需要下面的<strong>引理二</strong>。</p>
+class="math inline">\(w\)</span>的原因就是要把两项都表示为三个因子的乘积。<span
+class="math inline">\(ww^*\)</span>实际上是一个恒等变换，它并不对<span
+class="math inline">\(p_\parallel\)</span>产生作用，真正起作用的是<span
+class="math inline">\(w^2\)</span>，它对<span
+class="math inline">\(p_\perp\)</span>旋转了<span
+class="math inline">\(\theta\)</span>度，使得相加后能得到正确的结果。</p>
+<p>但是这种形式还是不能简化右式，我们需要下面的<strong>引理二</strong>。</p>
 <h3 id="引理二">引理二</h3>
 <details class="note primary"><summary><p>Lemma 2</p>
 </summary>
@@ -954,6 +960,199 @@ class="math inline">\(p_\parallel w=wp_\parallel\)</span>.</p>
 w^*+wwp_\perp\]</span></p>
 <p>最后我们再使用<strong>引理三</strong>进行最后的化简。</p>
 <h3 id="引理三">引理三</h3>
+<details class="note primary"><summary><p>Lemma 2</p>
+</summary>
+<p>如果<span
+class="math inline">\(p_\perp=[0,\mathbf{p}_\perp]\)</span>是一个纯四元数，<span
+class="math inline">\(w=[\alpha,\beta \mathbf{n}]\)</span>，其中<span
+class="math inline">\(\mathbf{n}\)</span>是单位向量，<span
+class="math inline">\(\alpha,\beta\in\mathbb{R}\)</span>。若<span
+class="math inline">\(\mathbf{p}_\perp\)</span>正交于<span
+class="math inline">\(\mathbf{n}\)</span>，则<span
+class="math inline">\(wp_\perp=p_\perp w^*\)</span>.</p>
+
+</details>
+<p>证明与引理二过程类似，不多赘述。根据这个引理，我们就能对原式做最后的化简：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  p&#39;&amp;=wp_\parallel w^*+wwp_\perp\\
+  &amp;=wp_\parallel w^*+wp_\perp w^*\\
+  &amp;=w(p_\parallel+p_\perp)w^*\\
+  &amp;=wpw^*
+\end{aligned}
+\]</span></p>
+<p>最后我们得到了一个非常优美的结果，在这个公式中，我们不再把待旋转向量拆分为两个分量，而是直接通过四元数之间的乘法实现了旋转。该结论可以总结为一个定理：</p>
+<h3 id="三维旋转定理四元数型">三维旋转定理（四元数型）</h3>
+<details class="note success"><summary><p>3D Rotation Theorem (Quaternion)</p>
+</summary>
+<p>任意三维向量<span
+class="math inline">\(\mathbf{p}\)</span>绕着单位向量<span
+class="math inline">\(\mathbf{n}\)</span>旋转<span
+class="math inline">\(\theta\)</span>度之后的向量<span
+class="math inline">\(\mathbf{p}&#39;\)</span>可以用下式表示：</p>
+<p><span class="math display">\[p&#39;=wpw^*,\;
+(p=[0,\mathbf{p}],w=[\cos(\tfrac{1}{2}\theta),\sin(\tfrac{1}{2}\theta)\mathbf{n}])\]</span></p>
+
+</details>
+<p>现在我们进行验证：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  wpw^*&amp;=(wp)w^*\\
+  &amp;=([\cos(\tfrac{1}{2}\theta),\sin(\tfrac{1}{2}\theta)\mathbf{n}]\cdot[0,\mathbf{p}])\cdot
+[\cos(\tfrac{1}{2}\theta),-\sin(\tfrac{1}{2}\theta)\mathbf{n}]\\
+  &amp;=[-\sin(\tfrac{1}{2}\theta)\mathbf{n}\cdot\mathbf{p},
+\cos(\tfrac{1}{2}\theta)\mathbf{p}+\sin(\tfrac{1}{2}\theta)\mathbf{n}\times\mathbf{p}]\cdot
+[\cos(\tfrac{1}{2}\theta),-\sin(\tfrac{1}{2}\theta)\mathbf{n}]\\
+  &amp;=[0,\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p})]
+\end{aligned}
+\]</span></p>
+<p>正好就是Rodrigues' formula！</p>
+<p>并且，从上面的推导我们还知道：<strong>所有的单位四元数都对应了一个三维旋转（但这二者之间并非双射）</strong>。那么给定单位四元数<span
+class="math inline">\(w=[a,\mathbf{b}]\)</span>，我们就能得到它对应的旋转角<span
+class="math inline">\(\theta\)</span>和旋转轴<span
+class="math inline">\(\mathbf{n}\)</span>：</p>
+<p><span
+class="math display">\[\frac{\theta}{2}=\arccos(a),\;\mathbf{n}=\frac{\mathbf{b}}{\sin(\arccos(a))}\]</span></p>
+<h3 id="三维旋转四元数型的矩阵形式">三维旋转（四元数型）的矩阵形式</h3>
+<p>通过之前的讨论（尽管不完全相同，但可以类似推导）我们知道左乘一个四元数<span
+class="math inline">\(w=a+bi+cj+dj\)</span>等同于下面的矩阵</p>
+<p><span class="math display">\[
+L(w)=
+\begin{bmatrix}
+  a &amp; -b &amp; -c &amp; -d\\
+  b &amp; a &amp; -d &amp; c\\
+  c &amp; d &amp; a &amp; -b\\
+  d &amp; -c &amp; b &amp; a
+\end{bmatrix}
+\]</span></p>
+<p>而右乘<span class="math inline">\(w\)</span>等同于</p>
+<p><span class="math display">\[
+R(w)=
+\begin{bmatrix}
+  a &amp; -b &amp; -c &amp; -d\\
+  b &amp; a &amp; d &amp; -c\\
+  c &amp; -d &amp; a &amp; b\\
+  d &amp; c &amp; -b &amp; a
+\end{bmatrix}
+\]</span></p>
+<p>现在我们就可以利用这个结论把<span
+class="math inline">\(p&#39;=wpw^*\)</span>写成矩阵形式。假定<span
+class="math inline">\(a=\cos(\tfrac{1}{2}\theta),b=\sin(\tfrac{1}{2}\theta)n_x,c=\sin(\tfrac{1}{2}\theta)n_y,d=\sin(\tfrac{1}{2}\theta)n_z,w=a+bi+cj+dk\)</span>，我们就有：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  wpw^*&amp;=L(w)R(w^*)p\\
+  &amp;=\begin{bmatrix}
+  a &amp; -b &amp; -c &amp; -d\\
+  b &amp; a &amp; -d &amp; c\\
+  c &amp; d &amp; a &amp; -b\\
+  d &amp; -c &amp; b &amp; a
+\end{bmatrix}
+\begin{bmatrix}
+  a &amp; b &amp; c &amp; d\\
+  -b &amp; a &amp; -d &amp; c\\
+  -c &amp; d &amp; a &amp; -b\\
+  -d &amp; c &amp; b &amp; a
+\end{bmatrix}p\\
+&amp;=\begin{bmatrix}
+  a^2+b^2+c^2+d^2 &amp; ab-ab-cd+cd &amp; ac+bd-ac-bd &amp;
+ad-bc+bc-ad\\
+  ab-ab+cd-cd &amp; b^2+a^2-d^2-c^2 &amp; bc-ad-ad+bc &amp;
+bd+ac+bd+ac\\
+  ac-bd-ac+bd &amp; bc+ad+ad+bc &amp; c^2-d^2+a^2-b^2 &amp;
+cd+cd-ab-ab\\
+  ad+bc-bc-ad &amp; bd-ac+bd-ac &amp; cd+cd+ab+ab &amp; d^2-c^2-b^2+a^2
+\end{bmatrix}p\\
+&amp;=\begin{bmatrix}
+  1 &amp; 0 &amp; 0 &amp; 0\\
+  0 &amp; 1-2c^2-2d^2 &amp; 2bc-2ad &amp; 2ac+2bd\\
+  0 &amp; 2bc+2ad &amp; 1-2b^2-2d^2 &amp; 2cd-2ab\\
+  0 &amp; 2bd-2ac &amp; 2ab+2cd &amp; 1-2b^2-2c^2
+\end{bmatrix}p
+\end{aligned}
+\]</span></p>
+<p>实际上我们不需要存这个<span class="math inline">\(4\times
+4\)</span>的矩阵，只需要存右下角的<span class="math inline">\(3\times
+3\)</span>矩阵即可。如此以来，我们就得旋转定理的矩阵形式：</p>
+<details class="note success"><summary><p>3D Rotation Theorem (Matrix)</p>
+</summary>
+<p>任意三维向量<span
+class="math inline">\(\mathbf{p}\)</span>绕着单位向量<span
+class="math inline">\(\mathbf{n}\)</span>旋转<span
+class="math inline">\(\theta\)</span>度之后的向量<span
+class="math inline">\(\mathbf{p}&#39;\)</span>可以用下面的矩阵表示：</p>
+<p><span class="math display">\[
+\mathbf{p}&#39;=\begin{bmatrix}
+  1-2c^2-2d^2 &amp; 2bc-2ad &amp; 2ac+2bd\\
+  2bc+2ad &amp; 1-2b^2-2d^2 &amp; 2cd-2ab\\
+  2bd-2ac &amp; 2ab+2cd &amp; 1-2b^2-2c^2
+\end{bmatrix}\mathbf{p}
+\]</span></p>
+<p>其中<span
+class="math inline">\(a=\cos(\tfrac{1}{2}\theta),b=\sin(\tfrac{1}{2}\theta)n_x,c=\sin(\tfrac{1}{2}\theta)n_y,d=\sin(\tfrac{1}{2}\theta)n_z\)</span>.</p>
+
+</details>
+<p>尽管看起来比较复杂，但是在实际中如果旋转轴<span
+class="math inline">\(\mathbf{n}\)</span>和旋转角度<span
+class="math inline">\(\theta\)</span>固定了之后，该矩阵就可以预先计算下来，在需要旋转很多<span
+class="math inline">\(\mathbf{p}\)</span>时提高效率。</p>
+<h3 id="三维旋转四元数型的指数形式">三维旋转（四元数型）的指数形式</h3>
+<p>类似复数，我们也可以把四元数写成指数的形式。如果<span
+class="math inline">\(\mathbf{n}\)</span>是一个单位向量，对于单位四元数<span
+class="math inline">\(n=[0,\mathbf{n}]\)</span>，我们有:</p>
+<p><span
+class="math display">\[\mathrm{e}^{n\theta}=\cos(\theta)+n\sin(\theta)=\cos(\theta)+\mathbf{n}\sin(\theta)\]</span></p>
+<p>也就是说，<span
+class="math inline">\(w=[\cos(\theta),\sin(\theta)\mathbf{n}]\)</span>可以写为<span
+class="math inline">\(\mathrm{e}^{n\theta}\)</span>。你还可以注意到<span
+class="math inline">\(n^2=[-\mathbf{n}\cdot\mathbf{n},0]=-1\)</span>，这与复数中的<span
+class="math inline">\(i\)</span>是非常类似的。</p>
+<details class="note success"><summary><p>3D Rotation Theorem (Exponential)</p>
+</summary>
+<p>任意三维向量<span
+class="math inline">\(\mathbf{p}\)</span>绕着单位向量<span
+class="math inline">\(\mathbf{n}\)</span>旋转<span
+class="math inline">\(\theta\)</span>度之后的向量<span
+class="math inline">\(\mathbf{p}&#39;\)</span>可以用下面的指数表示：</p>
+<p><span class="math display">\[
+p&#39;=\mathrm{e}^{n\frac{\theta}{2}}p\mathrm{e}^{-n\frac{\theta}{2}}
+\]</span></p>
+<p>其中<span
+class="math inline">\(p=[0,\mathbf{p}],n=[0,\mathbf{n}]\)</span>.</p>
+
+</details>
+<p>有了指数形式，我们就可以很自然地运用关于指数的一些运算了。比如对单位四元数<span
+class="math inline">\(w=[\cos(\theta),\sin(\theta)\mathbf{n}],
+n=[0,\mathbf{n}]\)</span>，<span
+class="math inline">\(w\)</span>的对数是：</p>
+<p><span
+class="math display">\[\log(w)=\log(\mathrm{e}^{n\theta})=n\theta=[0,\mathbf{n}\theta]\]</span></p>
+<p>下面是幂运算；</p>
+<p><span
+class="math display">\[w^t=(\mathrm{e}^{n\theta})^t=\mathrm{e}^{n(t\theta)}=[\cos(t\theta),\sin(t\theta)\mathbf{n}]\]</span></p>
+<p>即一个单位四元数的<span
+class="math inline">\(t\)</span>次幂等同于旋转角缩放到原来的<span
+class="math inline">\(t\)</span>倍，且不会改变旋转轴。</p>
+<h3 id="旋转复合-1">旋转复合</h3>
+<p>现在来考虑基于四元数的旋转复合，假设分别在四元数<span
+class="math inline">\(w_1,w_2\)</span>上进行旋转，则有：</p>
+<p><span
+class="math display">\[p&#39;&#39;=w_2p&#39;w_2^*=w_2w_1pw_1^*w_2^*=wpw^*\;(w=w_2w_1)\]</span></p>
+<p>上式隐含了<span
+class="math inline">\((w_2w_1)^*=w_1^*w_2^*\)</span>，它的证明不多赘述。</p>
+<p>需要注意的是，复合后旋转<span
+class="math inline">\(w=w_2w_1\)</span>是绕着一个新的旋转轴旋转某个角度，尽管结果是相同的，但是过程完全不同。</p>
+<h3 id="双倍覆盖">双倍覆盖</h3>
+<p>单位四元数与三维旋转并不是双射（一对一）的，一个单位四元数对应一个三维旋转，但是一个三维旋转可以找到两个单位四元数去对应它，这就是所谓的<strong>2对1满射同态</strong>，或者说单位四元数<strong>双倍覆盖</strong>了三维旋转。</p>
+<p>具体来说，<span class="math inline">\(w\)</span>与<span
+class="math inline">\(-w\)</span>代表了同一个旋转：</p>
+<p><span
+class="math display">\[-w=[-\cos(\tfrac{1}{2}\theta),-\sin(\tfrac{1}{2}\theta)\mathbf{n}]=[\cos(\pi-\tfrac{1}{2}\theta),\sin(\pi-\tfrac{1}{2}\theta)(\mathbf{-n})]\]</span></p>
+<p>即<span class="math inline">\(-w\)</span>是绕着轴<span
+class="math inline">\(-\mathbf{n}\)</span>旋转了<span
+class="math inline">\(2\pi-\theta\)</span>度，正好是<span
+class="math inline">\(w\)</span>代表的旋转。这个结果也可以从四元数旋转公式得到：</p>
+<p><span
+class="math display">\[(-w)p(-w)^*=(-1)^2wpw^*=wpw^*\]</span></p>
 <h1 id="四元数插值">四元数插值</h1>
 <section class="footnotes footnotes-end-of-document"
 role="doc-endnotes">
@@ -1030,9 +1229,9 @@ class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解�
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
-              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
               <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
           </div>
 
         
@@ -1083,13 +1282,13 @@ class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解�
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">81k</span>
+    <span title="站点总字数">86k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:14</span>
+    <span title="站点阅读时长">1:18</span>
   </span>
 </div>
 <div class="busuanzi-count">
