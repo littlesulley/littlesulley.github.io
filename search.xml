@@ -1,44 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Motion Matching -- 概念与发展</title>
-    <url>/2022/03/27/Motion%20Matching%20-%20%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%8F%91%E5%B1%95/</url>
-    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
-Matching基本知识的介绍，放在此备份。</p>
-<span id="more"></span>
-<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
-]]></content>
-      <categories>
-        <category>计算机 - 动画</category>
-      </categories>
-      <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
-        <tag>计算机</tag>
-        <tag>动画</tag>
-        <tag>机器学习</tag>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/09/07/hello-world/</url>
-    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
-<span id="more"></span>
-<h1 id="测试">测试</h1>
-<h2 id="代码">代码</h2>
-<p>现在来测试一下代码</p>
-<details class="note info no-icon"><summary><p>This is a code test</p>
-</summary>
-<h4 id="details-and-code">Details and code</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
-
-</details>
-<h2 id="latex">Latex</h2>
-<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
-]]></content>
-  </entry>
-  <entry>
     <title>Bresenham算法画直线</title>
     <url>/2020/10/18/Bresenham%E7%AE%97%E6%B3%95%E7%94%BB%E7%9B%B4%E7%BA%BF/</url>
     <content><![CDATA[<p>Bresenham's
@@ -222,9 +184,29 @@ class="math inline">\(0&lt;k\le
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>计算机</tag>
         <tag>算法</tag>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Motion Matching -- 概念与发展</title>
+    <url>/2022/03/27/Motion%20Matching%20-%20%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%8F%91%E5%B1%95/</url>
+    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
+Matching基本知识的介绍，放在此备份。</p>
+<span id="more"></span>
+<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
+]]></content>
+      <categories>
+        <category>计算机 - 动画</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+        <tag>动画</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -267,6 +249,263 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
         <tag>游戏</tag>
         <tag>生活</tag>
         <tag>刺客细条</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/09/07/hello-world/</url>
+    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
+<span id="more"></span>
+<h1 id="测试">测试</h1>
+<h2 id="代码">代码</h2>
+<p>现在来测试一下代码</p>
+<details class="note info no-icon"><summary><p>This is a code test</p>
+</summary>
+<h4 id="details-and-code">Details and code</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
+
+</details>
+<h2 id="latex">Latex</h2>
+<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>无穷连根式求极限的充要条件</title>
+    <url>/2020/09/09/infinite-radicals/</url>
+    <content><![CDATA[<p>在刷习题集或者考试的时候我们经常会遇到诸如<span
+class="math inline">\(\sqrt{1+\sqrt{2+\sqrt{3+\cdots}}}\)</span>或者<span
+class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解或极限存在性证明。解决此类问题的方法有很多，但都可以归结为一点：缩放。要么是两端缩放然后夹逼定理，要么是证明有界然后两边取极限。本文记录此类问题极限存在的一个充要条件，以供参阅。</p>
+<span id="more"></span>
+<h1 id="ramanujans-problem">Ramanujan's Problem</h1>
+<p>这类问题最著名的是拉马努金（Ramanujan）所提出的恒等式：</p>
+<blockquote>
+<p>证明: <span
+class="math display">\[3=\sqrt{1+2\sqrt{1+3\sqrt{1+\cdots}}}\tag{1}\]</span></p>
+</blockquote>
+<p>这个等式的证明是简单而有趣的：</p>
+<p><span class="math display">\[3=\sqrt{1+2\cdot
+4}=\sqrt{1+2\sqrt{1+3\cdot
+5}}=\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}\]</span></p>
+<p>同时，Ramanujan还断言下面的结论：</p>
+<p><span
+class="math display">\[\lim_{n\to\infty}\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=3\]</span></p>
+<p>这个的证明也是容易的。首先把上式和（1）式比较，就发现上式以3为上界，并且由单调性可知，其极限是存在的。为了证明<span
+class="math inline">\(a_n=\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}\)</span>的极限就是3，我们证明：对任意的<span
+class="math inline">\(3&gt;\epsilon&gt;0\)</span>，都存在<span
+class="math inline">\(N\)</span>，使得所有的<span
+class="math inline">\(n&gt;N\)</span>都有<span
+class="math inline">\(a_n&gt;3-\epsilon\)</span>。</p>
+<p>现在任取<span
+class="math inline">\(0&lt;\epsilon&lt;3\)</span>，令<span
+class="math inline">\(3-\epsilon=3r\)</span>，故<span
+class="math inline">\(0&lt;r=1-\epsilon/3&lt;1\)</span>，故有：</p>
+<p><span
+class="math display">\[3-\epsilon=3r=r\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}\]</span></p>
+<p>把<span class="math inline">\(r\)</span>乘进去，就有：</p>
+<p><span
+class="math display">\[3-\epsilon=\sqrt{r^2+2\sqrt{r^{2^2}+\cdots+n\sqrt{r^{2^n}[1+(n+1)(n+3)]}}}\tag{2}\]</span></p>
+<p>由于<span class="math inline">\(1&gt;r^{2^i},\forall
+i=1,2,\cdots\)</span>，且存在<span
+class="math inline">\(N\)</span>，当<span
+class="math inline">\(n&gt;N\)</span>时，有</p>
+<p><span
+class="math display">\[1&gt;r^{2^n}[1+(n+1)(n+2)]=r^{2^n}(n+2)^2\]</span></p>
+<p>把这些全部带入（2）式，就可以证明：</p>
+<p><span
+class="math display">\[3-\epsilon=\sqrt{r^2+2\sqrt{r^{2^2}+\cdots+n\sqrt{r^{2^n}[1+(n+1)(n+3)]}}}&lt;\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=a_n,n&gt;N\]</span></p>
+<p>从而完成证明。</p>
+<h1 id="polyas-criterionpolya准则">Polya's Criterion（Polya准则）</h1>
+<p>在考虑普遍情况下首先来观察一些特例，一个典型的特例就是形如<span
+class="math inline">\(\sqrt{a_1+\sqrt{a_2+\cdots}}\)</span>的无穷根式，每个根号的次数都是<span
+class="math inline">\(2\)</span>，或者幂次都是<span
+class="math inline">\(2^{-1}\)</span>。对于<span
+class="math inline">\(a_1\)</span>来看，控制它的幂次是<span
+class="math inline">\(\frac{1}{2}\)</span>，对于<span
+class="math inline">\(a_2\)</span>来说，控制它的幂次是<span
+class="math inline">\(2^{-2}\)</span>，对于<span
+class="math inline">\(a_n\)</span>来说，控制它的幂次是<span
+class="math inline">\(2^{-n}\)</span>。假设这个无穷根式极限存在，那么我们关心的肯定是<span
+class="math inline">\(n\)</span>足够大时，它被什么控制，显然是<span
+class="math inline">\(a_n\)</span>及控制它的<span
+class="math inline">\(2^{-n}\)</span>的幂次。所以，一个合理的猜测是，如果<span
+class="math inline">\(a_n^{2^{-n}}\)</span>极限存在，那么该根式就收敛。下面我们将看到，这个猜测已经非常接近“真相”，甚至是真相的一部分。</p>
+<h2 id="description">Description</h2>
+<p>设序列<span
+class="math inline">\(u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}\)</span>，则<span
+class="math inline">\(\{u_n\}\)</span>可以用下述条件判定：</p>
+<p><span class="math display">\[
+\begin{cases}
+\text{converges},&amp;\text{if}\;
+\overline{\lim}\_{n\to\infty}\frac{\log\log a_n}{n}&lt;\log 2\\
+\text{diverges},&amp;\text{if}\;
+\overline{\lim}\_{n\to\infty}\frac{\log\log a_n}{n}&gt;\log 2
+\end{cases}
+\]</span></p>
+<p>上述准则还可以进一步推广为：</p>
+<blockquote>
+<p>序列<span class="math inline">\(\{u_n\}\)</span>收敛的充要条件是：
+<span class="math display">\[\overline{\lim_{n\to\infty}} n \left(
+\frac{\log\log a_n}{n}-\log2 \right) &lt;+\infty\tag{3}\]</span></p>
+</blockquote>
+<p>注意到，这个极限可以取有限数或者负无穷。我们将在陈述下面的<strong>定理一</strong>之后进行证明。</p>
+<blockquote>
+<p><strong>（定理一）</strong> 序列<span
+class="math inline">\(u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}\)</span>收敛当且仅当存在有限上极限
+<span
+class="math display">\[\overline{\lim_{n\to\infty}}a_n^{2^{-n}}&lt;+\infty\]</span></p>
+</blockquote>
+<p>首先证明<em>必要性</em>，即假定<span
+class="math inline">\(\{u_n\}\)</span>收敛。因为<span
+class="math inline">\(u_n\ge a_n^{2^{-n}}\)</span>，故<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}\)</span>一定是有限的，得证。</p>
+<p>再来证明<em>充分性</em>。假定<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}&lt;+\infty\)</span>，则存在<span
+class="math inline">\(G&gt;0\)</span>使得对所有<span
+class="math inline">\(n&gt;0\)</span>，有<span
+class="math inline">\(a_n^{2^{-n}}\le G\)</span>，因此<span
+class="math inline">\(a_n\le G^{2^n}\)</span>。从而有：</p>
+<p><span class="math display">\[u_n\le
+\sqrt{G^2+\sqrt{G^{2^2}+\cdots+\sqrt{G^{2^n}}}}=G\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
+<p>同时又因为</p>
+<p><span
+class="math display">\[2=\sqrt{2+2}=\sqrt{2+\sqrt{2+2}}=\cdots=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+2}}}&gt;\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
+<p>从而有<span class="math inline">\(u_n&lt;2G,\forall
+n&gt;0\)</span>，又由<span
+class="math inline">\(\{u_n\}\)</span>的单调性知收敛。</p>
+<p>到此为止，我们发现<strong>定理一</strong>和开始我们的猜测是非常相似的，只是<strong>定理一</strong>只需要上极限，这比我们的猜测更加宽松。下面我们利用此定理证明Polya's
+Criterion.</p>
+<h2 id="proof-of-polyas-criterion">Proof of Polya's Criterion</h2>
+<p>当<span
+class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
+a_n}{n}&lt;\log 2\)</span>时，存在<span
+class="math inline">\(N\)</span>，当<span
+class="math inline">\(n&gt;N\)</span>时<span
+class="math inline">\((\log\log a_n)/n&lt;\log 2\)</span>，也即<span
+class="math inline">\(a_n^{2^{-n}}&lt;\mathrm{e}\)</span>，由<strong>定理一</strong>知<span
+class="math inline">\(\{u_n\}\)</span>收敛。</p>
+<p>当<span
+class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
+a_n}{n}&gt;\log 2\)</span>时，存在某个<span
+class="math inline">\(a&gt;1\)</span>，对某些无限的<span
+class="math inline">\(n\)</span>，使得<span
+class="math inline">\((\log\log a_n)/n&gt;a\log 2\)</span>，也即<span
+class="math inline">\(\log a_n&gt;2^{an}\)</span>。因此，对这些<span
+class="math inline">\(n\)</span>而言：</p>
+<p><span
+class="math display">\[a_n^{2^{-n}}&gt;e^{2^{(a-1)n}}\]</span></p>
+<p>因此<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}=+\infty\)</span>.</p>
+<p>最后考虑<span
+class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
+a_n}{n}=\log 2\)</span>。</p>
+<p>若<span class="math inline">\(\{u_n\}\)</span>收敛，则<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}\)</span>有限，即存在<span
+class="math inline">\(G&gt;1\)</span>对所有<span
+class="math inline">\(n\)</span>成立<span
+class="math inline">\(a_n^{2^{-n}}&lt;G\)</span>，因而<span
+class="math inline">\(\log a_n&lt;2^n\log G\)</span>。此时若<span
+class="math inline">\(a_n&gt;1\)</span>，则</p>
+<p><span class="math display">\[n\left(\frac{\log\log
+a_n}{n}-\log2\right)&lt;\log\log G\]</span></p>
+<p>而当<span class="math inline">\(a_n\le 1\)</span>时，按照约定有<span
+class="math inline">\((\log\log
+a_n)/n=-\infty\)</span>，则综上公式（3）的必要性得证。</p>
+<p>同时公式（3）也是充分的。假定条件成立但<span
+class="math inline">\(\{u_n\}\)</span>不收敛，则由<strong>定理一</strong>知<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}=+\infty\)</span>，则对任意的<span
+class="math inline">\(G&gt;\mathrm{e}\)</span>，有充分大的<span
+class="math inline">\(n\)</span>使得<span
+class="math inline">\(a_n^{2^{-n}}&gt;G\)</span>，从而<span
+class="math inline">\(\log a_n&gt;2^n\log G\)</span>，于是有</p>
+<p><span class="math display">\[n\left(\frac{\log\log
+a_n}{n}-\log2\right)&gt;\log\log G\]</span></p>
+<p>这说明上极限是无穷大，与假设矛盾。充分性得证。</p>
+<h2 id="examples">Examples</h2>
+<h3 id="例一">例一</h3>
+<p>现在我们考虑一个序列<span
+class="math inline">\(u_n=\sqrt{x+\sqrt{x+\cdots+\sqrt{x}}}\)</span>，当<span
+class="math inline">\(x&lt;1\)</span>的时候，它的上界是<span
+class="math inline">\(\sqrt{1+\sqrt{1+\cdots}}\)</span>，而后者我们上面已经证明了它的上界是2。现在我们考虑<span
+class="math inline">\(x&gt;1\)</span>的情景。此时有：</p>
+<p><span
+class="math display">\[u_n&lt;\sqrt{x^2+\sqrt{x^{2^2}+\cdots+\sqrt{x^{2^n}}}}&lt;2x\]</span></p>
+<p>所以我们证明了，对<span
+class="math inline">\(x&gt;0\)</span>，序列<span
+class="math inline">\(\{u_n\}\)</span>都是收敛的，并且没有使用<strong>定理一</strong>。</p>
+<h3 id="例二">例二</h3>
+<p>现在考虑下述恒等式：</p>
+<p><span
+class="math display">\[x(2^n+x)=x\sqrt{2^{2n}+x(2^{n+1}+x)}\]</span></p>
+<p>于是可以立即得到：</p>
+<p><span class="math display">\[
+\begin{aligned}
+x(2+x)&amp;=x\sqrt{2^2+x(2^2+x)}\\
+&amp;=x\sqrt{2^2+x\sqrt{2^4+x(2^4+x)}}\\
+&amp;=\cdots\\
+&amp;=x\sqrt{2^2+x\sqrt{2^4+\cdots+x\sqrt{2^{2n}+x(2^{n+1}+x)}}}\\
+&amp;=x\sqrt{2^2+x\sqrt{2^4+x\sqrt{\cdots}}}
+\end{aligned}
+\]</span></p>
+<p>现在令<span class="math inline">\(x=1\)</span>，就有：</p>
+<p><span
+class="math display">\[3=\sqrt{2^2+\sqrt{2^4+\cdots}}\]</span></p>
+<p>用<span class="math inline">\(x/2\)</span>替换<span
+class="math inline">\(x\)</span>，有：</p>
+<p><span
+class="math display">\[2+\frac{x}{2}=\sqrt{2^2+\frac{x}{2}\sqrt{2^4+\frac{x}{2}\sqrt{2^6+\cdots}}}\]</span></p>
+<p>两边约去2，就有：</p>
+<p><span
+class="math display">\[1+\frac{x}{4}=\sqrt{1+\frac{x}{2}\sqrt{1+\frac{x}{2^2}\sqrt{1+\cdots}}}\]</span></p>
+<h3 id="例三">例三</h3>
+<p>由余弦二倍角公式<span
+class="math inline">\(\cos2\theta=2\cos^2\theta-1\)</span>可知：</p>
+<p><span
+class="math display">\[2\cos\theta=\sqrt{2+2\cos2\theta}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+2\cos
+2^n\theta}}}\]</span></p>
+<p>此时令<span
+class="math inline">\(\theta=\frac{\pi}{2^{n+1}}\)</span>，就有：</p>
+<p><span
+class="math display">\[2\cos\frac{\pi}{2^{n+1}}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+0}}}\Rightarrow\\\\
+\cos\frac{\pi}{2^{n+1}}=\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\]</span></p>
+<p>所以可以立刻得到下式的极限：</p>
+<p><span
+class="math display">\[\lim_{n\to\infty}4^n\left(1-\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\right)\\\\
+=\lim_{n\to\infty}4^n\left(1-\cos\frac{\pi}{2^{n+1}}\right)\\\\
+=\lim_{n\to\infty}4^n\cdot\frac{\pi^2}{2^{2n+2+1}} (1-\cos x\sim
+\frac{1}{2}x^2)\\\\
+=\frac{\pi^2}{8}\]</span></p>
+<h1 id="herschfelds-convergence-theorem-herschfeld收敛定理">Herschfeld’s
+Convergence Theorem （Herschfeld收敛定理）</h1>
+<p>Polya's Criterion只考虑了指数为<span
+class="math inline">\(\frac{1}{2}\)</span>的情况，对于更加普遍的情况，即形如<span
+class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n^{r_n}))^{r_2})^{r_1}
+(a_i\ge 0,0&lt;r_i\le 1)\)</span>的序列，Herschfeld’s Convergence
+Theorem给出了一个其收敛的充要条件。</p>
+<p><a
+href="https://www.tandfonline.com/doi/abs/10.1080/00029890.1935.11987745?journalCode=uamm20">Herschfeld’s
+Convergence Theorem</a> 告诉我们了一个无穷根式收敛的充要条件：</p>
+<blockquote>
+<p>设序列<span
+class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n^{r_n}))^{r_2})^{r_1}
+(a_i\ge 0,0&lt;r_i\le 1)\)</span>且级数<span
+class="math inline">\(S=\sum_{i=1}^\infty r_1r_2\cdots
+r_i\)</span>收敛，则序列<span
+class="math inline">\(\{u_n\}\)</span>收敛的充分必要条件是： <span
+class="math display">\[\overline{\lim_{n\to\infty}}a_n^{r_1r_2\cdots
+r_n}&lt;+\infty\]</span></p>
+</blockquote>
+<p>这个定理的证明之后有空了补充。</p>
+<h1 id="后记">后记</h1>
+<p>实际上无穷根式分为右无穷根式（Right Infinite
+Radicals）和左无穷根式（Left Infinite
+Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷根式可以仿照进行推导。</p>
+]]></content>
+      <categories>
+        <category>数学 - 数学分析</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -534,6 +773,30 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
       </tags>
   </entry>
   <entry>
+    <title>十二月的花</title>
+    <url>/2020/12/22/%E5%8D%81%E4%BA%8C%E6%9C%88%E7%9A%84%E8%8A%B1/</url>
+    <content><![CDATA[<p>埙吹响了海岸<br />
+琴穿梭叶间<br />
+笛在天空啼鸣<br />
+伴奏着雪花片片</p>
+<p>孩子们欢笑着相聚<br />
+踏着雪<br />
+吱吱嘎嘎</p>
+<p>把欢乐捏成一团团棉<br />
+随风起舞<br />
+在阳光下<br />
+雪爱上了花</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>向量绕任意轴旋转的简单推导</title>
     <url>/2021/06/07/%E5%90%91%E9%87%8F%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E7%AE%80%E5%8D%95%E6%8E%A8%E5%AF%BC/</url>
     <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
@@ -696,264 +959,29 @@ CPU @ 2.90GHz。</p>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
         <tag>计算机</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>无穷连根式求极限的充要条件</title>
-    <url>/2020/09/09/infinite-radicals/</url>
-    <content><![CDATA[<p>在刷习题集或者考试的时候我们经常会遇到诸如<span
-class="math inline">\(\sqrt{1+\sqrt{2+\sqrt{3+\cdots}}}\)</span>或者<span
-class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解或极限存在性证明。解决此类问题的方法有很多，但都可以归结为一点：缩放。要么是两端缩放然后夹逼定理，要么是证明有界然后两边取极限。本文记录此类问题极限存在的一个充要条件，以供参阅。</p>
-<span id="more"></span>
-<h1 id="ramanujans-problem">Ramanujan's Problem</h1>
-<p>这类问题最著名的是拉马努金（Ramanujan）所提出的恒等式：</p>
-<blockquote>
-<p>证明: <span
-class="math display">\[3=\sqrt{1+2\sqrt{1+3\sqrt{1+\cdots}}}\tag{1}\]</span></p>
-</blockquote>
-<p>这个等式的证明是简单而有趣的：</p>
-<p><span class="math display">\[3=\sqrt{1+2\cdot
-4}=\sqrt{1+2\sqrt{1+3\cdot
-5}}=\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}\]</span></p>
-<p>同时，Ramanujan还断言下面的结论：</p>
-<p><span
-class="math display">\[\lim_{n\to\infty}\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=3\]</span></p>
-<p>这个的证明也是容易的。首先把上式和（1）式比较，就发现上式以3为上界，并且由单调性可知，其极限是存在的。为了证明<span
-class="math inline">\(a_n=\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}\)</span>的极限就是3，我们证明：对任意的<span
-class="math inline">\(3&gt;\epsilon&gt;0\)</span>，都存在<span
-class="math inline">\(N\)</span>，使得所有的<span
-class="math inline">\(n&gt;N\)</span>都有<span
-class="math inline">\(a_n&gt;3-\epsilon\)</span>。</p>
-<p>现在任取<span
-class="math inline">\(0&lt;\epsilon&lt;3\)</span>，令<span
-class="math inline">\(3-\epsilon=3r\)</span>，故<span
-class="math inline">\(0&lt;r=1-\epsilon/3&lt;1\)</span>，故有：</p>
-<p><span
-class="math display">\[3-\epsilon=3r=r\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}\]</span></p>
-<p>把<span class="math inline">\(r\)</span>乘进去，就有：</p>
-<p><span
-class="math display">\[3-\epsilon=\sqrt{r^2+2\sqrt{r^{2^2}+\cdots+n\sqrt{r^{2^n}[1+(n+1)(n+3)]}}}\tag{2}\]</span></p>
-<p>由于<span class="math inline">\(1&gt;r^{2^i},\forall
-i=1,2,\cdots\)</span>，且存在<span
-class="math inline">\(N\)</span>，当<span
-class="math inline">\(n&gt;N\)</span>时，有</p>
-<p><span
-class="math display">\[1&gt;r^{2^n}[1+(n+1)(n+2)]=r^{2^n}(n+2)^2\]</span></p>
-<p>把这些全部带入（2）式，就可以证明：</p>
-<p><span
-class="math display">\[3-\epsilon=\sqrt{r^2+2\sqrt{r^{2^2}+\cdots+n\sqrt{r^{2^n}[1+(n+1)(n+3)]}}}&lt;\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=a_n,n&gt;N\]</span></p>
-<p>从而完成证明。</p>
-<h1 id="polyas-criterionpolya准则">Polya's Criterion（Polya准则）</h1>
-<p>在考虑普遍情况下首先来观察一些特例，一个典型的特例就是形如<span
-class="math inline">\(\sqrt{a_1+\sqrt{a_2+\cdots}}\)</span>的无穷根式，每个根号的次数都是<span
-class="math inline">\(2\)</span>，或者幂次都是<span
-class="math inline">\(2^{-1}\)</span>。对于<span
-class="math inline">\(a_1\)</span>来看，控制它的幂次是<span
-class="math inline">\(\frac{1}{2}\)</span>，对于<span
-class="math inline">\(a_2\)</span>来说，控制它的幂次是<span
-class="math inline">\(2^{-2}\)</span>，对于<span
-class="math inline">\(a_n\)</span>来说，控制它的幂次是<span
-class="math inline">\(2^{-n}\)</span>。假设这个无穷根式极限存在，那么我们关心的肯定是<span
-class="math inline">\(n\)</span>足够大时，它被什么控制，显然是<span
-class="math inline">\(a_n\)</span>及控制它的<span
-class="math inline">\(2^{-n}\)</span>的幂次。所以，一个合理的猜测是，如果<span
-class="math inline">\(a_n^{2^{-n}}\)</span>极限存在，那么该根式就收敛。下面我们将看到，这个猜测已经非常接近“真相”，甚至是真相的一部分。</p>
-<h2 id="description">Description</h2>
-<p>设序列<span
-class="math inline">\(u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}\)</span>，则<span
-class="math inline">\(\{u_n\}\)</span>可以用下述条件判定：</p>
-<p><span class="math display">\[
-\begin{cases}
-\text{converges},&amp;\text{if}\;
-\overline{\lim}\_{n\to\infty}\frac{\log\log a_n}{n}&lt;\log 2\\
-\text{diverges},&amp;\text{if}\;
-\overline{\lim}\_{n\to\infty}\frac{\log\log a_n}{n}&gt;\log 2
-\end{cases}
-\]</span></p>
-<p>上述准则还可以进一步推广为：</p>
-<blockquote>
-<p>序列<span class="math inline">\(\{u_n\}\)</span>收敛的充要条件是：
-<span class="math display">\[\overline{\lim_{n\to\infty}} n \left(
-\frac{\log\log a_n}{n}-\log2 \right) &lt;+\infty\tag{3}\]</span></p>
-</blockquote>
-<p>注意到，这个极限可以取有限数或者负无穷。我们将在陈述下面的<strong>定理一</strong>之后进行证明。</p>
-<blockquote>
-<p><strong>（定理一）</strong> 序列<span
-class="math inline">\(u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}\)</span>收敛当且仅当存在有限上极限
-<span
-class="math display">\[\overline{\lim_{n\to\infty}}a_n^{2^{-n}}&lt;+\infty\]</span></p>
-</blockquote>
-<p>首先证明<em>必要性</em>，即假定<span
-class="math inline">\(\{u_n\}\)</span>收敛。因为<span
-class="math inline">\(u_n\ge a_n^{2^{-n}}\)</span>，故<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}\)</span>一定是有限的，得证。</p>
-<p>再来证明<em>充分性</em>。假定<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}&lt;+\infty\)</span>，则存在<span
-class="math inline">\(G&gt;0\)</span>使得对所有<span
-class="math inline">\(n&gt;0\)</span>，有<span
-class="math inline">\(a_n^{2^{-n}}\le G\)</span>，因此<span
-class="math inline">\(a_n\le G^{2^n}\)</span>。从而有：</p>
-<p><span class="math display">\[u_n\le
-\sqrt{G^2+\sqrt{G^{2^2}+\cdots+\sqrt{G^{2^n}}}}=G\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
-<p>同时又因为</p>
-<p><span
-class="math display">\[2=\sqrt{2+2}=\sqrt{2+\sqrt{2+2}}=\cdots=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+2}}}&gt;\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
-<p>从而有<span class="math inline">\(u_n&lt;2G,\forall
-n&gt;0\)</span>，又由<span
-class="math inline">\(\{u_n\}\)</span>的单调性知收敛。</p>
-<p>到此为止，我们发现<strong>定理一</strong>和开始我们的猜测是非常相似的，只是<strong>定理一</strong>只需要上极限，这比我们的猜测更加宽松。下面我们利用此定理证明Polya's
-Criterion.</p>
-<h2 id="proof-of-polyas-criterion">Proof of Polya's Criterion</h2>
-<p>当<span
-class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
-a_n}{n}&lt;\log 2\)</span>时，存在<span
-class="math inline">\(N\)</span>，当<span
-class="math inline">\(n&gt;N\)</span>时<span
-class="math inline">\((\log\log a_n)/n&lt;\log 2\)</span>，也即<span
-class="math inline">\(a_n^{2^{-n}}&lt;\mathrm{e}\)</span>，由<strong>定理一</strong>知<span
-class="math inline">\(\{u_n\}\)</span>收敛。</p>
-<p>当<span
-class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
-a_n}{n}&gt;\log 2\)</span>时，存在某个<span
-class="math inline">\(a&gt;1\)</span>，对某些无限的<span
-class="math inline">\(n\)</span>，使得<span
-class="math inline">\((\log\log a_n)/n&gt;a\log 2\)</span>，也即<span
-class="math inline">\(\log a_n&gt;2^{an}\)</span>。因此，对这些<span
-class="math inline">\(n\)</span>而言：</p>
-<p><span
-class="math display">\[a_n^{2^{-n}}&gt;e^{2^{(a-1)n}}\]</span></p>
-<p>因此<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}=+\infty\)</span>.</p>
-<p>最后考虑<span
-class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
-a_n}{n}=\log 2\)</span>。</p>
-<p>若<span class="math inline">\(\{u_n\}\)</span>收敛，则<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}\)</span>有限，即存在<span
-class="math inline">\(G&gt;1\)</span>对所有<span
-class="math inline">\(n\)</span>成立<span
-class="math inline">\(a_n^{2^{-n}}&lt;G\)</span>，因而<span
-class="math inline">\(\log a_n&lt;2^n\log G\)</span>。此时若<span
-class="math inline">\(a_n&gt;1\)</span>，则</p>
-<p><span class="math display">\[n\left(\frac{\log\log
-a_n}{n}-\log2\right)&lt;\log\log G\]</span></p>
-<p>而当<span class="math inline">\(a_n\le 1\)</span>时，按照约定有<span
-class="math inline">\((\log\log
-a_n)/n=-\infty\)</span>，则综上公式（3）的必要性得证。</p>
-<p>同时公式（3）也是充分的。假定条件成立但<span
-class="math inline">\(\{u_n\}\)</span>不收敛，则由<strong>定理一</strong>知<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}=+\infty\)</span>，则对任意的<span
-class="math inline">\(G&gt;\mathrm{e}\)</span>，有充分大的<span
-class="math inline">\(n\)</span>使得<span
-class="math inline">\(a_n^{2^{-n}}&gt;G\)</span>，从而<span
-class="math inline">\(\log a_n&gt;2^n\log G\)</span>，于是有</p>
-<p><span class="math display">\[n\left(\frac{\log\log
-a_n}{n}-\log2\right)&gt;\log\log G\]</span></p>
-<p>这说明上极限是无穷大，与假设矛盾。充分性得证。</p>
-<h2 id="examples">Examples</h2>
-<h3 id="例一">例一</h3>
-<p>现在我们考虑一个序列<span
-class="math inline">\(u_n=\sqrt{x+\sqrt{x+\cdots+\sqrt{x}}}\)</span>，当<span
-class="math inline">\(x&lt;1\)</span>的时候，它的上界是<span
-class="math inline">\(\sqrt{1+\sqrt{1+\cdots}}\)</span>，而后者我们上面已经证明了它的上界是2。现在我们考虑<span
-class="math inline">\(x&gt;1\)</span>的情景。此时有：</p>
-<p><span
-class="math display">\[u_n&lt;\sqrt{x^2+\sqrt{x^{2^2}+\cdots+\sqrt{x^{2^n}}}}&lt;2x\]</span></p>
-<p>所以我们证明了，对<span
-class="math inline">\(x&gt;0\)</span>，序列<span
-class="math inline">\(\{u_n\}\)</span>都是收敛的，并且没有使用<strong>定理一</strong>。</p>
-<h3 id="例二">例二</h3>
-<p>现在考虑下述恒等式：</p>
-<p><span
-class="math display">\[x(2^n+x)=x\sqrt{2^{2n}+x(2^{n+1}+x)}\]</span></p>
-<p>于是可以立即得到：</p>
-<p><span class="math display">\[
-\begin{aligned}
-x(2+x)&amp;=x\sqrt{2^2+x(2^2+x)}\\
-&amp;=x\sqrt{2^2+x\sqrt{2^4+x(2^4+x)}}\\
-&amp;=\cdots\\
-&amp;=x\sqrt{2^2+x\sqrt{2^4+\cdots+x\sqrt{2^{2n}+x(2^{n+1}+x)}}}\\
-&amp;=x\sqrt{2^2+x\sqrt{2^4+x\sqrt{\cdots}}}
-\end{aligned}
-\]</span></p>
-<p>现在令<span class="math inline">\(x=1\)</span>，就有：</p>
-<p><span
-class="math display">\[3=\sqrt{2^2+\sqrt{2^4+\cdots}}\]</span></p>
-<p>用<span class="math inline">\(x/2\)</span>替换<span
-class="math inline">\(x\)</span>，有：</p>
-<p><span
-class="math display">\[2+\frac{x}{2}=\sqrt{2^2+\frac{x}{2}\sqrt{2^4+\frac{x}{2}\sqrt{2^6+\cdots}}}\]</span></p>
-<p>两边约去2，就有：</p>
-<p><span
-class="math display">\[1+\frac{x}{4}=\sqrt{1+\frac{x}{2}\sqrt{1+\frac{x}{2^2}\sqrt{1+\cdots}}}\]</span></p>
-<h3 id="例三">例三</h3>
-<p>由余弦二倍角公式<span
-class="math inline">\(\cos2\theta=2\cos^2\theta-1\)</span>可知：</p>
-<p><span
-class="math display">\[2\cos\theta=\sqrt{2+2\cos2\theta}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+2\cos
-2^n\theta}}}\]</span></p>
-<p>此时令<span
-class="math inline">\(\theta=\frac{\pi}{2^{n+1}}\)</span>，就有：</p>
-<p><span
-class="math display">\[2\cos\frac{\pi}{2^{n+1}}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+0}}}\Rightarrow\\\\
-\cos\frac{\pi}{2^{n+1}}=\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\]</span></p>
-<p>所以可以立刻得到下式的极限：</p>
-<p><span
-class="math display">\[\lim_{n\to\infty}4^n\left(1-\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\right)\\\\
-=\lim_{n\to\infty}4^n\left(1-\cos\frac{\pi}{2^{n+1}}\right)\\\\
-=\lim_{n\to\infty}4^n\cdot\frac{\pi^2}{2^{2n+2+1}} (1-\cos x\sim
-\frac{1}{2}x^2)\\\\
-=\frac{\pi^2}{8}\]</span></p>
-<h1 id="herschfelds-convergence-theorem-herschfeld收敛定理">Herschfeld’s
-Convergence Theorem （Herschfeld收敛定理）</h1>
-<p>Polya's Criterion只考虑了指数为<span
-class="math inline">\(\frac{1}{2}\)</span>的情况，对于更加普遍的情况，即形如<span
-class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n^{r_n}))^{r_2})^{r_1}
-(a_i\ge 0,0&lt;r_i\le 1)\)</span>的序列，Herschfeld’s Convergence
-Theorem给出了一个其收敛的充要条件。</p>
-<p><a
-href="https://www.tandfonline.com/doi/abs/10.1080/00029890.1935.11987745?journalCode=uamm20">Herschfeld’s
-Convergence Theorem</a> 告诉我们了一个无穷根式收敛的充要条件：</p>
-<blockquote>
-<p>设序列<span
-class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n^{r_n}))^{r_2})^{r_1}
-(a_i\ge 0,0&lt;r_i\le 1)\)</span>且级数<span
-class="math inline">\(S=\sum_{i=1}^\infty r_1r_2\cdots
-r_i\)</span>收敛，则序列<span
-class="math inline">\(\{u_n\}\)</span>收敛的充分必要条件是： <span
-class="math display">\[\overline{\lim_{n\to\infty}}a_n^{r_1r_2\cdots
-r_n}&lt;+\infty\]</span></p>
-</blockquote>
-<p>这个定理的证明之后有空了补充。</p>
-<h1 id="后记">后记</h1>
-<p>实际上无穷根式分为右无穷根式（Right Infinite
-Radicals）和左无穷根式（Left Infinite
-Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷根式可以仿照进行推导。</p>
-]]></content>
-      <categories>
-        <category>数学 - 数学分析</category>
-      </categories>
-      <tags>
-        <tag>数学</tag>
         <tag>随笔</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
-    <title>十二月的花</title>
-    <url>/2020/12/22/%E5%8D%81%E4%BA%8C%E6%9C%88%E7%9A%84%E8%8A%B1/</url>
-    <content><![CDATA[<p>埙吹响了海岸<br />
-琴穿梭叶间<br />
-笛在天空啼鸣<br />
-伴奏着雪花片片</p>
-<p>孩子们欢笑着相聚<br />
-踏着雪<br />
-吱吱嘎嘎</p>
-<p>把欢乐捏成一团团棉<br />
-随风起舞<br />
-在阳光下<br />
-雪爱上了花</p>
+    <title>樱花</title>
+    <url>/2021/06/29/%E6%A8%B1%E8%8A%B1/</url>
+    <content><![CDATA[<p>昨夜 我收到一封书札<br />
+旧纸上 缀满了一朵樱花<br />
+风干的墨迹 渗透了陌生人的迷茫<br />
+我慢慢 把信合上</p>
+<p>昨夜 我写了一封书札<br />
+述说着 近日的苦闷衷肠<br />
+窗外的灯火 依旧那么辉煌<br />
+我贴上 一朵樱花珍藏</p>
+<p>同样的夜晚 走过了岁月多少锋芒<br />
+心中仍 呐喊着一个熟悉人的回响<br />
+把信 随风寄向远方<br />
+留给陌生的他 打开新的过往<br />
+愿他不要怯懦 续写昨夜的感慨<br />
+还有清晨的阳光</p>
+<p>案台旁 樱花在绽放</p>
 ]]></content>
       <categories>
         <category>随笔</category>
@@ -1028,50 +1056,6 @@ key）。</p>
         <tag>随笔</tag>
         <tag>生活</tag>
         <tag>影评</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>樱花</title>
-    <url>/2021/06/29/%E6%A8%B1%E8%8A%B1/</url>
-    <content><![CDATA[<p>昨夜 我收到一封书札<br />
-旧纸上 缀满了一朵樱花<br />
-风干的墨迹 渗透了陌生人的迷茫<br />
-我慢慢 把信合上</p>
-<p>昨夜 我写了一封书札<br />
-述说着 近日的苦闷衷肠<br />
-窗外的灯火 依旧那么辉煌<br />
-我贴上 一朵樱花珍藏</p>
-<p>同样的夜晚 走过了岁月多少锋芒<br />
-心中仍 呐喊着一个熟悉人的回响<br />
-把信 随风寄向远方<br />
-留给陌生的他 打开新的过往<br />
-愿他不要怯懦 续写昨夜的感慨<br />
-还有清晨的阳光</p>
-<p>案台旁 樱花在绽放</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>西湖夜歌</title>
-    <url>/2021/07/09/%E8%A5%BF%E6%B9%96%E5%A4%9C%E6%AD%8C/</url>
-    <content><![CDATA[<p>霓光半遮影<br />
-湖波轻颤合韵起<br />
-半句寻谁去</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -1474,122 +1458,25 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
         <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
-    <title>巫师三：一个告诉你原来游戏可以是艺术品的神作</title>
-    <url>/2020/10/09/witcher-impression/</url>
-    <content><![CDATA[<p>巫师三是一款已经被时间证明的，当之无愧的神作。巫师三没有波澜壮阔气势浩天的景致，却有风格迥异人文色彩浓厚的地区特色。威伦的破败荒凉贫穷凄苦，为了一双鞋可以连父母都能出卖；诺威格瑞的大城风范，有日进斗金的土豪乡绅，也有困守城中的穷困百姓，女巫猎人穿梭其中，种族矛盾暗流涌动；史凯利杰群岛的剽悍民风，对外来者的敌视，对入侵者的抵御，捍卫土地的决心让诸多岛屿团结在一起；凯尔莫罕的静谧安详，森林环抱狼堡，猎魔人镇守故乡，仿佛出世的仙境，危机四伏但又简单质朴；陶森特的梦幻美丽，人们自得其乐，生活在这宛若仙境的城都中。不仅仅是景色，巫师三更是以它的剧情和对人物的刻画出名，抛开难以入流的战斗系统，单凭巫师三对剧情的把控、对人物的描写和对画面的雕琢，就足以令这部游戏称为艺术品。在经历了完整的主线和DLC流程后，几乎没有玩家会给巫师三一个低分，尽管它有瑕疵，但是它在剧情、人物和画面上已经到达巅峰造极的水平了，更难能可贵的是，这三者完美融合，在体验游戏的同时，给予玩家美的享受、身心的震撼。这是奥德赛无法比拟的，也是大多数游戏难以企及的高度。</p>
-<span id="more"></span>
-<h1 id="前言">前言</h1>
-<p>由于巫师三的世界观过于宏大，一篇未经雕琢的读后感不能道尽巫师三的所有优点，故本文旨在从宏观上呈现巫师三是如何完美统一任务、节奏与剧情这三者的。至于其他的，我们有机会留在以后再说。我相信，通关巫师三的玩家，一定会承认巫师三在任务的组织和剧情的展开上非常连贯丝滑，而且剧情上的节奏递进、叙述上的跌宕起伏都让人回味无穷。游戏本质是在讲故事，但是巫师三成功地给予了玩家沉浸式的体验，也就是，我们从观众的角色深入到了主角的角色，从游戏外的世界走进了游戏内的世界，仿佛每个人都是真实可及的，都是有血有肉的，都是有情有义的。那么，如何讲好这个故事，把观众代入到游戏中，就是巫师三不同于其他游戏的关键所在，这也是这篇玩后感的主要内容。</p>
-<figure>
-<img data-src="/images/witcher-impression/4.jpg"
-alt="被附身的Geralt帅中泄露出一丝痞气" />
-<figcaption
-aria-hidden="true">被附身的Geralt帅中泄露出一丝痞气</figcaption>
-</figure>
-<h1 id="主线为林支线为溪">主线为林，支线为溪</h1>
-<p>巫师三的一大特色就是它的任务系统非常丰富，从表层看，巫师三的主线只有一个——寻找女儿，但是，在每个地区，都会有非常多的支线为主线提供背景。就好比一个建筑，主线是骨架，支撑起整个游戏的大致轮廓，而支线是钢筋水泥，垒起了整个建筑的最终格局。当然玩家可以只做主线不做支线，但我相信如果不做支线，这个游戏的乐趣就会少一半。</p>
-<figure>
-<img data-src="/images/witcher-impression/5.jpg" alt="父女之间的亲昵" />
-<figcaption aria-hidden="true">父女之间的亲昵</figcaption>
-</figure>
-<p>说到支线繁多，一个典型的对比就是刺客信条奥德赛。同样有非常多的支线，但是从我个人的游玩体验来说，我宁愿无视奥德赛的90%的支线，直接一条路走完主线，但是巫师三的支线不然，玩家会有强烈的意愿去做大部分支线，在做支线的过程中解锁问号，发掘游戏中隐藏的剧情，是巫师三最为亮眼的一大特色。如果要对比巫师三和奥德赛的任务系统，可以从下面几个方面评价：</p>
-<ul>
-<li>支线多样化：巫师三的支线是多样的，支线之间没有重复，猎魔人委托可能会更无聊一点，但生意人的事情嘛，不寒碜。除了猎魔人委托之外，寻宝任务有解密探险要素，区域日常支线有搞笑奇葩要素，重要支线甚至会改变整个巫师三世界格局。然而，奥德赛的支线是单调的，支线的选择不会影响主线的进程，支线品类非常单一，并且缺乏逻辑。巫师三支线给玩家的动力是充分的：委托赚钱，寻宝得装备，日常支线放松一下，重要支线扣人心弦；而奥德赛不是的，除了几个从头到尾都有的支线之外（类似于巫师三的寻宝任务），其他的支线毫无意义，既对主线没有补益，而且也缺乏特色。</li>
-<li>支线重要化：当然，支线多样丰富是一方面，更重要的是，支线是需要起到作用的，有时候甚至是决定性的作用。巫师三的主线和支线的分工相当明确：主线用来推进整个游戏进程，而支线则负责主线缺失的娱乐性与严肃性。这大大补充了单主线的贫乏，让玩家在游戏的时候不会觉得推进主线是无聊的，因为在同时还有大量丰富有趣的支线在支撑游戏的饱满度。而且，巫师三的支线并不是其他游戏中如过往云烟般的支线，而是不同的支线会在主线的不同时间点产生决定性的影响。比如，迪胖的支线会决定整个游戏最终的政治格局，这是从大了讲。从小了讲，如果细心留意，就会发现很多很多支线都涉及到游戏中不同人物的命运，即使是路人，我们也能够感到他们是真实的，而不仅仅是一堆数据。这些都是支线带来的重要积极影响。巫师三赋予了支线游戏的精神内核，并令其成为承载游戏厚度的“实力担当”。</li>
-</ul>
-<figure>
-<img data-src="/images/witcher-impression/13.png"
-alt="这样有趣的小支线在巫师三里不胜枚举" />
-<figcaption
-aria-hidden="true">这样有趣的小支线在巫师三里不胜枚举</figcaption>
-</figure>
-<ul>
-<li>支线惊奇化。巫师三的支线时常给人一种惊奇的感觉，无论是之前无意之中做的支线会在后来的某一天发现原来会产生这样的影响，还是后来做到的支线会发现是之前剧情的关键结果，这种突如其来的“因果”呈现都带给玩家游戏体验上的冲击。重点是，正所谓大音希声，这样的惊奇化支线完全不需要漫长的铺垫，而只需要一个小小的“接口”，把因果串联起来就可以达到这样震撼的效果。一个典型的例子就是在DLC石之心里，拍卖行里的一个小支线展现了维瑟米尔的不为人知的一面，不但极大丰富了人物形象，而且还带给玩家无尽的唏嘘。此类四两拨千斤的支线在巫师三里比比皆是，</li>
-</ul>
-<figure>
-<img data-src="/images/witcher-impression/2.jpg"
-alt="一个非常小的细节，但是却折射出了两个饱满的人物形象" />
-<figcaption
-aria-hidden="true">一个非常小的细节，但是却折射出了两个饱满的人物形象</figcaption>
-</figure>
-<figure>
-<img data-src="/images/witcher-impression/3.jpg"
-alt="一个非常小的细节，但是却折射出了两个饱满的人物形象" />
-<figcaption
-aria-hidden="true">一个非常小的细节，但是却折射出了两个饱满的人物形象</figcaption>
-</figure>
-<p>所以，巫师三成功的一大关键因素就在于他巧思的任务系统，尤以支线为代表，主线与支线的交织，主线推动整个剧情的发展。支线却承载了多样化、重要化和惊奇化的具体内容，让人家流连忘返，深陷其中。</p>
-<h1 id="选择困境人生模拟">选择困境，人生模拟</h1>
-<p>当然，除了巫师三之外，还有很多游戏的支线也很丰富，主线支线的组织也很巧妙，那凭什么巫师三这么牛逼呢？这就是巫师三的第二个牛逼之处：通过合逻辑的选择带给你极尽真实的人生体验。</p>
-<p>巫师三的任务绝大多数都是需要玩家做出选择的，无论主线还是支线，这在从威伦到诺威格瑞之后尤为突出。不同于很多游戏可有可无的“可选项”，巫师三的每一个选项都是经过反复斟酌的，不存在无意义的选项。威伦雷索的选择直接决定了他之后会不会在凯尔莫罕的时候来帮你；凯拉的连续选项直接决定了她的命运，也决定了兰伯特的命运（这个有些小伙伴可能还不知道）；威伦有个狼人的支线直接决定了这个悲惨爱情故事的结局；诺威格瑞迪胖的支线决定了游戏最终的政治格局。对主线来说，这样的决定性选项无处不在：血腥男爵的选项，特莉丝和椰奶的选项，Ciri的一系列选项等等。在巫师三中，选项的重要性直接以前后的因果关系体现出来，也许你的不经意的一个选择，就很有可能在未来决定了不同的世界线，其中的很多选项，你甚至都意识不到是由自己的决定造成的，这是不是有《命运石之门》的感觉了。</p>
-<figure>
-<img data-src="/images/witcher-impression/10.jpg" alt="Ciri猎魔人结局片段" />
-<figcaption aria-hidden="true">Ciri猎魔人结局片段</figcaption>
-</figure>
-<figure>
-<img data-src="/images/witcher-impression/11.jpg" alt="Ciri猎魔人结局" />
-<figcaption aria-hidden="true">Ciri猎魔人结局</figcaption>
-</figure>
-<p>我们之前说了，巫师三带给玩家的是沉浸式的体验，那实现这一点的关键就在“真实”。这里的真实，大部分是成年人的部分：我们会遇到各种各样的决策，尽管有句话是说“小孩子才做选择，成年人全都要”，但实际上，只有小孩子才能全都要，成年人的世界不能兼得鱼和熊掌。有些选择比较简单，但也有很多选择，可以说是直接决定了往后人生的整个发展方向。世界上没有后悔药，所以我们常常看到成年人的无奈与悔恨。但是游戏不一样，我们可以回档，可以重来，可以把现实中无法完成的夙愿转移到游戏中，体味人生抉择的无奈，尝尽人生起伏的精彩，但最爽的，还是能够重来，再走一遭。</p>
-<p>巫师三是在真正意义上模拟了人生： -
-首先，它的选项逻辑是合理的。很多游戏，包括奥德赛在内，它们所谓给出的选项很多都是不合理的。我为什么要这么做？为什么只有这几个选择？策划是不是脑子有坑？正常人会这么做？在选择的时候，不合理、不充分的选项不但不能产生真实的沉浸感，而且还会极大破坏游戏剧情推进的合理性。巫师三不然，它给出的每一个选项都是合理的，都是玩家真的可能在现实生活中面对的两难困境，从而不会让玩家产生“这个选项好弱智”的疑惑。真实的选项才能获得真实的体验，为选择而选择的设置只能适得其反。
--
-其次，它的选项是有反馈的。所谓反馈，就是无论你选了什么选项，都能在游戏的过程中获得该选择的结果，而且在看到这个结果的时候，玩家是可以或多或少发现它的起源就是那个选项。巫师三的选项就是有始有终的，它可能在有意无意间唤起你的决定，或最近，或久远，那个时候，玩家就会惊叹：原来如此！这是很重要的，因为在现实中，人们会感到“后悔”或者“幸好”，就是这样的“记忆唤醒”在作祟。人是健忘的，但这不是说记忆会消失，而是会被暂时隐藏，所以必须要有一个触发点（Trigger）才能重新唤醒这段记忆，而记忆一旦唤醒，就会有首尾呼应的触动，进而给玩家带来震撼感。这也是巫师三能带来真实体验的一个重要因素。</p>
-<figure>
-<img data-src="/images/witcher-impression/1.jpg" alt="Geralt和夏妮" />
-<figcaption aria-hidden="true">Geralt和夏妮</figcaption>
-</figure>
-<ul>
-<li>最后，它的选项是关键的。所谓关键，就是一些选项会产生极其重大的影响，此类选项在主线中最多，但也不乏一些支线。为什么说一些选项需要具备关键性？其实这就像欣赏任何一个文学作品一样，无论是小说，还是电影，剧情总是需要跌宕起伏。一平到底，或者过于波折，都会给观众造成审美疲劳。这在游戏里也是一样的。如果所有的支线都是做了就做了的那种，那么就不会给人留下深刻印象，反之，只有平淡与冲突交错的支线才会充分勾起玩家的兴趣。上面我们说了巫师三的支线都是有反馈，那么反馈对后续游戏造成的影响就可以定义为该支线的“关键度”。一个比较合理的关键度分布，应该需要满足5:3:2或者6:3:1的比例的，也就是大部分任务都是比较平淡的，立马能得到反馈的，而且对主要剧情没有影响的；少部分任务会在游戏后续呈现出比较重要的影响；而极少的任务会产生决定性的影响。举例来说，委托任务，城中任务，基本上都可以归为第一类，像凯拉、雷索这样的任务可以归为第二类，最后像迪胖、希里这样的就可以归为第三类。可以看到，巫师三的选项是非常有层次的，这样的层次感不会让玩家感到枯燥疲倦，从而更好地代入到游戏中。这也是巫师三让人停不下来的一个原因之一。</li>
-</ul>
-<figure>
-<img data-src="/images/witcher-impression/7.jpg" alt="Geralt的回忆" />
-<figcaption aria-hidden="true">Geralt的回忆</figcaption>
-</figure>
-<h1 id="有条不紊循序渐进">有条不紊，循序渐进</h1>
-<p>在前面的两节中，我们说了很多支线的内容，包括支线的特性、选项的特性，但是在游戏里，决定玩家游戏体验是否“丝滑”的决定因素是主线的推进节奏。巫师三的主线的推进非常顺滑，玩家不会感到节奏上的拖沓或者赶工，从百草园，到威伦，到诺威格瑞，再到Skellig、凯尔莫罕，每个地方的风土人情都在剧情中得以充分展开，每个地方，从开始到结尾，都有明显的渐变，不会造成突兀感。这就是主线承接上的无缝性。</p>
-<p>从整体上来看，巫师三的剧情推进呈现出前期平缓，后期陡峭上升，在最后达到高潮之后迅速下降收尾的趋势，尤其是在最后经过高潮后的突然结束，让玩家回味无穷。从百草园到是Skellig是整个游戏的平缓期，在这个时期，玩家更多地是在品味一个新地点的独有风格，所以游戏没有安排太波折的剧情，只是一点一点让玩家代入到整个游戏的剧情中。之后从凯尔莫罕开始，剧情开始迅速推进，寻找Ciri——&gt;找到Ciri——&gt;凯尔莫罕保卫战——&gt;决战狂猎——&gt;真相浮出——&gt;Ciri献身，这一系列重要剧情节点被安排地非常紧凑，这是因为经过前中期长时间的铺垫，玩家已经全然进入到角色，当前最期待的是一波快节奏的剧情轰炸。笔者在出Skellig之后，就有预感剧情一定会出现巨大转折，从乌马开始，到狂猎结束，整个线非常完整，发展也非常迅速。但在这样的快节奏下，游戏不是混乱的，而是始终围绕着一个线索在有序地推进（找Ciri——&gt;干狂猎），这样一来，即使游戏的节奏突然加快，玩家也没有不适感。</p>
-<figure>
-<img data-src="/images/witcher-impression/8.jpg" alt="老爷子战逝" />
-<figcaption aria-hidden="true">老爷子战逝</figcaption>
-</figure>
-<figure>
-<img data-src="/images/witcher-impression/6.jpg" alt="老爷子死去Ciri流泪" />
-<figcaption aria-hidden="true">老爷子死去Ciri流泪</figcaption>
-</figure>
-<p>巫师三的三个时期“平缓——上升——下降”是处理得很好的。平缓期大概占了整个游戏进度的50%左右，在这个期间，游戏的主要内容缓慢推进。注意，不是没有推进，而是以叙述的方式娓娓道来，逐渐营造引人入胜的氛围。上升期大概占了45%的内容，在这个阶段内，游戏的剧情迅速发展，剧情节点迅速变化，游戏状态迅速切换，然而玩家没有任何的不适应，反而更加乐在其中，停不下来。这是因为前50%的铺垫已经将玩家去完全代入到游戏中，仿佛你就是Geralt，你的使命就在眼前。在上升期的末尾，游戏戛然而止，来到下降期。巫师三的下降期非常短暂，我认为大致可以从Ciri献身开始算做下降期，在这个节点，玩家之前所有的选择都会体现在不同的结局上，突然结尾更加凸显了玩家之前决策带来的种种后果。显然，CDPR没有采取让游戏慢慢结束，而且一下子就关闭了游戏主线剧情，带来了一种“惊愕感”：“这游戏结束了！？”这样的设计是很巧妙的，但也是建立在之前的平缓期与上升期的铺垫之上的。可以说，巫师三这种有条不紊、循序渐进的三阶段推进方式，是它能够取得沉浸式体验的另一大重要原因。</p>
-<figure>
-<img data-src="/images/witcher-impression/12.jpg"
-alt="通关主线，从空荡的凯尔莫罕重新出发，寂寥涌上心头" />
-<figcaption
-aria-hidden="true">通关主线，从空荡的凯尔莫罕重新出发，寂寥涌上心头</figcaption>
-</figure>
-<h1 id="写在最后">写在最后</h1>
-<p>尽管本文的目的在于从任务系统上简要感受一下巫师三为什么能带给人沉浸式的体验，但是对于巫师三来说，画面、人物、音乐等等其他方面都是促成巫师三能成为神作的重要因素，尤其是巫师三的音乐，直击人心，给人带来的沉浸感不亚于剧情，在此强烈推荐。</p>
-<figure>
-<img data-src="/images/witcher-impression/9.jpg" alt="Geralt太可爱了吧" />
-<figcaption aria-hidden="true">Geralt太可爱了吧</figcaption>
-</figure>
-<p>之后我会介绍一下英灵殿和12月份的赛博朋克2077，到时候再来看看，巫师三这款5年前的游戏是否仍有一战之力。</p>
-<figure>
-<img data-src="/images/witcher-impression/14.png" alt="陶森特美丽的风光" />
-<figcaption aria-hidden="true">陶森特美丽的风光</figcaption>
-</figure>
+    <title>西湖夜歌</title>
+    <url>/2021/07/09/%E8%A5%BF%E6%B9%96%E5%A4%9C%E6%AD%8C/</url>
+    <content><![CDATA[<p>霓光半遮影<br />
+湖波轻颤合韵起<br />
+半句寻谁去</p>
 ]]></content>
       <categories>
-        <category>游戏 - 玩后感</category>
+        <category>随笔</category>
       </categories>
       <tags>
         <tag>随笔</tag>
-        <tag>游戏</tag>
         <tag>生活</tag>
-        <tag>巫师三</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -1943,6 +1830,119 @@ aria-hidden="true">通关主线，从空荡的凯尔莫罕重新出发，寂寥�
       <tags>
         <tag>随笔</tag>
         <tag>游戏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>巫师三：一个告诉你原来游戏可以是艺术品的神作</title>
+    <url>/2020/10/09/witcher-impression/</url>
+    <content><![CDATA[<p>巫师三是一款已经被时间证明的，当之无愧的神作。巫师三没有波澜壮阔气势浩天的景致，却有风格迥异人文色彩浓厚的地区特色。威伦的破败荒凉贫穷凄苦，为了一双鞋可以连父母都能出卖；诺威格瑞的大城风范，有日进斗金的土豪乡绅，也有困守城中的穷困百姓，女巫猎人穿梭其中，种族矛盾暗流涌动；史凯利杰群岛的剽悍民风，对外来者的敌视，对入侵者的抵御，捍卫土地的决心让诸多岛屿团结在一起；凯尔莫罕的静谧安详，森林环抱狼堡，猎魔人镇守故乡，仿佛出世的仙境，危机四伏但又简单质朴；陶森特的梦幻美丽，人们自得其乐，生活在这宛若仙境的城都中。不仅仅是景色，巫师三更是以它的剧情和对人物的刻画出名，抛开难以入流的战斗系统，单凭巫师三对剧情的把控、对人物的描写和对画面的雕琢，就足以令这部游戏称为艺术品。在经历了完整的主线和DLC流程后，几乎没有玩家会给巫师三一个低分，尽管它有瑕疵，但是它在剧情、人物和画面上已经到达巅峰造极的水平了，更难能可贵的是，这三者完美融合，在体验游戏的同时，给予玩家美的享受、身心的震撼。这是奥德赛无法比拟的，也是大多数游戏难以企及的高度。</p>
+<span id="more"></span>
+<h1 id="前言">前言</h1>
+<p>由于巫师三的世界观过于宏大，一篇未经雕琢的读后感不能道尽巫师三的所有优点，故本文旨在从宏观上呈现巫师三是如何完美统一任务、节奏与剧情这三者的。至于其他的，我们有机会留在以后再说。我相信，通关巫师三的玩家，一定会承认巫师三在任务的组织和剧情的展开上非常连贯丝滑，而且剧情上的节奏递进、叙述上的跌宕起伏都让人回味无穷。游戏本质是在讲故事，但是巫师三成功地给予了玩家沉浸式的体验，也就是，我们从观众的角色深入到了主角的角色，从游戏外的世界走进了游戏内的世界，仿佛每个人都是真实可及的，都是有血有肉的，都是有情有义的。那么，如何讲好这个故事，把观众代入到游戏中，就是巫师三不同于其他游戏的关键所在，这也是这篇玩后感的主要内容。</p>
+<figure>
+<img data-src="/images/witcher-impression/4.jpg"
+alt="被附身的Geralt帅中泄露出一丝痞气" />
+<figcaption
+aria-hidden="true">被附身的Geralt帅中泄露出一丝痞气</figcaption>
+</figure>
+<h1 id="主线为林支线为溪">主线为林，支线为溪</h1>
+<p>巫师三的一大特色就是它的任务系统非常丰富，从表层看，巫师三的主线只有一个——寻找女儿，但是，在每个地区，都会有非常多的支线为主线提供背景。就好比一个建筑，主线是骨架，支撑起整个游戏的大致轮廓，而支线是钢筋水泥，垒起了整个建筑的最终格局。当然玩家可以只做主线不做支线，但我相信如果不做支线，这个游戏的乐趣就会少一半。</p>
+<figure>
+<img data-src="/images/witcher-impression/5.jpg" alt="父女之间的亲昵" />
+<figcaption aria-hidden="true">父女之间的亲昵</figcaption>
+</figure>
+<p>说到支线繁多，一个典型的对比就是刺客信条奥德赛。同样有非常多的支线，但是从我个人的游玩体验来说，我宁愿无视奥德赛的90%的支线，直接一条路走完主线，但是巫师三的支线不然，玩家会有强烈的意愿去做大部分支线，在做支线的过程中解锁问号，发掘游戏中隐藏的剧情，是巫师三最为亮眼的一大特色。如果要对比巫师三和奥德赛的任务系统，可以从下面几个方面评价：</p>
+<ul>
+<li>支线多样化：巫师三的支线是多样的，支线之间没有重复，猎魔人委托可能会更无聊一点，但生意人的事情嘛，不寒碜。除了猎魔人委托之外，寻宝任务有解密探险要素，区域日常支线有搞笑奇葩要素，重要支线甚至会改变整个巫师三世界格局。然而，奥德赛的支线是单调的，支线的选择不会影响主线的进程，支线品类非常单一，并且缺乏逻辑。巫师三支线给玩家的动力是充分的：委托赚钱，寻宝得装备，日常支线放松一下，重要支线扣人心弦；而奥德赛不是的，除了几个从头到尾都有的支线之外（类似于巫师三的寻宝任务），其他的支线毫无意义，既对主线没有补益，而且也缺乏特色。</li>
+<li>支线重要化：当然，支线多样丰富是一方面，更重要的是，支线是需要起到作用的，有时候甚至是决定性的作用。巫师三的主线和支线的分工相当明确：主线用来推进整个游戏进程，而支线则负责主线缺失的娱乐性与严肃性。这大大补充了单主线的贫乏，让玩家在游戏的时候不会觉得推进主线是无聊的，因为在同时还有大量丰富有趣的支线在支撑游戏的饱满度。而且，巫师三的支线并不是其他游戏中如过往云烟般的支线，而是不同的支线会在主线的不同时间点产生决定性的影响。比如，迪胖的支线会决定整个游戏最终的政治格局，这是从大了讲。从小了讲，如果细心留意，就会发现很多很多支线都涉及到游戏中不同人物的命运，即使是路人，我们也能够感到他们是真实的，而不仅仅是一堆数据。这些都是支线带来的重要积极影响。巫师三赋予了支线游戏的精神内核，并令其成为承载游戏厚度的“实力担当”。</li>
+</ul>
+<figure>
+<img data-src="/images/witcher-impression/13.png"
+alt="这样有趣的小支线在巫师三里不胜枚举" />
+<figcaption
+aria-hidden="true">这样有趣的小支线在巫师三里不胜枚举</figcaption>
+</figure>
+<ul>
+<li>支线惊奇化。巫师三的支线时常给人一种惊奇的感觉，无论是之前无意之中做的支线会在后来的某一天发现原来会产生这样的影响，还是后来做到的支线会发现是之前剧情的关键结果，这种突如其来的“因果”呈现都带给玩家游戏体验上的冲击。重点是，正所谓大音希声，这样的惊奇化支线完全不需要漫长的铺垫，而只需要一个小小的“接口”，把因果串联起来就可以达到这样震撼的效果。一个典型的例子就是在DLC石之心里，拍卖行里的一个小支线展现了维瑟米尔的不为人知的一面，不但极大丰富了人物形象，而且还带给玩家无尽的唏嘘。此类四两拨千斤的支线在巫师三里比比皆是，</li>
+</ul>
+<figure>
+<img data-src="/images/witcher-impression/2.jpg"
+alt="一个非常小的细节，但是却折射出了两个饱满的人物形象" />
+<figcaption
+aria-hidden="true">一个非常小的细节，但是却折射出了两个饱满的人物形象</figcaption>
+</figure>
+<figure>
+<img data-src="/images/witcher-impression/3.jpg"
+alt="一个非常小的细节，但是却折射出了两个饱满的人物形象" />
+<figcaption
+aria-hidden="true">一个非常小的细节，但是却折射出了两个饱满的人物形象</figcaption>
+</figure>
+<p>所以，巫师三成功的一大关键因素就在于他巧思的任务系统，尤以支线为代表，主线与支线的交织，主线推动整个剧情的发展。支线却承载了多样化、重要化和惊奇化的具体内容，让人家流连忘返，深陷其中。</p>
+<h1 id="选择困境人生模拟">选择困境，人生模拟</h1>
+<p>当然，除了巫师三之外，还有很多游戏的支线也很丰富，主线支线的组织也很巧妙，那凭什么巫师三这么牛逼呢？这就是巫师三的第二个牛逼之处：通过合逻辑的选择带给你极尽真实的人生体验。</p>
+<p>巫师三的任务绝大多数都是需要玩家做出选择的，无论主线还是支线，这在从威伦到诺威格瑞之后尤为突出。不同于很多游戏可有可无的“可选项”，巫师三的每一个选项都是经过反复斟酌的，不存在无意义的选项。威伦雷索的选择直接决定了他之后会不会在凯尔莫罕的时候来帮你；凯拉的连续选项直接决定了她的命运，也决定了兰伯特的命运（这个有些小伙伴可能还不知道）；威伦有个狼人的支线直接决定了这个悲惨爱情故事的结局；诺威格瑞迪胖的支线决定了游戏最终的政治格局。对主线来说，这样的决定性选项无处不在：血腥男爵的选项，特莉丝和椰奶的选项，Ciri的一系列选项等等。在巫师三中，选项的重要性直接以前后的因果关系体现出来，也许你的不经意的一个选择，就很有可能在未来决定了不同的世界线，其中的很多选项，你甚至都意识不到是由自己的决定造成的，这是不是有《命运石之门》的感觉了。</p>
+<figure>
+<img data-src="/images/witcher-impression/10.jpg" alt="Ciri猎魔人结局片段" />
+<figcaption aria-hidden="true">Ciri猎魔人结局片段</figcaption>
+</figure>
+<figure>
+<img data-src="/images/witcher-impression/11.jpg" alt="Ciri猎魔人结局" />
+<figcaption aria-hidden="true">Ciri猎魔人结局</figcaption>
+</figure>
+<p>我们之前说了，巫师三带给玩家的是沉浸式的体验，那实现这一点的关键就在“真实”。这里的真实，大部分是成年人的部分：我们会遇到各种各样的决策，尽管有句话是说“小孩子才做选择，成年人全都要”，但实际上，只有小孩子才能全都要，成年人的世界不能兼得鱼和熊掌。有些选择比较简单，但也有很多选择，可以说是直接决定了往后人生的整个发展方向。世界上没有后悔药，所以我们常常看到成年人的无奈与悔恨。但是游戏不一样，我们可以回档，可以重来，可以把现实中无法完成的夙愿转移到游戏中，体味人生抉择的无奈，尝尽人生起伏的精彩，但最爽的，还是能够重来，再走一遭。</p>
+<p>巫师三是在真正意义上模拟了人生： -
+首先，它的选项逻辑是合理的。很多游戏，包括奥德赛在内，它们所谓给出的选项很多都是不合理的。我为什么要这么做？为什么只有这几个选择？策划是不是脑子有坑？正常人会这么做？在选择的时候，不合理、不充分的选项不但不能产生真实的沉浸感，而且还会极大破坏游戏剧情推进的合理性。巫师三不然，它给出的每一个选项都是合理的，都是玩家真的可能在现实生活中面对的两难困境，从而不会让玩家产生“这个选项好弱智”的疑惑。真实的选项才能获得真实的体验，为选择而选择的设置只能适得其反。
+-
+其次，它的选项是有反馈的。所谓反馈，就是无论你选了什么选项，都能在游戏的过程中获得该选择的结果，而且在看到这个结果的时候，玩家是可以或多或少发现它的起源就是那个选项。巫师三的选项就是有始有终的，它可能在有意无意间唤起你的决定，或最近，或久远，那个时候，玩家就会惊叹：原来如此！这是很重要的，因为在现实中，人们会感到“后悔”或者“幸好”，就是这样的“记忆唤醒”在作祟。人是健忘的，但这不是说记忆会消失，而是会被暂时隐藏，所以必须要有一个触发点（Trigger）才能重新唤醒这段记忆，而记忆一旦唤醒，就会有首尾呼应的触动，进而给玩家带来震撼感。这也是巫师三能带来真实体验的一个重要因素。</p>
+<figure>
+<img data-src="/images/witcher-impression/1.jpg" alt="Geralt和夏妮" />
+<figcaption aria-hidden="true">Geralt和夏妮</figcaption>
+</figure>
+<ul>
+<li>最后，它的选项是关键的。所谓关键，就是一些选项会产生极其重大的影响，此类选项在主线中最多，但也不乏一些支线。为什么说一些选项需要具备关键性？其实这就像欣赏任何一个文学作品一样，无论是小说，还是电影，剧情总是需要跌宕起伏。一平到底，或者过于波折，都会给观众造成审美疲劳。这在游戏里也是一样的。如果所有的支线都是做了就做了的那种，那么就不会给人留下深刻印象，反之，只有平淡与冲突交错的支线才会充分勾起玩家的兴趣。上面我们说了巫师三的支线都是有反馈，那么反馈对后续游戏造成的影响就可以定义为该支线的“关键度”。一个比较合理的关键度分布，应该需要满足5:3:2或者6:3:1的比例的，也就是大部分任务都是比较平淡的，立马能得到反馈的，而且对主要剧情没有影响的；少部分任务会在游戏后续呈现出比较重要的影响；而极少的任务会产生决定性的影响。举例来说，委托任务，城中任务，基本上都可以归为第一类，像凯拉、雷索这样的任务可以归为第二类，最后像迪胖、希里这样的就可以归为第三类。可以看到，巫师三的选项是非常有层次的，这样的层次感不会让玩家感到枯燥疲倦，从而更好地代入到游戏中。这也是巫师三让人停不下来的一个原因之一。</li>
+</ul>
+<figure>
+<img data-src="/images/witcher-impression/7.jpg" alt="Geralt的回忆" />
+<figcaption aria-hidden="true">Geralt的回忆</figcaption>
+</figure>
+<h1 id="有条不紊循序渐进">有条不紊，循序渐进</h1>
+<p>在前面的两节中，我们说了很多支线的内容，包括支线的特性、选项的特性，但是在游戏里，决定玩家游戏体验是否“丝滑”的决定因素是主线的推进节奏。巫师三的主线的推进非常顺滑，玩家不会感到节奏上的拖沓或者赶工，从百草园，到威伦，到诺威格瑞，再到Skellig、凯尔莫罕，每个地方的风土人情都在剧情中得以充分展开，每个地方，从开始到结尾，都有明显的渐变，不会造成突兀感。这就是主线承接上的无缝性。</p>
+<p>从整体上来看，巫师三的剧情推进呈现出前期平缓，后期陡峭上升，在最后达到高潮之后迅速下降收尾的趋势，尤其是在最后经过高潮后的突然结束，让玩家回味无穷。从百草园到是Skellig是整个游戏的平缓期，在这个时期，玩家更多地是在品味一个新地点的独有风格，所以游戏没有安排太波折的剧情，只是一点一点让玩家代入到整个游戏的剧情中。之后从凯尔莫罕开始，剧情开始迅速推进，寻找Ciri——&gt;找到Ciri——&gt;凯尔莫罕保卫战——&gt;决战狂猎——&gt;真相浮出——&gt;Ciri献身，这一系列重要剧情节点被安排地非常紧凑，这是因为经过前中期长时间的铺垫，玩家已经全然进入到角色，当前最期待的是一波快节奏的剧情轰炸。笔者在出Skellig之后，就有预感剧情一定会出现巨大转折，从乌马开始，到狂猎结束，整个线非常完整，发展也非常迅速。但在这样的快节奏下，游戏不是混乱的，而是始终围绕着一个线索在有序地推进（找Ciri——&gt;干狂猎），这样一来，即使游戏的节奏突然加快，玩家也没有不适感。</p>
+<figure>
+<img data-src="/images/witcher-impression/8.jpg" alt="老爷子战逝" />
+<figcaption aria-hidden="true">老爷子战逝</figcaption>
+</figure>
+<figure>
+<img data-src="/images/witcher-impression/6.jpg" alt="老爷子死去Ciri流泪" />
+<figcaption aria-hidden="true">老爷子死去Ciri流泪</figcaption>
+</figure>
+<p>巫师三的三个时期“平缓——上升——下降”是处理得很好的。平缓期大概占了整个游戏进度的50%左右，在这个期间，游戏的主要内容缓慢推进。注意，不是没有推进，而是以叙述的方式娓娓道来，逐渐营造引人入胜的氛围。上升期大概占了45%的内容，在这个阶段内，游戏的剧情迅速发展，剧情节点迅速变化，游戏状态迅速切换，然而玩家没有任何的不适应，反而更加乐在其中，停不下来。这是因为前50%的铺垫已经将玩家去完全代入到游戏中，仿佛你就是Geralt，你的使命就在眼前。在上升期的末尾，游戏戛然而止，来到下降期。巫师三的下降期非常短暂，我认为大致可以从Ciri献身开始算做下降期，在这个节点，玩家之前所有的选择都会体现在不同的结局上，突然结尾更加凸显了玩家之前决策带来的种种后果。显然，CDPR没有采取让游戏慢慢结束，而且一下子就关闭了游戏主线剧情，带来了一种“惊愕感”：“这游戏结束了！？”这样的设计是很巧妙的，但也是建立在之前的平缓期与上升期的铺垫之上的。可以说，巫师三这种有条不紊、循序渐进的三阶段推进方式，是它能够取得沉浸式体验的另一大重要原因。</p>
+<figure>
+<img data-src="/images/witcher-impression/12.jpg"
+alt="通关主线，从空荡的凯尔莫罕重新出发，寂寥涌上心头" />
+<figcaption
+aria-hidden="true">通关主线，从空荡的凯尔莫罕重新出发，寂寥涌上心头</figcaption>
+</figure>
+<h1 id="写在最后">写在最后</h1>
+<p>尽管本文的目的在于从任务系统上简要感受一下巫师三为什么能带给人沉浸式的体验，但是对于巫师三来说，画面、人物、音乐等等其他方面都是促成巫师三能成为神作的重要因素，尤其是巫师三的音乐，直击人心，给人带来的沉浸感不亚于剧情，在此强烈推荐。</p>
+<figure>
+<img data-src="/images/witcher-impression/9.jpg" alt="Geralt太可爱了吧" />
+<figcaption aria-hidden="true">Geralt太可爱了吧</figcaption>
+</figure>
+<p>之后我会介绍一下英灵殿和12月份的赛博朋克2077，到时候再来看看，巫师三这款5年前的游戏是否仍有一战之力。</p>
+<figure>
+<img data-src="/images/witcher-impression/14.png" alt="陶森特美丽的风光" />
+<figcaption aria-hidden="true">陶森特美丽的风光</figcaption>
+</figure>
+]]></content>
+      <categories>
+        <category>游戏 - 玩后感</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>游戏</tag>
+        <tag>生活</tag>
+        <tag>巫师三</tag>
       </tags>
   </entry>
   <entry>
@@ -2551,7 +2551,7 @@ class="math inline">\(p_\parallel w=wp_\parallel\)</span>.</p>
 w^*+wwp_\perp\]</span></p>
 <p>最后我们再使用<strong>引理三</strong>进行最后的化简。</p>
 <h3 id="引理三">引理三</h3>
-<details class="note primary"><summary><p>Lemma 2</p>
+<details class="note primary"><summary><p>Lemma 3</p>
 </summary>
 <p>如果<span
 class="math inline">\(p_\perp=[0,\mathbf{p}_\perp]\)</span>是一个纯四元数，<span
@@ -2573,7 +2573,7 @@ class="math inline">\(wp_\perp=p_\perp w^*\)</span>.</p>
 \end{aligned}
 \]</span></p>
 <p>最后我们得到了一个非常优美的结果，在这个公式中，我们不再把待旋转向量拆分为两个分量，而是直接通过四元数之间的乘法实现了旋转。该结论可以总结为一个定理：</p>
-<h3 id="三维旋转定理四元数型">三维旋转定理（四元数型）</h3>
+<h2 id="三维旋转定理四元数型">三维旋转定理（四元数型）</h2>
 <details class="note success"><summary><p>3D Rotation Theorem (Quaternion)</p>
 </summary>
 <p>任意三维向量<span
@@ -2604,7 +2604,7 @@ class="math inline">\(\theta\)</span>和旋转轴<span
 class="math inline">\(\mathbf{n}\)</span>：</p>
 <p><span
 class="math display">\[\frac{\theta}{2}=\arccos(a),\;\mathbf{n}=\frac{\mathbf{b}}{\sin(\arccos(a))}\]</span></p>
-<h3 id="三维旋转四元数型的矩阵形式">三维旋转（四元数型）的矩阵形式</h3>
+<h2 id="三维旋转四元数型的矩阵形式">三维旋转（四元数型）的矩阵形式</h2>
 <p>通过之前的讨论（尽管不完全相同，但可以类似推导）我们知道左乘一个四元数<span
 class="math inline">\(w=a+bi+cj+dj\)</span>等同于下面的矩阵</p>
 <p><span class="math display">\[
@@ -2661,9 +2661,9 @@ cd+cd-ab-ab\\
 \end{bmatrix}p
 \end{aligned}
 \]</span></p>
-<p>实际上我们不需要存这个<span class="math inline">\(4\times
+<p>实际上我们不需要存这个完整的<span class="math inline">\(4\times
 4\)</span>的矩阵，只需要存右下角的<span class="math inline">\(3\times
-3\)</span>矩阵即可。如此以来，我们就得旋转定理的矩阵形式：</p>
+3\)</span>矩阵即可。如此一来，我们就得到旋转定理的矩阵形式：</p>
 <details class="note success"><summary><p>3D Rotation Theorem (Matrix)</p>
 </summary>
 <p>任意三维向量<span
@@ -2686,7 +2686,7 @@ class="math inline">\(a=\cos(\tfrac{1}{2}\theta),b=\sin(\tfrac{1}{2}\theta)n_x,c
 class="math inline">\(\mathbf{n}\)</span>和旋转角度<span
 class="math inline">\(\theta\)</span>固定了之后，该矩阵就可以预先计算下来，在需要旋转很多<span
 class="math inline">\(\mathbf{p}\)</span>时提高效率。</p>
-<h3 id="三维旋转四元数型的指数形式">三维旋转（四元数型）的指数形式</h3>
+<h2 id="三维旋转四元数型的指数形式">三维旋转（四元数型）的指数形式</h2>
 <p>类似复数，我们也可以把四元数写成指数的形式。如果<span
 class="math inline">\(\mathbf{n}\)</span>是一个单位向量，对于单位四元数<span
 class="math inline">\(n=[0,\mathbf{n}]\)</span>，我们有:</p>
@@ -2723,7 +2723,7 @@ class="math display">\[w^t=(\mathrm{e}^{n\theta})^t=\mathrm{e}^{n(t\theta)}=[\co
 <p>即一个单位四元数的<span
 class="math inline">\(t\)</span>次幂等同于旋转角缩放到原来的<span
 class="math inline">\(t\)</span>倍，且不会改变旋转轴。</p>
-<h3 id="旋转复合-1">旋转复合</h3>
+<h2 id="旋转复合-1">旋转复合</h2>
 <p>现在来考虑基于四元数的旋转复合，假设分别在四元数<span
 class="math inline">\(w_1,w_2\)</span>上进行旋转，则有：</p>
 <p><span
@@ -2732,7 +2732,7 @@ class="math display">\[p&#39;&#39;=w_2p&#39;w_2^*=w_2w_1pw_1^*w_2^*=wpw^*\;(w=w_
 class="math inline">\((w_2w_1)^*=w_1^*w_2^*\)</span>，它的证明不多赘述。</p>
 <p>需要注意的是，复合后旋转<span
 class="math inline">\(w=w_2w_1\)</span>是绕着一个新的旋转轴旋转某个角度，尽管结果是相同的，但是过程完全不同。</p>
-<h3 id="双倍覆盖">双倍覆盖</h3>
+<h2 id="双倍覆盖">双倍覆盖</h2>
 <p>单位四元数与三维旋转并不是双射（一对一）的，一个单位四元数对应一个三维旋转，但是一个三维旋转可以找到两个单位四元数去对应它，这就是所谓的<strong>2对1满射同态</strong>，或者说单位四元数<strong>双倍覆盖</strong>了三维旋转。</p>
 <p>具体来说，<span class="math inline">\(w\)</span>与<span
 class="math inline">\(-w\)</span>代表了同一个旋转：</p>
@@ -2759,9 +2759,9 @@ href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
         <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
