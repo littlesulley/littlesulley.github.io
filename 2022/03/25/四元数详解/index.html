@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://sulley.cc/images/quaternion/1.png">
 <meta property="og:image" content="http://sulley.cc/images/quaternion/1.png">
 <meta property="article:published_time" content="2022-03-24T17:00:33.000Z">
-<meta property="article:modified_time" content="2022-03-31T07:28:29.026Z">
+<meta property="article:modified_time" content="2022-03-31T13:37:11.651Z">
 <meta property="article:author" content="Sulley">
 <meta property="article:tag" content="计算机">
 <meta property="article:tag" content="随笔">
@@ -302,7 +302,7 @@ Lock）问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-31 15:28:29" itemprop="dateModified" datetime="2022-03-31T15:28:29+08:00">2022-03-31</time>
+      <time title="修改时间：2022-03-31 21:37:11" itemprop="dateModified" datetime="2022-03-31T21:37:11+08:00">2022-03-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -597,7 +597,14 @@ class="math display">\[\mathbf{p}&#39;=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\
 <p>请记住此公式，我们将看到它与四元数之间紧密的联系。</p>
 <h1 id="欧拉角与万向锁gimbal-lock问题">欧拉角与万向锁（Gimbal
 Lock）问题</h1>
-<p>在正式进入四元数之前，我们介绍欧拉角及其引发的万向锁问题。</p>
+<p>在正式进入四元数之前，我们先介绍欧拉角及其引发的万向锁问题。网上有很多关于Gimbal
+Lock的文章，但是找了一通发现大都表述得非常不明确。下面我把这个现象放到Unity中可视化展示，读者应该就能立刻知道问题所在。</p>
+<video src="/images/quaternion/1.mp4" preload="metadata" controlslist="nodownload" controls playsinline poster=""></video>
+<details class="note default"><summary><p>Codeblock for rotation</p>
+</summary>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Rotation</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">float</span> rotationSpeed = <span class="number">45</span>;</span><br><span class="line">    Vector3 currentEulgerAngles = <span class="keyword">new</span> Vector3 (<span class="number">90</span>, <span class="number">0</span>, <span class="number">0</span>); <span class="comment">// Rotating 90 degree</span></span><br><span class="line">    <span class="built_in">float</span> x, y, z;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (Input.GetKeyDown (KeyCode.X)) x = <span class="number">1</span> - x;</span><br><span class="line">        <span class="keyword">if</span> (Input.GetKeyDown (KeyCode.Y)) y = <span class="number">1</span> - y;</span><br><span class="line">        <span class="keyword">if</span> (Input.GetKeyDown (KeyCode.Z)) z = <span class="number">1</span> - z;</span><br><span class="line"></span><br><span class="line">        currentEulgerAngles += <span class="keyword">new</span> Vector3 (x, y, z) * Time.deltaTime * rotationSpeed;</span><br><span class="line"></span><br><span class="line">        transform.eulerAngles = currentEulgerAngles;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">OnGUI</span> ()</span></span><br><span class="line">    &#123;</span><br><span class="line">        GUIStyle style = <span class="keyword">new</span> GUIStyle ();</span><br><span class="line">        style.fontSize = <span class="number">24</span>;</span><br><span class="line"></span><br><span class="line">        GUI.Label (<span class="keyword">new</span> Rect (<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>), <span class="string">&quot;Rotating on X: &quot;</span> + x + <span class="string">&quot; Y: &quot;</span> + y + <span class="string">&quot; Z: &quot;</span> + z, style);</span><br><span class="line">        GUI.Label (<span class="keyword">new</span> Rect (<span class="number">10</span>, <span class="number">25</span>, <span class="number">0</span>, <span class="number">0</span>), <span class="string">&quot;Transform.eulerAngle: &quot;</span> + transform.eulerAngles, style);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
 <h1 id="四元数">四元数</h1>
 <h2 id="定义-1">定义</h2>
 <p>四元数可以定义为如下形式：</p>
@@ -1462,13 +1469,13 @@ class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解�
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">91k</span>
+    <span title="站点总字数">92k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:23</span>
+    <span title="站点阅读时长">1:24</span>
   </span>
 </div>
 <div class="busuanzi-count">
