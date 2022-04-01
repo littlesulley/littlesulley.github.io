@@ -38,12 +38,16 @@
 <meta property="og:image" content="http://sulley.cc/images/quaternion/2.gif">
 <meta property="og:image" content="http://sulley.cc/images/quaternion/1.png">
 <meta property="og:image" content="http://sulley.cc/images/quaternion/2.png">
+<meta property="og:image" content="http://sulley.cc/images/quaternion/3.png">
+<meta property="og:image" content="http://sulley.cc/images/quaternion/4.png">
+<meta property="og:image" content="http://sulley.cc/images/quaternion/5.png">
+<meta property="og:image" content="http://sulley.cc/images/quaternion/6.png">
 <meta property="article:published_time" content="2022-03-24T17:00:33.000Z">
-<meta property="article:modified_time" content="2022-04-01T10:10:46.857Z">
+<meta property="article:modified_time" content="2022-04-01T16:31:48.844Z">
 <meta property="article:author" content="Sulley">
-<meta property="article:tag" content="计算机">
-<meta property="article:tag" content="随笔">
 <meta property="article:tag" content="数学">
+<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="计算机">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://sulley.cc/images/quaternion/0_1.gif">
 
@@ -173,7 +177,7 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E4%B8%8E%E4%BA%8C%E7%BB%B4%E6%97%8B%E8%BD%AC"><span class="nav-number">1.</span> <span class="nav-text">复数与二维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E5%8A%A0%E6%B3%95%E4%B8%8E%E4%B9%98%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">复数的加法与乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E5%8A%A0%E6%B3%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">复数的加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E4%B9%98%E6%B3%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">复数的乘法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E6%A8%A1%E9%95%BF"><span class="nav-number">1.3.</span> <span class="nav-text">复数的模长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E4%B8%8E%E4%BA%8C%E7%BB%B4%E6%97%8B%E8%BD%AC-1"><span class="nav-number">1.4.</span> <span class="nav-text">复数与二维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E5%A4%8D%E6%95%B0%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F%E5%AF%BC%E5%87%BA%E6%97%8B%E8%BD%AC%E5%85%B3%E7%B3%BB"><span class="nav-number">1.4.1.</span> <span class="nav-text">从复数矩阵形式导出旋转关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E6%9E%81%E5%9D%90%E6%A0%87%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.4.2.</span> <span class="nav-text">复数的极坐标形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E5%87%A0%E7%A7%8D%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.3.</span> <span class="nav-text">复数的几种表示形式总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E5%A4%8D%E5%90%88"><span class="nav-number">1.5.</span> <span class="nav-text">旋转复合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E7%A9%BA%E9%97%B4%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC"><span class="nav-number">2.</span> <span class="nav-text">三维空间中的旋转</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E8%A7%92%E4%B8%8E%E4%B8%87%E5%90%91%E9%94%81gimbal-lock%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">欧拉角与万向锁（Gimbal
-Lock）问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#unity%E4%B8%AD%E7%9A%84gimbal-lock%E7%8E%B0%E8%B1%A1"><span class="nav-number">3.1.</span> <span class="nav-text">Unity中的Gimbal Lock现象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E8%A7%92%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%8E%E6%97%8B%E8%BD%AC%E9%A1%BA%E5%BA%8F"><span class="nav-number">3.2.</span> <span class="nav-text">欧拉角、坐标系与旋转顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unity%E4%B8%AD%E7%9A%84%E6%AC%A7%E6%8B%89%E8%A7%92"><span class="nav-number">3.3.</span> <span class="nav-text">Unity中的欧拉角</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unity%E4%B8%AD%E7%9A%84gimbal-lock%E9%97%AE%E9%A2%98"><span class="nav-number">3.4.</span> <span class="nav-text">Unity中的Gimbal Lock问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">四元数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E4%B9%98%E6%B3%95%E6%A8%A1%E9%95%BF"><span class="nav-number">4.2.</span> <span class="nav-text">加法、乘法、模长</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95"><span class="nav-number">4.2.1.</span> <span class="nav-text">加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%98%E6%B3%95"><span class="nav-number">4.2.2.</span> <span class="nav-text">乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gra%C3%9Fmann%E7%A7%AF"><span class="nav-number">4.2.3.</span> <span class="nav-text">Graßmann积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E9%95%BF"><span class="nav-number">4.2.4.</span> <span class="nav-text">模长</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%AF%E5%9B%9B%E5%85%83%E6%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">纯四元数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B1%E8%BD%AD"><span class="nav-number">4.4.</span> <span class="nav-text">共轭</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%86"><span class="nav-number">4.5.</span> <span class="nav-text">逆</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E4%B8%8E%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC"><span class="nav-number">5.</span> <span class="nav-text">四元数与三维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F%E5%88%B0%E5%9B%9B%E5%85%83%E6%95%B0%E8%A1%A8%E7%A4%BA"><span class="nav-number">5.1.</span> <span class="nav-text">从三维旋转公式到四元数表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F%E7%9A%84%E7%AE%80%E5%8C%96"><span class="nav-number">5.2.</span> <span class="nav-text">四元数旋转公式的简化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%B8%80"><span class="nav-number">5.2.1.</span> <span class="nav-text">引理一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%BA%8C"><span class="nav-number">5.2.2.</span> <span class="nav-text">引理二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%B8%89"><span class="nav-number">5.2.3.</span> <span class="nav-text">引理三</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%AE%9A%E7%90%86%E5%9B%9B%E5%85%83%E6%95%B0%E5%9E%8B"><span class="nav-number">5.3.</span> <span class="nav-text">三维旋转定理（四元数型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%AE%9A%E7%90%86%E7%9F%A9%E9%98%B5%E5%9E%8B"><span class="nav-number">5.4.</span> <span class="nav-text">三维旋转定理（矩阵型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%AE%9A%E7%90%86%E6%8C%87%E6%95%B0%E5%9E%8B"><span class="nav-number">5.5.</span> <span class="nav-text">三维旋转定理（指数型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E5%A4%8D%E5%90%88-1"><span class="nav-number">5.6.</span> <span class="nav-text">旋转复合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E5%80%8D%E8%A6%86%E7%9B%96"><span class="nav-number">5.7.</span> <span class="nav-text">双倍覆盖</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E6%8F%92%E5%80%BC"><span class="nav-number">6.</span> <span class="nav-text">四元数插值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%B9%82%E8%BF%90%E7%AE%97%E7%9A%84%E6%8F%92%E5%80%BC"><span class="nav-number">6.1.</span> <span class="nav-text">基于幂运算的插值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E5%9C%A8%E5%9B%9B%E7%BB%B4%E7%A9%BA%E9%97%B4%E5%86%85%E7%9A%84%E5%A4%B9%E8%A7%92"><span class="nav-number">6.2.</span> <span class="nav-text">四元数在四维空间内的夹角</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lerp-nlerp-slerp"><span class="nav-number">6.3.</span> <span class="nav-text">Lerp, Nlerp, Slerp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lerp"><span class="nav-number">6.3.1.</span> <span class="nav-text">Lerp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nlerp"><span class="nav-number">6.3.2.</span> <span class="nav-text">Nlerp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slerp"><span class="nav-number">6.3.3.</span> <span class="nav-text">Slerp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E5%80%8D%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98"><span class="nav-number">6.4.</span> <span class="nav-text">双倍覆盖问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#squad"><span class="nav-number">7.</span> <span class="nav-text">Squad</span></a></li></ol></div>
+Lock）问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#unity%E4%B8%AD%E7%9A%84gimbal-lock%E7%8E%B0%E8%B1%A1"><span class="nav-number">3.1.</span> <span class="nav-text">Unity中的Gimbal Lock现象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E8%A7%92%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%8E%E6%97%8B%E8%BD%AC%E9%A1%BA%E5%BA%8F"><span class="nav-number">3.2.</span> <span class="nav-text">欧拉角、坐标系与旋转顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unity%E4%B8%AD%E7%9A%84%E6%AC%A7%E6%8B%89%E8%A7%92"><span class="nav-number">3.3.</span> <span class="nav-text">Unity中的欧拉角</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unity%E4%B8%AD%E7%9A%84gimbal-lock%E9%97%AE%E9%A2%98"><span class="nav-number">3.4.</span> <span class="nav-text">Unity中的Gimbal Lock问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">四元数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E4%B9%98%E6%B3%95%E6%A8%A1%E9%95%BF"><span class="nav-number">4.2.</span> <span class="nav-text">加法、乘法、模长</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95"><span class="nav-number">4.2.1.</span> <span class="nav-text">加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%98%E6%B3%95"><span class="nav-number">4.2.2.</span> <span class="nav-text">乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gra%C3%9Fmann%E7%A7%AF"><span class="nav-number">4.2.3.</span> <span class="nav-text">Graßmann积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E9%95%BF"><span class="nav-number">4.2.4.</span> <span class="nav-text">模长</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%AF%E5%9B%9B%E5%85%83%E6%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">纯四元数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B1%E8%BD%AD"><span class="nav-number">4.4.</span> <span class="nav-text">共轭</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%86"><span class="nav-number">4.5.</span> <span class="nav-text">逆</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E4%B8%8E%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC"><span class="nav-number">5.</span> <span class="nav-text">四元数与三维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F%E5%88%B0%E5%9B%9B%E5%85%83%E6%95%B0%E8%A1%A8%E7%A4%BA"><span class="nav-number">5.1.</span> <span class="nav-text">从三维旋转公式到四元数表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F%E7%9A%84%E7%AE%80%E5%8C%96"><span class="nav-number">5.2.</span> <span class="nav-text">四元数旋转公式的简化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%B8%80"><span class="nav-number">5.2.1.</span> <span class="nav-text">引理一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%BA%8C"><span class="nav-number">5.2.2.</span> <span class="nav-text">引理二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%B8%89"><span class="nav-number">5.2.3.</span> <span class="nav-text">引理三</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%AE%9A%E7%90%86%E5%9B%9B%E5%85%83%E6%95%B0%E5%9E%8B"><span class="nav-number">5.3.</span> <span class="nav-text">三维旋转定理（四元数型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%AE%9A%E7%90%86%E7%9F%A9%E9%98%B5%E5%9E%8B"><span class="nav-number">5.4.</span> <span class="nav-text">三维旋转定理（矩阵型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%AE%9A%E7%90%86%E6%8C%87%E6%95%B0%E5%9E%8B"><span class="nav-number">5.5.</span> <span class="nav-text">三维旋转定理（指数型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E5%A4%8D%E5%90%88-1"><span class="nav-number">5.6.</span> <span class="nav-text">旋转复合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E5%80%8D%E8%A6%86%E7%9B%96"><span class="nav-number">5.7.</span> <span class="nav-text">双倍覆盖</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E6%8F%92%E5%80%BC"><span class="nav-number">6.</span> <span class="nav-text">四元数插值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%B9%82%E8%BF%90%E7%AE%97%E7%9A%84%E6%8F%92%E5%80%BC"><span class="nav-number">6.1.</span> <span class="nav-text">基于幂运算的插值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E5%9C%A8%E5%9B%9B%E7%BB%B4%E7%A9%BA%E9%97%B4%E5%86%85%E7%9A%84%E5%A4%B9%E8%A7%92"><span class="nav-number">6.2.</span> <span class="nav-text">四元数在四维空间内的夹角</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lerp-nlerp-slerp"><span class="nav-number">6.3.</span> <span class="nav-text">Lerp, Nlerp, Slerp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lerp"><span class="nav-number">6.3.1.</span> <span class="nav-text">Lerp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nlerp"><span class="nav-number">6.3.2.</span> <span class="nav-text">Nlerp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slerp"><span class="nav-number">6.3.3.</span> <span class="nav-text">Slerp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E5%80%8D%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98"><span class="nav-number">6.4.</span> <span class="nav-text">双倍覆盖问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#squad"><span class="nav-number">7.</span> <span class="nav-text">Squad</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#b%C3%A9zier%E6%9B%B2%E7%BA%BF"><span class="nav-number">7.1.</span> <span class="nav-text">Bézier曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E6%AC%A1b%C3%A9zier%E6%9B%B2%E7%BA%BF"><span class="nav-number">7.2.</span> <span class="nav-text">三次Bézier曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#de-casteljau%E7%AE%97%E6%B3%95"><span class="nav-number">7.3.</span> <span class="nav-text">de Casteljau算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#squad-1"><span class="nav-number">7.4.</span> <span class="nav-text">Squad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#squad%E5%BA%94%E7%94%A8"><span class="nav-number">7.5.</span> <span class="nav-text">Squad应用</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -306,7 +310,7 @@ Lock）问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-01 18:10:46" itemprop="dateModified" datetime="2022-04-01T18:10:46+08:00">2022-04-01</time>
+      <time title="修改时间：2022-04-02 00:31:48" itemprop="dateModified" datetime="2022-04-02T00:31:48+08:00">2022-04-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -346,14 +350,14 @@ Lock）问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>27k</span>
+      <span>30k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>25 分钟</span>
+      <span>27 分钟</span>
     </span>
 </div>
 
@@ -1540,6 +1544,90 @@ class="math inline">\(-q_1\)</span>。</p>
 <p>这告诉我们，在对四元数插值之前，要检查<span
 class="math inline">\(w_0,w_1\)</span>之间的夹角是否是钝角，即检查它们的点积结果是否是负数，如果是负数，就对其中一个四元数取负号，然后在新的四元数间插值。</p>
 <h1 id="squad">Squad</h1>
+<p><em>Slerp</em>已经是我们理想中的插值方式了：它直接对角度插值，插值角度匀速变化，运算效率尚可。但是它还有一个小问题：角度变化的速率等于夹角，即<span
+class="math inline">\(\tfrac{\mathrm{d}\theta_t}{\mathrm{d}t}=\tfrac{\mathrm{d}}{\mathrm{d}t}(t\theta)=\theta\)</span>，这就意味着，当我们在多个角速度之间插值的时候，当在不同的四元数之间插值的时候，速率会发生突变，或者说在切断点处<strong>不可导</strong>。从数学上讲，函数<span
+class="math inline">\(f\)</span>连续并不意味着函数的一阶导连续（前者称为<span
+class="math inline">\(C^0\)</span>连续，后者称为<span
+class="math inline">\(C^1\)</span>连续）。</p>
+<p>为此，我们希望插值的曲线能够在高阶导处也连续，下面介绍的Squad（Spherical
+and quadrangle）就是一种解决方法。</p>
+<h2 id="bézier曲线">Bézier曲线</h2>
+<p>假设我们有一个向量序列<span
+class="math inline">\(\mathbf{v}_0,\mathbf{v}_1,\cdots,\mathbf{v}_n\)</span>，我们可以分别对每一对向量<span
+class="math inline">\(\mathbf{v}_i,\mathbf{v}_{i+1}\)</span>插值。如果我们使用最简单的<em>Lerp</em>插值，就会得到如下图的结果：</p>
+<p><img data-src="/images/quaternion/3.png" /></p>
+<p>显然这个曲线是<span class="math inline">\(C^0\)</span>连续但<span
+class="math inline">\(C^1\)</span>不连续，为此，我们可以使用一个四次Bézier曲线，将中间的<span
+class="math inline">\(\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3\)</span>作为控制点来生成连续曲线。然而这种方法得到的曲线一般不会经过控制点：</p>
+<p><img data-src="/images/quaternion/4.png" /></p>
+<p>关于Bézier曲线的相关知识可以在<a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve">Wikipedia</a>上找到介绍。</p>
+<h2 id="三次bézier曲线">三次Bézier曲线</h2>
+<p>为了解决这个问题，我们想让生成的曲线（1）经过每个点和（2）一阶导数连续。因此，我们可以分段对每两个向量<span
+class="math inline">\(\mathbf{v}_i,\mathbf{v}_{i+1}\)</span>使用Bézier曲线，其中我们要使用前一个向量<span
+class="math inline">\(\mathbf{v}_{i-1}\)</span>和后一个向量<span
+class="math inline">\(\mathbf{v}_{i+2}\)</span>生成两个控制点<span
+class="math inline">\(\mathbf{s}_i,\mathbf{s}_{i+1}\)</span>去控制曲线的走势。使用<span
+class="math inline">\(\mathbf{s}_i,\mathbf{v}_i,\mathbf{v}_{i+1},\mathbf{s}_{i+1}\)</span>（<span
+class="math inline">\(\mathbf{v}_i,\mathbf{v}_{i+1}\)</span>是端点，<span
+class="math inline">\(\mathbf{s}_i,\mathbf{s}_{i+1}\)</span>是中间的控制点），就能通过一个三次Bézier曲线来插值。</p>
+<p>上述做法可以保证曲线经过每个点，但是不能保证曲线在每个点处都是<span
+class="math inline">\(C^1\)</span>连续的。实际上，对于三次Bézier曲线，只要保证前一个Spline（一对向量生成的曲线）在<span
+class="math inline">\(\mathbf{v}_i\)</span>的控制点与当前Spline在<span
+class="math inline">\(\mathbf{v}_i\)</span>的控制点分别处于最终曲线在<span
+class="math inline">\(\mathbf{v}_i\)</span>处切线<strong>对等的两侧</strong>：</p>
+<p><img data-src="/images/quaternion/5.png" /></p>
+<p>蓝色的线就是曲线在点<span
+class="math inline">\(\mathbf{v}_i\)</span>处的切线，红色的点就是控制点，每一对控制点分别处于切线对等的两侧。</p>
+<p>下面我们来具体了解如何构造一个三次Bézier曲线。</p>
+<h2 id="de-casteljau算法">de Casteljau算法</h2>
+<p>de
+Casteljau算法可以非常直观简单地构造Bézier曲线，在这里我们只关注三次Bézier曲线的情况。</p>
+<p>假设我们有四个向量<span
+class="math inline">\(\mathbf{v}_0,\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3\)</span>，de
+Casteljau算法首先对每一对向量<span
+class="math inline">\(\mathbf{v}_0\mathbf{v}_1,\mathbf{v}_1\mathbf{v}_2,\mathbf{v}_2\mathbf{v}_3\)</span>进行线性插值，得到<span
+class="math inline">\(\mathbf{v}_{01},\mathbf{v}_{12},\mathbf{v}_{23}\)</span>这三个向量：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \mathbf{v}_{01}&amp;=\text{Lerp}(\mathbf{v}_0,\mathbf{v}_1;t)\\
+  \mathbf{v}_{12}&amp;=\text{Lerp}(\mathbf{v}_1,\mathbf{v}_2;t)\\
+  \mathbf{v}_{23}&amp;=\text{Lerp}(\mathbf{v}_2,\mathbf{v}_3;t)
+\end{aligned}
+\]</span></p>
+<p>之后，我们对<span
+class="math inline">\(\mathbf{v}_{01}\mathbf{v}_{12},\mathbf{v}_{12}\mathbf{v}_{23}\)</span>这两对向量进行线性插值，得到<span
+class="math inline">\(\mathbf{v}_{012},\mathbf{v}_{123}\)</span>：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \mathbf{v}_{012}&amp;=\text{Lerp}(\mathbf{v}_{01},\mathbf{v}_{12};t)\\
+  \mathbf{v}_{123}&amp;=\text{Lerp}(\mathbf{v}_{12},\mathbf{v}_{23};t)\\
+\end{aligned}
+\]</span></p>
+<p>最后，我们对<span
+class="math inline">\(\mathbf{v}_{012},\mathbf{v}_{123}\)</span>进行线性插值得到<span
+class="math inline">\(\mathbf{v}_{0123}\)</span>，这就是我们想要的结果（插值为<span
+class="math inline">\(t\)</span>时）：</p>
+<p><span
+class="math display">\[\mathbf{v}_{0123}=\text{Lerp}(\mathbf{v}_{012},\mathbf{v}_{123};t)\]</span></p>
+<p>整个过程可以总结为下图（<span
+class="math inline">\(t=0.4\)</span>）：</p>
+<p><img data-src="/images/quaternion/6.png" /></p>
+<p>当我们把<span class="math inline">\(t\)</span>从<span
+class="math inline">\(0\)</span>变换到<span
+class="math inline">\(1\)</span>时，我们就能得到黑色的曲线。</p>
+<p>三次Bézier曲线的过程可以表述为：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \text{Bézier}(\mathbf{v}_{0},\mathbf{v}_{1},\mathbf{v}_{2},\mathbf{v}_{3};t)&amp;=f(f(f(\mathbf{v}_{0},\mathbf{v}_{1};t),f(\mathbf{v}_{1},\mathbf{v}_{2};t);t),f(f(\mathbf{v}_{1},\mathbf{v}_{2};t),f(\mathbf{v}_{2},\mathbf{v}_{3};t);t);t)\\
+  &amp;=(1-t)^3\mathbf{v}_{0}+3(1-t)^2t\mathbf{v}_{1}+3(1-t)t^2\mathbf{v}_{2}+t^3\mathbf{v}_{3}\;(f=\text{Lerp})
+\end{aligned}
+\]</span></p>
+<p>这里的<span
+class="math inline">\(f\)</span>对于上面的过程来说是线性插值<em>Lerp</em>，对四元数来说则是<em>Slerp</em>。但是由于一个<em>Slerp</em>涉及四个三角函数与除法运算，上式包含了<span
+class="math inline">\(7\)</span>个<em>Slerp</em>，这就会导致极大的效率问题。</p>
+<h2 id="squad-1">Squad</h2>
+<h2 id="squad应用">Squad应用</h2>
 <section class="footnotes footnotes-end-of-document"
 role="doc-endnotes">
 <hr />
@@ -1618,9 +1706,9 @@ class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解�
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
-              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
               <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
           </div>
 
         
@@ -1671,13 +1759,13 @@ class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解�
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">97k</span>
+    <span title="站点总字数">100k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:28</span>
+    <span title="站点阅读时长">1:31</span>
   </span>
 </div>
 <div class="busuanzi-count">

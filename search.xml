@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Motion Matching -- 概念与发展</title>
+    <url>/2022/03/27/Motion%20Matching%20-%20%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%8F%91%E5%B1%95/</url>
+    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
+Matching基本知识的介绍，放在此备份。</p>
+<span id="more"></span>
+<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
+]]></content>
+      <categories>
+        <category>计算机 - 动画</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>随笔</tag>
+        <tag>计算机</tag>
+        <tag>动画</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Bresenham算法画直线</title>
     <url>/2020/10/18/Bresenham%E7%AE%97%E6%B3%95%E7%94%BB%E7%9B%B4%E7%BA%BF/</url>
     <content><![CDATA[<p>Bresenham's
@@ -184,29 +204,9 @@ class="math inline">\(0&lt;k\le
         <category>数学 - 图形学</category>
       </categories>
       <tags>
+        <tag>随笔</tag>
         <tag>计算机</tag>
         <tag>算法</tag>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Motion Matching -- 概念与发展</title>
-    <url>/2022/03/27/Motion%20Matching%20-%20%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%8F%91%E5%B1%95/</url>
-    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
-Matching基本知识的介绍，放在此备份。</p>
-<span id="more"></span>
-<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
-]]></content>
-      <categories>
-        <category>计算机 - 动画</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>随笔</tag>
-        <tag>数学</tag>
-        <tag>动画</tag>
-        <tag>机器学习</tag>
-        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -504,8 +504,8 @@ Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷
         <category>数学 - 数学分析</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -959,9 +959,9 @@ CPU @ 2.90GHz。</p>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
+        <tag>计算机</tag>
       </tags>
   </entry>
   <entry>
@@ -1458,9 +1458,9 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
+        <tag>计算机</tag>
       </tags>
   </entry>
   <entry>
@@ -3394,6 +3394,90 @@ class="math inline">\(-q_1\)</span>。</p>
 <p>这告诉我们，在对四元数插值之前，要检查<span
 class="math inline">\(w_0,w_1\)</span>之间的夹角是否是钝角，即检查它们的点积结果是否是负数，如果是负数，就对其中一个四元数取负号，然后在新的四元数间插值。</p>
 <h1 id="squad">Squad</h1>
+<p><em>Slerp</em>已经是我们理想中的插值方式了：它直接对角度插值，插值角度匀速变化，运算效率尚可。但是它还有一个小问题：角度变化的速率等于夹角，即<span
+class="math inline">\(\tfrac{\mathrm{d}\theta_t}{\mathrm{d}t}=\tfrac{\mathrm{d}}{\mathrm{d}t}(t\theta)=\theta\)</span>，这就意味着，当我们在多个角速度之间插值的时候，当在不同的四元数之间插值的时候，速率会发生突变，或者说在切断点处<strong>不可导</strong>。从数学上讲，函数<span
+class="math inline">\(f\)</span>连续并不意味着函数的一阶导连续（前者称为<span
+class="math inline">\(C^0\)</span>连续，后者称为<span
+class="math inline">\(C^1\)</span>连续）。</p>
+<p>为此，我们希望插值的曲线能够在高阶导处也连续，下面介绍的Squad（Spherical
+and quadrangle）就是一种解决方法。</p>
+<h2 id="bézier曲线">Bézier曲线</h2>
+<p>假设我们有一个向量序列<span
+class="math inline">\(\mathbf{v}_0,\mathbf{v}_1,\cdots,\mathbf{v}_n\)</span>，我们可以分别对每一对向量<span
+class="math inline">\(\mathbf{v}_i,\mathbf{v}_{i+1}\)</span>插值。如果我们使用最简单的<em>Lerp</em>插值，就会得到如下图的结果：</p>
+<p><img data-src="/images/quaternion/3.png" /></p>
+<p>显然这个曲线是<span class="math inline">\(C^0\)</span>连续但<span
+class="math inline">\(C^1\)</span>不连续，为此，我们可以使用一个四次Bézier曲线，将中间的<span
+class="math inline">\(\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3\)</span>作为控制点来生成连续曲线。然而这种方法得到的曲线一般不会经过控制点：</p>
+<p><img data-src="/images/quaternion/4.png" /></p>
+<p>关于Bézier曲线的相关知识可以在<a
+href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve">Wikipedia</a>上找到介绍。</p>
+<h2 id="三次bézier曲线">三次Bézier曲线</h2>
+<p>为了解决这个问题，我们想让生成的曲线（1）经过每个点和（2）一阶导数连续。因此，我们可以分段对每两个向量<span
+class="math inline">\(\mathbf{v}_i,\mathbf{v}_{i+1}\)</span>使用Bézier曲线，其中我们要使用前一个向量<span
+class="math inline">\(\mathbf{v}_{i-1}\)</span>和后一个向量<span
+class="math inline">\(\mathbf{v}_{i+2}\)</span>生成两个控制点<span
+class="math inline">\(\mathbf{s}_i,\mathbf{s}_{i+1}\)</span>去控制曲线的走势。使用<span
+class="math inline">\(\mathbf{s}_i,\mathbf{v}_i,\mathbf{v}_{i+1},\mathbf{s}_{i+1}\)</span>（<span
+class="math inline">\(\mathbf{v}_i,\mathbf{v}_{i+1}\)</span>是端点，<span
+class="math inline">\(\mathbf{s}_i,\mathbf{s}_{i+1}\)</span>是中间的控制点），就能通过一个三次Bézier曲线来插值。</p>
+<p>上述做法可以保证曲线经过每个点，但是不能保证曲线在每个点处都是<span
+class="math inline">\(C^1\)</span>连续的。实际上，对于三次Bézier曲线，只要保证前一个Spline（一对向量生成的曲线）在<span
+class="math inline">\(\mathbf{v}_i\)</span>的控制点与当前Spline在<span
+class="math inline">\(\mathbf{v}_i\)</span>的控制点分别处于最终曲线在<span
+class="math inline">\(\mathbf{v}_i\)</span>处切线<strong>对等的两侧</strong>：</p>
+<p><img data-src="/images/quaternion/5.png" /></p>
+<p>蓝色的线就是曲线在点<span
+class="math inline">\(\mathbf{v}_i\)</span>处的切线，红色的点就是控制点，每一对控制点分别处于切线对等的两侧。</p>
+<p>下面我们来具体了解如何构造一个三次Bézier曲线。</p>
+<h2 id="de-casteljau算法">de Casteljau算法</h2>
+<p>de
+Casteljau算法可以非常直观简单地构造Bézier曲线，在这里我们只关注三次Bézier曲线的情况。</p>
+<p>假设我们有四个向量<span
+class="math inline">\(\mathbf{v}_0,\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3\)</span>，de
+Casteljau算法首先对每一对向量<span
+class="math inline">\(\mathbf{v}_0\mathbf{v}_1,\mathbf{v}_1\mathbf{v}_2,\mathbf{v}_2\mathbf{v}_3\)</span>进行线性插值，得到<span
+class="math inline">\(\mathbf{v}_{01},\mathbf{v}_{12},\mathbf{v}_{23}\)</span>这三个向量：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \mathbf{v}_{01}&amp;=\text{Lerp}(\mathbf{v}_0,\mathbf{v}_1;t)\\
+  \mathbf{v}_{12}&amp;=\text{Lerp}(\mathbf{v}_1,\mathbf{v}_2;t)\\
+  \mathbf{v}_{23}&amp;=\text{Lerp}(\mathbf{v}_2,\mathbf{v}_3;t)
+\end{aligned}
+\]</span></p>
+<p>之后，我们对<span
+class="math inline">\(\mathbf{v}_{01}\mathbf{v}_{12},\mathbf{v}_{12}\mathbf{v}_{23}\)</span>这两对向量进行线性插值，得到<span
+class="math inline">\(\mathbf{v}_{012},\mathbf{v}_{123}\)</span>：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \mathbf{v}_{012}&amp;=\text{Lerp}(\mathbf{v}_{01},\mathbf{v}_{12};t)\\
+  \mathbf{v}_{123}&amp;=\text{Lerp}(\mathbf{v}_{12},\mathbf{v}_{23};t)\\
+\end{aligned}
+\]</span></p>
+<p>最后，我们对<span
+class="math inline">\(\mathbf{v}_{012},\mathbf{v}_{123}\)</span>进行线性插值得到<span
+class="math inline">\(\mathbf{v}_{0123}\)</span>，这就是我们想要的结果（插值为<span
+class="math inline">\(t\)</span>时）：</p>
+<p><span
+class="math display">\[\mathbf{v}_{0123}=\text{Lerp}(\mathbf{v}_{012},\mathbf{v}_{123};t)\]</span></p>
+<p>整个过程可以总结为下图（<span
+class="math inline">\(t=0.4\)</span>）：</p>
+<p><img data-src="/images/quaternion/6.png" /></p>
+<p>当我们把<span class="math inline">\(t\)</span>从<span
+class="math inline">\(0\)</span>变换到<span
+class="math inline">\(1\)</span>时，我们就能得到黑色的曲线。</p>
+<p>三次Bézier曲线的过程可以表述为：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \text{Bézier}(\mathbf{v}_{0},\mathbf{v}_{1},\mathbf{v}_{2},\mathbf{v}_{3};t)&amp;=f(f(f(\mathbf{v}_{0},\mathbf{v}_{1};t),f(\mathbf{v}_{1},\mathbf{v}_{2};t);t),f(f(\mathbf{v}_{1},\mathbf{v}_{2};t),f(\mathbf{v}_{2},\mathbf{v}_{3};t);t);t)\\
+  &amp;=(1-t)^3\mathbf{v}_{0}+3(1-t)^2t\mathbf{v}_{1}+3(1-t)t^2\mathbf{v}_{2}+t^3\mathbf{v}_{3}\;(f=\text{Lerp})
+\end{aligned}
+\]</span></p>
+<p>这里的<span
+class="math inline">\(f\)</span>对于上面的过程来说是线性插值<em>Lerp</em>，对四元数来说则是<em>Slerp</em>。但是由于一个<em>Slerp</em>涉及四个三角函数与除法运算，上式包含了<span
+class="math inline">\(7\)</span>个<em>Slerp</em>，这就会导致极大的效率问题。</p>
+<h2 id="squad-1">Squad</h2>
+<h2 id="squad应用">Squad应用</h2>
 <section class="footnotes footnotes-end-of-document"
 role="doc-endnotes">
 <hr />
@@ -3411,9 +3495,9 @@ href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
+        <tag>计算机</tag>
       </tags>
   </entry>
 </search>
