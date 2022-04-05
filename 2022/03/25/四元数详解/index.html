@@ -46,11 +46,11 @@
 <meta property="og:image" content="http://sulley.cc/images/quaternion/7.png">
 <meta property="og:image" content="http://sulley.cc/images/quaternion/8.png">
 <meta property="article:published_time" content="2022-03-24T17:00:33.000Z">
-<meta property="article:modified_time" content="2022-04-03T17:09:48.270Z">
+<meta property="article:modified_time" content="2022-04-05T09:29:21.432Z">
 <meta property="article:author" content="Sulley">
-<meta property="article:tag" content="计算机">
-<meta property="article:tag" content="随笔">
 <meta property="article:tag" content="数学">
+<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="计算机">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://sulley.cc/images/quaternion/0_1.gif">
 
@@ -313,7 +313,7 @@ Lock）问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-04 01:09:48" itemprop="dateModified" datetime="2022-04-04T01:09:48+08:00">2022-04-04</time>
+      <time title="修改时间：2022-04-05 17:29:21" itemprop="dateModified" datetime="2022-04-05T17:29:21+08:00">2022-04-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -353,14 +353,14 @@ Lock）问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>40k</span>
+      <span>43k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>37 分钟</span>
+      <span>39 分钟</span>
     </span>
 </div>
 
@@ -1376,6 +1376,66 @@ class="math inline">\(q(t)=[\cos(\theta_t),\sin(\theta_t)\mathbf{n}_t]\)</span>�
 \]</span></p>
 
 </details>
+<p>最后一个Property联系了四元数的乘积与点乘。</p>
+<details class="note primary"><summary><p>Property 7</p>
+</summary>
+<p>设<span
+class="math inline">\(p=[a,\mathbf{b}],q_1=[a_1,(x_1,y_1,z_1)]=[a_1,\mathbf{b}_1],q_2=[a_2,(x_2,y_2,z_2)]=[a_2,\mathbf{b}_2]\)</span>是三个四元数，则有<span
+class="math inline">\((pq_1)\cdot(pq_2)=\|p\|^2(q_1\cdot
+q_2)\)</span>。</p>
+<p><strong>证明</strong>：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  (pq_1)\cdot(pq_2)&amp;=[aa_1-\mathbf{b}\cdot\mathbf{b}_1,a\mathbf{b}_1+a_1\mathbf{b}+\mathbf{b}\times\mathbf{b}_1]\cdot
+[aa_2-\mathbf{b}\cdot\mathbf{b}_2,a\mathbf{b}_2+a_2\mathbf{b}+\mathbf{b}\times\mathbf{b}_2]\\
+  &amp;=a^2a_1a_2+(\mathbf{b}\cdot\mathbf{b}_1)(\mathbf{b}\cdot\mathbf{b}_2)+\\
+  &amp;~~~~~a^2\mathbf{b}_1\cdot\mathbf{b}_2+a\mathbf{b}_1\cdot(\mathbf{b}\times\mathbf{b}_2)+a_1a_2\mathbf{b}\cdot\mathbf{b}+\\
+  &amp;~~~~~a(\mathbf{b}\times\mathbf{b}_1)\cdot\mathbf{b}_2+(\mathbf{b}\times\mathbf{b}_1)\cdot(\mathbf{b}\times
+\mathbf{b}_2)
+\end{aligned}
+\]</span></p>
+<p>使用恒等式<span
+class="math inline">\((\mathbf{b}\times\mathbf{b}_1)\cdot(\mathbf{b}\times
+\mathbf{b}_2)=(\mathbf{b}\cdot\mathbf{b})(\mathbf{b}_1\cdot\mathbf{b}_2)-(\mathbf{b}\cdot\mathbf{b}_2)(\mathbf{b}_1\cdot\mathbf{b})\)</span>，我们有：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  (pq_1)\cdot(pq_2)&amp;=a^2a_1a_2+(\mathbf{b}\cdot\mathbf{b}_1)(\mathbf{b}\cdot\mathbf{b}_2)+\\
+  &amp;~~~~~a^2\mathbf{b}_1\cdot\mathbf{b}_2+a\mathbf{b}_1\cdot(\mathbf{b}\times\mathbf{b}_2)+a_1a_2\mathbf{b}\cdot\mathbf{b}+\\
+  &amp;~~~~~a(\mathbf{b}\times\mathbf{b}_1)\cdot\mathbf{b}_2+(\mathbf{b}\cdot\mathbf{b})(\mathbf{b}_1\cdot\mathbf{b}_2)-(\mathbf{b}\cdot\mathbf{b}_2)(\mathbf{b}_1\cdot\mathbf{b})\\
+  &amp;=(a^2+\mathbf{b}\cdot\mathbf{b})(a_1a_2+\mathbf{b}_1\cdot\mathbf{b}_2)+a\mathbf{b}_1\cdot(\mathbf{b}\times\mathbf{b}_2)+a(\mathbf{b}\times\mathbf{b}_1)\cdot\mathbf{b}_2\\
+  &amp;=\|p\|^2(q_1\cdot
+q_2)+a\mathbf{b}_1\cdot(\mathbf{b}\times\mathbf{b}_2)+a(\mathbf{b}\times\mathbf{b}_1)\cdot\mathbf{b}_2
+\end{aligned}
+\]</span></p>
+<p>最后，我们使用下述等式：</p>
+<p><span class="math display">\[\mathbf{b}\cdot(\mathbf{b}_1\times
+\mathbf{b}_2)=
+\begin{vmatrix}
+  x &amp; y &amp; z\\
+  x_1 &amp; y_1 &amp; z_1\\
+  x_2 &amp; y_2 &amp; z_2
+\end{vmatrix}
+\]</span></p>
+<p>现在我们有：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  (pq_1)\cdot(pq_2)&amp;=\|p\|^2(q_1\cdot
+q_2)+a\mathbf{b}_1\cdot(\mathbf{b}\times\mathbf{b}_2)+a(\mathbf{b}\times\mathbf{b}_1)\cdot\mathbf{b}_2\\
+  &amp;=\|p\|^2(q_1\cdot q_2)+a\left(\begin{vmatrix}
+  x_1 &amp; y_1 &amp; z_1\\
+  x &amp; y &amp; z\\
+  x_2 &amp; y_2 &amp; z_2
+\end{vmatrix}+
+\begin{vmatrix}
+  x_2 &amp; y_2 &amp; z_2\\
+  x &amp; y &amp; z\\
+  x_1 &amp; y_1 &amp; z_1
+\end{vmatrix}\right)\\
+&amp;=\|p\|^2(q_1\cdot q_2)
+\end{aligned}
+\]</span></p>
+
+</details>
 <h2 id="三维旋转定理矩阵型">三维旋转定理（矩阵型）</h2>
 <p>通过之前的讨论（尽管不完全相同，但可以类似推导）我们知道左乘一个四元数<span
 class="math inline">\(w=a+bi+cj+dj\)</span>等同于下面的矩阵</p>
@@ -1688,6 +1748,7 @@ class="math inline">\(\theta\)</span>很小，<span
 class="math inline">\(\sin(\theta)\)</span>可能因浮点精度问题被近似为<span
 class="math inline">\(0\)</span>，导致运算错误。所以在实际使用<em>Slerp</em>时，要首先判断夹角<span
 class="math inline">\(\theta\)</span>是否较小，若是，则改用<em>Nlerp</em>，而由于夹角很小，<em>Nlerp</em>与<em>Slerp</em>的误差可以忽略。</p>
+<p>需要注意的是，<em>Slerp</em>并不是一个“万能答案”，它的运行效率显著低于<em>Nlerp</em>。此外，<em>Nlerp</em>的角速度变化不一致并不一定是个坏处，在不同的情景下可能有不同的用处。所以，在使用插值方法的时候要根据实际情况选择，大多数时候<em>Nlerp</em>已经足够了。</p>
 <h2 id="双倍覆盖问题">双倍覆盖问题</h2>
 <p>之前我们介绍过，四元数<span class="math inline">\(-w\)</span>与<span
 class="math inline">\(w\)</span>代表的是同一个旋转，这就导致对两个四元数的插值会有效率差距。</p>
@@ -2033,9 +2094,9 @@ class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解�
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
-              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
               <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
           </div>
 
         
@@ -2086,13 +2147,13 @@ class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解�
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">110k</span>
+    <span title="站点总字数">112k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:40</span>
+    <span title="站点阅读时长">1:42</span>
   </span>
 </div>
 <div class="busuanzi-count">
