@@ -210,6 +210,24 @@ Matching基本知识的介绍，放在此备份。</p>
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2020/09/07/hello-world/</url>
+    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
+<span id="more"></span>
+<h1 id="测试">测试</h1>
+<h2 id="代码">代码</h2>
+<p>现在来测试一下代码</p>
+<details class="note info no-icon"><summary><p>This is a code test</p>
+</summary>
+<h4 id="details-and-code">Details and code</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
+
+</details>
+<h2 id="latex">Latex</h2>
+<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
+]]></content>
+  </entry>
+  <entry>
     <title>《Assassain&#39;s Creed Valhalla》玩后感</title>
     <url>/2020/11/12/acv-impression-md/</url>
     <content><![CDATA[<p><code>刺客信条：英灵殿</code>（Assassin's Creed
@@ -249,263 +267,6 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
         <tag>游戏</tag>
         <tag>生活</tag>
         <tag>刺客细条</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/09/07/hello-world/</url>
-    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
-<span id="more"></span>
-<h1 id="测试">测试</h1>
-<h2 id="代码">代码</h2>
-<p>现在来测试一下代码</p>
-<details class="note info no-icon"><summary><p>This is a code test</p>
-</summary>
-<h4 id="details-and-code">Details and code</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
-
-</details>
-<h2 id="latex">Latex</h2>
-<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>无穷连根式求极限的充要条件</title>
-    <url>/2020/09/09/infinite-radicals/</url>
-    <content><![CDATA[<p>在刷习题集或者考试的时候我们经常会遇到诸如<span
-class="math inline">\(\sqrt{1+\sqrt{2+\sqrt{3+\cdots}}}\)</span>或者<span
-class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解或极限存在性证明。解决此类问题的方法有很多，但都可以归结为一点：缩放。要么是两端缩放然后夹逼定理，要么是证明有界然后两边取极限。本文记录此类问题极限存在的一个充要条件，以供参阅。</p>
-<span id="more"></span>
-<h1 id="ramanujans-problem">Ramanujan's Problem</h1>
-<p>这类问题最著名的是拉马努金（Ramanujan）所提出的恒等式：</p>
-<blockquote>
-<p>证明: <span
-class="math display">\[3=\sqrt{1+2\sqrt{1+3\sqrt{1+\cdots}}}\tag{1}\]</span></p>
-</blockquote>
-<p>这个等式的证明是简单而有趣的：</p>
-<p><span class="math display">\[3=\sqrt{1+2\cdot
-4}=\sqrt{1+2\sqrt{1+3\cdot
-5}}=\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}\]</span></p>
-<p>同时，Ramanujan还断言下面的结论：</p>
-<p><span
-class="math display">\[\lim_{n\to\infty}\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=3\]</span></p>
-<p>这个的证明也是容易的。首先把上式和（1）式比较，就发现上式以3为上界，并且由单调性可知，其极限是存在的。为了证明<span
-class="math inline">\(a_n=\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}\)</span>的极限就是3，我们证明：对任意的<span
-class="math inline">\(3&gt;\epsilon&gt;0\)</span>，都存在<span
-class="math inline">\(N\)</span>，使得所有的<span
-class="math inline">\(n&gt;N\)</span>都有<span
-class="math inline">\(a_n&gt;3-\epsilon\)</span>。</p>
-<p>现在任取<span
-class="math inline">\(0&lt;\epsilon&lt;3\)</span>，令<span
-class="math inline">\(3-\epsilon=3r\)</span>，故<span
-class="math inline">\(0&lt;r=1-\epsilon/3&lt;1\)</span>，故有：</p>
-<p><span
-class="math display">\[3-\epsilon=3r=r\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}\]</span></p>
-<p>把<span class="math inline">\(r\)</span>乘进去，就有：</p>
-<p><span
-class="math display">\[3-\epsilon=\sqrt{r^2+2\sqrt{r^{2^2}+\cdots+n\sqrt{r^{2^n}[1+(n+1)(n+3)]}}}\tag{2}\]</span></p>
-<p>由于<span class="math inline">\(1&gt;r^{2^i},\forall
-i=1,2,\cdots\)</span>，且存在<span
-class="math inline">\(N\)</span>，当<span
-class="math inline">\(n&gt;N\)</span>时，有</p>
-<p><span
-class="math display">\[1&gt;r^{2^n}[1+(n+1)(n+2)]=r^{2^n}(n+2)^2\]</span></p>
-<p>把这些全部带入（2）式，就可以证明：</p>
-<p><span
-class="math display">\[3-\epsilon=\sqrt{r^2+2\sqrt{r^{2^2}+\cdots+n\sqrt{r^{2^n}[1+(n+1)(n+3)]}}}&lt;\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=a_n,n&gt;N\]</span></p>
-<p>从而完成证明。</p>
-<h1 id="polyas-criterionpolya准则">Polya's Criterion（Polya准则）</h1>
-<p>在考虑普遍情况下首先来观察一些特例，一个典型的特例就是形如<span
-class="math inline">\(\sqrt{a_1+\sqrt{a_2+\cdots}}\)</span>的无穷根式，每个根号的次数都是<span
-class="math inline">\(2\)</span>，或者幂次都是<span
-class="math inline">\(2^{-1}\)</span>。对于<span
-class="math inline">\(a_1\)</span>来看，控制它的幂次是<span
-class="math inline">\(\frac{1}{2}\)</span>，对于<span
-class="math inline">\(a_2\)</span>来说，控制它的幂次是<span
-class="math inline">\(2^{-2}\)</span>，对于<span
-class="math inline">\(a_n\)</span>来说，控制它的幂次是<span
-class="math inline">\(2^{-n}\)</span>。假设这个无穷根式极限存在，那么我们关心的肯定是<span
-class="math inline">\(n\)</span>足够大时，它被什么控制，显然是<span
-class="math inline">\(a_n\)</span>及控制它的<span
-class="math inline">\(2^{-n}\)</span>的幂次。所以，一个合理的猜测是，如果<span
-class="math inline">\(a_n^{2^{-n}}\)</span>极限存在，那么该根式就收敛。下面我们将看到，这个猜测已经非常接近“真相”，甚至是真相的一部分。</p>
-<h2 id="description">Description</h2>
-<p>设序列<span
-class="math inline">\(u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}\)</span>，则<span
-class="math inline">\(\{u_n\}\)</span>可以用下述条件判定：</p>
-<p><span class="math display">\[
-\begin{cases}
-\text{converges},&amp;\text{if}\;
-\overline{\lim}_{n\to\infty}\frac{\log\log a_n}{n}&lt;\log 2\\
-\text{diverges},&amp;\text{if}\;
-\overline{\lim}_{n\to\infty}\frac{\log\log a_n}{n}&gt;\log 2
-\end{cases}
-\]</span></p>
-<p>上述准则还可以进一步推广为：</p>
-<blockquote>
-<p>序列<span class="math inline">\(\{u_n\}\)</span>收敛的充要条件是：
-<span class="math display">\[\overline{\lim_{n\to\infty}} n \left(
-\frac{\log\log a_n}{n}-\log2 \right) &lt;+\infty\tag{3}\]</span></p>
-</blockquote>
-<p>注意到，这个极限可以取有限数或者负无穷。我们将在陈述下面的<strong>定理一</strong>之后进行证明。</p>
-<blockquote>
-<p><strong>（定理一）</strong> 序列<span
-class="math inline">\(u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}\)</span>收敛当且仅当存在有限上极限
-<span
-class="math display">\[\overline{\lim_{n\to\infty}}a_n^{2^{-n}}&lt;+\infty\]</span></p>
-</blockquote>
-<p>首先证明<em>必要性</em>，即假定<span
-class="math inline">\(\{u_n\}\)</span>收敛。因为<span
-class="math inline">\(u_n\ge a_n^{2^{-n}}\)</span>，故<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}\)</span>一定是有限的，得证。</p>
-<p>再来证明<em>充分性</em>。假定<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}&lt;+\infty\)</span>，则存在<span
-class="math inline">\(G&gt;0\)</span>使得对所有<span
-class="math inline">\(n&gt;0\)</span>，有<span
-class="math inline">\(a_n^{2^{-n}}\le G\)</span>，因此<span
-class="math inline">\(a_n\le G^{2^n}\)</span>。从而有：</p>
-<p><span class="math display">\[u_n\le
-\sqrt{G^2+\sqrt{G^{2^2}+\cdots+\sqrt{G^{2^n}}}}=G\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
-<p>同时又因为</p>
-<p><span
-class="math display">\[2=\sqrt{2+2}=\sqrt{2+\sqrt{2+2}}=\cdots=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+2}}}&gt;\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
-<p>从而有<span class="math inline">\(u_n&lt;2G,\forall
-n&gt;0\)</span>，又由<span
-class="math inline">\(\{u_n\}\)</span>的单调性知收敛。</p>
-<p>到此为止，我们发现<strong>定理一</strong>和开始我们的猜测是非常相似的，只是<strong>定理一</strong>只需要上极限，这比我们的猜测更加宽松。下面我们利用此定理证明Polya's
-Criterion.</p>
-<h2 id="proof-of-polyas-criterion">Proof of Polya's Criterion</h2>
-<p>当<span
-class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
-a_n}{n}&lt;\log 2\)</span>时，存在<span
-class="math inline">\(N\)</span>，当<span
-class="math inline">\(n&gt;N\)</span>时<span
-class="math inline">\((\log\log a_n)/n&lt;\log 2\)</span>，也即<span
-class="math inline">\(a_n^{2^{-n}}&lt;\mathrm{e}\)</span>，由<strong>定理一</strong>知<span
-class="math inline">\(\{u_n\}\)</span>收敛。</p>
-<p>当<span
-class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
-a_n}{n}&gt;\log 2\)</span>时，存在某个<span
-class="math inline">\(a&gt;1\)</span>，对某些无限的<span
-class="math inline">\(n\)</span>，使得<span
-class="math inline">\((\log\log a_n)/n&gt;a\log 2\)</span>，也即<span
-class="math inline">\(\log a_n&gt;2^{an}\)</span>。因此，对这些<span
-class="math inline">\(n\)</span>而言：</p>
-<p><span
-class="math display">\[a_n^{2^{-n}}&gt;e^{2^{(a-1)n}}\]</span></p>
-<p>因此<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}=+\infty\)</span>.</p>
-<p>最后考虑<span
-class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
-a_n}{n}=\log 2\)</span>。</p>
-<p>若<span class="math inline">\(\{u_n\}\)</span>收敛，则<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}\)</span>有限，即存在<span
-class="math inline">\(G&gt;1\)</span>对所有<span
-class="math inline">\(n\)</span>成立<span
-class="math inline">\(a_n^{2^{-n}}&lt;G\)</span>，因而<span
-class="math inline">\(\log a_n&lt;2^n\log G\)</span>。此时若<span
-class="math inline">\(a_n&gt;1\)</span>，则</p>
-<p><span class="math display">\[n\left(\frac{\log\log
-a_n}{n}-\log2\right)&lt;\log\log G\]</span></p>
-<p>而当<span class="math inline">\(a_n\le 1\)</span>时，按照约定有<span
-class="math inline">\((\log\log
-a_n)/n=-\infty\)</span>，则综上公式（3）的必要性得证。</p>
-<p>同时公式（3）也是充分的。假定条件成立但<span
-class="math inline">\(\{u_n\}\)</span>不收敛，则由<strong>定理一</strong>知<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}=+\infty\)</span>，则对任意的<span
-class="math inline">\(G&gt;\mathrm{e}\)</span>，有充分大的<span
-class="math inline">\(n\)</span>使得<span
-class="math inline">\(a_n^{2^{-n}}&gt;G\)</span>，从而<span
-class="math inline">\(\log a_n&gt;2^n\log G\)</span>，于是有</p>
-<p><span class="math display">\[n\left(\frac{\log\log
-a_n}{n}-\log2\right)&gt;\log\log G\]</span></p>
-<p>这说明上极限是无穷大，与假设矛盾。充分性得证。</p>
-<h2 id="examples">Examples</h2>
-<h3 id="例一">例一</h3>
-<p>现在我们考虑一个序列<span
-class="math inline">\(u_n=\sqrt{x+\sqrt{x+\cdots+\sqrt{x}}}\)</span>，当<span
-class="math inline">\(x&lt;1\)</span>的时候，它的上界是<span
-class="math inline">\(\sqrt{1+\sqrt{1+\cdots}}\)</span>，而后者我们上面已经证明了它的上界是2。现在我们考虑<span
-class="math inline">\(x&gt;1\)</span>的情景。此时有：</p>
-<p><span
-class="math display">\[u_n&lt;\sqrt{x^2+\sqrt{x^{2^2}+\cdots+\sqrt{x^{2^n}}}}&lt;2x\]</span></p>
-<p>所以我们证明了，对<span
-class="math inline">\(x&gt;0\)</span>，序列<span
-class="math inline">\(\{u_n\}\)</span>都是收敛的，并且没有使用<strong>定理一</strong>。</p>
-<h3 id="例二">例二</h3>
-<p>现在考虑下述恒等式：</p>
-<p><span
-class="math display">\[x(2^n+x)=x\sqrt{2^{2n}+x(2^{n+1}+x)}\]</span></p>
-<p>于是可以立即得到：</p>
-<p><span class="math display">\[
-\begin{aligned}
-x(2+x)&amp;=x\sqrt{2^2+x(2^2+x)}\\
-&amp;=x\sqrt{2^2+x\sqrt{2^4+x(2^4+x)}}\\
-&amp;=\cdots\\
-&amp;=x\sqrt{2^2+x\sqrt{2^4+\cdots+x\sqrt{2^{2n}+x(2^{n+1}+x)}}}\\
-&amp;=x\sqrt{2^2+x\sqrt{2^4+x\sqrt{\cdots}}}
-\end{aligned}
-\]</span></p>
-<p>现在令<span class="math inline">\(x=1\)</span>，就有：</p>
-<p><span
-class="math display">\[3=\sqrt{2^2+\sqrt{2^4+\cdots}}\]</span></p>
-<p>用<span class="math inline">\(x/2\)</span>替换<span
-class="math inline">\(x\)</span>，有：</p>
-<p><span
-class="math display">\[2+\frac{x}{2}=\sqrt{2^2+\frac{x}{2}\sqrt{2^4+\frac{x}{2}\sqrt{2^6+\cdots}}}\]</span></p>
-<p>两边约去2，就有：</p>
-<p><span
-class="math display">\[1+\frac{x}{4}=\sqrt{1+\frac{x}{2}\sqrt{1+\frac{x}{2^2}\sqrt{1+\cdots}}}\]</span></p>
-<h3 id="例三">例三</h3>
-<p>由余弦二倍角公式<span
-class="math inline">\(\cos2\theta=2\cos^2\theta-1\)</span>可知：</p>
-<p><span
-class="math display">\[2\cos\theta=\sqrt{2+2\cos2\theta}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+2\cos
-2^n\theta}}}\]</span></p>
-<p>此时令<span
-class="math inline">\(\theta=\frac{\pi}{2^{n+1}}\)</span>，就有：</p>
-<p><span
-class="math display">\[2\cos\frac{\pi}{2^{n+1}}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+0}}}\Rightarrow\\\\
-\cos\frac{\pi}{2^{n+1}}=\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\]</span></p>
-<p>所以可以立刻得到下式的极限：</p>
-<p><span
-class="math display">\[\lim_{n\to\infty}4^n\left(1-\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\right)\\\\
-=\lim_{n\to\infty}4^n\left(1-\cos\frac{\pi}{2^{n+1}}\right)\\\\
-=\lim_{n\to\infty}4^n\cdot\frac{\pi^2}{2^{2n+2+1}} (1-\cos x\sim
-\frac{1}{2}x^2)\\\\
-=\frac{\pi^2}{8}\]</span></p>
-<h1 id="herschfelds-convergence-theorem-herschfeld收敛定理">Herschfeld’s
-Convergence Theorem （Herschfeld收敛定理）</h1>
-<p>Polya's Criterion只考虑了指数为<span
-class="math inline">\(\frac{1}{2}\)</span>的情况，对于更加普遍的情况，即形如<span
-class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n^{r_n}))^{r_2})^{r_1}
-(a_i\ge 0,0&lt;r_i\le 1)\)</span>的序列，Herschfeld’s Convergence
-Theorem给出了一个其收敛的充要条件。</p>
-<p><a
-href="https://www.tandfonline.com/doi/abs/10.1080/00029890.1935.11987745?journalCode=uamm20">Herschfeld’s
-Convergence Theorem</a> 告诉我们了一个无穷根式收敛的充要条件：</p>
-<blockquote>
-<p>设序列<span
-class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n^{r_n}))^{r_2})^{r_1}
-(a_i\ge 0,0&lt;r_i\le 1)\)</span>且级数<span
-class="math inline">\(S=\sum_{i=1}^\infty r_1r_2\cdots
-r_i\)</span>收敛，则序列<span
-class="math inline">\(\{u_n\}\)</span>收敛的充分必要条件是： <span
-class="math display">\[\overline{\lim_{n\to\infty}}a_n^{r_1r_2\cdots
-r_n}&lt;+\infty\]</span></p>
-</blockquote>
-<p>这个定理的证明之后有空了补充。</p>
-<h1 id="后记">后记</h1>
-<p>实际上无穷根式分为右无穷根式（Right Infinite
-Radicals）和左无穷根式（Left Infinite
-Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷根式可以仿照进行推导。</p>
-]]></content>
-      <categories>
-        <category>数学 - 数学分析</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -773,30 +534,6 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
       </tags>
   </entry>
   <entry>
-    <title>十二月的花</title>
-    <url>/2020/12/22/%E5%8D%81%E4%BA%8C%E6%9C%88%E7%9A%84%E8%8A%B1/</url>
-    <content><![CDATA[<p>埙吹响了海岸<br />
-琴穿梭叶间<br />
-笛在天空啼鸣<br />
-伴奏着雪花片片</p>
-<p>孩子们欢笑着相聚<br />
-踏着雪<br />
-吱吱嘎嘎</p>
-<p>把欢乐捏成一团团棉<br />
-随风起舞<br />
-在阳光下<br />
-雪爱上了花</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>向量绕任意轴旋转的简单推导</title>
     <url>/2021/06/07/%E5%90%91%E9%87%8F%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E7%AE%80%E5%8D%95%E6%8E%A8%E5%AF%BC/</url>
     <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
@@ -965,31 +702,242 @@ CPU @ 2.90GHz。</p>
       </tags>
   </entry>
   <entry>
-    <title>樱花</title>
-    <url>/2021/06/29/%E6%A8%B1%E8%8A%B1/</url>
-    <content><![CDATA[<p>昨夜 我收到一封书札<br />
-旧纸上 缀满了一朵樱花<br />
-风干的墨迹 渗透了陌生人的迷茫<br />
-我慢慢 把信合上</p>
-<p>昨夜 我写了一封书札<br />
-述说着 近日的苦闷衷肠<br />
-窗外的灯火 依旧那么辉煌<br />
-我贴上 一朵樱花珍藏</p>
-<p>同样的夜晚 走过了岁月多少锋芒<br />
-心中仍 呐喊着一个熟悉人的回响<br />
-把信 随风寄向远方<br />
-留给陌生的他 打开新的过往<br />
-愿他不要怯懦 续写昨夜的感慨<br />
-还有清晨的阳光</p>
-<p>案台旁 樱花在绽放</p>
+    <title>无穷连根式求极限的充要条件</title>
+    <url>/2020/09/09/infinite-radicals/</url>
+    <content><![CDATA[<p>在刷习题集或者考试的时候我们经常会遇到诸如<span
+class="math inline">\(\sqrt{1+\sqrt{2+\sqrt{3+\cdots}}}\)</span>或者<span
+class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解或极限存在性证明。解决此类问题的方法有很多，但都可以归结为一点：缩放。要么是两端缩放然后夹逼定理，要么是证明有界然后两边取极限。本文记录此类问题极限存在的一个充要条件，以供参阅。</p>
+<span id="more"></span>
+<h1 id="ramanujans-problem">Ramanujan's Problem</h1>
+<p>这类问题最著名的是拉马努金（Ramanujan）所提出的恒等式：</p>
+<blockquote>
+<p>证明: <span
+class="math display">\[3=\sqrt{1+2\sqrt{1+3\sqrt{1+\cdots}}}\tag{1}\]</span></p>
+</blockquote>
+<p>这个等式的证明是简单而有趣的：</p>
+<p><span class="math display">\[3=\sqrt{1+2\cdot
+4}=\sqrt{1+2\sqrt{1+3\cdot
+5}}=\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}\]</span></p>
+<p>同时，Ramanujan还断言下面的结论：</p>
+<p><span
+class="math display">\[\lim_{n\to\infty}\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=3\]</span></p>
+<p>这个的证明也是容易的。首先把上式和（1）式比较，就发现上式以3为上界，并且由单调性可知，其极限是存在的。为了证明<span
+class="math inline">\(a_n=\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}\)</span>的极限就是3，我们证明：对任意的<span
+class="math inline">\(3&gt;\epsilon&gt;0\)</span>，都存在<span
+class="math inline">\(N\)</span>，使得所有的<span
+class="math inline">\(n&gt;N\)</span>都有<span
+class="math inline">\(a_n&gt;3-\epsilon\)</span>。</p>
+<p>现在任取<span
+class="math inline">\(0&lt;\epsilon&lt;3\)</span>，令<span
+class="math inline">\(3-\epsilon=3r\)</span>，故<span
+class="math inline">\(0&lt;r=1-\epsilon/3&lt;1\)</span>，故有：</p>
+<p><span
+class="math display">\[3-\epsilon=3r=r\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}\]</span></p>
+<p>把<span class="math inline">\(r\)</span>乘进去，就有：</p>
+<p><span
+class="math display">\[3-\epsilon=\sqrt{r^2+2\sqrt{r^{2^2}+\cdots+n\sqrt{r^{2^n}[1+(n+1)(n+3)]}}}\tag{2}\]</span></p>
+<p>由于<span class="math inline">\(1&gt;r^{2^i},\forall
+i=1,2,\cdots\)</span>，且存在<span
+class="math inline">\(N\)</span>，当<span
+class="math inline">\(n&gt;N\)</span>时，有</p>
+<p><span
+class="math display">\[1&gt;r^{2^n}[1+(n+1)(n+2)]=r^{2^n}(n+2)^2\]</span></p>
+<p>把这些全部带入（2）式，就可以证明：</p>
+<p><span
+class="math display">\[3-\epsilon=\sqrt{r^2+2\sqrt{r^{2^2}+\cdots+n\sqrt{r^{2^n}[1+(n+1)(n+3)]}}}&lt;\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=a_n,n&gt;N\]</span></p>
+<p>从而完成证明。</p>
+<h1 id="polyas-criterionpolya准则">Polya's Criterion（Polya准则）</h1>
+<p>在考虑普遍情况下首先来观察一些特例，一个典型的特例就是形如<span
+class="math inline">\(\sqrt{a_1+\sqrt{a_2+\cdots}}\)</span>的无穷根式，每个根号的次数都是<span
+class="math inline">\(2\)</span>，或者幂次都是<span
+class="math inline">\(2^{-1}\)</span>。对于<span
+class="math inline">\(a_1\)</span>来看，控制它的幂次是<span
+class="math inline">\(\frac{1}{2}\)</span>，对于<span
+class="math inline">\(a_2\)</span>来说，控制它的幂次是<span
+class="math inline">\(2^{-2}\)</span>，对于<span
+class="math inline">\(a_n\)</span>来说，控制它的幂次是<span
+class="math inline">\(2^{-n}\)</span>。假设这个无穷根式极限存在，那么我们关心的肯定是<span
+class="math inline">\(n\)</span>足够大时，它被什么控制，显然是<span
+class="math inline">\(a_n\)</span>及控制它的<span
+class="math inline">\(2^{-n}\)</span>的幂次。所以，一个合理的猜测是，如果<span
+class="math inline">\(a_n^{2^{-n}}\)</span>极限存在，那么该根式就收敛。下面我们将看到，这个猜测已经非常接近“真相”，甚至是真相的一部分。</p>
+<h2 id="description">Description</h2>
+<p>设序列<span
+class="math inline">\(u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}\)</span>，则<span
+class="math inline">\(\{u_n\}\)</span>可以用下述条件判定：</p>
+<p><span class="math display">\[
+\begin{cases}
+\text{converges},&amp;\text{if}\;
+\overline{\lim}_{n\to\infty}\frac{\log\log a_n}{n}&lt;\log 2\\
+\text{diverges},&amp;\text{if}\;
+\overline{\lim}_{n\to\infty}\frac{\log\log a_n}{n}&gt;\log 2
+\end{cases}
+\]</span></p>
+<p>上述准则还可以进一步推广为：</p>
+<blockquote>
+<p>序列<span class="math inline">\(\{u_n\}\)</span>收敛的充要条件是：
+<span class="math display">\[\overline{\lim_{n\to\infty}} n \left(
+\frac{\log\log a_n}{n}-\log2 \right) &lt;+\infty\tag{3}\]</span></p>
+</blockquote>
+<p>注意到，这个极限可以取有限数或者负无穷。我们将在陈述下面的<strong>定理一</strong>之后进行证明。</p>
+<blockquote>
+<p><strong>（定理一）</strong> 序列<span
+class="math inline">\(u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}\)</span>收敛当且仅当存在有限上极限
+<span
+class="math display">\[\overline{\lim_{n\to\infty}}a_n^{2^{-n}}&lt;+\infty\]</span></p>
+</blockquote>
+<p>首先证明<em>必要性</em>，即假定<span
+class="math inline">\(\{u_n\}\)</span>收敛。因为<span
+class="math inline">\(u_n\ge a_n^{2^{-n}}\)</span>，故<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}\)</span>一定是有限的，得证。</p>
+<p>再来证明<em>充分性</em>。假定<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}&lt;+\infty\)</span>，则存在<span
+class="math inline">\(G&gt;0\)</span>使得对所有<span
+class="math inline">\(n&gt;0\)</span>，有<span
+class="math inline">\(a_n^{2^{-n}}\le G\)</span>，因此<span
+class="math inline">\(a_n\le G^{2^n}\)</span>。从而有：</p>
+<p><span class="math display">\[u_n\le
+\sqrt{G^2+\sqrt{G^{2^2}+\cdots+\sqrt{G^{2^n}}}}=G\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
+<p>同时又因为</p>
+<p><span
+class="math display">\[2=\sqrt{2+2}=\sqrt{2+\sqrt{2+2}}=\cdots=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+2}}}&gt;\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
+<p>从而有<span class="math inline">\(u_n&lt;2G,\forall
+n&gt;0\)</span>，又由<span
+class="math inline">\(\{u_n\}\)</span>的单调性知收敛。</p>
+<p>到此为止，我们发现<strong>定理一</strong>和开始我们的猜测是非常相似的，只是<strong>定理一</strong>只需要上极限，这比我们的猜测更加宽松。下面我们利用此定理证明Polya's
+Criterion.</p>
+<h2 id="proof-of-polyas-criterion">Proof of Polya's Criterion</h2>
+<p>当<span
+class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
+a_n}{n}&lt;\log 2\)</span>时，存在<span
+class="math inline">\(N\)</span>，当<span
+class="math inline">\(n&gt;N\)</span>时<span
+class="math inline">\((\log\log a_n)/n&lt;\log 2\)</span>，也即<span
+class="math inline">\(a_n^{2^{-n}}&lt;\mathrm{e}\)</span>，由<strong>定理一</strong>知<span
+class="math inline">\(\{u_n\}\)</span>收敛。</p>
+<p>当<span
+class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
+a_n}{n}&gt;\log 2\)</span>时，存在某个<span
+class="math inline">\(a&gt;1\)</span>，对某些无限的<span
+class="math inline">\(n\)</span>，使得<span
+class="math inline">\((\log\log a_n)/n&gt;a\log 2\)</span>，也即<span
+class="math inline">\(\log a_n&gt;2^{an}\)</span>。因此，对这些<span
+class="math inline">\(n\)</span>而言：</p>
+<p><span
+class="math display">\[a_n^{2^{-n}}&gt;e^{2^{(a-1)n}}\]</span></p>
+<p>因此<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}=+\infty\)</span>.</p>
+<p>最后考虑<span
+class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
+a_n}{n}=\log 2\)</span>。</p>
+<p>若<span class="math inline">\(\{u_n\}\)</span>收敛，则<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}\)</span>有限，即存在<span
+class="math inline">\(G&gt;1\)</span>对所有<span
+class="math inline">\(n\)</span>成立<span
+class="math inline">\(a_n^{2^{-n}}&lt;G\)</span>，因而<span
+class="math inline">\(\log a_n&lt;2^n\log G\)</span>。此时若<span
+class="math inline">\(a_n&gt;1\)</span>，则</p>
+<p><span class="math display">\[n\left(\frac{\log\log
+a_n}{n}-\log2\right)&lt;\log\log G\]</span></p>
+<p>而当<span class="math inline">\(a_n\le 1\)</span>时，按照约定有<span
+class="math inline">\((\log\log
+a_n)/n=-\infty\)</span>，则综上公式（3）的必要性得证。</p>
+<p>同时公式（3）也是充分的。假定条件成立但<span
+class="math inline">\(\{u_n\}\)</span>不收敛，则由<strong>定理一</strong>知<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}=+\infty\)</span>，则对任意的<span
+class="math inline">\(G&gt;\mathrm{e}\)</span>，有充分大的<span
+class="math inline">\(n\)</span>使得<span
+class="math inline">\(a_n^{2^{-n}}&gt;G\)</span>，从而<span
+class="math inline">\(\log a_n&gt;2^n\log G\)</span>，于是有</p>
+<p><span class="math display">\[n\left(\frac{\log\log
+a_n}{n}-\log2\right)&gt;\log\log G\]</span></p>
+<p>这说明上极限是无穷大，与假设矛盾。充分性得证。</p>
+<h2 id="examples">Examples</h2>
+<h3 id="例一">例一</h3>
+<p>现在我们考虑一个序列<span
+class="math inline">\(u_n=\sqrt{x+\sqrt{x+\cdots+\sqrt{x}}}\)</span>，当<span
+class="math inline">\(x&lt;1\)</span>的时候，它的上界是<span
+class="math inline">\(\sqrt{1+\sqrt{1+\cdots}}\)</span>，而后者我们上面已经证明了它的上界是2。现在我们考虑<span
+class="math inline">\(x&gt;1\)</span>的情景。此时有：</p>
+<p><span
+class="math display">\[u_n&lt;\sqrt{x^2+\sqrt{x^{2^2}+\cdots+\sqrt{x^{2^n}}}}&lt;2x\]</span></p>
+<p>所以我们证明了，对<span
+class="math inline">\(x&gt;0\)</span>，序列<span
+class="math inline">\(\{u_n\}\)</span>都是收敛的，并且没有使用<strong>定理一</strong>。</p>
+<h3 id="例二">例二</h3>
+<p>现在考虑下述恒等式：</p>
+<p><span
+class="math display">\[x(2^n+x)=x\sqrt{2^{2n}+x(2^{n+1}+x)}\]</span></p>
+<p>于是可以立即得到：</p>
+<p><span class="math display">\[
+\begin{aligned}
+x(2+x)&amp;=x\sqrt{2^2+x(2^2+x)}\\
+&amp;=x\sqrt{2^2+x\sqrt{2^4+x(2^4+x)}}\\
+&amp;=\cdots\\
+&amp;=x\sqrt{2^2+x\sqrt{2^4+\cdots+x\sqrt{2^{2n}+x(2^{n+1}+x)}}}\\
+&amp;=x\sqrt{2^2+x\sqrt{2^4+x\sqrt{\cdots}}}
+\end{aligned}
+\]</span></p>
+<p>现在令<span class="math inline">\(x=1\)</span>，就有：</p>
+<p><span
+class="math display">\[3=\sqrt{2^2+\sqrt{2^4+\cdots}}\]</span></p>
+<p>用<span class="math inline">\(x/2\)</span>替换<span
+class="math inline">\(x\)</span>，有：</p>
+<p><span
+class="math display">\[2+\frac{x}{2}=\sqrt{2^2+\frac{x}{2}\sqrt{2^4+\frac{x}{2}\sqrt{2^6+\cdots}}}\]</span></p>
+<p>两边约去2，就有：</p>
+<p><span
+class="math display">\[1+\frac{x}{4}=\sqrt{1+\frac{x}{2}\sqrt{1+\frac{x}{2^2}\sqrt{1+\cdots}}}\]</span></p>
+<h3 id="例三">例三</h3>
+<p>由余弦二倍角公式<span
+class="math inline">\(\cos2\theta=2\cos^2\theta-1\)</span>可知：</p>
+<p><span
+class="math display">\[2\cos\theta=\sqrt{2+2\cos2\theta}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+2\cos
+2^n\theta}}}\]</span></p>
+<p>此时令<span
+class="math inline">\(\theta=\frac{\pi}{2^{n+1}}\)</span>，就有：</p>
+<p><span
+class="math display">\[2\cos\frac{\pi}{2^{n+1}}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+0}}}\Rightarrow\\\\
+\cos\frac{\pi}{2^{n+1}}=\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\]</span></p>
+<p>所以可以立刻得到下式的极限：</p>
+<p><span
+class="math display">\[\lim_{n\to\infty}4^n\left(1-\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\right)\\\\
+=\lim_{n\to\infty}4^n\left(1-\cos\frac{\pi}{2^{n+1}}\right)\\\\
+=\lim_{n\to\infty}4^n\cdot\frac{\pi^2}{2^{2n+2+1}} (1-\cos x\sim
+\frac{1}{2}x^2)\\\\
+=\frac{\pi^2}{8}\]</span></p>
+<h1 id="herschfelds-convergence-theorem-herschfeld收敛定理">Herschfeld’s
+Convergence Theorem （Herschfeld收敛定理）</h1>
+<p>Polya's Criterion只考虑了指数为<span
+class="math inline">\(\frac{1}{2}\)</span>的情况，对于更加普遍的情况，即形如<span
+class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n^{r_n}))^{r_2})^{r_1}
+(a_i\ge 0,0&lt;r_i\le 1)\)</span>的序列，Herschfeld’s Convergence
+Theorem给出了一个其收敛的充要条件。</p>
+<p><a
+href="https://www.tandfonline.com/doi/abs/10.1080/00029890.1935.11987745?journalCode=uamm20">Herschfeld’s
+Convergence Theorem</a> 告诉我们了一个无穷根式收敛的充要条件：</p>
+<blockquote>
+<p>设序列<span
+class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n^{r_n}))^{r_2})^{r_1}
+(a_i\ge 0,0&lt;r_i\le 1)\)</span>且级数<span
+class="math inline">\(S=\sum_{i=1}^\infty r_1r_2\cdots
+r_i\)</span>收敛，则序列<span
+class="math inline">\(\{u_n\}\)</span>收敛的充分必要条件是： <span
+class="math display">\[\overline{\lim_{n\to\infty}}a_n^{r_1r_2\cdots
+r_n}&lt;+\infty\]</span></p>
+</blockquote>
+<p>这个定理的证明之后有空了补充。</p>
+<h1 id="后记">后记</h1>
+<p>实际上无穷根式分为右无穷根式（Right Infinite
+Radicals）和左无穷根式（Left Infinite
+Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷根式可以仿照进行推导。</p>
 ]]></content>
       <categories>
-        <category>随笔</category>
+        <category>数学 - 数学分析</category>
       </categories>
       <tags>
         <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -1056,6 +1004,58 @@ key）。</p>
         <tag>随笔</tag>
         <tag>生活</tag>
         <tag>影评</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>十二月的花</title>
+    <url>/2020/12/22/%E5%8D%81%E4%BA%8C%E6%9C%88%E7%9A%84%E8%8A%B1/</url>
+    <content><![CDATA[<p>埙吹响了海岸<br />
+琴穿梭叶间<br />
+笛在天空啼鸣<br />
+伴奏着雪花片片</p>
+<p>孩子们欢笑着相聚<br />
+踏着雪<br />
+吱吱嘎嘎</p>
+<p>把欢乐捏成一团团棉<br />
+随风起舞<br />
+在阳光下<br />
+雪爱上了花</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>樱花</title>
+    <url>/2021/06/29/%E6%A8%B1%E8%8A%B1/</url>
+    <content><![CDATA[<p>昨夜 我收到一封书札<br />
+旧纸上 缀满了一朵樱花<br />
+风干的墨迹 渗透了陌生人的迷茫<br />
+我慢慢 把信合上</p>
+<p>昨夜 我写了一封书札<br />
+述说着 近日的苦闷衷肠<br />
+窗外的灯火 依旧那么辉煌<br />
+我贴上 一朵樱花珍藏</p>
+<p>同样的夜晚 走过了岁月多少锋芒<br />
+心中仍 呐喊着一个熟悉人的回响<br />
+把信 随风寄向远方<br />
+留给陌生的他 打开新的过往<br />
+愿他不要怯懦 续写昨夜的感慨<br />
+还有清晨的阳光</p>
+<p>案台旁 樱花在绽放</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -2230,7 +2230,9 @@ id="fnref4" role="doc-noteref"><sup>4</sup></a><a href="#fn5"
 class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a><a
 href="#fn6" class="footnote-ref" id="fnref6"
 role="doc-noteref"><sup>6</sup></a><a href="#fn7" class="footnote-ref"
-id="fnref7" role="doc-noteref"><sup>7</sup></a>。</p>
+id="fnref7" role="doc-noteref"><sup>7</sup></a><a href="#fn8"
+class="footnote-ref" id="fnref8"
+role="doc-noteref"><sup>8</sup></a>。</p>
 <span id="more"></span>
 <h1 id="复数与二维旋转">复数与二维旋转</h1>
 <p>首先我们将简要介绍复数及它与二维旋转的关系，从而可以更加自然地过度到四元数及其与三维旋转的关系。</p>
@@ -3285,7 +3287,7 @@ q_2)+a\mathbf{b}_1\cdot(\mathbf{b}\times\mathbf{b}_2)+a(\mathbf{b}\times\mathbf{
 </details>
 <h2 id="三维旋转定理矩阵型">三维旋转定理（矩阵型）</h2>
 <p>通过之前的讨论（尽管不完全相同，但可以类似推导）我们知道左乘一个四元数<span
-class="math inline">\(w=a+bi+cj+dj\)</span>等同于下面的矩阵</p>
+class="math inline">\(w=a+bi+cj+dk\)</span>等同于下面的矩阵</p>
 <p><span class="math display">\[
 L(w)=
 \begin{bmatrix}
@@ -3848,6 +3850,153 @@ Multiplication（简称为Matrix）：任何一个旋转都可以用矩阵乘法
 Rotation（简称为Quaternion)：任何一个旋转都可以用四元数的乘法表示。</li>
 </ul>
 <p>这几种表示方法实际上可以相互转化，下面将进行介绍。</p>
+<h2 id="angle转化为其他形式">Angle转化为其他形式</h2>
+<h3 id="angle转化为euler">Angle转化为Euler</h3>
+<h3 id="angle转化为matrix">Angle转化为Matrix</h3>
+<p>在<a
+href="https://sulley.cc/2021/06/07/%E5%90%91%E9%87%8F%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E7%AE%80%E5%8D%95%E6%8E%A8%E5%AF%BC/">向量绕任意轴旋转的简单推导</a>这篇文章中，我们已经推导出了AngleAxis对应的矩阵形式：</p>
+<p><span
+class="math display">\[\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2,\;
+\mathbf{N}=\begin{bmatrix}0&amp;-n_z&amp;n_y\\n_z&amp;0&amp;-n_x\\-n_y&amp;n_x&amp;0\end{bmatrix}\]</span></p>
+<h3 id="angle转化为quaternion">Angle转化为Quaternion</h3>
+<p>Angle与Quaternion在本质上是一致的，我们在<a
+href="#四元数乘积的性质">四元数乘积的性质</a>一节中已经证明过了。所以，对于轴为<span
+class="math inline">\(\mathbf{n}\)</span>，旋转角为<span
+class="math inline">\(\theta\)</span>的Angle表示来说，只需要构造四元数<span
+class="math inline">\(w=[\cos(\theta/2),\sin(\theta/2)\mathbf{n}]\)</span>即可。</p>
+<h2 id="euler转化为其他形式">Euler转化为其他形式</h2>
+<h3 id="euler转化为angle">Euler转化为Angle</h3>
+<h3 id="euler转化为matrix">Euler转化为Matrix</h3>
+<p>在<a
+href="#欧拉角-坐标系与旋转顺序">欧拉角、坐标系与旋转顺序</a>一节中我们已经证明了：对于以<span
+class="math inline">\(x\to y\to
+z\)</span>为顺序的欧拉角旋转，旋转矩阵是：</p>
+<p><span class="math display">\[
+R_\text{global}=R_z(\tau)R_y(\phi)R_x(\theta)=
+\begin{bmatrix}
+\cos(\phi)\cos(\tau) &amp;
+\sin(\theta)\sin(\phi)\cos(\tau)-\cos(\theta)\sin(\tau) &amp;
+\cos(\theta)\sin(\phi)\cos(\tau)+\sin(\theta)\sin(\tau)\\
+\cos(\phi)\sin(\tau) &amp;
+\sin(\theta)\sin(\phi)\sin(\tau)+\cos(\theta)\cos(\tau) &amp;
+\cos(\theta)\sin(\phi)\sin(\tau)-\sin(\theta)\cos(\tau)\\
+-\sin(\phi) &amp; \sin(\theta)\cos(\phi) &amp; \cos(\theta)\cos(\phi)
+\end{bmatrix}
+\]</span></p>
+<h3 id="euler转化为quaternion">Euler转化为Quaternion</h3>
+<h2 id="matrix转化为其他形式">Matrix转化为其他形式</h2>
+<h3 id="matrix转化为angle">Matrix转化为Angle</h3>
+<p>给定旋转矩阵<span
+class="math inline">\(R=\begin{bmatrix}R_{11}&amp;R_{12}&amp;R_{13}\\R_{21}&amp;R_{22}&amp;R_{23}\\R_{31}&amp;R_{32}&amp;R_{33}\end{bmatrix}\)</span>，并假设对应的旋转轴是<span
+class="math inline">\(\mathbf{n}\)</span>、旋转角度是<span
+class="math inline">\(\omega\)</span>。显然，如果一个向量<span
+class="math inline">\(\mathbf{u}\)</span>平行于<span
+class="math inline">\(\mathbf{n}\)</span>，则<span
+class="math inline">\(R\mathbf{u}=\mathbf{u}\)</span>，从而<span
+class="math inline">\((R-I)\mathbf{u}=0\)</span>。</p>
+<p>从特征向量的角度来看，<span
+class="math inline">\(\mathbf{u}\)</span>是<span
+class="math inline">\(R\)</span>的一个特征向量，它对应的特征值为<span
+class="math inline">\(\lambda=1\)</span>。从而我们知道：每个旋转矩阵就有一个特征值为<span
+class="math inline">\(1\)</span>。为了求出旋转轴，我们有：</p>
+<p><span class="math display">\[\begin{aligned}
+  0&amp;=R^\top 0+0\\
+  &amp;=R^\top(R-I)\mathbf{u}+(R-I)\mathbf{u}\\
+  &amp;=(R^\top R-R^\top+R-I)\mathbf{u}\\
+  &amp;=(I-R^\top+R-I)\mathbf{u}\\
+  &amp;=(R-R^\top)\mathbf{u}
+\end{aligned}\]</span></p>
+<p>从而我们有：</p>
+<p><span class="math display">\[
+\begin{cases}
+  0&amp;=u_y(R_{12}-R_{21})+u_z(R_{13}-R_{31})\\
+  0&amp;=u_x(R_{21}-R_{12})+u_z(R_{23}-R_{32})\\
+  0&amp;=u_x(R_{31}-R_{13})+u_y(R_{32}-R_{23})
+\end{cases}\Rightarrow
+\mathbf{u}=\begin{bmatrix}
+  R_{32}-R_{23}\\
+  R_{13}-R_{31}\\
+  R_{21}-R_{12}
+\end{bmatrix}
+\]</span></p>
+<p>所以<span
+class="math inline">\(\mathbf{n}=\mathbf{u}/\|\mathbf{n}\|\)</span>。注意到上面的推导过程在<span
+class="math inline">\(R\)</span>为对称矩阵时不成立，这时候就要按照常规的求特征向量的步骤去求<span
+class="math inline">\(\mathbf{u}\)</span>了。</p>
+<p>既然我们已经知道了旋转轴<span
+class="math inline">\(\mathbf{n}\)</span>，这时只需要找一个垂直于<span
+class="math inline">\(\mathbf{n}\)</span>的向量<span
+class="math inline">\(\mathbf{v}\)</span>，旋转轴就是<span
+class="math inline">\(\mathbf{v}\)</span>和<span
+class="math inline">\(R\mathbf{v}\)</span>的夹角。</p>
+<p>我们也可以从特征值的角度出发。在三维空间内，旋转矩阵的三个特征值分别为<span
+class="math inline">\(\lambda=1,\mathrm{e}^{i\omega},\mathrm{e}^{-i\omega}\)</span>，三者之和为<span
+class="math inline">\(1+\mathrm{e}^{i\omega}+\mathrm{e}^{-i\omega}=1+2\cos(\omega)=\text{tr}(R)=R_{11}+R_{22}+R_{33}\)</span>，于是：</p>
+<p><span
+class="math display">\[\omega=\arccos\left(\frac{\text{tr}(R)-1}{2}\right)\]</span></p>
+<h3 id="matrix转化为euler">Matrix转化为Euler</h3>
+<p>对于旋转矩阵<span
+class="math inline">\(R=\begin{bmatrix}R_{11}&amp;R_{12}&amp;R_{13}\\R_{21}&amp;R_{22}&amp;R_{23}\\R_{31}&amp;R_{32}&amp;R_{33}\end{bmatrix}\)</span>，通过上面Euler到Matrix的转换，我们知道<span
+class="math inline">\(\sin(\phi)=-R_{31}\Rightarrow
+\phi=\arcsin(R_{31})\)</span>。从而有：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \phi&amp;=\arcsin(-R_{31})\\
+  \theta&amp;=\text{atan2}\left(\frac{R_{32}}{\cos(\phi)},\frac{R_{33}}{\cos(\phi)}\right)\\
+  \tau&amp;=\text{atan2}\left(\frac{R_{21}}{\cos(\phi)},\frac{R_{11}}{\cos(\phi)}\right)
+\end{aligned}
+\]</span></p>
+<p>上式仅在<span class="math inline">\(\cos(\phi)\neq
+0\)</span>，也即<span class="math inline">\(R_{31}\neq \pm
+1\)</span>时才成立。当<span class="math inline">\(R_{31}=\pm
+1\)</span>时，原矩阵退化为Gimbal
+Lock，因此无法转化为对应的Euler角。从上面的过程来看，对一个旋转矩阵，至少有两组Euler角与它对应，在某些情况下甚至有无穷解。</p>
+<h3 id="matrix转化为quaternion">Matrix转化为Quaternion</h3>
+<p>给定矩阵<span
+class="math inline">\(R=\begin{bmatrix}R_{11}&amp;R_{12}&amp;R_{13}\\R_{21}&amp;R_{22}&amp;R_{23}\\R_{31}&amp;R_{32}&amp;R_{33}\end{bmatrix}\)</span>，我们不难通过<a
+href="#quaternion转化为matrix">Quaternion转化为Matrix</a>得到下述关系成立：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  1+R_{11}+R_{22}+R_{33}&amp;=4-4(b^2+c^2+d^2)\\
+  &amp;=4-4(1-a^2)\\
+  &amp;=4a^2
+\end{aligned}
+\]</span></p>
+<p>所以我们就能解出<span class="math inline">\(a,b,c,d\)</span>：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  a&amp;=\pm\frac{1}{2}\sqrt{1+R_{11}+R_{22}+R_{33}}\\
+  b&amp;=\frac{R_{32}-R_{23}}{4a}\\
+  c&amp;=\frac{R_{13}-R_{31}}{4a}\\
+  d&amp;=\frac{R_{21}-R_{12}}{4a}
+\end{aligned}
+\]</span></p>
+<p>从而得到四元数<span class="math inline">\(w=[a,b,c,d]\)</span>。</p>
+<h2 id="quaternion转化为其他形式">Quaternion转化为其他形式</h2>
+<h3 id="quaternion转化为angle">Quaternion转化为Angle</h3>
+<p>Quaternion转化为Axis Angle的结果我们已经在<a
+href="#三维旋转定理四元数型">三维旋转定理（四元数型）</a>一节中给出。给定单位四元数<span
+class="math inline">\(w=[a,\mathbf{b}]\)</span>，我们可以通过变换：</p>
+<p><span
+class="math display">\[\frac{\theta}{2}=\arccos(a),\;\mathbf{n}=\frac{\mathbf{b}}{\sin(\arccos(a))}\]</span></p>
+<p>得到它的等价形式<span
+class="math inline">\(w=[a,\mathbf{b}]=[\cos(\tfrac{\theta}{2}),\sin(\tfrac{\theta}{2})\mathbf{n}]\)</span>，从而，<span
+class="math inline">\(\theta\)</span>即为旋转角，<span
+class="math inline">\(\mathbf{n}\)</span>即为旋转轴。</p>
+<h3 id="quaternion转化为euler">Quaternion转化为Euler</h3>
+<h3 id="quaternion转化为matrix">Quaternion转化为Matrix</h3>
+<p>结果已经由<a
+href="#三维旋转定理矩阵型">三维旋转定理（矩阵型）</a>一节给出，结果是：</p>
+<p><span class="math display">\[
+R=\begin{bmatrix}
+  1 &amp; 0 &amp; 0 &amp; 0\\
+  0 &amp; 1-2c^2-2d^2 &amp; 2bc-2ad &amp; 2ac+2bd\\
+  0 &amp; 2bc+2ad &amp; 1-2b^2-2d^2 &amp; 2cd-2ab\\
+  0 &amp; 2bd-2ac &amp; 2ab+2cd &amp; 1-2b^2-2c^2
+\end{bmatrix}
+\]</span></p>
+<p>其中<span
+class="math inline">\(a=\cos(\tfrac{1}{2}\theta),b=\sin(\tfrac{1}{2}\theta)n_x,c=\sin(\tfrac{1}{2}\theta)n_y,d=\sin(\tfrac{1}{2}\theta)n_z\)</span>。</p>
 <section class="footnotes footnotes-end-of-document"
 role="doc-endnotes">
 <hr />
@@ -3873,6 +4022,9 @@ href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"
 role="doc-endnote"><p>https://www.geometrictools.com/Documentation/RotationRepresentations.pdf<a
 href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"
+role="doc-endnote"><p>https://en.wikipedia.org/wiki/Rotation_formalisms_in_three_dimensions#Rotation_matrix_%E2%86%94_Euler_axis/angle<a
+href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 ]]></content>

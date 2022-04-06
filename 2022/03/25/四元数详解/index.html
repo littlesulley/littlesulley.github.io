@@ -46,7 +46,7 @@
 <meta property="og:image" content="http://sulley.cc/images/quaternion/7.png">
 <meta property="og:image" content="http://sulley.cc/images/quaternion/8.png">
 <meta property="article:published_time" content="2022-03-24T17:00:33.000Z">
-<meta property="article:modified_time" content="2022-04-05T12:24:50.069Z">
+<meta property="article:modified_time" content="2022-04-06T14:11:26.911Z">
 <meta property="article:author" content="Sulley">
 <meta property="article:tag" content="计算机">
 <meta property="article:tag" content="随笔">
@@ -180,7 +180,7 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E4%B8%8E%E4%BA%8C%E7%BB%B4%E6%97%8B%E8%BD%AC"><span class="nav-number">1.</span> <span class="nav-text">复数与二维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E5%8A%A0%E6%B3%95%E4%B8%8E%E4%B9%98%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">复数的加法与乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E5%8A%A0%E6%B3%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">复数的加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E4%B9%98%E6%B3%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">复数的乘法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E6%A8%A1%E9%95%BF"><span class="nav-number">1.3.</span> <span class="nav-text">复数的模长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E4%B8%8E%E4%BA%8C%E7%BB%B4%E6%97%8B%E8%BD%AC-1"><span class="nav-number">1.4.</span> <span class="nav-text">复数与二维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E5%A4%8D%E6%95%B0%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F%E5%AF%BC%E5%87%BA%E6%97%8B%E8%BD%AC%E5%85%B3%E7%B3%BB"><span class="nav-number">1.4.1.</span> <span class="nav-text">从复数矩阵形式导出旋转关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E6%9E%81%E5%9D%90%E6%A0%87%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.4.2.</span> <span class="nav-text">复数的极坐标形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E5%87%A0%E7%A7%8D%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.3.</span> <span class="nav-text">复数的几种表示形式总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E5%A4%8D%E5%90%88"><span class="nav-number">1.5.</span> <span class="nav-text">旋转复合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Eaxis-angle%E7%9A%84%E6%97%8B%E8%BD%AC"><span class="nav-number">2.</span> <span class="nav-text">基于Axis Angle的旋转</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E8%A7%92%E4%B8%8E%E4%B8%87%E5%90%91%E9%94%81gimbal-lock%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">欧拉角与万向锁（Gimbal
-Lock）问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#unity%E4%B8%AD%E7%9A%84gimbal-lock%E7%8E%B0%E8%B1%A1"><span class="nav-number">3.1.</span> <span class="nav-text">Unity中的Gimbal Lock现象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E8%A7%92%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%8E%E6%97%8B%E8%BD%AC%E9%A1%BA%E5%BA%8F"><span class="nav-number">3.2.</span> <span class="nav-text">欧拉角、坐标系与旋转顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unity%E4%B8%AD%E7%9A%84%E6%AC%A7%E6%8B%89%E8%A7%92"><span class="nav-number">3.3.</span> <span class="nav-text">Unity中的欧拉角</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unity%E4%B8%AD%E7%9A%84gimbal-lock%E9%97%AE%E9%A2%98"><span class="nav-number">3.4.</span> <span class="nav-text">Unity中的Gimbal Lock问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">四元数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E4%B9%98%E6%B3%95%E6%A8%A1%E9%95%BF"><span class="nav-number">4.2.</span> <span class="nav-text">加法、乘法、模长</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95"><span class="nav-number">4.2.1.</span> <span class="nav-text">加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%98%E6%B3%95"><span class="nav-number">4.2.2.</span> <span class="nav-text">乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gra%C3%9Fmann%E7%A7%AF"><span class="nav-number">4.2.3.</span> <span class="nav-text">Graßmann积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E9%95%BF"><span class="nav-number">4.2.4.</span> <span class="nav-text">模长</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%AF%E5%9B%9B%E5%85%83%E6%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">纯四元数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B1%E8%BD%AD"><span class="nav-number">4.4.</span> <span class="nav-text">共轭</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%86"><span class="nav-number">4.5.</span> <span class="nav-text">逆</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E4%B8%8E%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC"><span class="nav-number">5.</span> <span class="nav-text">四元数与三维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F%E5%88%B0%E5%9B%9B%E5%85%83%E6%95%B0%E8%A1%A8%E7%A4%BA"><span class="nav-number">5.1.</span> <span class="nav-text">从三维旋转公式到四元数表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F%E7%9A%84%E7%AE%80%E5%8C%96"><span class="nav-number">5.2.</span> <span class="nav-text">四元数旋转公式的简化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%B8%80"><span class="nav-number">5.2.1.</span> <span class="nav-text">引理一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%BA%8C"><span class="nav-number">5.2.2.</span> <span class="nav-text">引理二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%B8%89"><span class="nav-number">5.2.3.</span> <span class="nav-text">引理三</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%AE%9A%E7%90%86%E5%9B%9B%E5%85%83%E6%95%B0%E5%9E%8B"><span class="nav-number">5.3.</span> <span class="nav-text">三维旋转定理（四元数型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E4%B9%98%E7%A7%AF%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">5.4.</span> <span class="nav-text">四元数乘积的性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%AE%9A%E7%90%86%E7%9F%A9%E9%98%B5%E5%9E%8B"><span class="nav-number">5.5.</span> <span class="nav-text">三维旋转定理（矩阵型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%AE%9A%E7%90%86%E6%8C%87%E6%95%B0%E5%9E%8B"><span class="nav-number">5.6.</span> <span class="nav-text">三维旋转定理（指数型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E5%A4%8D%E5%90%88-1"><span class="nav-number">5.7.</span> <span class="nav-text">旋转复合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E5%80%8D%E8%A6%86%E7%9B%96"><span class="nav-number">5.8.</span> <span class="nav-text">双倍覆盖</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E6%8F%92%E5%80%BC"><span class="nav-number">6.</span> <span class="nav-text">四元数插值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%B9%82%E8%BF%90%E7%AE%97%E7%9A%84%E6%8F%92%E5%80%BC"><span class="nav-number">6.1.</span> <span class="nav-text">基于幂运算的插值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E5%9C%A8%E5%9B%9B%E7%BB%B4%E7%A9%BA%E9%97%B4%E5%86%85%E7%9A%84%E5%A4%B9%E8%A7%92"><span class="nav-number">6.2.</span> <span class="nav-text">四元数在四维空间内的夹角</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lerp-nlerp-slerp"><span class="nav-number">6.3.</span> <span class="nav-text">Lerp, Nlerp, Slerp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lerp"><span class="nav-number">6.3.1.</span> <span class="nav-text">Lerp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nlerp"><span class="nav-number">6.3.2.</span> <span class="nav-text">Nlerp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slerp"><span class="nav-number">6.3.3.</span> <span class="nav-text">Slerp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E5%80%8D%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98"><span class="nav-number">6.4.</span> <span class="nav-text">双倍覆盖问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#squad"><span class="nav-number">7.</span> <span class="nav-text">Squad</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#b%C3%A9zier%E6%9B%B2%E7%BA%BF"><span class="nav-number">7.1.</span> <span class="nav-text">Bézier曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E6%AC%A1b%C3%A9zier%E6%9B%B2%E7%BA%BF"><span class="nav-number">7.2.</span> <span class="nav-text">三次Bézier曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#de-casteljau%E7%AE%97%E6%B3%95"><span class="nav-number">7.3.</span> <span class="nav-text">de Casteljau算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#squad-1"><span class="nav-number">7.4.</span> <span class="nav-text">Squad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#squad%E5%BA%94%E7%94%A8"><span class="nav-number">7.5.</span> <span class="nav-text">Squad应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#angleeulermatrixquaternion%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2"><span class="nav-number">8.</span> <span class="nav-text">Angle、Euler、Matrix、Quaternion之间的相互转换</span></a></li></ol></div>
+Lock）问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#unity%E4%B8%AD%E7%9A%84gimbal-lock%E7%8E%B0%E8%B1%A1"><span class="nav-number">3.1.</span> <span class="nav-text">Unity中的Gimbal Lock现象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E8%A7%92%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%8E%E6%97%8B%E8%BD%AC%E9%A1%BA%E5%BA%8F"><span class="nav-number">3.2.</span> <span class="nav-text">欧拉角、坐标系与旋转顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unity%E4%B8%AD%E7%9A%84%E6%AC%A7%E6%8B%89%E8%A7%92"><span class="nav-number">3.3.</span> <span class="nav-text">Unity中的欧拉角</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unity%E4%B8%AD%E7%9A%84gimbal-lock%E9%97%AE%E9%A2%98"><span class="nav-number">3.4.</span> <span class="nav-text">Unity中的Gimbal Lock问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">四元数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E4%B9%98%E6%B3%95%E6%A8%A1%E9%95%BF"><span class="nav-number">4.2.</span> <span class="nav-text">加法、乘法、模长</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95"><span class="nav-number">4.2.1.</span> <span class="nav-text">加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%98%E6%B3%95"><span class="nav-number">4.2.2.</span> <span class="nav-text">乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gra%C3%9Fmann%E7%A7%AF"><span class="nav-number">4.2.3.</span> <span class="nav-text">Graßmann积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E9%95%BF"><span class="nav-number">4.2.4.</span> <span class="nav-text">模长</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%AF%E5%9B%9B%E5%85%83%E6%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">纯四元数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B1%E8%BD%AD"><span class="nav-number">4.4.</span> <span class="nav-text">共轭</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%86"><span class="nav-number">4.5.</span> <span class="nav-text">逆</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E4%B8%8E%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC"><span class="nav-number">5.</span> <span class="nav-text">四元数与三维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F%E5%88%B0%E5%9B%9B%E5%85%83%E6%95%B0%E8%A1%A8%E7%A4%BA"><span class="nav-number">5.1.</span> <span class="nav-text">从三维旋转公式到四元数表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F%E7%9A%84%E7%AE%80%E5%8C%96"><span class="nav-number">5.2.</span> <span class="nav-text">四元数旋转公式的简化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%B8%80"><span class="nav-number">5.2.1.</span> <span class="nav-text">引理一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%BA%8C"><span class="nav-number">5.2.2.</span> <span class="nav-text">引理二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%90%86%E4%B8%89"><span class="nav-number">5.2.3.</span> <span class="nav-text">引理三</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%AE%9A%E7%90%86%E5%9B%9B%E5%85%83%E6%95%B0%E5%9E%8B"><span class="nav-number">5.3.</span> <span class="nav-text">三维旋转定理（四元数型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E4%B9%98%E7%A7%AF%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">5.4.</span> <span class="nav-text">四元数乘积的性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%AE%9A%E7%90%86%E7%9F%A9%E9%98%B5%E5%9E%8B"><span class="nav-number">5.5.</span> <span class="nav-text">三维旋转定理（矩阵型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E6%97%8B%E8%BD%AC%E5%AE%9A%E7%90%86%E6%8C%87%E6%95%B0%E5%9E%8B"><span class="nav-number">5.6.</span> <span class="nav-text">三维旋转定理（指数型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E5%A4%8D%E5%90%88-1"><span class="nav-number">5.7.</span> <span class="nav-text">旋转复合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E5%80%8D%E8%A6%86%E7%9B%96"><span class="nav-number">5.8.</span> <span class="nav-text">双倍覆盖</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E6%8F%92%E5%80%BC"><span class="nav-number">6.</span> <span class="nav-text">四元数插值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%B9%82%E8%BF%90%E7%AE%97%E7%9A%84%E6%8F%92%E5%80%BC"><span class="nav-number">6.1.</span> <span class="nav-text">基于幂运算的插值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E5%9C%A8%E5%9B%9B%E7%BB%B4%E7%A9%BA%E9%97%B4%E5%86%85%E7%9A%84%E5%A4%B9%E8%A7%92"><span class="nav-number">6.2.</span> <span class="nav-text">四元数在四维空间内的夹角</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lerp-nlerp-slerp"><span class="nav-number">6.3.</span> <span class="nav-text">Lerp, Nlerp, Slerp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lerp"><span class="nav-number">6.3.1.</span> <span class="nav-text">Lerp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nlerp"><span class="nav-number">6.3.2.</span> <span class="nav-text">Nlerp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slerp"><span class="nav-number">6.3.3.</span> <span class="nav-text">Slerp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E5%80%8D%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98"><span class="nav-number">6.4.</span> <span class="nav-text">双倍覆盖问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#squad"><span class="nav-number">7.</span> <span class="nav-text">Squad</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#b%C3%A9zier%E6%9B%B2%E7%BA%BF"><span class="nav-number">7.1.</span> <span class="nav-text">Bézier曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E6%AC%A1b%C3%A9zier%E6%9B%B2%E7%BA%BF"><span class="nav-number">7.2.</span> <span class="nav-text">三次Bézier曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#de-casteljau%E7%AE%97%E6%B3%95"><span class="nav-number">7.3.</span> <span class="nav-text">de Casteljau算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#squad-1"><span class="nav-number">7.4.</span> <span class="nav-text">Squad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#squad%E5%BA%94%E7%94%A8"><span class="nav-number">7.5.</span> <span class="nav-text">Squad应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#angleeulermatrixquaternion%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2"><span class="nav-number">8.</span> <span class="nav-text">Angle、Euler、Matrix、Quaternion之间的相互转换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#angle%E8%BD%AC%E5%8C%96%E4%B8%BA%E5%85%B6%E4%BB%96%E5%BD%A2%E5%BC%8F"><span class="nav-number">8.1.</span> <span class="nav-text">Angle转化为其他形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#angle%E8%BD%AC%E5%8C%96%E4%B8%BAeuler"><span class="nav-number">8.1.1.</span> <span class="nav-text">Angle转化为Euler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#angle%E8%BD%AC%E5%8C%96%E4%B8%BAmatrix"><span class="nav-number">8.1.2.</span> <span class="nav-text">Angle转化为Matrix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#angle%E8%BD%AC%E5%8C%96%E4%B8%BAquaternion"><span class="nav-number">8.1.3.</span> <span class="nav-text">Angle转化为Quaternion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#euler%E8%BD%AC%E5%8C%96%E4%B8%BA%E5%85%B6%E4%BB%96%E5%BD%A2%E5%BC%8F"><span class="nav-number">8.2.</span> <span class="nav-text">Euler转化为其他形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#euler%E8%BD%AC%E5%8C%96%E4%B8%BAangle"><span class="nav-number">8.2.1.</span> <span class="nav-text">Euler转化为Angle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#euler%E8%BD%AC%E5%8C%96%E4%B8%BAmatrix"><span class="nav-number">8.2.2.</span> <span class="nav-text">Euler转化为Matrix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#euler%E8%BD%AC%E5%8C%96%E4%B8%BAquaternion"><span class="nav-number">8.2.3.</span> <span class="nav-text">Euler转化为Quaternion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#matrix%E8%BD%AC%E5%8C%96%E4%B8%BA%E5%85%B6%E4%BB%96%E5%BD%A2%E5%BC%8F"><span class="nav-number">8.3.</span> <span class="nav-text">Matrix转化为其他形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#matrix%E8%BD%AC%E5%8C%96%E4%B8%BAangle"><span class="nav-number">8.3.1.</span> <span class="nav-text">Matrix转化为Angle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#matrix%E8%BD%AC%E5%8C%96%E4%B8%BAeuler"><span class="nav-number">8.3.2.</span> <span class="nav-text">Matrix转化为Euler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#matrix%E8%BD%AC%E5%8C%96%E4%B8%BAquaternion"><span class="nav-number">8.3.3.</span> <span class="nav-text">Matrix转化为Quaternion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#quaternion%E8%BD%AC%E5%8C%96%E4%B8%BA%E5%85%B6%E4%BB%96%E5%BD%A2%E5%BC%8F"><span class="nav-number">8.4.</span> <span class="nav-text">Quaternion转化为其他形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#quaternion%E8%BD%AC%E5%8C%96%E4%B8%BAangle"><span class="nav-number">8.4.1.</span> <span class="nav-text">Quaternion转化为Angle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#quaternion%E8%BD%AC%E5%8C%96%E4%B8%BAeuler"><span class="nav-number">8.4.2.</span> <span class="nav-text">Quaternion转化为Euler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#quaternion%E8%BD%AC%E5%8C%96%E4%B8%BAmatrix"><span class="nav-number">8.4.3.</span> <span class="nav-text">Quaternion转化为Matrix</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -313,7 +313,7 @@ Lock）问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-05 20:24:50" itemprop="dateModified" datetime="2022-04-05T20:24:50+08:00">2022-04-05</time>
+      <time title="修改时间：2022-04-06 22:11:26" itemprop="dateModified" datetime="2022-04-06T22:11:26+08:00">2022-04-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -353,14 +353,14 @@ Lock）问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>43k</span>
+      <span>47k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>39 分钟</span>
+      <span>42 分钟</span>
     </span>
 </div>
 
@@ -383,7 +383,9 @@ id="fnref4" role="doc-noteref"><sup>4</sup></a><a href="#fn5"
 class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a><a
 href="#fn6" class="footnote-ref" id="fnref6"
 role="doc-noteref"><sup>6</sup></a><a href="#fn7" class="footnote-ref"
-id="fnref7" role="doc-noteref"><sup>7</sup></a>。</p>
+id="fnref7" role="doc-noteref"><sup>7</sup></a><a href="#fn8"
+class="footnote-ref" id="fnref8"
+role="doc-noteref"><sup>8</sup></a>。</p>
 <span id="more"></span>
 <h1 id="复数与二维旋转">复数与二维旋转</h1>
 <p>首先我们将简要介绍复数及它与二维旋转的关系，从而可以更加自然地过度到四元数及其与三维旋转的关系。</p>
@@ -1438,7 +1440,7 @@ q_2)+a\mathbf{b}_1\cdot(\mathbf{b}\times\mathbf{b}_2)+a(\mathbf{b}\times\mathbf{
 </details>
 <h2 id="三维旋转定理矩阵型">三维旋转定理（矩阵型）</h2>
 <p>通过之前的讨论（尽管不完全相同，但可以类似推导）我们知道左乘一个四元数<span
-class="math inline">\(w=a+bi+cj+dj\)</span>等同于下面的矩阵</p>
+class="math inline">\(w=a+bi+cj+dk\)</span>等同于下面的矩阵</p>
 <p><span class="math display">\[
 L(w)=
 \begin{bmatrix}
@@ -2001,6 +2003,153 @@ Multiplication（简称为Matrix）：任何一个旋转都可以用矩阵乘法
 Rotation（简称为Quaternion)：任何一个旋转都可以用四元数的乘法表示。</li>
 </ul>
 <p>这几种表示方法实际上可以相互转化，下面将进行介绍。</p>
+<h2 id="angle转化为其他形式">Angle转化为其他形式</h2>
+<h3 id="angle转化为euler">Angle转化为Euler</h3>
+<h3 id="angle转化为matrix">Angle转化为Matrix</h3>
+<p>在<a
+href="https://sulley.cc/2021/06/07/%E5%90%91%E9%87%8F%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E7%AE%80%E5%8D%95%E6%8E%A8%E5%AF%BC/">向量绕任意轴旋转的简单推导</a>这篇文章中，我们已经推导出了AngleAxis对应的矩阵形式：</p>
+<p><span
+class="math display">\[\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2,\;
+\mathbf{N}=\begin{bmatrix}0&amp;-n_z&amp;n_y\\n_z&amp;0&amp;-n_x\\-n_y&amp;n_x&amp;0\end{bmatrix}\]</span></p>
+<h3 id="angle转化为quaternion">Angle转化为Quaternion</h3>
+<p>Angle与Quaternion在本质上是一致的，我们在<a
+href="#四元数乘积的性质">四元数乘积的性质</a>一节中已经证明过了。所以，对于轴为<span
+class="math inline">\(\mathbf{n}\)</span>，旋转角为<span
+class="math inline">\(\theta\)</span>的Angle表示来说，只需要构造四元数<span
+class="math inline">\(w=[\cos(\theta/2),\sin(\theta/2)\mathbf{n}]\)</span>即可。</p>
+<h2 id="euler转化为其他形式">Euler转化为其他形式</h2>
+<h3 id="euler转化为angle">Euler转化为Angle</h3>
+<h3 id="euler转化为matrix">Euler转化为Matrix</h3>
+<p>在<a
+href="#欧拉角-坐标系与旋转顺序">欧拉角、坐标系与旋转顺序</a>一节中我们已经证明了：对于以<span
+class="math inline">\(x\to y\to
+z\)</span>为顺序的欧拉角旋转，旋转矩阵是：</p>
+<p><span class="math display">\[
+R_\text{global}=R_z(\tau)R_y(\phi)R_x(\theta)=
+\begin{bmatrix}
+\cos(\phi)\cos(\tau) &amp;
+\sin(\theta)\sin(\phi)\cos(\tau)-\cos(\theta)\sin(\tau) &amp;
+\cos(\theta)\sin(\phi)\cos(\tau)+\sin(\theta)\sin(\tau)\\
+\cos(\phi)\sin(\tau) &amp;
+\sin(\theta)\sin(\phi)\sin(\tau)+\cos(\theta)\cos(\tau) &amp;
+\cos(\theta)\sin(\phi)\sin(\tau)-\sin(\theta)\cos(\tau)\\
+-\sin(\phi) &amp; \sin(\theta)\cos(\phi) &amp; \cos(\theta)\cos(\phi)
+\end{bmatrix}
+\]</span></p>
+<h3 id="euler转化为quaternion">Euler转化为Quaternion</h3>
+<h2 id="matrix转化为其他形式">Matrix转化为其他形式</h2>
+<h3 id="matrix转化为angle">Matrix转化为Angle</h3>
+<p>给定旋转矩阵<span
+class="math inline">\(R=\begin{bmatrix}R_{11}&amp;R_{12}&amp;R_{13}\\R_{21}&amp;R_{22}&amp;R_{23}\\R_{31}&amp;R_{32}&amp;R_{33}\end{bmatrix}\)</span>，并假设对应的旋转轴是<span
+class="math inline">\(\mathbf{n}\)</span>、旋转角度是<span
+class="math inline">\(\omega\)</span>。显然，如果一个向量<span
+class="math inline">\(\mathbf{u}\)</span>平行于<span
+class="math inline">\(\mathbf{n}\)</span>，则<span
+class="math inline">\(R\mathbf{u}=\mathbf{u}\)</span>，从而<span
+class="math inline">\((R-I)\mathbf{u}=0\)</span>。</p>
+<p>从特征向量的角度来看，<span
+class="math inline">\(\mathbf{u}\)</span>是<span
+class="math inline">\(R\)</span>的一个特征向量，它对应的特征值为<span
+class="math inline">\(\lambda=1\)</span>。从而我们知道：每个旋转矩阵就有一个特征值为<span
+class="math inline">\(1\)</span>。为了求出旋转轴，我们有：</p>
+<p><span class="math display">\[\begin{aligned}
+  0&amp;=R^\top 0+0\\
+  &amp;=R^\top(R-I)\mathbf{u}+(R-I)\mathbf{u}\\
+  &amp;=(R^\top R-R^\top+R-I)\mathbf{u}\\
+  &amp;=(I-R^\top+R-I)\mathbf{u}\\
+  &amp;=(R-R^\top)\mathbf{u}
+\end{aligned}\]</span></p>
+<p>从而我们有：</p>
+<p><span class="math display">\[
+\begin{cases}
+  0&amp;=u_y(R_{12}-R_{21})+u_z(R_{13}-R_{31})\\
+  0&amp;=u_x(R_{21}-R_{12})+u_z(R_{23}-R_{32})\\
+  0&amp;=u_x(R_{31}-R_{13})+u_y(R_{32}-R_{23})
+\end{cases}\Rightarrow
+\mathbf{u}=\begin{bmatrix}
+  R_{32}-R_{23}\\
+  R_{13}-R_{31}\\
+  R_{21}-R_{12}
+\end{bmatrix}
+\]</span></p>
+<p>所以<span
+class="math inline">\(\mathbf{n}=\mathbf{u}/\|\mathbf{n}\|\)</span>。注意到上面的推导过程在<span
+class="math inline">\(R\)</span>为对称矩阵时不成立，这时候就要按照常规的求特征向量的步骤去求<span
+class="math inline">\(\mathbf{u}\)</span>了。</p>
+<p>既然我们已经知道了旋转轴<span
+class="math inline">\(\mathbf{n}\)</span>，这时只需要找一个垂直于<span
+class="math inline">\(\mathbf{n}\)</span>的向量<span
+class="math inline">\(\mathbf{v}\)</span>，旋转轴就是<span
+class="math inline">\(\mathbf{v}\)</span>和<span
+class="math inline">\(R\mathbf{v}\)</span>的夹角。</p>
+<p>我们也可以从特征值的角度出发。在三维空间内，旋转矩阵的三个特征值分别为<span
+class="math inline">\(\lambda=1,\mathrm{e}^{i\omega},\mathrm{e}^{-i\omega}\)</span>，三者之和为<span
+class="math inline">\(1+\mathrm{e}^{i\omega}+\mathrm{e}^{-i\omega}=1+2\cos(\omega)=\text{tr}(R)=R_{11}+R_{22}+R_{33}\)</span>，于是：</p>
+<p><span
+class="math display">\[\omega=\arccos\left(\frac{\text{tr}(R)-1}{2}\right)\]</span></p>
+<h3 id="matrix转化为euler">Matrix转化为Euler</h3>
+<p>对于旋转矩阵<span
+class="math inline">\(R=\begin{bmatrix}R_{11}&amp;R_{12}&amp;R_{13}\\R_{21}&amp;R_{22}&amp;R_{23}\\R_{31}&amp;R_{32}&amp;R_{33}\end{bmatrix}\)</span>，通过上面Euler到Matrix的转换，我们知道<span
+class="math inline">\(\sin(\phi)=-R_{31}\Rightarrow
+\phi=\arcsin(R_{31})\)</span>。从而有：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \phi&amp;=\arcsin(-R_{31})\\
+  \theta&amp;=\text{atan2}\left(\frac{R_{32}}{\cos(\phi)},\frac{R_{33}}{\cos(\phi)}\right)\\
+  \tau&amp;=\text{atan2}\left(\frac{R_{21}}{\cos(\phi)},\frac{R_{11}}{\cos(\phi)}\right)
+\end{aligned}
+\]</span></p>
+<p>上式仅在<span class="math inline">\(\cos(\phi)\neq
+0\)</span>，也即<span class="math inline">\(R_{31}\neq \pm
+1\)</span>时才成立。当<span class="math inline">\(R_{31}=\pm
+1\)</span>时，原矩阵退化为Gimbal
+Lock，因此无法转化为对应的Euler角。从上面的过程来看，对一个旋转矩阵，至少有两组Euler角与它对应，在某些情况下甚至有无穷解。</p>
+<h3 id="matrix转化为quaternion">Matrix转化为Quaternion</h3>
+<p>给定矩阵<span
+class="math inline">\(R=\begin{bmatrix}R_{11}&amp;R_{12}&amp;R_{13}\\R_{21}&amp;R_{22}&amp;R_{23}\\R_{31}&amp;R_{32}&amp;R_{33}\end{bmatrix}\)</span>，我们不难通过<a
+href="#quaternion转化为matrix">Quaternion转化为Matrix</a>得到下述关系成立：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  1+R_{11}+R_{22}+R_{33}&amp;=4-4(b^2+c^2+d^2)\\
+  &amp;=4-4(1-a^2)\\
+  &amp;=4a^2
+\end{aligned}
+\]</span></p>
+<p>所以我们就能解出<span class="math inline">\(a,b,c,d\)</span>：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  a&amp;=\pm\frac{1}{2}\sqrt{1+R_{11}+R_{22}+R_{33}}\\
+  b&amp;=\frac{R_{32}-R_{23}}{4a}\\
+  c&amp;=\frac{R_{13}-R_{31}}{4a}\\
+  d&amp;=\frac{R_{21}-R_{12}}{4a}
+\end{aligned}
+\]</span></p>
+<p>从而得到四元数<span class="math inline">\(w=[a,b,c,d]\)</span>。</p>
+<h2 id="quaternion转化为其他形式">Quaternion转化为其他形式</h2>
+<h3 id="quaternion转化为angle">Quaternion转化为Angle</h3>
+<p>Quaternion转化为Axis Angle的结果我们已经在<a
+href="#三维旋转定理四元数型">三维旋转定理（四元数型）</a>一节中给出。给定单位四元数<span
+class="math inline">\(w=[a,\mathbf{b}]\)</span>，我们可以通过变换：</p>
+<p><span
+class="math display">\[\frac{\theta}{2}=\arccos(a),\;\mathbf{n}=\frac{\mathbf{b}}{\sin(\arccos(a))}\]</span></p>
+<p>得到它的等价形式<span
+class="math inline">\(w=[a,\mathbf{b}]=[\cos(\tfrac{\theta}{2}),\sin(\tfrac{\theta}{2})\mathbf{n}]\)</span>，从而，<span
+class="math inline">\(\theta\)</span>即为旋转角，<span
+class="math inline">\(\mathbf{n}\)</span>即为旋转轴。</p>
+<h3 id="quaternion转化为euler">Quaternion转化为Euler</h3>
+<h3 id="quaternion转化为matrix">Quaternion转化为Matrix</h3>
+<p>结果已经由<a
+href="#三维旋转定理矩阵型">三维旋转定理（矩阵型）</a>一节给出，结果是：</p>
+<p><span class="math display">\[
+R=\begin{bmatrix}
+  1 &amp; 0 &amp; 0 &amp; 0\\
+  0 &amp; 1-2c^2-2d^2 &amp; 2bc-2ad &amp; 2ac+2bd\\
+  0 &amp; 2bc+2ad &amp; 1-2b^2-2d^2 &amp; 2cd-2ab\\
+  0 &amp; 2bd-2ac &amp; 2ab+2cd &amp; 1-2b^2-2c^2
+\end{bmatrix}
+\]</span></p>
+<p>其中<span
+class="math inline">\(a=\cos(\tfrac{1}{2}\theta),b=\sin(\tfrac{1}{2}\theta)n_x,c=\sin(\tfrac{1}{2}\theta)n_y,d=\sin(\tfrac{1}{2}\theta)n_z\)</span>。</p>
 <section class="footnotes footnotes-end-of-document"
 role="doc-endnotes">
 <hr />
@@ -2026,6 +2175,9 @@ href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"
 role="doc-endnote"><p>https://www.geometrictools.com/Documentation/RotationRepresentations.pdf<a
 href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"
+role="doc-endnote"><p>https://en.wikipedia.org/wiki/Rotation_formalisms_in_three_dimensions#Rotation_matrix_%E2%86%94_Euler_axis/angle<a
+href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -2147,13 +2299,13 @@ class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解�
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">112k</span>
+    <span title="站点总字数">116k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:42</span>
+    <span title="站点阅读时长">1:46</span>
   </span>
 </div>
 <div class="busuanzi-count">
