@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sulley.cc/photos/love/family/index.html</loc>
+    
+    <lastmod>2022-04-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://sulley.cc/photos/love/shanghai/index.html</loc>
+    
+    <lastmod>2022-04-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://sulley.cc/photos/love/index.html</loc>
+    
+    <lastmod>2022-04-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://sulley.cc/photos/games/index.html</loc>
     
     <lastmod>2022-04-28</lastmod>
@@ -111,15 +138,6 @@
   
   <url>
     <loc>http://sulley.cc/photos/index.html</loc>
-    
-    <lastmod>2022-03-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://sulley.cc/photos/love/index.html</loc>
     
     <lastmod>2022-03-27</lastmod>
     
