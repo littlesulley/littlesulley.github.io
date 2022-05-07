@@ -27,15 +27,16 @@
 
     <meta name="description" content="本文是《Real-Time Cameras: A Guide for Game Designers and Developers》的阅读笔记，放在此备份供参阅。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《Real-Time-Cameras》笔记">
+<meta property="og:title" content="《Real-Time Cameras》笔记">
 <meta property="og:url" content="http://sulley.cc/2022/05/05/%E3%80%8AReal-Time%20Cameras%E3%80%8B%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Sulley">
 <meta property="og:description" content="本文是《Real-Time Cameras: A Guide for Game Designers and Developers》的阅读笔记，放在此备份供参阅。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://sulley.cc/images/realtime_cameras/1-1.png">
 <meta property="og:image" content="http://sulley.cc/images/realtime_cameras/1-2.png">
+<meta property="og:image" content="http://sulley.cc/images/realtime_cameras/2-1.png">
 <meta property="article:published_time" content="2022-05-05T13:40:19.000Z">
-<meta property="article:modified_time" content="2022-05-05T16:10:42.022Z">
+<meta property="article:modified_time" content="2022-05-07T14:58:23.521Z">
 <meta property="article:author" content="Sulley">
 <meta property="article:tag" content="随笔">
 <meta property="article:tag" content="游戏">
@@ -49,10 +50,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://sulley.cc/2022/05/05/%E3%80%8AReal-Time%20Cameras%E3%80%8B%E7%AC%94%E8%AE%B0/","path":"2022/05/05/《Real-Time Cameras》笔记/","title":"《Real-Time-Cameras》笔记"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://sulley.cc/2022/05/05/%E3%80%8AReal-Time%20Cameras%E3%80%8B%E7%AC%94%E8%AE%B0/","path":"2022/05/05/《Real-Time Cameras》笔记/","title":"《Real-Time Cameras》笔记"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>《Real-Time-Cameras》笔记 | Sulley</title>
+<title>《Real-Time Cameras》笔记 | Sulley</title>
   
 
 
@@ -169,7 +170,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#part-1-core-concepts"><span class="nav-number">1.</span> <span class="nav-text">Part 1: Core Concepts</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-1-game-overview"><span class="nav-number">1.1.</span> <span class="nav-text">Chapter 1: Game Overview</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#part-1-core-concepts"><span class="nav-number">1.</span> <span class="nav-text">Part 1: Core Concepts</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-1-game-overview"><span class="nav-number">1.1.</span> <span class="nav-text">Chapter 1: Game Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-2-camera-fundamentals"><span class="nav-number">1.2.</span> <span class="nav-text">Chapter 2: Camera
+Fundamentals</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#real-world-cameras"><span class="nav-number">1.2.1.</span> <span class="nav-text">Real-World Cameras</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#camera-presentation-styles"><span class="nav-number">1.2.2.</span> <span class="nav-text">Camera Presentation Styles</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#camera-behaviors"><span class="nav-number">1.2.3.</span> <span class="nav-text">Camera Behaviors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#view-generation"><span class="nav-number">1.2.4.</span> <span class="nav-text">View Generation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#player-controls"><span class="nav-number">1.2.5.</span> <span class="nav-text">Player Controls</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-3-cinematography"><span class="nav-number">1.3.</span> <span class="nav-text">Chapter 3: Cinematography</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -282,12 +284,12 @@
     </span>
     
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="《Real-Time-Cameras》笔记 | Sulley">
+      <meta itemprop="name" content="《Real-Time Cameras》笔记 | Sulley">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          《Real-Time-Cameras》笔记
+          《Real-Time Cameras》笔记
         </h1>
 
         <div class="post-meta-container">
@@ -305,7 +307,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-05-06 00:10:42" itemprop="dateModified" datetime="2022-05-06T00:10:42+08:00">2022-05-06</time>
+      <time title="修改时间：2022-05-07 22:58:23" itemprop="dateModified" datetime="2022-05-07T22:58:23+08:00">2022-05-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -345,14 +347,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>612</span>
+      <span>3.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -373,14 +375,24 @@ Developers》的阅读笔记，放在此备份供参阅。</p>
 <li>第三章：介绍电影摄影的基础知识与应用。</li>
 </ul>
 <h2 id="chapter-1-game-overview">Chapter 1: Game Overview</h2>
-<p>一个典型的游戏引擎（Game Engine）应当包括： - 资源管理系统（Resource
-Management） - 玩家控制（Player Control） - 物理模拟（Physics
-Simulation） - 游戏对象逻辑（Game Object Logic） -
-图形用户界面（Graphical User Interface） - 相机与视口管理（Camera and
-Viewport Management） - 网络交流（Network Communication） -
-人工智能（AI） - 游戏事件管理（Game Event Management） -
-渲染（Rendering） - 对象间交流（Inter-Object Communication） -
-音频（Audio） - 任务管理（Task Management） - ……</p>
+<p>一个典型的游戏引擎（Game Engine）应当包括：</p>
+<ul>
+<li>资源管理系统（Resource Management）</li>
+<li>玩家控制（Player Control）</li>
+<li>物理模拟（Physics Simulation）</li>
+<li>游戏对象逻辑（Game Object Logic）</li>
+<li>图形用户界面（Graphical User Interface）</li>
+<li>相机与视口管理（Camera and Viewport Management）</li>
+<li>网络交流（Network Communication）</li>
+<li>人工智能（AI）</li>
+<li>游戏事件管理（Game Event Management）</li>
+<li>渲染（Rendering）</li>
+<li>对象间交流（Inter-Object Communication）<br />
+</li>
+<li>音频（Audio）</li>
+<li>任务管理（Task Management）</li>
+<li>……</li>
+</ul>
 <figure>
 <img data-src="/images/realtime_cameras/1-1.png"
 alt="游戏各系统之间的联系。" />
@@ -392,9 +404,151 @@ alt="游戏各系统之间的联系。" />
 alt="游戏各系统的更新顺序。" />
 <figcaption aria-hidden="true">游戏各系统的更新顺序。</figcaption>
 </figure>
-<p>对于每个步骤的介绍如下： -
-<strong>Input</strong>：通常是每帧更新一次，但一些游戏也会每帧更新若干次，从而精准反应玩家输入。
-- <strong>Think</strong>：</p>
+<p>对于每个步骤的介绍如下：</p>
+<ul>
+<li><strong>Input</strong>：通常是每帧更新一次，但一些游戏也会每帧更新若干次，从而精准反应玩家输入。</li>
+<li><strong>Think</strong>：大部分游戏逻辑得到更新，包括玩家输入、AI、游戏事件生成等。</li>
+<li><strong>Move</strong>：更新物理模拟、碰撞检测等内容。</li>
+<li><strong>Messaging</strong>：用于在游戏对象、游戏系统之间传递信息，比如新游戏对象的激活、开门、对人死亡、资源加载完成、动画事件、碰撞等等。Messaging并不是一定会在Update
+Loop中出现，可能会在消息发出的瞬间被处理，或者延迟处理。Messaging系统有利于不同系统之间的解耦，简化游戏录像逻辑。Messaging本质上是一种保证不同时间点游戏事件同步的技术。</li>
+<li><strong>Camera</strong>：主要包含以下步骤：
+<ul>
+<li>移除无用的camera</li>
+<li>激活需要的camera</li>
+<li>决定哪个camera用于渲染</li>
+<li>更新当前激活的相机</li>
+<li>更新主相机</li>
+<li>基于主相机更新玩家control reference frame</li>
+<li>构建transformation matrices用于渲染，包括特效如shaking, FOV等</li>
+</ul></li>
+<li><strong>Post-Camera</strong>：更新依赖于相机的物体</li>
+<li><strong>Render</strong>：有时候一个camera view也会被用于另一个camera
+view的生成过程中</li>
+</ul>
+<p><strong>对于相机而言，Occam's
+Razor法则适用：最简单的相机解决方案通常是最好的。</strong></p>
+<p>相机系统的作用包括：</p>
+<ul>
+<li>管理活跃相机，保证其逻辑正常</li>
+<li>控制相机增删</li>
+<li>支持相机参数动态调整</li>
+<li>为玩家操控提供参考帧（reference frames）</li>
+<li>处理所有非交互式电影片段</li>
+<li>管理并更新视口</li>
+<li>获取frustum信息以展示view</li>
+<li>提供可选的debug能力</li>
+</ul>
+<p>角色控制与角色移动之间的关系被称为<strong>控制参考帧（control
+reference frame）</strong>。</p>
+<h2 id="chapter-2-camera-fundamentals">Chapter 2: Camera
+Fundamentals</h2>
+<h3 id="real-world-cameras">Real-World Cameras</h3>
+<p>真实世界的相机大概包含以下关键要素：</p>
+<ul>
+<li>Lens type</li>
+<li>Capture method</li>
+<li>Film stock</li>
+<li>Capture rate</li>
+<li>Exposure of film</li>
+<li>Projection method</li>
+<li>Aspect ratio</li>
+</ul>
+<p>真实世界相机的一些特点：</p>
+<ul>
+<li>缺乏交互性</li>
+<li>预先决定的机位</li>
+<li>相机镜头</li>
+<li>场景切换</li>
+<li>胶片曝光</li>
+<li>后处理特效</li>
+</ul>
+<p>游戏相机的一些特点：</p>
+<ul>
+<li>模拟真实世界相机的功能</li>
+<li>不需要相机实体</li>
+<li>动态变化</li>
+<li>允许游戏世界的不同投影</li>
+<li>可变的光照与渲染</li>
+<li>更多样的转场</li>
+<li>允许特殊效果</li>
+</ul>
+<p>一些专有名字： - Game system:
+管理相机、应用相机、控制相机行为、生成用于渲染的信息、控制参考帧 - Game
+camera: 抽象的游戏实体 - Presentation style:
+指将游戏世界投影到屏幕空间的方法 - Camera behavior:
+一人称/三人称相机，影院式/交互式相机 - Look-at position: 相机朝向的位置
+- Desired position: 相机移动的位置 - Orientation: 相机朝向 - Desired
+orientation: 相机的目标朝向 - Rotation: 朝向的变化量 - View frustum:
+游戏世界的可视空间 - Viewport: 呈现在显示设备上的一种数据结构 - Field of
+view: View frustum的上下/左右边界的夹角 - Aspect ratio:
+长宽比，对于standard definition television
+(SDTV)来说，是4:3，对high-definition television
+(HDTV)是16:9。对电影投影中使用最多的是1.85 (CinemaScope)和2.35
+(anamorphic) - Refresh or frame rate: 刷新率 - Refresh and motion blur:
+刷新模糊指显示设备刷新率不能与计算机的输出同步，运动模糊是因为物体运动快于曝光时间
+- Display tearing: 显示撕裂 - Player character： 玩家在游戏中控制的物体
+- Target object: 被看向的物体 - Interpolation: 插值 - Projection: 投影 -
+Parallax: 视差 - Transitions:
+转场，包括过程化转换、插值、瞬时切换、清除、过渡等等 - Camera
+constraints: 相机约束 - Motion constraints:
+运动约束，如距离、相对位置、路径、速度、加速度等等 - Orientation
+constraints: 通常用于第一人称相机</p>
+<h3 id="camera-presentation-styles">Camera Presentation Styles</h3>
+<p>Presentation style
+通常被划分为正交（2D）或者透视（3D）渲染，有时也会使用2.5D</p>
+<h3 id="camera-behaviors">Camera Behaviors</h3>
+<p>主要有三种相机行为：</p>
+<ul>
+<li>Cinematic cameras:
+非交互的、玩家不可控的相机，包括cutscene和real-time cinematic
+sequences</li>
+<li>First person cameras:
+视野比TP游戏小，使玩家难以全面捕捉空间与环境信息，跳跃也更加困难。在实现FP相机时，建议把相机与任务的头部分开，同时使相机的朝向独立于玩家的朝向</li>
+<li>Third person cameras:
+允许更大的视野，适用于环境导向型游戏，但存在world navigation与collision
+avoidance两个问题</li>
+</ul>
+<p>此外，相机也可以分为predictive和reactive两类： - Reactive:
+根据游戏对象的变化而变化 - Predictive:
+根据当前游戏物体预测最佳的相机位置和朝向</p>
+<p>Path finding solutions: -
+全局路径搜索：搜索环境中的一条路径，能够保持美学质量 -
+局部路径搜索：以某种具体的物体类型为核心进行搜索 -
+基于目标的搜索：在各种约束下搜索路径</p>
+<h3 id="view-generation">View Generation</h3>
+<p>视图生成步骤：</p>
+<ul>
+<li>游戏中每个活跃的物体更新内部状态</li>
+<li>相机更新位置、朝向等信息</li>
+<li>对游戏中待生成的每个view:
+<ul>
+<li>决定相机的位置和朝向</li>
+<li>决定显示设备上的viewport</li>
+<li>决定游戏世界中的frustum</li>
+<li>给定frustum，决定哪些物体被剔除</li>
+<li>对每个待渲染的物体：
+<ul>
+<li>变换物体</li>
+<li>应用光照着色</li>
+<li>2D投影</li>
+<li>光栅化</li>
+<li><img data-src="/images/realtime_cameras/2-1.png" title="fig:"
+alt="简化的渲染流程。" /></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>在上述步骤中，与相机系统直接相关的由：view frustum, view
+transform和projection transform</p>
+<h3 id="player-controls">Player Controls</h3>
+<p>A control reference frame refers to a relationship between changes to
+the controller input and how it affects movement or other aspects of
+player control.</p>
+<p>在FP游戏中，control reference
+frame直接对应了玩家角色面朝的方向，且通常只能绕up
+axis旋转。在TP游戏中，control reference
+frame基于相机与玩家的相对位置。</p>
+<p>Control reference frame需要始终反应玩家的意图！</p>
+<h2 id="chapter-3-cinematography">Chapter 3: Cinematography</h2>
 
     </div>
 
@@ -414,7 +568,7 @@ alt="游戏各系统的更新顺序。" />
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://sulley.cc/2022/05/05/%E3%80%8AReal-Time%20Cameras%E3%80%8B%E7%AC%94%E8%AE%B0/" title="《Real-Time-Cameras》笔记">http://sulley.cc/2022/05/05/《Real-Time Cameras》笔记/</a>
+      <a href="http://sulley.cc/2022/05/05/%E3%80%8AReal-Time%20Cameras%E3%80%8B%E7%AC%94%E8%AE%B0/" title="《Real-Time Cameras》笔记">http://sulley.cc/2022/05/05/《Real-Time Cameras》笔记/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -474,13 +628,13 @@ alt="游戏各系统的更新顺序。" />
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">119k</span>
+    <span title="站点总字数">122k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:49</span>
+    <span title="站点阅读时长">1:51</span>
   </span>
 </div>
 <div class="busuanzi-count">
