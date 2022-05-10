@@ -37,7 +37,7 @@
 <meta property="og:image" content="http://sulley.cc/images/realtime_cameras/2-1.png">
 <meta property="og:image" content="http://sulley.cc/images/realtime_cameras/3-1.png">
 <meta property="article:published_time" content="2022-05-05T13:40:19.000Z">
-<meta property="article:modified_time" content="2022-05-09T11:53:53.001Z">
+<meta property="article:modified_time" content="2022-05-10T07:51:48.384Z">
 <meta property="article:author" content="Sulley">
 <meta property="article:tag" content="随笔">
 <meta property="article:tag" content="游戏">
@@ -173,7 +173,9 @@
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#part-1-core-concepts"><span class="nav-number">1.</span> <span class="nav-text">Part 1: Core Concepts</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-1-game-overview"><span class="nav-number">1.1.</span> <span class="nav-text">Chapter 1: Game Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-2-camera-fundamentals"><span class="nav-number">1.2.</span> <span class="nav-text">Chapter 2: Camera
 Fundamentals</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#real-world-cameras"><span class="nav-number">1.2.1.</span> <span class="nav-text">Real-World Cameras</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#camera-presentation-styles"><span class="nav-number">1.2.2.</span> <span class="nav-text">Camera Presentation Styles</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#camera-behaviors"><span class="nav-number">1.2.3.</span> <span class="nav-text">Camera Behaviors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#view-generation"><span class="nav-number">1.2.4.</span> <span class="nav-text">View Generation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#player-controls"><span class="nav-number">1.2.5.</span> <span class="nav-text">Player Controls</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-3-cinematography"><span class="nav-number">1.3.</span> <span class="nav-text">Chapter 3: Cinematography</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nomenclature"><span class="nav-number">1.3.1.</span> <span class="nav-text">Nomenclature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dynamically-generated-moviesreplay-cameras"><span class="nav-number">1.3.2.</span> <span class="nav-text">Dynamically
-Generated Movies&#x2F;Replay Cameras</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scripting"><span class="nav-number">1.3.3.</span> <span class="nav-text">Scripting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#editing"><span class="nav-number">1.3.4.</span> <span class="nav-text">Editing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tools"><span class="nav-number">1.3.5.</span> <span class="nav-text">Tools</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#part-2-design-principles"><span class="nav-number">2.</span> <span class="nav-text">Part 2: Design Principles</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-4-camera-design"><span class="nav-number">2.1.</span> <span class="nav-text">Chapter 4: Camera Design</span></a></li></ol></li></ol></div>
+Generated Movies&#x2F;Replay Cameras</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scripting"><span class="nav-number">1.3.3.</span> <span class="nav-text">Scripting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#editing"><span class="nav-number">1.3.4.</span> <span class="nav-text">Editing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tools"><span class="nav-number">1.3.5.</span> <span class="nav-text">Tools</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#part-2-design-principles"><span class="nav-number">2.</span> <span class="nav-text">Part 2: Design Principles</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-4-camera-design"><span class="nav-number">2.1.</span> <span class="nav-text">Chapter 4: Camera Design</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#interactive-2d-camera-systems"><span class="nav-number">2.1.1.</span> <span class="nav-text">Interactive 2D Camera
+Systems</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cinematic-2d-camera-systems"><span class="nav-number">2.1.2.</span> <span class="nav-text">Cinematic 2D Camera Systems</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#interactive-3d-camera-systems"><span class="nav-number">2.1.3.</span> <span class="nav-text">Interactive 3D Camera
+Systems</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cinematic-3d-camera-systems"><span class="nav-number">2.1.4.</span> <span class="nav-text">Cinematic 3D Camera Systems</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d-camera-systems"><span class="nav-number">2.1.5.</span> <span class="nav-text">2.5D Camera Systems</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#display-devices"><span class="nav-number">2.1.6.</span> <span class="nav-text">Display Devices</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#camera-design-process"><span class="nav-number">2.1.7.</span> <span class="nav-text">Camera Design process</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#camera-design-guidelines"><span class="nav-number">2.1.8.</span> <span class="nav-text">Camera Design Guidelines</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-5-camera-solutions"><span class="nav-number">2.2.</span> <span class="nav-text">Chapter 5: Camera Solutions</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -309,7 +311,7 @@ Generated Movies&#x2F;Replay Cameras</span></a></li><li class="nav-item nav-leve
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-05-09 19:53:53" itemprop="dateModified" datetime="2022-05-09T19:53:53+08:00">2022-05-09</time>
+      <time title="修改时间：2022-05-10 15:51:48" itemprop="dateModified" datetime="2022-05-10T15:51:48+08:00">2022-05-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -349,14 +351,14 @@ Generated Movies&#x2F;Replay Cameras</span></a></li><li class="nav-item nav-leve
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.4k</span>
+      <span>8.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
+      <span>8 分钟</span>
     </span>
 </div>
 
@@ -677,6 +679,155 @@ sequences，包括：</p>
 time，纵坐标是具体值</p>
 <h1 id="part-2-design-principles">Part 2: Design Principles</h1>
 <h2 id="chapter-4-camera-design">Chapter 4: Camera Design</h2>
+<h3 id="interactive-2d-camera-systems">Interactive 2D Camera
+Systems</h3>
+<p>2D游戏通常使用tile
+map，每个tile都是一个小图片，且使用hash存储，因此极大节省内存</p>
+<p>2D相机的主要功能之一是让角色一直位于屏幕可视范围，比如可以使用scrolling，即让背景做相对运动。下面是一些常见的scrolling类型：</p>
+<ul>
+<li>Continuous: 背景的scrolling随着游戏连续进行</li>
+<li>Character-relative: 相机的运动与角色的运动同步</li>
+<li>Directional lag: 期望的相机位置基于角色运动的方向</li>
+<li>Burst: 期望的相机位置只有当角色到达某个位置或距离时才变化</li>
+<li>Screen-relative: 只有在角色超出预定义的边界时相机才开始移动</li>
+<li>Region-based: 当角色超过相对于世界的边界时相机才开始移动</li>
+</ul>
+<p>有时候相机的位置要独立于角色位置。对共用一个viewport的多人游戏来说，所有角色的位置共同决定了相机的位置。解决方案：</p>
+<ul>
+<li>允许相机zoom out</li>
+<li>限制玩家移动</li>
+<li>分屏</li>
+<li>允许玩家在屏幕外移动</li>
+<li>传送玩家</li>
+</ul>
+<h3 id="cinematic-2d-camera-systems">Cinematic 2D Camera Systems</h3>
+<p>2D cinamatic camera system的一些典型特征包括：</p>
+<ul>
+<li>Viewport panning control: 控制运动路径</li>
+<li>Zoom in/out: 放大缩小</li>
+<li>Object tracking: 目标跟踪</li>
+<li>Keep an object within screen bounds or other arbitrary
+viewport-based constraint: 带有限制的移动</li>
+</ul>
+<h3 id="interactive-3d-camera-systems">Interactive 3D Camera
+Systems</h3>
+<p>交互式3D相机系统的难点在于提供一个上下文合适的视角，包括艺术性与游戏性，特征包括：</p>
+<ul>
+<li>渲染投影类型（透视、正交）</li>
+<li>决定相机期望位置（navigation）</li>
+<li>相机移动的方式</li>
+<li>决定相机期望朝向</li>
+<li>相机旋转的方式</li>
+<li>相机其他属性的动态改变（FOV, etc）</li>
+<li>相机插值</li>
+<li>Fail-safe handling</li>
+<li>多视口/分屏</li>
+</ul>
+<h3 id="cinematic-3d-camera-systems">Cinematic 3D Camera Systems</h3>
+<p>当设计3D cinematic camera system的时候有几个有用的建议：</p>
+<ul>
+<li>Duplicate controls and functionality from modeling packages:
+复用现有建模包中的功能，让艺术家能够用得舒服、更有效率</li>
+<li>Develop a common terminology: 尽可能用标准的专业术语</li>
+<li>Consider pre-rendering cinematic sequences:
+用游戏引擎渲染sequence</li>
+<li>Distinguish non-interactive sequences from regular game play:
+要让玩家意识到在播放cinematic
+sequences时不能再操纵角色了，比如调整aspect ratio</li>
+<li>Allow an early out after viewing scene once:
+让观众有机会跳过cinematic sequence</li>
+</ul>
+<h3 id="d-camera-systems">2.5D Camera Systems</h3>
+<p>2.5D相机系统有自身的优势，比如让游戏玩家更容易理解和接受游戏</p>
+<h3 id="display-devices">Display Devices</h3>
+<p>让游戏分辨率适应显示分辨率的方法：</p>
+<ul>
+<li>Resize: 通过render buffer和viewport匹配显示设备的分辨率</li>
+<li>Pan and scan: 裁剪</li>
+<li>Stretch: 伸缩</li>
+</ul>
+<h3 id="camera-design-process">Camera Design process</h3>
+<p>首先，游戏的整体体验/玩法需要制定下来，然后再制定相机的宏观设计框架。相机设计的总体流程是：</p>
+<ul>
+<li>Examine high-level design goals:
+明确在游戏的不同部分相机有何相同之处，是否需要单个representation
+style，玩家有怎样的体验</li>
+<li>Evaluate player character abilities:
+玩家怎么移动、怎么与环境交互</li>
+<li>Determine scope of environments:
+游戏场景是怎样的，要提前根据场景做camera prototyping</li>
+<li>Define base camera behaviors: 尽快确定相机的基础功能</li>
+<li>Determine area-specific requirements: 明确特殊区域</li>
+<li>Technical evaluation of cameras:
+关注处理器开销、内存开销、脚本能力、Debug能力</li>
+</ul>
+<p>在相机设计的时候可以问一些问题，这有助于我们更好地设计：</p>
+<ul>
+<li>Player abilities and controls
+<ul>
+<li>角色怎么移动的？加速度是什么？是否能跳/飞？</li>
+<li>角色的移动能力是否最终确定了？</li>
+<li>相机与玩家的关系是怎样的？</li>
+<li>是否应该保持与玩家朝向相对固定的朝向？</li>
+<li>玩家想要看到什么？</li>
+<li>相机应该关注角色还是角色前的某个点？</li>
+<li>是否有必须可视的部分？</li>
+<li>除了角色之外是否还有其他物体必须可视？</li>
+<li>相机的朝向是否需要改变？</li>
+<li>玩家角色怎样被控制？</li>
+</ul></li>
+<li>Environmental concerns: 场景设计应该围绕玩法和相机限制
+<ul>
+<li>角色在怎样的场景中移动？开放还是封闭，宽敞还是狭窄？</li>
+<li>场景是否影响相机的位置和朝向？</li>
+<li>相机是否应该被放在场景外？如是，如果在常规玩法中切换？</li>
+<li>相机是否会在动态变化的场景中跟随玩家？受到阻挡怎么办？</li>
+<li>相机是否应当避免复杂物体？</li>
+<li>相机是否应当限制在具体的路径或表面？</li>
+<li>哪种presentation style更好？</li>
+<li>在场景中相机插值是否还生效？</li>
+<li>是否有必要给相机加上特定的碰撞体？</li>
+</ul></li>
+<li>Technical concerns
+<ul>
+<li>是否有技术限制？包括渲染性能问题等</li>
+<li>如果相机会穿透物体，是否支持透明化？</li>
+<li>是否需要fail-safes以处理未预料的意外情况，比如关门？</li>
+<li>是否允许操纵相机？</li>
+<li>场景是否可能遮挡玩家而无法解决？此时场景是否需要进行改变？</li>
+<li>是否支持相机插值？如何避免插值间的遮挡？</li>
+</ul></li>
+</ul>
+<p>对于相机的要求、限制应该在项目早期就明确，除非是个别例外，并且要避免在项目开展后大改相机系统。因此，要在项目商讨环节把需求都明确清楚</p>
+<p>团队中的camera
+designer不仅需要负责相机表现，而且也需要负责大部分情况下的相机解决方案。Lead
+camera
+designer需要具备美学sense，包括游戏内容的呈现和玩家操作、感知的表现，此外，他还需要推动团队提高认知</p>
+<h3 id="camera-design-guidelines">Camera Design Guidelines</h3>
+<p>一些相机设计的建议：</p>
+<ul>
+<li>Attempt to keep the player character in view (3rd person
+cameras)</li>
+<li>Prevent the camera passing through (or close to) game objects or
+physical environmental features</li>
+<li>Do not require the player to manipulate the camera simply to play
+the game -- unless it is a design requirement</li>
+<li>Allow camera manupulation when possible or dictated by game design
+requirements</li>
+<li>Minimize unintentional camera motion whenever possible</li>
+<li>Ensure camera motion is smooth</li>
+<li>Limit the reorientation speed of the camera</li>
+<li>Limited roll should be allowed in most regular game cameras</li>
+<li>Do not allow the camera to pass outside the game world</li>
+<li>Retain the camera position with respect to the player when instantly
+moving th camera to a new position (3rd person cameras)</li>
+<li>Do not focus directly on the player character when it is moving</li>
+<li>Retain control reference frame after rapid or instantaneous camera
+motion</li>
+<li>Avoid enclosed spaces with complex geometry (3rd person
+cameras)</li>
+</ul>
+<h2 id="chapter-5-camera-solutions">Chapter 5: Camera Solutions</h2>
 
     </div>
 
@@ -756,13 +907,13 @@ time，纵坐标是具体值</p>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">124k</span>
+    <span title="站点总字数">128k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:53</span>
+    <span title="站点阅读时长">1:56</span>
   </span>
 </div>
 <div class="busuanzi-count">
