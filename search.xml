@@ -232,6 +232,24 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2020/09/07/hello-world/</url>
+    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
+<span id="more"></span>
+<h1 id="测试">测试</h1>
+<h2 id="代码">代码</h2>
+<p>现在来测试一下代码</p>
+<details class="note info no-icon"><summary><p>This is a code test</p>
+</summary>
+<h4 id="details-and-code">Details and code</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
+
+</details>
+<h2 id="latex">Latex</h2>
+<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
+]]></content>
+  </entry>
+  <entry>
     <title>Motion Matching -- 概念与发展</title>
     <url>/2022/03/27/Motion%20Matching%20-%20%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%8F%91%E5%B1%95/</url>
     <content><![CDATA[<p>这是我在组内分享的一次关于Motion
@@ -251,24 +269,6 @@ Matching基本知识的介绍，放在此备份。</p>
         <tag>机器学习</tag>
         <tag>深度学习</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/09/07/hello-world/</url>
-    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
-<span id="more"></span>
-<h1 id="测试">测试</h1>
-<h2 id="代码">代码</h2>
-<p>现在来测试一下代码</p>
-<details class="note info no-icon"><summary><p>This is a code test</p>
-</summary>
-<h4 id="details-and-code">Details and code</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
-
-</details>
-<h2 id="latex">Latex</h2>
-<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
-]]></content>
   </entry>
   <entry>
     <title>无穷连根式求极限的充要条件</title>
@@ -505,6 +505,174 @@ Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷
         <category>数学 - 数学分析</category>
       </categories>
       <tags>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>向量绕任意轴旋转的简单推导</title>
+    <url>/2021/06/07/%E5%90%91%E9%87%8F%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E7%AE%80%E5%8D%95%E6%8E%A8%E5%AF%BC/</url>
+    <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
+<span id="more"></span>
+<h1 id="方法一向量分解">方法一：向量分解</h1>
+<h2 id="推导过程">推导过程</h2>
+<p>首先介绍一个最容易理解的方法——向量分解。假设要旋转的向量是<span
+class="math inline">\(\mathbf{p}\)</span>，要旋转的轴是<span
+class="math inline">\(\mathbf{n}\)</span>，是一个单位向量，要旋转的角度是<span
+class="math inline">\(\theta\)</span>。再设旋转后的轴是<span
+class="math inline">\(\mathbf{p}&#39;\)</span>。</p>
+<p>现在我们把<span
+class="math inline">\(\mathbf{p}\)</span>分解为两个向量，一个平行于<span
+class="math inline">\(\mathbf{n}\)</span>，另一个垂直于<span
+class="math inline">\(\mathbf{n}\)</span>，即： <span
+class="math display">\[\mathbf{p}=\mathbf{p}_\perp+\mathbf{p}_\parallel\]</span>
+容易知道，平行于<span
+class="math inline">\(\mathbf{n}\)</span>的分向量<span
+class="math inline">\(\mathbf{p}_\parallel\)</span>就是<span
+class="math inline">\(\mathbf{p}\)</span>在<span
+class="math inline">\(\mathbf{n}\)</span>上的投影（推导过程略）： <span
+class="math display">\[\mathbf{p}_\parallel=(\mathbf{n}\cdot\mathbf{p})\mathbf{n}\]</span>
+从而就能得到<span class="math inline">\(\mathbf{p}_\perp\)</span>：
+<span
+class="math display">\[\mathbf{p}_\perp=\mathbf{p}-\mathbf{p}_\parallel\]</span>
+同样地可以将旋转后的向量分解： <span
+class="math display">\[\mathbf{p}&#39;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\]</span>
+显然，旋转后的向量对应的平行分量<span
+class="math inline">\(\mathbf{p}&#39;_\parallel\)</span>是不变的： <span
+class="math display">\[\mathbf{p}&#39;_\parallel=\mathbf{p}_\parallel\]</span>
+这里的关键在于求垂直分量<span
+class="math inline">\(\mathbf{p}&#39;_\perp\)</span>。</p>
+<figure>
+<img data-src="/images/arbitrary_rotation/1.png"
+alt="将向量分解为一个平行向量和一个垂直向量" />
+<figcaption
+aria-hidden="true">将向量分解为一个平行向量和一个垂直向量</figcaption>
+</figure>
+<p>根据已知的旋转轴<span
+class="math inline">\(\mathbf{n}\)</span>，我们就知道它对应的平面<span
+class="math inline">\(V\)</span>，而向量<span
+class="math inline">\(\mathbf{p}\)</span>与<span
+class="math inline">\(\mathbf{p}&#39;\)</span>的垂直分量就在该平面内。该平面的维度是2，因此只需要找到两个基向量，就可以通过这两个基向量的线性组合表示该平面的任意向量。</p>
+<p>其中一个基向量我们已经找到了，就是<span
+class="math inline">\(\mathbf{p}_\perp\)</span>，而另一个我们可以通过<span
+class="math inline">\(\mathbf{n}\)</span>与<span
+class="math inline">\(\mathbf{p}_\perp\)</span>的叉乘实现，得到的向量与<span
+class="math inline">\(\mathbf{n}\)</span>和<span
+class="math inline">\(\mathbf{p}_\perp\)</span>垂直，且在平面<span
+class="math inline">\(V\)</span>内。且注意到： <span
+class="math display">\[\mathbf{n}\times
+\mathbf{p}_\perp=\mathbf{n}\times(\mathbf{p}-\mathbf{p}_\parallel)=\mathbf{n}\times\mathbf{p}-\mathbf{n}\times\mathbf{p}_\parallel=\mathbf{n}\times\mathbf{p}\]</span>
+并且有： <span class="math display">\[\|\mathbf{n}\times
+\mathbf{p}\|=\|\mathbf{n}\times
+\mathbf{p}_\perp\|=\|\mathbf{n}\|\cdot\|\mathbf{p}_\perp\|\cdot\sin(\pi/2)=\|\mathbf{p}_\perp\|\]</span>
+进而我们能导出旋转后的垂直分量<span
+class="math inline">\(\mathbf{p}&#39;_\perp\)</span>： <span
+class="math display">\[\mathbf{p}&#39;_\perp=\cos(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{p}_\perp}{\|\mathbf{p}_\perp\|}+\sin(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{n}\times\mathbf{p}}{\|\mathbf{n}\times\mathbf{p}\|}=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})\]</span>
+最后，我们得到旋转后的向量<span
+class="math inline">\(\mathbf{p}&#39;\)</span>：</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbf{p}&#39;&amp;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\\
+&amp;=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})+\mathbf{p}_\parallel\\
+&amp;=\cos(\theta)(\mathbf{p}-\mathbf{p}_\parallel)+\mathbf{p}_\parallel+\sin(\theta)(\mathbf{n}\times\mathbf{p})\\
+&amp;=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p})
+\end{aligned}
+\]</span></p>
+<p>搞定！</p>
+<h2 id="矩阵形式">矩阵形式</h2>
+<p>我们知道向量的叉乘可以表示为： <span class="math display">\[
+\mathbf{n}\times\mathbf{p}=
+\begin{bmatrix}
+0&amp;-n_z&amp;n_y\\
+n_z&amp;0&amp;-n_x\\
+-n_y&amp;n_x&amp;0
+\end{bmatrix}
+\mathbf{p}=\mathbf{N}\mathbf{p}
+\]</span> 注意到，矩阵<span
+class="math inline">\(\mathbf{N}\)</span>有如下的性质： <span
+class="math display">\[\mathbf{N}(\mathbf{N}\mathbf{p})=\mathbf{N}^2\mathbf{p}=\mathbf{n}\times(\mathbf{n}\times\mathbf{p})\]</span>
+所以我们可以把旋转公式写成下述形式： <span
+class="math display">\[\mathbf{p}&#39;=\mathbf{p}+(1-\cos(\theta))\mathbf{N}^2\mathbf{p}+\sin(\theta)\mathbf{N}\mathbf{p}=\mathbf{R}\mathbf{p}\]</span>
+其中<span
+class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>。上面的等式需要注意到<span
+class="math inline">\((\mathbf{n}\cdot\mathbf{p})\mathbf{n}=\mathbf{p}+\mathbf{N}^2\mathbf{p}\)</span>。</p>
+<p>所以，使用Rodrigues'旋转公式，只需要首先令<span
+class="math inline">\(\mathbf{N}=\begin{bmatrix}0&amp;-n_z&amp;n_y\\n_z&amp;0&amp;-n_x\\-n_y&amp;n_x&amp;0\end{bmatrix}\)</span>，然后再计算<span
+class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>，就能得到旋转后的向量为<span
+class="math inline">\(\mathbf{p}&#39;=\mathbf{R}\mathbf{p}\)</span>。</p>
+<h1 id="方法二坐标轴对齐">方法二：坐标轴对齐</h1>
+<p>既然直接绕着任意轴旋转比较困难，那为啥不先进行整个空间的旋转，把旋转轴旋转为坐标轴，这样就能把向量绕任意轴旋转转化为向量绕标准坐标轴旋转。这就是我们非常熟悉的问题了。</p>
+<p>假定我们考虑的是三维空间的旋转（对更高维的情况容易推论），即标准坐标系为<span
+class="math inline">\(\mathbf{x}=(1,0,0),\mathbf{y}=(0,1,0),\mathbf{z}=(0,0,1)\)</span>。我们有旋转轴<span
+class="math inline">\(\mathbf{n},\Vert\mathbf{n}\Vert=1\)</span>和待旋转向量<span
+class="math inline">\(\mathbf{p}\)</span>。</p>
+<p>首先，我们构建一个坐标系<span
+class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>，该坐标系的一个轴就是<span
+class="math inline">\(\mathbf{n}\)</span>，我们利用叉乘实现：</p>
+<p><span class="math display">\[
+\mathbf{u}=\mathbf{n},\qquad
+\mathbf{v}=\frac{\mathbf{n}\times\mathbf{p}}{\Vert\mathbf{n}\times\mathbf{p}\Vert},\qquad
+\mathbf{w}=\mathbf{n}\times \mathbf{v}
+\]</span></p>
+<p>现在，我们要把坐标轴<span
+class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>分别旋转到坐标轴<span
+class="math inline">\(\mathbf{x},\mathbf{y},\mathbf{z}\)</span>的位置，这可以用下面的旋转矩阵实现：</p>
+<p><span class="math display">\[
+\mathbf{Q}=
+\begin{bmatrix}
+\mathbf{u}\\
+\mathbf{v}\\
+\mathbf{w}
+\end{bmatrix}=
+\begin{bmatrix}
+x_u&amp;y_u&amp;z_u\\
+x_v&amp;y_v&amp;z_v\\
+x_w&amp;y_w&amp;z_w
+\end{bmatrix}
+\]</span></p>
+<p>很容易验证：<span
+class="math inline">\(\mathbf{x}=\mathbf{Q}\mathbf{u},\mathbf{y}=\mathbf{Q}\mathbf{v},\mathbf{z}=\mathbf{Q}\mathbf{w}\)</span>，从而就有<span
+class="math inline">\(\mathbf{I}=\mathbf{Q}\mathbf{Q}^\top=\mathbf{Q}^\top\mathbf{Q}\)</span>，这就验证了<span
+class="math inline">\(\mathbf{Q}\)</span>是正交的。</p>
+<p>现在，原来的向量<span
+class="math inline">\(\mathbf{p}\)</span>就变成了<span
+class="math inline">\(\mathbf{Q}\mathbf{p}\)</span>，原来绕<span
+class="math inline">\(\mathbf{n}\)</span>旋转（也就是绕<span
+class="math inline">\(\mathbf{u}\)</span>旋转）就变成了绕<span
+class="math inline">\(\mathbf{x}\)</span>旋转，而我们知道绕<span
+class="math inline">\(\mathbf{x}\)</span>轴旋转<span
+class="math inline">\(\theta\)</span>的旋转矩阵是： <span
+class="math display">\[
+\mathbf{T}=
+\begin{bmatrix}
+1&amp;0&amp;0\\
+0&amp;\cos(\theta)&amp;-\sin(\theta)\\
+0&amp;\sin(\theta)&amp;\cos(\theta)
+\end{bmatrix}
+\]</span> 因此，旋转后的向量就是<span
+class="math inline">\(\mathbf{T}\mathbf{Q}\mathbf{p}\)</span>。现在，只需要把旋转后的向量再旋转回原来的位置就好了，我们只需要再乘以<span
+class="math inline">\(\mathbf{Q}\)</span>的逆即可。由于<span
+class="math inline">\(\mathbf{Q}\)</span>是正交的，所以有<span
+class="math inline">\(\mathbf{Q}^{-1}=\mathbf{Q}^\top\)</span>。把上面的结果合起来，就能得到最终的结果是：
+<span class="math display">\[\mathbf{p}&#39;=\mathbf{Q}^\top
+\mathbf{T}\mathbf{Q}\mathbf{p}\]</span></p>
+<h1 id="检验">检验</h1>
+<p>现在我们用代码来检验一下上述三种方法是否能得到同样的结果，以及它们的运算效率如何。比较的方法包括：
+1. 向量分解-向量形式 2. 向量分解-矩阵形式 3. 对标轴对齐</p>
+<p>程序在虚拟机上运行，RAM为4G，硬盘20G，处理器为2个Intel Core i5-10400F
+CPU @ 2.90GHz。</p>
+<p>代码如下： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;eigen3/Eigen/Eigen&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> PI = <span class="number">3.1415926</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the vector form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeVector</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f rotatedVector = <span class="built_in">cos</span>(rotationAngle) * p </span><br><span class="line">                                + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * (n.<span class="built_in">dot</span>(p)) * n </span><br><span class="line">                                + <span class="built_in">sin</span>(rotationAngle) * (n.<span class="built_in">cross</span>(p));</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the vector form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the matrix form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeMatrix</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Matrix3f N = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">N &lt;&lt; <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">2</span>), <span class="built_in">n</span>(<span class="number">1</span>),</span><br><span class="line">     <span class="built_in">n</span>(<span class="number">2</span>), <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">0</span>),</span><br><span class="line">     -<span class="built_in">n</span>(<span class="number">1</span>), <span class="built_in">n</span>(<span class="number">0</span>), <span class="number">0</span>;</span><br><span class="line">Eigen::Matrix3f R = Eigen::Matrix3f::<span class="built_in">Identity</span>() + <span class="built_in">sin</span>(rotationAngle) * N + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * N * N;</span><br><span class="line">Eigen::Vector3f rotatedVector = R * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the matrix form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using axis coordination</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AxisCoordination</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f crossed = n.<span class="built_in">cross</span>(p);</span><br><span class="line">Eigen::Vector3f u = n;</span><br><span class="line">Eigen::Vector3f v = crossed / crossed.<span class="built_in">norm</span>();</span><br><span class="line">Eigen::Vector3f w = n.<span class="built_in">cross</span>(v);</span><br><span class="line">Eigen::Matrix3f Q = Eigen::Matrix3f::<span class="built_in">Identity</span>(), T = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">0</span>) = u;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">1</span>) = v;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">2</span>) = w;</span><br><span class="line">T &lt;&lt; <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">cos</span>(rotationAngle), -<span class="built_in">sin</span>(rotationAngle),</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">sin</span>(rotationAngle), <span class="built_in">cos</span>(rotationAngle);</span><br><span class="line">Eigen::Vector3f rotatedVector = Q.<span class="built_in">transpose</span>() * T * Q * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: axis coordination. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> angle = <span class="number">60</span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">p</span><span class="params">(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>)</span></span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">n</span><span class="params">(<span class="number">2.0</span>, <span class="number">8.6</span>, <span class="number">-3.1</span>)</span></span>;</span><br><span class="line">    n.<span class="built_in">normalize</span>(); </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// execute functions</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The vector p is (&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;The rotation axis n is (&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">DecomposeVector</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">DecomposeMatrix</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">AxisCoordination</span>(n, p, angle);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 输出是： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.213724</span>,<span class="number">0.919011</span>,<span class="number">-0.331271</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.016354</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">3.57449</span>,<span class="number">0.643966</span>,<span class="number">0.899062</span>). The time used is <span class="number">0.016642</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.021062</span></span></span><br></pre></td></tr></table></figure> 再多试几组：
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">-654.1</span>,<span class="number">12.88</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.995044</span>,<span class="number">0.0136933</span>,<span class="number">-0.0984901</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.015503</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">-59.7309</span>,<span class="number">-338.298</span>,<span class="number">-556.777</span>). The time used is <span class="number">0.015297</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.021547</span></span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">32.5</span>,<span class="number">45.1</span>,<span class="number">-2.2</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.57735</span>,<span class="number">0.57735</span>,<span class="number">0.57735</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.015558</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">5.16667</span>,<span class="number">52.4667</span>,<span class="number">17.7667</span>). The time used is <span class="number">0.015215</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.020841</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">666</span>,<span class="number">0</span>,<span class="number">0</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.01517</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">0</span>,<span class="number">666</span>,<span class="number">0</span>). The time used is <span class="number">0.015402</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.020898</span></span></span><br></pre></td></tr></table></figure>
+<p>最后一组出现了精度问题，所以代码中还应该加入判断 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">abs</span>(value - <span class="built_in">round</span>(value)) &lt; epsilon)</span><br><span class="line">     value = <span class="built_in">round</span>(value);</span><br></pre></td></tr></table></figure></p>
+<p>从上面的例子来看，<strong>向量分解-向量形式</strong>与<strong>向量分解-矩阵形式</strong>运行效率是一致的，而<strong>坐标轴对齐</strong>的效率较低，这主要是由计算三次矩阵乘法导致的。</p>
+]]></content>
+      <categories>
+        <category>数学 - 图形学</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
         <tag>随笔</tag>
         <tag>数学</tag>
       </tags>
@@ -774,174 +942,6 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
       </tags>
   </entry>
   <entry>
-    <title>向量绕任意轴旋转的简单推导</title>
-    <url>/2021/06/07/%E5%90%91%E9%87%8F%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E7%AE%80%E5%8D%95%E6%8E%A8%E5%AF%BC/</url>
-    <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
-<span id="more"></span>
-<h1 id="方法一向量分解">方法一：向量分解</h1>
-<h2 id="推导过程">推导过程</h2>
-<p>首先介绍一个最容易理解的方法——向量分解。假设要旋转的向量是<span
-class="math inline">\(\mathbf{p}\)</span>，要旋转的轴是<span
-class="math inline">\(\mathbf{n}\)</span>，是一个单位向量，要旋转的角度是<span
-class="math inline">\(\theta\)</span>。再设旋转后的轴是<span
-class="math inline">\(\mathbf{p}&#39;\)</span>。</p>
-<p>现在我们把<span
-class="math inline">\(\mathbf{p}\)</span>分解为两个向量，一个平行于<span
-class="math inline">\(\mathbf{n}\)</span>，另一个垂直于<span
-class="math inline">\(\mathbf{n}\)</span>，即： <span
-class="math display">\[\mathbf{p}=\mathbf{p}_\perp+\mathbf{p}_\parallel\]</span>
-容易知道，平行于<span
-class="math inline">\(\mathbf{n}\)</span>的分向量<span
-class="math inline">\(\mathbf{p}_\parallel\)</span>就是<span
-class="math inline">\(\mathbf{p}\)</span>在<span
-class="math inline">\(\mathbf{n}\)</span>上的投影（推导过程略）： <span
-class="math display">\[\mathbf{p}_\parallel=(\mathbf{n}\cdot\mathbf{p})\mathbf{n}\]</span>
-从而就能得到<span class="math inline">\(\mathbf{p}_\perp\)</span>：
-<span
-class="math display">\[\mathbf{p}_\perp=\mathbf{p}-\mathbf{p}_\parallel\]</span>
-同样地可以将旋转后的向量分解： <span
-class="math display">\[\mathbf{p}&#39;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\]</span>
-显然，旋转后的向量对应的平行分量<span
-class="math inline">\(\mathbf{p}&#39;_\parallel\)</span>是不变的： <span
-class="math display">\[\mathbf{p}&#39;_\parallel=\mathbf{p}_\parallel\]</span>
-这里的关键在于求垂直分量<span
-class="math inline">\(\mathbf{p}&#39;_\perp\)</span>。</p>
-<figure>
-<img data-src="/images/arbitrary_rotation/1.png"
-alt="将向量分解为一个平行向量和一个垂直向量" />
-<figcaption
-aria-hidden="true">将向量分解为一个平行向量和一个垂直向量</figcaption>
-</figure>
-<p>根据已知的旋转轴<span
-class="math inline">\(\mathbf{n}\)</span>，我们就知道它对应的平面<span
-class="math inline">\(V\)</span>，而向量<span
-class="math inline">\(\mathbf{p}\)</span>与<span
-class="math inline">\(\mathbf{p}&#39;\)</span>的垂直分量就在该平面内。该平面的维度是2，因此只需要找到两个基向量，就可以通过这两个基向量的线性组合表示该平面的任意向量。</p>
-<p>其中一个基向量我们已经找到了，就是<span
-class="math inline">\(\mathbf{p}_\perp\)</span>，而另一个我们可以通过<span
-class="math inline">\(\mathbf{n}\)</span>与<span
-class="math inline">\(\mathbf{p}_\perp\)</span>的叉乘实现，得到的向量与<span
-class="math inline">\(\mathbf{n}\)</span>和<span
-class="math inline">\(\mathbf{p}_\perp\)</span>垂直，且在平面<span
-class="math inline">\(V\)</span>内。且注意到： <span
-class="math display">\[\mathbf{n}\times
-\mathbf{p}_\perp=\mathbf{n}\times(\mathbf{p}-\mathbf{p}_\parallel)=\mathbf{n}\times\mathbf{p}-\mathbf{n}\times\mathbf{p}_\parallel=\mathbf{n}\times\mathbf{p}\]</span>
-并且有： <span class="math display">\[\|\mathbf{n}\times
-\mathbf{p}\|=\|\mathbf{n}\times
-\mathbf{p}_\perp\|=\|\mathbf{n}\|\cdot\|\mathbf{p}_\perp\|\cdot\sin(\pi/2)=\|\mathbf{p}_\perp\|\]</span>
-进而我们能导出旋转后的垂直分量<span
-class="math inline">\(\mathbf{p}&#39;_\perp\)</span>： <span
-class="math display">\[\mathbf{p}&#39;_\perp=\cos(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{p}_\perp}{\|\mathbf{p}_\perp\|}+\sin(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{n}\times\mathbf{p}}{\|\mathbf{n}\times\mathbf{p}\|}=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})\]</span>
-最后，我们得到旋转后的向量<span
-class="math inline">\(\mathbf{p}&#39;\)</span>：</p>
-<p><span class="math display">\[
-\begin{aligned}
-\mathbf{p}&#39;&amp;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\\
-&amp;=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})+\mathbf{p}_\parallel\\
-&amp;=\cos(\theta)(\mathbf{p}-\mathbf{p}_\parallel)+\mathbf{p}_\parallel+\sin(\theta)(\mathbf{n}\times\mathbf{p})\\
-&amp;=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p})
-\end{aligned}
-\]</span></p>
-<p>搞定！</p>
-<h2 id="矩阵形式">矩阵形式</h2>
-<p>我们知道向量的叉乘可以表示为： <span class="math display">\[
-\mathbf{n}\times\mathbf{p}=
-\begin{bmatrix}
-0&amp;-n_z&amp;n_y\\
-n_z&amp;0&amp;-n_x\\
--n_y&amp;n_x&amp;0
-\end{bmatrix}
-\mathbf{p}=\mathbf{N}\mathbf{p}
-\]</span> 注意到，矩阵<span
-class="math inline">\(\mathbf{N}\)</span>有如下的性质： <span
-class="math display">\[\mathbf{N}(\mathbf{N}\mathbf{p})=\mathbf{N}^2\mathbf{p}=\mathbf{n}\times(\mathbf{n}\times\mathbf{p})\]</span>
-所以我们可以把旋转公式写成下述形式： <span
-class="math display">\[\mathbf{p}&#39;=\mathbf{p}+(1-\cos(\theta))\mathbf{N}^2\mathbf{p}+\sin(\theta)\mathbf{N}\mathbf{p}=\mathbf{R}\mathbf{p}\]</span>
-其中<span
-class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>。上面的等式需要注意到<span
-class="math inline">\((\mathbf{n}\cdot\mathbf{p})\mathbf{n}=\mathbf{p}+\mathbf{N}^2\mathbf{p}\)</span>。</p>
-<p>所以，使用Rodrigues'旋转公式，只需要首先令<span
-class="math inline">\(\mathbf{N}=\begin{bmatrix}0&amp;-n_z&amp;n_y\\n_z&amp;0&amp;-n_x\\-n_y&amp;n_x&amp;0\end{bmatrix}\)</span>，然后再计算<span
-class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>，就能得到旋转后的向量为<span
-class="math inline">\(\mathbf{p}&#39;=\mathbf{R}\mathbf{p}\)</span>。</p>
-<h1 id="方法二坐标轴对齐">方法二：坐标轴对齐</h1>
-<p>既然直接绕着任意轴旋转比较困难，那为啥不先进行整个空间的旋转，把旋转轴旋转为坐标轴，这样就能把向量绕任意轴旋转转化为向量绕标准坐标轴旋转。这就是我们非常熟悉的问题了。</p>
-<p>假定我们考虑的是三维空间的旋转（对更高维的情况容易推论），即标准坐标系为<span
-class="math inline">\(\mathbf{x}=(1,0,0),\mathbf{y}=(0,1,0),\mathbf{z}=(0,0,1)\)</span>。我们有旋转轴<span
-class="math inline">\(\mathbf{n},\Vert\mathbf{n}\Vert=1\)</span>和待旋转向量<span
-class="math inline">\(\mathbf{p}\)</span>。</p>
-<p>首先，我们构建一个坐标系<span
-class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>，该坐标系的一个轴就是<span
-class="math inline">\(\mathbf{n}\)</span>，我们利用叉乘实现：</p>
-<p><span class="math display">\[
-\mathbf{u}=\mathbf{n},\qquad
-\mathbf{v}=\frac{\mathbf{n}\times\mathbf{p}}{\Vert\mathbf{n}\times\mathbf{p}\Vert},\qquad
-\mathbf{w}=\mathbf{n}\times \mathbf{v}
-\]</span></p>
-<p>现在，我们要把坐标轴<span
-class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>分别旋转到坐标轴<span
-class="math inline">\(\mathbf{x},\mathbf{y},\mathbf{z}\)</span>的位置，这可以用下面的旋转矩阵实现：</p>
-<p><span class="math display">\[
-\mathbf{Q}=
-\begin{bmatrix}
-\mathbf{u}\\
-\mathbf{v}\\
-\mathbf{w}
-\end{bmatrix}=
-\begin{bmatrix}
-x_u&amp;y_u&amp;z_u\\
-x_v&amp;y_v&amp;z_v\\
-x_w&amp;y_w&amp;z_w
-\end{bmatrix}
-\]</span></p>
-<p>很容易验证：<span
-class="math inline">\(\mathbf{x}=\mathbf{Q}\mathbf{u},\mathbf{y}=\mathbf{Q}\mathbf{v},\mathbf{z}=\mathbf{Q}\mathbf{w}\)</span>，从而就有<span
-class="math inline">\(\mathbf{I}=\mathbf{Q}\mathbf{Q}^\top=\mathbf{Q}^\top\mathbf{Q}\)</span>，这就验证了<span
-class="math inline">\(\mathbf{Q}\)</span>是正交的。</p>
-<p>现在，原来的向量<span
-class="math inline">\(\mathbf{p}\)</span>就变成了<span
-class="math inline">\(\mathbf{Q}\mathbf{p}\)</span>，原来绕<span
-class="math inline">\(\mathbf{n}\)</span>旋转（也就是绕<span
-class="math inline">\(\mathbf{u}\)</span>旋转）就变成了绕<span
-class="math inline">\(\mathbf{x}\)</span>旋转，而我们知道绕<span
-class="math inline">\(\mathbf{x}\)</span>轴旋转<span
-class="math inline">\(\theta\)</span>的旋转矩阵是： <span
-class="math display">\[
-\mathbf{T}=
-\begin{bmatrix}
-1&amp;0&amp;0\\
-0&amp;\cos(\theta)&amp;-\sin(\theta)\\
-0&amp;\sin(\theta)&amp;\cos(\theta)
-\end{bmatrix}
-\]</span> 因此，旋转后的向量就是<span
-class="math inline">\(\mathbf{T}\mathbf{Q}\mathbf{p}\)</span>。现在，只需要把旋转后的向量再旋转回原来的位置就好了，我们只需要再乘以<span
-class="math inline">\(\mathbf{Q}\)</span>的逆即可。由于<span
-class="math inline">\(\mathbf{Q}\)</span>是正交的，所以有<span
-class="math inline">\(\mathbf{Q}^{-1}=\mathbf{Q}^\top\)</span>。把上面的结果合起来，就能得到最终的结果是：
-<span class="math display">\[\mathbf{p}&#39;=\mathbf{Q}^\top
-\mathbf{T}\mathbf{Q}\mathbf{p}\]</span></p>
-<h1 id="检验">检验</h1>
-<p>现在我们用代码来检验一下上述三种方法是否能得到同样的结果，以及它们的运算效率如何。比较的方法包括：
-1. 向量分解-向量形式 2. 向量分解-矩阵形式 3. 对标轴对齐</p>
-<p>程序在虚拟机上运行，RAM为4G，硬盘20G，处理器为2个Intel Core i5-10400F
-CPU @ 2.90GHz。</p>
-<p>代码如下： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;eigen3/Eigen/Eigen&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> PI = <span class="number">3.1415926</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the vector form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeVector</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f rotatedVector = <span class="built_in">cos</span>(rotationAngle) * p </span><br><span class="line">                                + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * (n.<span class="built_in">dot</span>(p)) * n </span><br><span class="line">                                + <span class="built_in">sin</span>(rotationAngle) * (n.<span class="built_in">cross</span>(p));</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the vector form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the matrix form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeMatrix</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Matrix3f N = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">N &lt;&lt; <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">2</span>), <span class="built_in">n</span>(<span class="number">1</span>),</span><br><span class="line">     <span class="built_in">n</span>(<span class="number">2</span>), <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">0</span>),</span><br><span class="line">     -<span class="built_in">n</span>(<span class="number">1</span>), <span class="built_in">n</span>(<span class="number">0</span>), <span class="number">0</span>;</span><br><span class="line">Eigen::Matrix3f R = Eigen::Matrix3f::<span class="built_in">Identity</span>() + <span class="built_in">sin</span>(rotationAngle) * N + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * N * N;</span><br><span class="line">Eigen::Vector3f rotatedVector = R * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the matrix form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using axis coordination</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AxisCoordination</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f crossed = n.<span class="built_in">cross</span>(p);</span><br><span class="line">Eigen::Vector3f u = n;</span><br><span class="line">Eigen::Vector3f v = crossed / crossed.<span class="built_in">norm</span>();</span><br><span class="line">Eigen::Vector3f w = n.<span class="built_in">cross</span>(v);</span><br><span class="line">Eigen::Matrix3f Q = Eigen::Matrix3f::<span class="built_in">Identity</span>(), T = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">0</span>) = u;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">1</span>) = v;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">2</span>) = w;</span><br><span class="line">T &lt;&lt; <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">cos</span>(rotationAngle), -<span class="built_in">sin</span>(rotationAngle),</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">sin</span>(rotationAngle), <span class="built_in">cos</span>(rotationAngle);</span><br><span class="line">Eigen::Vector3f rotatedVector = Q.<span class="built_in">transpose</span>() * T * Q * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: axis coordination. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> angle = <span class="number">60</span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">p</span><span class="params">(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>)</span></span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">n</span><span class="params">(<span class="number">2.0</span>, <span class="number">8.6</span>, <span class="number">-3.1</span>)</span></span>;</span><br><span class="line">    n.<span class="built_in">normalize</span>(); </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// execute functions</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The vector p is (&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;The rotation axis n is (&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">DecomposeVector</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">DecomposeMatrix</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">AxisCoordination</span>(n, p, angle);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 输出是： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.213724</span>,<span class="number">0.919011</span>,<span class="number">-0.331271</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.016354</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">3.57449</span>,<span class="number">0.643966</span>,<span class="number">0.899062</span>). The time used is <span class="number">0.016642</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.021062</span></span></span><br></pre></td></tr></table></figure> 再多试几组：
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">-654.1</span>,<span class="number">12.88</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.995044</span>,<span class="number">0.0136933</span>,<span class="number">-0.0984901</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.015503</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">-59.7309</span>,<span class="number">-338.298</span>,<span class="number">-556.777</span>). The time used is <span class="number">0.015297</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.021547</span></span></span><br></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">32.5</span>,<span class="number">45.1</span>,<span class="number">-2.2</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.57735</span>,<span class="number">0.57735</span>,<span class="number">0.57735</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.015558</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">5.16667</span>,<span class="number">52.4667</span>,<span class="number">17.7667</span>). The time used is <span class="number">0.015215</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.020841</span></span></span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">666</span>,<span class="number">0</span>,<span class="number">0</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.01517</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">0</span>,<span class="number">666</span>,<span class="number">0</span>). The time used is <span class="number">0.015402</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.020898</span></span></span><br></pre></td></tr></table></figure>
-<p>最后一组出现了精度问题，所以代码中还应该加入判断 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">abs</span>(value - <span class="built_in">round</span>(value)) &lt; epsilon)</span><br><span class="line">     value = <span class="built_in">round</span>(value);</span><br></pre></td></tr></table></figure></p>
-<p>从上面的例子来看，<strong>向量分解-向量形式</strong>与<strong>向量分解-矩阵形式</strong>运行效率是一致的，而<strong>坐标轴对齐</strong>的效率较低，这主要是由计算三次矩阵乘法导致的。</p>
-]]></content>
-      <categories>
-        <category>数学 - 图形学</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>随笔</tag>
-        <tag>数学</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>十二月的花</title>
     <url>/2020/12/22/%E5%8D%81%E4%BA%8C%E6%9C%88%E7%9A%84%E8%8A%B1/</url>
     <content><![CDATA[<p>埙吹响了海岸<br />
@@ -955,34 +955,6 @@ CPU @ 2.90GHz。</p>
 随风起舞<br />
 在阳光下<br />
 雪爱上了花</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>樱花</title>
-    <url>/2021/06/29/%E6%A8%B1%E8%8A%B1/</url>
-    <content><![CDATA[<p>昨夜 我收到一封书札<br />
-旧纸上 缀满了一朵樱花<br />
-风干的墨迹 渗透了陌生人的迷茫<br />
-我慢慢 把信合上</p>
-<p>昨夜 我写了一封书札<br />
-述说着 近日的苦闷衷肠<br />
-窗外的灯火 依旧那么辉煌<br />
-我贴上 一朵樱花珍藏</p>
-<p>同样的夜晚 走过了岁月多少锋芒<br />
-心中仍 呐喊着一个熟悉人的回响<br />
-把信 随风寄向远方<br />
-留给陌生的他 打开新的过往<br />
-愿他不要怯懦 续写昨夜的感慨<br />
-还有清晨的阳光</p>
-<p>案台旁 樱花在绽放</p>
 ]]></content>
       <categories>
         <category>随笔</category>
@@ -1057,6 +1029,50 @@ key）。</p>
         <tag>随笔</tag>
         <tag>生活</tag>
         <tag>影评</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>樱花</title>
+    <url>/2021/06/29/%E6%A8%B1%E8%8A%B1/</url>
+    <content><![CDATA[<p>昨夜 我收到一封书札<br />
+旧纸上 缀满了一朵樱花<br />
+风干的墨迹 渗透了陌生人的迷茫<br />
+我慢慢 把信合上</p>
+<p>昨夜 我写了一封书札<br />
+述说着 近日的苦闷衷肠<br />
+窗外的灯火 依旧那么辉煌<br />
+我贴上 一朵樱花珍藏</p>
+<p>同样的夜晚 走过了岁月多少锋芒<br />
+心中仍 呐喊着一个熟悉人的回响<br />
+把信 随风寄向远方<br />
+留给陌生的他 打开新的过往<br />
+愿他不要怯懦 续写昨夜的感慨<br />
+还有清晨的阳光</p>
+<p>案台旁 樱花在绽放</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>西湖夜歌</title>
+    <url>/2021/07/09/%E8%A5%BF%E6%B9%96%E5%A4%9C%E6%AD%8C/</url>
+    <content><![CDATA[<p>霓光半遮影<br />
+湖波轻颤合韵起<br />
+半句寻谁去</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -1462,375 +1478,6 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <tag>计算机</tag>
         <tag>随笔</tag>
         <tag>数学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>西湖夜歌</title>
-    <url>/2021/07/09/%E8%A5%BF%E6%B9%96%E5%A4%9C%E6%AD%8C/</url>
-    <content><![CDATA[<p>霓光半遮影<br />
-湖波轻颤合韵起<br />
-半句寻谁去</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《电脑游戏：文本、叙事与游戏》纪要</title>
-    <url>/2021/08/14/computer-games-text-narrative-play/</url>
-    <content><![CDATA[<p>本文是《电脑游戏：文本、叙事与游戏》的简单纪要，在此备份。</p>
-<span id="more"></span>
-<h1 id="游戏与叙事">游戏与叙事</h1>
-<h2 id="叙事理论">叙事理论</h2>
-<ul>
-<li>每一个叙事都有两个部分：一个是故事，指事件的内容或串联（动作、发生的事），再加上所谓的存在物（角色、场景中的事物等）；二是话语，即内容赖以传达的方法。</li>
-<li>故事的事件在时间和空间上都是按照一定的顺序排列的，这就是所谓的<strong>情节设计</strong>。</li>
-<li>叙事事实的三个方面：故事（内容）、叙事（话语）、叙述。
-<ul>
-<li>童话《灰姑娘》中包含了一系列故事的事件，可以通过很多种不同的方式被呈现出来。</li>
-<li>叙事的关键要素：<strong>对事件加以安排</strong>，使之在话语当中凸显出来，对它们的时间长度、发生频率和次序予以控制。</li>
-</ul></li>
-<li>隐含作者与隐含读者。</li>
-</ul>
-<h2 id="叙事理论与博德之门">叙事理论与《博德之门》</h2>
-<ul>
-<li>游戏包含了一系列由玩家所触发的新事件，允许玩家实时行动；也包含了过去的事件，已经被安排好的。</li>
-<li>事件被提前预制好，玩家是做出情节安排的人。</li>
-<li>同步叙事：向玩家传达屏幕上的行动、事件、得分和对话。</li>
-</ul>
-<h2 id="叙事的限度">叙事的限度</h2>
-<ul>
-<li>叙事理论追问的是：故事情节是从何种角度被描述的，我们是通过谁的眼睛了解叙事当中的事件的，又是谁的声音在传递信息，是谁在策动事件，谁来决定事件的持续时间、发生频率和次序。</li>
-<li>《博德之门》以一种玩家无法操纵的形式讲述事件，以过场动画、NPC的对白和角色简介的方式被编织在一起，并与玩家发生联系。</li>
-<li><strong>已然事件</strong>与<strong>实时事件</strong>。</li>
-</ul>
-<h1 id="游戏与快感">游戏与快感</h1>
-<ul>
-<li>电脑游戏究竟要驱使玩家去做什么。</li>
-</ul>
-<h2 id="角色的生成">角色的生成</h2>
-<ul>
-<li>选择外观、种族、职业、阵营、声音、名字。通过这些选择，让玩家了解游戏玩法与背景，同时限定了一系列数值。</li>
-</ul>
-<h2 id="角色特征和游戏">角色、特征和游戏</h2>
-<ul>
-<li>角色既包含了审美层面和故事层面的偏好，也涉及战略方面的考虑。人物的特征会影响（约束）其行为。</li>
-<li>但是玩家的风格和喜好决定了角色内在的可能性以怎样的形式表达出来，或怎样被压抑。【如果想要增强角色自身的特征，应该限制玩家的可操作性，如从数值、剧情、环境、探索度等层面。】</li>
-<li>在电脑游戏中，玩家的input和游戏所提供的特征描述之间的互动可能引发不可预测的行为，与某个角色表面的扁平性发生矛盾。因此，仅仅按照设定的属性和特征去描述一个游戏化身或角色是错误的。【可以通过“如果不这么做，游戏就难以进行下去”的思路引导玩家进行特定的操作。】</li>
-</ul>
-<h2 id="沉浸卷入与心流体验">沉浸、卷入与“心流”体验</h2>
-<ul>
-<li>玩家将游戏系统看做一个整体，但是在这一游戏系统中，玩家还必须关注一系列次级系统，那就是角色的行动、武器、物品和技能。</li>
-<li>在文学研究中，<strong>沉浸感</strong>是指读者所享受到的放弃批判思考的全神贯注。认知心理学的<strong>图式理论</strong>使我们能够感知周遭的事物并进行有效的处理，这一能力有赖于此前通过阅读、个人经验和别人的建议而建立起来的对类似事件的已有知识储备。【也就是说，沉浸感实际上是一种<strong>记忆唤醒机制</strong>？】</li>
-<li>只要故事、背景和界面保持统一的图式，玩家的审美体验就能在很大程度上保持沉浸感。</li>
-<li><strong>卷入</strong>，是一种经过更多思考的批判式的参与方式。
-<ul>
-<li>当读者面临不熟悉的题材，或者文本很难左右其反应时，他们被驱使着一再重读或反复斟酌其中的信息。</li>
-</ul></li>
-<li>沉浸的快感来源于我们伴随某种熟悉图式的退潮和涌动而完全专注其中。卷入的快感则来自我们从<strong>文本之外的视点</strong>去识别一件作品如何将<strong>互相矛盾</strong>的图式翻转、连接。【“相互矛盾”可以是新的情节、新的人物、新的动作，总之与既有的图式产生了区别之处。】
-<ul>
-<li>当屏幕上的场景要求即时的、固定的反应时——比如思考、凝视、阅读、击打、探索、行走——就促使玩家进入沉浸状态。</li>
-<li>当玩家不得不与屏幕上的行为逐渐拉开距离时，就进入卷入的状态。可能是由于角色的特性、一条迷失的小路、一个强大的敌人等。这时候就要寻求解决之道：重复行为——&gt;重新经历——&gt;查找攻略。</li>
-<li>沉浸和卷入相互依赖，玩家在流动性和安逸心情之间切换，游戏世界由此塑造体验。【战神的战斗、探索、叙事是一种沉浸，而其中的解密、情节、道具、新的敌人又是卷入。<strong>不断创造卷入，然后将卷入转化为沉浸，再创造新的卷入。</strong>】</li>
-</ul></li>
-<li>随着游戏难度的提高，玩家的应对能力也在进步，游戏需要与玩家的水准相匹配。这时候玩家总说自己“处于巅峰状态”。【战神。】</li>
-</ul>
-<h1 id="空间导航与情绪反应">空间、导航与情绪反应</h1>
-<h2 id="异域镇魂曲与寂静岭">《异域镇魂曲》与《寂静岭》</h2>
-<ul>
-<li>《寂静岭》的音效使之恐怖感上升。</li>
-<li>《寂静岭》的<strong>线性结构能让游戏始终保持一定的节奏和紧张感</strong>。</li>
-</ul>
-<h2 id="导航迷阵根茎与迷宫">导航：迷阵、根茎与迷宫</h2>
-<ul>
-<li>空间导航有两种模式：迷阵与根茎。
-<ul>
-<li>迷阵意味着在向唯一的出口有条件地前进，缺点是玩家只能被引导到预先设定的唯一出口。</li>
-<li>根茎并没有特定的方向比其他方向更有利，缺点是结构的缺失。</li>
-<li>游戏当中的迷宫应当处于二者之间：要实现的目标应足够强大，引导玩家前进；同时设定开放式结局，令玩家可自由探索。【巫师三和BOTW的一大共性（实际上Sekiro也是）：<strong>主线分支化</strong>，鼓励玩家自主选择、探索。核心要点是：<strong>自由地引导</strong>。】</li>
-</ul></li>
-<li>恐怖效果地生成总是基于“一个简单而明显地基本公式：<strong>怪物使常态遭到威胁</strong>。”
-<ul>
-<li>《寂静岭》中，常态被怪异之物威胁并摧毁。</li>
-<li>《异域镇魂曲》中，怪物本身就是常态。</li>
-</ul></li>
-</ul>
-<h2 id="游戏文本与遍历函数">游戏文本与遍历函数</h2>
-<ul>
-<li>呈现于受众面前的称为“脚本单元”：是不同玩家将游戏中的信息“玩出来”的。</li>
-<li>存在于文本之中的称为“文本单元”：是游戏提供的所有潜在信息。</li>
-<li>使脚本单元自文本单元中显露或生成并呈现于玩家面前的机制，叫做“<strong>遍历函数</strong>”。</li>
-<li>遍历函数的几种变体：活跃性、可确定性、可访性、连接性。
-<ul>
-<li>活跃性（与文本单元和脚本单元的数量与稳定性有关）：《异域镇魂曲》比《寂静岭》更加活跃少停滞，因为前者任务更多，且一部分是强制性的，而且文本单元更丰富，玩家选择和组建的脚本单元的可能性也都更多。</li>
-<li>可确定性（给定状况相同反应是否总是导致相同的结果）：《异域镇魂曲》比《寂静岭》更加不确定。</li>
-<li>可访性（玩家是否能在游戏中任意一点进入游戏文本）：《异域镇魂曲》比《寂静岭》可访性更强。</li>
-<li>连接性（文本单元间时空的连接）：《异域镇魂曲》比《寂静岭》连接性更强。</li>
-</ul></li>
-<li>《寂静岭》更加稳定、有节制、更具确定性的特点塑造了它迷阵般的结构。《异域镇魂曲》较富于开放性的遍历模式则表现出如根茎般的扩张趋势。</li>
-</ul>
-<h3 id="替身">替身</h3>
-<ul>
-<li>沉浸分为感知层面的沉浸和心理层面的沉浸。
-<ul>
-<li>感知层面：游戏体验垄断了玩家的感觉，如听觉、视觉。</li>
-<li>心理层面：玩家全神贯注地投入到想象中的游戏世界去。</li>
-</ul></li>
-<li>《异域镇魂曲》的等距视角和游戏主角本质上的复合性在感知和行为两方面都大大消解了玩家与化身的同一感（削弱了感知层面的沉浸）。但游戏以另一种方式令玩家沉浸其中：大量描述性文本的阅读，以及关于玩家对游戏主角、其作战团队及其物品的巧妙运用的细节信息的缓慢积累。【古剑三】</li>
-<li>《寂静岭》是感知层面的沉浸，各种即时状态。</li>
-<li>《异域镇魂曲》拒绝被匆忙对待，而《寂静岭》催促着玩家从一个地方到另一个地方，抵达终点。</li>
-</ul>
-<p>（更多细节，侧重代入感，带来感知沉浸）小&lt;---------视距---------&gt;大（更多信息，侧重策略性）</p>
-<h1 id="角色扮演">角色扮演</h1>
-<h2 id="社会符号学视角">社会符号学视角</h2>
-<ul>
-<li>图像语法：再现性（再现这个世界）、互动性（允许文本的作者和读者之间的沟通，以及文本中虚构人物与读者之间的沟通）、组织性（使文本各要素连贯一致，由此组合起来以进一步实现它们承载的含义）。</li>
-<li>多模态理论：文本如何将不同的符号模态——如讲话、书写、声音和图像——组合在一起，游戏是多模态的文本，因此应该思考，动画、视觉设计、音乐、文字文本和声效等多种沟通模态的联合是如何实现前述三个主要功能。</li>
-</ul>
-<h2 id="克劳德大英雄">克劳德——大英雄</h2>
-<ul>
-<li>克劳德这样的角色在相当大的程度上利用了民间文化、口头叙事和罗曼司等传统形式，通过精心构建的寓言故事，为日常生活中的过渡仪式和苦难提供了情感慰藉、道德争论和心灵拷问。</li>
-<li>电脑游戏是被翁称为高科技社会“次级口述”的案例之一，它是口述文化这种思维模式的进化，基础是文学和以技术为媒介的文化。</li>
-</ul>
-<h2 id="克劳德数码傀儡">克劳德——数码傀儡？</h2>
-<ul>
-<li>将克劳德这样的文本建构视为一种固定的对象却可能导致我们忽视玩家—化身这一重联系，甚至是忽略普遍意义上的文本的含义。</li>
-<li>玩家同时也是一种文化资源，是阐释者，也是粉丝艺术和粉丝写作当中对游戏资源进行改编的人。</li>
-</ul>
-<h2 id="化身的操纵">化身的操纵</h2>
-<ul>
-<li>玩家既是化身，又不是化身，这是游戏体验的核心。</li>
-<li>文化研究强调能动性（agency）这一概念，这是读者主动阅读时所具备的积极素质，因此我们可以认为对化身行动的操纵程度可以等同于更为广泛意义上的掌握文化权力的程度。
-<ul>
-<li>我们是自主有力的社会行为者：可以选择为玩家可以参与文本的程度达到前所未有的地步而欢呼。</li>
-<li>我们仅仅是他者的再现：玩家只能接受并操纵由公司设定的游戏文本决定提供给他们的角色。</li>
-</ul></li>
-<li>随着游戏在不同时刻在给予性结构或需求性结构上的转变，玩家的参与方式也将发生变化。战斗可能是最为偏向需求性结构的情况，此时游戏系统似乎称为游戏的全部。</li>
-</ul>
-<h2 id="多模态的给予与需求">多模态的给予与需求</h2>
-<ul>
-<li>文本产生的需求由文本当中的不同模态通过相互组合以不同方式实现。
-<ul>
-<li>如音乐节奏的变化暗示着游戏文本变化。</li>
-<li>如图像的变换预示着危险的迫近。</li>
-<li>此时玩家具有双重身份：一方面，玩家与化身融为一体，二者皆为行动者；另一方面，玩家又像是一个操纵木偶的人，拉着化身的线，甚至是某种类型的作者，作为建立在规则之上的因果结构的一部分，以一种受限语言进行书写。</li>
-</ul></li>
-<li>镜头元素同样有助于文本互动。
-<ul>
-<li>置于较低处，好像和角色并肩作战，去除了需求性结构所产生的木偶操纵般的感觉。如果我们被赋予了操纵能力，同时视角又较高，则操纵的感觉会相当强烈。在需求性结构处于最紧张的时刻，将镜头拉低和拉近能够使玩家不失时机地与角色接近。【战神4】</li>
-<li>镜头通常置于角色上方固定的位置，以提供操纵感，让玩家像对待、培养宠物一样对待化身，提供了给予性结构，并提供一定的稳定性。</li>
-</ul></li>
-<li>对游戏世界的探索感得自一种更弱的需求形式——诱导而非命令。【只能在有强烈需求的时候才能给予玩家强烈的暗示，或命令；而在一般情况下，需求更多给予微弱的引导。这一方面战神做得很好。】</li>
-<li>【游戏需要不断地、交叉地提供需求性结构和给予性结构。】</li>
-</ul>
-<h1 id="文本再创作网络上的粉丝文化">文本再创作：网络上的粉丝文化</h1>
-<ul>
-<li>在游戏的需求性结构（搅动因果链条，推动你跨越失事列车或迷宫实验室的解密关卡，使你陷入紧张情绪之中，让你迷路和让你在面临众多敌人的时候产生焦虑感）和给予性结构（安排前后语境、风景、背景故事、动机和心理，将读者-受众拉入文本的移情网络和想象性延展空间中，和传统叙事中的运作方式一样）之间存在一种辩证关系，正是二者的结合提供了快感，而在以游戏为核心的粉丝创作中，二者将以相当不同的方式结合在一起。</li>
-<li>粉丝是如何使用游戏系统的？游戏攻略、创意性写作、漫画。</li>
-</ul>
-<h2 id="游戏攻略作者">游戏攻略作者</h2>
-<ul>
-<li>这是一种探索游戏系统本身的快感。</li>
-<li>他们用祈使句（第二人称）控制彼此的游戏行为——这是游戏攻略的特征。</li>
-</ul>
-<h2 id="虚构文学写作者">虚构文学写作者</h2>
-<ul>
-<li>过场动画属于给予性结构——它们只作叙事性陈述，并无互动性。过场动画可能表现出作为核心的游戏和外层叙事之间的分离。</li>
-</ul>
-<h2 id="诗人">诗人</h2>
-<ul>
-<li>直接阐释了游戏主角的情感，这是游戏文本无法做到的。【现代游戏在有面捕和动捕之后是可以实现的。】</li>
-</ul>
-<h2 id="三无漫画家">“三无”漫画家</h2>
-<h2 id="结论">结论</h2>
-<ul>
-<li>在围绕《FF7》的粉丝创作当中，再现系统和游戏系统是彼此分离的。</li>
-<li>以再现系统复制对玩家与化身的第一人称认同是可能的，但更为常见的还是借助游戏再现系统所提供的可能性，生产出第三人称的视角、叙事和形象创造，并为了自己获得快乐而对其进行挑选、放大或转换。【采用第一人称就限制了创作空间，而第三人称视角提供了无限大的创作空间，不仅仅限于游戏文本所提供的现有信息。】</li>
-</ul>
-<h1 id="动机与网络游戏">动机与网络游戏</h1>
-<h2 id="再现动机欢迎来到鲁比卡世界">再现动机：欢迎来到鲁比卡世界</h2>
-<ul>
-<li>《混乱在线》以科幻小说为基础进行设定，在游戏网站上，鲁比卡世界的故事片段以各种形式呈现。</li>
-<li>我们借以创建化身的个人标准，远比我们最初所能意识到的更能暴露自身经历及偏好。</li>
-</ul>
-<h2 id="娱乐动机游戏目标与策略">娱乐动机：游戏、目标与策略</h2>
-<ul>
-<li>娱乐动机相关的要素：战略、目标、即时事件、机遇、规则、技能、探险、升级、数值。</li>
-<li>娱乐动机更强调玩家所操纵的游戏中的那个化身作为游戏的一个元素存在，是一个具有战略价值的符号单元，而非一个角色。</li>
-</ul>
-<h2 id="公共动机共享鲁比卡世界">公共动机：共享鲁比卡世界</h2>
-<ul>
-<li>公共动机包括一个游戏和其他游戏之间的关系、玩家由游戏之外带入游戏的期待，以及游戏本身的共享属性。</li>
-</ul>
-<h2 id="结论-1">结论</h2>
-<ul>
-<li>游戏动机的三种类型：再现动机（戏剧性的、表演性的、修饰性的、图像化的、叙事的）、娱乐动机（指向游戏层面的：数值、升级等）和公共动机（共有的期待、广泛的网络文化、游戏所分享的外部世界）。</li>
-</ul>
-<h1 id="社交性的游戏与学习">社交性的游戏与学习</h1>
-<h2 id="探究游戏的社交性">探究游戏的社交性</h2>
-<ul>
-<li>游戏较之更为传统的、只能独自体验的媒介，比如书籍，可能是更适合儿童的娱乐形式。</li>
-<li>游戏文化可以被认为视为这样的一个竞技场：它创建了等级制度，并且欺凌群体当中的弱者。</li>
-</ul>
-<h2 id="观察玩家">观察玩家</h2>
-<ul>
-<li>游戏过程当中与其他玩家之间的互动似乎已经成为游戏乐趣的一个重要部分。</li>
-</ul>
-<h2 id="游戏">游戏</h2>
-<ul>
-<li>《凯恩的遗产：噬魂者》。</li>
-</ul>
-<h2 id="玩游戏">玩游戏</h2>
-<ul>
-<li>玩家与游戏机之间的联系可以在同伴的指导和建议下构成，这产生了一种有效的“中介性合作”。</li>
-<li>无论小组中的不同成员扮演什么角色，我们从男孩们的游戏失败的同步反应中，可以进一步证实合作游戏的集体性本质是显而易见的。</li>
-</ul>
-<h2 id="叙事与游戏">叙事与游戏</h2>
-<ul>
-<li>如何处理游戏角色的死亡对动作冒险游戏而言十分重要。《噬魂者》的处理方式是：死亡不会导致重新开始，而是进入阴间，这使得玩家在相似环境下继续游戏，且包括了许多之前不存在的道路。</li>
-<li>“管控调整”语言明显见于游戏和玩家之间以及玩家和玩家之间所交换的各种问题和命令中，“高手”完全关注于游戏系统以及对操作的指导。</li>
-<li>电脑游戏的试听魅力明显降低了在游戏过程中当面讨论的需要，如果故事已经展现在你眼前，描述故事甚至事无巨细地加以讨论就显得多余。</li>
-<li>“玩后叙事”可以更多地展示出游戏地叙事魅力。</li>
-</ul>
-<h2 id="结论-2">结论</h2>
-<ul>
-<li>作为一种指导性活动，合作性游戏比明确地尝试指导更为有效。</li>
-<li>电脑游戏嵌入了“社交外壳”，单人游戏可以转变为包含有效指导与沟通的社交活动。游戏都是那种可以形成社群和身份认同感的学习形式的绝佳例证。</li>
-<li>互动不仅指玩家和游戏之间的关系，也应包括很多玩游戏这一活动所固有的社会语境和社交关系。</li>
-</ul>
-<h1 id="游戏内外的能动性">游戏内外的能动性</h1>
-<ul>
-<li>“互动性”一次常用以解释电脑游戏的魅力。三种类型的交流模式：声明式交流、反应式交流和互动式交流。从这个角度来看动作冒险游戏，它更像式“反应式交流”而非“互动式交流”。</li>
-</ul>
-<h2 id="进入奇异世界">进入奇异世界</h2>
-<ul>
-<li>“奇异世界”的创造者和设计者表示，他想将生态困境注入作为整体的游戏，让玩家可以与之互动，并最终战胜困境。</li>
-</ul>
-<h2 id="对玩家能动性的研究">对玩家能动性的研究</h2>
-<ul>
-<li>论坛的集体性质还表现在以下事实中：论坛成员对论坛环境负有管理职责，他们鼓励参与者以相互支持而非破坏性的方式参与讨论。</li>
-</ul>
-<h2 id="个人能动性">个人能动性</h2>
-<ul>
-<li>玩家可以以多种方式参与游戏，尽管游戏具有强烈的叙事目标，但它仍可以被从视觉、情感和主题等多个层次加以解读。</li>
-</ul>
-<h2 id="代理能动性">代理能动性</h2>
-<ul>
-<li>代理能动性：人们努力以某种手段争取那些拥有资源或技能的人按照他们的意图行动，，以协助他们获得期望的结果。
-<ul>
-<li>游戏攻略。</li>
-<li>论坛讨论。</li>
-</ul></li>
-</ul>
-<h2 id="集体能动性粉丝作品">集体能动性：粉丝作品</h2>
-<ul>
-<li>文本在粉丝中被认为式一个可以被集体改变、改编和重写的过程，一个未竟的事业，而非静态对象。</li>
-<li>在粉丝艺术家的创作过程中，我们能够看到所有的能动性形式。在某种层次上，帖子表现出个人发挥其能动性和培养个人能力时所带有的焦虑、压力和挑战。粉丝们在对彼此的反馈、建议和专业技能表示支持和学习的过程中，利用了代理能动性。</li>
-</ul>
-<h2 id="结论-3">结论</h2>
-<ul>
-<li>游戏在某种程度上要求甚至依赖玩家能动性的积极发挥。对玩家能动性的关注将引导我们重新评估对以下问题的常规臆断：游戏是什么？谁在生产它？怎样生产？</li>
-</ul>
-<h1 id="电影改编与电脑游戏">电影、改编与电脑游戏</h1>
-<h2 id="恐怖类型从电影到游戏">恐怖类型——从电影到游戏</h2>
-<ul>
-<li>恐怖类型携带者“所有口头叙事的印记：主题和母题的自由转换、原型人物和背景设置，以及不断累积的续集、翻拍和模仿。某种意义上，在这个领域当中，没有原创，没有真实的或正确的文本，而只有变体。”</li>
-</ul>
-<h2 id="改编与突变怪物">改编与《突变怪物》</h2>
-<ul>
-<li>不可预知的威胁乃至有时无法辨识的敌人及其带来的焦虑，正是为玩家提供的挑战，玩过经过训练即可将之战胜。在从电影到游戏的移植中，其功能和意义均发生了改变。</li>
-<li><strong>游戏设计中最为重要的，是对空间和空间当中物品的设置与安排。</strong></li>
-<li>为已经开发出来的游戏增加一个额外关卡是一回事，而尝试去想象一个尚不存在的游戏的某个关卡是另一回事，后者要困难得多。</li>
-</ul>
-<h2 id="人物塑造与过场动画">人物塑造与过场动画</h2>
-<ul>
-<li>一款好的游戏需要为玩家提供有意义的选择，以及相应可觉察的成果。《突变怪物》的叙事性元素给游戏的目标、任务和障碍提供了背景。</li>
-<li>恐怖游戏的操作应当足够简单，因为这会在相当程度上将玩家限制在其所处的环境中，增加游戏的悬念。</li>
-<li>过场动画分为两种：预制的和实时的。必须对带有预制过场动画的游戏进行周密计划，以避免其对游戏世界的真实感造成破坏。</li>
-</ul>
-<h2 id="改编从游戏到游戏">改编——从游戏到游戏</h2>
-<ul>
-<li>目标是开发一个具有足够普适性的游戏引擎。</li>
-</ul>
-<h1 id="游戏与性别">游戏与性别</h1>
-<h2 id="作为再现的游戏">作为再现的游戏</h2>
-<ul>
-<li>有研究者认为，女性对电脑游戏的疏离主要是因为其再现性因素——游戏中女性化身的外形。</li>
-<li>在很多游戏中，被特别标志的或被边缘化以至于缺席的性别，都是女性。</li>
-<li>如果将电脑游戏视为一种文本，那么将玩家定义为一种性别主体并不可行。</li>
-</ul>
-<h2 id="娱乐性与再现性">娱乐性与再现性</h2>
-<ul>
-<li>一些游戏强调视觉呈现和故事讲述方式——它们在引人入胜的细节中呈现游戏的场景和角色，我们将之称为游戏的再现层面。</li>
-</ul>
-<h2 id="性别游戏与语境">性别、游戏与语境</h2>
-<ul>
-<li>游戏开发商或其发行商如果要争取更多的女性玩家，就要面临失去现有男性玩家的危险。</li>
-<li>那种认为女性对电脑游戏不感兴趣的想法和剥夺女性玩游戏权利的做法已经过时了，尽管某些社会因素和文化因素还将因用户的性别而持续对其产生影响。</li>
-</ul>
-<h1 id="游戏分析的实践">游戏分析的实践</h1>
-<h2 id="定义游戏">定义游戏</h2>
-<ul>
-<li>目标、障碍、资源、奖赏和惩罚等是电脑游戏的一些重要元素，同时还有一些可获得的不同种类的信息——不管是对于所有玩家，还是对于个别玩家，抑或对于游戏本身——以及这些信息逐渐显露的诸多方式。</li>
-<li>我们也关注到其他有助于探索游戏要素多样性的理论研究方法，
-<ul>
-<li>例如，可以探究游戏当中的<strong>奖赏与惩罚</strong>（游戏的“经济体系”）或游戏当中玩家可控因素与不可控因素之间的制衡关系。</li>
-<li>同样，也可以探索游戏中不同类型的<strong>障碍物</strong>。</li>
-<li>还可以分析不同类型的<strong>游戏规则</strong>。</li>
-<li>它们为我们发现一款游戏的与众不同之处，并促使我们继续思考这种差异是有意义的创新还是对规范的偏离。</li>
-</ul></li>
-<li>所有的定义都聚焦于被我们所称的游戏的<strong>娱乐层面</strong>或“<strong>游戏系统</strong>”，是它们决定一款游戏是不是可玩，以及游戏活动所遵循的限制。【游戏系统决定了游戏的定义。】</li>
-<li>对电脑游戏的分析既要关注“娱乐性”，也要关注“再现性”，以及二者之间的关系。</li>
-</ul>
-<h2 id="游戏类型">游戏类型</h2>
-<ul>
-<li>在一个典型的动作冒险游戏中，我们通过扮演游戏内设定的化身来进行游戏，该化身通常会依循特定的游戏顺序克服已被设定的的重重困难。游戏目标通常相当明确，其经济体系一般与可量化的特征相关，比如生命值和弹药。游戏玩法中最核心的是速度和精确性。玩家会在游戏过程中学习一些技巧，但化身却不会成长。【游戏路线是既定的，游戏目标是明确的，游戏玩法是速度和精确度。】</li>
-<li>与之相反，RPG游戏的主角可能是玩家通过一系列选择构建出来的，而且围绕该角色通常会有一个具有特定技能的辅助性团队。玩家可以自由地在游戏中探险，展开各种探索，并且可以不用遵照预设地步骤战胜游戏中的各种障碍。虽然游戏最终目标可能非常明确，但通常会有一些与最终目标未必相关的支线目标。以经验值和物品清单呈现出来的经济体系十分重要，但它更倾向于随玩家的表现而浮动。玩游戏的关键在于策略而非速度，而游戏体验往往具有更多反思性。【游戏路线是未定的，游戏目标是多样的，游戏玩法核心是策略。】</li>
-<li>这两者之间的关键性差异与游戏系统有关，而非在再现层面。</li>
-</ul>
-<h2 id="叙事与游戏-1">叙事与游戏</h2>
-<ul>
-<li>沉浸分为<strong>感知</strong>上的沉浸与<strong>心理</strong>上的沉浸，卷入则是玩家被迫在游戏中采用一种更为审慎和具有反思性的态度。</li>
-<li>沉浸和卷入并不互相排斥，二者间的摆动在游戏“心流”体验的产生中处于核心地位。所谓心流体验，就是玩家感到自己此刻“<strong>处在巅峰状态</strong>”，这种及其满足和欲罢不能的感觉部分由玩家在沉浸和卷入之间的转换所触发。</li>
-</ul>
-<h2 id="穿越游戏空间">穿越游戏空间</h2>
-<ul>
-<li>等距视角的RPG游戏更多依赖<strong>心理</strong>上的沉浸，而《寂静岭》中的移动视角和3D效果唤起玩家<strong>感知</strong>沉浸。</li>
-</ul>
-<h2 id="游戏动力学">游戏动力学</h2>
-<ul>
-<li>为什么游戏攻略大多采用第二人称祈使语气？因为游戏攻略大都紧密围绕游戏系统撰写，几乎不会注意<strong>再现层面</strong>，攻略是冷静的和技术性的。粉丝撰写的小说和诗歌都着墨于游戏的再现层面，倾向于借鉴游戏的过场动画，而非游戏本身的互动性元素。</li>
-</ul>
-<h2 id="走向线上">走向线上</h2>
-<ul>
-<li>玩家玩在线游戏的动机与游戏的娱乐层面和再现层面都有关系。
-<ul>
-<li><strong>再现层面</strong>的动机包括操纵视觉形象、创建角色和生成叙事。玩家构建化身的方式将折射出其现实生活的某些方面，或其内在愿望和幻想，而参与游戏的模式反映出不同的社会动机。</li>
-<li><strong>娱乐层面</strong>的动机则更多和游戏活动本身直接相关，涉及竞争、规则和游戏目标。</li>
-<li>此外还有<strong>公共动机</strong>，即玩家之间的互动，这是一种多模态呈现的现象。</li>
-</ul></li>
-</ul>
-<h2 id="游戏中的社会生活">游戏中的社会生活</h2>
-<ul>
-<li>在团队协作中，游戏的<strong>娱乐层面</strong>是主要的。</li>
-<li>游戏具有三个能动性：个人能动性、代理能动性、集体能动性。</li>
-</ul>
-<h2 id="生产游戏生产意义">生产游戏、生产意义</h2>
-<ul>
-<li>游戏设计者最为关心的问题，正是游戏的娱乐性和再现性之间的相关性和互联性。比如，角色具有再现性和娱乐性，过场动画也有娱乐性从（提供了战略上必不可少的信息）。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>游戏 - 游戏理论</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>游戏</tag>
       </tags>
   </entry>
   <entry>
@@ -2295,6 +1942,104 @@ motion</li>
 cameras)</li>
 </ul>
 <h2 id="chapter-5-camera-solutions">Chapter 5: Camera Solutions</h2>
+<h3 id="game-genre-camera-solutions">Game Genre Camera Solutions</h3>
+<ul>
+<li>FPS游戏：目标是提供沉浸式的体验
+<ul>
+<li>位置：一般与玩家视角同步，但并不是玩家眼睛的位置，因为武器、手臂等必要元素通常不能从眼睛位置可视</li>
+<li>朝向：通常与人眼可视方式一样，即free-look，有时候可帮助玩家自动调整垂直方向的朝向</li>
+<li>武器或手臂位置：武器与手臂通常可见</li>
+<li>与外部观测的不同：多人游戏中其他玩家看到的角色可能不同</li>
+<li>与三人称之间的切换：常用jump cut实现切换</li>
+<li>Zoom effects</li>
+<li>Lack of peripheral vision</li>
+<li>Aiming position</li>
+<li>Motion sickness</li>
+<li>Camera shaking</li>
+<li>Cmaera bob: 角色运动时相机的轻微移动</li>
+<li>Idle wandering</li>
+<li>Scale: 人物在高速移动时往往会scale
+尽管相机和人物之间保持相对距离，但是相机也对影响人物移动的因素相当敏感，比如在复杂的地形上，角色可能被垂直提高一段距离，这通常不到一秒钟的时间，但是仍然会对相机产生影响，导致glitch现象，这可以通过增加垂直方向的damping解决，这只有在角色穿越崎岖地表时才生效。注意一人称的damping值要比三人称小</li>
+</ul></li>
+<li>Character/action
+adventure游戏：可以根据角色的技能决定相机的行为，比如大致分为两类：地面与飞行</li>
+<li>Stealth: 相机会随着使用物品或武器而变化</li>
+<li>3D platform: 主要分为两种形式：free form与pre-determined
+<ul>
+<li>free-form: 相机的位置与距离可以由玩家操控</li>
+<li>pre-determined: 严重依赖于特定的Game
+play，同时也要兼顾相机的效果</li>
+</ul></li>
+<li>RPG: 常用三人称相机</li>
+<li>Scrolling</li>
+<li>Sports: TV-style presentation may be very desired
+<ul>
+<li>Single-participants sports: 相机只需要focus on玩家或者单个物体</li>
+<li>Two or four-participant sports: 联机or分屏</li>
+<li>Team sports: 预留一个control
+command标识当前正在控制哪个角色以及哪些角色可以被控制</li>
+<li>Court and indoor sports:
+对球类运动而言，难点在于追踪及可视球；对桌类运动而言，要提供整个桌面的视野并简化玩家操作</li>
+<li>Outdoor sports:
+对于场地运动，可以提供能够自主操作的相机；自由运动；轨道运动</li>
+<li>Abstract sports</li>
+</ul></li>
+<li>Racing games:
+可提供额外的视角以观测其他人的位置，增大FOV可以制造物体快速通过玩家的感觉</li>
+<li>Ground vehicles</li>
+<li>RTS</li>
+<li>Flight simulation: 一个重要的方面是是否允许相机随着飞机一起roll
+<ul>
+<li>Realistic flight models: 此类游戏通常从驾驶舱或飞机后侧观察</li>
+<li>Non-realistic flight models</li>
+<li>Artificial horizon: 可以用仪器监控飞机的pitch或banking</li>
+<li>Sensation of motion:
+可以用云层或航迹云增强飞机的速度感；航天器可以用小的残骸增强速度感；也可以通过音效、FOV等方式</li>
+</ul></li>
+<li>Adventure: present a very cinematic experience to the player</li>
+<li>Puzzle/party games/board games</li>
+<li>Fighting/close combat:
+场景一般很简单以便于相机摆放，需要一些相机移动突出角色的操作</li>
+</ul>
+<h3 id="multi-player-camera-solutions">Multi-Player Camera
+Solutions</h3>
+<p>多人共享屏幕时，相机设计会有很大难度，有时候可以通过alternate
+players解决，但多数情况下并不适用。一般来说可以有两种解决方法：</p>
+<ul>
+<li>分屏</li>
+<li>单屏包含所有玩家</li>
+</ul>
+<p>下面是对相关技术的介绍：</p>
+<ul>
+<li>Single-screen techniques: 格斗游戏、合作游戏中常见
+<ul>
+<li>相机的位置很难确定</li>
+<li>通常相机位置固定在一个离游戏世界表面相对的高度，而与玩家移动无关</li>
+<li>相机位置可能导致朝向的迅速变化</li>
+</ul></li>
+<li>Split-screen techniques
+<ul>
+<li>每个玩家的分屏区域一样大</li>
+<li>根据活跃玩家动态分屏</li>
+<li>为了提升性能，尽量让所有玩家都处于同一个环境中</li>
+<li>尽量减少玩家获取的信息</li>
+<li>避免把重要的物体放在设备屏幕边缘</li>
+</ul></li>
+<li>Transitioning from full-screen to split-screen
+<ul>
+<li>保持相机相对距离相同</li>
+<li>UI元素要重新排布</li>
+<li>FOV要根据aspect ratio重新调整</li>
+</ul></li>
+<li>Transitioning from split-screen to full-screen
+<ul>
+<li>玩家移动地足够近的时候</li>
+<li>UI元素要等transition完成时再移动</li>
+<li>相机相对位置保持不变</li>
+<li>FOV调整</li>
+</ul></li>
+</ul>
+<h2 id="gamera-scripting">Gamera Scripting</h2>
 ]]></content>
       <categories>
         <category>游戏 - 游戏理论</category>
@@ -2304,6 +2049,359 @@ cameras)</li>
         <tag>游戏</tag>
         <tag>相机</tag>
         <tag>设计</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《电脑游戏：文本、叙事与游戏》纪要</title>
+    <url>/2021/08/14/computer-games-text-narrative-play/</url>
+    <content><![CDATA[<p>本文是《电脑游戏：文本、叙事与游戏》的简单纪要，在此备份。</p>
+<span id="more"></span>
+<h1 id="游戏与叙事">游戏与叙事</h1>
+<h2 id="叙事理论">叙事理论</h2>
+<ul>
+<li>每一个叙事都有两个部分：一个是故事，指事件的内容或串联（动作、发生的事），再加上所谓的存在物（角色、场景中的事物等）；二是话语，即内容赖以传达的方法。</li>
+<li>故事的事件在时间和空间上都是按照一定的顺序排列的，这就是所谓的<strong>情节设计</strong>。</li>
+<li>叙事事实的三个方面：故事（内容）、叙事（话语）、叙述。
+<ul>
+<li>童话《灰姑娘》中包含了一系列故事的事件，可以通过很多种不同的方式被呈现出来。</li>
+<li>叙事的关键要素：<strong>对事件加以安排</strong>，使之在话语当中凸显出来，对它们的时间长度、发生频率和次序予以控制。</li>
+</ul></li>
+<li>隐含作者与隐含读者。</li>
+</ul>
+<h2 id="叙事理论与博德之门">叙事理论与《博德之门》</h2>
+<ul>
+<li>游戏包含了一系列由玩家所触发的新事件，允许玩家实时行动；也包含了过去的事件，已经被安排好的。</li>
+<li>事件被提前预制好，玩家是做出情节安排的人。</li>
+<li>同步叙事：向玩家传达屏幕上的行动、事件、得分和对话。</li>
+</ul>
+<h2 id="叙事的限度">叙事的限度</h2>
+<ul>
+<li>叙事理论追问的是：故事情节是从何种角度被描述的，我们是通过谁的眼睛了解叙事当中的事件的，又是谁的声音在传递信息，是谁在策动事件，谁来决定事件的持续时间、发生频率和次序。</li>
+<li>《博德之门》以一种玩家无法操纵的形式讲述事件，以过场动画、NPC的对白和角色简介的方式被编织在一起，并与玩家发生联系。</li>
+<li><strong>已然事件</strong>与<strong>实时事件</strong>。</li>
+</ul>
+<h1 id="游戏与快感">游戏与快感</h1>
+<ul>
+<li>电脑游戏究竟要驱使玩家去做什么。</li>
+</ul>
+<h2 id="角色的生成">角色的生成</h2>
+<ul>
+<li>选择外观、种族、职业、阵营、声音、名字。通过这些选择，让玩家了解游戏玩法与背景，同时限定了一系列数值。</li>
+</ul>
+<h2 id="角色特征和游戏">角色、特征和游戏</h2>
+<ul>
+<li>角色既包含了审美层面和故事层面的偏好，也涉及战略方面的考虑。人物的特征会影响（约束）其行为。</li>
+<li>但是玩家的风格和喜好决定了角色内在的可能性以怎样的形式表达出来，或怎样被压抑。【如果想要增强角色自身的特征，应该限制玩家的可操作性，如从数值、剧情、环境、探索度等层面。】</li>
+<li>在电脑游戏中，玩家的input和游戏所提供的特征描述之间的互动可能引发不可预测的行为，与某个角色表面的扁平性发生矛盾。因此，仅仅按照设定的属性和特征去描述一个游戏化身或角色是错误的。【可以通过“如果不这么做，游戏就难以进行下去”的思路引导玩家进行特定的操作。】</li>
+</ul>
+<h2 id="沉浸卷入与心流体验">沉浸、卷入与“心流”体验</h2>
+<ul>
+<li>玩家将游戏系统看做一个整体，但是在这一游戏系统中，玩家还必须关注一系列次级系统，那就是角色的行动、武器、物品和技能。</li>
+<li>在文学研究中，<strong>沉浸感</strong>是指读者所享受到的放弃批判思考的全神贯注。认知心理学的<strong>图式理论</strong>使我们能够感知周遭的事物并进行有效的处理，这一能力有赖于此前通过阅读、个人经验和别人的建议而建立起来的对类似事件的已有知识储备。【也就是说，沉浸感实际上是一种<strong>记忆唤醒机制</strong>？】</li>
+<li>只要故事、背景和界面保持统一的图式，玩家的审美体验就能在很大程度上保持沉浸感。</li>
+<li><strong>卷入</strong>，是一种经过更多思考的批判式的参与方式。
+<ul>
+<li>当读者面临不熟悉的题材，或者文本很难左右其反应时，他们被驱使着一再重读或反复斟酌其中的信息。</li>
+</ul></li>
+<li>沉浸的快感来源于我们伴随某种熟悉图式的退潮和涌动而完全专注其中。卷入的快感则来自我们从<strong>文本之外的视点</strong>去识别一件作品如何将<strong>互相矛盾</strong>的图式翻转、连接。【“相互矛盾”可以是新的情节、新的人物、新的动作，总之与既有的图式产生了区别之处。】
+<ul>
+<li>当屏幕上的场景要求即时的、固定的反应时——比如思考、凝视、阅读、击打、探索、行走——就促使玩家进入沉浸状态。</li>
+<li>当玩家不得不与屏幕上的行为逐渐拉开距离时，就进入卷入的状态。可能是由于角色的特性、一条迷失的小路、一个强大的敌人等。这时候就要寻求解决之道：重复行为——&gt;重新经历——&gt;查找攻略。</li>
+<li>沉浸和卷入相互依赖，玩家在流动性和安逸心情之间切换，游戏世界由此塑造体验。【战神的战斗、探索、叙事是一种沉浸，而其中的解密、情节、道具、新的敌人又是卷入。<strong>不断创造卷入，然后将卷入转化为沉浸，再创造新的卷入。</strong>】</li>
+</ul></li>
+<li>随着游戏难度的提高，玩家的应对能力也在进步，游戏需要与玩家的水准相匹配。这时候玩家总说自己“处于巅峰状态”。【战神。】</li>
+</ul>
+<h1 id="空间导航与情绪反应">空间、导航与情绪反应</h1>
+<h2 id="异域镇魂曲与寂静岭">《异域镇魂曲》与《寂静岭》</h2>
+<ul>
+<li>《寂静岭》的音效使之恐怖感上升。</li>
+<li>《寂静岭》的<strong>线性结构能让游戏始终保持一定的节奏和紧张感</strong>。</li>
+</ul>
+<h2 id="导航迷阵根茎与迷宫">导航：迷阵、根茎与迷宫</h2>
+<ul>
+<li>空间导航有两种模式：迷阵与根茎。
+<ul>
+<li>迷阵意味着在向唯一的出口有条件地前进，缺点是玩家只能被引导到预先设定的唯一出口。</li>
+<li>根茎并没有特定的方向比其他方向更有利，缺点是结构的缺失。</li>
+<li>游戏当中的迷宫应当处于二者之间：要实现的目标应足够强大，引导玩家前进；同时设定开放式结局，令玩家可自由探索。【巫师三和BOTW的一大共性（实际上Sekiro也是）：<strong>主线分支化</strong>，鼓励玩家自主选择、探索。核心要点是：<strong>自由地引导</strong>。】</li>
+</ul></li>
+<li>恐怖效果地生成总是基于“一个简单而明显地基本公式：<strong>怪物使常态遭到威胁</strong>。”
+<ul>
+<li>《寂静岭》中，常态被怪异之物威胁并摧毁。</li>
+<li>《异域镇魂曲》中，怪物本身就是常态。</li>
+</ul></li>
+</ul>
+<h2 id="游戏文本与遍历函数">游戏文本与遍历函数</h2>
+<ul>
+<li>呈现于受众面前的称为“脚本单元”：是不同玩家将游戏中的信息“玩出来”的。</li>
+<li>存在于文本之中的称为“文本单元”：是游戏提供的所有潜在信息。</li>
+<li>使脚本单元自文本单元中显露或生成并呈现于玩家面前的机制，叫做“<strong>遍历函数</strong>”。</li>
+<li>遍历函数的几种变体：活跃性、可确定性、可访性、连接性。
+<ul>
+<li>活跃性（与文本单元和脚本单元的数量与稳定性有关）：《异域镇魂曲》比《寂静岭》更加活跃少停滞，因为前者任务更多，且一部分是强制性的，而且文本单元更丰富，玩家选择和组建的脚本单元的可能性也都更多。</li>
+<li>可确定性（给定状况相同反应是否总是导致相同的结果）：《异域镇魂曲》比《寂静岭》更加不确定。</li>
+<li>可访性（玩家是否能在游戏中任意一点进入游戏文本）：《异域镇魂曲》比《寂静岭》可访性更强。</li>
+<li>连接性（文本单元间时空的连接）：《异域镇魂曲》比《寂静岭》连接性更强。</li>
+</ul></li>
+<li>《寂静岭》更加稳定、有节制、更具确定性的特点塑造了它迷阵般的结构。《异域镇魂曲》较富于开放性的遍历模式则表现出如根茎般的扩张趋势。</li>
+</ul>
+<h3 id="替身">替身</h3>
+<ul>
+<li>沉浸分为感知层面的沉浸和心理层面的沉浸。
+<ul>
+<li>感知层面：游戏体验垄断了玩家的感觉，如听觉、视觉。</li>
+<li>心理层面：玩家全神贯注地投入到想象中的游戏世界去。</li>
+</ul></li>
+<li>《异域镇魂曲》的等距视角和游戏主角本质上的复合性在感知和行为两方面都大大消解了玩家与化身的同一感（削弱了感知层面的沉浸）。但游戏以另一种方式令玩家沉浸其中：大量描述性文本的阅读，以及关于玩家对游戏主角、其作战团队及其物品的巧妙运用的细节信息的缓慢积累。【古剑三】</li>
+<li>《寂静岭》是感知层面的沉浸，各种即时状态。</li>
+<li>《异域镇魂曲》拒绝被匆忙对待，而《寂静岭》催促着玩家从一个地方到另一个地方，抵达终点。</li>
+</ul>
+<p>（更多细节，侧重代入感，带来感知沉浸）小&lt;---------视距---------&gt;大（更多信息，侧重策略性）</p>
+<h1 id="角色扮演">角色扮演</h1>
+<h2 id="社会符号学视角">社会符号学视角</h2>
+<ul>
+<li>图像语法：再现性（再现这个世界）、互动性（允许文本的作者和读者之间的沟通，以及文本中虚构人物与读者之间的沟通）、组织性（使文本各要素连贯一致，由此组合起来以进一步实现它们承载的含义）。</li>
+<li>多模态理论：文本如何将不同的符号模态——如讲话、书写、声音和图像——组合在一起，游戏是多模态的文本，因此应该思考，动画、视觉设计、音乐、文字文本和声效等多种沟通模态的联合是如何实现前述三个主要功能。</li>
+</ul>
+<h2 id="克劳德大英雄">克劳德——大英雄</h2>
+<ul>
+<li>克劳德这样的角色在相当大的程度上利用了民间文化、口头叙事和罗曼司等传统形式，通过精心构建的寓言故事，为日常生活中的过渡仪式和苦难提供了情感慰藉、道德争论和心灵拷问。</li>
+<li>电脑游戏是被翁称为高科技社会“次级口述”的案例之一，它是口述文化这种思维模式的进化，基础是文学和以技术为媒介的文化。</li>
+</ul>
+<h2 id="克劳德数码傀儡">克劳德——数码傀儡？</h2>
+<ul>
+<li>将克劳德这样的文本建构视为一种固定的对象却可能导致我们忽视玩家—化身这一重联系，甚至是忽略普遍意义上的文本的含义。</li>
+<li>玩家同时也是一种文化资源，是阐释者，也是粉丝艺术和粉丝写作当中对游戏资源进行改编的人。</li>
+</ul>
+<h2 id="化身的操纵">化身的操纵</h2>
+<ul>
+<li>玩家既是化身，又不是化身，这是游戏体验的核心。</li>
+<li>文化研究强调能动性（agency）这一概念，这是读者主动阅读时所具备的积极素质，因此我们可以认为对化身行动的操纵程度可以等同于更为广泛意义上的掌握文化权力的程度。
+<ul>
+<li>我们是自主有力的社会行为者：可以选择为玩家可以参与文本的程度达到前所未有的地步而欢呼。</li>
+<li>我们仅仅是他者的再现：玩家只能接受并操纵由公司设定的游戏文本决定提供给他们的角色。</li>
+</ul></li>
+<li>随着游戏在不同时刻在给予性结构或需求性结构上的转变，玩家的参与方式也将发生变化。战斗可能是最为偏向需求性结构的情况，此时游戏系统似乎称为游戏的全部。</li>
+</ul>
+<h2 id="多模态的给予与需求">多模态的给予与需求</h2>
+<ul>
+<li>文本产生的需求由文本当中的不同模态通过相互组合以不同方式实现。
+<ul>
+<li>如音乐节奏的变化暗示着游戏文本变化。</li>
+<li>如图像的变换预示着危险的迫近。</li>
+<li>此时玩家具有双重身份：一方面，玩家与化身融为一体，二者皆为行动者；另一方面，玩家又像是一个操纵木偶的人，拉着化身的线，甚至是某种类型的作者，作为建立在规则之上的因果结构的一部分，以一种受限语言进行书写。</li>
+</ul></li>
+<li>镜头元素同样有助于文本互动。
+<ul>
+<li>置于较低处，好像和角色并肩作战，去除了需求性结构所产生的木偶操纵般的感觉。如果我们被赋予了操纵能力，同时视角又较高，则操纵的感觉会相当强烈。在需求性结构处于最紧张的时刻，将镜头拉低和拉近能够使玩家不失时机地与角色接近。【战神4】</li>
+<li>镜头通常置于角色上方固定的位置，以提供操纵感，让玩家像对待、培养宠物一样对待化身，提供了给予性结构，并提供一定的稳定性。</li>
+</ul></li>
+<li>对游戏世界的探索感得自一种更弱的需求形式——诱导而非命令。【只能在有强烈需求的时候才能给予玩家强烈的暗示，或命令；而在一般情况下，需求更多给予微弱的引导。这一方面战神做得很好。】</li>
+<li>【游戏需要不断地、交叉地提供需求性结构和给予性结构。】</li>
+</ul>
+<h1 id="文本再创作网络上的粉丝文化">文本再创作：网络上的粉丝文化</h1>
+<ul>
+<li>在游戏的需求性结构（搅动因果链条，推动你跨越失事列车或迷宫实验室的解密关卡，使你陷入紧张情绪之中，让你迷路和让你在面临众多敌人的时候产生焦虑感）和给予性结构（安排前后语境、风景、背景故事、动机和心理，将读者-受众拉入文本的移情网络和想象性延展空间中，和传统叙事中的运作方式一样）之间存在一种辩证关系，正是二者的结合提供了快感，而在以游戏为核心的粉丝创作中，二者将以相当不同的方式结合在一起。</li>
+<li>粉丝是如何使用游戏系统的？游戏攻略、创意性写作、漫画。</li>
+</ul>
+<h2 id="游戏攻略作者">游戏攻略作者</h2>
+<ul>
+<li>这是一种探索游戏系统本身的快感。</li>
+<li>他们用祈使句（第二人称）控制彼此的游戏行为——这是游戏攻略的特征。</li>
+</ul>
+<h2 id="虚构文学写作者">虚构文学写作者</h2>
+<ul>
+<li>过场动画属于给予性结构——它们只作叙事性陈述，并无互动性。过场动画可能表现出作为核心的游戏和外层叙事之间的分离。</li>
+</ul>
+<h2 id="诗人">诗人</h2>
+<ul>
+<li>直接阐释了游戏主角的情感，这是游戏文本无法做到的。【现代游戏在有面捕和动捕之后是可以实现的。】</li>
+</ul>
+<h2 id="三无漫画家">“三无”漫画家</h2>
+<h2 id="结论">结论</h2>
+<ul>
+<li>在围绕《FF7》的粉丝创作当中，再现系统和游戏系统是彼此分离的。</li>
+<li>以再现系统复制对玩家与化身的第一人称认同是可能的，但更为常见的还是借助游戏再现系统所提供的可能性，生产出第三人称的视角、叙事和形象创造，并为了自己获得快乐而对其进行挑选、放大或转换。【采用第一人称就限制了创作空间，而第三人称视角提供了无限大的创作空间，不仅仅限于游戏文本所提供的现有信息。】</li>
+</ul>
+<h1 id="动机与网络游戏">动机与网络游戏</h1>
+<h2 id="再现动机欢迎来到鲁比卡世界">再现动机：欢迎来到鲁比卡世界</h2>
+<ul>
+<li>《混乱在线》以科幻小说为基础进行设定，在游戏网站上，鲁比卡世界的故事片段以各种形式呈现。</li>
+<li>我们借以创建化身的个人标准，远比我们最初所能意识到的更能暴露自身经历及偏好。</li>
+</ul>
+<h2 id="娱乐动机游戏目标与策略">娱乐动机：游戏、目标与策略</h2>
+<ul>
+<li>娱乐动机相关的要素：战略、目标、即时事件、机遇、规则、技能、探险、升级、数值。</li>
+<li>娱乐动机更强调玩家所操纵的游戏中的那个化身作为游戏的一个元素存在，是一个具有战略价值的符号单元，而非一个角色。</li>
+</ul>
+<h2 id="公共动机共享鲁比卡世界">公共动机：共享鲁比卡世界</h2>
+<ul>
+<li>公共动机包括一个游戏和其他游戏之间的关系、玩家由游戏之外带入游戏的期待，以及游戏本身的共享属性。</li>
+</ul>
+<h2 id="结论-1">结论</h2>
+<ul>
+<li>游戏动机的三种类型：再现动机（戏剧性的、表演性的、修饰性的、图像化的、叙事的）、娱乐动机（指向游戏层面的：数值、升级等）和公共动机（共有的期待、广泛的网络文化、游戏所分享的外部世界）。</li>
+</ul>
+<h1 id="社交性的游戏与学习">社交性的游戏与学习</h1>
+<h2 id="探究游戏的社交性">探究游戏的社交性</h2>
+<ul>
+<li>游戏较之更为传统的、只能独自体验的媒介，比如书籍，可能是更适合儿童的娱乐形式。</li>
+<li>游戏文化可以被认为视为这样的一个竞技场：它创建了等级制度，并且欺凌群体当中的弱者。</li>
+</ul>
+<h2 id="观察玩家">观察玩家</h2>
+<ul>
+<li>游戏过程当中与其他玩家之间的互动似乎已经成为游戏乐趣的一个重要部分。</li>
+</ul>
+<h2 id="游戏">游戏</h2>
+<ul>
+<li>《凯恩的遗产：噬魂者》。</li>
+</ul>
+<h2 id="玩游戏">玩游戏</h2>
+<ul>
+<li>玩家与游戏机之间的联系可以在同伴的指导和建议下构成，这产生了一种有效的“中介性合作”。</li>
+<li>无论小组中的不同成员扮演什么角色，我们从男孩们的游戏失败的同步反应中，可以进一步证实合作游戏的集体性本质是显而易见的。</li>
+</ul>
+<h2 id="叙事与游戏">叙事与游戏</h2>
+<ul>
+<li>如何处理游戏角色的死亡对动作冒险游戏而言十分重要。《噬魂者》的处理方式是：死亡不会导致重新开始，而是进入阴间，这使得玩家在相似环境下继续游戏，且包括了许多之前不存在的道路。</li>
+<li>“管控调整”语言明显见于游戏和玩家之间以及玩家和玩家之间所交换的各种问题和命令中，“高手”完全关注于游戏系统以及对操作的指导。</li>
+<li>电脑游戏的试听魅力明显降低了在游戏过程中当面讨论的需要，如果故事已经展现在你眼前，描述故事甚至事无巨细地加以讨论就显得多余。</li>
+<li>“玩后叙事”可以更多地展示出游戏地叙事魅力。</li>
+</ul>
+<h2 id="结论-2">结论</h2>
+<ul>
+<li>作为一种指导性活动，合作性游戏比明确地尝试指导更为有效。</li>
+<li>电脑游戏嵌入了“社交外壳”，单人游戏可以转变为包含有效指导与沟通的社交活动。游戏都是那种可以形成社群和身份认同感的学习形式的绝佳例证。</li>
+<li>互动不仅指玩家和游戏之间的关系，也应包括很多玩游戏这一活动所固有的社会语境和社交关系。</li>
+</ul>
+<h1 id="游戏内外的能动性">游戏内外的能动性</h1>
+<ul>
+<li>“互动性”一次常用以解释电脑游戏的魅力。三种类型的交流模式：声明式交流、反应式交流和互动式交流。从这个角度来看动作冒险游戏，它更像式“反应式交流”而非“互动式交流”。</li>
+</ul>
+<h2 id="进入奇异世界">进入奇异世界</h2>
+<ul>
+<li>“奇异世界”的创造者和设计者表示，他想将生态困境注入作为整体的游戏，让玩家可以与之互动，并最终战胜困境。</li>
+</ul>
+<h2 id="对玩家能动性的研究">对玩家能动性的研究</h2>
+<ul>
+<li>论坛的集体性质还表现在以下事实中：论坛成员对论坛环境负有管理职责，他们鼓励参与者以相互支持而非破坏性的方式参与讨论。</li>
+</ul>
+<h2 id="个人能动性">个人能动性</h2>
+<ul>
+<li>玩家可以以多种方式参与游戏，尽管游戏具有强烈的叙事目标，但它仍可以被从视觉、情感和主题等多个层次加以解读。</li>
+</ul>
+<h2 id="代理能动性">代理能动性</h2>
+<ul>
+<li>代理能动性：人们努力以某种手段争取那些拥有资源或技能的人按照他们的意图行动，，以协助他们获得期望的结果。
+<ul>
+<li>游戏攻略。</li>
+<li>论坛讨论。</li>
+</ul></li>
+</ul>
+<h2 id="集体能动性粉丝作品">集体能动性：粉丝作品</h2>
+<ul>
+<li>文本在粉丝中被认为式一个可以被集体改变、改编和重写的过程，一个未竟的事业，而非静态对象。</li>
+<li>在粉丝艺术家的创作过程中，我们能够看到所有的能动性形式。在某种层次上，帖子表现出个人发挥其能动性和培养个人能力时所带有的焦虑、压力和挑战。粉丝们在对彼此的反馈、建议和专业技能表示支持和学习的过程中，利用了代理能动性。</li>
+</ul>
+<h2 id="结论-3">结论</h2>
+<ul>
+<li>游戏在某种程度上要求甚至依赖玩家能动性的积极发挥。对玩家能动性的关注将引导我们重新评估对以下问题的常规臆断：游戏是什么？谁在生产它？怎样生产？</li>
+</ul>
+<h1 id="电影改编与电脑游戏">电影、改编与电脑游戏</h1>
+<h2 id="恐怖类型从电影到游戏">恐怖类型——从电影到游戏</h2>
+<ul>
+<li>恐怖类型携带者“所有口头叙事的印记：主题和母题的自由转换、原型人物和背景设置，以及不断累积的续集、翻拍和模仿。某种意义上，在这个领域当中，没有原创，没有真实的或正确的文本，而只有变体。”</li>
+</ul>
+<h2 id="改编与突变怪物">改编与《突变怪物》</h2>
+<ul>
+<li>不可预知的威胁乃至有时无法辨识的敌人及其带来的焦虑，正是为玩家提供的挑战，玩过经过训练即可将之战胜。在从电影到游戏的移植中，其功能和意义均发生了改变。</li>
+<li><strong>游戏设计中最为重要的，是对空间和空间当中物品的设置与安排。</strong></li>
+<li>为已经开发出来的游戏增加一个额外关卡是一回事，而尝试去想象一个尚不存在的游戏的某个关卡是另一回事，后者要困难得多。</li>
+</ul>
+<h2 id="人物塑造与过场动画">人物塑造与过场动画</h2>
+<ul>
+<li>一款好的游戏需要为玩家提供有意义的选择，以及相应可觉察的成果。《突变怪物》的叙事性元素给游戏的目标、任务和障碍提供了背景。</li>
+<li>恐怖游戏的操作应当足够简单，因为这会在相当程度上将玩家限制在其所处的环境中，增加游戏的悬念。</li>
+<li>过场动画分为两种：预制的和实时的。必须对带有预制过场动画的游戏进行周密计划，以避免其对游戏世界的真实感造成破坏。</li>
+</ul>
+<h2 id="改编从游戏到游戏">改编——从游戏到游戏</h2>
+<ul>
+<li>目标是开发一个具有足够普适性的游戏引擎。</li>
+</ul>
+<h1 id="游戏与性别">游戏与性别</h1>
+<h2 id="作为再现的游戏">作为再现的游戏</h2>
+<ul>
+<li>有研究者认为，女性对电脑游戏的疏离主要是因为其再现性因素——游戏中女性化身的外形。</li>
+<li>在很多游戏中，被特别标志的或被边缘化以至于缺席的性别，都是女性。</li>
+<li>如果将电脑游戏视为一种文本，那么将玩家定义为一种性别主体并不可行。</li>
+</ul>
+<h2 id="娱乐性与再现性">娱乐性与再现性</h2>
+<ul>
+<li>一些游戏强调视觉呈现和故事讲述方式——它们在引人入胜的细节中呈现游戏的场景和角色，我们将之称为游戏的再现层面。</li>
+</ul>
+<h2 id="性别游戏与语境">性别、游戏与语境</h2>
+<ul>
+<li>游戏开发商或其发行商如果要争取更多的女性玩家，就要面临失去现有男性玩家的危险。</li>
+<li>那种认为女性对电脑游戏不感兴趣的想法和剥夺女性玩游戏权利的做法已经过时了，尽管某些社会因素和文化因素还将因用户的性别而持续对其产生影响。</li>
+</ul>
+<h1 id="游戏分析的实践">游戏分析的实践</h1>
+<h2 id="定义游戏">定义游戏</h2>
+<ul>
+<li>目标、障碍、资源、奖赏和惩罚等是电脑游戏的一些重要元素，同时还有一些可获得的不同种类的信息——不管是对于所有玩家，还是对于个别玩家，抑或对于游戏本身——以及这些信息逐渐显露的诸多方式。</li>
+<li>我们也关注到其他有助于探索游戏要素多样性的理论研究方法，
+<ul>
+<li>例如，可以探究游戏当中的<strong>奖赏与惩罚</strong>（游戏的“经济体系”）或游戏当中玩家可控因素与不可控因素之间的制衡关系。</li>
+<li>同样，也可以探索游戏中不同类型的<strong>障碍物</strong>。</li>
+<li>还可以分析不同类型的<strong>游戏规则</strong>。</li>
+<li>它们为我们发现一款游戏的与众不同之处，并促使我们继续思考这种差异是有意义的创新还是对规范的偏离。</li>
+</ul></li>
+<li>所有的定义都聚焦于被我们所称的游戏的<strong>娱乐层面</strong>或“<strong>游戏系统</strong>”，是它们决定一款游戏是不是可玩，以及游戏活动所遵循的限制。【游戏系统决定了游戏的定义。】</li>
+<li>对电脑游戏的分析既要关注“娱乐性”，也要关注“再现性”，以及二者之间的关系。</li>
+</ul>
+<h2 id="游戏类型">游戏类型</h2>
+<ul>
+<li>在一个典型的动作冒险游戏中，我们通过扮演游戏内设定的化身来进行游戏，该化身通常会依循特定的游戏顺序克服已被设定的的重重困难。游戏目标通常相当明确，其经济体系一般与可量化的特征相关，比如生命值和弹药。游戏玩法中最核心的是速度和精确性。玩家会在游戏过程中学习一些技巧，但化身却不会成长。【游戏路线是既定的，游戏目标是明确的，游戏玩法是速度和精确度。】</li>
+<li>与之相反，RPG游戏的主角可能是玩家通过一系列选择构建出来的，而且围绕该角色通常会有一个具有特定技能的辅助性团队。玩家可以自由地在游戏中探险，展开各种探索，并且可以不用遵照预设地步骤战胜游戏中的各种障碍。虽然游戏最终目标可能非常明确，但通常会有一些与最终目标未必相关的支线目标。以经验值和物品清单呈现出来的经济体系十分重要，但它更倾向于随玩家的表现而浮动。玩游戏的关键在于策略而非速度，而游戏体验往往具有更多反思性。【游戏路线是未定的，游戏目标是多样的，游戏玩法核心是策略。】</li>
+<li>这两者之间的关键性差异与游戏系统有关，而非在再现层面。</li>
+</ul>
+<h2 id="叙事与游戏-1">叙事与游戏</h2>
+<ul>
+<li>沉浸分为<strong>感知</strong>上的沉浸与<strong>心理</strong>上的沉浸，卷入则是玩家被迫在游戏中采用一种更为审慎和具有反思性的态度。</li>
+<li>沉浸和卷入并不互相排斥，二者间的摆动在游戏“心流”体验的产生中处于核心地位。所谓心流体验，就是玩家感到自己此刻“<strong>处在巅峰状态</strong>”，这种及其满足和欲罢不能的感觉部分由玩家在沉浸和卷入之间的转换所触发。</li>
+</ul>
+<h2 id="穿越游戏空间">穿越游戏空间</h2>
+<ul>
+<li>等距视角的RPG游戏更多依赖<strong>心理</strong>上的沉浸，而《寂静岭》中的移动视角和3D效果唤起玩家<strong>感知</strong>沉浸。</li>
+</ul>
+<h2 id="游戏动力学">游戏动力学</h2>
+<ul>
+<li>为什么游戏攻略大多采用第二人称祈使语气？因为游戏攻略大都紧密围绕游戏系统撰写，几乎不会注意<strong>再现层面</strong>，攻略是冷静的和技术性的。粉丝撰写的小说和诗歌都着墨于游戏的再现层面，倾向于借鉴游戏的过场动画，而非游戏本身的互动性元素。</li>
+</ul>
+<h2 id="走向线上">走向线上</h2>
+<ul>
+<li>玩家玩在线游戏的动机与游戏的娱乐层面和再现层面都有关系。
+<ul>
+<li><strong>再现层面</strong>的动机包括操纵视觉形象、创建角色和生成叙事。玩家构建化身的方式将折射出其现实生活的某些方面，或其内在愿望和幻想，而参与游戏的模式反映出不同的社会动机。</li>
+<li><strong>娱乐层面</strong>的动机则更多和游戏活动本身直接相关，涉及竞争、规则和游戏目标。</li>
+<li>此外还有<strong>公共动机</strong>，即玩家之间的互动，这是一种多模态呈现的现象。</li>
+</ul></li>
+</ul>
+<h2 id="游戏中的社会生活">游戏中的社会生活</h2>
+<ul>
+<li>在团队协作中，游戏的<strong>娱乐层面</strong>是主要的。</li>
+<li>游戏具有三个能动性：个人能动性、代理能动性、集体能动性。</li>
+</ul>
+<h2 id="生产游戏生产意义">生产游戏、生产意义</h2>
+<ul>
+<li>游戏设计者最为关心的问题，正是游戏的娱乐性和再现性之间的相关性和互联性。比如，角色具有再现性和娱乐性，过场动画也有娱乐性从（提供了战略上必不可少的信息）。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>游戏 - 游戏理论</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>游戏</tag>
       </tags>
   </entry>
   <entry>
