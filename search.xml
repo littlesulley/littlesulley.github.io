@@ -190,6 +190,27 @@ class="math inline">\(0&lt;k\le
       </tags>
   </entry>
   <entry>
+    <title>Motion Matching -- 概念与发展</title>
+    <url>/2022/03/27/Motion%20Matching%20-%20%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%8F%91%E5%B1%95/</url>
+    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
+Matching基本知识的介绍，放在此备份。</p>
+<span id="more"></span>
+<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
+]]></content>
+      <categories>
+        <category>游戏 - 动画</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+        <tag>动画</tag>
+        <tag>游戏</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《Assassain&#39;s Creed Valhalla》玩后感</title>
     <url>/2020/11/12/acv-impression-md/</url>
     <content><![CDATA[<p><code>刺客信条：英灵殿</code>（Assassin's Creed
@@ -250,263 +271,27 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
 ]]></content>
   </entry>
   <entry>
-    <title>Motion Matching -- 概念与发展</title>
-    <url>/2022/03/27/Motion%20Matching%20-%20%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%8F%91%E5%B1%95/</url>
-    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
-Matching基本知识的介绍，放在此备份。</p>
-<span id="more"></span>
-<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
+    <title>十二月的花</title>
+    <url>/2020/12/22/%E5%8D%81%E4%BA%8C%E6%9C%88%E7%9A%84%E8%8A%B1/</url>
+    <content><![CDATA[<p>埙吹响了海岸<br />
+琴穿梭叶间<br />
+笛在天空啼鸣<br />
+伴奏着雪花片片</p>
+<p>孩子们欢笑着相聚<br />
+踏着雪<br />
+吱吱嘎嘎</p>
+<p>把欢乐捏成一团团棉<br />
+随风起舞<br />
+在阳光下<br />
+雪爱上了花</p>
 ]]></content>
       <categories>
-        <category>游戏 - 动画</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>随笔</tag>
-        <tag>游戏</tag>
-        <tag>数学</tag>
-        <tag>动画</tag>
-        <tag>机器学习</tag>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>无穷连根式求极限的充要条件</title>
-    <url>/2020/09/09/infinite-radicals/</url>
-    <content><![CDATA[<p>在刷习题集或者考试的时候我们经常会遇到诸如<span
-class="math inline">\(\sqrt{1+\sqrt{2+\sqrt{3+\cdots}}}\)</span>或者<span
-class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解或极限存在性证明。解决此类问题的方法有很多，但都可以归结为一点：缩放。要么是两端缩放然后夹逼定理，要么是证明有界然后两边取极限。本文记录此类问题极限存在的一个充要条件，以供参阅。</p>
-<span id="more"></span>
-<h1 id="ramanujans-problem">Ramanujan's Problem</h1>
-<p>这类问题最著名的是拉马努金（Ramanujan）所提出的恒等式：</p>
-<blockquote>
-<p>证明: <span
-class="math display">\[3=\sqrt{1+2\sqrt{1+3\sqrt{1+\cdots}}}\tag{1}\]</span></p>
-</blockquote>
-<p>这个等式的证明是简单而有趣的：</p>
-<p><span class="math display">\[3=\sqrt{1+2\cdot
-4}=\sqrt{1+2\sqrt{1+3\cdot
-5}}=\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}\]</span></p>
-<p>同时，Ramanujan还断言下面的结论：</p>
-<p><span
-class="math display">\[\lim_{n\to\infty}\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=3\]</span></p>
-<p>这个的证明也是容易的。首先把上式和（1）式比较，就发现上式以3为上界，并且由单调性可知，其极限是存在的。为了证明<span
-class="math inline">\(a_n=\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}\)</span>的极限就是3，我们证明：对任意的<span
-class="math inline">\(3&gt;\epsilon&gt;0\)</span>，都存在<span
-class="math inline">\(N\)</span>，使得所有的<span
-class="math inline">\(n&gt;N\)</span>都有<span
-class="math inline">\(a_n&gt;3-\epsilon\)</span>。</p>
-<p>现在任取<span
-class="math inline">\(0&lt;\epsilon&lt;3\)</span>，令<span
-class="math inline">\(3-\epsilon=3r\)</span>，故<span
-class="math inline">\(0&lt;r=1-\epsilon/3&lt;1\)</span>，故有：</p>
-<p><span
-class="math display">\[3-\epsilon=3r=r\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}\]</span></p>
-<p>把<span class="math inline">\(r\)</span>乘进去，就有：</p>
-<p><span
-class="math display">\[3-\epsilon=\sqrt{r^2+2\sqrt{r^{2^2}+\cdots+n\sqrt{r^{2^n}[1+(n+1)(n+3)]}}}\tag{2}\]</span></p>
-<p>由于<span class="math inline">\(1&gt;r^{2^i},\forall
-i=1,2,\cdots\)</span>，且存在<span
-class="math inline">\(N\)</span>，当<span
-class="math inline">\(n&gt;N\)</span>时，有</p>
-<p><span
-class="math display">\[1&gt;r^{2^n}[1+(n+1)(n+2)]=r^{2^n}(n+2)^2\]</span></p>
-<p>把这些全部带入（2）式，就可以证明：</p>
-<p><span
-class="math display">\[3-\epsilon=\sqrt{r^2+2\sqrt{r^{2^2}+\cdots+n\sqrt{r^{2^n}[1+(n+1)(n+3)]}}}&lt;\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=a_n,n&gt;N\]</span></p>
-<p>从而完成证明。</p>
-<h1 id="polyas-criterionpolya准则">Polya's Criterion（Polya准则）</h1>
-<p>在考虑普遍情况下首先来观察一些特例，一个典型的特例就是形如<span
-class="math inline">\(\sqrt{a_1+\sqrt{a_2+\cdots}}\)</span>的无穷根式，每个根号的次数都是<span
-class="math inline">\(2\)</span>，或者幂次都是<span
-class="math inline">\(2^{-1}\)</span>。对于<span
-class="math inline">\(a_1\)</span>来看，控制它的幂次是<span
-class="math inline">\(\frac{1}{2}\)</span>，对于<span
-class="math inline">\(a_2\)</span>来说，控制它的幂次是<span
-class="math inline">\(2^{-2}\)</span>，对于<span
-class="math inline">\(a_n\)</span>来说，控制它的幂次是<span
-class="math inline">\(2^{-n}\)</span>。假设这个无穷根式极限存在，那么我们关心的肯定是<span
-class="math inline">\(n\)</span>足够大时，它被什么控制，显然是<span
-class="math inline">\(a_n\)</span>及控制它的<span
-class="math inline">\(2^{-n}\)</span>的幂次。所以，一个合理的猜测是，如果<span
-class="math inline">\(a_n^{2^{-n}}\)</span>极限存在，那么该根式就收敛。下面我们将看到，这个猜测已经非常接近“真相”，甚至是真相的一部分。</p>
-<h2 id="description">Description</h2>
-<p>设序列<span
-class="math inline">\(u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}\)</span>，则<span
-class="math inline">\(\{u_n\}\)</span>可以用下述条件判定：</p>
-<p><span class="math display">\[
-\begin{cases}
-\text{converges},&amp;\text{if}\;
-\overline{\lim}_{n\to\infty}\frac{\log\log a_n}{n}&lt;\log 2\\
-\text{diverges},&amp;\text{if}\;
-\overline{\lim}_{n\to\infty}\frac{\log\log a_n}{n}&gt;\log 2
-\end{cases}
-\]</span></p>
-<p>上述准则还可以进一步推广为：</p>
-<blockquote>
-<p>序列<span class="math inline">\(\{u_n\}\)</span>收敛的充要条件是：
-<span class="math display">\[\overline{\lim_{n\to\infty}} n \left(
-\frac{\log\log a_n}{n}-\log2 \right) &lt;+\infty\tag{3}\]</span></p>
-</blockquote>
-<p>注意到，这个极限可以取有限数或者负无穷。我们将在陈述下面的<strong>定理一</strong>之后进行证明。</p>
-<blockquote>
-<p><strong>（定理一）</strong> 序列<span
-class="math inline">\(u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}\)</span>收敛当且仅当存在有限上极限
-<span
-class="math display">\[\overline{\lim_{n\to\infty}}a_n^{2^{-n}}&lt;+\infty\]</span></p>
-</blockquote>
-<p>首先证明<em>必要性</em>，即假定<span
-class="math inline">\(\{u_n\}\)</span>收敛。因为<span
-class="math inline">\(u_n\ge a_n^{2^{-n}}\)</span>，故<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}\)</span>一定是有限的，得证。</p>
-<p>再来证明<em>充分性</em>。假定<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}&lt;+\infty\)</span>，则存在<span
-class="math inline">\(G&gt;0\)</span>使得对所有<span
-class="math inline">\(n&gt;0\)</span>，有<span
-class="math inline">\(a_n^{2^{-n}}\le G\)</span>，因此<span
-class="math inline">\(a_n\le G^{2^n}\)</span>。从而有：</p>
-<p><span class="math display">\[u_n\le
-\sqrt{G^2+\sqrt{G^{2^2}+\cdots+\sqrt{G^{2^n}}}}=G\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
-<p>同时又因为</p>
-<p><span
-class="math display">\[2=\sqrt{2+2}=\sqrt{2+\sqrt{2+2}}=\cdots=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+2}}}&gt;\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
-<p>从而有<span class="math inline">\(u_n&lt;2G,\forall
-n&gt;0\)</span>，又由<span
-class="math inline">\(\{u_n\}\)</span>的单调性知收敛。</p>
-<p>到此为止，我们发现<strong>定理一</strong>和开始我们的猜测是非常相似的，只是<strong>定理一</strong>只需要上极限，这比我们的猜测更加宽松。下面我们利用此定理证明Polya's
-Criterion.</p>
-<h2 id="proof-of-polyas-criterion">Proof of Polya's Criterion</h2>
-<p>当<span
-class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
-a_n}{n}&lt;\log 2\)</span>时，存在<span
-class="math inline">\(N\)</span>，当<span
-class="math inline">\(n&gt;N\)</span>时<span
-class="math inline">\((\log\log a_n)/n&lt;\log 2\)</span>，也即<span
-class="math inline">\(a_n^{2^{-n}}&lt;\mathrm{e}\)</span>，由<strong>定理一</strong>知<span
-class="math inline">\(\{u_n\}\)</span>收敛。</p>
-<p>当<span
-class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
-a_n}{n}&gt;\log 2\)</span>时，存在某个<span
-class="math inline">\(a&gt;1\)</span>，对某些无限的<span
-class="math inline">\(n\)</span>，使得<span
-class="math inline">\((\log\log a_n)/n&gt;a\log 2\)</span>，也即<span
-class="math inline">\(\log a_n&gt;2^{an}\)</span>。因此，对这些<span
-class="math inline">\(n\)</span>而言：</p>
-<p><span
-class="math display">\[a_n^{2^{-n}}&gt;e^{2^{(a-1)n}}\]</span></p>
-<p>因此<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}=+\infty\)</span>.</p>
-<p>最后考虑<span
-class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
-a_n}{n}=\log 2\)</span>。</p>
-<p>若<span class="math inline">\(\{u_n\}\)</span>收敛，则<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}\)</span>有限，即存在<span
-class="math inline">\(G&gt;1\)</span>对所有<span
-class="math inline">\(n\)</span>成立<span
-class="math inline">\(a_n^{2^{-n}}&lt;G\)</span>，因而<span
-class="math inline">\(\log a_n&lt;2^n\log G\)</span>。此时若<span
-class="math inline">\(a_n&gt;1\)</span>，则</p>
-<p><span class="math display">\[n\left(\frac{\log\log
-a_n}{n}-\log2\right)&lt;\log\log G\]</span></p>
-<p>而当<span class="math inline">\(a_n\le 1\)</span>时，按照约定有<span
-class="math inline">\((\log\log
-a_n)/n=-\infty\)</span>，则综上公式（3）的必要性得证。</p>
-<p>同时公式（3）也是充分的。假定条件成立但<span
-class="math inline">\(\{u_n\}\)</span>不收敛，则由<strong>定理一</strong>知<span
-class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}=+\infty\)</span>，则对任意的<span
-class="math inline">\(G&gt;\mathrm{e}\)</span>，有充分大的<span
-class="math inline">\(n\)</span>使得<span
-class="math inline">\(a_n^{2^{-n}}&gt;G\)</span>，从而<span
-class="math inline">\(\log a_n&gt;2^n\log G\)</span>，于是有</p>
-<p><span class="math display">\[n\left(\frac{\log\log
-a_n}{n}-\log2\right)&gt;\log\log G\]</span></p>
-<p>这说明上极限是无穷大，与假设矛盾。充分性得证。</p>
-<h2 id="examples">Examples</h2>
-<h3 id="例一">例一</h3>
-<p>现在我们考虑一个序列<span
-class="math inline">\(u_n=\sqrt{x+\sqrt{x+\cdots+\sqrt{x}}}\)</span>，当<span
-class="math inline">\(x&lt;1\)</span>的时候，它的上界是<span
-class="math inline">\(\sqrt{1+\sqrt{1+\cdots}}\)</span>，而后者我们上面已经证明了它的上界是2。现在我们考虑<span
-class="math inline">\(x&gt;1\)</span>的情景。此时有：</p>
-<p><span
-class="math display">\[u_n&lt;\sqrt{x^2+\sqrt{x^{2^2}+\cdots+\sqrt{x^{2^n}}}}&lt;2x\]</span></p>
-<p>所以我们证明了，对<span
-class="math inline">\(x&gt;0\)</span>，序列<span
-class="math inline">\(\{u_n\}\)</span>都是收敛的，并且没有使用<strong>定理一</strong>。</p>
-<h3 id="例二">例二</h3>
-<p>现在考虑下述恒等式：</p>
-<p><span
-class="math display">\[x(2^n+x)=x\sqrt{2^{2n}+x(2^{n+1}+x)}\]</span></p>
-<p>于是可以立即得到：</p>
-<p><span class="math display">\[
-\begin{aligned}
-x(2+x)&amp;=x\sqrt{2^2+x(2^2+x)}\\
-&amp;=x\sqrt{2^2+x\sqrt{2^4+x(2^4+x)}}\\
-&amp;=\cdots\\
-&amp;=x\sqrt{2^2+x\sqrt{2^4+\cdots+x\sqrt{2^{2n}+x(2^{n+1}+x)}}}\\
-&amp;=x\sqrt{2^2+x\sqrt{2^4+x\sqrt{\cdots}}}
-\end{aligned}
-\]</span></p>
-<p>现在令<span class="math inline">\(x=1\)</span>，就有：</p>
-<p><span
-class="math display">\[3=\sqrt{2^2+\sqrt{2^4+\cdots}}\]</span></p>
-<p>用<span class="math inline">\(x/2\)</span>替换<span
-class="math inline">\(x\)</span>，有：</p>
-<p><span
-class="math display">\[2+\frac{x}{2}=\sqrt{2^2+\frac{x}{2}\sqrt{2^4+\frac{x}{2}\sqrt{2^6+\cdots}}}\]</span></p>
-<p>两边约去2，就有：</p>
-<p><span
-class="math display">\[1+\frac{x}{4}=\sqrt{1+\frac{x}{2}\sqrt{1+\frac{x}{2^2}\sqrt{1+\cdots}}}\]</span></p>
-<h3 id="例三">例三</h3>
-<p>由余弦二倍角公式<span
-class="math inline">\(\cos2\theta=2\cos^2\theta-1\)</span>可知：</p>
-<p><span
-class="math display">\[2\cos\theta=\sqrt{2+2\cos2\theta}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+2\cos
-2^n\theta}}}\]</span></p>
-<p>此时令<span
-class="math inline">\(\theta=\frac{\pi}{2^{n+1}}\)</span>，就有：</p>
-<p><span
-class="math display">\[2\cos\frac{\pi}{2^{n+1}}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+0}}}\Rightarrow\\\\
-\cos\frac{\pi}{2^{n+1}}=\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\]</span></p>
-<p>所以可以立刻得到下式的极限：</p>
-<p><span
-class="math display">\[\lim_{n\to\infty}4^n\left(1-\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\right)\\\\
-=\lim_{n\to\infty}4^n\left(1-\cos\frac{\pi}{2^{n+1}}\right)\\\\
-=\lim_{n\to\infty}4^n\cdot\frac{\pi^2}{2^{2n+2+1}} (1-\cos x\sim
-\frac{1}{2}x^2)\\\\
-=\frac{\pi^2}{8}\]</span></p>
-<h1 id="herschfelds-convergence-theorem-herschfeld收敛定理">Herschfeld’s
-Convergence Theorem （Herschfeld收敛定理）</h1>
-<p>Polya's Criterion只考虑了指数为<span
-class="math inline">\(\frac{1}{2}\)</span>的情况，对于更加普遍的情况，即形如<span
-class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n^{r_n}))^{r_2})^{r_1}
-(a_i\ge 0,0&lt;r_i\le 1)\)</span>的序列，Herschfeld’s Convergence
-Theorem给出了一个其收敛的充要条件。</p>
-<p><a
-href="https://www.tandfonline.com/doi/abs/10.1080/00029890.1935.11987745?journalCode=uamm20">Herschfeld’s
-Convergence Theorem</a> 告诉我们了一个无穷根式收敛的充要条件：</p>
-<blockquote>
-<p>设序列<span
-class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n^{r_n}))^{r_2})^{r_1}
-(a_i\ge 0,0&lt;r_i\le 1)\)</span>且级数<span
-class="math inline">\(S=\sum_{i=1}^\infty r_1r_2\cdots
-r_i\)</span>收敛，则序列<span
-class="math inline">\(\{u_n\}\)</span>收敛的充分必要条件是： <span
-class="math display">\[\overline{\lim_{n\to\infty}}a_n^{r_1r_2\cdots
-r_n}&lt;+\infty\]</span></p>
-</blockquote>
-<p>这个定理的证明之后有空了补充。</p>
-<h1 id="后记">后记</h1>
-<p>实际上无穷根式分为右无穷根式（Right Infinite
-Radicals）和左无穷根式（Left Infinite
-Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷根式可以仿照进行推导。</p>
-]]></content>
-      <categories>
-        <category>数学 - 数学分析</category>
+        <category>随笔</category>
       </categories>
       <tags>
         <tag>随笔</tag>
-        <tag>数学</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -942,27 +727,242 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
       </tags>
   </entry>
   <entry>
-    <title>十二月的花</title>
-    <url>/2020/12/22/%E5%8D%81%E4%BA%8C%E6%9C%88%E7%9A%84%E8%8A%B1/</url>
-    <content><![CDATA[<p>埙吹响了海岸<br />
-琴穿梭叶间<br />
-笛在天空啼鸣<br />
-伴奏着雪花片片</p>
-<p>孩子们欢笑着相聚<br />
-踏着雪<br />
-吱吱嘎嘎</p>
-<p>把欢乐捏成一团团棉<br />
-随风起舞<br />
-在阳光下<br />
-雪爱上了花</p>
+    <title>无穷连根式求极限的充要条件</title>
+    <url>/2020/09/09/infinite-radicals/</url>
+    <content><![CDATA[<p>在刷习题集或者考试的时候我们经常会遇到诸如<span
+class="math inline">\(\sqrt{1+\sqrt{2+\sqrt{3+\cdots}}}\)</span>或者<span
+class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解或极限存在性证明。解决此类问题的方法有很多，但都可以归结为一点：缩放。要么是两端缩放然后夹逼定理，要么是证明有界然后两边取极限。本文记录此类问题极限存在的一个充要条件，以供参阅。</p>
+<span id="more"></span>
+<h1 id="ramanujans-problem">Ramanujan's Problem</h1>
+<p>这类问题最著名的是拉马努金（Ramanujan）所提出的恒等式：</p>
+<blockquote>
+<p>证明: <span
+class="math display">\[3=\sqrt{1+2\sqrt{1+3\sqrt{1+\cdots}}}\tag{1}\]</span></p>
+</blockquote>
+<p>这个等式的证明是简单而有趣的：</p>
+<p><span class="math display">\[3=\sqrt{1+2\cdot
+4}=\sqrt{1+2\sqrt{1+3\cdot
+5}}=\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}\]</span></p>
+<p>同时，Ramanujan还断言下面的结论：</p>
+<p><span
+class="math display">\[\lim_{n\to\infty}\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=3\]</span></p>
+<p>这个的证明也是容易的。首先把上式和（1）式比较，就发现上式以3为上界，并且由单调性可知，其极限是存在的。为了证明<span
+class="math inline">\(a_n=\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}\)</span>的极限就是3，我们证明：对任意的<span
+class="math inline">\(3&gt;\epsilon&gt;0\)</span>，都存在<span
+class="math inline">\(N\)</span>，使得所有的<span
+class="math inline">\(n&gt;N\)</span>都有<span
+class="math inline">\(a_n&gt;3-\epsilon\)</span>。</p>
+<p>现在任取<span
+class="math inline">\(0&lt;\epsilon&lt;3\)</span>，令<span
+class="math inline">\(3-\epsilon=3r\)</span>，故<span
+class="math inline">\(0&lt;r=1-\epsilon/3&lt;1\)</span>，故有：</p>
+<p><span
+class="math display">\[3-\epsilon=3r=r\sqrt{1+2\sqrt{\cdots+n\sqrt{1+(n+1)(n+3)}}}\]</span></p>
+<p>把<span class="math inline">\(r\)</span>乘进去，就有：</p>
+<p><span
+class="math display">\[3-\epsilon=\sqrt{r^2+2\sqrt{r^{2^2}+\cdots+n\sqrt{r^{2^n}[1+(n+1)(n+3)]}}}\tag{2}\]</span></p>
+<p>由于<span class="math inline">\(1&gt;r^{2^i},\forall
+i=1,2,\cdots\)</span>，且存在<span
+class="math inline">\(N\)</span>，当<span
+class="math inline">\(n&gt;N\)</span>时，有</p>
+<p><span
+class="math display">\[1&gt;r^{2^n}[1+(n+1)(n+2)]=r^{2^n}(n+2)^2\]</span></p>
+<p>把这些全部带入（2）式，就可以证明：</p>
+<p><span
+class="math display">\[3-\epsilon=\sqrt{r^2+2\sqrt{r^{2^2}+\cdots+n\sqrt{r^{2^n}[1+(n+1)(n+3)]}}}&lt;\sqrt{1+2\sqrt{1+\cdots+n\sqrt{1}}}=a_n,n&gt;N\]</span></p>
+<p>从而完成证明。</p>
+<h1 id="polyas-criterionpolya准则">Polya's Criterion（Polya准则）</h1>
+<p>在考虑普遍情况下首先来观察一些特例，一个典型的特例就是形如<span
+class="math inline">\(\sqrt{a_1+\sqrt{a_2+\cdots}}\)</span>的无穷根式，每个根号的次数都是<span
+class="math inline">\(2\)</span>，或者幂次都是<span
+class="math inline">\(2^{-1}\)</span>。对于<span
+class="math inline">\(a_1\)</span>来看，控制它的幂次是<span
+class="math inline">\(\frac{1}{2}\)</span>，对于<span
+class="math inline">\(a_2\)</span>来说，控制它的幂次是<span
+class="math inline">\(2^{-2}\)</span>，对于<span
+class="math inline">\(a_n\)</span>来说，控制它的幂次是<span
+class="math inline">\(2^{-n}\)</span>。假设这个无穷根式极限存在，那么我们关心的肯定是<span
+class="math inline">\(n\)</span>足够大时，它被什么控制，显然是<span
+class="math inline">\(a_n\)</span>及控制它的<span
+class="math inline">\(2^{-n}\)</span>的幂次。所以，一个合理的猜测是，如果<span
+class="math inline">\(a_n^{2^{-n}}\)</span>极限存在，那么该根式就收敛。下面我们将看到，这个猜测已经非常接近“真相”，甚至是真相的一部分。</p>
+<h2 id="description">Description</h2>
+<p>设序列<span
+class="math inline">\(u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}\)</span>，则<span
+class="math inline">\(\{u_n\}\)</span>可以用下述条件判定：</p>
+<p><span class="math display">\[
+\begin{cases}
+\text{converges},&amp;\text{if}\;
+\overline{\lim}_{n\to\infty}\frac{\log\log a_n}{n}&lt;\log 2\\
+\text{diverges},&amp;\text{if}\;
+\overline{\lim}_{n\to\infty}\frac{\log\log a_n}{n}&gt;\log 2
+\end{cases}
+\]</span></p>
+<p>上述准则还可以进一步推广为：</p>
+<blockquote>
+<p>序列<span class="math inline">\(\{u_n\}\)</span>收敛的充要条件是：
+<span class="math display">\[\overline{\lim_{n\to\infty}} n \left(
+\frac{\log\log a_n}{n}-\log2 \right) &lt;+\infty\tag{3}\]</span></p>
+</blockquote>
+<p>注意到，这个极限可以取有限数或者负无穷。我们将在陈述下面的<strong>定理一</strong>之后进行证明。</p>
+<blockquote>
+<p><strong>（定理一）</strong> 序列<span
+class="math inline">\(u_n=\sqrt{a_1+\sqrt{a_2+\cdots+\sqrt{a_n}}}\)</span>收敛当且仅当存在有限上极限
+<span
+class="math display">\[\overline{\lim_{n\to\infty}}a_n^{2^{-n}}&lt;+\infty\]</span></p>
+</blockquote>
+<p>首先证明<em>必要性</em>，即假定<span
+class="math inline">\(\{u_n\}\)</span>收敛。因为<span
+class="math inline">\(u_n\ge a_n^{2^{-n}}\)</span>，故<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}\)</span>一定是有限的，得证。</p>
+<p>再来证明<em>充分性</em>。假定<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}&lt;+\infty\)</span>，则存在<span
+class="math inline">\(G&gt;0\)</span>使得对所有<span
+class="math inline">\(n&gt;0\)</span>，有<span
+class="math inline">\(a_n^{2^{-n}}\le G\)</span>，因此<span
+class="math inline">\(a_n\le G^{2^n}\)</span>。从而有：</p>
+<p><span class="math display">\[u_n\le
+\sqrt{G^2+\sqrt{G^{2^2}+\cdots+\sqrt{G^{2^n}}}}=G\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
+<p>同时又因为</p>
+<p><span
+class="math display">\[2=\sqrt{2+2}=\sqrt{2+\sqrt{2+2}}=\cdots=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+2}}}&gt;\sqrt{1+\sqrt{1+\cdots+\sqrt{1}}}\]</span></p>
+<p>从而有<span class="math inline">\(u_n&lt;2G,\forall
+n&gt;0\)</span>，又由<span
+class="math inline">\(\{u_n\}\)</span>的单调性知收敛。</p>
+<p>到此为止，我们发现<strong>定理一</strong>和开始我们的猜测是非常相似的，只是<strong>定理一</strong>只需要上极限，这比我们的猜测更加宽松。下面我们利用此定理证明Polya's
+Criterion.</p>
+<h2 id="proof-of-polyas-criterion">Proof of Polya's Criterion</h2>
+<p>当<span
+class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
+a_n}{n}&lt;\log 2\)</span>时，存在<span
+class="math inline">\(N\)</span>，当<span
+class="math inline">\(n&gt;N\)</span>时<span
+class="math inline">\((\log\log a_n)/n&lt;\log 2\)</span>，也即<span
+class="math inline">\(a_n^{2^{-n}}&lt;\mathrm{e}\)</span>，由<strong>定理一</strong>知<span
+class="math inline">\(\{u_n\}\)</span>收敛。</p>
+<p>当<span
+class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
+a_n}{n}&gt;\log 2\)</span>时，存在某个<span
+class="math inline">\(a&gt;1\)</span>，对某些无限的<span
+class="math inline">\(n\)</span>，使得<span
+class="math inline">\((\log\log a_n)/n&gt;a\log 2\)</span>，也即<span
+class="math inline">\(\log a_n&gt;2^{an}\)</span>。因此，对这些<span
+class="math inline">\(n\)</span>而言：</p>
+<p><span
+class="math display">\[a_n^{2^{-n}}&gt;e^{2^{(a-1)n}}\]</span></p>
+<p>因此<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}=+\infty\)</span>.</p>
+<p>最后考虑<span
+class="math inline">\(\overline{\lim}_{n\to\infty}\frac{\log\log
+a_n}{n}=\log 2\)</span>。</p>
+<p>若<span class="math inline">\(\{u_n\}\)</span>收敛，则<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}\)</span>有限，即存在<span
+class="math inline">\(G&gt;1\)</span>对所有<span
+class="math inline">\(n\)</span>成立<span
+class="math inline">\(a_n^{2^{-n}}&lt;G\)</span>，因而<span
+class="math inline">\(\log a_n&lt;2^n\log G\)</span>。此时若<span
+class="math inline">\(a_n&gt;1\)</span>，则</p>
+<p><span class="math display">\[n\left(\frac{\log\log
+a_n}{n}-\log2\right)&lt;\log\log G\]</span></p>
+<p>而当<span class="math inline">\(a_n\le 1\)</span>时，按照约定有<span
+class="math inline">\((\log\log
+a_n)/n=-\infty\)</span>，则综上公式（3）的必要性得证。</p>
+<p>同时公式（3）也是充分的。假定条件成立但<span
+class="math inline">\(\{u_n\}\)</span>不收敛，则由<strong>定理一</strong>知<span
+class="math inline">\(\overline{\lim}_{n\to\infty}a_n^{2^{-n}}=+\infty\)</span>，则对任意的<span
+class="math inline">\(G&gt;\mathrm{e}\)</span>，有充分大的<span
+class="math inline">\(n\)</span>使得<span
+class="math inline">\(a_n^{2^{-n}}&gt;G\)</span>，从而<span
+class="math inline">\(\log a_n&gt;2^n\log G\)</span>，于是有</p>
+<p><span class="math display">\[n\left(\frac{\log\log
+a_n}{n}-\log2\right)&gt;\log\log G\]</span></p>
+<p>这说明上极限是无穷大，与假设矛盾。充分性得证。</p>
+<h2 id="examples">Examples</h2>
+<h3 id="例一">例一</h3>
+<p>现在我们考虑一个序列<span
+class="math inline">\(u_n=\sqrt{x+\sqrt{x+\cdots+\sqrt{x}}}\)</span>，当<span
+class="math inline">\(x&lt;1\)</span>的时候，它的上界是<span
+class="math inline">\(\sqrt{1+\sqrt{1+\cdots}}\)</span>，而后者我们上面已经证明了它的上界是2。现在我们考虑<span
+class="math inline">\(x&gt;1\)</span>的情景。此时有：</p>
+<p><span
+class="math display">\[u_n&lt;\sqrt{x^2+\sqrt{x^{2^2}+\cdots+\sqrt{x^{2^n}}}}&lt;2x\]</span></p>
+<p>所以我们证明了，对<span
+class="math inline">\(x&gt;0\)</span>，序列<span
+class="math inline">\(\{u_n\}\)</span>都是收敛的，并且没有使用<strong>定理一</strong>。</p>
+<h3 id="例二">例二</h3>
+<p>现在考虑下述恒等式：</p>
+<p><span
+class="math display">\[x(2^n+x)=x\sqrt{2^{2n}+x(2^{n+1}+x)}\]</span></p>
+<p>于是可以立即得到：</p>
+<p><span class="math display">\[
+\begin{aligned}
+x(2+x)&amp;=x\sqrt{2^2+x(2^2+x)}\\
+&amp;=x\sqrt{2^2+x\sqrt{2^4+x(2^4+x)}}\\
+&amp;=\cdots\\
+&amp;=x\sqrt{2^2+x\sqrt{2^4+\cdots+x\sqrt{2^{2n}+x(2^{n+1}+x)}}}\\
+&amp;=x\sqrt{2^2+x\sqrt{2^4+x\sqrt{\cdots}}}
+\end{aligned}
+\]</span></p>
+<p>现在令<span class="math inline">\(x=1\)</span>，就有：</p>
+<p><span
+class="math display">\[3=\sqrt{2^2+\sqrt{2^4+\cdots}}\]</span></p>
+<p>用<span class="math inline">\(x/2\)</span>替换<span
+class="math inline">\(x\)</span>，有：</p>
+<p><span
+class="math display">\[2+\frac{x}{2}=\sqrt{2^2+\frac{x}{2}\sqrt{2^4+\frac{x}{2}\sqrt{2^6+\cdots}}}\]</span></p>
+<p>两边约去2，就有：</p>
+<p><span
+class="math display">\[1+\frac{x}{4}=\sqrt{1+\frac{x}{2}\sqrt{1+\frac{x}{2^2}\sqrt{1+\cdots}}}\]</span></p>
+<h3 id="例三">例三</h3>
+<p>由余弦二倍角公式<span
+class="math inline">\(\cos2\theta=2\cos^2\theta-1\)</span>可知：</p>
+<p><span
+class="math display">\[2\cos\theta=\sqrt{2+2\cos2\theta}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+2\cos
+2^n\theta}}}\]</span></p>
+<p>此时令<span
+class="math inline">\(\theta=\frac{\pi}{2^{n+1}}\)</span>，就有：</p>
+<p><span
+class="math display">\[2\cos\frac{\pi}{2^{n+1}}=\sqrt{2+\sqrt{2+\cdots+\sqrt{2+0}}}\Rightarrow\\\\
+\cos\frac{\pi}{2^{n+1}}=\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\]</span></p>
+<p>所以可以立刻得到下式的极限：</p>
+<p><span
+class="math display">\[\lim_{n\to\infty}4^n\left(1-\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\cdots+\frac{1}{2}\sqrt{\frac{1}{2}}}}\right)\\\\
+=\lim_{n\to\infty}4^n\left(1-\cos\frac{\pi}{2^{n+1}}\right)\\\\
+=\lim_{n\to\infty}4^n\cdot\frac{\pi^2}{2^{2n+2+1}} (1-\cos x\sim
+\frac{1}{2}x^2)\\\\
+=\frac{\pi^2}{8}\]</span></p>
+<h1 id="herschfelds-convergence-theorem-herschfeld收敛定理">Herschfeld’s
+Convergence Theorem （Herschfeld收敛定理）</h1>
+<p>Polya's Criterion只考虑了指数为<span
+class="math inline">\(\frac{1}{2}\)</span>的情况，对于更加普遍的情况，即形如<span
+class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n^{r_n}))^{r_2})^{r_1}
+(a_i\ge 0,0&lt;r_i\le 1)\)</span>的序列，Herschfeld’s Convergence
+Theorem给出了一个其收敛的充要条件。</p>
+<p><a
+href="https://www.tandfonline.com/doi/abs/10.1080/00029890.1935.11987745?journalCode=uamm20">Herschfeld’s
+Convergence Theorem</a> 告诉我们了一个无穷根式收敛的充要条件：</p>
+<blockquote>
+<p>设序列<span
+class="math inline">\(u_n=(a_1+(a_2+(\cdots+a_n^{r_n}))^{r_2})^{r_1}
+(a_i\ge 0,0&lt;r_i\le 1)\)</span>且级数<span
+class="math inline">\(S=\sum_{i=1}^\infty r_1r_2\cdots
+r_i\)</span>收敛，则序列<span
+class="math inline">\(\{u_n\}\)</span>收敛的充分必要条件是： <span
+class="math display">\[\overline{\lim_{n\to\infty}}a_n^{r_1r_2\cdots
+r_n}&lt;+\infty\]</span></p>
+</blockquote>
+<p>这个定理的证明之后有空了补充。</p>
+<h1 id="后记">后记</h1>
+<p>实际上无穷根式分为右无穷根式（Right Infinite
+Radicals）和左无穷根式（Left Infinite
+Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷根式可以仿照进行推导。</p>
 ]]></content>
       <categories>
-        <category>随笔</category>
+        <category>数学 - 数学分析</category>
       </categories>
       <tags>
         <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -1049,22 +1049,6 @@ key）。</p>
 愿他不要怯懦 续写昨夜的感慨<br />
 还有清晨的阳光</p>
 <p>案台旁 樱花在绽放</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>西湖夜歌</title>
-    <url>/2021/07/09/%E8%A5%BF%E6%B9%96%E5%A4%9C%E6%AD%8C/</url>
-    <content><![CDATA[<p>霓光半遮影<br />
-湖波轻颤合韵起<br />
-半句寻谁去</p>
 ]]></content>
       <categories>
         <category>随笔</category>
@@ -1478,6 +1462,22 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <tag>计算机</tag>
         <tag>随笔</tag>
         <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>西湖夜歌</title>
+    <url>/2021/07/09/%E8%A5%BF%E6%B9%96%E5%A4%9C%E6%AD%8C/</url>
+    <content><![CDATA[<p>霓光半遮影<br />
+湖波轻颤合韵起<br />
+半句寻谁去</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -2040,6 +2040,143 @@ players解决，但多数情况下并不适用。一般来说可以有两种解�
 </ul></li>
 </ul>
 <h2 id="gamera-scripting">Gamera Scripting</h2>
+<h3 id="what-is-meant-by-scripting">What is Meant by Scripting</h3>
+<p>定义与控制物体加偶和的过程被称为scripting，在游戏中，指控制游戏事件发生的事件与物体之间的交互。Scripting允许设计师在没有程序员介入的情况下完成迭代</p>
+<h3 id="types-of-scripting">Types of Scripting</h3>
+<p>我们希望构建一个与游戏类型无关的scripting系统，主要由两个方面组成：scripting
+language和event messaging</p>
+<h4 id="scripting-languages">Scripting languages</h4>
+<ul>
+<li>Text-based scripting languages:
+包括pre-compiled和interpreted两类</li>
+<li>General-purpose programming languages: 编程语言</li>
+<li>Custom scripting languages</li>
+<li>Finite state machines</li>
+<li>Visual scripting languages</li>
+</ul>
+<h4 id="event-messaging">Event messaging</h4>
+<p>Event
+messaging要求定义不同物体之间的关系。典型的能够发送消息的事件包括：</p>
+<ul>
+<li>关卡开始</li>
+<li>物体加载</li>
+<li>游戏暂停</li>
+<li>进入或退出volume</li>
+<li>玩家受到伤害</li>
+<li>物体到达路径终点</li>
+<li>玩家状态改变</li>
+</ul>
+<p>能够被事件发送的典型消息包括：</p>
+<ul>
+<li>Start</li>
+<li>Stop</li>
+<li>Activate object</li>
+<li>Delete object</li>
+<li>Query state</li>
+</ul>
+<h3 id="script-objects">Script Objects</h3>
+<p>用于定义物体的属性和行为</p>
+<h3 id="scriptable-game-hints">Scriptable game hints</h3>
+<p>Game hints are script objects that provide one possible type of
+runtime mechanism by which designers can override player properties,
+game controls or camera properties according to events</p>
+<ul>
+<li>Camera hints: 改变相机的属性或移动，可以被重载的相机属性包括：
+<ul>
+<li>相机行为</li>
+<li>位置朝向</li>
+<li>相对距离</li>
+<li>看向点</li>
+<li>移动速度</li>
+<li>FOV</li>
+</ul></li>
+<li>Player hints
+<ul>
+<li>Prevent motion of the player</li>
+<li>Relocate player position</li>
+<li>Change player movement characteristics</li>
+<li>Flags to indicate special kinds of game play</li>
+</ul></li>
+<li>Control hints
+<ul>
+<li>Disable specific controls or sets of player controls</li>
+<li>Specify the control reference time and the time to interpolate to
+that new reference time</li>
+</ul></li>
+</ul>
+<p>很多时候事件需要有先后顺序，一个sequenced event
+manager可以用来定义事件的先后顺序。</p>
+<h3 id="camera-scripting">Camera Scripting</h3>
+<h4 id="camera-scripting-methods">Camera scripting methods</h4>
+<ul>
+<li>Pre-defined camera scripting</li>
+<li>Dynamic camera scripting: 只调整需要的相机属性</li>
+</ul>
+<h4 id="dcamera-control">DCamera control</h4>
+<ul>
+<li>Third person scripting: 用专门的script objects去调整FOV、Focal
+Length，filter or rendering effects, fog distance等</li>
+<li>First person scripting: 有一些情况也需要对FP相机进行动态控制，比如
+<ul>
+<li>Traversing up or down ramps or other significantly sloped surfaces:
+在上下坡的时候线相机要和坡度一致 <img
+src="/images/realtime_cameras/6-6.png"
+alt="根据玩家位置自动pitch。" /></li>
+<li>Jumping: 在高距离跳跃时，能够对准落脚点的方向，但幅度不宜过大 <img
+src="/images/realtime_cameras/6-7.png"
+alt="玩家跳跃时自动pitch。" /></li>
+<li>View locking: 锁定目标时相机要朝向目标点 <img
+src="/images/realtime_cameras/6-8.png" alt="玩家锁定目标。" /></li>
+</ul></li>
+<li>Non-interactive movie scripting:
+最常用的就是位置和朝向的scripting</li>
+</ul>
+<p>一些经验法则：</p>
+<ul>
+<li>Apply Occam's Razor: 使用最简单scripting方案，这便于随时修改</li>
+<li>Allow for different ways that the camera event may be triggered:
+比如有时候只用trigger volume可能不够</li>
+<li>Allow previewing of camera motion and orientation: 支持预览</li>
+<li>Assess camera scripting requirements early in the design
+process</li>
+<li>Make the scripting development cycle as efficient as possible:
+提高预览和扩展能力</li>
+<li>Mimic the behaviors of the tools used by artists where possible:
+降低艺术家（设计师）的学习成本</li>
+<li>Allow for game play changes: camera scripting
+system必须游戏玩法改变时能够轻松地修改camera</li>
+</ul>
+<h3 id="scripting-tools">Scripting Tools</h3>
+<h4 id="world-editor-support">World editor support</h4>
+<p>必须支持script objects的放置与操作，而且还要支持message passing,
+state transition, event trigger和其他物体间的关系</p>
+<h4
+id="communication-between-target-platform-and-development-pc">Communication
+between target platform and development PC</h4>
+<p>要获得运行物体的状态</p>
+<h4 id="messagingevent-logging">Messaging/event logging</h4>
+<p>对消息和事件进行记录</p>
+<h4 id="object-properties-debugging">Object properties debugging</h4>
+<p>当游戏运行时要动态检查物体的属性</p>
+<h4 id="replay">Replay</h4>
+<p>最简单的方法是内置video recording</p>
+<h4 id="console-window">Console window</h4>
+<p>支持打印文本消息，通过GM指令查看想要的文本消息</p>
+<h3 id="scripting-debugging">Scripting Debugging</h3>
+<p>常见的debugging方法：</p>
+<ul>
+<li>Script statement execution/filter:
+对任意给定的script，展示每个状态执行的历史记录</li>
+<li>Debug message logging: 单独展示日志</li>
+<li>Message filtering: 增加过滤功能以更好地debug</li>
+<li>Object state: 展示物体的状态</li>
+<li>FSM state changes: 展示当前的state和历史state</li>
+<li>Animation state and event management:
+记录当前的动画状态和插值状态，记录事件</li>
+</ul>
+<h1 id="part-3-camera-engineering">Part 3: Camera Engineering</h1>
+<h2 id="chapter-7-position-and-orientation">Chapter 7: Position and
+Orientation</h2>
 ]]></content>
       <categories>
         <category>游戏 - 游戏理论</category>
