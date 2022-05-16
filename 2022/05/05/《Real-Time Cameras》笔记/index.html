@@ -37,7 +37,7 @@
 <meta property="og:image" content="http://sulley.cc/images/realtime_cameras/2-1.png">
 <meta property="og:image" content="http://sulley.cc/images/realtime_cameras/3-1.png">
 <meta property="article:published_time" content="2022-05-05T13:40:19.000Z">
-<meta property="article:modified_time" content="2022-05-14T16:12:42.358Z">
+<meta property="article:modified_time" content="2022-05-16T07:02:33.043Z">
 <meta property="article:author" content="Sulley">
 <meta property="article:tag" content="随笔">
 <meta property="article:tag" content="游戏">
@@ -182,7 +182,11 @@ Orientation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a 
 positioning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#third-person-camera-positioning"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">Third person camera
 positioning</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#desired-position-determination-methods"><span class="nav-number">3.1.3.</span> <span class="nav-text">Desired Position
 Determination Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#stationary"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">Stationary</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#slavedtracking"><span class="nav-number">3.1.3.2.</span> <span class="nav-text">Slaved&#x2F;tracking</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#path"><span class="nav-number">3.1.3.3.</span> <span class="nav-text">Path</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#surface-constrained"><span class="nav-number">3.1.3.4.</span> <span class="nav-text">Surface constrained</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#volume-constrained"><span class="nav-number">3.1.3.5.</span> <span class="nav-text">Volume constrained</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#framing"><span class="nav-number">3.1.3.6.</span> <span class="nav-text">Framing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#object-framing-relative"><span class="nav-number">3.1.3.7.</span> <span class="nav-text">Object-framing relative</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#axis-rotationalspindle"><span class="nav-number">3.1.3.8.</span> <span class="nav-text">Axis rotational&#x2F;spindle</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#common-position-problems"><span class="nav-number">3.1.4.</span> <span class="nav-text">Common Position Problems</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#orientation"><span class="nav-number">3.1.5.</span> <span class="nav-text">Orientation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#desired-orientation-determination-methods"><span class="nav-number">3.1.6.</span> <span class="nav-text">Desired Orientation
-Determination Methods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reorientation-methods"><span class="nav-number">3.1.7.</span> <span class="nav-text">Reorientation Methods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#free-look"><span class="nav-number">3.1.8.</span> <span class="nav-text">Free-Look</span></a></li></ol></li></ol></li></ol></div>
+Determination Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#constant-orientation"><span class="nav-number">3.1.6.1.</span> <span class="nav-text">Constant orientation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tracking-a-target-object-or-position"><span class="nav-number">3.1.6.2.</span> <span class="nav-text">Tracking a target object
+or position</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#look-at-offset"><span class="nav-number">3.1.6.3.</span> <span class="nav-text">Look-at offset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#locked-look-at-position"><span class="nav-number">3.1.6.4.</span> <span class="nav-text">Locked look-at position</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#target-object-position-prediction"><span class="nav-number">3.1.6.5.</span> <span class="nav-text">Target object position
+prediction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#object-framing"><span class="nav-number">3.1.6.6.</span> <span class="nav-text">Object framing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#idle-wandering"><span class="nav-number">3.1.6.7.</span> <span class="nav-text">Idle wandering</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#automated-orientation-control"><span class="nav-number">3.1.6.8.</span> <span class="nav-text">Automated orientation
+control</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reorientation-methods"><span class="nav-number">3.1.7.</span> <span class="nav-text">Reorientation Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#applying-rotations"><span class="nav-number">3.1.7.1.</span> <span class="nav-text">Applying rotations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reorientation-lag"><span class="nav-number">3.1.7.2.</span> <span class="nav-text">Reorientation lag</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#offsets"><span class="nav-number">3.1.7.3.</span> <span class="nav-text">Offsets</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#smoothing-and-damping"><span class="nav-number">3.1.7.4.</span> <span class="nav-text">Smoothing and damping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#springs-and-pid-controllers"><span class="nav-number">3.1.7.5.</span> <span class="nav-text">Springs and PID controllers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#look-at-position-interpolation"><span class="nav-number">3.1.7.6.</span> <span class="nav-text">Look-at position
+interpolation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#free-look"><span class="nav-number">3.1.8.</span> <span class="nav-text">Free-Look</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -318,7 +322,7 @@ Determination Methods</span></a></li><li class="nav-item nav-level-3"><a class="
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-05-15 00:12:42" itemprop="dateModified" datetime="2022-05-15T00:12:42+08:00">2022-05-15</time>
+      <time title="修改时间：2022-05-16 15:02:33" itemprop="dateModified" datetime="2022-05-16T15:02:33+08:00">2022-05-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -358,14 +362,14 @@ Determination Methods</span></a></li><li class="nav-item nav-level-3"><a class="
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>16k</span>
+      <span>20k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>14 分钟</span>
+      <span>18 分钟</span>
     </span>
 </div>
 
@@ -1133,16 +1137,142 @@ space used to calculate the desired position，相机的朝向通常由玩家操
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Mat3 rotation = Mat3::LookAt(GetPosition().DropZ(), GetTargetObject()-&gt;GetPosition().DropZ(), mWorldPosition);</span><br><span class="line"><span class="comment">// only elevation (here pitch) and distance are required</span></span><br><span class="line"><span class="function">Vec3 <span class="title">offset</span>(<span class="params"><span class="number">0.0f</span>, cosf(pitch</span>) * distance, <span class="title">sinf</span>(<span class="params">pitch</span>) * distance)</span>;</span><br><span class="line">mOffset = rotation * offset;</span><br><span class="line">Vec3 desiredPosition = GetTargetObject()-&gt;GetPosition() + mOffset;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h4 id="path">Path</h4>
+<p>有几种不同类型的路径：</p>
+<ul>
+<li>Linear: 直线路径</li>
+<li>Circular/elliptical/spiral: 环状路径 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X = a * cos(theta);</span><br><span class="line">Y = b * sin(theta);</span><br></pre></td></tr></table></figure></li>
+<li>Spline: 通常一系列control points定义</li>
+</ul>
+<p>下面是决定路径位置的方法：</p>
+<ul>
+<li>Non-interactive situations: 在movie
+sequences中通常由一个时间到位置的映射决定</li>
+<li>The position of the player character relative to another object</li>
+<li>Player position relative to a defined path</li>
+<li>A specified distance away from the closest position on the path to
+the player: 改方法需要注意相机移动的平滑性</li>
+</ul>
+<p><strong>Splines.</strong> 可以用brute
+force的方法去计算spline的长度，代码如下 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">float</span> <span class="title">length</span>(<span class="params"><span class="number">0.0f</span></span>)</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; controlPoints.Size(); ++i)</span><br><span class="line">&#123;</span><br><span class="line">  Vec3 pathPosition = EvaluateSegment(i, <span class="number">0.0f</span>);</span><br><span class="line">  <span class="comment">// start of i&#x27;th segment</span></span><br><span class="line">  controlPoints[i].mLength = length;</span><br><span class="line">  <span class="comment">// save length at the control point</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">int</span> j = <span class="number">1</span>; i &lt; kMaxSegmentSlices; ++j)</span><br><span class="line">  <span class="comment">// includes next control point</span></span><br><span class="line">  &#123;</span><br><span class="line">    Vec3 newPosition = EvaluateSegment(i, j/kMaxSegmentSlices);</span><br><span class="line">    Vec3 delta = newPosition - pathPosition;</span><br><span class="line">    length += delta.Magnitude();</span><br><span class="line">    <span class="comment">// add the &quot;length&quot; of this slice</span></span><br><span class="line">    pathPosition = newPosition;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;   <span class="comment">// length now holds the approximate total length</span></span><br></pre></td></tr></table></figure></p>
+<p>一种更快且准确的方法是用多项式逼近</p>
+<p><strong>Mapping functions.</strong>
+最简单的是从时间到长度的线性映射，此时相机的速度不变，导致abrupt开始或结束。一种常见的方法是使用一个二维spline曲线（Hermite
+curves)，用户可以定义控制点和切线控制曲线的形状</p>
 <h4 id="surface-constrained">Surface constrained</h4>
+<p>在一些情况下，相机可能限制在一个隐式的平面上，比如一个flat平面，一个椭球、圆柱等等，该平面的大小和朝向可能是动态的</p>
+<p>下面是一些常见的surface类型：</p>
+<ul>
+<li>Sphere: 容易受gimbal lock影响</li>
+<li>Plane</li>
+<li>Cylinder</li>
+<li>Cone</li>
+<li>Extruded spline plane</li>
+<li>Spline cylinder</li>
+</ul>
 <h4 id="volume-constrained">Volume constrained</h4>
+<p>相机与圆柱体的碰撞检测：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Vec3 direction = currentPosition - cylinder.GetPosition();</span><br><span class="line">direction.SetZ(<span class="number">0.0f</span>);</span><br><span class="line"><span class="built_in">float</span> radius = direction.Magnitude();</span><br><span class="line"><span class="keyword">if</span> (radius &gt; kMaxRadius)</span><br><span class="line">  radius = kMaxRadius;</span><br><span class="line">direction = direction.AsNormalized() * radius;</span><br><span class="line">Vec3 newPosition = cylinder.GetPosition() + direction;</span><br><span class="line">newPosition.SetZ(currentPosition.GetZ());</span><br></pre></td></tr></table></figure>
 <h4 id="framing">Framing</h4>
+<p>该方法在屏幕空间上保持目标角色的位置，这可以通过移动相机、修改FOV、伸缩viewport等方法实现</p>
 <h4 id="object-framing-relative">Object-framing relative</h4>
+<p>该方法不仅考虑物体在屏幕空间中的小，而且也考虑它和另一个物体之间的相对距离，一些因素包括：</p>
+<ul>
+<li>Object screen size</li>
+<li>Multiple objects must be kept on screen</li>
+<li>Distance between objects</li>
+<li>Relative position to other objects</li>
+<li>Relative position to the screen (not rendered size)</li>
+<li>Orientation with respect to the camera</li>
+<li>Distance aiming/ranged weapons</li>
+</ul>
 <h4 id="axis-rotationalspindle">Axis rotational/spindle</h4>
+<p>相机围绕游戏世界中的一个轴旋转、平移，适用于玩家需要围着一个物体导航的情况，或限制在一个圆柱物体的情况</p>
+<p>一些影响相机位置的因素：</p>
+<ul>
+<li>Angular offset relative to the reference vector or the axis
+origin</li>
+<li>Axial offset relative to the current player positionn or the axis
+origin</li>
+<li>Radial offset relative to the spindle axis or current player
+radius</li>
+</ul>
+<p>此外，我们也可以改变相机的朝向：</p>
+<ul>
+<li>Look at the spindle axis along a projected vector from the current
+camera position</li>
+<li>Look away from the spindle along a projected vector that passes
+through the camera position as above</li>
+<li>Apply an angular offset either toward or away from the spindle
+relative to the target object</li>
+</ul>
+<p>玩家位置相对于spindle axis的半径可以作为mapping
+function的输入，当玩家移动半径更小时，相机移动得更高</p>
 <h3 id="common-position-problems">Common Position Problems</h3>
+<ul>
+<li>期望位置和一个物体碰撞，或者太近以至于物体穿透相机的近平面</li>
+<li>期望位置离环境中的边界物体太近以至于有环境外的视野</li>
+<li>期望位置离目标对象太远，玩家没有好的视野</li>
+<li>环境复杂相机不能提供好的视野</li>
+</ul>
 <h3 id="orientation">Orientation</h3>
+<p>旋转有四种表示方法：欧拉角、变换矩阵、轴角和四元数</p>
 <h3 id="desired-orientation-determination-methods">Desired Orientation
 Determination Methods</h3>
+<h4 id="constant-orientation">Constant orientation</h4>
+<p>朝向不变，但是位置可以移动。可以变式为constant elevation
+cameras，即只有pitch可以改变</p>
+<p>这种相机可以用在：</p>
+<ul>
+<li>Player controlled remote cameras</li>
+<li>Dynamic positioning of replay cameras</li>
+<li>Dynamic positioning of caemras for non-interactive game play
+sequences</li>
+</ul>
+<h4 id="tracking-a-target-object-or-position">Tracking a target object
+or position</h4>
+<p>相机达到期望朝向的方法取决于目标物体的移动和相机的重朝向速度，此类相机一般保持固定的pitch</p>
+<h4 id="look-at-offset">Look-at offset</h4>
+<p>许多三人称游戏使用一个固定的look-at offset</p>
+<h4 id="locked-look-at-position">Locked look-at position</h4>
+<p>玩家的朝向也会随便改变</p>
+<h4 id="target-object-position-prediction">Target object position
+prediction</h4>
+<h4 id="object-framing">Object framing</h4>
+<p>一个很好的例子是格斗游戏，双方玩家都希望自己和对方都能呈现在屏幕上，当玩家距离增加的时候，相机要么拉远，要么增大FOV，但是频繁切换FOV通常不可取</p>
+<p>回放相机通常会从不同的视角呈现玩家行为</p>
+<h4 id="idle-wandering">Idle wandering</h4>
+<p>A semi-random camera reorientation while the player character is
+idle</p>
+<h4 id="automated-orientation-control">Automated orientation
+control</h4>
+<p>在没有玩家操作的情况下自动帮助相机转向：</p>
+<ul>
+<li>Automated control over camera pitch when the player is jumping:
+从玩家起跳时开始相机可以向下看</li>
+<li>Automated pitch control when traversing environmental features: This
+is applied to present a view facing up or down a ramp, staircase or
+other incline as appropriate so that players have a better view of what
+they are moving toward,
+在有洞穴或悬崖的地方，相机应该自动看向以给予提示</li>
+<li>Automated pitch control during combat or interactions:
+自动调整pitch以提示可交互的物体</li>
+<li>Automated reorientation of the player or a camera toward a target
+position: 锁定到目标物体</li>
+<li>Repositioning and reorientation of the camera to face the same
+direction as the player character</li>
+<li>Transitions from first to third person cameras:
+要保证当相机移动地充分远的时候才渲染物体，避免穿帮，此时可通过fade角色解决此问题</li>
+<li>Transitions from third to first person cameras: 可通过cut
+transition实现</li>
+</ul>
 <h3 id="reorientation-methods">Reorientation Methods</h3>
+<h4 id="applying-rotations">Applying rotations</h4>
+<h4 id="reorientation-lag">Reorientation lag</h4>
+<h4 id="offsets">Offsets</h4>
+<h4 id="smoothing-and-damping">Smoothing and damping</h4>
+<h4 id="springs-and-pid-controllers">Springs and PID controllers</h4>
+<h4 id="look-at-position-interpolation">Look-at position
+interpolation</h4>
 <h3 id="free-look">Free-Look</h3>
 
     </div>
@@ -1223,13 +1353,13 @@ Determination Methods</h3>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">135k</span>
+    <span title="站点总字数">139k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:03</span>
+    <span title="站点阅读时长">2:06</span>
   </span>
 </div>
 <div class="busuanzi-count">
