@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Motion Matching -- 概念与发展</title>
+    <url>/2022/03/27/Motion%20Matching%20-%20%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%8F%91%E5%B1%95/</url>
+    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
+Matching基本知识的介绍，放在此备份。</p>
+<span id="more"></span>
+<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
+]]></content>
+      <categories>
+        <category>游戏 - 动画</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>随笔</tag>
+        <tag>计算机</tag>
+        <tag>动画</tag>
+        <tag>游戏</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Bresenham算法画直线</title>
     <url>/2020/10/18/Bresenham%E7%AE%97%E6%B3%95%E7%94%BB%E7%9B%B4%E7%BA%BF/</url>
     <content><![CDATA[<p>Bresenham's
@@ -184,30 +205,9 @@ class="math inline">\(0&lt;k\le
         <category>数学 - 图形学</category>
       </categories>
       <tags>
+        <tag>随笔</tag>
         <tag>计算机</tag>
         <tag>算法</tag>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Motion Matching -- 概念与发展</title>
-    <url>/2022/03/27/Motion%20Matching%20-%20%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%8F%91%E5%B1%95/</url>
-    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
-Matching基本知识的介绍，放在此备份。</p>
-<span id="more"></span>
-<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
-]]></content>
-      <categories>
-        <category>游戏 - 动画</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>随笔</tag>
-        <tag>数学</tag>
-        <tag>动画</tag>
-        <tag>游戏</tag>
-        <tag>机器学习</tag>
-        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -251,24 +251,6 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
         <tag>生活</tag>
         <tag>刺客信条</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/09/07/hello-world/</url>
-    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
-<span id="more"></span>
-<h1 id="测试">测试</h1>
-<h2 id="代码">代码</h2>
-<p>现在来测试一下代码</p>
-<details class="note info no-icon"><summary><p>This is a code test</p>
-</summary>
-<h4 id="details-and-code">Details and code</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
-
-</details>
-<h2 id="latex">Latex</h2>
-<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
-]]></content>
   </entry>
   <entry>
     <title>无穷连根式求极限的充要条件</title>
@@ -505,9 +487,27 @@ Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷
         <category>数学 - 数学分析</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/09/07/hello-world/</url>
+    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
+<span id="more"></span>
+<h1 id="测试">测试</h1>
+<h2 id="代码">代码</h2>
+<p>现在来测试一下代码</p>
+<details class="note info no-icon"><summary><p>This is a code test</p>
+</summary>
+<h4 id="details-and-code">Details and code</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
+
+</details>
+<h2 id="latex">Latex</h2>
+<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
+]]></content>
   </entry>
   <entry>
     <title>《游戏设计的236个技巧》笔记</title>
@@ -960,9 +960,9 @@ CPU @ 2.90GHz。</p>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
+        <tag>计算机</tag>
       </tags>
   </entry>
   <entry>
@@ -1459,9 +1459,9 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
+        <tag>计算机</tag>
       </tags>
   </entry>
   <entry>
@@ -3106,12 +3106,34 @@ transition实现</li>
 </ul>
 <h3 id="reorientation-methods">Reorientation Methods</h3>
 <h4 id="applying-rotations">Applying rotations</h4>
+<p>有几种方法去应用旋转：</p>
+<ul>
+<li>Constant angular velocity:
+匀速变动旋转角，但是开始和结束会有突变</li>
+<li>Acceleration and deceleration: 应用加速度与减速度</li>
+<li>Angular velocity damping: 用damp使开始结尾更皮规划</li>
+<li>Free-look damping: 用bump和其他的ease
+functions防止因noise导致的相机朝向变动</li>
+<li>Twist reduction</li>
+</ul>
 <h4 id="reorientation-lag">Reorientation lag</h4>
+<p>通常我们希望相机朝向的变化能有一些延迟（lag），同时保持平滑</p>
+<p>很多游戏没有任何延迟，这有两个影响：第一，相机直接看向角色会导致玩家不能提前看见角色的移动，第二，相机非常依赖角色的移动，任何小的扰动就会影响相机表现</p>
+<p>因此需要使小的移动没有影响，并且使用damp。当插值的时候，可以限制每帧允许的旋转角度。此外，lag还可以通过用springs或feedback
+controller实现</p>
 <h4 id="offsets">Offsets</h4>
+<p>一个常被忽略的点是look-at position和target
+object之间的关系。如果直接看向角色，那么就容易丢失玩家想要看的东西。可以用一些视觉提示帮助玩家瞄准目标对象，比如highlight敌人，或者lock-on
+to the target object</p>
 <h4 id="smoothing-and-damping">Smoothing and damping</h4>
+<p>常用的平滑方法是limit the angular velocity of the camera
+proportionally to the angle between the current and desired
+orientations，这可以表示为一个简单的三角函数：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function">Real32 <span class="keyword">const</span> <span class="title">kDampingAngle</span>(<span class="params"><span class="number">30.0f</span> * gkRadiansPerDegree</span>)</span>;</span><br><span class="line">Real32 angle = acosf(CVector3f::Dot(currentOrientation, desiredOrientation));</span><br><span class="line">Real32 <span class="keyword">const</span> kDampingFactor = Cmath::Limit(angle / kDampingAngle, <span class="number">1.0f</span>); <span class="comment">// linearly proportional</span></span><br><span class="line">Real32 angularLimit = angularSpeed * deltaTime * kDampingFactor;</span><br><span class="line">CQuaternion newOrientation = CQuaternion::LookAt(currentOrientation, desiredOrientation, angularLimit);</span><br></pre></td></tr></table></figure>
+<p>始终记住我们有两个矛盾的要求：平滑移动和保持角色合理视角</p>
 <h4 id="springs-and-pid-controllers">Springs and PID controllers</h4>
-<h4 id="look-at-position-interpolation">Look-at position
-interpolation</h4>
+<p>In practice, tuning the characteristics of the controller to achieve
+this behavior can be time-consuming but very worthwhile</p>
 <h3 id="free-look">Free-Look</h3>
 ]]></content>
       <categories>
@@ -5039,9 +5061,9 @@ href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
+        <tag>计算机</tag>
       </tags>
   </entry>
 </search>
