@@ -1,27 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Motion Matching -- 概念与发展</title>
-    <url>/2022/03/27/Motion%20Matching%20-%20%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%8F%91%E5%B1%95/</url>
-    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
-Matching基本知识的介绍，放在此备份。</p>
-<span id="more"></span>
-<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
-]]></content>
-      <categories>
-        <category>游戏 - 动画</category>
-      </categories>
-      <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
-        <tag>计算机</tag>
-        <tag>动画</tag>
-        <tag>游戏</tag>
-        <tag>机器学习</tag>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Bresenham算法画直线</title>
     <url>/2020/10/18/Bresenham%E7%AE%97%E6%B3%95%E7%94%BB%E7%9B%B4%E7%BA%BF/</url>
     <content><![CDATA[<p>Bresenham's
@@ -205,9 +184,30 @@ class="math inline">\(0&lt;k\le
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>计算机</tag>
         <tag>算法</tag>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Motion Matching -- 概念与发展</title>
+    <url>/2022/03/27/Motion%20Matching%20-%20%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%8F%91%E5%B1%95/</url>
+    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
+Matching基本知识的介绍，放在此备份。</p>
+<span id="more"></span>
+<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
+]]></content>
+      <categories>
+        <category>游戏 - 动画</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+        <tag>动画</tag>
+        <tag>游戏</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -251,6 +251,24 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
         <tag>生活</tag>
         <tag>刺客信条</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/09/07/hello-world/</url>
+    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
+<span id="more"></span>
+<h1 id="测试">测试</h1>
+<h2 id="代码">代码</h2>
+<p>现在来测试一下代码</p>
+<details class="note info no-icon"><summary><p>This is a code test</p>
+</summary>
+<h4 id="details-and-code">Details and code</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
+
+</details>
+<h2 id="latex">Latex</h2>
+<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
+]]></content>
   </entry>
   <entry>
     <title>无穷连根式求极限的充要条件</title>
@@ -487,27 +505,9 @@ Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷
         <category>数学 - 数学分析</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>随笔</tag>
+        <tag>数学</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/09/07/hello-world/</url>
-    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
-<span id="more"></span>
-<h1 id="测试">测试</h1>
-<h2 id="代码">代码</h2>
-<p>现在来测试一下代码</p>
-<details class="note info no-icon"><summary><p>This is a code test</p>
-</summary>
-<h4 id="details-and-code">Details and code</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
-
-</details>
-<h2 id="latex">Latex</h2>
-<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
-]]></content>
   </entry>
   <entry>
     <title>《游戏设计的236个技巧》笔记</title>
@@ -960,9 +960,9 @@ CPU @ 2.90GHz。</p>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
         <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -1459,9 +1459,9 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
         <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -5061,9 +5061,9 @@ href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
         <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
 </search>
