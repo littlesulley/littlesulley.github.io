@@ -37,7 +37,7 @@
 <meta property="og:image" content="http://sulley.cc/images/realtime_cameras/2-1.png">
 <meta property="og:image" content="http://sulley.cc/images/realtime_cameras/3-1.png">
 <meta property="article:published_time" content="2022-05-05T13:40:19.000Z">
-<meta property="article:modified_time" content="2022-05-22T12:51:18.645Z">
+<meta property="article:modified_time" content="2022-05-23T13:11:51.640Z">
 <meta property="article:author" content="Sulley">
 <meta property="article:tag" content="随笔">
 <meta property="article:tag" content="游戏">
@@ -337,7 +337,7 @@ Mathematics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" 
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-05-22 20:51:18" itemprop="dateModified" datetime="2022-05-22T20:51:18+08:00">2022-05-22</time>
+      <time title="修改时间：2022-05-23 21:11:51" itemprop="dateModified" datetime="2022-05-23T21:11:51+08:00">2022-05-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -377,14 +377,14 @@ Mathematics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" 
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>31k</span>
+      <span>34k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>28 分钟</span>
+      <span>31 分钟</span>
     </span>
 </div>
 
@@ -1553,15 +1553,78 @@ point到当前位置和期望位置之间的夹角决定，因此需要计算其
 </ul>
 <h4 id="smoothing-and-damping-techniques">Smoothing and damping
 techniques</h4>
+<p>Damping方法通常要用ease
+functions，把一个输入值（0到1之间）映射到相同区间，只不过是非线性映射且开始和结尾的导数为零</p>
+<ul>
+<li>Motion damping: 可以通过添加vertical damping减少颠簸感</li>
+<li>Motion filters: 用一个低通滤波过滤噪音 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Vec3 <span class="type">const</span> movementDelta = newPosition - currentPosition;</span><br><span class="line"><span class="keyword">if</span> (movementDelta.<span class="built_in">Magnitude</span> () &gt; kMovementThreshold) &#123;</span><br><span class="line">  currentPosition = newPosition;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// ignoring small changes may cause the camera never to move at all!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+下面是一种改进的方法（使用finite impulese response and infinite impulse
+response filters）： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Vec3 <span class="type">const</span> movementDelta = newPosition - currentPosition;</span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">close_enough</span> (movementDelta, Vec3::<span class="built_in">Zero</span> ())) &#123;</span><br><span class="line">  <span class="type">float</span> distance = movementDelta.<span class="built_in">Magnitude</span> ();</span><br><span class="line">  distance = mMovementFilter.<span class="built_in">Update</span> (distance);</span><br><span class="line">  currentPosition += movementDelta.<span class="built_in">AsNormazlied</span> () * distance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
 <h4 id="motion-constraints">Motion constraints</h4>
+<p>一般有下述几种相机约束：</p>
+<ul>
+<li><p>Vertical motion constraint:
+用于避免不想要的图形效果如穿模，比如避免水面穿帮可以用下面的代码：
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">float</span> <span class="type">const</span> <span class="title">kMinimumZDistance</span> <span class="params">(<span class="number">0.1f</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="type">float</span> <span class="type">const</span> <span class="title">zDistance</span> <span class="params">(currentPosition.GetZ () - waterPlane.GetZ ())</span></span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">fabs</span> (zDistance) &lt; kMinimumZDistance)</span><br><span class="line">&#123;</span><br><span class="line">  currentPosition.<span class="built_in">SetZ</span> (waterPlane.<span class="built_in">GetZ</span> () + Math::<span class="built_in">Sign</span> (zDistance) * kMinimumZDistance);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+显然，上述代码的问题在于相机在进入水面后会出现不连续移动，但这无法避免，但可以用特效过渡</p></li>
+<li><p>Render geometry proximity: 用collision volume解决</p></li>
+<li><p>Distance constraints:
+可以让相机和玩家保持固定的距离或最小/最大距离，但是可能会有问题
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Vec3 <span class="type">const</span> unconstrainedOffset = currentPosition - desiredPosition;</span><br><span class="line"><span class="type">float</span> <span class="type">const</span> currentDistance = inverseDirection.<span class="built_in">Magnitude</span> ();</span><br><span class="line"><span class="type">float</span> <span class="type">const</span> newDistance = Math::<span class="built_in">Clamp</span> (kMinDistance, currentDistance, kMaxDistance);</span><br><span class="line">Vec3 <span class="type">const</span> newOffset = unconstrainedOffset.<span class="built_in">AsNormalized</span> () * newDistance;</span><br><span class="line">currentPosition = desiredPosition + newOffset;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>Planaer constraints <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">CPlane <span class="type">const</span> <span class="title">plane</span> <span class="params">(normal, constant)</span></span>;</span><br><span class="line"><span class="function">Vec3 <span class="title">cameraPosition</span> <span class="params">(GetCurrentPosition ())</span></span>;</span><br><span class="line"><span class="type">float</span> <span class="type">const</span> planeDistance = Vec3::<span class="built_in">Dot</span> (plane.<span class="built_in">GetNormal</span> (), cameraPosition) - plane.<span class="built_in">GetConstant</span> ();</span><br><span class="line"><span class="keyword">if</span> (planeDistance &lt; kMinDistance)</span><br><span class="line">&#123;</span><br><span class="line">  cameraPosition += plane.<span class="built_in">GetNormal</span> () * (planeDistance - kMinDistance);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>Surface constraints</p></li>
+<li><p>Volume constraints</p></li>
+</ul>
 <h4 id="player-camera-control">Player camera control</h4>
+<p>一个原则： &gt; The player should be not REQUIRED to manipulate the
+camera simply to play the game, unless explicitly dictated by the game
+design.</p>
+<p>If camera-relative, the sheer act of moving the camera changes the
+control reference frame and "pulls the rug out from under the player's
+feet". Sadly, some games seem to treat this behavior as acceptable. It
+is not. Changing the control reference frame without player knowledge is
+counter to good game play practice.</p>
+<ul>
+<li>Maunipulation of the camera position:
+有时候允许玩家直接操纵相机，分为2D和3D相机
+<ul>
+<li>2D相机: 2D游戏通常会限制相机的移动以防看到游戏外的场景</li>
+<li>3D相机: 在不同相机之间切换可以使用插值或jump cut</li>
+</ul></li>
+<li>Observer cameras: 提供观察者相机，即可以随意自由移动的相机</li>
+<li>Camera motion validation: 一些游戏不允许操纵相机位置</li>
+<li>Positional control constraints:
+Character-relative相机通常保持在玩家身后的一定区域内，一般不会让相机面朝角色。相机移动要尽可能平滑和慢以避免player
+disorientation</li>
+</ul>
 <h4 id="camera-position-control-schemes">Camera position control
 schemes</h4>
+<p>主要有两种方法决定相机位置：</p>
+<ul>
+<li>Character-relative:
+类似unity的free-look相机，但需要加一些限制，比如相机的移动范围是一个cylindrical而不是整个球面、相机在人物朝向的身后一定范围内。一些相机允许半自动的移动，比如移动向一个危险区域时</li>
+<li>World-relative:
+此时相机的朝向和玩家朝向没关系，比如RTS、运动、3D平台游戏中的相机</li>
+</ul>
 <h4 id="manipulation-of-camera-orientation">Manipulation of camera
 orientation</h4>
+<ul>
+<li>First person cameras</li>
+<li>Third person cameras:</li>
+</ul>
 <h4 id="automated-camera-positioning-and-orientation">Automated camera
 positioning and orientation</h4>
+<p>除了cinematic
+sequences之外，也有一些情况会需要相机自动改变位置和朝向：</p>
+<ul>
+<li>In response to player controller usage: 玩家自由选择视角</li>
+<li>In response to game play requirements:
+在三人称游戏中，有时候我们想保证某个物体一直在视野内，有时候，会通过相机给玩家辅助（比如在跳跃时增加pitch）</li>
+</ul>
 <h4 id="debug-camera-control">Debug camera control</h4>
+<p>该相机需要在不影响游戏的情况完全由用户操作，同时，如果能在降低游戏运行速度的情况能以正常速度操作debugging
+camera，则会非常有利于debug</p>
 <h3 id="camera-collisions">Camera Collisions</h3>
 <h4 id="the-importance-of-camera-collisions">The importance of camera
 collisions</h4>
@@ -1655,13 +1718,13 @@ Mathematics</h2>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">150k</span>
+    <span title="站点总字数">153k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:16</span>
+    <span title="站点阅读时长">2:19</span>
   </span>
 </div>
 <div class="busuanzi-count">
