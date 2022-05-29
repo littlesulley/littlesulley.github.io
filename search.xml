@@ -211,66 +211,6 @@ Matching基本知识的介绍，放在此备份。</p>
       </tags>
   </entry>
   <entry>
-    <title>《Assassain&#39;s Creed Valhalla》玩后感</title>
-    <url>/2020/11/12/acv-impression-md/</url>
-    <content><![CDATA[<p><code>刺客信条：英灵殿</code>（Assassin's Creed
-Valhalla，下称<code>英灵殿</code>）无疑是刺客信条“神话三部曲”中最成功的一部，无论是从游戏的质量上，还是从销售成绩上。在80个小时的主线与10多个小时的“内置DLC”游玩后，我个人对英灵殿的评价可以总结为“自我突破，承前启后”。说它自我突破是因为它革除了起源和奥德赛中的绝大部分缺点，在自我的改进中完成了里程碑式的跨越；说它承前启后式因为它标志着刺客信条系列一次华丽而成功的转型与过渡，是游戏特色与市场充分交合后的最佳发展方向，是游戏缺点自我祓除与优点渐进式凸显的结果。本文将重点从游戏的任务系统、剧情节奏和人物刻画这三个方面介绍英灵殿的蜕变，至于游戏画面和风景，<del>还有育碧特色BUG，</del>都是刺客信条系列经典的历史特征了，在本文不再赘述。</p>
-<span id="more"></span>
-<h1
-id="任务系统众星捧月映空青稀光散落满夜明">任务系统：众星捧月映空青，稀光散落满夜明</h1>
-<h1
-id="剧情节奏一马平川驰此间峰峦叠嶂牛羊见">剧情节奏：一马平川驰此间，峰峦叠嶂牛羊见</h1>
-<h1
-id="人物刻画穷极千里观百态瓦泥滂沱照众生">人物刻画：穷极千里观百态，瓦泥滂沱照众生。</h1>
-<h1
-id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终将至，共邀朝阳行远方。</h1>
-<p><img data-src="/images/acv-impression/1.png" /></p>
-<p><img data-src="/images/acv-impression/2.png" /></p>
-<p><img data-src="/images/acv-impression/3.png" /></p>
-<p><img data-src="/images/acv-impression/4.png" /></p>
-<p><img data-src="/images/acv-impression/5.png" /></p>
-<p><img data-src="/images/acv-impression/6.png" /></p>
-<p><img data-src="/images/acv-impression/7.png" /></p>
-<p><img data-src="/images/acv-impression/8.png" /></p>
-<p><img data-src="/images/acv-impression/9.png" /></p>
-<p><img data-src="/images/acv-impression/10.png" /></p>
-<p><img data-src="/images/acv-impression/11.png" /></p>
-<p><img data-src="/images/acv-impression/12.png" /></p>
-<p><img data-src="/images/acv-impression/13.png" /></p>
-<p><img data-src="/images/acv-impression/14.png" /></p>
-<p><img data-src="/images/acv-impression/15.png" /></p>
-<p><img data-src="/images/acv-impression/16.png" /></p>
-<p><img data-src="/images/acv-impression/17.png" /></p>
-]]></content>
-      <categories>
-        <category>游戏 - 玩后感</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>游戏</tag>
-        <tag>生活</tag>
-        <tag>刺客信条</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/09/07/hello-world/</url>
-    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
-<span id="more"></span>
-<h1 id="测试">测试</h1>
-<h2 id="代码">代码</h2>
-<p>现在来测试一下代码</p>
-<details class="note info no-icon"><summary><p>This is a code test</p>
-</summary>
-<h4 id="details-and-code">Details and code</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
-
-</details>
-<h2 id="latex">Latex</h2>
-<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
-]]></content>
-  </entry>
-  <entry>
     <title>无穷连根式求极限的充要条件</title>
     <url>/2020/09/09/infinite-radicals/</url>
     <content><![CDATA[<p>在刷习题集或者考试的时候我们经常会遇到诸如<span
@@ -505,6 +445,258 @@ Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷
         <category>数学 - 数学分析</category>
       </categories>
       <tags>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/09/07/hello-world/</url>
+    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
+<span id="more"></span>
+<h1 id="测试">测试</h1>
+<h2 id="代码">代码</h2>
+<p>现在来测试一下代码</p>
+<details class="note info no-icon"><summary><p>This is a code test</p>
+</summary>
+<h4 id="details-and-code">Details and code</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
+
+</details>
+<h2 id="latex">Latex</h2>
+<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>十二月的花</title>
+    <url>/2020/12/22/%E5%8D%81%E4%BA%8C%E6%9C%88%E7%9A%84%E8%8A%B1/</url>
+    <content><![CDATA[<p>埙吹响了海岸<br />
+琴穿梭叶间<br />
+笛在天空啼鸣<br />
+伴奏着雪花片片</p>
+<p>孩子们欢笑着相聚<br />
+踏着雪<br />
+吱吱嘎嘎</p>
+<p>把欢乐捏成一团团棉<br />
+随风起舞<br />
+在阳光下<br />
+雪爱上了花</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《Assassain&#39;s Creed Valhalla》玩后感</title>
+    <url>/2020/11/12/acv-impression-md/</url>
+    <content><![CDATA[<p><code>刺客信条：英灵殿</code>（Assassin's Creed
+Valhalla，下称<code>英灵殿</code>）无疑是刺客信条“神话三部曲”中最成功的一部，无论是从游戏的质量上，还是从销售成绩上。在80个小时的主线与10多个小时的“内置DLC”游玩后，我个人对英灵殿的评价可以总结为“自我突破，承前启后”。说它自我突破是因为它革除了起源和奥德赛中的绝大部分缺点，在自我的改进中完成了里程碑式的跨越；说它承前启后式因为它标志着刺客信条系列一次华丽而成功的转型与过渡，是游戏特色与市场充分交合后的最佳发展方向，是游戏缺点自我祓除与优点渐进式凸显的结果。本文将重点从游戏的任务系统、剧情节奏和人物刻画这三个方面介绍英灵殿的蜕变，至于游戏画面和风景，<del>还有育碧特色BUG，</del>都是刺客信条系列经典的历史特征了，在本文不再赘述。</p>
+<span id="more"></span>
+<h1
+id="任务系统众星捧月映空青稀光散落满夜明">任务系统：众星捧月映空青，稀光散落满夜明</h1>
+<h1
+id="剧情节奏一马平川驰此间峰峦叠嶂牛羊见">剧情节奏：一马平川驰此间，峰峦叠嶂牛羊见</h1>
+<h1
+id="人物刻画穷极千里观百态瓦泥滂沱照众生">人物刻画：穷极千里观百态，瓦泥滂沱照众生。</h1>
+<h1
+id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终将至，共邀朝阳行远方。</h1>
+<p><img data-src="/images/acv-impression/1.png" /></p>
+<p><img data-src="/images/acv-impression/2.png" /></p>
+<p><img data-src="/images/acv-impression/3.png" /></p>
+<p><img data-src="/images/acv-impression/4.png" /></p>
+<p><img data-src="/images/acv-impression/5.png" /></p>
+<p><img data-src="/images/acv-impression/6.png" /></p>
+<p><img data-src="/images/acv-impression/7.png" /></p>
+<p><img data-src="/images/acv-impression/8.png" /></p>
+<p><img data-src="/images/acv-impression/9.png" /></p>
+<p><img data-src="/images/acv-impression/10.png" /></p>
+<p><img data-src="/images/acv-impression/11.png" /></p>
+<p><img data-src="/images/acv-impression/12.png" /></p>
+<p><img data-src="/images/acv-impression/13.png" /></p>
+<p><img data-src="/images/acv-impression/14.png" /></p>
+<p><img data-src="/images/acv-impression/15.png" /></p>
+<p><img data-src="/images/acv-impression/16.png" /></p>
+<p><img data-src="/images/acv-impression/17.png" /></p>
+]]></content>
+      <categories>
+        <category>游戏 - 玩后感</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>游戏</tag>
+        <tag>生活</tag>
+        <tag>刺客信条</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>向量绕任意轴旋转的简单推导</title>
+    <url>/2021/06/07/%E5%90%91%E9%87%8F%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E7%AE%80%E5%8D%95%E6%8E%A8%E5%AF%BC/</url>
+    <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
+<span id="more"></span>
+<h1 id="方法一向量分解">方法一：向量分解</h1>
+<h2 id="推导过程">推导过程</h2>
+<p>首先介绍一个最容易理解的方法——向量分解。假设要旋转的向量是<span
+class="math inline">\(\mathbf{p}\)</span>，要旋转的轴是<span
+class="math inline">\(\mathbf{n}\)</span>，是一个单位向量，要旋转的角度是<span
+class="math inline">\(\theta\)</span>。再设旋转后的轴是<span
+class="math inline">\(\mathbf{p}&#39;\)</span>。</p>
+<p>现在我们把<span
+class="math inline">\(\mathbf{p}\)</span>分解为两个向量，一个平行于<span
+class="math inline">\(\mathbf{n}\)</span>，另一个垂直于<span
+class="math inline">\(\mathbf{n}\)</span>，即： <span
+class="math display">\[\mathbf{p}=\mathbf{p}_\perp+\mathbf{p}_\parallel\]</span>
+容易知道，平行于<span
+class="math inline">\(\mathbf{n}\)</span>的分向量<span
+class="math inline">\(\mathbf{p}_\parallel\)</span>就是<span
+class="math inline">\(\mathbf{p}\)</span>在<span
+class="math inline">\(\mathbf{n}\)</span>上的投影（推导过程略）： <span
+class="math display">\[\mathbf{p}_\parallel=(\mathbf{n}\cdot\mathbf{p})\mathbf{n}\]</span>
+从而就能得到<span class="math inline">\(\mathbf{p}_\perp\)</span>：
+<span
+class="math display">\[\mathbf{p}_\perp=\mathbf{p}-\mathbf{p}_\parallel\]</span>
+同样地可以将旋转后的向量分解： <span
+class="math display">\[\mathbf{p}&#39;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\]</span>
+显然，旋转后的向量对应的平行分量<span
+class="math inline">\(\mathbf{p}&#39;_\parallel\)</span>是不变的： <span
+class="math display">\[\mathbf{p}&#39;_\parallel=\mathbf{p}_\parallel\]</span>
+这里的关键在于求垂直分量<span
+class="math inline">\(\mathbf{p}&#39;_\perp\)</span>。</p>
+<figure>
+<img data-src="/images/arbitrary_rotation/1.png"
+alt="将向量分解为一个平行向量和一个垂直向量" />
+<figcaption
+aria-hidden="true">将向量分解为一个平行向量和一个垂直向量</figcaption>
+</figure>
+<p>根据已知的旋转轴<span
+class="math inline">\(\mathbf{n}\)</span>，我们就知道它对应的平面<span
+class="math inline">\(V\)</span>，而向量<span
+class="math inline">\(\mathbf{p}\)</span>与<span
+class="math inline">\(\mathbf{p}&#39;\)</span>的垂直分量就在该平面内。该平面的维度是2，因此只需要找到两个基向量，就可以通过这两个基向量的线性组合表示该平面的任意向量。</p>
+<p>其中一个基向量我们已经找到了，就是<span
+class="math inline">\(\mathbf{p}_\perp\)</span>，而另一个我们可以通过<span
+class="math inline">\(\mathbf{n}\)</span>与<span
+class="math inline">\(\mathbf{p}_\perp\)</span>的叉乘实现，得到的向量与<span
+class="math inline">\(\mathbf{n}\)</span>和<span
+class="math inline">\(\mathbf{p}_\perp\)</span>垂直，且在平面<span
+class="math inline">\(V\)</span>内。且注意到： <span
+class="math display">\[\mathbf{n}\times
+\mathbf{p}_\perp=\mathbf{n}\times(\mathbf{p}-\mathbf{p}_\parallel)=\mathbf{n}\times\mathbf{p}-\mathbf{n}\times\mathbf{p}_\parallel=\mathbf{n}\times\mathbf{p}\]</span>
+并且有： <span class="math display">\[\|\mathbf{n}\times
+\mathbf{p}\|=\|\mathbf{n}\times
+\mathbf{p}_\perp\|=\|\mathbf{n}\|\cdot\|\mathbf{p}_\perp\|\cdot\sin(\pi/2)=\|\mathbf{p}_\perp\|\]</span>
+进而我们能导出旋转后的垂直分量<span
+class="math inline">\(\mathbf{p}&#39;_\perp\)</span>： <span
+class="math display">\[\mathbf{p}&#39;_\perp=\cos(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{p}_\perp}{\|\mathbf{p}_\perp\|}+\sin(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{n}\times\mathbf{p}}{\|\mathbf{n}\times\mathbf{p}\|}=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})\]</span>
+最后，我们得到旋转后的向量<span
+class="math inline">\(\mathbf{p}&#39;\)</span>：</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbf{p}&#39;&amp;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\\
+&amp;=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})+\mathbf{p}_\parallel\\
+&amp;=\cos(\theta)(\mathbf{p}-\mathbf{p}_\parallel)+\mathbf{p}_\parallel+\sin(\theta)(\mathbf{n}\times\mathbf{p})\\
+&amp;=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p})
+\end{aligned}
+\]</span></p>
+<p>搞定！</p>
+<h2 id="矩阵形式">矩阵形式</h2>
+<p>我们知道向量的叉乘可以表示为： <span class="math display">\[
+\mathbf{n}\times\mathbf{p}=
+\begin{bmatrix}
+0&amp;-n_z&amp;n_y\\
+n_z&amp;0&amp;-n_x\\
+-n_y&amp;n_x&amp;0
+\end{bmatrix}
+\mathbf{p}=\mathbf{N}\mathbf{p}
+\]</span> 注意到，矩阵<span
+class="math inline">\(\mathbf{N}\)</span>有如下的性质： <span
+class="math display">\[\mathbf{N}(\mathbf{N}\mathbf{p})=\mathbf{N}^2\mathbf{p}=\mathbf{n}\times(\mathbf{n}\times\mathbf{p})\]</span>
+所以我们可以把旋转公式写成下述形式： <span
+class="math display">\[\mathbf{p}&#39;=\mathbf{p}+(1-\cos(\theta))\mathbf{N}^2\mathbf{p}+\sin(\theta)\mathbf{N}\mathbf{p}=\mathbf{R}\mathbf{p}\]</span>
+其中<span
+class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>。上面的等式需要注意到<span
+class="math inline">\((\mathbf{n}\cdot\mathbf{p})\mathbf{n}=\mathbf{p}+\mathbf{N}^2\mathbf{p}\)</span>。</p>
+<p>所以，使用Rodrigues'旋转公式，只需要首先令<span
+class="math inline">\(\mathbf{N}=\begin{bmatrix}0&amp;-n_z&amp;n_y\\n_z&amp;0&amp;-n_x\\-n_y&amp;n_x&amp;0\end{bmatrix}\)</span>，然后再计算<span
+class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>，就能得到旋转后的向量为<span
+class="math inline">\(\mathbf{p}&#39;=\mathbf{R}\mathbf{p}\)</span>。</p>
+<h1 id="方法二坐标轴对齐">方法二：坐标轴对齐</h1>
+<p>既然直接绕着任意轴旋转比较困难，那为啥不先进行整个空间的旋转，把旋转轴旋转为坐标轴，这样就能把向量绕任意轴旋转转化为向量绕标准坐标轴旋转。这就是我们非常熟悉的问题了。</p>
+<p>假定我们考虑的是三维空间的旋转（对更高维的情况容易推论），即标准坐标系为<span
+class="math inline">\(\mathbf{x}=(1,0,0),\mathbf{y}=(0,1,0),\mathbf{z}=(0,0,1)\)</span>。我们有旋转轴<span
+class="math inline">\(\mathbf{n},\Vert\mathbf{n}\Vert=1\)</span>和待旋转向量<span
+class="math inline">\(\mathbf{p}\)</span>。</p>
+<p>首先，我们构建一个坐标系<span
+class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>，该坐标系的一个轴就是<span
+class="math inline">\(\mathbf{n}\)</span>，我们利用叉乘实现：</p>
+<p><span class="math display">\[
+\mathbf{u}=\mathbf{n},\qquad
+\mathbf{v}=\frac{\mathbf{n}\times\mathbf{p}}{\Vert\mathbf{n}\times\mathbf{p}\Vert},\qquad
+\mathbf{w}=\mathbf{n}\times \mathbf{v}
+\]</span></p>
+<p>现在，我们要把坐标轴<span
+class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>分别旋转到坐标轴<span
+class="math inline">\(\mathbf{x},\mathbf{y},\mathbf{z}\)</span>的位置，这可以用下面的旋转矩阵实现：</p>
+<p><span class="math display">\[
+\mathbf{Q}=
+\begin{bmatrix}
+\mathbf{u}\\
+\mathbf{v}\\
+\mathbf{w}
+\end{bmatrix}=
+\begin{bmatrix}
+x_u&amp;y_u&amp;z_u\\
+x_v&amp;y_v&amp;z_v\\
+x_w&amp;y_w&amp;z_w
+\end{bmatrix}
+\]</span></p>
+<p>很容易验证：<span
+class="math inline">\(\mathbf{x}=\mathbf{Q}\mathbf{u},\mathbf{y}=\mathbf{Q}\mathbf{v},\mathbf{z}=\mathbf{Q}\mathbf{w}\)</span>，从而就有<span
+class="math inline">\(\mathbf{I}=\mathbf{Q}\mathbf{Q}^\top=\mathbf{Q}^\top\mathbf{Q}\)</span>，这就验证了<span
+class="math inline">\(\mathbf{Q}\)</span>是正交的。</p>
+<p>现在，原来的向量<span
+class="math inline">\(\mathbf{p}\)</span>就变成了<span
+class="math inline">\(\mathbf{Q}\mathbf{p}\)</span>，原来绕<span
+class="math inline">\(\mathbf{n}\)</span>旋转（也就是绕<span
+class="math inline">\(\mathbf{u}\)</span>旋转）就变成了绕<span
+class="math inline">\(\mathbf{x}\)</span>旋转，而我们知道绕<span
+class="math inline">\(\mathbf{x}\)</span>轴旋转<span
+class="math inline">\(\theta\)</span>的旋转矩阵是： <span
+class="math display">\[
+\mathbf{T}=
+\begin{bmatrix}
+1&amp;0&amp;0\\
+0&amp;\cos(\theta)&amp;-\sin(\theta)\\
+0&amp;\sin(\theta)&amp;\cos(\theta)
+\end{bmatrix}
+\]</span> 因此，旋转后的向量就是<span
+class="math inline">\(\mathbf{T}\mathbf{Q}\mathbf{p}\)</span>。现在，只需要把旋转后的向量再旋转回原来的位置就好了，我们只需要再乘以<span
+class="math inline">\(\mathbf{Q}\)</span>的逆即可。由于<span
+class="math inline">\(\mathbf{Q}\)</span>是正交的，所以有<span
+class="math inline">\(\mathbf{Q}^{-1}=\mathbf{Q}^\top\)</span>。把上面的结果合起来，就能得到最终的结果是：
+<span class="math display">\[\mathbf{p}&#39;=\mathbf{Q}^\top
+\mathbf{T}\mathbf{Q}\mathbf{p}\]</span></p>
+<h1 id="检验">检验</h1>
+<p>现在我们用代码来检验一下上述三种方法是否能得到同样的结果，以及它们的运算效率如何。比较的方法包括：
+1. 向量分解-向量形式 2. 向量分解-矩阵形式 3. 对标轴对齐</p>
+<p>程序在虚拟机上运行，RAM为4G，硬盘20G，处理器为2个Intel Core i5-10400F
+CPU @ 2.90GHz。</p>
+<p>代码如下： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;eigen3/Eigen/Eigen&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> PI = <span class="number">3.1415926</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the vector form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeVector</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f rotatedVector = <span class="built_in">cos</span>(rotationAngle) * p </span><br><span class="line">                                + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * (n.<span class="built_in">dot</span>(p)) * n </span><br><span class="line">                                + <span class="built_in">sin</span>(rotationAngle) * (n.<span class="built_in">cross</span>(p));</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the vector form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the matrix form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeMatrix</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Matrix3f N = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">N &lt;&lt; <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">2</span>), <span class="built_in">n</span>(<span class="number">1</span>),</span><br><span class="line">     <span class="built_in">n</span>(<span class="number">2</span>), <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">0</span>),</span><br><span class="line">     -<span class="built_in">n</span>(<span class="number">1</span>), <span class="built_in">n</span>(<span class="number">0</span>), <span class="number">0</span>;</span><br><span class="line">Eigen::Matrix3f R = Eigen::Matrix3f::<span class="built_in">Identity</span>() + <span class="built_in">sin</span>(rotationAngle) * N + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * N * N;</span><br><span class="line">Eigen::Vector3f rotatedVector = R * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the matrix form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using axis coordination</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AxisCoordination</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f crossed = n.<span class="built_in">cross</span>(p);</span><br><span class="line">Eigen::Vector3f u = n;</span><br><span class="line">Eigen::Vector3f v = crossed / crossed.<span class="built_in">norm</span>();</span><br><span class="line">Eigen::Vector3f w = n.<span class="built_in">cross</span>(v);</span><br><span class="line">Eigen::Matrix3f Q = Eigen::Matrix3f::<span class="built_in">Identity</span>(), T = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">0</span>) = u;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">1</span>) = v;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">2</span>) = w;</span><br><span class="line">T &lt;&lt; <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">cos</span>(rotationAngle), -<span class="built_in">sin</span>(rotationAngle),</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">sin</span>(rotationAngle), <span class="built_in">cos</span>(rotationAngle);</span><br><span class="line">Eigen::Vector3f rotatedVector = Q.<span class="built_in">transpose</span>() * T * Q * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: axis coordination. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> angle = <span class="number">60</span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">p</span><span class="params">(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>)</span></span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">n</span><span class="params">(<span class="number">2.0</span>, <span class="number">8.6</span>, <span class="number">-3.1</span>)</span></span>;</span><br><span class="line">    n.<span class="built_in">normalize</span>(); </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// execute functions</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The vector p is (&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;The rotation axis n is (&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">DecomposeVector</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">DecomposeMatrix</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">AxisCoordination</span>(n, p, angle);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 输出是： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.213724</span>,<span class="number">0.919011</span>,<span class="number">-0.331271</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.016354</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">3.57449</span>,<span class="number">0.643966</span>,<span class="number">0.899062</span>). The time used is <span class="number">0.016642</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.021062</span></span></span><br></pre></td></tr></table></figure> 再多试几组：
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">-654.1</span>,<span class="number">12.88</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.995044</span>,<span class="number">0.0136933</span>,<span class="number">-0.0984901</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.015503</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">-59.7309</span>,<span class="number">-338.298</span>,<span class="number">-556.777</span>). The time used is <span class="number">0.015297</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.021547</span></span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">32.5</span>,<span class="number">45.1</span>,<span class="number">-2.2</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.57735</span>,<span class="number">0.57735</span>,<span class="number">0.57735</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.015558</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">5.16667</span>,<span class="number">52.4667</span>,<span class="number">17.7667</span>). The time used is <span class="number">0.015215</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.020841</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">666</span>,<span class="number">0</span>,<span class="number">0</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.01517</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">0</span>,<span class="number">666</span>,<span class="number">0</span>). The time used is <span class="number">0.015402</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.020898</span></span></span><br></pre></td></tr></table></figure>
+<p>最后一组出现了精度问题，所以代码中还应该加入判断 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">abs</span>(value - <span class="built_in">round</span>(value)) &lt; epsilon)</span><br><span class="line">     value = <span class="built_in">round</span>(value);</span><br></pre></td></tr></table></figure></p>
+<p>从上面的例子来看，<strong>向量分解-向量形式</strong>与<strong>向量分解-矩阵形式</strong>运行效率是一致的，而<strong>坐标轴对齐</strong>的效率较低，这主要是由计算三次矩阵乘法导致的。</p>
+]]></content>
+      <categories>
+        <category>数学 - 图形学</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
         <tag>随笔</tag>
         <tag>数学</tag>
       </tags>
@@ -774,198 +966,6 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
       </tags>
   </entry>
   <entry>
-    <title>向量绕任意轴旋转的简单推导</title>
-    <url>/2021/06/07/%E5%90%91%E9%87%8F%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E7%AE%80%E5%8D%95%E6%8E%A8%E5%AF%BC/</url>
-    <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
-<span id="more"></span>
-<h1 id="方法一向量分解">方法一：向量分解</h1>
-<h2 id="推导过程">推导过程</h2>
-<p>首先介绍一个最容易理解的方法——向量分解。假设要旋转的向量是<span
-class="math inline">\(\mathbf{p}\)</span>，要旋转的轴是<span
-class="math inline">\(\mathbf{n}\)</span>，是一个单位向量，要旋转的角度是<span
-class="math inline">\(\theta\)</span>。再设旋转后的轴是<span
-class="math inline">\(\mathbf{p}&#39;\)</span>。</p>
-<p>现在我们把<span
-class="math inline">\(\mathbf{p}\)</span>分解为两个向量，一个平行于<span
-class="math inline">\(\mathbf{n}\)</span>，另一个垂直于<span
-class="math inline">\(\mathbf{n}\)</span>，即： <span
-class="math display">\[\mathbf{p}=\mathbf{p}_\perp+\mathbf{p}_\parallel\]</span>
-容易知道，平行于<span
-class="math inline">\(\mathbf{n}\)</span>的分向量<span
-class="math inline">\(\mathbf{p}_\parallel\)</span>就是<span
-class="math inline">\(\mathbf{p}\)</span>在<span
-class="math inline">\(\mathbf{n}\)</span>上的投影（推导过程略）： <span
-class="math display">\[\mathbf{p}_\parallel=(\mathbf{n}\cdot\mathbf{p})\mathbf{n}\]</span>
-从而就能得到<span class="math inline">\(\mathbf{p}_\perp\)</span>：
-<span
-class="math display">\[\mathbf{p}_\perp=\mathbf{p}-\mathbf{p}_\parallel\]</span>
-同样地可以将旋转后的向量分解： <span
-class="math display">\[\mathbf{p}&#39;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\]</span>
-显然，旋转后的向量对应的平行分量<span
-class="math inline">\(\mathbf{p}&#39;_\parallel\)</span>是不变的： <span
-class="math display">\[\mathbf{p}&#39;_\parallel=\mathbf{p}_\parallel\]</span>
-这里的关键在于求垂直分量<span
-class="math inline">\(\mathbf{p}&#39;_\perp\)</span>。</p>
-<figure>
-<img data-src="/images/arbitrary_rotation/1.png"
-alt="将向量分解为一个平行向量和一个垂直向量" />
-<figcaption
-aria-hidden="true">将向量分解为一个平行向量和一个垂直向量</figcaption>
-</figure>
-<p>根据已知的旋转轴<span
-class="math inline">\(\mathbf{n}\)</span>，我们就知道它对应的平面<span
-class="math inline">\(V\)</span>，而向量<span
-class="math inline">\(\mathbf{p}\)</span>与<span
-class="math inline">\(\mathbf{p}&#39;\)</span>的垂直分量就在该平面内。该平面的维度是2，因此只需要找到两个基向量，就可以通过这两个基向量的线性组合表示该平面的任意向量。</p>
-<p>其中一个基向量我们已经找到了，就是<span
-class="math inline">\(\mathbf{p}_\perp\)</span>，而另一个我们可以通过<span
-class="math inline">\(\mathbf{n}\)</span>与<span
-class="math inline">\(\mathbf{p}_\perp\)</span>的叉乘实现，得到的向量与<span
-class="math inline">\(\mathbf{n}\)</span>和<span
-class="math inline">\(\mathbf{p}_\perp\)</span>垂直，且在平面<span
-class="math inline">\(V\)</span>内。且注意到： <span
-class="math display">\[\mathbf{n}\times
-\mathbf{p}_\perp=\mathbf{n}\times(\mathbf{p}-\mathbf{p}_\parallel)=\mathbf{n}\times\mathbf{p}-\mathbf{n}\times\mathbf{p}_\parallel=\mathbf{n}\times\mathbf{p}\]</span>
-并且有： <span class="math display">\[\|\mathbf{n}\times
-\mathbf{p}\|=\|\mathbf{n}\times
-\mathbf{p}_\perp\|=\|\mathbf{n}\|\cdot\|\mathbf{p}_\perp\|\cdot\sin(\pi/2)=\|\mathbf{p}_\perp\|\]</span>
-进而我们能导出旋转后的垂直分量<span
-class="math inline">\(\mathbf{p}&#39;_\perp\)</span>： <span
-class="math display">\[\mathbf{p}&#39;_\perp=\cos(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{p}_\perp}{\|\mathbf{p}_\perp\|}+\sin(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{n}\times\mathbf{p}}{\|\mathbf{n}\times\mathbf{p}\|}=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})\]</span>
-最后，我们得到旋转后的向量<span
-class="math inline">\(\mathbf{p}&#39;\)</span>：</p>
-<p><span class="math display">\[
-\begin{aligned}
-\mathbf{p}&#39;&amp;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\\
-&amp;=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})+\mathbf{p}_\parallel\\
-&amp;=\cos(\theta)(\mathbf{p}-\mathbf{p}_\parallel)+\mathbf{p}_\parallel+\sin(\theta)(\mathbf{n}\times\mathbf{p})\\
-&amp;=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p})
-\end{aligned}
-\]</span></p>
-<p>搞定！</p>
-<h2 id="矩阵形式">矩阵形式</h2>
-<p>我们知道向量的叉乘可以表示为： <span class="math display">\[
-\mathbf{n}\times\mathbf{p}=
-\begin{bmatrix}
-0&amp;-n_z&amp;n_y\\
-n_z&amp;0&amp;-n_x\\
--n_y&amp;n_x&amp;0
-\end{bmatrix}
-\mathbf{p}=\mathbf{N}\mathbf{p}
-\]</span> 注意到，矩阵<span
-class="math inline">\(\mathbf{N}\)</span>有如下的性质： <span
-class="math display">\[\mathbf{N}(\mathbf{N}\mathbf{p})=\mathbf{N}^2\mathbf{p}=\mathbf{n}\times(\mathbf{n}\times\mathbf{p})\]</span>
-所以我们可以把旋转公式写成下述形式： <span
-class="math display">\[\mathbf{p}&#39;=\mathbf{p}+(1-\cos(\theta))\mathbf{N}^2\mathbf{p}+\sin(\theta)\mathbf{N}\mathbf{p}=\mathbf{R}\mathbf{p}\]</span>
-其中<span
-class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>。上面的等式需要注意到<span
-class="math inline">\((\mathbf{n}\cdot\mathbf{p})\mathbf{n}=\mathbf{p}+\mathbf{N}^2\mathbf{p}\)</span>。</p>
-<p>所以，使用Rodrigues'旋转公式，只需要首先令<span
-class="math inline">\(\mathbf{N}=\begin{bmatrix}0&amp;-n_z&amp;n_y\\n_z&amp;0&amp;-n_x\\-n_y&amp;n_x&amp;0\end{bmatrix}\)</span>，然后再计算<span
-class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>，就能得到旋转后的向量为<span
-class="math inline">\(\mathbf{p}&#39;=\mathbf{R}\mathbf{p}\)</span>。</p>
-<h1 id="方法二坐标轴对齐">方法二：坐标轴对齐</h1>
-<p>既然直接绕着任意轴旋转比较困难，那为啥不先进行整个空间的旋转，把旋转轴旋转为坐标轴，这样就能把向量绕任意轴旋转转化为向量绕标准坐标轴旋转。这就是我们非常熟悉的问题了。</p>
-<p>假定我们考虑的是三维空间的旋转（对更高维的情况容易推论），即标准坐标系为<span
-class="math inline">\(\mathbf{x}=(1,0,0),\mathbf{y}=(0,1,0),\mathbf{z}=(0,0,1)\)</span>。我们有旋转轴<span
-class="math inline">\(\mathbf{n},\Vert\mathbf{n}\Vert=1\)</span>和待旋转向量<span
-class="math inline">\(\mathbf{p}\)</span>。</p>
-<p>首先，我们构建一个坐标系<span
-class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>，该坐标系的一个轴就是<span
-class="math inline">\(\mathbf{n}\)</span>，我们利用叉乘实现：</p>
-<p><span class="math display">\[
-\mathbf{u}=\mathbf{n},\qquad
-\mathbf{v}=\frac{\mathbf{n}\times\mathbf{p}}{\Vert\mathbf{n}\times\mathbf{p}\Vert},\qquad
-\mathbf{w}=\mathbf{n}\times \mathbf{v}
-\]</span></p>
-<p>现在，我们要把坐标轴<span
-class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>分别旋转到坐标轴<span
-class="math inline">\(\mathbf{x},\mathbf{y},\mathbf{z}\)</span>的位置，这可以用下面的旋转矩阵实现：</p>
-<p><span class="math display">\[
-\mathbf{Q}=
-\begin{bmatrix}
-\mathbf{u}\\
-\mathbf{v}\\
-\mathbf{w}
-\end{bmatrix}=
-\begin{bmatrix}
-x_u&amp;y_u&amp;z_u\\
-x_v&amp;y_v&amp;z_v\\
-x_w&amp;y_w&amp;z_w
-\end{bmatrix}
-\]</span></p>
-<p>很容易验证：<span
-class="math inline">\(\mathbf{x}=\mathbf{Q}\mathbf{u},\mathbf{y}=\mathbf{Q}\mathbf{v},\mathbf{z}=\mathbf{Q}\mathbf{w}\)</span>，从而就有<span
-class="math inline">\(\mathbf{I}=\mathbf{Q}\mathbf{Q}^\top=\mathbf{Q}^\top\mathbf{Q}\)</span>，这就验证了<span
-class="math inline">\(\mathbf{Q}\)</span>是正交的。</p>
-<p>现在，原来的向量<span
-class="math inline">\(\mathbf{p}\)</span>就变成了<span
-class="math inline">\(\mathbf{Q}\mathbf{p}\)</span>，原来绕<span
-class="math inline">\(\mathbf{n}\)</span>旋转（也就是绕<span
-class="math inline">\(\mathbf{u}\)</span>旋转）就变成了绕<span
-class="math inline">\(\mathbf{x}\)</span>旋转，而我们知道绕<span
-class="math inline">\(\mathbf{x}\)</span>轴旋转<span
-class="math inline">\(\theta\)</span>的旋转矩阵是： <span
-class="math display">\[
-\mathbf{T}=
-\begin{bmatrix}
-1&amp;0&amp;0\\
-0&amp;\cos(\theta)&amp;-\sin(\theta)\\
-0&amp;\sin(\theta)&amp;\cos(\theta)
-\end{bmatrix}
-\]</span> 因此，旋转后的向量就是<span
-class="math inline">\(\mathbf{T}\mathbf{Q}\mathbf{p}\)</span>。现在，只需要把旋转后的向量再旋转回原来的位置就好了，我们只需要再乘以<span
-class="math inline">\(\mathbf{Q}\)</span>的逆即可。由于<span
-class="math inline">\(\mathbf{Q}\)</span>是正交的，所以有<span
-class="math inline">\(\mathbf{Q}^{-1}=\mathbf{Q}^\top\)</span>。把上面的结果合起来，就能得到最终的结果是：
-<span class="math display">\[\mathbf{p}&#39;=\mathbf{Q}^\top
-\mathbf{T}\mathbf{Q}\mathbf{p}\]</span></p>
-<h1 id="检验">检验</h1>
-<p>现在我们用代码来检验一下上述三种方法是否能得到同样的结果，以及它们的运算效率如何。比较的方法包括：
-1. 向量分解-向量形式 2. 向量分解-矩阵形式 3. 对标轴对齐</p>
-<p>程序在虚拟机上运行，RAM为4G，硬盘20G，处理器为2个Intel Core i5-10400F
-CPU @ 2.90GHz。</p>
-<p>代码如下： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;eigen3/Eigen/Eigen&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> PI = <span class="number">3.1415926</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the vector form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeVector</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f rotatedVector = <span class="built_in">cos</span>(rotationAngle) * p </span><br><span class="line">                                + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * (n.<span class="built_in">dot</span>(p)) * n </span><br><span class="line">                                + <span class="built_in">sin</span>(rotationAngle) * (n.<span class="built_in">cross</span>(p));</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the vector form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the matrix form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeMatrix</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Matrix3f N = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">N &lt;&lt; <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">2</span>), <span class="built_in">n</span>(<span class="number">1</span>),</span><br><span class="line">     <span class="built_in">n</span>(<span class="number">2</span>), <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">0</span>),</span><br><span class="line">     -<span class="built_in">n</span>(<span class="number">1</span>), <span class="built_in">n</span>(<span class="number">0</span>), <span class="number">0</span>;</span><br><span class="line">Eigen::Matrix3f R = Eigen::Matrix3f::<span class="built_in">Identity</span>() + <span class="built_in">sin</span>(rotationAngle) * N + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * N * N;</span><br><span class="line">Eigen::Vector3f rotatedVector = R * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the matrix form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using axis coordination</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AxisCoordination</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f crossed = n.<span class="built_in">cross</span>(p);</span><br><span class="line">Eigen::Vector3f u = n;</span><br><span class="line">Eigen::Vector3f v = crossed / crossed.<span class="built_in">norm</span>();</span><br><span class="line">Eigen::Vector3f w = n.<span class="built_in">cross</span>(v);</span><br><span class="line">Eigen::Matrix3f Q = Eigen::Matrix3f::<span class="built_in">Identity</span>(), T = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">0</span>) = u;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">1</span>) = v;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">2</span>) = w;</span><br><span class="line">T &lt;&lt; <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">cos</span>(rotationAngle), -<span class="built_in">sin</span>(rotationAngle),</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">sin</span>(rotationAngle), <span class="built_in">cos</span>(rotationAngle);</span><br><span class="line">Eigen::Vector3f rotatedVector = Q.<span class="built_in">transpose</span>() * T * Q * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: axis coordination. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> angle = <span class="number">60</span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">p</span><span class="params">(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>)</span></span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">n</span><span class="params">(<span class="number">2.0</span>, <span class="number">8.6</span>, <span class="number">-3.1</span>)</span></span>;</span><br><span class="line">    n.<span class="built_in">normalize</span>(); </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// execute functions</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The vector p is (&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;The rotation axis n is (&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">DecomposeVector</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">DecomposeMatrix</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">AxisCoordination</span>(n, p, angle);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 输出是： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.213724</span>,<span class="number">0.919011</span>,<span class="number">-0.331271</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.016354</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">3.57449</span>,<span class="number">0.643966</span>,<span class="number">0.899062</span>). The time used is <span class="number">0.016642</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.021062</span></span></span><br></pre></td></tr></table></figure> 再多试几组：
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">-654.1</span>,<span class="number">12.88</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.995044</span>,<span class="number">0.0136933</span>,<span class="number">-0.0984901</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.015503</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">-59.7309</span>,<span class="number">-338.298</span>,<span class="number">-556.777</span>). The time used is <span class="number">0.015297</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.021547</span></span></span><br></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">32.5</span>,<span class="number">45.1</span>,<span class="number">-2.2</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.57735</span>,<span class="number">0.57735</span>,<span class="number">0.57735</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.015558</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">5.16667</span>,<span class="number">52.4667</span>,<span class="number">17.7667</span>). The time used is <span class="number">0.015215</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.020841</span></span></span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">666</span>,<span class="number">0</span>,<span class="number">0</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.01517</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">0</span>,<span class="number">666</span>,<span class="number">0</span>). The time used is <span class="number">0.015402</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.020898</span></span></span><br></pre></td></tr></table></figure>
-<p>最后一组出现了精度问题，所以代码中还应该加入判断 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">abs</span>(value - <span class="built_in">round</span>(value)) &lt; epsilon)</span><br><span class="line">     value = <span class="built_in">round</span>(value);</span><br></pre></td></tr></table></figure></p>
-<p>从上面的例子来看，<strong>向量分解-向量形式</strong>与<strong>向量分解-矩阵形式</strong>运行效率是一致的，而<strong>坐标轴对齐</strong>的效率较低，这主要是由计算三次矩阵乘法导致的。</p>
-]]></content>
-      <categories>
-        <category>数学 - 图形学</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>随笔</tag>
-        <tag>数学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>十二月的花</title>
-    <url>/2020/12/22/%E5%8D%81%E4%BA%8C%E6%9C%88%E7%9A%84%E8%8A%B1/</url>
-    <content><![CDATA[<p>埙吹响了海岸<br />
-琴穿梭叶间<br />
-笛在天空啼鸣<br />
-伴奏着雪花片片</p>
-<p>孩子们欢笑着相聚<br />
-踏着雪<br />
-吱吱嘎嘎</p>
-<p>把欢乐捏成一团团棉<br />
-随风起舞<br />
-在阳光下<br />
-雪爱上了花</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>电影《误杀》短评</title>
     <url>/2020/09/08/%E7%94%B5%E5%BD%B1%E3%80%8A%E8%AF%AF%E6%9D%80%E3%80%8B%E7%9F%AD%E8%AF%84/</url>
     <content><![CDATA[<p>《误杀》是一部不失水准的悬疑片。实际上，在看完电影得知这是一部翻拍（翻拍自2015年的印度电影《误杀瞒天记》。实际上，它还有更早的来源）后，我竟然有些失落：要是这是我们自己的剧本该多好。但无论如何，本片从剧情、人物、节奏、立意、表现手法等方法，都是在水准线之上的作品，其中的若干不足完全是瑕不掩瑜的。8分是我对本片的总体评价。
@@ -1049,6 +1049,22 @@ key）。</p>
 愿他不要怯懦 续写昨夜的感慨<br />
 还有清晨的阳光</p>
 <p>案台旁 樱花在绽放</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>西湖夜歌</title>
+    <url>/2021/07/09/%E8%A5%BF%E6%B9%96%E5%A4%9C%E6%AD%8C/</url>
+    <content><![CDATA[<p>霓光半遮影<br />
+湖波轻颤合韵起<br />
+半句寻谁去</p>
 ]]></content>
       <categories>
         <category>随笔</category>
@@ -1462,22 +1478,6 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <tag>计算机</tag>
         <tag>随笔</tag>
         <tag>数学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>西湖夜歌</title>
-    <url>/2021/07/09/%E8%A5%BF%E6%B9%96%E5%A4%9C%E6%AD%8C/</url>
-    <content><![CDATA[<p>霓光半遮影<br />
-湖波轻颤合韵起<br />
-半句寻谁去</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -3452,16 +3452,208 @@ camera，则会非常有利于debug</p>
 <h3 id="camera-collisions">Camera Collisions</h3>
 <h4 id="the-importance-of-camera-collisions">The importance of camera
 collisions</h4>
-<h4 id="is-collision-testing-necessary">Is collision testing
-necessary</h4>
+<p>Camera collision可能引起的问题：</p>
+<ul>
+<li>The collision prevents the camera from moving to its desired
+position</li>
+<li>Discontinuous motion may be caused by collisions</li>
+<li>Occulusion of the target object</li>
+<li>Camera near plane intersects with geometry</li>
+</ul>
 <h4 id="collision-determination">Collision determination</h4>
+<ul>
+<li>Object collisions</li>
+<li>Environmental collisions: 有两种数据——render mesh和collision
+mesh</li>
+<li>Collision primitives: 通常来说，相机会被表示为球体用于碰撞检测</li>
+</ul>
 <h4 id="collision-geometry-design">Collision geometry design</h4>
+<p>下面是一些设计场景的tips:</p>
+<ul>
+<li>Avoid tightly confined spaces</li>
+<li>Allow sufficient space for the camera</li>
+<li>Steep steps</li>
+<li>Ledges/overhangs</li>
+<li>Low ceilings</li>
+<li>Doorways:
+第一，玩家可能移动太快以至于门在玩家和相机之间关闭，此时可以让门保持开启直到相机穿过；第二，玩家可能沿着门缝移动并导致相机无法跟随玩家，此时可以让相机沿着门缝的轴移动；第三，玩家可能站在门缝里，此时要避免相机因玩家旋转而与物体相交</li>
+<li>Use the simplest collision mesh possible</li>
+<li>Separate collision mesh for the camera</li>
+<li>Chamfer all corners: 为此可以让相机沿着collision表面滑动</li>
+</ul>
 <h4 id="collision-resolution">Collision resolution</h4>
+<p>当我们检测到发生碰撞时，就需要决定相机怎么办，可以有以下几种策略：</p>
+<ul>
+<li>Do not move: 此时如果人物移动就可能会有问题</li>
+<li>Partial move: 尝试向期望方向移动，如果还是有碰撞则不动</li>
+<li>Alternative movement: 改变相机的移动方向</li>
+<li>Jump cut: 重新计算desired position并立即切换过去</li>
+</ul>
 <h4 id="disabling-collision-detection">Disabling collision
 detection</h4>
+<p>有时候我们不需要相机的碰撞检测。比如第一人称和第三人称视角的切换、path-based
+cameras。总之取决于期望的相机效果</p>
 <h4 id="avoiding-camera-collisions">Avoiding camera collisions</h4>
+<p>可以动态生成一条相机跟随的路径，或者统一采用半透明的方式。在三人称游戏中，当玩家在墙角或无法移动的地区时，相机可能和角色碰撞，此时可以切换到第一人称中，或者旋转相机调整相机位置</p>
+<ul>
+<li>Future position of player</li>
+<li>Predicting potential collisions</li>
+<li>Collision prediction</li>
+<li>Object repulsion</li>
+<li>Movement toward the camera</li>
+</ul>
 <h2 id="chapter-10-camera-mathematics">Chapter 10: Camera
 Mathematics</h2>
+<p>摄像机的一些数学：</p>
+<ul>
+<li>Camera position
+<ul>
+<li>Offset within the local space of an object</li>
+<li>Angular offsets relative to game objects</li>
+<li>Valid position determination</li>
+<li>Spline curves</li>
+</ul></li>
+<li>Camera orientation
+<ul>
+<li>Representation</li>
+<li>Look-at</li>
+<li>Shortest rotation arc</li>
+<li>Roll removal</li>
+<li>Twist reduction</li>
+<li>Determining angles between desired orientations</li>
+</ul></li>
+<li>Camera motion
+<ul>
+<li>Proximity</li>
+<li>Damping functions</li>
+<li>Springs</li>
+<li>Interpolation</li>
+</ul></li>
+<li>Rendering
+<ul>
+<li>Camera space/world space/screen space conversions</li>
+<li>FOV conversion</li>
+<li>Frustum construction</li>
+<li>Perspective projection</li>
+<li>Orthographic projection</li>
+<li>Isometric projection</li>
+<li>Axonometric projection</li>
+</ul></li>
+<li>General camera math
+<ul>
+<li>Digital filters</li>
+<li>Spline curves</li>
+<li>Interpolation</li>
+</ul></li>
+<li>Camera math problems and fixes
+<ul>
+<li>Floating-point accuracy and precision</li>
+<li>Epsilon usage</li>
+<li>Base conversion</li>
+</ul></li>
+</ul>
+<h3 id="common-mathematical-techniques">Common Mathematical
+Techniques</h3>
+<h4 id="look-at">Look-at</h4>
+<p>此时通过一个旋转矩阵或四元数把当前的相机朝向变换到新的朝向</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Mat4 <span class="type">const</span> <span class="title">Mat4::LookAt</span> <span class="params">(Vec3 <span class="type">const</span>&amp; source, Vec3 <span class="type">const</span>&amp; dest, Vec3 <span class="type">const</span>&amp; worldUpVector)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Vec3 viewDirection = <span class="built_in">Vece</span> (dest - source).<span class="built_in">AsNormalized</span> ();</span><br><span class="line">  <span class="type">float</span> dot = Vec3::<span class="built_in">Dot</span> (viewDirection, worldUpVector); </span><br><span class="line">  Vec3 unnormalizedUp = worldUpVector - (dot * vewDirection); <span class="comment">// 相机的unnormalized Up axis</span></span><br><span class="line">  Vec3 up = unnormalizedUp.<span class="built_in">AsNormalized</span> ();  <span class="comment">// 相机的up axis</span></span><br><span class="line">  Vec3 right = Vec3::<span class="built_in">Cross</span> (up, viewDirection);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// matrix ordering depends on row/column major</span></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Mat4</span> (</span><br><span class="line">    right[X], viewDirection[X], up[X], source[X],</span><br><span class="line">    right[Y], viewDirection[Y], up[Y], source[Y],</span><br><span class="line">    right[Z], viewDirection[Z], up[Z], source[Z]</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意到上面的变换矩阵是把世界空间中的点变换到相机在（0,0）点的位置</p>
+<h4 id="roll-removal">Roll removal</h4>
+<p>为了移除roll，我们需要重新计算view transform的right
+axis同时保持当前的forward vector，然后可以通过叉乘决定up vector</p>
+<h4 id="twist-reduction">Twist reduction</h4>
+<p>在三人称相机中，当物体在相机上方或者下方的时候，可能导致相机快速旋转。一个方法是检测相机绕着forward
+vector旋转的速度，但是只有在forward vector几乎在和world up
+axis平行的时候</p>
+<h4 id="world-space-to-screen-space-conversion">World space to screen
+space conversion</h4>
+<p>取决于projection算法</p>
+<ul>
+<li>Orthographic projection <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">uint32 <span class="type">const</span> ScreenX = ObjectX - ViewportX; <span class="comment">// assumes top left corner is (0,0)</span></span><br><span class="line">uint32 <span class="type">const</span> ScreenY = ViewPortY - ObjectY; <span class="comment">// depends on the direction of +Y</span></span><br></pre></td></tr></table></figure>
+如果viewport是显示设备的子集，或者viewport涉及缩放，则必须考虑这些因素：
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">uint32 <span class="type">const</span> ScreenX = Viewport.ScreenX + (ObjectX - Viewport.WorldX);</span><br><span class="line">uint32 <span class="type">const</span> ScreenY = Viewport.ScreenY + (Viewport.WorldY - ObjectY);</span><br></pre></td></tr></table></figure></li>
+<li>Isometric projection <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">uint32 <span class="type">const</span> ScreenX = (ObjectX - Viewport.WorldX) * <span class="number">2</span>;</span><br><span class="line">uint32 <span class="type">const</span> ScreenY = Viewport.WorldY - ObjectY;</span><br></pre></td></tr></table></figure></li>
+<li>Perspective projection</li>
+</ul>
+<h4 id="screen-space-to-cameraworld-space-conversion">Screen space to
+camera/world space conversion</h4>
+<p>通常来说，神都会被设置为相机的近平面，或者一个特定的距离相机的距离</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Vec3 <span class="type">const</span> <span class="title">ConvertToWorldSpace</span> <span class="params">(Mat4 <span class="type">const</span>&amp; cameraTransform, Vec3 <span class="type">const</span>&amp; screenPosition)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Vec3 <span class="type">const</span> viewSpace = <span class="built_in">GetProjectionMatrix</span> ().<span class="built_in">Inverted</span> ().<span class="built_in">MultiplyOneOverW</span> (screenSpacePosition);</span><br><span class="line">  Vec3 <span class="type">const</span> worldSpace = cameraTransform * viewSpace;</span><br><span class="line">  <span class="keyword">return</span> worldSpace;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="fov-conversion">FOV conversion</h4>
+<p>考虑把HFOV转化为VFOV，假设我们知道了近平面距离和aspect
+ratio，与HFOV</p>
+<p>我们定义变量<code>alpha</code>和<code>beta</code>：
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">alpha = HFOV / <span class="number">2</span></span><br><span class="line">beta = VFOV / <span class="number">2</span></span><br><span class="line"><span class="built_in">tan</span> (alpha) = (viewport width / <span class="number">2</span>) / near plane distance</span><br><span class="line"><span class="built_in">tan</span> (beta) = (viewport height  / <span class="number">2</span>) / near plane distance</span><br></pre></td></tr></table></figure></p>
+<p>从而有：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">tan</span> (alpha) * near plane distance = viewport width / <span class="number">2</span></span><br><span class="line">Near plane distance = (viewport width / <span class="number">2</span>) / <span class="built_in">tan</span> (alpha)</span><br><span class="line"><span class="built_in">tan</span> (beta) * near plane distance = viewport height / <span class="number">2</span></span><br><span class="line">Near plane distance = (viewport height / <span class="number">2</span>) / <span class="built_in">tan</span> (beta)</span><br></pre></td></tr></table></figure>
+<p>进而有：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">(viewport width / <span class="number">2</span>) * <span class="built_in">tan</span> (beta) = (viewport height / <span class="number">2</span>) * <span class="built_in">tan</span> (alpha)</span><br><span class="line"><span class="built_in">tan</span> (beta) = [(viewport height / <span class="number">2</span>) / (viewport width / <span class="number">2</span>)] * <span class="built_in">tan</span> (alpha)</span><br><span class="line"><span class="built_in">tan</span> (beta) = aspect ratio * <span class="built_in">tan</span> (alpha)</span><br><span class="line">VFOV = <span class="number">2</span> * <span class="built_in">arctan</span> (<span class="built_in">tan</span> (HFOV / <span class="number">2</span>) * aspect ratio)</span><br></pre></td></tr></table></figure>
+<p>所以，只要知道了aspect ratio和其中一个FOV，就可以求出另一个FOV</p>
+<h3 id="quaternions">Quaternions</h3>
+<h3 id="bump-and-ease-functions">Bump and Ease Functions</h3>
+<h4 id="exponentials">Exponentials</h4>
+<h4 id="proportional">Proportional</h4>
+<h4 id="spherical-linear-interpolation">Spherical linear
+interpolation</h4>
+<h4 id="transcendentals">Transcendentals</h4>
+<h4 id="piecewise-spline-curve">Piecewise spline curve</h4>
+<h3 id="springs">Springs</h3>
+<h3 id="digital-filters">Digital Filters</h3>
+<h4 id="low-pass">Low pass</h4>
+<h4 id="high-pass">High pass</h4>
+<h4 id="band">Band</h4>
+<h4 id="finite-impulse-response">Finite impulse response</h4>
+<h4 id="infinite-impulse-response">Infinite impulse response</h4>
+<h3 id="spline-curves">Spline Curves</h3>
+<h4 id="camera-spline-usage">Camera spline usage</h4>
+<h4 id="cubic-polynomials">Cubic polynomials</h4>
+<h4 id="spline-types">Spline types</h4>
+<h4 id="continuity">Continuity</h4>
+<h4 id="spline-definitions">Spline definitions</h4>
+<h4 id="spline-evaluation">Spline evaluation</h4>
+<h4 id="control-point-generation">Control point generation</h4>
+<h4 id="parameterized-arc-length">Parameterized arc length</h4>
+<h4 id="total-spline-length">Total spline length</h4>
+<h4 id="closest-position">Closest position</h4>
+<h4 id="spline-editing">Spline editing</h4>
+<h3 id="interpolation">Interpolation</h3>
+<h3 id="camera-property-interpolation">Camera Property
+Interpolation</h3>
+<h4 id="position-interpolation">Position interpolation</h4>
+<h4 id="orientation-interpolation">Orientation interpolation</h4>
+<h4 id="fov-interpolation">FOV interpolation</h4>
+<h3 id="viewport-interpolation">Viewport Interpolation</h3>
+<h3 id="player-control-interpolation">Player Control Interpolation</h3>
+<h4 id="first-person-cameras">First person cameras</h4>
+<h4 id="third-person-cameras">Third person cameras</h4>
+<h3 id="interpolation-choices">Interpolation Choices</h3>
+<h4 id="linear-interpolation">Linear interpolation</h4>
+<h4 id="piecewise-interpolation">Piecewise interpolation</h4>
+<h3 id="methods-of-interpolation">Methods of Interpolation</h3>
+<h4 id="linear-time-interpolation">Linear time interpolation</h4>
+<h4 id="parametric-functions">Parametric functions</h4>
+<h4 id="spherical-linear-interpolation-1">Spherical linear
+interpolation</h4>
+<h3 id="potential-interpolation-problems">Potential Interpolation
+Problems</h3>
+<h4 id="aesthetic-problems">Aesthetic problems</h4>
+<h4 id="mathematical-problems">Mathematical problems</h4>
+<h3 id="interruption-of-interpolation">Interruption of
+Interpolation</h3>
+<h3 id="transitions">Transitions</h3>
+<h4 id="position-during-transitions">Position during transitions</h4>
+<h4 id="orientation-during-transitions">Orientation during
+transitions</h4>
+<h3 id="camera-math-problems">Camera Math Problems</h3>
+<h4 id="floating-point-precision">Floating-point precision</h4>
+<h4 id="epsilon-usage">Epsilon usage</h4>
+<h4 id="compiler-differences">Compiler differences</h4>
+<h4 id="hardware-fpu-differences">Hardware FPU differences</h4>
+<h4 id="vector-normalization">Vector normalization</h4>
+<h4 id="matrix-concatenation-floating-point-drift">Matrix concatenation
+floating-point drift</h4>
+<h3 id="periodic-camera-mathematical-fixes">Periodic Camera Mathematical
+Fixes</h3>
 <h2 id="chapter-11-implementation">Chapter 11: Implementation</h2>
 ]]></content>
       <categories>

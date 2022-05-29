@@ -37,7 +37,7 @@
 <meta property="og:image" content="http://sulley.cc/images/realtime_cameras/2-1.png">
 <meta property="og:image" content="http://sulley.cc/images/realtime_cameras/3-1.png">
 <meta property="article:published_time" content="2022-05-05T13:40:19.000Z">
-<meta property="article:modified_time" content="2022-05-23T13:11:51.640Z">
+<meta property="article:modified_time" content="2022-05-29T15:15:31.254Z">
 <meta property="article:author" content="Sulley">
 <meta property="article:tag" content="随笔">
 <meta property="article:tag" content="游戏">
@@ -198,10 +198,20 @@ techniques</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" h
 schemes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#manipulation-of-camera-orientation"><span class="nav-number">3.3.1.7.</span> <span class="nav-text">Manipulation of camera
 orientation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#automated-camera-positioning-and-orientation"><span class="nav-number">3.3.1.8.</span> <span class="nav-text">Automated camera
 positioning and orientation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#debug-camera-control"><span class="nav-number">3.3.1.9.</span> <span class="nav-text">Debug camera control</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#camera-collisions"><span class="nav-number">3.3.2.</span> <span class="nav-text">Camera Collisions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#the-importance-of-camera-collisions"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">The importance of camera
-collisions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#is-collision-testing-necessary"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">Is collision testing
-necessary</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#collision-determination"><span class="nav-number">3.3.2.3.</span> <span class="nav-text">Collision determination</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#collision-geometry-design"><span class="nav-number">3.3.2.4.</span> <span class="nav-text">Collision geometry design</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#collision-resolution"><span class="nav-number">3.3.2.5.</span> <span class="nav-text">Collision resolution</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#disabling-collision-detection"><span class="nav-number">3.3.2.6.</span> <span class="nav-text">Disabling collision
-detection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#avoiding-camera-collisions"><span class="nav-number">3.3.2.7.</span> <span class="nav-text">Avoiding camera collisions</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-10-camera-mathematics"><span class="nav-number">3.4.</span> <span class="nav-text">Chapter 10: Camera
-Mathematics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-11-implementation"><span class="nav-number">3.5.</span> <span class="nav-text">Chapter 11: Implementation</span></a></li></ol></li></ol></div>
+collisions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#collision-determination"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">Collision determination</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#collision-geometry-design"><span class="nav-number">3.3.2.3.</span> <span class="nav-text">Collision geometry design</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#collision-resolution"><span class="nav-number">3.3.2.4.</span> <span class="nav-text">Collision resolution</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#disabling-collision-detection"><span class="nav-number">3.3.2.5.</span> <span class="nav-text">Disabling collision
+detection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#avoiding-camera-collisions"><span class="nav-number">3.3.2.6.</span> <span class="nav-text">Avoiding camera collisions</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-10-camera-mathematics"><span class="nav-number">3.4.</span> <span class="nav-text">Chapter 10: Camera
+Mathematics</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#common-mathematical-techniques"><span class="nav-number">3.4.1.</span> <span class="nav-text">Common Mathematical
+Techniques</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#look-at"><span class="nav-number">3.4.1.1.</span> <span class="nav-text">Look-at</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#roll-removal"><span class="nav-number">3.4.1.2.</span> <span class="nav-text">Roll removal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#twist-reduction"><span class="nav-number">3.4.1.3.</span> <span class="nav-text">Twist reduction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#world-space-to-screen-space-conversion"><span class="nav-number">3.4.1.4.</span> <span class="nav-text">World space to screen
+space conversion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#screen-space-to-cameraworld-space-conversion"><span class="nav-number">3.4.1.5.</span> <span class="nav-text">Screen space to
+camera&#x2F;world space conversion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fov-conversion"><span class="nav-number">3.4.1.6.</span> <span class="nav-text">FOV conversion</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#quaternions"><span class="nav-number">3.4.2.</span> <span class="nav-text">Quaternions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bump-and-ease-functions"><span class="nav-number">3.4.3.</span> <span class="nav-text">Bump and Ease Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#exponentials"><span class="nav-number">3.4.3.1.</span> <span class="nav-text">Exponentials</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#proportional"><span class="nav-number">3.4.3.2.</span> <span class="nav-text">Proportional</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#spherical-linear-interpolation"><span class="nav-number">3.4.3.3.</span> <span class="nav-text">Spherical linear
+interpolation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#transcendentals"><span class="nav-number">3.4.3.4.</span> <span class="nav-text">Transcendentals</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#piecewise-spline-curve"><span class="nav-number">3.4.3.5.</span> <span class="nav-text">Piecewise spline curve</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#springs"><span class="nav-number">3.4.4.</span> <span class="nav-text">Springs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#digital-filters"><span class="nav-number">3.4.5.</span> <span class="nav-text">Digital Filters</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#low-pass"><span class="nav-number">3.4.5.1.</span> <span class="nav-text">Low pass</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#high-pass"><span class="nav-number">3.4.5.2.</span> <span class="nav-text">High pass</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#band"><span class="nav-number">3.4.5.3.</span> <span class="nav-text">Band</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#finite-impulse-response"><span class="nav-number">3.4.5.4.</span> <span class="nav-text">Finite impulse response</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#infinite-impulse-response"><span class="nav-number">3.4.5.5.</span> <span class="nav-text">Infinite impulse response</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spline-curves"><span class="nav-number">3.4.6.</span> <span class="nav-text">Spline Curves</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#camera-spline-usage"><span class="nav-number">3.4.6.1.</span> <span class="nav-text">Camera spline usage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cubic-polynomials"><span class="nav-number">3.4.6.2.</span> <span class="nav-text">Cubic polynomials</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#spline-types"><span class="nav-number">3.4.6.3.</span> <span class="nav-text">Spline types</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#continuity"><span class="nav-number">3.4.6.4.</span> <span class="nav-text">Continuity</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#spline-definitions"><span class="nav-number">3.4.6.5.</span> <span class="nav-text">Spline definitions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#spline-evaluation"><span class="nav-number">3.4.6.6.</span> <span class="nav-text">Spline evaluation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#control-point-generation"><span class="nav-number">3.4.6.7.</span> <span class="nav-text">Control point generation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#parameterized-arc-length"><span class="nav-number">3.4.6.8.</span> <span class="nav-text">Parameterized arc length</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#total-spline-length"><span class="nav-number">3.4.6.9.</span> <span class="nav-text">Total spline length</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#closest-position"><span class="nav-number">3.4.6.10.</span> <span class="nav-text">Closest position</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#spline-editing"><span class="nav-number">3.4.6.11.</span> <span class="nav-text">Spline editing</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#interpolation"><span class="nav-number">3.4.7.</span> <span class="nav-text">Interpolation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#camera-property-interpolation"><span class="nav-number">3.4.8.</span> <span class="nav-text">Camera Property
+Interpolation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#position-interpolation"><span class="nav-number">3.4.8.1.</span> <span class="nav-text">Position interpolation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#orientation-interpolation"><span class="nav-number">3.4.8.2.</span> <span class="nav-text">Orientation interpolation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fov-interpolation"><span class="nav-number">3.4.8.3.</span> <span class="nav-text">FOV interpolation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#viewport-interpolation"><span class="nav-number">3.4.9.</span> <span class="nav-text">Viewport Interpolation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#player-control-interpolation"><span class="nav-number">3.4.10.</span> <span class="nav-text">Player Control Interpolation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#first-person-cameras"><span class="nav-number">3.4.10.1.</span> <span class="nav-text">First person cameras</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#third-person-cameras"><span class="nav-number">3.4.10.2.</span> <span class="nav-text">Third person cameras</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#interpolation-choices"><span class="nav-number">3.4.11.</span> <span class="nav-text">Interpolation Choices</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#linear-interpolation"><span class="nav-number">3.4.11.1.</span> <span class="nav-text">Linear interpolation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#piecewise-interpolation"><span class="nav-number">3.4.11.2.</span> <span class="nav-text">Piecewise interpolation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#methods-of-interpolation"><span class="nav-number">3.4.12.</span> <span class="nav-text">Methods of Interpolation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#linear-time-interpolation"><span class="nav-number">3.4.12.1.</span> <span class="nav-text">Linear time interpolation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#parametric-functions"><span class="nav-number">3.4.12.2.</span> <span class="nav-text">Parametric functions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#spherical-linear-interpolation-1"><span class="nav-number">3.4.12.3.</span> <span class="nav-text">Spherical linear
+interpolation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#potential-interpolation-problems"><span class="nav-number">3.4.13.</span> <span class="nav-text">Potential Interpolation
+Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#aesthetic-problems"><span class="nav-number">3.4.13.1.</span> <span class="nav-text">Aesthetic problems</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mathematical-problems"><span class="nav-number">3.4.13.2.</span> <span class="nav-text">Mathematical problems</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#interruption-of-interpolation"><span class="nav-number">3.4.14.</span> <span class="nav-text">Interruption of
+Interpolation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transitions"><span class="nav-number">3.4.15.</span> <span class="nav-text">Transitions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#position-during-transitions"><span class="nav-number">3.4.15.1.</span> <span class="nav-text">Position during transitions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#orientation-during-transitions"><span class="nav-number">3.4.15.2.</span> <span class="nav-text">Orientation during
+transitions</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#camera-math-problems"><span class="nav-number">3.4.16.</span> <span class="nav-text">Camera Math Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#floating-point-precision"><span class="nav-number">3.4.16.1.</span> <span class="nav-text">Floating-point precision</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#epsilon-usage"><span class="nav-number">3.4.16.2.</span> <span class="nav-text">Epsilon usage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#compiler-differences"><span class="nav-number">3.4.16.3.</span> <span class="nav-text">Compiler differences</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hardware-fpu-differences"><span class="nav-number">3.4.16.4.</span> <span class="nav-text">Hardware FPU differences</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vector-normalization"><span class="nav-number">3.4.16.5.</span> <span class="nav-text">Vector normalization</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#matrix-concatenation-floating-point-drift"><span class="nav-number">3.4.16.6.</span> <span class="nav-text">Matrix concatenation
+floating-point drift</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#periodic-camera-mathematical-fixes"><span class="nav-number">3.4.17.</span> <span class="nav-text">Periodic Camera Mathematical
+Fixes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-11-implementation"><span class="nav-number">3.5.</span> <span class="nav-text">Chapter 11: Implementation</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -337,7 +347,7 @@ Mathematics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" 
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-05-23 21:11:51" itemprop="dateModified" datetime="2022-05-23T21:11:51+08:00">2022-05-23</time>
+      <time title="修改时间：2022-05-29 23:15:31" itemprop="dateModified" datetime="2022-05-29T23:15:31+08:00">2022-05-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -377,14 +387,14 @@ Mathematics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" 
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>34k</span>
+      <span>39k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>31 分钟</span>
+      <span>36 分钟</span>
     </span>
 </div>
 
@@ -1628,16 +1638,208 @@ camera，则会非常有利于debug</p>
 <h3 id="camera-collisions">Camera Collisions</h3>
 <h4 id="the-importance-of-camera-collisions">The importance of camera
 collisions</h4>
-<h4 id="is-collision-testing-necessary">Is collision testing
-necessary</h4>
+<p>Camera collision可能引起的问题：</p>
+<ul>
+<li>The collision prevents the camera from moving to its desired
+position</li>
+<li>Discontinuous motion may be caused by collisions</li>
+<li>Occulusion of the target object</li>
+<li>Camera near plane intersects with geometry</li>
+</ul>
 <h4 id="collision-determination">Collision determination</h4>
+<ul>
+<li>Object collisions</li>
+<li>Environmental collisions: 有两种数据——render mesh和collision
+mesh</li>
+<li>Collision primitives: 通常来说，相机会被表示为球体用于碰撞检测</li>
+</ul>
 <h4 id="collision-geometry-design">Collision geometry design</h4>
+<p>下面是一些设计场景的tips:</p>
+<ul>
+<li>Avoid tightly confined spaces</li>
+<li>Allow sufficient space for the camera</li>
+<li>Steep steps</li>
+<li>Ledges/overhangs</li>
+<li>Low ceilings</li>
+<li>Doorways:
+第一，玩家可能移动太快以至于门在玩家和相机之间关闭，此时可以让门保持开启直到相机穿过；第二，玩家可能沿着门缝移动并导致相机无法跟随玩家，此时可以让相机沿着门缝的轴移动；第三，玩家可能站在门缝里，此时要避免相机因玩家旋转而与物体相交</li>
+<li>Use the simplest collision mesh possible</li>
+<li>Separate collision mesh for the camera</li>
+<li>Chamfer all corners: 为此可以让相机沿着collision表面滑动</li>
+</ul>
 <h4 id="collision-resolution">Collision resolution</h4>
+<p>当我们检测到发生碰撞时，就需要决定相机怎么办，可以有以下几种策略：</p>
+<ul>
+<li>Do not move: 此时如果人物移动就可能会有问题</li>
+<li>Partial move: 尝试向期望方向移动，如果还是有碰撞则不动</li>
+<li>Alternative movement: 改变相机的移动方向</li>
+<li>Jump cut: 重新计算desired position并立即切换过去</li>
+</ul>
 <h4 id="disabling-collision-detection">Disabling collision
 detection</h4>
+<p>有时候我们不需要相机的碰撞检测。比如第一人称和第三人称视角的切换、path-based
+cameras。总之取决于期望的相机效果</p>
 <h4 id="avoiding-camera-collisions">Avoiding camera collisions</h4>
+<p>可以动态生成一条相机跟随的路径，或者统一采用半透明的方式。在三人称游戏中，当玩家在墙角或无法移动的地区时，相机可能和角色碰撞，此时可以切换到第一人称中，或者旋转相机调整相机位置</p>
+<ul>
+<li>Future position of player</li>
+<li>Predicting potential collisions</li>
+<li>Collision prediction</li>
+<li>Object repulsion</li>
+<li>Movement toward the camera</li>
+</ul>
 <h2 id="chapter-10-camera-mathematics">Chapter 10: Camera
 Mathematics</h2>
+<p>摄像机的一些数学：</p>
+<ul>
+<li>Camera position
+<ul>
+<li>Offset within the local space of an object</li>
+<li>Angular offsets relative to game objects</li>
+<li>Valid position determination</li>
+<li>Spline curves</li>
+</ul></li>
+<li>Camera orientation
+<ul>
+<li>Representation</li>
+<li>Look-at</li>
+<li>Shortest rotation arc</li>
+<li>Roll removal</li>
+<li>Twist reduction</li>
+<li>Determining angles between desired orientations</li>
+</ul></li>
+<li>Camera motion
+<ul>
+<li>Proximity</li>
+<li>Damping functions</li>
+<li>Springs</li>
+<li>Interpolation</li>
+</ul></li>
+<li>Rendering
+<ul>
+<li>Camera space/world space/screen space conversions</li>
+<li>FOV conversion</li>
+<li>Frustum construction</li>
+<li>Perspective projection</li>
+<li>Orthographic projection</li>
+<li>Isometric projection</li>
+<li>Axonometric projection</li>
+</ul></li>
+<li>General camera math
+<ul>
+<li>Digital filters</li>
+<li>Spline curves</li>
+<li>Interpolation</li>
+</ul></li>
+<li>Camera math problems and fixes
+<ul>
+<li>Floating-point accuracy and precision</li>
+<li>Epsilon usage</li>
+<li>Base conversion</li>
+</ul></li>
+</ul>
+<h3 id="common-mathematical-techniques">Common Mathematical
+Techniques</h3>
+<h4 id="look-at">Look-at</h4>
+<p>此时通过一个旋转矩阵或四元数把当前的相机朝向变换到新的朝向</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Mat4 <span class="type">const</span> <span class="title">Mat4::LookAt</span> <span class="params">(Vec3 <span class="type">const</span>&amp; source, Vec3 <span class="type">const</span>&amp; dest, Vec3 <span class="type">const</span>&amp; worldUpVector)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Vec3 viewDirection = <span class="built_in">Vece</span> (dest - source).<span class="built_in">AsNormalized</span> ();</span><br><span class="line">  <span class="type">float</span> dot = Vec3::<span class="built_in">Dot</span> (viewDirection, worldUpVector); </span><br><span class="line">  Vec3 unnormalizedUp = worldUpVector - (dot * vewDirection); <span class="comment">// 相机的unnormalized Up axis</span></span><br><span class="line">  Vec3 up = unnormalizedUp.<span class="built_in">AsNormalized</span> ();  <span class="comment">// 相机的up axis</span></span><br><span class="line">  Vec3 right = Vec3::<span class="built_in">Cross</span> (up, viewDirection);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// matrix ordering depends on row/column major</span></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Mat4</span> (</span><br><span class="line">    right[X], viewDirection[X], up[X], source[X],</span><br><span class="line">    right[Y], viewDirection[Y], up[Y], source[Y],</span><br><span class="line">    right[Z], viewDirection[Z], up[Z], source[Z]</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意到上面的变换矩阵是把世界空间中的点变换到相机在（0,0）点的位置</p>
+<h4 id="roll-removal">Roll removal</h4>
+<p>为了移除roll，我们需要重新计算view transform的right
+axis同时保持当前的forward vector，然后可以通过叉乘决定up vector</p>
+<h4 id="twist-reduction">Twist reduction</h4>
+<p>在三人称相机中，当物体在相机上方或者下方的时候，可能导致相机快速旋转。一个方法是检测相机绕着forward
+vector旋转的速度，但是只有在forward vector几乎在和world up
+axis平行的时候</p>
+<h4 id="world-space-to-screen-space-conversion">World space to screen
+space conversion</h4>
+<p>取决于projection算法</p>
+<ul>
+<li>Orthographic projection <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uint32 <span class="type">const</span> ScreenX = ObjectX - ViewportX; <span class="comment">// assumes top left corner is (0,0)</span></span><br><span class="line">uint32 <span class="type">const</span> ScreenY = ViewPortY - ObjectY; <span class="comment">// depends on the direction of +Y</span></span><br></pre></td></tr></table></figure>
+如果viewport是显示设备的子集，或者viewport涉及缩放，则必须考虑这些因素：
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uint32 <span class="type">const</span> ScreenX = Viewport.ScreenX + (ObjectX - Viewport.WorldX);</span><br><span class="line">uint32 <span class="type">const</span> ScreenY = Viewport.ScreenY + (Viewport.WorldY - ObjectY);</span><br></pre></td></tr></table></figure></li>
+<li>Isometric projection <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uint32 <span class="type">const</span> ScreenX = (ObjectX - Viewport.WorldX) * <span class="number">2</span>;</span><br><span class="line">uint32 <span class="type">const</span> ScreenY = Viewport.WorldY - ObjectY;</span><br></pre></td></tr></table></figure></li>
+<li>Perspective projection</li>
+</ul>
+<h4 id="screen-space-to-cameraworld-space-conversion">Screen space to
+camera/world space conversion</h4>
+<p>通常来说，神都会被设置为相机的近平面，或者一个特定的距离相机的距离</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Vec3 <span class="type">const</span> <span class="title">ConvertToWorldSpace</span> <span class="params">(Mat4 <span class="type">const</span>&amp; cameraTransform, Vec3 <span class="type">const</span>&amp; screenPosition)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Vec3 <span class="type">const</span> viewSpace = <span class="built_in">GetProjectionMatrix</span> ().<span class="built_in">Inverted</span> ().<span class="built_in">MultiplyOneOverW</span> (screenSpacePosition);</span><br><span class="line">  Vec3 <span class="type">const</span> worldSpace = cameraTransform * viewSpace;</span><br><span class="line">  <span class="keyword">return</span> worldSpace;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="fov-conversion">FOV conversion</h4>
+<p>考虑把HFOV转化为VFOV，假设我们知道了近平面距离和aspect
+ratio，与HFOV</p>
+<p>我们定义变量<code>alpha</code>和<code>beta</code>：
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alpha = HFOV / <span class="number">2</span></span><br><span class="line">beta = VFOV / <span class="number">2</span></span><br><span class="line"><span class="built_in">tan</span> (alpha) = (viewport width / <span class="number">2</span>) / near plane distance</span><br><span class="line"><span class="built_in">tan</span> (beta) = (viewport height  / <span class="number">2</span>) / near plane distance</span><br></pre></td></tr></table></figure></p>
+<p>从而有：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tan</span> (alpha) * near plane distance = viewport width / <span class="number">2</span></span><br><span class="line">Near plane distance = (viewport width / <span class="number">2</span>) / <span class="built_in">tan</span> (alpha)</span><br><span class="line"><span class="built_in">tan</span> (beta) * near plane distance = viewport height / <span class="number">2</span></span><br><span class="line">Near plane distance = (viewport height / <span class="number">2</span>) / <span class="built_in">tan</span> (beta)</span><br></pre></td></tr></table></figure>
+<p>进而有：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(viewport width / <span class="number">2</span>) * <span class="built_in">tan</span> (beta) = (viewport height / <span class="number">2</span>) * <span class="built_in">tan</span> (alpha)</span><br><span class="line"><span class="built_in">tan</span> (beta) = [(viewport height / <span class="number">2</span>) / (viewport width / <span class="number">2</span>)] * <span class="built_in">tan</span> (alpha)</span><br><span class="line"><span class="built_in">tan</span> (beta) = aspect ratio * <span class="built_in">tan</span> (alpha)</span><br><span class="line">VFOV = <span class="number">2</span> * <span class="built_in">arctan</span> (<span class="built_in">tan</span> (HFOV / <span class="number">2</span>) * aspect ratio)</span><br></pre></td></tr></table></figure>
+<p>所以，只要知道了aspect ratio和其中一个FOV，就可以求出另一个FOV</p>
+<h3 id="quaternions">Quaternions</h3>
+<h3 id="bump-and-ease-functions">Bump and Ease Functions</h3>
+<h4 id="exponentials">Exponentials</h4>
+<h4 id="proportional">Proportional</h4>
+<h4 id="spherical-linear-interpolation">Spherical linear
+interpolation</h4>
+<h4 id="transcendentals">Transcendentals</h4>
+<h4 id="piecewise-spline-curve">Piecewise spline curve</h4>
+<h3 id="springs">Springs</h3>
+<h3 id="digital-filters">Digital Filters</h3>
+<h4 id="low-pass">Low pass</h4>
+<h4 id="high-pass">High pass</h4>
+<h4 id="band">Band</h4>
+<h4 id="finite-impulse-response">Finite impulse response</h4>
+<h4 id="infinite-impulse-response">Infinite impulse response</h4>
+<h3 id="spline-curves">Spline Curves</h3>
+<h4 id="camera-spline-usage">Camera spline usage</h4>
+<h4 id="cubic-polynomials">Cubic polynomials</h4>
+<h4 id="spline-types">Spline types</h4>
+<h4 id="continuity">Continuity</h4>
+<h4 id="spline-definitions">Spline definitions</h4>
+<h4 id="spline-evaluation">Spline evaluation</h4>
+<h4 id="control-point-generation">Control point generation</h4>
+<h4 id="parameterized-arc-length">Parameterized arc length</h4>
+<h4 id="total-spline-length">Total spline length</h4>
+<h4 id="closest-position">Closest position</h4>
+<h4 id="spline-editing">Spline editing</h4>
+<h3 id="interpolation">Interpolation</h3>
+<h3 id="camera-property-interpolation">Camera Property
+Interpolation</h3>
+<h4 id="position-interpolation">Position interpolation</h4>
+<h4 id="orientation-interpolation">Orientation interpolation</h4>
+<h4 id="fov-interpolation">FOV interpolation</h4>
+<h3 id="viewport-interpolation">Viewport Interpolation</h3>
+<h3 id="player-control-interpolation">Player Control Interpolation</h3>
+<h4 id="first-person-cameras">First person cameras</h4>
+<h4 id="third-person-cameras">Third person cameras</h4>
+<h3 id="interpolation-choices">Interpolation Choices</h3>
+<h4 id="linear-interpolation">Linear interpolation</h4>
+<h4 id="piecewise-interpolation">Piecewise interpolation</h4>
+<h3 id="methods-of-interpolation">Methods of Interpolation</h3>
+<h4 id="linear-time-interpolation">Linear time interpolation</h4>
+<h4 id="parametric-functions">Parametric functions</h4>
+<h4 id="spherical-linear-interpolation-1">Spherical linear
+interpolation</h4>
+<h3 id="potential-interpolation-problems">Potential Interpolation
+Problems</h3>
+<h4 id="aesthetic-problems">Aesthetic problems</h4>
+<h4 id="mathematical-problems">Mathematical problems</h4>
+<h3 id="interruption-of-interpolation">Interruption of
+Interpolation</h3>
+<h3 id="transitions">Transitions</h3>
+<h4 id="position-during-transitions">Position during transitions</h4>
+<h4 id="orientation-during-transitions">Orientation during
+transitions</h4>
+<h3 id="camera-math-problems">Camera Math Problems</h3>
+<h4 id="floating-point-precision">Floating-point precision</h4>
+<h4 id="epsilon-usage">Epsilon usage</h4>
+<h4 id="compiler-differences">Compiler differences</h4>
+<h4 id="hardware-fpu-differences">Hardware FPU differences</h4>
+<h4 id="vector-normalization">Vector normalization</h4>
+<h4 id="matrix-concatenation-floating-point-drift">Matrix concatenation
+floating-point drift</h4>
+<h3 id="periodic-camera-mathematical-fixes">Periodic Camera Mathematical
+Fixes</h3>
 <h2 id="chapter-11-implementation">Chapter 11: Implementation</h2>
 
     </div>
@@ -1718,13 +1920,13 @@ Mathematics</h2>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">153k</span>
+    <span title="站点总字数">158k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:19</span>
+    <span title="站点阅读时长">2:24</span>
   </span>
 </div>
 <div class="busuanzi-count">
