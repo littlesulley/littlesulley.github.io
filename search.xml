@@ -271,6 +271,174 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
 ]]></content>
   </entry>
   <entry>
+    <title>向量绕任意轴旋转的简单推导</title>
+    <url>/2021/06/07/%E5%90%91%E9%87%8F%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E7%AE%80%E5%8D%95%E6%8E%A8%E5%AF%BC/</url>
+    <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
+<span id="more"></span>
+<h1 id="方法一向量分解">方法一：向量分解</h1>
+<h2 id="推导过程">推导过程</h2>
+<p>首先介绍一个最容易理解的方法——向量分解。假设要旋转的向量是<span
+class="math inline">\(\mathbf{p}\)</span>，要旋转的轴是<span
+class="math inline">\(\mathbf{n}\)</span>，是一个单位向量，要旋转的角度是<span
+class="math inline">\(\theta\)</span>。再设旋转后的轴是<span
+class="math inline">\(\mathbf{p}&#39;\)</span>。</p>
+<p>现在我们把<span
+class="math inline">\(\mathbf{p}\)</span>分解为两个向量，一个平行于<span
+class="math inline">\(\mathbf{n}\)</span>，另一个垂直于<span
+class="math inline">\(\mathbf{n}\)</span>，即： <span
+class="math display">\[\mathbf{p}=\mathbf{p}_\perp+\mathbf{p}_\parallel\]</span>
+容易知道，平行于<span
+class="math inline">\(\mathbf{n}\)</span>的分向量<span
+class="math inline">\(\mathbf{p}_\parallel\)</span>就是<span
+class="math inline">\(\mathbf{p}\)</span>在<span
+class="math inline">\(\mathbf{n}\)</span>上的投影（推导过程略）： <span
+class="math display">\[\mathbf{p}_\parallel=(\mathbf{n}\cdot\mathbf{p})\mathbf{n}\]</span>
+从而就能得到<span class="math inline">\(\mathbf{p}_\perp\)</span>：
+<span
+class="math display">\[\mathbf{p}_\perp=\mathbf{p}-\mathbf{p}_\parallel\]</span>
+同样地可以将旋转后的向量分解： <span
+class="math display">\[\mathbf{p}&#39;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\]</span>
+显然，旋转后的向量对应的平行分量<span
+class="math inline">\(\mathbf{p}&#39;_\parallel\)</span>是不变的： <span
+class="math display">\[\mathbf{p}&#39;_\parallel=\mathbf{p}_\parallel\]</span>
+这里的关键在于求垂直分量<span
+class="math inline">\(\mathbf{p}&#39;_\perp\)</span>。</p>
+<figure>
+<img data-src="/images/arbitrary_rotation/1.png"
+alt="将向量分解为一个平行向量和一个垂直向量" />
+<figcaption
+aria-hidden="true">将向量分解为一个平行向量和一个垂直向量</figcaption>
+</figure>
+<p>根据已知的旋转轴<span
+class="math inline">\(\mathbf{n}\)</span>，我们就知道它对应的平面<span
+class="math inline">\(V\)</span>，而向量<span
+class="math inline">\(\mathbf{p}\)</span>与<span
+class="math inline">\(\mathbf{p}&#39;\)</span>的垂直分量就在该平面内。该平面的维度是2，因此只需要找到两个基向量，就可以通过这两个基向量的线性组合表示该平面的任意向量。</p>
+<p>其中一个基向量我们已经找到了，就是<span
+class="math inline">\(\mathbf{p}_\perp\)</span>，而另一个我们可以通过<span
+class="math inline">\(\mathbf{n}\)</span>与<span
+class="math inline">\(\mathbf{p}_\perp\)</span>的叉乘实现，得到的向量与<span
+class="math inline">\(\mathbf{n}\)</span>和<span
+class="math inline">\(\mathbf{p}_\perp\)</span>垂直，且在平面<span
+class="math inline">\(V\)</span>内。且注意到： <span
+class="math display">\[\mathbf{n}\times
+\mathbf{p}_\perp=\mathbf{n}\times(\mathbf{p}-\mathbf{p}_\parallel)=\mathbf{n}\times\mathbf{p}-\mathbf{n}\times\mathbf{p}_\parallel=\mathbf{n}\times\mathbf{p}\]</span>
+并且有： <span class="math display">\[\|\mathbf{n}\times
+\mathbf{p}\|=\|\mathbf{n}\times
+\mathbf{p}_\perp\|=\|\mathbf{n}\|\cdot\|\mathbf{p}_\perp\|\cdot\sin(\pi/2)=\|\mathbf{p}_\perp\|\]</span>
+进而我们能导出旋转后的垂直分量<span
+class="math inline">\(\mathbf{p}&#39;_\perp\)</span>： <span
+class="math display">\[\mathbf{p}&#39;_\perp=\cos(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{p}_\perp}{\|\mathbf{p}_\perp\|}+\sin(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{n}\times\mathbf{p}}{\|\mathbf{n}\times\mathbf{p}\|}=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})\]</span>
+最后，我们得到旋转后的向量<span
+class="math inline">\(\mathbf{p}&#39;\)</span>：</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbf{p}&#39;&amp;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\\
+&amp;=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})+\mathbf{p}_\parallel\\
+&amp;=\cos(\theta)(\mathbf{p}-\mathbf{p}_\parallel)+\mathbf{p}_\parallel+\sin(\theta)(\mathbf{n}\times\mathbf{p})\\
+&amp;=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p})
+\end{aligned}
+\]</span></p>
+<p>搞定！</p>
+<h2 id="矩阵形式">矩阵形式</h2>
+<p>我们知道向量的叉乘可以表示为： <span class="math display">\[
+\mathbf{n}\times\mathbf{p}=
+\begin{bmatrix}
+0&amp;-n_z&amp;n_y\\
+n_z&amp;0&amp;-n_x\\
+-n_y&amp;n_x&amp;0
+\end{bmatrix}
+\mathbf{p}=\mathbf{N}\mathbf{p}
+\]</span> 注意到，矩阵<span
+class="math inline">\(\mathbf{N}\)</span>有如下的性质： <span
+class="math display">\[\mathbf{N}(\mathbf{N}\mathbf{p})=\mathbf{N}^2\mathbf{p}=\mathbf{n}\times(\mathbf{n}\times\mathbf{p})\]</span>
+所以我们可以把旋转公式写成下述形式： <span
+class="math display">\[\mathbf{p}&#39;=\mathbf{p}+(1-\cos(\theta))\mathbf{N}^2\mathbf{p}+\sin(\theta)\mathbf{N}\mathbf{p}=\mathbf{R}\mathbf{p}\]</span>
+其中<span
+class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>。上面的等式需要注意到<span
+class="math inline">\((\mathbf{n}\cdot\mathbf{p})\mathbf{n}=\mathbf{p}+\mathbf{N}^2\mathbf{p}\)</span>。</p>
+<p>所以，使用Rodrigues'旋转公式，只需要首先令<span
+class="math inline">\(\mathbf{N}=\begin{bmatrix}0&amp;-n_z&amp;n_y\\n_z&amp;0&amp;-n_x\\-n_y&amp;n_x&amp;0\end{bmatrix}\)</span>，然后再计算<span
+class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>，就能得到旋转后的向量为<span
+class="math inline">\(\mathbf{p}&#39;=\mathbf{R}\mathbf{p}\)</span>。</p>
+<h1 id="方法二坐标轴对齐">方法二：坐标轴对齐</h1>
+<p>既然直接绕着任意轴旋转比较困难，那为啥不先进行整个空间的旋转，把旋转轴旋转为坐标轴，这样就能把向量绕任意轴旋转转化为向量绕标准坐标轴旋转。这就是我们非常熟悉的问题了。</p>
+<p>假定我们考虑的是三维空间的旋转（对更高维的情况容易推论），即标准坐标系为<span
+class="math inline">\(\mathbf{x}=(1,0,0),\mathbf{y}=(0,1,0),\mathbf{z}=(0,0,1)\)</span>。我们有旋转轴<span
+class="math inline">\(\mathbf{n},\Vert\mathbf{n}\Vert=1\)</span>和待旋转向量<span
+class="math inline">\(\mathbf{p}\)</span>。</p>
+<p>首先，我们构建一个坐标系<span
+class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>，该坐标系的一个轴就是<span
+class="math inline">\(\mathbf{n}\)</span>，我们利用叉乘实现：</p>
+<p><span class="math display">\[
+\mathbf{u}=\mathbf{n},\qquad
+\mathbf{v}=\frac{\mathbf{n}\times\mathbf{p}}{\Vert\mathbf{n}\times\mathbf{p}\Vert},\qquad
+\mathbf{w}=\mathbf{n}\times \mathbf{v}
+\]</span></p>
+<p>现在，我们要把坐标轴<span
+class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>分别旋转到坐标轴<span
+class="math inline">\(\mathbf{x},\mathbf{y},\mathbf{z}\)</span>的位置，这可以用下面的旋转矩阵实现：</p>
+<p><span class="math display">\[
+\mathbf{Q}=
+\begin{bmatrix}
+\mathbf{u}\\
+\mathbf{v}\\
+\mathbf{w}
+\end{bmatrix}=
+\begin{bmatrix}
+x_u&amp;y_u&amp;z_u\\
+x_v&amp;y_v&amp;z_v\\
+x_w&amp;y_w&amp;z_w
+\end{bmatrix}
+\]</span></p>
+<p>很容易验证：<span
+class="math inline">\(\mathbf{x}=\mathbf{Q}\mathbf{u},\mathbf{y}=\mathbf{Q}\mathbf{v},\mathbf{z}=\mathbf{Q}\mathbf{w}\)</span>，从而就有<span
+class="math inline">\(\mathbf{I}=\mathbf{Q}\mathbf{Q}^\top=\mathbf{Q}^\top\mathbf{Q}\)</span>，这就验证了<span
+class="math inline">\(\mathbf{Q}\)</span>是正交的。</p>
+<p>现在，原来的向量<span
+class="math inline">\(\mathbf{p}\)</span>就变成了<span
+class="math inline">\(\mathbf{Q}\mathbf{p}\)</span>，原来绕<span
+class="math inline">\(\mathbf{n}\)</span>旋转（也就是绕<span
+class="math inline">\(\mathbf{u}\)</span>旋转）就变成了绕<span
+class="math inline">\(\mathbf{x}\)</span>旋转，而我们知道绕<span
+class="math inline">\(\mathbf{x}\)</span>轴旋转<span
+class="math inline">\(\theta\)</span>的旋转矩阵是： <span
+class="math display">\[
+\mathbf{T}=
+\begin{bmatrix}
+1&amp;0&amp;0\\
+0&amp;\cos(\theta)&amp;-\sin(\theta)\\
+0&amp;\sin(\theta)&amp;\cos(\theta)
+\end{bmatrix}
+\]</span> 因此，旋转后的向量就是<span
+class="math inline">\(\mathbf{T}\mathbf{Q}\mathbf{p}\)</span>。现在，只需要把旋转后的向量再旋转回原来的位置就好了，我们只需要再乘以<span
+class="math inline">\(\mathbf{Q}\)</span>的逆即可。由于<span
+class="math inline">\(\mathbf{Q}\)</span>是正交的，所以有<span
+class="math inline">\(\mathbf{Q}^{-1}=\mathbf{Q}^\top\)</span>。把上面的结果合起来，就能得到最终的结果是：
+<span class="math display">\[\mathbf{p}&#39;=\mathbf{Q}^\top
+\mathbf{T}\mathbf{Q}\mathbf{p}\]</span></p>
+<h1 id="检验">检验</h1>
+<p>现在我们用代码来检验一下上述三种方法是否能得到同样的结果，以及它们的运算效率如何。比较的方法包括：
+1. 向量分解-向量形式 2. 向量分解-矩阵形式 3. 对标轴对齐</p>
+<p>程序在虚拟机上运行，RAM为4G，硬盘20G，处理器为2个Intel Core i5-10400F
+CPU @ 2.90GHz。</p>
+<p>代码如下： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;eigen3/Eigen/Eigen&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> PI = <span class="number">3.1415926</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the vector form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeVector</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f rotatedVector = <span class="built_in">cos</span>(rotationAngle) * p </span><br><span class="line">                                + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * (n.<span class="built_in">dot</span>(p)) * n </span><br><span class="line">                                + <span class="built_in">sin</span>(rotationAngle) * (n.<span class="built_in">cross</span>(p));</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the vector form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the matrix form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeMatrix</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Matrix3f N = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">N &lt;&lt; <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">2</span>), <span class="built_in">n</span>(<span class="number">1</span>),</span><br><span class="line">     <span class="built_in">n</span>(<span class="number">2</span>), <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">0</span>),</span><br><span class="line">     -<span class="built_in">n</span>(<span class="number">1</span>), <span class="built_in">n</span>(<span class="number">0</span>), <span class="number">0</span>;</span><br><span class="line">Eigen::Matrix3f R = Eigen::Matrix3f::<span class="built_in">Identity</span>() + <span class="built_in">sin</span>(rotationAngle) * N + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * N * N;</span><br><span class="line">Eigen::Vector3f rotatedVector = R * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the matrix form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using axis coordination</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AxisCoordination</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f crossed = n.<span class="built_in">cross</span>(p);</span><br><span class="line">Eigen::Vector3f u = n;</span><br><span class="line">Eigen::Vector3f v = crossed / crossed.<span class="built_in">norm</span>();</span><br><span class="line">Eigen::Vector3f w = n.<span class="built_in">cross</span>(v);</span><br><span class="line">Eigen::Matrix3f Q = Eigen::Matrix3f::<span class="built_in">Identity</span>(), T = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">0</span>) = u;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">1</span>) = v;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">2</span>) = w;</span><br><span class="line">T &lt;&lt; <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">cos</span>(rotationAngle), -<span class="built_in">sin</span>(rotationAngle),</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">sin</span>(rotationAngle), <span class="built_in">cos</span>(rotationAngle);</span><br><span class="line">Eigen::Vector3f rotatedVector = Q.<span class="built_in">transpose</span>() * T * Q * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: axis coordination. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> angle = <span class="number">60</span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">p</span><span class="params">(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>)</span></span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">n</span><span class="params">(<span class="number">2.0</span>, <span class="number">8.6</span>, <span class="number">-3.1</span>)</span></span>;</span><br><span class="line">    n.<span class="built_in">normalize</span>(); </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// execute functions</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The vector p is (&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;The rotation axis n is (&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">DecomposeVector</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">DecomposeMatrix</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">AxisCoordination</span>(n, p, angle);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 输出是： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.213724</span>,<span class="number">0.919011</span>,<span class="number">-0.331271</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.016354</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">3.57449</span>,<span class="number">0.643966</span>,<span class="number">0.899062</span>). The time used is <span class="number">0.016642</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.021062</span></span></span><br></pre></td></tr></table></figure> 再多试几组：
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">-654.1</span>,<span class="number">12.88</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.995044</span>,<span class="number">0.0136933</span>,<span class="number">-0.0984901</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.015503</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">-59.7309</span>,<span class="number">-338.298</span>,<span class="number">-556.777</span>). The time used is <span class="number">0.015297</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.021547</span></span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">32.5</span>,<span class="number">45.1</span>,<span class="number">-2.2</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.57735</span>,<span class="number">0.57735</span>,<span class="number">0.57735</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.015558</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">5.16667</span>,<span class="number">52.4667</span>,<span class="number">17.7667</span>). The time used is <span class="number">0.015215</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.020841</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">666</span>,<span class="number">0</span>,<span class="number">0</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.01517</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">0</span>,<span class="number">666</span>,<span class="number">0</span>). The time used is <span class="number">0.015402</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.020898</span></span></span><br></pre></td></tr></table></figure>
+<p>最后一组出现了精度问题，所以代码中还应该加入判断 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">abs</span>(value - <span class="built_in">round</span>(value)) &lt; epsilon)</span><br><span class="line">     value = <span class="built_in">round</span>(value);</span><br></pre></td></tr></table></figure></p>
+<p>从上面的例子来看，<strong>向量分解-向量形式</strong>与<strong>向量分解-矩阵形式</strong>运行效率是一致的，而<strong>坐标轴对齐</strong>的效率较低，这主要是由计算三次矩阵乘法导致的。</p>
+]]></content>
+      <categories>
+        <category>数学 - 图形学</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>无穷连根式求极限的充要条件</title>
     <url>/2020/09/09/infinite-radicals/</url>
     <content><![CDATA[<p>在刷习题集或者考试的时候我们经常会遇到诸如<span
@@ -798,174 +966,6 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
       </tags>
   </entry>
   <entry>
-    <title>向量绕任意轴旋转的简单推导</title>
-    <url>/2021/06/07/%E5%90%91%E9%87%8F%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E6%97%8B%E8%BD%AC%E7%9A%84%E7%AE%80%E5%8D%95%E6%8E%A8%E5%AF%BC/</url>
-    <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
-<span id="more"></span>
-<h1 id="方法一向量分解">方法一：向量分解</h1>
-<h2 id="推导过程">推导过程</h2>
-<p>首先介绍一个最容易理解的方法——向量分解。假设要旋转的向量是<span
-class="math inline">\(\mathbf{p}\)</span>，要旋转的轴是<span
-class="math inline">\(\mathbf{n}\)</span>，是一个单位向量，要旋转的角度是<span
-class="math inline">\(\theta\)</span>。再设旋转后的轴是<span
-class="math inline">\(\mathbf{p}&#39;\)</span>。</p>
-<p>现在我们把<span
-class="math inline">\(\mathbf{p}\)</span>分解为两个向量，一个平行于<span
-class="math inline">\(\mathbf{n}\)</span>，另一个垂直于<span
-class="math inline">\(\mathbf{n}\)</span>，即： <span
-class="math display">\[\mathbf{p}=\mathbf{p}_\perp+\mathbf{p}_\parallel\]</span>
-容易知道，平行于<span
-class="math inline">\(\mathbf{n}\)</span>的分向量<span
-class="math inline">\(\mathbf{p}_\parallel\)</span>就是<span
-class="math inline">\(\mathbf{p}\)</span>在<span
-class="math inline">\(\mathbf{n}\)</span>上的投影（推导过程略）： <span
-class="math display">\[\mathbf{p}_\parallel=(\mathbf{n}\cdot\mathbf{p})\mathbf{n}\]</span>
-从而就能得到<span class="math inline">\(\mathbf{p}_\perp\)</span>：
-<span
-class="math display">\[\mathbf{p}_\perp=\mathbf{p}-\mathbf{p}_\parallel\]</span>
-同样地可以将旋转后的向量分解： <span
-class="math display">\[\mathbf{p}&#39;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\]</span>
-显然，旋转后的向量对应的平行分量<span
-class="math inline">\(\mathbf{p}&#39;_\parallel\)</span>是不变的： <span
-class="math display">\[\mathbf{p}&#39;_\parallel=\mathbf{p}_\parallel\]</span>
-这里的关键在于求垂直分量<span
-class="math inline">\(\mathbf{p}&#39;_\perp\)</span>。</p>
-<figure>
-<img data-src="/images/arbitrary_rotation/1.png"
-alt="将向量分解为一个平行向量和一个垂直向量" />
-<figcaption
-aria-hidden="true">将向量分解为一个平行向量和一个垂直向量</figcaption>
-</figure>
-<p>根据已知的旋转轴<span
-class="math inline">\(\mathbf{n}\)</span>，我们就知道它对应的平面<span
-class="math inline">\(V\)</span>，而向量<span
-class="math inline">\(\mathbf{p}\)</span>与<span
-class="math inline">\(\mathbf{p}&#39;\)</span>的垂直分量就在该平面内。该平面的维度是2，因此只需要找到两个基向量，就可以通过这两个基向量的线性组合表示该平面的任意向量。</p>
-<p>其中一个基向量我们已经找到了，就是<span
-class="math inline">\(\mathbf{p}_\perp\)</span>，而另一个我们可以通过<span
-class="math inline">\(\mathbf{n}\)</span>与<span
-class="math inline">\(\mathbf{p}_\perp\)</span>的叉乘实现，得到的向量与<span
-class="math inline">\(\mathbf{n}\)</span>和<span
-class="math inline">\(\mathbf{p}_\perp\)</span>垂直，且在平面<span
-class="math inline">\(V\)</span>内。且注意到： <span
-class="math display">\[\mathbf{n}\times
-\mathbf{p}_\perp=\mathbf{n}\times(\mathbf{p}-\mathbf{p}_\parallel)=\mathbf{n}\times\mathbf{p}-\mathbf{n}\times\mathbf{p}_\parallel=\mathbf{n}\times\mathbf{p}\]</span>
-并且有： <span class="math display">\[\|\mathbf{n}\times
-\mathbf{p}\|=\|\mathbf{n}\times
-\mathbf{p}_\perp\|=\|\mathbf{n}\|\cdot\|\mathbf{p}_\perp\|\cdot\sin(\pi/2)=\|\mathbf{p}_\perp\|\]</span>
-进而我们能导出旋转后的垂直分量<span
-class="math inline">\(\mathbf{p}&#39;_\perp\)</span>： <span
-class="math display">\[\mathbf{p}&#39;_\perp=\cos(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{p}_\perp}{\|\mathbf{p}_\perp\|}+\sin(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{n}\times\mathbf{p}}{\|\mathbf{n}\times\mathbf{p}\|}=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})\]</span>
-最后，我们得到旋转后的向量<span
-class="math inline">\(\mathbf{p}&#39;\)</span>：</p>
-<p><span class="math display">\[
-\begin{aligned}
-\mathbf{p}&#39;&amp;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\\
-&amp;=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})+\mathbf{p}_\parallel\\
-&amp;=\cos(\theta)(\mathbf{p}-\mathbf{p}_\parallel)+\mathbf{p}_\parallel+\sin(\theta)(\mathbf{n}\times\mathbf{p})\\
-&amp;=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p})
-\end{aligned}
-\]</span></p>
-<p>搞定！</p>
-<h2 id="矩阵形式">矩阵形式</h2>
-<p>我们知道向量的叉乘可以表示为： <span class="math display">\[
-\mathbf{n}\times\mathbf{p}=
-\begin{bmatrix}
-0&amp;-n_z&amp;n_y\\
-n_z&amp;0&amp;-n_x\\
--n_y&amp;n_x&amp;0
-\end{bmatrix}
-\mathbf{p}=\mathbf{N}\mathbf{p}
-\]</span> 注意到，矩阵<span
-class="math inline">\(\mathbf{N}\)</span>有如下的性质： <span
-class="math display">\[\mathbf{N}(\mathbf{N}\mathbf{p})=\mathbf{N}^2\mathbf{p}=\mathbf{n}\times(\mathbf{n}\times\mathbf{p})\]</span>
-所以我们可以把旋转公式写成下述形式： <span
-class="math display">\[\mathbf{p}&#39;=\mathbf{p}+(1-\cos(\theta))\mathbf{N}^2\mathbf{p}+\sin(\theta)\mathbf{N}\mathbf{p}=\mathbf{R}\mathbf{p}\]</span>
-其中<span
-class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>。上面的等式需要注意到<span
-class="math inline">\((\mathbf{n}\cdot\mathbf{p})\mathbf{n}=\mathbf{p}+\mathbf{N}^2\mathbf{p}\)</span>。</p>
-<p>所以，使用Rodrigues'旋转公式，只需要首先令<span
-class="math inline">\(\mathbf{N}=\begin{bmatrix}0&amp;-n_z&amp;n_y\\n_z&amp;0&amp;-n_x\\-n_y&amp;n_x&amp;0\end{bmatrix}\)</span>，然后再计算<span
-class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>，就能得到旋转后的向量为<span
-class="math inline">\(\mathbf{p}&#39;=\mathbf{R}\mathbf{p}\)</span>。</p>
-<h1 id="方法二坐标轴对齐">方法二：坐标轴对齐</h1>
-<p>既然直接绕着任意轴旋转比较困难，那为啥不先进行整个空间的旋转，把旋转轴旋转为坐标轴，这样就能把向量绕任意轴旋转转化为向量绕标准坐标轴旋转。这就是我们非常熟悉的问题了。</p>
-<p>假定我们考虑的是三维空间的旋转（对更高维的情况容易推论），即标准坐标系为<span
-class="math inline">\(\mathbf{x}=(1,0,0),\mathbf{y}=(0,1,0),\mathbf{z}=(0,0,1)\)</span>。我们有旋转轴<span
-class="math inline">\(\mathbf{n},\Vert\mathbf{n}\Vert=1\)</span>和待旋转向量<span
-class="math inline">\(\mathbf{p}\)</span>。</p>
-<p>首先，我们构建一个坐标系<span
-class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>，该坐标系的一个轴就是<span
-class="math inline">\(\mathbf{n}\)</span>，我们利用叉乘实现：</p>
-<p><span class="math display">\[
-\mathbf{u}=\mathbf{n},\qquad
-\mathbf{v}=\frac{\mathbf{n}\times\mathbf{p}}{\Vert\mathbf{n}\times\mathbf{p}\Vert},\qquad
-\mathbf{w}=\mathbf{n}\times \mathbf{v}
-\]</span></p>
-<p>现在，我们要把坐标轴<span
-class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>分别旋转到坐标轴<span
-class="math inline">\(\mathbf{x},\mathbf{y},\mathbf{z}\)</span>的位置，这可以用下面的旋转矩阵实现：</p>
-<p><span class="math display">\[
-\mathbf{Q}=
-\begin{bmatrix}
-\mathbf{u}\\
-\mathbf{v}\\
-\mathbf{w}
-\end{bmatrix}=
-\begin{bmatrix}
-x_u&amp;y_u&amp;z_u\\
-x_v&amp;y_v&amp;z_v\\
-x_w&amp;y_w&amp;z_w
-\end{bmatrix}
-\]</span></p>
-<p>很容易验证：<span
-class="math inline">\(\mathbf{x}=\mathbf{Q}\mathbf{u},\mathbf{y}=\mathbf{Q}\mathbf{v},\mathbf{z}=\mathbf{Q}\mathbf{w}\)</span>，从而就有<span
-class="math inline">\(\mathbf{I}=\mathbf{Q}\mathbf{Q}^\top=\mathbf{Q}^\top\mathbf{Q}\)</span>，这就验证了<span
-class="math inline">\(\mathbf{Q}\)</span>是正交的。</p>
-<p>现在，原来的向量<span
-class="math inline">\(\mathbf{p}\)</span>就变成了<span
-class="math inline">\(\mathbf{Q}\mathbf{p}\)</span>，原来绕<span
-class="math inline">\(\mathbf{n}\)</span>旋转（也就是绕<span
-class="math inline">\(\mathbf{u}\)</span>旋转）就变成了绕<span
-class="math inline">\(\mathbf{x}\)</span>旋转，而我们知道绕<span
-class="math inline">\(\mathbf{x}\)</span>轴旋转<span
-class="math inline">\(\theta\)</span>的旋转矩阵是： <span
-class="math display">\[
-\mathbf{T}=
-\begin{bmatrix}
-1&amp;0&amp;0\\
-0&amp;\cos(\theta)&amp;-\sin(\theta)\\
-0&amp;\sin(\theta)&amp;\cos(\theta)
-\end{bmatrix}
-\]</span> 因此，旋转后的向量就是<span
-class="math inline">\(\mathbf{T}\mathbf{Q}\mathbf{p}\)</span>。现在，只需要把旋转后的向量再旋转回原来的位置就好了，我们只需要再乘以<span
-class="math inline">\(\mathbf{Q}\)</span>的逆即可。由于<span
-class="math inline">\(\mathbf{Q}\)</span>是正交的，所以有<span
-class="math inline">\(\mathbf{Q}^{-1}=\mathbf{Q}^\top\)</span>。把上面的结果合起来，就能得到最终的结果是：
-<span class="math display">\[\mathbf{p}&#39;=\mathbf{Q}^\top
-\mathbf{T}\mathbf{Q}\mathbf{p}\]</span></p>
-<h1 id="检验">检验</h1>
-<p>现在我们用代码来检验一下上述三种方法是否能得到同样的结果，以及它们的运算效率如何。比较的方法包括：
-1. 向量分解-向量形式 2. 向量分解-矩阵形式 3. 对标轴对齐</p>
-<p>程序在虚拟机上运行，RAM为4G，硬盘20G，处理器为2个Intel Core i5-10400F
-CPU @ 2.90GHz。</p>
-<p>代码如下： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;eigen3/Eigen/Eigen&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> PI = <span class="number">3.1415926</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the vector form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeVector</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f rotatedVector = <span class="built_in">cos</span>(rotationAngle) * p </span><br><span class="line">                                + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * (n.<span class="built_in">dot</span>(p)) * n </span><br><span class="line">                                + <span class="built_in">sin</span>(rotationAngle) * (n.<span class="built_in">cross</span>(p));</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the vector form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the matrix form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeMatrix</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Matrix3f N = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">N &lt;&lt; <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">2</span>), <span class="built_in">n</span>(<span class="number">1</span>),</span><br><span class="line">     <span class="built_in">n</span>(<span class="number">2</span>), <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">0</span>),</span><br><span class="line">     -<span class="built_in">n</span>(<span class="number">1</span>), <span class="built_in">n</span>(<span class="number">0</span>), <span class="number">0</span>;</span><br><span class="line">Eigen::Matrix3f R = Eigen::Matrix3f::<span class="built_in">Identity</span>() + <span class="built_in">sin</span>(rotationAngle) * N + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * N * N;</span><br><span class="line">Eigen::Vector3f rotatedVector = R * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the matrix form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using axis coordination</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AxisCoordination</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f crossed = n.<span class="built_in">cross</span>(p);</span><br><span class="line">Eigen::Vector3f u = n;</span><br><span class="line">Eigen::Vector3f v = crossed / crossed.<span class="built_in">norm</span>();</span><br><span class="line">Eigen::Vector3f w = n.<span class="built_in">cross</span>(v);</span><br><span class="line">Eigen::Matrix3f Q = Eigen::Matrix3f::<span class="built_in">Identity</span>(), T = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">0</span>) = u;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">1</span>) = v;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">2</span>) = w;</span><br><span class="line">T &lt;&lt; <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">cos</span>(rotationAngle), -<span class="built_in">sin</span>(rotationAngle),</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">sin</span>(rotationAngle), <span class="built_in">cos</span>(rotationAngle);</span><br><span class="line">Eigen::Vector3f rotatedVector = Q.<span class="built_in">transpose</span>() * T * Q * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: axis coordination. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> angle = <span class="number">60</span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">p</span><span class="params">(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>)</span></span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">n</span><span class="params">(<span class="number">2.0</span>, <span class="number">8.6</span>, <span class="number">-3.1</span>)</span></span>;</span><br><span class="line">    n.<span class="built_in">normalize</span>(); </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// execute functions</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The vector p is (&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;The rotation axis n is (&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">DecomposeVector</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">DecomposeMatrix</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">AxisCoordination</span>(n, p, angle);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 输出是： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.213724</span>,<span class="number">0.919011</span>,<span class="number">-0.331271</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.016354</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">3.57449</span>,<span class="number">0.643966</span>,<span class="number">0.899062</span>). The time used is <span class="number">0.016642</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.021062</span></span></span><br></pre></td></tr></table></figure> 再多试几组：
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">-654.1</span>,<span class="number">12.88</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.995044</span>,<span class="number">0.0136933</span>,<span class="number">-0.0984901</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.015503</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">-59.7309</span>,<span class="number">-338.298</span>,<span class="number">-556.777</span>). The time used is <span class="number">0.015297</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.021547</span></span></span><br></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">32.5</span>,<span class="number">45.1</span>,<span class="number">-2.2</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.57735</span>,<span class="number">0.57735</span>,<span class="number">0.57735</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.015558</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">5.16667</span>,<span class="number">52.4667</span>,<span class="number">17.7667</span>). The time used is <span class="number">0.015215</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.020841</span></span></span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">666</span>,<span class="number">0</span>,<span class="number">0</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.01517</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">0</span>,<span class="number">666</span>,<span class="number">0</span>). The time used is <span class="number">0.015402</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.020898</span></span></span><br></pre></td></tr></table></figure>
-<p>最后一组出现了精度问题，所以代码中还应该加入判断 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">abs</span>(value - <span class="built_in">round</span>(value)) &lt; epsilon)</span><br><span class="line">     value = <span class="built_in">round</span>(value);</span><br></pre></td></tr></table></figure></p>
-<p>从上面的例子来看，<strong>向量分解-向量形式</strong>与<strong>向量分解-矩阵形式</strong>运行效率是一致的，而<strong>坐标轴对齐</strong>的效率较低，这主要是由计算三次矩阵乘法导致的。</p>
-]]></content>
-      <categories>
-        <category>数学 - 图形学</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>随笔</tag>
-        <tag>数学</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>樱花</title>
     <url>/2021/06/29/%E6%A8%B1%E8%8A%B1/</url>
     <content><![CDATA[<p>昨夜 我收到一封书札<br />
@@ -1481,6 +1481,119 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
       </tags>
   </entry>
   <entry>
+    <title>巫师三：一个告诉你原来游戏可以是艺术品的神作</title>
+    <url>/2020/10/09/witcher-impression/</url>
+    <content><![CDATA[<p>巫师三是一款已经被时间证明的，当之无愧的神作。巫师三没有波澜壮阔气势浩天的景致，却有风格迥异人文色彩浓厚的地区特色。威伦的破败荒凉贫穷凄苦，为了一双鞋可以连父母都能出卖；诺威格瑞的大城风范，有日进斗金的土豪乡绅，也有困守城中的穷困百姓，女巫猎人穿梭其中，种族矛盾暗流涌动；史凯利杰群岛的剽悍民风，对外来者的敌视，对入侵者的抵御，捍卫土地的决心让诸多岛屿团结在一起；凯尔莫罕的静谧安详，森林环抱狼堡，猎魔人镇守故乡，仿佛出世的仙境，危机四伏但又简单质朴；陶森特的梦幻美丽，人们自得其乐，生活在这宛若仙境的城都中。不仅仅是景色，巫师三更是以它的剧情和对人物的刻画出名，抛开难以入流的战斗系统，单凭巫师三对剧情的把控、对人物的描写和对画面的雕琢，就足以令这部游戏称为艺术品。在经历了完整的主线和DLC流程后，几乎没有玩家会给巫师三一个低分，尽管它有瑕疵，但是它在剧情、人物和画面上已经到达巅峰造极的水平了，更难能可贵的是，这三者完美融合，在体验游戏的同时，给予玩家美的享受、身心的震撼。这是奥德赛无法比拟的，也是大多数游戏难以企及的高度。</p>
+<span id="more"></span>
+<h1 id="前言">前言</h1>
+<p>由于巫师三的世界观过于宏大，一篇未经雕琢的读后感不能道尽巫师三的所有优点，故本文旨在从宏观上呈现巫师三是如何完美统一任务、节奏与剧情这三者的。至于其他的，我们有机会留在以后再说。我相信，通关巫师三的玩家，一定会承认巫师三在任务的组织和剧情的展开上非常连贯丝滑，而且剧情上的节奏递进、叙述上的跌宕起伏都让人回味无穷。游戏本质是在讲故事，但是巫师三成功地给予了玩家沉浸式的体验，也就是，我们从观众的角色深入到了主角的角色，从游戏外的世界走进了游戏内的世界，仿佛每个人都是真实可及的，都是有血有肉的，都是有情有义的。那么，如何讲好这个故事，把观众代入到游戏中，就是巫师三不同于其他游戏的关键所在，这也是这篇玩后感的主要内容。</p>
+<figure>
+<img data-src="/images/witcher-impression/4.jpg"
+alt="被附身的Geralt帅中泄露出一丝痞气" />
+<figcaption
+aria-hidden="true">被附身的Geralt帅中泄露出一丝痞气</figcaption>
+</figure>
+<h1 id="主线为林支线为溪">主线为林，支线为溪</h1>
+<p>巫师三的一大特色就是它的任务系统非常丰富，从表层看，巫师三的主线只有一个——寻找女儿，但是，在每个地区，都会有非常多的支线为主线提供背景。就好比一个建筑，主线是骨架，支撑起整个游戏的大致轮廓，而支线是钢筋水泥，垒起了整个建筑的最终格局。当然玩家可以只做主线不做支线，但我相信如果不做支线，这个游戏的乐趣就会少一半。</p>
+<figure>
+<img data-src="/images/witcher-impression/5.jpg" alt="父女之间的亲昵" />
+<figcaption aria-hidden="true">父女之间的亲昵</figcaption>
+</figure>
+<p>说到支线繁多，一个典型的对比就是刺客信条奥德赛。同样有非常多的支线，但是从我个人的游玩体验来说，我宁愿无视奥德赛的90%的支线，直接一条路走完主线，但是巫师三的支线不然，玩家会有强烈的意愿去做大部分支线，在做支线的过程中解锁问号，发掘游戏中隐藏的剧情，是巫师三最为亮眼的一大特色。如果要对比巫师三和奥德赛的任务系统，可以从下面几个方面评价：</p>
+<ul>
+<li>支线多样化：巫师三的支线是多样的，支线之间没有重复，猎魔人委托可能会更无聊一点，但生意人的事情嘛，不寒碜。除了猎魔人委托之外，寻宝任务有解密探险要素，区域日常支线有搞笑奇葩要素，重要支线甚至会改变整个巫师三世界格局。然而，奥德赛的支线是单调的，支线的选择不会影响主线的进程，支线品类非常单一，并且缺乏逻辑。巫师三支线给玩家的动力是充分的：委托赚钱，寻宝得装备，日常支线放松一下，重要支线扣人心弦；而奥德赛不是的，除了几个从头到尾都有的支线之外（类似于巫师三的寻宝任务），其他的支线毫无意义，既对主线没有补益，而且也缺乏特色。</li>
+<li>支线重要化：当然，支线多样丰富是一方面，更重要的是，支线是需要起到作用的，有时候甚至是决定性的作用。巫师三的主线和支线的分工相当明确：主线用来推进整个游戏进程，而支线则负责主线缺失的娱乐性与严肃性。这大大补充了单主线的贫乏，让玩家在游戏的时候不会觉得推进主线是无聊的，因为在同时还有大量丰富有趣的支线在支撑游戏的饱满度。而且，巫师三的支线并不是其他游戏中如过往云烟般的支线，而是不同的支线会在主线的不同时间点产生决定性的影响。比如，迪胖的支线会决定整个游戏最终的政治格局，这是从大了讲。从小了讲，如果细心留意，就会发现很多很多支线都涉及到游戏中不同人物的命运，即使是路人，我们也能够感到他们是真实的，而不仅仅是一堆数据。这些都是支线带来的重要积极影响。巫师三赋予了支线游戏的精神内核，并令其成为承载游戏厚度的“实力担当”。</li>
+</ul>
+<figure>
+<img data-src="/images/witcher-impression/13.png"
+alt="这样有趣的小支线在巫师三里不胜枚举" />
+<figcaption
+aria-hidden="true">这样有趣的小支线在巫师三里不胜枚举</figcaption>
+</figure>
+<ul>
+<li>支线惊奇化。巫师三的支线时常给人一种惊奇的感觉，无论是之前无意之中做的支线会在后来的某一天发现原来会产生这样的影响，还是后来做到的支线会发现是之前剧情的关键结果，这种突如其来的“因果”呈现都带给玩家游戏体验上的冲击。重点是，正所谓大音希声，这样的惊奇化支线完全不需要漫长的铺垫，而只需要一个小小的“接口”，把因果串联起来就可以达到这样震撼的效果。一个典型的例子就是在DLC石之心里，拍卖行里的一个小支线展现了维瑟米尔的不为人知的一面，不但极大丰富了人物形象，而且还带给玩家无尽的唏嘘。此类四两拨千斤的支线在巫师三里比比皆是，</li>
+</ul>
+<figure>
+<img data-src="/images/witcher-impression/2.jpg"
+alt="一个非常小的细节，但是却折射出了两个饱满的人物形象" />
+<figcaption
+aria-hidden="true">一个非常小的细节，但是却折射出了两个饱满的人物形象</figcaption>
+</figure>
+<figure>
+<img data-src="/images/witcher-impression/3.jpg"
+alt="一个非常小的细节，但是却折射出了两个饱满的人物形象" />
+<figcaption
+aria-hidden="true">一个非常小的细节，但是却折射出了两个饱满的人物形象</figcaption>
+</figure>
+<p>所以，巫师三成功的一大关键因素就在于他巧思的任务系统，尤以支线为代表，主线与支线的交织，主线推动整个剧情的发展。支线却承载了多样化、重要化和惊奇化的具体内容，让人家流连忘返，深陷其中。</p>
+<h1 id="选择困境人生模拟">选择困境，人生模拟</h1>
+<p>当然，除了巫师三之外，还有很多游戏的支线也很丰富，主线支线的组织也很巧妙，那凭什么巫师三这么牛逼呢？这就是巫师三的第二个牛逼之处：通过合逻辑的选择带给你极尽真实的人生体验。</p>
+<p>巫师三的任务绝大多数都是需要玩家做出选择的，无论主线还是支线，这在从威伦到诺威格瑞之后尤为突出。不同于很多游戏可有可无的“可选项”，巫师三的每一个选项都是经过反复斟酌的，不存在无意义的选项。威伦雷索的选择直接决定了他之后会不会在凯尔莫罕的时候来帮你；凯拉的连续选项直接决定了她的命运，也决定了兰伯特的命运（这个有些小伙伴可能还不知道）；威伦有个狼人的支线直接决定了这个悲惨爱情故事的结局；诺威格瑞迪胖的支线决定了游戏最终的政治格局。对主线来说，这样的决定性选项无处不在：血腥男爵的选项，特莉丝和椰奶的选项，Ciri的一系列选项等等。在巫师三中，选项的重要性直接以前后的因果关系体现出来，也许你的不经意的一个选择，就很有可能在未来决定了不同的世界线，其中的很多选项，你甚至都意识不到是由自己的决定造成的，这是不是有《命运石之门》的感觉了。</p>
+<figure>
+<img data-src="/images/witcher-impression/10.jpg" alt="Ciri猎魔人结局片段" />
+<figcaption aria-hidden="true">Ciri猎魔人结局片段</figcaption>
+</figure>
+<figure>
+<img data-src="/images/witcher-impression/11.jpg" alt="Ciri猎魔人结局" />
+<figcaption aria-hidden="true">Ciri猎魔人结局</figcaption>
+</figure>
+<p>我们之前说了，巫师三带给玩家的是沉浸式的体验，那实现这一点的关键就在“真实”。这里的真实，大部分是成年人的部分：我们会遇到各种各样的决策，尽管有句话是说“小孩子才做选择，成年人全都要”，但实际上，只有小孩子才能全都要，成年人的世界不能兼得鱼和熊掌。有些选择比较简单，但也有很多选择，可以说是直接决定了往后人生的整个发展方向。世界上没有后悔药，所以我们常常看到成年人的无奈与悔恨。但是游戏不一样，我们可以回档，可以重来，可以把现实中无法完成的夙愿转移到游戏中，体味人生抉择的无奈，尝尽人生起伏的精彩，但最爽的，还是能够重来，再走一遭。</p>
+<p>巫师三是在真正意义上模拟了人生： -
+首先，它的选项逻辑是合理的。很多游戏，包括奥德赛在内，它们所谓给出的选项很多都是不合理的。我为什么要这么做？为什么只有这几个选择？策划是不是脑子有坑？正常人会这么做？在选择的时候，不合理、不充分的选项不但不能产生真实的沉浸感，而且还会极大破坏游戏剧情推进的合理性。巫师三不然，它给出的每一个选项都是合理的，都是玩家真的可能在现实生活中面对的两难困境，从而不会让玩家产生“这个选项好弱智”的疑惑。真实的选项才能获得真实的体验，为选择而选择的设置只能适得其反。
+-
+其次，它的选项是有反馈的。所谓反馈，就是无论你选了什么选项，都能在游戏的过程中获得该选择的结果，而且在看到这个结果的时候，玩家是可以或多或少发现它的起源就是那个选项。巫师三的选项就是有始有终的，它可能在有意无意间唤起你的决定，或最近，或久远，那个时候，玩家就会惊叹：原来如此！这是很重要的，因为在现实中，人们会感到“后悔”或者“幸好”，就是这样的“记忆唤醒”在作祟。人是健忘的，但这不是说记忆会消失，而是会被暂时隐藏，所以必须要有一个触发点（Trigger）才能重新唤醒这段记忆，而记忆一旦唤醒，就会有首尾呼应的触动，进而给玩家带来震撼感。这也是巫师三能带来真实体验的一个重要因素。</p>
+<figure>
+<img data-src="/images/witcher-impression/1.jpg" alt="Geralt和夏妮" />
+<figcaption aria-hidden="true">Geralt和夏妮</figcaption>
+</figure>
+<ul>
+<li>最后，它的选项是关键的。所谓关键，就是一些选项会产生极其重大的影响，此类选项在主线中最多，但也不乏一些支线。为什么说一些选项需要具备关键性？其实这就像欣赏任何一个文学作品一样，无论是小说，还是电影，剧情总是需要跌宕起伏。一平到底，或者过于波折，都会给观众造成审美疲劳。这在游戏里也是一样的。如果所有的支线都是做了就做了的那种，那么就不会给人留下深刻印象，反之，只有平淡与冲突交错的支线才会充分勾起玩家的兴趣。上面我们说了巫师三的支线都是有反馈，那么反馈对后续游戏造成的影响就可以定义为该支线的“关键度”。一个比较合理的关键度分布，应该需要满足5:3:2或者6:3:1的比例的，也就是大部分任务都是比较平淡的，立马能得到反馈的，而且对主要剧情没有影响的；少部分任务会在游戏后续呈现出比较重要的影响；而极少的任务会产生决定性的影响。举例来说，委托任务，城中任务，基本上都可以归为第一类，像凯拉、雷索这样的任务可以归为第二类，最后像迪胖、希里这样的就可以归为第三类。可以看到，巫师三的选项是非常有层次的，这样的层次感不会让玩家感到枯燥疲倦，从而更好地代入到游戏中。这也是巫师三让人停不下来的一个原因之一。</li>
+</ul>
+<figure>
+<img data-src="/images/witcher-impression/7.jpg" alt="Geralt的回忆" />
+<figcaption aria-hidden="true">Geralt的回忆</figcaption>
+</figure>
+<h1 id="有条不紊循序渐进">有条不紊，循序渐进</h1>
+<p>在前面的两节中，我们说了很多支线的内容，包括支线的特性、选项的特性，但是在游戏里，决定玩家游戏体验是否“丝滑”的决定因素是主线的推进节奏。巫师三的主线的推进非常顺滑，玩家不会感到节奏上的拖沓或者赶工，从百草园，到威伦，到诺威格瑞，再到Skellig、凯尔莫罕，每个地方的风土人情都在剧情中得以充分展开，每个地方，从开始到结尾，都有明显的渐变，不会造成突兀感。这就是主线承接上的无缝性。</p>
+<p>从整体上来看，巫师三的剧情推进呈现出前期平缓，后期陡峭上升，在最后达到高潮之后迅速下降收尾的趋势，尤其是在最后经过高潮后的突然结束，让玩家回味无穷。从百草园到是Skellig是整个游戏的平缓期，在这个时期，玩家更多地是在品味一个新地点的独有风格，所以游戏没有安排太波折的剧情，只是一点一点让玩家代入到整个游戏的剧情中。之后从凯尔莫罕开始，剧情开始迅速推进，寻找Ciri——&gt;找到Ciri——&gt;凯尔莫罕保卫战——&gt;决战狂猎——&gt;真相浮出——&gt;Ciri献身，这一系列重要剧情节点被安排地非常紧凑，这是因为经过前中期长时间的铺垫，玩家已经全然进入到角色，当前最期待的是一波快节奏的剧情轰炸。笔者在出Skellig之后，就有预感剧情一定会出现巨大转折，从乌马开始，到狂猎结束，整个线非常完整，发展也非常迅速。但在这样的快节奏下，游戏不是混乱的，而是始终围绕着一个线索在有序地推进（找Ciri——&gt;干狂猎），这样一来，即使游戏的节奏突然加快，玩家也没有不适感。</p>
+<figure>
+<img data-src="/images/witcher-impression/8.jpg" alt="老爷子战逝" />
+<figcaption aria-hidden="true">老爷子战逝</figcaption>
+</figure>
+<figure>
+<img data-src="/images/witcher-impression/6.jpg" alt="老爷子死去Ciri流泪" />
+<figcaption aria-hidden="true">老爷子死去Ciri流泪</figcaption>
+</figure>
+<p>巫师三的三个时期“平缓——上升——下降”是处理得很好的。平缓期大概占了整个游戏进度的50%左右，在这个期间，游戏的主要内容缓慢推进。注意，不是没有推进，而是以叙述的方式娓娓道来，逐渐营造引人入胜的氛围。上升期大概占了45%的内容，在这个阶段内，游戏的剧情迅速发展，剧情节点迅速变化，游戏状态迅速切换，然而玩家没有任何的不适应，反而更加乐在其中，停不下来。这是因为前50%的铺垫已经将玩家去完全代入到游戏中，仿佛你就是Geralt，你的使命就在眼前。在上升期的末尾，游戏戛然而止，来到下降期。巫师三的下降期非常短暂，我认为大致可以从Ciri献身开始算做下降期，在这个节点，玩家之前所有的选择都会体现在不同的结局上，突然结尾更加凸显了玩家之前决策带来的种种后果。显然，CDPR没有采取让游戏慢慢结束，而且一下子就关闭了游戏主线剧情，带来了一种“惊愕感”：“这游戏结束了！？”这样的设计是很巧妙的，但也是建立在之前的平缓期与上升期的铺垫之上的。可以说，巫师三这种有条不紊、循序渐进的三阶段推进方式，是它能够取得沉浸式体验的另一大重要原因。</p>
+<figure>
+<img data-src="/images/witcher-impression/12.jpg"
+alt="通关主线，从空荡的凯尔莫罕重新出发，寂寥涌上心头" />
+<figcaption
+aria-hidden="true">通关主线，从空荡的凯尔莫罕重新出发，寂寥涌上心头</figcaption>
+</figure>
+<h1 id="写在最后">写在最后</h1>
+<p>尽管本文的目的在于从任务系统上简要感受一下巫师三为什么能带给人沉浸式的体验，但是对于巫师三来说，画面、人物、音乐等等其他方面都是促成巫师三能成为神作的重要因素，尤其是巫师三的音乐，直击人心，给人带来的沉浸感不亚于剧情，在此强烈推荐。</p>
+<figure>
+<img data-src="/images/witcher-impression/9.jpg" alt="Geralt太可爱了吧" />
+<figcaption aria-hidden="true">Geralt太可爱了吧</figcaption>
+</figure>
+<p>之后我会介绍一下英灵殿和12月份的赛博朋克2077，到时候再来看看，巫师三这款5年前的游戏是否仍有一战之力。</p>
+<figure>
+<img data-src="/images/witcher-impression/14.png" alt="陶森特美丽的风光" />
+<figcaption aria-hidden="true">陶森特美丽的风光</figcaption>
+</figure>
+]]></content>
+      <categories>
+        <category>游戏 - 玩后感</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>游戏</tag>
+        <tag>生活</tag>
+        <tag>巫师三</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《电脑游戏：文本、叙事与游戏》纪要</title>
     <url>/2021/08/14/computer-games-text-narrative-play/</url>
     <content><![CDATA[<p>本文是《电脑游戏：文本、叙事与游戏》的简单纪要，在此备份。</p>
@@ -1831,119 +1944,6 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
       <tags>
         <tag>随笔</tag>
         <tag>游戏</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>巫师三：一个告诉你原来游戏可以是艺术品的神作</title>
-    <url>/2020/10/09/witcher-impression/</url>
-    <content><![CDATA[<p>巫师三是一款已经被时间证明的，当之无愧的神作。巫师三没有波澜壮阔气势浩天的景致，却有风格迥异人文色彩浓厚的地区特色。威伦的破败荒凉贫穷凄苦，为了一双鞋可以连父母都能出卖；诺威格瑞的大城风范，有日进斗金的土豪乡绅，也有困守城中的穷困百姓，女巫猎人穿梭其中，种族矛盾暗流涌动；史凯利杰群岛的剽悍民风，对外来者的敌视，对入侵者的抵御，捍卫土地的决心让诸多岛屿团结在一起；凯尔莫罕的静谧安详，森林环抱狼堡，猎魔人镇守故乡，仿佛出世的仙境，危机四伏但又简单质朴；陶森特的梦幻美丽，人们自得其乐，生活在这宛若仙境的城都中。不仅仅是景色，巫师三更是以它的剧情和对人物的刻画出名，抛开难以入流的战斗系统，单凭巫师三对剧情的把控、对人物的描写和对画面的雕琢，就足以令这部游戏称为艺术品。在经历了完整的主线和DLC流程后，几乎没有玩家会给巫师三一个低分，尽管它有瑕疵，但是它在剧情、人物和画面上已经到达巅峰造极的水平了，更难能可贵的是，这三者完美融合，在体验游戏的同时，给予玩家美的享受、身心的震撼。这是奥德赛无法比拟的，也是大多数游戏难以企及的高度。</p>
-<span id="more"></span>
-<h1 id="前言">前言</h1>
-<p>由于巫师三的世界观过于宏大，一篇未经雕琢的读后感不能道尽巫师三的所有优点，故本文旨在从宏观上呈现巫师三是如何完美统一任务、节奏与剧情这三者的。至于其他的，我们有机会留在以后再说。我相信，通关巫师三的玩家，一定会承认巫师三在任务的组织和剧情的展开上非常连贯丝滑，而且剧情上的节奏递进、叙述上的跌宕起伏都让人回味无穷。游戏本质是在讲故事，但是巫师三成功地给予了玩家沉浸式的体验，也就是，我们从观众的角色深入到了主角的角色，从游戏外的世界走进了游戏内的世界，仿佛每个人都是真实可及的，都是有血有肉的，都是有情有义的。那么，如何讲好这个故事，把观众代入到游戏中，就是巫师三不同于其他游戏的关键所在，这也是这篇玩后感的主要内容。</p>
-<figure>
-<img data-src="/images/witcher-impression/4.jpg"
-alt="被附身的Geralt帅中泄露出一丝痞气" />
-<figcaption
-aria-hidden="true">被附身的Geralt帅中泄露出一丝痞气</figcaption>
-</figure>
-<h1 id="主线为林支线为溪">主线为林，支线为溪</h1>
-<p>巫师三的一大特色就是它的任务系统非常丰富，从表层看，巫师三的主线只有一个——寻找女儿，但是，在每个地区，都会有非常多的支线为主线提供背景。就好比一个建筑，主线是骨架，支撑起整个游戏的大致轮廓，而支线是钢筋水泥，垒起了整个建筑的最终格局。当然玩家可以只做主线不做支线，但我相信如果不做支线，这个游戏的乐趣就会少一半。</p>
-<figure>
-<img data-src="/images/witcher-impression/5.jpg" alt="父女之间的亲昵" />
-<figcaption aria-hidden="true">父女之间的亲昵</figcaption>
-</figure>
-<p>说到支线繁多，一个典型的对比就是刺客信条奥德赛。同样有非常多的支线，但是从我个人的游玩体验来说，我宁愿无视奥德赛的90%的支线，直接一条路走完主线，但是巫师三的支线不然，玩家会有强烈的意愿去做大部分支线，在做支线的过程中解锁问号，发掘游戏中隐藏的剧情，是巫师三最为亮眼的一大特色。如果要对比巫师三和奥德赛的任务系统，可以从下面几个方面评价：</p>
-<ul>
-<li>支线多样化：巫师三的支线是多样的，支线之间没有重复，猎魔人委托可能会更无聊一点，但生意人的事情嘛，不寒碜。除了猎魔人委托之外，寻宝任务有解密探险要素，区域日常支线有搞笑奇葩要素，重要支线甚至会改变整个巫师三世界格局。然而，奥德赛的支线是单调的，支线的选择不会影响主线的进程，支线品类非常单一，并且缺乏逻辑。巫师三支线给玩家的动力是充分的：委托赚钱，寻宝得装备，日常支线放松一下，重要支线扣人心弦；而奥德赛不是的，除了几个从头到尾都有的支线之外（类似于巫师三的寻宝任务），其他的支线毫无意义，既对主线没有补益，而且也缺乏特色。</li>
-<li>支线重要化：当然，支线多样丰富是一方面，更重要的是，支线是需要起到作用的，有时候甚至是决定性的作用。巫师三的主线和支线的分工相当明确：主线用来推进整个游戏进程，而支线则负责主线缺失的娱乐性与严肃性。这大大补充了单主线的贫乏，让玩家在游戏的时候不会觉得推进主线是无聊的，因为在同时还有大量丰富有趣的支线在支撑游戏的饱满度。而且，巫师三的支线并不是其他游戏中如过往云烟般的支线，而是不同的支线会在主线的不同时间点产生决定性的影响。比如，迪胖的支线会决定整个游戏最终的政治格局，这是从大了讲。从小了讲，如果细心留意，就会发现很多很多支线都涉及到游戏中不同人物的命运，即使是路人，我们也能够感到他们是真实的，而不仅仅是一堆数据。这些都是支线带来的重要积极影响。巫师三赋予了支线游戏的精神内核，并令其成为承载游戏厚度的“实力担当”。</li>
-</ul>
-<figure>
-<img data-src="/images/witcher-impression/13.png"
-alt="这样有趣的小支线在巫师三里不胜枚举" />
-<figcaption
-aria-hidden="true">这样有趣的小支线在巫师三里不胜枚举</figcaption>
-</figure>
-<ul>
-<li>支线惊奇化。巫师三的支线时常给人一种惊奇的感觉，无论是之前无意之中做的支线会在后来的某一天发现原来会产生这样的影响，还是后来做到的支线会发现是之前剧情的关键结果，这种突如其来的“因果”呈现都带给玩家游戏体验上的冲击。重点是，正所谓大音希声，这样的惊奇化支线完全不需要漫长的铺垫，而只需要一个小小的“接口”，把因果串联起来就可以达到这样震撼的效果。一个典型的例子就是在DLC石之心里，拍卖行里的一个小支线展现了维瑟米尔的不为人知的一面，不但极大丰富了人物形象，而且还带给玩家无尽的唏嘘。此类四两拨千斤的支线在巫师三里比比皆是，</li>
-</ul>
-<figure>
-<img data-src="/images/witcher-impression/2.jpg"
-alt="一个非常小的细节，但是却折射出了两个饱满的人物形象" />
-<figcaption
-aria-hidden="true">一个非常小的细节，但是却折射出了两个饱满的人物形象</figcaption>
-</figure>
-<figure>
-<img data-src="/images/witcher-impression/3.jpg"
-alt="一个非常小的细节，但是却折射出了两个饱满的人物形象" />
-<figcaption
-aria-hidden="true">一个非常小的细节，但是却折射出了两个饱满的人物形象</figcaption>
-</figure>
-<p>所以，巫师三成功的一大关键因素就在于他巧思的任务系统，尤以支线为代表，主线与支线的交织，主线推动整个剧情的发展。支线却承载了多样化、重要化和惊奇化的具体内容，让人家流连忘返，深陷其中。</p>
-<h1 id="选择困境人生模拟">选择困境，人生模拟</h1>
-<p>当然，除了巫师三之外，还有很多游戏的支线也很丰富，主线支线的组织也很巧妙，那凭什么巫师三这么牛逼呢？这就是巫师三的第二个牛逼之处：通过合逻辑的选择带给你极尽真实的人生体验。</p>
-<p>巫师三的任务绝大多数都是需要玩家做出选择的，无论主线还是支线，这在从威伦到诺威格瑞之后尤为突出。不同于很多游戏可有可无的“可选项”，巫师三的每一个选项都是经过反复斟酌的，不存在无意义的选项。威伦雷索的选择直接决定了他之后会不会在凯尔莫罕的时候来帮你；凯拉的连续选项直接决定了她的命运，也决定了兰伯特的命运（这个有些小伙伴可能还不知道）；威伦有个狼人的支线直接决定了这个悲惨爱情故事的结局；诺威格瑞迪胖的支线决定了游戏最终的政治格局。对主线来说，这样的决定性选项无处不在：血腥男爵的选项，特莉丝和椰奶的选项，Ciri的一系列选项等等。在巫师三中，选项的重要性直接以前后的因果关系体现出来，也许你的不经意的一个选择，就很有可能在未来决定了不同的世界线，其中的很多选项，你甚至都意识不到是由自己的决定造成的，这是不是有《命运石之门》的感觉了。</p>
-<figure>
-<img data-src="/images/witcher-impression/10.jpg" alt="Ciri猎魔人结局片段" />
-<figcaption aria-hidden="true">Ciri猎魔人结局片段</figcaption>
-</figure>
-<figure>
-<img data-src="/images/witcher-impression/11.jpg" alt="Ciri猎魔人结局" />
-<figcaption aria-hidden="true">Ciri猎魔人结局</figcaption>
-</figure>
-<p>我们之前说了，巫师三带给玩家的是沉浸式的体验，那实现这一点的关键就在“真实”。这里的真实，大部分是成年人的部分：我们会遇到各种各样的决策，尽管有句话是说“小孩子才做选择，成年人全都要”，但实际上，只有小孩子才能全都要，成年人的世界不能兼得鱼和熊掌。有些选择比较简单，但也有很多选择，可以说是直接决定了往后人生的整个发展方向。世界上没有后悔药，所以我们常常看到成年人的无奈与悔恨。但是游戏不一样，我们可以回档，可以重来，可以把现实中无法完成的夙愿转移到游戏中，体味人生抉择的无奈，尝尽人生起伏的精彩，但最爽的，还是能够重来，再走一遭。</p>
-<p>巫师三是在真正意义上模拟了人生： -
-首先，它的选项逻辑是合理的。很多游戏，包括奥德赛在内，它们所谓给出的选项很多都是不合理的。我为什么要这么做？为什么只有这几个选择？策划是不是脑子有坑？正常人会这么做？在选择的时候，不合理、不充分的选项不但不能产生真实的沉浸感，而且还会极大破坏游戏剧情推进的合理性。巫师三不然，它给出的每一个选项都是合理的，都是玩家真的可能在现实生活中面对的两难困境，从而不会让玩家产生“这个选项好弱智”的疑惑。真实的选项才能获得真实的体验，为选择而选择的设置只能适得其反。
--
-其次，它的选项是有反馈的。所谓反馈，就是无论你选了什么选项，都能在游戏的过程中获得该选择的结果，而且在看到这个结果的时候，玩家是可以或多或少发现它的起源就是那个选项。巫师三的选项就是有始有终的，它可能在有意无意间唤起你的决定，或最近，或久远，那个时候，玩家就会惊叹：原来如此！这是很重要的，因为在现实中，人们会感到“后悔”或者“幸好”，就是这样的“记忆唤醒”在作祟。人是健忘的，但这不是说记忆会消失，而是会被暂时隐藏，所以必须要有一个触发点（Trigger）才能重新唤醒这段记忆，而记忆一旦唤醒，就会有首尾呼应的触动，进而给玩家带来震撼感。这也是巫师三能带来真实体验的一个重要因素。</p>
-<figure>
-<img data-src="/images/witcher-impression/1.jpg" alt="Geralt和夏妮" />
-<figcaption aria-hidden="true">Geralt和夏妮</figcaption>
-</figure>
-<ul>
-<li>最后，它的选项是关键的。所谓关键，就是一些选项会产生极其重大的影响，此类选项在主线中最多，但也不乏一些支线。为什么说一些选项需要具备关键性？其实这就像欣赏任何一个文学作品一样，无论是小说，还是电影，剧情总是需要跌宕起伏。一平到底，或者过于波折，都会给观众造成审美疲劳。这在游戏里也是一样的。如果所有的支线都是做了就做了的那种，那么就不会给人留下深刻印象，反之，只有平淡与冲突交错的支线才会充分勾起玩家的兴趣。上面我们说了巫师三的支线都是有反馈，那么反馈对后续游戏造成的影响就可以定义为该支线的“关键度”。一个比较合理的关键度分布，应该需要满足5:3:2或者6:3:1的比例的，也就是大部分任务都是比较平淡的，立马能得到反馈的，而且对主要剧情没有影响的；少部分任务会在游戏后续呈现出比较重要的影响；而极少的任务会产生决定性的影响。举例来说，委托任务，城中任务，基本上都可以归为第一类，像凯拉、雷索这样的任务可以归为第二类，最后像迪胖、希里这样的就可以归为第三类。可以看到，巫师三的选项是非常有层次的，这样的层次感不会让玩家感到枯燥疲倦，从而更好地代入到游戏中。这也是巫师三让人停不下来的一个原因之一。</li>
-</ul>
-<figure>
-<img data-src="/images/witcher-impression/7.jpg" alt="Geralt的回忆" />
-<figcaption aria-hidden="true">Geralt的回忆</figcaption>
-</figure>
-<h1 id="有条不紊循序渐进">有条不紊，循序渐进</h1>
-<p>在前面的两节中，我们说了很多支线的内容，包括支线的特性、选项的特性，但是在游戏里，决定玩家游戏体验是否“丝滑”的决定因素是主线的推进节奏。巫师三的主线的推进非常顺滑，玩家不会感到节奏上的拖沓或者赶工，从百草园，到威伦，到诺威格瑞，再到Skellig、凯尔莫罕，每个地方的风土人情都在剧情中得以充分展开，每个地方，从开始到结尾，都有明显的渐变，不会造成突兀感。这就是主线承接上的无缝性。</p>
-<p>从整体上来看，巫师三的剧情推进呈现出前期平缓，后期陡峭上升，在最后达到高潮之后迅速下降收尾的趋势，尤其是在最后经过高潮后的突然结束，让玩家回味无穷。从百草园到是Skellig是整个游戏的平缓期，在这个时期，玩家更多地是在品味一个新地点的独有风格，所以游戏没有安排太波折的剧情，只是一点一点让玩家代入到整个游戏的剧情中。之后从凯尔莫罕开始，剧情开始迅速推进，寻找Ciri——&gt;找到Ciri——&gt;凯尔莫罕保卫战——&gt;决战狂猎——&gt;真相浮出——&gt;Ciri献身，这一系列重要剧情节点被安排地非常紧凑，这是因为经过前中期长时间的铺垫，玩家已经全然进入到角色，当前最期待的是一波快节奏的剧情轰炸。笔者在出Skellig之后，就有预感剧情一定会出现巨大转折，从乌马开始，到狂猎结束，整个线非常完整，发展也非常迅速。但在这样的快节奏下，游戏不是混乱的，而是始终围绕着一个线索在有序地推进（找Ciri——&gt;干狂猎），这样一来，即使游戏的节奏突然加快，玩家也没有不适感。</p>
-<figure>
-<img data-src="/images/witcher-impression/8.jpg" alt="老爷子战逝" />
-<figcaption aria-hidden="true">老爷子战逝</figcaption>
-</figure>
-<figure>
-<img data-src="/images/witcher-impression/6.jpg" alt="老爷子死去Ciri流泪" />
-<figcaption aria-hidden="true">老爷子死去Ciri流泪</figcaption>
-</figure>
-<p>巫师三的三个时期“平缓——上升——下降”是处理得很好的。平缓期大概占了整个游戏进度的50%左右，在这个期间，游戏的主要内容缓慢推进。注意，不是没有推进，而是以叙述的方式娓娓道来，逐渐营造引人入胜的氛围。上升期大概占了45%的内容，在这个阶段内，游戏的剧情迅速发展，剧情节点迅速变化，游戏状态迅速切换，然而玩家没有任何的不适应，反而更加乐在其中，停不下来。这是因为前50%的铺垫已经将玩家去完全代入到游戏中，仿佛你就是Geralt，你的使命就在眼前。在上升期的末尾，游戏戛然而止，来到下降期。巫师三的下降期非常短暂，我认为大致可以从Ciri献身开始算做下降期，在这个节点，玩家之前所有的选择都会体现在不同的结局上，突然结尾更加凸显了玩家之前决策带来的种种后果。显然，CDPR没有采取让游戏慢慢结束，而且一下子就关闭了游戏主线剧情，带来了一种“惊愕感”：“这游戏结束了！？”这样的设计是很巧妙的，但也是建立在之前的平缓期与上升期的铺垫之上的。可以说，巫师三这种有条不紊、循序渐进的三阶段推进方式，是它能够取得沉浸式体验的另一大重要原因。</p>
-<figure>
-<img data-src="/images/witcher-impression/12.jpg"
-alt="通关主线，从空荡的凯尔莫罕重新出发，寂寥涌上心头" />
-<figcaption
-aria-hidden="true">通关主线，从空荡的凯尔莫罕重新出发，寂寥涌上心头</figcaption>
-</figure>
-<h1 id="写在最后">写在最后</h1>
-<p>尽管本文的目的在于从任务系统上简要感受一下巫师三为什么能带给人沉浸式的体验，但是对于巫师三来说，画面、人物、音乐等等其他方面都是促成巫师三能成为神作的重要因素，尤其是巫师三的音乐，直击人心，给人带来的沉浸感不亚于剧情，在此强烈推荐。</p>
-<figure>
-<img data-src="/images/witcher-impression/9.jpg" alt="Geralt太可爱了吧" />
-<figcaption aria-hidden="true">Geralt太可爱了吧</figcaption>
-</figure>
-<p>之后我会介绍一下英灵殿和12月份的赛博朋克2077，到时候再来看看，巫师三这款5年前的游戏是否仍有一战之力。</p>
-<figure>
-<img data-src="/images/witcher-impression/14.png" alt="陶森特美丽的风光" />
-<figcaption aria-hidden="true">陶森特美丽的风光</figcaption>
-</figure>
-]]></content>
-      <categories>
-        <category>游戏 - 玩后感</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>游戏</tag>
-        <tag>生活</tag>
-        <tag>巫师三</tag>
       </tags>
   </entry>
   <entry>
@@ -5676,40 +5676,124 @@ Squad。基于角度的插值的一个缺点是：相机可能会看得远离目
 <h4 id="fov-interpolation">FOV interpolation</h4>
 <p>如果没有其他渲染效果，那么只改变FOV就显得很突兀，快速的FOV改变会让玩家不适，这时候一个jump
 cut反而更好。zoom in也是通过FOV实现的</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">float</span> targetFOV = <span class="built_in">GetTargetFOV</span> ();</span><br><span class="line"><span class="type">float</span> deltaFOV = mFOV - targetFOV;</span><br><span class="line"><span class="type">float</span> newFOV = targetFOV + (deltaFOV * deltaTime);</span><br><span class="line"><span class="type">float</span> newDeltaFOV = newFOV - targetFOV;</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">absF</span>(newDeltaFOV) &gt; <span class="built_in">absF</span>(deltaFOV))</span><br><span class="line">&#123;</span><br><span class="line">  mFOV = newFOV; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">float</span> targetFOV = <span class="built_in">GetTargetFOV</span> ();</span><br><span class="line"><span class="type">float</span> deltaFOV = mFOV - targetFOV;</span><br><span class="line"><span class="type">float</span> newFOV = targetFOV + (deltaFOV * deltaTime);</span><br><span class="line"><span class="type">float</span> newDeltaFOV = newFOV - targetFOV;</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">absF</span>(newDeltaFOV) &lt; <span class="built_in">absF</span>(deltaFOV))</span><br><span class="line">&#123;</span><br><span class="line">  mFOV = newFOV; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="viewport-interpolation">Viewport Interpolation</h3>
+<p>改变显示设备的大小，通常用于cinematic sequences和regular game
+play之间的转换。比如从2.35:1到1.33:1</p>
 <h3 id="player-control-interpolation">Player Control Interpolation</h3>
 <h4 id="first-person-cameras">First person cameras</h4>
+<p>control interpolation通常用于从一个第一人称control reference
+frame变化到一个fixed control reference frame比如object orbiting</p>
 <h4 id="third-person-cameras">Third person cameras</h4>
+<p>在很多情况下，我们要保证如果相机出现巨大移动，则玩家控制不会马上改变</p>
+<p>一个问题是如何处理玩家移动比相机移动快的问题，而且玩家绕着相机垂直轴的任何移动会导致相机绕着该轴的快速转动</p>
 <h3 id="interpolation-choices">Interpolation Choices</h3>
+<p>首先要问现有的数据是kay value还是control
+values；第二，要考虑插值方法的效率和效果；第三，要考虑插值结果的平滑性；最后，也要考虑不同插值方法需要的数据量</p>
 <h4 id="linear-interpolation">Linear interpolation</h4>
+<p>线性插值只需要三个参数：source value, destination
+value和interpolation method</p>
+<p>Destination value往往会随时间改变，我们就需要考虑到destination
+value的变化率，当插值的变化率不匹配目标值的变化率时，不连续就会发生</p>
+<p>插值方法需要考虑是否要用固定的时间完成插值。不考虑变化率会在开始和结束时产生不连续现象</p>
 <h4 id="piecewise-interpolation">Piecewise interpolation</h4>
+<p>通常有多于两个数据点进行插值，一种策略是把它们视为独立的interpolation
+segments： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">foundTime</span> <span class="params">(<span class="literal">false</span>)</span></span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; valueTimes.<span class="built_in">Size</span>() - <span class="number">1</span>; ++i)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> (valueTimes[i+<span class="number">1</span>] &gt; time)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="type">float</span> timeDelta = valueTimes[i+<span class="number">1</span>] - valueTimes[i];</span><br><span class="line">    timeFactor = (time - valueTimes[i]);</span><br><span class="line">    segment = i;</span><br><span class="line">    source = values[i];</span><br><span class="line">    destination = values[i+<span class="number">1</span>];</span><br><span class="line">    foundTime = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (foundTime)</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Interpolate</span> (source, destination, timeFactor);</span><br></pre></td></tr></table></figure></p>
+<p>此外，也可以在每对数据点中假设均匀时间区间，但会有比较大的问题</p>
 <h3 id="methods-of-interpolation">Methods of Interpolation</h3>
 <h4 id="linear-time-interpolation">Linear time interpolation</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Interpolated value = source + ((destination - source) * t)</span><br></pre></td></tr></table></figure>
 <h4 id="parametric-functions">Parametric functions</h4>
+<p>比如ease函数</p>
 <h4 id="spherical-linear-interpolation-1">Spherical linear
 interpolation</h4>
+<p>用于角的插值</p>
 <h3 id="potential-interpolation-problems">Potential Interpolation
 Problems</h3>
 <h4 id="aesthetic-problems">Aesthetic problems</h4>
+<p>一些视觉上的问题包括：</p>
+<ul>
+<li>Geometry interpenetration</li>
+<li>Discontinuities</li>
+<li>Interpolation noise</li>
+<li>Target object framing</li>
+<li>Large orientation changes</li>
+<li>Large interpolation distances</li>
+</ul>
 <h4 id="mathematical-problems">Mathematical problems</h4>
+<p>数学上的问题一般是由浮点误差导致的：</p>
+<ul>
+<li>Co-linear (or exactly opposed) orientation</li>
+<li>Coincident positions: 0为除数</li>
+<li>Floating-point inaccuracy</li>
+</ul>
 <h3 id="interruption-of-interpolation">Interruption of
 Interpolation</h3>
+<p>有可能在一个插值过程中触发了另一个插值，这时候可以从当前值开始直接开始新的插值</p>
 <h3 id="transitions">Transitions</h3>
 <h4 id="position-during-transitions">Position during transitions</h4>
 <h4 id="orientation-during-transitions">Orientation during
 transitions</h4>
+<p>有两种方法在transition的过程中控制插值相机的朝向，如果source和des相机没有reorienting，那么简单的线性插值或slerp可以处理得很好，但如果有一个或者两个都reorient就会有问题。一个方法是计算从目标值到当前值之间得剩余量（比如角度），如果新的插值大于当前值，则忽略</p>
 <h3 id="camera-math-problems">Camera Math Problems</h3>
 <h4 id="floating-point-precision">Floating-point precision</h4>
+<p>相机系统一般用单精度浮点数，所以不能表示很大的数</p>
 <h4 id="epsilon-usage">Epsilon usage</h4>
+<p>要根据用途改变epsilon的值</p>
 <h4 id="compiler-differences">Compiler differences</h4>
+<p>编译器也有不同</p>
 <h4 id="hardware-fpu-differences">Hardware FPU differences</h4>
 <h4 id="vector-normalization">Vector normalization</h4>
 <h4 id="matrix-concatenation-floating-point-drift">Matrix concatenation
 floating-point drift</h4>
+<p>在应用旋转矩阵后，正交化该矩阵以保证浮点精确度</p>
 <h3 id="periodic-camera-mathematical-fixes">Periodic Camera Mathematical
 Fixes</h3>
+<p>最好在渲染之前检查当前的相机变换是不是正确的，包括：</p>
+<ul>
+<li>变换矩阵的每个元素不包含异常值，比如NaN</li>
+<li>变换矩阵的每个向量都是单位向量</li>
+<li>Up-vector和游戏内的Up-vector一致</li>
+<li>必要时移除roll</li>
+<li>必要时限制相机快速的reorientation</li>
+</ul>
+<p>如果矩阵不能被修复，则使用上一帧的矩阵；记得多正交化矩阵</p>
 <h2 id="chapter-11-implementation">Chapter 11: Implementation</h2>
+<h3 id="game-engine-architecture">Game Engine Architecture</h3>
+<h4 id="game-update-loop">Game update loop</h4>
+<h4 id="game-system-managers">Game system managers</h4>
+<h4 id="delta-time">Delta time</h4>
+<h4 id="input-processing">Input processing</h4>
+<h3 id="camera-system-architecture">Camera System Architecture</h3>
+<h4 id="viewport-manager">Viewport manager</h4>
+<h4 id="render-manager">Render manager</h4>
+<h4 id="camera-manager">Camera manager</h4>
+<h4 id="camera-update-loop">Camera update loop</h4>
+<h4 id="hint-manager">Hint manager</h4>
+<h4 id="shake-manager">Shake manager</h4>
+<h3 id="game-cameras">Game Cameras</h3>
+<h4 id="inherited-camera-behaviors">Inherited camera behaviors</h4>
+<h4 id="component-based-camera-behaviors">Component-based camera
+behaviors</h4>
+<h4 id="cinematic-cameras">Cinematic cameras</h4>
+<h4 id="debug-camera">Debug camera</h4>
+<h3 id="scripting-system-implementation">Scripting System
+Implementation</h3>
+<h4 id="camera-script-objects">Camera script objects</h4>
+<h4 id="ordering-of-scripting-logic">Ordering of scripting logic</h4>
+<h4 id="messaging">Messaging</h4>
+<h4 id="prioritization">Prioritization</h4>
+<h4 id="interpolation-1">Interpolation</h4>
+<h3 id="performance-considerations">Performance Considerations</h3>
+<h4 id="amortization">Amortization</h4>
+<h4 id="preprocessing">Preprocessing</h4>
+<h3 id="tools-support">Tools Support</h3>
+<h4 id="world-editor">World editor</h4>
+<h4 id="camera-collision-mesh">Camera collision mesh</h4>
+<h3 id="camera-debugging-techniques">Camera Debugging Techniques</h3>
+<h4 id="interactive-debugging">Interactive debugging</h4>
+<h4 id="data-logging">Data logging</h4>
+<h4 id="game-replaying">Game replaying</h4>
 ]]></content>
       <categories>
         <category>游戏 - 游戏理论</category>
