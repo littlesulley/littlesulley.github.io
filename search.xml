@@ -191,7 +191,7 @@ class="math inline">\(0&lt;k\le
   </entry>
   <entry>
     <title>Bump Mapping, Normal Mapping and Displacement Mapping</title>
-    <url>/2020/10/12/18/39/</url>
+    <url>/2022/10/12/18/39/</url>
     <content><![CDATA[<p>凹凸贴图（Bump
 mapping）是图形学中一种常用的用于改变物体视觉凹凸性的方法，但是网上很多介绍对它的原理和变体都非常模糊，甚至包含一些关键概念的错误。本文将详细介绍凹凸贴图及其变体（Normal
 Mapping和Displacement
