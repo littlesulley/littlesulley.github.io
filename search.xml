@@ -985,34 +985,6 @@ CPU @ 2.90GHz。</p>
       </tags>
   </entry>
   <entry>
-    <title>樱花</title>
-    <url>/2021/06/29/00/24/</url>
-    <content><![CDATA[<p>昨夜 我收到一封书札<br />
-旧纸上 缀满了一朵樱花<br />
-风干的墨迹 渗透了陌生人的迷茫<br />
-我慢慢 把信合上</p>
-<p>昨夜 我写了一封书札<br />
-述说着 近日的苦闷衷肠<br />
-窗外的灯火 依旧那么辉煌<br />
-我贴上 一朵樱花珍藏</p>
-<p>同样的夜晚 走过了岁月多少锋芒<br />
-心中仍 呐喊着一个熟悉人的回响<br />
-把信 随风寄向远方<br />
-留给陌生的他 打开新的过往<br />
-愿他不要怯懦 续写昨夜的感慨<br />
-还有清晨的阳光</p>
-<p>案台旁 樱花在绽放</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>根据角色体型和俯角自动确定FreeLook镜头参数</title>
     <url>/2022/06/21/23/40/</url>
     <content><![CDATA[<p>最近项目涉及到一个需求：如何自动确定镜头的参数（在Unity中即为轨道的高度和半径）。这个问题可以形式化为：给定角色身高<span
@@ -1138,6 +1110,34 @@ H &amp;= \tan(A)R + Y
         <tag>数学</tag>
         <tag>游戏</tag>
         <tag>相机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>樱花</title>
+    <url>/2021/06/29/00/24/</url>
+    <content><![CDATA[<p>昨夜 我收到一封书札<br />
+旧纸上 缀满了一朵樱花<br />
+风干的墨迹 渗透了陌生人的迷茫<br />
+我慢慢 把信合上</p>
+<p>昨夜 我写了一封书札<br />
+述说着 近日的苦闷衷肠<br />
+窗外的灯火 依旧那么辉煌<br />
+我贴上 一朵樱花珍藏</p>
+<p>同样的夜晚 走过了岁月多少锋芒<br />
+心中仍 呐喊着一个熟悉人的回响<br />
+把信 随风寄向远方<br />
+留给陌生的他 打开新的过往<br />
+愿他不要怯懦 续写昨夜的感慨<br />
+还有清晨的阳光</p>
+<p>案台旁 樱花在绽放</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -1428,22 +1428,6 @@ key）。</p>
         <tag>随笔</tag>
         <tag>生活</tag>
         <tag>影评</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>西湖夜歌</title>
-    <url>/2021/07/09/22/55/</url>
-    <content><![CDATA[<p>霓光半遮影<br />
-湖波轻颤合韵起<br />
-半句寻谁去</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -1849,6 +1833,22 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <tag>计算机</tag>
         <tag>随笔</tag>
         <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>西湖夜歌</title>
+    <url>/2021/07/09/22/55/</url>
+    <content><![CDATA[<p>霓光半遮影<br />
+湖波轻颤合韵起<br />
+半句寻谁去</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -2681,9 +2681,10 @@ class="math inline">\([0,1]\)</span>的范围，但是后面用到的OpenCV可�
 <p><img data-src="/images/games101/3-3.png" /></p>
 <h3 id="bump-shader">Bump shader</h3>
 <p>Bump mapping之后会写一篇文章介绍，在这里直接搬运<a
-href="https://www.yuque.com/gaoshanliushui-mbfny/sst4c5/hr2dgd">别人的代码</a>如下（注，已更新对<a
-href="">凹凸贴图的详解</a>）：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Eigen::Vector3f <span class="title">bump_fragment_shader</span><span class="params">(<span class="type">const</span> fragment_shader_payload&amp; payload)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    </span><br><span class="line">    Eigen::Vector3f ka = Eigen::<span class="built_in">Vector3f</span>(<span class="number">0.005</span>, <span class="number">0.005</span>, <span class="number">0.005</span>);</span><br><span class="line">    Eigen::Vector3f kd = payload.color;</span><br><span class="line">    Eigen::Vector3f ks = Eigen::<span class="built_in">Vector3f</span>(<span class="number">0.7937</span>, <span class="number">0.7937</span>, <span class="number">0.7937</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> l1 = light&#123;&#123;<span class="number">20</span>, <span class="number">20</span>, <span class="number">20</span>&#125;, &#123;<span class="number">500</span>, <span class="number">500</span>, <span class="number">500</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">auto</span> l2 = light&#123;&#123;<span class="number">-20</span>, <span class="number">20</span>, <span class="number">0</span>&#125;, &#123;<span class="number">500</span>, <span class="number">500</span>, <span class="number">500</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">    std::vector&lt;light&gt; lights = &#123;l1, l2&#125;;</span><br><span class="line">    Eigen::Vector3f amb_light_intensity&#123;<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>&#125;;</span><br><span class="line">    Eigen::Vector3f eye_pos&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> p = <span class="number">150</span>;</span><br><span class="line"></span><br><span class="line">    Eigen::Vector3f color = payload.color; </span><br><span class="line">    Eigen::Vector3f point = payload.view_pos;</span><br><span class="line">    Eigen::Vector3f normal = payload.normal;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="type">float</span> kh = <span class="number">0.2</span>, kn = <span class="number">0.1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    Vector3f n = normal.<span class="built_in">normalized</span>();</span><br><span class="line">    <span class="type">float</span> d = <span class="built_in">sqrt</span>(n.<span class="built_in">x</span>() * n.<span class="built_in">x</span>() + n.<span class="built_in">z</span>() * n.<span class="built_in">z</span>());</span><br><span class="line">    <span class="function">Vector3f <span class="title">t</span> <span class="params">(n.x() * n.y() / d, d, n.z() * n.y() / d)</span></span>;</span><br><span class="line">    Vector3f b = n.<span class="built_in">cross</span>(t);</span><br><span class="line"></span><br><span class="line">    Matrix3f TBN;</span><br><span class="line">    TBN.<span class="built_in">col</span>(<span class="number">0</span>) = t, TBN.<span class="built_in">col</span>(<span class="number">1</span>) = b, TBN.<span class="built_in">col</span>(<span class="number">2</span>) = n;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> u = payload.tex_coords.<span class="built_in">x</span>(), v = payload.tex_coords.<span class="built_in">y</span>();</span><br><span class="line">    <span class="type">float</span> w = payload.texture-&gt;width, h = payload.texture-&gt;height;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> dU = kh * kn * (payload.texture-&gt;<span class="built_in">getColor</span>(u + <span class="number">1.0f</span> / w, v).<span class="built_in">norm</span>() - payload.texture-&gt;<span class="built_in">getColor</span>(u, v).<span class="built_in">norm</span>());</span><br><span class="line">    <span class="type">float</span> dV = kh * kn * (payload.texture-&gt;<span class="built_in">getColor</span>(u, v + <span class="number">1.0f</span> / h).<span class="built_in">norm</span>() - payload.texture-&gt;<span class="built_in">getColor</span>(u, v).<span class="built_in">norm</span>());</span><br><span class="line"></span><br><span class="line">    <span class="function">Vector3f <span class="title">ln</span> <span class="params">(-dU, -dV, <span class="number">1</span>)</span></span>;</span><br><span class="line">    normal = TBN * ln;</span><br><span class="line"></span><br><span class="line">    Eigen::Vector3f result_color = normal.<span class="built_in">normalized</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result_color * <span class="number">255.f</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+href="https://www.yuque.com/gaoshanliushui-mbfny/sst4c5/hr2dgd">别人的代码</a>如下（注:
+已更新对<a
+href="https://sulley.cc/2022/10/12/18/39/">凹凸贴图的详解</a>）：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Eigen::Vector3f <span class="title">bump_fragment_shader</span><span class="params">(<span class="type">const</span> fragment_shader_payload&amp; payload)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    </span><br><span class="line">    Eigen::Vector3f ka = Eigen::<span class="built_in">Vector3f</span>(<span class="number">0.005</span>, <span class="number">0.005</span>, <span class="number">0.005</span>);</span><br><span class="line">    Eigen::Vector3f kd = payload.color;</span><br><span class="line">    Eigen::Vector3f ks = Eigen::<span class="built_in">Vector3f</span>(<span class="number">0.7937</span>, <span class="number">0.7937</span>, <span class="number">0.7937</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> l1 = light&#123;&#123;<span class="number">20</span>, <span class="number">20</span>, <span class="number">20</span>&#125;, &#123;<span class="number">500</span>, <span class="number">500</span>, <span class="number">500</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">auto</span> l2 = light&#123;&#123;<span class="number">-20</span>, <span class="number">20</span>, <span class="number">0</span>&#125;, &#123;<span class="number">500</span>, <span class="number">500</span>, <span class="number">500</span>&#125;&#125;;</span><br><span class="line">e</span><br><span class="line">    std::vector&lt;light&gt; lights = &#123;l1, l2&#125;;</span><br><span class="line">    Eigen::Vector3f amb_light_intensity&#123;<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>&#125;;</span><br><span class="line">    Eigen::Vector3f eye_pos&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> p = <span class="number">150</span>;</span><br><span class="line"></span><br><span class="line">    Eigen::Vector3f color = payload.color; </span><br><span class="line">    Eigen::Vector3f point = payload.view_pos;</span><br><span class="line">    Eigen::Vector3f normal = payload.normal;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="type">float</span> kh = <span class="number">0.2</span>, kn = <span class="number">0.1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    Vector3f n = normal.<span class="built_in">normalized</span>();</span><br><span class="line">    <span class="type">float</span> d = <span class="built_in">sqrt</span>(n.<span class="built_in">x</span>() * n.<span class="built_in">x</span>() + n.<span class="built_in">z</span>() * n.<span class="built_in">z</span>());</span><br><span class="line">    <span class="function">Vector3f <span class="title">t</span> <span class="params">(n.x() * n.y() / d, d, n.z() * n.y() / d)</span></span>;</span><br><span class="line">    Vector3f b = n.<span class="built_in">cross</span>(t);</span><br><span class="line"></span><br><span class="line">    Matrix3f TBN;</span><br><span class="line">    TBN.<span class="built_in">col</span>(<span class="number">0</span>) = t, TBN.<span class="built_in">col</span>(<span class="number">1</span>) = b, TBN.<span class="built_in">col</span>(<span class="number">2</span>) = n;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> u = payload.tex_coords.<span class="built_in">x</span>(), v = payload.tex_coords.<span class="built_in">y</span>();</span><br><span class="line">    <span class="type">float</span> w = payload.texture-&gt;width, h = payload.texture-&gt;height;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> dU = kh * kn * (payload.texture-&gt;<span class="built_in">getColor</span>(u + <span class="number">1.0f</span> / w, v).<span class="built_in">norm</span>() - payload.texture-&gt;<span class="built_in">getColor</span>(u, v).<span class="built_in">norm</span>());</span><br><span class="line">    <span class="type">float</span> dV = kh * kn * (payload.texture-&gt;<span class="built_in">getColor</span>(u, v + <span class="number">1.0f</span> / h).<span class="built_in">norm</span>() - payload.texture-&gt;<span class="built_in">getColor</span>(u, v).<span class="built_in">norm</span>());</span><br><span class="line"></span><br><span class="line">    <span class="function">Vector3f <span class="title">ln</span> <span class="params">(-dU, -dV, <span class="number">1</span>)</span></span>;</span><br><span class="line">    normal = TBN * ln;</span><br><span class="line"></span><br><span class="line">    Eigen::Vector3f result_color = normal.<span class="built_in">normalized</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result_color * <span class="number">255.f</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>下图是<code>bump_fragment_shader</code>得到的结果：</p>
 <p><img data-src="/images/games101/3-4.png" /></p>
 <h3 id="displacement-shader">Displacement shader</h3>
@@ -2703,6 +2704,15 @@ Shading，也就是<strong>逐像素着色</strong>，因为<code>fragment_shade
 <p>得到的图片和原来差不太多，有可能是因为纹理图的分辨率还是比较高的。我替换了一张低分辨率的纹理图，得到了下面的两张对比图。注意牛的后腿，显然能发现使用bilinear的更加平滑，这说明bilinear插值能对低分辨率纹理图有比较好的效果。</p>
 <p><img data-src="/images/games101/3-6.png" width = "300" height = "400" alt="无Bilinear"/>
 <img data-src="/images/games101/3-7.png" width = "300" height = "400" alt="有Bilinear"/></p>
+<h3 id="着色流程总结">着色流程总结</h3>
+<p>最后来总结一下我们是怎样实现整个着色过程的：</p>
+<ol type="1">
+<li>读取信息：从模型文件中读取Mesh，再从Mesh中加载三角形，及其三个顶点的位置、法线和纹理坐标等其他信息；</li>
+<li>顶点处理：分别将顶点变换到view space、projection space和screen
+space中，保存其中需要的信息；</li>
+<li>光栅化：对每个三角形中的每个像素，首先计算出它的重心坐标，然后通过矫正插值计算它在真实空间中的深度、法线、纹理坐标和颜色等信息，最后存入缓存区等待着色；</li>
+<li>着色：最后根据不同的着色器按需取出缓存区的信息加以处理，得到一个最终的RGB值，这就是在屏幕上呈现的颜色。</li>
+</ol>
 <h1 id="作业四">作业四</h1>
 <h1 id="作业五">作业五</h1>
 <h1 id="作业六">作业六</h1>
