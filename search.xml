@@ -230,6 +230,24 @@ Matching基本知识的介绍，放在此备份。</p>
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2020/09/07/23/00/</url>
+    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
+<span id="more"></span>
+<h1 id="测试">测试</h1>
+<h2 id="代码">代码</h2>
+<p>现在来测试一下代码</p>
+<details class="note info no-icon"><summary><p>This is a code test</p>
+</summary>
+<h4 id="details-and-code">Details and code</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
+
+</details>
+<h2 id="latex">Latex</h2>
+<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
+]]></content>
+  </entry>
+  <entry>
     <title>《Assassain&#39;s Creed Valhalla》玩后感</title>
     <url>/2020/11/12/23/23/</url>
     <content><![CDATA[<p><code>刺客信条：英灵殿</code>（Assassin's Creed
@@ -269,288 +287,6 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
         <tag>游戏</tag>
         <tag>生活</tag>
         <tag>刺客信条</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/09/07/23/00/</url>
-    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
-<span id="more"></span>
-<h1 id="测试">测试</h1>
-<h2 id="代码">代码</h2>
-<p>现在来测试一下代码</p>
-<details class="note info no-icon"><summary><p>This is a code test</p>
-</summary>
-<h4 id="details-and-code">Details and code</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
-
-</details>
-<h2 id="latex">Latex</h2>
-<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>《游戏设计的236个技巧》笔记</title>
-    <url>/2021/08/17/01/07/</url>
-    <content><![CDATA[<p>本文是《游戏设计的236个技巧：游戏机制、关卡设计和镜头窍门》的笔记。</p>
-<span id="more"></span>
-<h1 id="前言">前言</h1>
-<p>一款优秀的游戏是如何让玩家在某个瞬间感到无比有趣、极度畅快的呢？本书旨在引领读者发现“让游戏更有趣的设计技巧”。
-本书将内容分为“玩家角色”“敌人角色”“关卡设计”“碰撞检测”“镜头”五个部分。</p>
-<h1 id="让3d游戏更有趣的玩家角色技术">让3D游戏更有趣的玩家角色技术</h1>
-<h2
-id="能够吸引2d游戏玩家的3d游戏设计技巧超级马里奥兄弟超级马里奥3d大陆">能够吸引2D游戏玩家的3D游戏设计技巧（《超级马里奥兄弟》《超级马里奥3D大陆》）</h2>
-<ul>
-<li>马里奥飞奔的感觉让人很舒服。
-<ul>
-<li>按住十字键开始加速，即使放开十字键也不会马上停住，而是有惯性。</li>
-<li>按B键冲刺的过程中按反方向键，就会出现一个急刹车的动作。</li>
-</ul></li>
-<li>但是塞尔达中林克就没有惯性，让玩家精准停在想停的位置。</li>
-<li>这是因为游戏想带给玩家的<strong>游戏体验</strong>不同。
-<ul>
-<li>塞尔达的游戏体验是探索与战斗：不需要过多关注奔跑的细节动作。</li>
-<li>超级马里奥的游戏体验是单人挑战障碍赛跑：关注如何更快奔跑、转弯、准确停止并穿越障碍物。将“无法简单停止”作为一种操纵上的风险加入游戏，除了能给游戏带来紧张感之外，还能让玩家在熟悉操作之后获得成就感。</li>
-</ul></li>
-</ul>
-<h3
-id="b键冲刺带来的感官刺激以及风险与回报的趣味性">B键冲刺带来的感官刺激以及风险与回报的趣味性</h3>
-<ul>
-<li>操纵冲刺中的马里奥会给玩家带来畅快感。
-<ul>
-<li>通过运动或动作获得感官上的舒畅体验的过程称为<strong>感官体验</strong>。</li>
-</ul></li>
-<li>有趣秘密还在挑战中蕴含的风险与回报。
-<ul>
-<li>马里奥通过加速的移动实现了风险与回报，玩家按住B是一种主动提高风险与回报的行为。<br />
-</li>
-</ul></li>
-<li>在超级马里奥兄弟之前，动作类游戏的跳跃一直都是跳跃到固定高度，但是超马采用了按键时长与跳跃高度相关的机制。</li>
-<li>在跳跃时按方向键可以控制马里奥在空间左右移动。</li>
-<li>在跳跃过程中碰到墙壁等障碍物不会下落，这虽然有悖物理，但是给了玩家更舒适的游戏体验。</li>
-</ul>
-<h3 id="勾起玩家跳跃冲动的互动式玩法">勾起玩家跳跃冲动的互动式玩法</h3>
-<ul>
-<li>宫本茂说：“我认为互动的乐趣之一在于：一个人对自己的某种想法付诸实践之后，能够获得相应的反馈”。</li>
-<li>《超马》为跳跃这一动作准备了大量的反馈。
-<ul>
-<li><strong>操作复杂度&lt;动作数&lt;反馈数</strong>。</li>
-<li>即用较少的动作获得较多的反馈。</li>
-</ul></li>
-<li>那么《超马》凭什么让人能够不自由自主地想要按下跳跃键呢？
-<ul>
-<li>存在让玩家不由自主想要去实践地机制，称其为“游戏的钓饵”。比如玩家用小马里奥顶砖块，获得的反应是砖块向上被拱起这一动画。
-这一动画会在玩家心中放下一个钓饵，让玩家觉得砖块里藏着什么。</li>
-<li>游戏里一定要有<strong>引诱玩家付诸实践的钓饵</strong>。</li>
-</ul></li>
-</ul>
-<h3 id="从2d马里奥到3d马里奥">从《2D马里奥》到《3D马里奥》</h3>
-<ul>
-<li>《3D马里奥》出乎意料地取消了移动动作的惯性，可能是因为3D视角的距离感相比2D要更难以掌握，加入惯性会使操作难度上升。</li>
-<li>《3D马里奥》中镜头角度局限在了“侧面”“上方”“倾斜”三种固定模式中，而不是像一般3D游戏将视角决定权交给玩家。同时，滑垫也被限制在了16个方向以内，让镜头角度与移动角度保持一致，从而<strong>帮助玩家找回2D游戏的感觉</strong>，同时也避免了因斜向移动导致误判跳跃距离。</li>
-<li>同时，在《超级马里奥3D大陆》中还首次加入了在跳跃过程中改变方向的机制。</li>
-<li>加入了翻滚、远跳、翻滚跳等动作，吸引高端玩家重复挑战关卡。</li>
-</ul>
-<h3 id="小结">小结</h3>
-<ul>
-<li>要给玩家带来“感官刺激”“风险与回报”“动作与反应”和“连环钓饵”。</li>
-<li>游戏体验的真实性并不仅取决于贴图和声效等外观因素，通过游戏内部机制表现出的“互动的乐趣”也有巨大影响。</li>
-</ul>
-<h2
-id="让游戏更具临场感的玩家角色动作设计技巧战神三">让游戏更具临场感的玩家角色动作设计技巧（战神三）</h2>
-<h3 id="不需控制镜头的移动操作机制">不需控制镜头的移动操作机制</h3>
-<ul>
-<li>战神是TPS游戏，角色的移动方向与遥感倾斜方向一致。也会自动选取最佳角度。</li>
-<li>采用自动镜头的3D动作游戏需要很好地处理镜头移动。
-<ul>
-<li>可以<strong>为每个场景设置不同风格的自动镜头</strong>，同时让玩家体验到2D游戏简单而又直观的操作感，以及3D游戏身临其境般的操作感。</li>
-<li>通过自动镜头，战神三创造出了电影般的临场感与魄力。</li>
-</ul></li>
-</ul>
-<h3
-id="实现快节奏战斗的玩家移动动作机制">实现快节奏战斗的玩家移动动作机制</h3>
-<ul>
-<li>要实现快节奏战斗，玩家必须能够灵活转身、迅速静止，因此战神三的静止具有即时性，同时旋转左摇杆可以实现角色的原地旋转。</li>
-<li>《怪猎4》玩家的转身半径要大于战神三，原地回头的时间也略长。
-<ul>
-<li>怪猎4想创造出“狩猎”的感觉。</li>
-</ul></li>
-<li>每个游戏都有一套能让玩家觉得舒服的“<strong>速度</strong>”（转身速度、移动速度、拔刀速度、收刀速度、硬直速度）“<strong>节奏</strong>”（具体的动作设计、动作之间的连贯性）和“<strong>触感</strong>”（动作的打击感）。根据这三点找出合适的玩家角色动作机制，是现代游戏开发的重点。</li>
-</ul>
-<h3 id="不带来烦躁感的地图切换机制">不带来烦躁感的地图切换机制</h3>
-<ul>
-<li>战神三在切换地图之后玩家仍然<strong>继承之前的移动方向</strong>。只要玩家不放开左摇杆方向，就会继续沿着切换前的方向行进。</li>
-<li>3D动作游戏的核心是：<strong>让玩家角色的动作准确反映玩家意图</strong>。</li>
-</ul>
-<h3
-id="让人不由得手指发力的玩家角色动作机制">让人不由得手指发力的玩家角色动作机制</h3>
-<ul>
-<li>为烘托角色服务的动作需要由<strong>互动动作</strong>实现。
-<ul>
-<li>比如开宝箱这个动作需要玩家长按R1，主角运足全身力量掀开宝箱的动画贯彻玩家按键始终，引得玩家下意识加大按键力道。</li>
-<li>开门同理。</li>
-<li>这种称为<strong>互动性演出</strong>。</li>
-</ul></li>
-</ul>
-<h3 id="小结-1">小结</h3>
-<ul>
-<li>战神三在角色动作上的设计创造玩家与玩家角色融为一体的真实游戏体验。</li>
-</ul>
-<h2
-id="让割草游戏更有趣的攻击动作设计技巧战神三">让割草游戏更有趣的攻击动作设计技巧（战神三）</h2>
-<h3 id="让攻击准确命中目标敌人的机制">让攻击准确命中目标敌人的机制</h3>
-<ul>
-<li>战神三并没有锁定操作，实际上，游戏一致在进行锁定和解除锁定，只是玩家没有察觉到而已。
-<ul>
-<li>玩家倾斜左摇杆时，玩家角色会锁定移动方向上最近的敌人。</li>
-<li>锁定过程中，角色会一直面朝敌人。</li>
-<li>可以通过左摇杆锁定其他敌人，如果超出一定距离，锁定会解除。</li>
-<li>消灭敌人后，锁定会自动解除，如果还有其他敌人，会继续自动锁定。</li>
-</ul></li>
-</ul>
-<h3 id="让连击畅快淋漓的机制">让连击畅快淋漓的机制</h3>
-<ul>
-<li>普通攻击以灵活为主，一般会在第三击转换为大范围横向攻击。</li>
-<li>重攻击出招慢，以纵向为主。</li>
-<li>开始以普通攻击震慑周围敌人，再以重击给单个敌人予以重创。</li>
-<li>战神三在设计攻击种类和连击招式时，为每一个攻击动作都分配了固定的用途，玩家能够享受制定战术的乐趣。</li>
-<li>每一个招式都是由<strong>攻击动画</strong>
-、<strong>攻击力</strong>、<strong>攻击方向</strong>、<strong>追踪性能</strong>等要素组合而成。
-<ul>
-<li>所谓“追踪性能”，就是指玩家角色发动攻击招式时，根据已锁定的敌人所在的位置自动进行追踪的功能。</li>
-<li>普通攻击威力小但追踪性能高，重击威力大但追踪性能低。</li>
-<li>如果一款游戏的连击系统能让玩家觉得畅快淋漓，那么其对追踪的调整一定十分到位。</li>
-</ul></li>
-</ul>
-<h3
-id="菜鸟也能轻松上手的畅快的浮空连击机制">菜鸟也能轻松上手的畅快的浮空连击机制</h3>
-<ul>
-<li>割草类游戏都将空中连击的下落设置得比较慢。</li>
-<li>在战神三中，玩家只需长按键就可发动挑空攻击。</li>
-<li>此外，在玩家随挑空攻击后插入了短暂的慢放，相当于一个信号，帮助玩家准确把握发动空中连击的时机。</li>
-</ul>
-<h3 id="用简单操作发动复杂连击的机制">用简单操作发动复杂连击的机制</h3>
-<ul>
-<li>两个攻击键，短按与长按。</li>
-<li>如果连击第一招需要判断长按还是短按，需要在“长按”判定结束之前，所有受影响的连击都应用同一个攻击动画。</li>
-<li>战神三中的连击只有第一招需要判定按键长短，连击过程不需要。《鬼泣》和《猎天使魔女》则支持连击过程长按。</li>
-<li>战神三还可以在连击过程中切换武器。</li>
-</ul>
-<h2
-id="让玩家角色动作更细腻的设计技巧塞尔达传说天空之剑">让玩家角色动作更细腻的设计技巧（《塞尔达传说：天空之剑》）</h2>
-<ul>
-<li>将玩家动作与角色为动作融为一体。 ###
-支撑海量解密内容的玩家角色移动动作</li>
-<li>按下Z键，镜头会自动调整至林克面朝的方向。</li>
-<li>在悬崖边行走不会跌落。</li>
-</ul>
-<h3
-id="让玩家下意识选择合适动作的z注视机制">让玩家下意识选择合适动作的Z注视机制</h3>
-<ul>
-<li>采用“普通移动”“Z注视移动”“Z注视锁定敌人移动”三种移动模式。</li>
-</ul>
-<h3
-id="能单独当游戏玩的移动动作奋力冲刺">能单独当游戏玩的移动动作——奋力冲刺</h3>
-<ul>
-<li>冲刺消耗耐力值，设置了只有奋力冲刺才能通过的斜坡。</li>
-<li>翻滚冲刺、沿墙冲刺等等。</li>
-</ul>
-<h3
-id="没有跳跃键却可以体验真实跳跃的机制">没有跳跃键却可以体验真实跳跃的机制</h3>
-<ul>
-<li>自动触发跳跃，但并没有失去跳跃的乐趣。玩家依然需要掌控距离，需要助跑等等。</li>
-<li>自动跳跃可以避免空气墙。</li>
-</ul>
-<h2
-id="头脑与身体一起享受的剑战动作设计技巧塞尔达传说天空之剑">头脑与身体一起享受的剑战动作设计技巧（《塞尔达传说：天空之剑》）</h2>
-<h3 id="能帅气挥剑的机制">能帅气挥剑的机制</h3>
-<ul>
-<li>要将遥控器当成真剑来操作，带来了前所未有的战斗动作享受。</li>
-<li>Wii将人的动作符号化，让普通玩家也能享受到乐趣。</li>
-</ul>
-<h3 id="攻击与体力的机制">攻击与体力的机制</h3>
-<ul>
-<li>游戏系统设定的连击结束时攻击即结束，最后一招往往动作较大、破绽较多。</li>
-<li>为玩家设置体力参数，归零时攻击结束。</li>
-<li>玩家没有体力或者没有挥动Wii时，攻击结束。</li>
-<li>一般动作游戏是A与B结合，而天空之剑是B与C组合。</li>
-</ul>
-<h3 id="让玩家痛快反击的盾击机制">让玩家痛快反击的盾击机制</h3>
-<ul>
-<li>盾击会让敌人暂时失去平衡，创造反击的机会。</li>
-<li>盾击是通过“玩家盾击动作”与“敌人攻击动作”中设置的“盾击成功判定帧”进行判定的。如果这两个动作中的“盾击成功帧”重合，则判定盾击成功。</li>
-<li>盾牌加入耐久。</li>
-</ul>
-<h3 id="实现剑战动作的机制">实现剑战动作的机制</h3>
-<ul>
-<li>当面对多个敌人时，只集中精力与一名敌人对战，基本上是一对一。</li>
-<li>通过Z注视机制实现剑战。受到Z注视的敌人会先积极攻击。</li>
-</ul>
-<h3 id="剑战动作与割草游戏的区别">剑战动作与割草游戏的区别</h3>
-<ul>
-<li>战斗中的跳跃不同。塞尔达采用了自动跳跃，不会出现跳跃闪避攻击的情况。战神则可以通过跳跃躲避敌人。</li>
-<li>割草游戏有大量的AOE，塞尔达大多为单体攻击。</li>
-</ul>
-<h2
-id="完美演绎英雄的玩家角色动作设计技巧蝙蝠侠阿甘之城">完美演绎英雄的玩家角色动作设计技巧（《蝙蝠侠：阿甘之城》）</h2>
-<h3
-id="能像蝙蝠一样在三维空间自如穿梭的机制">能像蝙蝠一样在三维空间自如穿梭的机制</h3>
-<ul>
-<li>滑翔与抓钩就是“平面+高度”的移动手段，还有其他作用。</li>
-<li>在大楼之间移动时，玩家只需要按住X操作左摇杆，就能根据间隔和高度进行跳跃或自动切换至滑翔状态。不会因为跳跃失误而遭失败。</li>
-<li>抓钩也实现了精准操作和粗略操作。</li>
-</ul>
-<h3
-id="通过简单操作实现高自由度的玩家角色动作的机制">通过简单操作实现高自由度的玩家角色动作的机制</h3>
-<ul>
-<li>玩家角色的移动动作就有很多种，移动动作并不由玩家的手柄决定，而是由玩家触碰的物体决定。（类似刺客信条）</li>
-<li>蝙蝠侠将移动动作特有的难点——时机把握从基本移动操作中剔除，是一款专注功能可供性的动作游戏。</li>
-</ul>
-<h3 id="演绎一名不会轻易死亡的英雄">演绎一名不会轻易死亡的英雄</h3>
-<ul>
-<li>在奔跑中碰到墙壁，移动动画会终止。</li>
-<li>在滑翔时碰到墙壁，蝙蝠侠也不会落下去，而是抓住墙壁。</li>
-</ul>
-<h2
-id="让玩家化身为英雄的设计技巧蝙蝠侠阿甘之城">让玩家化身为英雄的设计技巧（《蝙蝠侠：阿甘之城》）</h2>
-<h3 id="让战术自由度更高的机制">让战术自由度更高的机制</h3>
-<ul>
-<li>潜行动作游戏在游戏中的流程分为“侦察”“制定战术”“捕食战术”“格斗战术”四个阶段。</li>
-<li>蝙蝠侠在捕食战斗阶段能削减敌人多少就成了战斗取胜的关键。</li>
-<li>蝙蝠侠提供了50多种不同的动作，具有极高的自由度。</li>
-</ul>
-<h3 id="让人忍不住要尝试的工具机制">让人忍不住要尝试的工具机制</h3>
-<ul>
-<li>蝙蝠侠中有很多工具，或者道具，一共有20多种。这些工具不会击溃敌人，只会造成负面效果，保证了工具不会打破战斗平衡性。</li>
-<li><strong>工具和战斗动作可以组合，使得产生“有趣的反应”和“新动作”</strong>。</li>
-</ul>
-<h3
-id="让玩家完美演绎蝙蝠侠的捕食者动作的机制">让玩家完美演绎蝙蝠侠的捕食者动作的机制</h3>
-<ul>
-<li>“无声压制”和“转角隐蔽压制”可以无声无息地击溃敌人，所以玩家能够立刻开始下一步动作而不被敌人发现。</li>
-<li>“粉碎重击”和“边缘压制”能产生很大的声响。</li>
-<li>利用有利位置，可以将敌人吊起来剥夺其行动力的“倒吊压制”。</li>
-</ul>
-<h3
-id="改变动作游戏定式的自由流程格斗机制">改变动作游戏定式的自由流程格斗机制</h3>
-<ul>
-<li>在一般的动作游戏种，玩家需要根据周围敌人的情况选择固定的攻击动作或连击，然后输入指令来发动。
-<ul>
-<li>要先考虑与敌人的距离、招式的速度、招式的追踪性能、招式的属性。</li>
-</ul></li>
-<li>自由格斗，玩家输入的不是攻击招式，而是适合周围状况的攻击动作。</li>
-<li>一个按键对应多个攻击招式以及敌人反应。</li>
-<li>蝙蝠侠仍然是一款根据环境自动选择动作的游戏。</li>
-</ul>
-<h2
-id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡灵之神">还原机器人动画的玩家角色动作设计技巧（《终极地带：引导亡灵之神》）</h2>
-]]></content>
-      <categories>
-        <category>游戏 - 游戏理论</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>游戏</tag>
       </tags>
   </entry>
   <entry>
@@ -961,6 +697,294 @@ CPU @ 2.90GHz。</p>
       </tags>
   </entry>
   <entry>
+    <title>《游戏设计的236个技巧》笔记</title>
+    <url>/2021/08/17/01/07/</url>
+    <content><![CDATA[<p>本文是《游戏设计的236个技巧：游戏机制、关卡设计和镜头窍门》的笔记。</p>
+<span id="more"></span>
+<h1 id="前言">前言</h1>
+<p>一款优秀的游戏是如何让玩家在某个瞬间感到无比有趣、极度畅快的呢？本书旨在引领读者发现“让游戏更有趣的设计技巧”。
+本书将内容分为“玩家角色”“敌人角色”“关卡设计”“碰撞检测”“镜头”五个部分。</p>
+<h1 id="让3d游戏更有趣的玩家角色技术">让3D游戏更有趣的玩家角色技术</h1>
+<h2
+id="能够吸引2d游戏玩家的3d游戏设计技巧超级马里奥兄弟超级马里奥3d大陆">能够吸引2D游戏玩家的3D游戏设计技巧（《超级马里奥兄弟》《超级马里奥3D大陆》）</h2>
+<ul>
+<li>马里奥飞奔的感觉让人很舒服。
+<ul>
+<li>按住十字键开始加速，即使放开十字键也不会马上停住，而是有惯性。</li>
+<li>按B键冲刺的过程中按反方向键，就会出现一个急刹车的动作。</li>
+</ul></li>
+<li>但是塞尔达中林克就没有惯性，让玩家精准停在想停的位置。</li>
+<li>这是因为游戏想带给玩家的<strong>游戏体验</strong>不同。
+<ul>
+<li>塞尔达的游戏体验是探索与战斗：不需要过多关注奔跑的细节动作。</li>
+<li>超级马里奥的游戏体验是单人挑战障碍赛跑：关注如何更快奔跑、转弯、准确停止并穿越障碍物。将“无法简单停止”作为一种操纵上的风险加入游戏，除了能给游戏带来紧张感之外，还能让玩家在熟悉操作之后获得成就感。</li>
+</ul></li>
+</ul>
+<h3
+id="b键冲刺带来的感官刺激以及风险与回报的趣味性">B键冲刺带来的感官刺激以及风险与回报的趣味性</h3>
+<ul>
+<li>操纵冲刺中的马里奥会给玩家带来畅快感。
+<ul>
+<li>通过运动或动作获得感官上的舒畅体验的过程称为<strong>感官体验</strong>。</li>
+</ul></li>
+<li>有趣秘密还在挑战中蕴含的风险与回报。
+<ul>
+<li>马里奥通过加速的移动实现了风险与回报，玩家按住B是一种主动提高风险与回报的行为。<br />
+</li>
+</ul></li>
+<li>在超级马里奥兄弟之前，动作类游戏的跳跃一直都是跳跃到固定高度，但是超马采用了按键时长与跳跃高度相关的机制。</li>
+<li>在跳跃时按方向键可以控制马里奥在空间左右移动。</li>
+<li>在跳跃过程中碰到墙壁等障碍物不会下落，这虽然有悖物理，但是给了玩家更舒适的游戏体验。</li>
+</ul>
+<h3 id="勾起玩家跳跃冲动的互动式玩法">勾起玩家跳跃冲动的互动式玩法</h3>
+<ul>
+<li>宫本茂说：“我认为互动的乐趣之一在于：一个人对自己的某种想法付诸实践之后，能够获得相应的反馈”。</li>
+<li>《超马》为跳跃这一动作准备了大量的反馈。
+<ul>
+<li><strong>操作复杂度&lt;动作数&lt;反馈数</strong>。</li>
+<li>即用较少的动作获得较多的反馈。</li>
+</ul></li>
+<li>那么《超马》凭什么让人能够不自由自主地想要按下跳跃键呢？
+<ul>
+<li>存在让玩家不由自主想要去实践地机制，称其为“游戏的钓饵”。比如玩家用小马里奥顶砖块，获得的反应是砖块向上被拱起这一动画。
+这一动画会在玩家心中放下一个钓饵，让玩家觉得砖块里藏着什么。</li>
+<li>游戏里一定要有<strong>引诱玩家付诸实践的钓饵</strong>。</li>
+</ul></li>
+</ul>
+<h3 id="从2d马里奥到3d马里奥">从《2D马里奥》到《3D马里奥》</h3>
+<ul>
+<li>《3D马里奥》出乎意料地取消了移动动作的惯性，可能是因为3D视角的距离感相比2D要更难以掌握，加入惯性会使操作难度上升。</li>
+<li>《3D马里奥》中镜头角度局限在了“侧面”“上方”“倾斜”三种固定模式中，而不是像一般3D游戏将视角决定权交给玩家。同时，滑垫也被限制在了16个方向以内，让镜头角度与移动角度保持一致，从而<strong>帮助玩家找回2D游戏的感觉</strong>，同时也避免了因斜向移动导致误判跳跃距离。</li>
+<li>同时，在《超级马里奥3D大陆》中还首次加入了在跳跃过程中改变方向的机制。</li>
+<li>加入了翻滚、远跳、翻滚跳等动作，吸引高端玩家重复挑战关卡。</li>
+</ul>
+<h3 id="小结">小结</h3>
+<ul>
+<li>要给玩家带来“感官刺激”“风险与回报”“动作与反应”和“连环钓饵”。</li>
+<li>游戏体验的真实性并不仅取决于贴图和声效等外观因素，通过游戏内部机制表现出的“互动的乐趣”也有巨大影响。</li>
+</ul>
+<h2
+id="让游戏更具临场感的玩家角色动作设计技巧战神三">让游戏更具临场感的玩家角色动作设计技巧（战神三）</h2>
+<h3 id="不需控制镜头的移动操作机制">不需控制镜头的移动操作机制</h3>
+<ul>
+<li>战神是TPS游戏，角色的移动方向与遥感倾斜方向一致。也会自动选取最佳角度。</li>
+<li>采用自动镜头的3D动作游戏需要很好地处理镜头移动。
+<ul>
+<li>可以<strong>为每个场景设置不同风格的自动镜头</strong>，同时让玩家体验到2D游戏简单而又直观的操作感，以及3D游戏身临其境般的操作感。</li>
+<li>通过自动镜头，战神三创造出了电影般的临场感与魄力。</li>
+</ul></li>
+</ul>
+<h3
+id="实现快节奏战斗的玩家移动动作机制">实现快节奏战斗的玩家移动动作机制</h3>
+<ul>
+<li>要实现快节奏战斗，玩家必须能够灵活转身、迅速静止，因此战神三的静止具有即时性，同时旋转左摇杆可以实现角色的原地旋转。</li>
+<li>《怪猎4》玩家的转身半径要大于战神三，原地回头的时间也略长。
+<ul>
+<li>怪猎4想创造出“狩猎”的感觉。</li>
+</ul></li>
+<li>每个游戏都有一套能让玩家觉得舒服的“<strong>速度</strong>”（转身速度、移动速度、拔刀速度、收刀速度、硬直速度）“<strong>节奏</strong>”（具体的动作设计、动作之间的连贯性）和“<strong>触感</strong>”（动作的打击感）。根据这三点找出合适的玩家角色动作机制，是现代游戏开发的重点。</li>
+</ul>
+<h3 id="不带来烦躁感的地图切换机制">不带来烦躁感的地图切换机制</h3>
+<ul>
+<li>战神三在切换地图之后玩家仍然<strong>继承之前的移动方向</strong>。只要玩家不放开左摇杆方向，就会继续沿着切换前的方向行进。</li>
+<li>3D动作游戏的核心是：<strong>让玩家角色的动作准确反映玩家意图</strong>。</li>
+</ul>
+<h3
+id="让人不由得手指发力的玩家角色动作机制">让人不由得手指发力的玩家角色动作机制</h3>
+<ul>
+<li>为烘托角色服务的动作需要由<strong>互动动作</strong>实现。
+<ul>
+<li>比如开宝箱这个动作需要玩家长按R1，主角运足全身力量掀开宝箱的动画贯彻玩家按键始终，引得玩家下意识加大按键力道。</li>
+<li>开门同理。</li>
+<li>这种称为<strong>互动性演出</strong>。</li>
+</ul></li>
+</ul>
+<h3 id="小结-1">小结</h3>
+<ul>
+<li>战神三在角色动作上的设计创造玩家与玩家角色融为一体的真实游戏体验。</li>
+</ul>
+<h2
+id="让割草游戏更有趣的攻击动作设计技巧战神三">让割草游戏更有趣的攻击动作设计技巧（战神三）</h2>
+<h3 id="让攻击准确命中目标敌人的机制">让攻击准确命中目标敌人的机制</h3>
+<ul>
+<li>战神三并没有锁定操作，实际上，游戏一致在进行锁定和解除锁定，只是玩家没有察觉到而已。
+<ul>
+<li>玩家倾斜左摇杆时，玩家角色会锁定移动方向上最近的敌人。</li>
+<li>锁定过程中，角色会一直面朝敌人。</li>
+<li>可以通过左摇杆锁定其他敌人，如果超出一定距离，锁定会解除。</li>
+<li>消灭敌人后，锁定会自动解除，如果还有其他敌人，会继续自动锁定。</li>
+</ul></li>
+</ul>
+<h3 id="让连击畅快淋漓的机制">让连击畅快淋漓的机制</h3>
+<ul>
+<li>普通攻击以灵活为主，一般会在第三击转换为大范围横向攻击。</li>
+<li>重攻击出招慢，以纵向为主。</li>
+<li>开始以普通攻击震慑周围敌人，再以重击给单个敌人予以重创。</li>
+<li>战神三在设计攻击种类和连击招式时，为每一个攻击动作都分配了固定的用途，玩家能够享受制定战术的乐趣。</li>
+<li>每一个招式都是由<strong>攻击动画</strong>
+、<strong>攻击力</strong>、<strong>攻击方向</strong>、<strong>追踪性能</strong>等要素组合而成。
+<ul>
+<li>所谓“追踪性能”，就是指玩家角色发动攻击招式时，根据已锁定的敌人所在的位置自动进行追踪的功能。</li>
+<li>普通攻击威力小但追踪性能高，重击威力大但追踪性能低。</li>
+<li>如果一款游戏的连击系统能让玩家觉得畅快淋漓，那么其对追踪的调整一定十分到位。</li>
+</ul></li>
+</ul>
+<h3
+id="菜鸟也能轻松上手的畅快的浮空连击机制">菜鸟也能轻松上手的畅快的浮空连击机制</h3>
+<ul>
+<li>割草类游戏都将空中连击的下落设置得比较慢。</li>
+<li>在战神三中，玩家只需长按键就可发动挑空攻击。</li>
+<li>此外，在玩家随挑空攻击后插入了短暂的慢放，相当于一个信号，帮助玩家准确把握发动空中连击的时机。</li>
+</ul>
+<h3 id="用简单操作发动复杂连击的机制">用简单操作发动复杂连击的机制</h3>
+<ul>
+<li>两个攻击键，短按与长按。</li>
+<li>如果连击第一招需要判断长按还是短按，需要在“长按”判定结束之前，所有受影响的连击都应用同一个攻击动画。</li>
+<li>战神三中的连击只有第一招需要判定按键长短，连击过程不需要。《鬼泣》和《猎天使魔女》则支持连击过程长按。</li>
+<li>战神三还可以在连击过程中切换武器。</li>
+</ul>
+<h2
+id="让玩家角色动作更细腻的设计技巧塞尔达传说天空之剑">让玩家角色动作更细腻的设计技巧（《塞尔达传说：天空之剑》）</h2>
+<ul>
+<li>将玩家动作与角色为动作融为一体。 ###
+支撑海量解密内容的玩家角色移动动作</li>
+<li>按下Z键，镜头会自动调整至林克面朝的方向。</li>
+<li>在悬崖边行走不会跌落。</li>
+</ul>
+<h3
+id="让玩家下意识选择合适动作的z注视机制">让玩家下意识选择合适动作的Z注视机制</h3>
+<ul>
+<li>采用“普通移动”“Z注视移动”“Z注视锁定敌人移动”三种移动模式。</li>
+</ul>
+<h3
+id="能单独当游戏玩的移动动作奋力冲刺">能单独当游戏玩的移动动作——奋力冲刺</h3>
+<ul>
+<li>冲刺消耗耐力值，设置了只有奋力冲刺才能通过的斜坡。</li>
+<li>翻滚冲刺、沿墙冲刺等等。</li>
+</ul>
+<h3
+id="没有跳跃键却可以体验真实跳跃的机制">没有跳跃键却可以体验真实跳跃的机制</h3>
+<ul>
+<li>自动触发跳跃，但并没有失去跳跃的乐趣。玩家依然需要掌控距离，需要助跑等等。</li>
+<li>自动跳跃可以避免空气墙。</li>
+</ul>
+<h2
+id="头脑与身体一起享受的剑战动作设计技巧塞尔达传说天空之剑">头脑与身体一起享受的剑战动作设计技巧（《塞尔达传说：天空之剑》）</h2>
+<h3 id="能帅气挥剑的机制">能帅气挥剑的机制</h3>
+<ul>
+<li>要将遥控器当成真剑来操作，带来了前所未有的战斗动作享受。</li>
+<li>Wii将人的动作符号化，让普通玩家也能享受到乐趣。</li>
+</ul>
+<h3 id="攻击与体力的机制">攻击与体力的机制</h3>
+<ul>
+<li>游戏系统设定的连击结束时攻击即结束，最后一招往往动作较大、破绽较多。</li>
+<li>为玩家设置体力参数，归零时攻击结束。</li>
+<li>玩家没有体力或者没有挥动Wii时，攻击结束。</li>
+<li>一般动作游戏是A与B结合，而天空之剑是B与C组合。</li>
+</ul>
+<h3 id="让玩家痛快反击的盾击机制">让玩家痛快反击的盾击机制</h3>
+<ul>
+<li>盾击会让敌人暂时失去平衡，创造反击的机会。</li>
+<li>盾击是通过“玩家盾击动作”与“敌人攻击动作”中设置的“盾击成功判定帧”进行判定的。如果这两个动作中的“盾击成功帧”重合，则判定盾击成功。</li>
+<li>盾牌加入耐久。</li>
+</ul>
+<h3 id="实现剑战动作的机制">实现剑战动作的机制</h3>
+<ul>
+<li>当面对多个敌人时，只集中精力与一名敌人对战，基本上是一对一。</li>
+<li>通过Z注视机制实现剑战。受到Z注视的敌人会先积极攻击。</li>
+</ul>
+<h3 id="剑战动作与割草游戏的区别">剑战动作与割草游戏的区别</h3>
+<ul>
+<li>战斗中的跳跃不同。塞尔达采用了自动跳跃，不会出现跳跃闪避攻击的情况。战神则可以通过跳跃躲避敌人。</li>
+<li>割草游戏有大量的AOE，塞尔达大多为单体攻击。</li>
+</ul>
+<h2
+id="完美演绎英雄的玩家角色动作设计技巧蝙蝠侠阿甘之城">完美演绎英雄的玩家角色动作设计技巧（《蝙蝠侠：阿甘之城》）</h2>
+<h3
+id="能像蝙蝠一样在三维空间自如穿梭的机制">能像蝙蝠一样在三维空间自如穿梭的机制</h3>
+<ul>
+<li>滑翔与抓钩就是“平面+高度”的移动手段，还有其他作用。</li>
+<li>在大楼之间移动时，玩家只需要按住X操作左摇杆，就能根据间隔和高度进行跳跃或自动切换至滑翔状态。不会因为跳跃失误而遭失败。</li>
+<li>抓钩也实现了精准操作和粗略操作。</li>
+</ul>
+<h3
+id="通过简单操作实现高自由度的玩家角色动作的机制">通过简单操作实现高自由度的玩家角色动作的机制</h3>
+<ul>
+<li>玩家角色的移动动作就有很多种，移动动作并不由玩家的手柄决定，而是由玩家触碰的物体决定。（类似刺客信条）</li>
+<li>蝙蝠侠将移动动作特有的难点——时机把握从基本移动操作中剔除，是一款专注功能可供性的动作游戏。</li>
+</ul>
+<h3 id="演绎一名不会轻易死亡的英雄">演绎一名不会轻易死亡的英雄</h3>
+<ul>
+<li>在奔跑中碰到墙壁，移动动画会终止。</li>
+<li>在滑翔时碰到墙壁，蝙蝠侠也不会落下去，而是抓住墙壁。</li>
+</ul>
+<h2
+id="让玩家化身为英雄的设计技巧蝙蝠侠阿甘之城">让玩家化身为英雄的设计技巧（《蝙蝠侠：阿甘之城》）</h2>
+<h3 id="让战术自由度更高的机制">让战术自由度更高的机制</h3>
+<ul>
+<li>潜行动作游戏在游戏中的流程分为“侦察”“制定战术”“捕食战术”“格斗战术”四个阶段。</li>
+<li>蝙蝠侠在捕食战斗阶段能削减敌人多少就成了战斗取胜的关键。</li>
+<li>蝙蝠侠提供了50多种不同的动作，具有极高的自由度。</li>
+</ul>
+<h3 id="让人忍不住要尝试的工具机制">让人忍不住要尝试的工具机制</h3>
+<ul>
+<li>蝙蝠侠中有很多工具，或者道具，一共有20多种。这些工具不会击溃敌人，只会造成负面效果，保证了工具不会打破战斗平衡性。</li>
+<li><strong>工具和战斗动作可以组合，使得产生“有趣的反应”和“新动作”</strong>。</li>
+</ul>
+<h3
+id="让玩家完美演绎蝙蝠侠的捕食者动作的机制">让玩家完美演绎蝙蝠侠的捕食者动作的机制</h3>
+<ul>
+<li>“无声压制”和“转角隐蔽压制”可以无声无息地击溃敌人，所以玩家能够立刻开始下一步动作而不被敌人发现。</li>
+<li>“粉碎重击”和“边缘压制”能产生很大的声响。</li>
+<li>利用有利位置，可以将敌人吊起来剥夺其行动力的“倒吊压制”。</li>
+</ul>
+<h3
+id="改变动作游戏定式的自由流程格斗机制">改变动作游戏定式的自由流程格斗机制</h3>
+<ul>
+<li>在一般的动作游戏种，玩家需要根据周围敌人的情况选择固定的攻击动作或连击，然后输入指令来发动。
+<ul>
+<li>要先考虑与敌人的距离、招式的速度、招式的追踪性能、招式的属性。</li>
+</ul></li>
+<li>自由格斗，玩家输入的不是攻击招式，而是适合周围状况的攻击动作。</li>
+<li>一个按键对应多个攻击招式以及敌人反应。</li>
+<li>蝙蝠侠仍然是一款根据环境自动选择动作的游戏。</li>
+</ul>
+<h2
+id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡灵之神">还原机器人动画的玩家角色动作设计技巧（《终极地带：引导亡灵之神》）</h2>
+]]></content>
+      <categories>
+        <category>游戏 - 游戏理论</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>游戏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>十二月的花</title>
+    <url>/2020/12/22/09/29/</url>
+    <content><![CDATA[<p>埙吹响了海岸<br />
+琴穿梭叶间<br />
+笛在天空啼鸣<br />
+伴奏着雪花片片</p>
+<p>孩子们欢笑着相聚<br />
+踏着雪<br />
+吱吱嘎嘎</p>
+<p>把欢乐捏成一团团棉<br />
+随风起舞<br />
+在阳光下<br />
+雪爱上了花</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>根据角色体型和俯角自动确定FreeLook镜头参数</title>
     <url>/2022/06/21/23/40/</url>
     <content><![CDATA[<p>最近项目涉及到一个需求：如何自动确定镜头的参数（在Unity中即为轨道的高度和半径）。这个问题可以形式化为：给定角色身高<span
@@ -1086,30 +1110,6 @@ H &amp;= \tan(A)R + Y
         <tag>数学</tag>
         <tag>游戏</tag>
         <tag>相机</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>十二月的花</title>
-    <url>/2020/12/22/09/29/</url>
-    <content><![CDATA[<p>埙吹响了海岸<br />
-琴穿梭叶间<br />
-笛在天空啼鸣<br />
-伴奏着雪花片片</p>
-<p>孩子们欢笑着相聚<br />
-踏着雪<br />
-吱吱嘎嘎</p>
-<p>把欢乐捏成一团团棉<br />
-随风起舞<br />
-在阳光下<br />
-雪爱上了花</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -2714,6 +2714,35 @@ space中，保存其中需要的信息；</li>
 <li>着色：最后根据不同的着色器按需取出缓存区的信息加以处理，得到一个最终的RGB值，这就是在屏幕上呈现的颜色。</li>
 </ol>
 <h1 id="作业四">作业四</h1>
+<p>本次作业非常简单，只需要实现Bézier曲线。</p>
+<h2 id="recursive-bézier-curve">Recursive bézier curve</h2>
+<p>主要完成的就是两个函数，<code>bezier</code>——循环每个<code>t</code>画出整个曲线，<code>recursive_bezier</code>——对每个<code>t</code>求出对应的点，都不困难。</p>
+<p><code>bezier</code>函数如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">bezier</span><span class="params">(<span class="type">const</span> std::vector&lt;cv::Point2f&gt; &amp;control_points, cv::Mat &amp;window)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> epsilon = <span class="number">0.001</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">float</span> t = <span class="number">0.0f</span>; t &lt;= <span class="number">1.0f</span>; t += epsilon)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">auto</span> point = <span class="built_in">recursive_bezier</span> (control_points, t);</span><br><span class="line">        window.<span class="built_in">at</span>&lt;cv::Vec3b&gt;(point.y, point.x)[<span class="number">1</span>] = <span class="number">255</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>recursive_bezier</code>函数如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">cv::Point2f <span class="title">recursive_bezier</span><span class="params">(<span class="type">const</span> std::vector&lt;cv::Point2f&gt; &amp;control_points, <span class="type">float</span> t)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// Only one point remaining</span></span><br><span class="line">    <span class="keyword">if</span> (control_points.<span class="built_in">size</span>() == <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> control_points[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Evaluate new points</span></span><br><span class="line">        std::vector&lt;cv::Point2f&gt; new_points;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; control_points.<span class="built_in">size</span>() - <span class="number">1</span>; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            new_points.<span class="built_in">push_back</span> (control_points[i] + t * (control_points[i + <span class="number">1</span>] - control_points[i]));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">recursive_bezier</span> (new_points, t);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="using-the-bernstein-polynomial">Using the bernstein
+polynomial</h2>
+<p>代码框架提供的Bernstein多项式只能针对四个点，我们把它稍作修改使它支持任意多个点：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">naive_bezier</span><span class="params">(<span class="type">const</span> std::vector&lt;cv::Point2f&gt; &amp;points, cv::Mat &amp;window)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// Make this function more generalized</span></span><br><span class="line">    <span class="type">int</span> n = points.<span class="built_in">size</span> ();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">float</span> t = <span class="number">0.0</span>; t &lt;= <span class="number">1.0</span>; t += <span class="number">0.001</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">auto</span> point = cv::<span class="built_in">Point2f</span>(<span class="number">0.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            point += <span class="built_in">bernstein_polynomial</span> (n - <span class="number">1</span>, i, t) * points[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        window.<span class="built_in">at</span>&lt;cv::Vec3b&gt;(point.y, point.x)[<span class="number">2</span>] = <span class="number">255</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>函数<code>bernstein_polynomial</code>计算对应项的系数：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">float</span> <span class="title">bernstein_polynomial</span> <span class="params">(<span class="type">int</span> n, <span class="type">int</span> i, <span class="type">float</span> t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">recursive_combination</span> (n, i) * std::<span class="built_in">pow</span> (t, i) * std::<span class="built_in">pow</span> (<span class="number">1</span> - t, n - i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>函数<code>recursive_combination</code>用于计算组合数<span
+class="math inline">\(\tbinom{n}{i}\)</span>：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">recursive_combination</span> <span class="params">(<span class="type">int</span> n, <span class="type">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span> || m == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">recursive_combination</span> (n, m - <span class="number">1</span>) * (n - m + <span class="number">1</span>) / m;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里用到了简单的组合数递推公式：</p>
+<p><span
+class="math display">\[\binom{n}{m}=\binom{n}{m-1}\cdot\frac{n-m+1}{m}\]</span></p>
+<p>随便画一画，结果是正确的：</p>
+<p><img data-src="/images/games101/4-1.png" /></p>
+<h2 id="bonus-antialiasing">Bonus: antialiasing</h2>
+<p>根据作业提示，在着色一个像素的时候，还要根据周围八个像素到当前点的距离去着色这八个点。我们把<code>bezier</code>稍作修改即可：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">bezier</span><span class="params">(<span class="type">const</span> std::vector&lt;cv::Point2f&gt; &amp;control_points, cv::Mat &amp;window)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> epsilon = <span class="number">0.001</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">float</span> t = <span class="number">0.0f</span>; t &lt;= <span class="number">1.0f</span>; t += epsilon)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">auto</span> point = <span class="built_in">recursive_bezier</span> (control_points, t);</span><br><span class="line">        window.<span class="built_in">at</span>&lt;cv::Vec3b&gt;(point.y, point.x)[<span class="number">1</span>] = <span class="number">255</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// The actual shading point (x,y)</span></span><br><span class="line">        <span class="type">int</span> x = point.x;</span><br><span class="line">        <span class="type">int</span> y = point.y;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// This is used to normalize the color</span></span><br><span class="line">        <span class="type">float</span> normalization = <span class="number">3.0f</span> / std::<span class="built_in">sqrt</span>(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// For each adjacent pixel</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> dx = <span class="number">-1</span>; dx &lt;= <span class="number">1</span>; ++dx)</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> dy = <span class="number">-1</span>; dy &lt;= <span class="number">1</span>; ++dy)</span><br><span class="line">            &#123;   </span><br><span class="line">                <span class="comment">// Should be within the bound</span></span><br><span class="line">                <span class="keyword">if</span> (x + dx &gt;= <span class="number">700</span> || x + dx &lt; <span class="number">0</span> || y + dy &gt;= <span class="number">700</span> || y + dy &lt; <span class="number">0</span>)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// Calculate the distance to the actual shading point</span></span><br><span class="line">                <span class="type">float</span> distance = cv::<span class="built_in">norm</span>((point - cv::<span class="built_in">Point2f</span>(x + dx + <span class="number">0.5</span>, y + dy + <span class="number">0.5</span>)));</span><br><span class="line">                <span class="comment">// Normalize according to the distance</span></span><br><span class="line">                <span class="type">float</span> ratio = <span class="number">1</span> - distance / normalization;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// Shading</span></span><br><span class="line">                window.<span class="built_in">at</span>&lt;cv::Vec3b&gt; (point.y + dy, point.x + dx)[<span class="number">1</span>] = std::<span class="built_in">fmax</span> (window.<span class="built_in">at</span>&lt;cv::Vec3b&gt; (point.y + dy, point.x + dx)[<span class="number">1</span>], <span class="number">255</span> * ratio);</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里需要注意的是我们对求出来的距离<code>distance</code>进行了归一化，归一化系数<code>normalization</code>是当前着色点到它相邻点的最大距离，也就是<span
+class="math inline">\(3/\sqrt{2}\)</span>。</p>
+<p>反走样前后对比如下：</p>
+<p><img data-src="/images/games101/4-2.png" width = "800" height = "400" alt="无反走样"/>
+<img data-src="/images/games101/4-3.png" width = "800" height = "400" alt="有反走样"/></p>
 <h1 id="作业五">作业五</h1>
 <h1 id="作业六">作业六</h1>
 <h1 id="作业七">作业七</h1>
