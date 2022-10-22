@@ -1098,12 +1098,12 @@ pre code {
 }
 @media (min-width: 1200px) {
   .header-inner {
-    width: 700px;
+    width: 1000px;
   }
 }
 @media (min-width: 1600px) {
   .header-inner {
-    width: 60%;
+    width: 70%;
   }
 }
 .site-brand-container {
@@ -1570,12 +1570,12 @@ pre code {
 }
 @media (min-width: 1200px) {
   .footer-inner {
-    width: 700px;
+    width: 1000px;
   }
 }
 @media (min-width: 1600px) {
   .footer-inner {
-    width: 60%;
+    width: 70%;
   }
 }
 .use-motion .footer {
@@ -1906,12 +1906,12 @@ pre code {
 }
 @media (min-width: 992px) {
   .post-body {
-    text-align: justify;
+    text-align: left;
   }
 }
 @media (max-width: 991px) {
   .post-body {
-    text-align: justify;
+    text-align: left;
   }
 }
 .post-body h1 .header-anchor,
@@ -2647,12 +2647,12 @@ mjx-container[display='true'] + br {
 }
 @media (min-width: 1200px) {
   .main {
-    width: 700px;
+    width: 1000px;
   }
 }
 @media (min-width: 1600px) {
   .main {
-    width: 60%;
+    width: 70%;
   }
 }
 @media (max-width: 991px) {
