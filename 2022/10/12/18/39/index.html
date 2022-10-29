@@ -35,11 +35,11 @@
 <meta property="og:image" content="http://sulley.cc/images/bump-map/1-1.png">
 <meta property="og:image" content="http://sulley.cc/images/bump-map/2-1.png">
 <meta property="article:published_time" content="2022-10-12T10:39:31.000Z">
-<meta property="article:modified_time" content="2022-10-15T13:24:57.489Z">
+<meta property="article:modified_time" content="2022-10-29T13:22:36.565Z">
 <meta property="article:author" content="Sulley">
-<meta property="article:tag" content="计算机">
-<meta property="article:tag" content="随笔">
 <meta property="article:tag" content="数学">
+<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="计算机">
 <meta property="article:tag" content="游戏">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://sulley.cc/images/bump-map/1-1.png">
@@ -169,7 +169,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%B9%E5%87%B8%E8%B4%B4%E5%9B%BEbump-mapping"><span class="nav-number">1.</span> <span class="nav-text">凹凸贴图（Bump Mapping）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E7%A9%BA%E9%97%B4%E4%B8%AD%E7%9A%84%E6%B3%95%E7%BA%BF"><span class="nav-number">1.1.</span> <span class="nav-text">纹理空间中的法线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E7%A9%BA%E9%97%B4%E4%B8%96%E7%95%8C%E7%A9%BA%E9%97%B4%E4%B8%8Etbn%E7%9F%A9%E9%98%B5"><span class="nav-number">1.2.</span> <span class="nav-text">纹理空间，世界空间与TBN矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%AD%A3%E4%BA%A4%E5%8C%96"><span class="nav-number">1.2.1.</span> <span class="nav-text">为什么要正交化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E7%BA%BF%E7%A9%BA%E9%97%B4%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">1.2.2.</span> <span class="nav-text">切线空间的优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#games-101-%E4%BD%9C%E4%B8%9A%E4%B8%89%E4%B8%AD%E7%9A%84bump-mapping"><span class="nav-number">1.2.3.</span> <span class="nav-text">GAMES 101 作业三中的Bump
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%B9%E5%87%B8%E8%B4%B4%E5%9B%BEbump-mapping"><span class="nav-number">1.</span> <span class="nav-text">凹凸贴图（Bump Mapping）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E7%A9%BA%E9%97%B4%E4%B8%AD%E7%9A%84%E6%B3%95%E7%BA%BF"><span class="nav-number">1.1.</span> <span class="nav-text">纹理空间中的法线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E7%A9%BA%E9%97%B4%E4%B8%96%E7%95%8C%E7%A9%BA%E9%97%B4%E4%B8%8Etbn%E7%9F%A9%E9%98%B5"><span class="nav-number">1.2.</span> <span class="nav-text">纹理空间，世界空间与TBN矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%AD%A3%E4%BA%A4%E5%8C%96"><span class="nav-number">1.2.1.</span> <span class="nav-text">为什么要正交化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%95%E5%90%91%E9%87%8F%E7%9A%84%E6%96%B9%E5%90%91"><span class="nav-number">1.2.2.</span> <span class="nav-text">法向量的方向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E7%BA%BF%E7%A9%BA%E9%97%B4%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">切线空间的优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#games-101-%E4%BD%9C%E4%B8%9A%E4%B8%89%E4%B8%AD%E7%9A%84bump-mapping"><span class="nav-number">1.2.4.</span> <span class="nav-text">GAMES 101 作业三中的Bump
 Mapping</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%96%E7%95%8C%E7%A9%BA%E9%97%B4%E4%B8%AD%E7%9A%84%E6%B3%95%E7%BA%BF"><span class="nav-number">1.3.</span> <span class="nav-text">世界空间中的法线</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BEnormal-mapping"><span class="nav-number">2.</span> <span class="nav-text">法线贴图（Normal Mapping）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%8D%E7%A7%BB%E8%B4%B4%E5%9B%BEdisplacement-mapping"><span class="nav-number">3.</span> <span class="nav-text">位移贴图（Displacement
 Mapping）</span></a></li></ol></div>
         </div>
@@ -307,7 +307,7 @@ Mapping）</span></a></li></ol></div>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-10-15 21:24:57" itemprop="dateModified" datetime="2022-10-15T21:24:57+08:00">2022-10-15</time>
+      <time title="修改时间：2022-10-29 21:22:36" itemprop="dateModified" datetime="2022-10-29T21:22:36+08:00">2022-10-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -347,14 +347,14 @@ Mapping）</span></a></li></ol></div>
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.8k</span>
+      <span>6.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
+      <span>6 分钟</span>
     </span>
 </div>
 
@@ -380,7 +380,7 @@ class="math inline">\(\mathcal{M}\)</span>去记录对应点的相对于它法�
 class="math inline">\(P\)</span>对应纹理坐标为<span
 class="math inline">\((u,v)\)</span>，而<span
 class="math inline">\(h(u,v)=0.5\)</span>，这就说明我们需要把点<span
-class="math inline">\(P\)</span>沿着它的法线方向<span
+class="math inline">\(P\)</span><strong>沿着它的法线方向</strong><span
 class="math inline">\(\mathbf{n}\)</span>增高<span
 class="math inline">\(0.5\)</span>。然而我们并不想实际改变点<span
 class="math inline">\(P\)</span>，而只需要知道改变后的法线<span
@@ -394,29 +394,30 @@ V\)</span>为竖轴，那么我们就建立起一个以<span
 class="math inline">\(UVW\)</span>为三轴的<strong>纹理空间</strong>。每个真实空间中点<span
 class="math inline">\(P\)</span>的法向量<span
 class="math inline">\(\mathbf{n}_P\)</span>都能对应到纹理空间中的向量<span
-class="math inline">\(\mathbf{w}_P=(u_P,v_P,1)\)</span>，其中<span
+class="math inline">\(\mathbf{w}_P=(0,0,1)\)</span>，但是这个向量的起点在<span
+class="math inline">\((u_P,v_P)\)</span>，其中<span
 class="math inline">\(u_P,v_P\)</span>是点<span
-class="math inline">\(P\)</span>的纹理坐标。这样一来，我们就构造了一个从世界空间（即真实世界中的空间）到纹理空间的映射：</p>
-<p><span class="math display">\[
-\begin{aligned}
-f:~&amp; \mathcal{N}\to\mathcal{W}\\
-&amp;\mathbf{n}\to \mathbf{w}
-\end{aligned}
-\]</span></p>
-<p>它把世界空间<span
-class="math inline">\(\mathcal{N}\)</span>中的法线<span
-class="math inline">\(\mathbf{n}\)</span>映射到纹理空间<span
-class="math inline">\(\mathcal{W}\)</span>中的法线<span
-class="math inline">\(\mathbf{w}\)</span>。我们现在还不知道这个映射是什么，没问题，先让我们来关注下纹理空间<span
-class="math inline">\(\mathcal{W}\)</span>。</p>
-<p>这个空间的三轴分别是<span
+class="math inline">\(P\)</span>的纹理坐标。换句话说，点<span
+class="math inline">\(P\)</span>首先对应了一个纹理坐标<span
+class="math inline">\((u_P,v_P)\)</span>，这个纹理坐标上有一个恒定的向量<span
+class="math inline">\(\mathbf{w}_P=(0,0,1)\)</span>，这个向量和坐标<span
+class="math inline">\((u_P,v_P)\)</span>一起，就对应了真实空间中<span
+class="math inline">\(P\)</span>的法向量<span
+class="math inline">\(\mathbf{n}_P\)</span>和<span
+class="math inline">\(P\)</span>本身。</p>
+<p>还记得我们上面强调了每个点高度的改变都是沿着它法线方向改变的吗？正是因为这样，我们才要把纹理空间中的每个点<span
+class="math inline">\((u,v)\)</span>处的法向量定义为垂直向上的<span
+class="math inline">\((0,0,1)\)</span>，这相当于是<strong>在纹理空间中模拟真实空间中的法向量，以及沿着法向量改变高度后的法向量如何变化</strong>。</p>
+<p>这个纹理空间的三轴分别是<span
 class="math inline">\(U,V,W\)</span>，每个<span
 class="math inline">\((u,v)\)</span>都定义了一个朝上的法线向量<span
-class="math inline">\(\mathbf{w}_{u,v}=(u,v,1)\)</span>。此外，这个空间还定义了每个点的相对高度<span
+class="math inline">\(\mathbf{w}_{u,v}=(0,0,1)\)</span>。此外，这个空间还定义了每个点的相对高度<span
 class="math inline">\(h(u,v)\)</span>。我们关心的是，<strong>在这个空间中，点<span
 class="math inline">\((u,v)\)</span>在改变了相对高度<span
 class="math inline">\(h(u,v)\)</span>之后它新的法线向量<span
-class="math inline">\(\mathbf{w}&#39;_{u,v}\)</span>是什么</strong>。</p>
+class="math inline">\(\mathbf{w}&#39;_{u,v}\)</span>是什么</strong>。把这个新的法线<span
+class="math inline">\(\mathbf{w}&#39;_{u,v}\)</span>应用到真实空间中点<span
+class="math inline">\(P\)</span>的法线上，就是改变后的法线。</p>
 <p>下图表现了这个过程，注意我们先从<span
 class="math inline">\(UW\)</span>平面看去。点<span
 class="math inline">\(u\)</span>（先不管<span
@@ -454,14 +455,33 @@ h(v),1)\)</span>。这就是纹理空间中变换相对高度后的法线。</p>
 class="math inline">\(\mathbf{w}&#39;\)</span>，同时也知道了世界空间中原本的法线<span
 class="math inline">\(\mathbf{n}\)</span>和纹理空间中原本的法线<span
 class="math inline">\(\mathbf{w}\)</span>，怎么才能得到世界空间中变换高度后的法线<span
-class="math inline">\(\mathbf{n}&#39;\)</span>。也就是说，我们要求出变换<span
-class="math inline">\(f\)</span>，或者它的逆<span
-class="math inline">\(f^{-1}\)</span>。</p>
+class="math inline">\(\mathbf{n}&#39;\)</span>。</p>
+<p>现在我们再捋一下世界空间和纹理空间这两个空间。在世界空间中，所有的向量都是一个<strong>绝对值</strong>。比如现在三角形上的一个顶点<span
+class="math inline">\(P\)</span>，它当前的法线是<span
+class="math inline">\((0,1,0)\)</span>，如果此时把三角形连同点<span
+class="math inline">\(P\)</span>任意旋转，那么<span
+class="math inline">\(P\)</span>的法向量也会随之改变，比如到了<span
+class="math inline">\((1,0,0)\)</span>。然而，在纹理空间中点<span
+class="math inline">\(P\)</span>对应的纹理坐标<span
+class="math inline">\((u,v)\)</span>和其之上的法向量<span
+class="math inline">\(\mathbf{w}_{u,v}\)</span>是没有改变的！同时，使用上述过程计算出来的纹理空间中新的法向量<span
+class="math inline">\(\mathbf{w}&#39;_{u,v}\)</span>也是没有改变的！这也就意味着纹理空间中的向量是一个<strong>相对值</strong>。无论世界空间中的点<span
+class="math inline">\(P\)</span>如何运动，纹理空间中变化前和变化后的法向量都不会随之运动，纹理空间中的法向量和世界空间中法向量始终保持了一致的相对位置关系！</p>
+<p>所以，我们现在的目标，就是要求出一个变换<span
+class="math inline">\(f\)</span>，<strong>对每个特定的点<span
+class="math inline">\(P\)</span></strong>，它能将世界空间中的法向量<span
+class="math inline">\(\mathbf{n}\)</span>变换为纹理空间中的一个法向量；那么它的逆变换<span
+class="math inline">\(f^{-1}\)</span>，就能把纹理空间中的法向量<span
+class="math inline">\(\mathbf{w}\)</span>映射为世界空间中的法向量。我们想要的，就是<span
+class="math inline">\(f^{-1}(\mathbf{w}&#39;)\)</span>。</p>
 <p>我们不妨先考虑逆变换<span
-class="math inline">\(f^{-1}:\mathcal{W}\to\mathcal{N}\)</span>，且可以用一个矩阵<span
+class="math inline">\(f^{-1}\)</span>，它可以用一个矩阵<span
 class="math inline">\(F^{-1}=\begin{bmatrix}\mathbf{a}&amp;\mathbf{b}&amp;\mathbf{c}\end{bmatrix}\)</span>表示。我们实际上很容易知道<span
-class="math inline">\(\mathbf{c}=\mathbf{n}\)</span>，这是因为<span
-class="math inline">\(F^{-1}\mathbf{w}=\mathbf{n},\mathbf{w}=(0,0,1)^\top\)</span>。我们还需要另外两个方程才能解出<span
+class="math inline">\(\mathbf{c}=\mathbf{n}\)</span>，这是因为纹理空间中改变前的法向量<span
+class="math inline">\(\mathbf{w}\)</span>需要和世界空间中改变前的法向量<span
+class="math inline">\(\mathbf{n}\)</span>相对应：<span
+class="math inline">\(F^{-1}\mathbf{w}=\mathbf{n}\
+(\mathbf{w}=(0,0,1)^\top)\)</span>。我们还需要另外两个方程才能解出<span
 class="math inline">\(\mathbf{a},
 \mathbf{b}\)</span>。为此，我们可以通过点<span
 class="math inline">\(P\)</span>所在的三角形<span
@@ -476,12 +496,12 @@ class="math inline">\(\mathbf{g}_1\)</span>，<span
 class="math inline">\(\mathbf{e}_2\)</span>对应的向量为<span
 class="math inline">\(\mathbf{g}_2\)</span>。其中<span
 class="math inline">\(\mathbf{g}_1=(u_B-u_A,v_B-v_A,0)^\top\)</span>，<span
-class="math inline">\(\mathbf{g}_2=(u_C-u_A,v_C-v_A,0)^\top\)</span>。那么显然有下述方程成立：</p>
+class="math inline">\(\mathbf{g}_2=(u_C-u_A,v_C-v_A,0)^\top\)</span>。那么根据我们的定义，显然有下述方程成立：</p>
 <p><span class="math display">\[
 \begin{aligned}
-  \mathbf{e}_1&amp;=F\mathbf{g}_1=\Delta u_1\mathbf{a}+\Delta
+  \mathbf{e}_1&amp;=F^{-1}\mathbf{g}_1=\Delta u_1\mathbf{a}+\Delta
 v_1\mathbf{b}\\
-  \mathbf{e}_2&amp;=F\mathbf{g}_2=\Delta u_2\mathbf{a}+\Delta
+  \mathbf{e}_2&amp;=F^{-1}\mathbf{g}_2=\Delta u_2\mathbf{a}+\Delta
 v_2\mathbf{b}
 \end{aligned}
 \]</span></p>
@@ -492,17 +512,17 @@ v_1=v_B-v_A,\Delta u_2=u_C-u_A,\Delta v_2=v_C-v_A\)</span>。</p>
 \begin{aligned}
   \begin{bmatrix}
     \mathbf{e}_1\\\mathbf{e}_2
-  \end{bmatrix}=\begin{bmatrix}
+  \end{bmatrix}&amp;=\begin{bmatrix}
     \Delta u_1 &amp; \Delta v_1\\
     \Delta u_2 &amp; \Delta v_2
   \end{bmatrix}\begin{bmatrix}
     \mathbf{a}\\
     \mathbf{b}
-  \end{bmatrix}\Rightarrow
+  \end{bmatrix}\Rightarrow\\
   \begin{bmatrix}
     \mathbf{a}\\
     \mathbf{b}
-  \end{bmatrix}=\begin{bmatrix}
+  \end{bmatrix}&amp;=\begin{bmatrix}
     \Delta u_1 &amp; \Delta v_1\\
     \Delta u_2 &amp; \Delta v_2
   \end{bmatrix}^{-1}\begin{bmatrix}
@@ -516,7 +536,29 @@ v_1}\begin{bmatrix}
   \end{bmatrix}
 \end{aligned}
 \]</span></p>
-<p>上式需要保证逆矩阵存在。解出<span
+<p>上式需要保证逆矩阵存在，即<span class="math inline">\(\Delta
+u_1\Delta v_2\not=\Delta u_2\Delta v_1\)</span>。</p>
+<p>但现在得到的<span
+class="math inline">\(\mathbf{a},\mathbf{b},\mathbf{c}\)</span>两两之间并不保证互相垂直，这是因为从上面的式子我们不难发现<span
+class="math inline">\(\mathbf{a}\)</span>和<span
+class="math inline">\(\mathbf{b}\)</span>是关于<span
+class="math inline">\(\mathbf{e}_1,\mathbf{e}_2\)</span>的线性组合，所以这两个基仍然在三角形<span
+class="math inline">\(ABC\)</span>所在的平面上，而这个平面不一定和向量<span
+class="math inline">\(\mathbf{n}\)</span>正交，而且<span
+class="math inline">\(\mathbf{a}\)</span>和<span
+class="math inline">\(\mathbf{b}\)</span>本身也不一定正交。</p>
+<p>所以作为求解<span
+class="math inline">\(F^{-1}\)</span>的最后一步，我们还要把这三个基正交化，我们可以使用Schmidt正交化：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \mathbf{t}&amp;=\text{normalize}(\mathbf{a}-(\mathbf{a}\cdot\mathbf{n})\mathbf{n})\\
+  \mathbf{b}&amp;=\mathbf{n}\times\mathbf{t}
+\end{aligned}
+\]</span></p>
+<p>这样一来，<span
+class="math inline">\(\mathbf{t},\mathbf{b},\mathbf{n}\)</span>就是两两正交的单位向量了，从而就得到了逆变换<span
+class="math inline">\(F^{-1}=\begin{bmatrix}\mathbf{t}&amp;\mathbf{b}&amp;\mathbf{n}\end{bmatrix}\)</span></p>
+<p>解出<span
 class="math inline">\(\mathbf{a},\mathbf{b}\)</span>之后，我们令<span
 class="math inline">\(\mathbf{t}\gets\text{normalize}(\mathbf{a}),\mathbf{b}\gets\text{normalize}(\mathbf{b})\)</span>，再加上之前得到的<span
 class="math inline">\(\mathbf{n}\)</span>，就得到了逆变换<span
@@ -524,32 +566,30 @@ class="math inline">\(F^{-1}=\begin{bmatrix}\mathbf{t}&amp;\mathbf{b}&amp;\mathb
 <p>你也许会问，上面的推导过程我们为什么不直接用三角形的三个顶点，而要去用它的边呢？这是因为，<strong>向量</strong>和<strong>点</strong>本质上是不同的，尽管它们都可以用一个三维坐标表示。比如三维空间中的一个物体，它某个点的法向量是<span
 class="math inline">\((0,0,1)\)</span>，把物体整体平移了之后，这个点的坐标发生了变化，但是它的法向量还是<span
 class="math inline">\((0,0,1)\)</span>。既然我们只是向量感兴趣，那么所有的操作都是基于向量进行的。这一点务必理解。</p>
-<p><span class="math inline">\(F^{-1}\)</span>定义的空间就是以<span
+<p>现在，<span
+class="math inline">\(F^{-1}\)</span>定义的空间就是以<span
 class="math inline">\(\mathbf{t},\mathbf{b},\mathbf{n}\)</span>为基的空间，这个空间的“<span
 class="math inline">\(Z\)</span>轴”就是<span
-class="math inline">\(\mathbf{n}\)</span>，正好与<strong>世界空间</strong>中点的法向量重合，但是我们不难发现，<span
-class="math inline">\(\mathbf{t}\)</span>和<span
-class="math inline">\(\mathbf{b}\)</span>是关于<span
-class="math inline">\(\mathbf{e}_1,\mathbf{e}_2\)</span>的线性组合，所以这两个基仍然在三角形<span
-class="math inline">\(ABC\)</span>所在的平面上，而这个平面不一定和向量<span
-class="math inline">\(\mathbf{n}\)</span>正交，而且<span
-class="math inline">\(\mathbf{t}\)</span>和<span
-class="math inline">\(\mathbf{b}\)</span>本身也不一定正交。</p>
-<p>我们想让这三个轴正交，就像在纹理空间中的<span
-class="math inline">\(U,V,W\)</span>一样。这很简单，直接使用Schmidt正交化即可：</p>
-<p><span class="math display">\[
-\begin{aligned}
-  \mathbf{t}&amp;\gets\text{normalize}(\mathbf{t}-(\mathbf{t}\cdot\mathbf{n})\mathbf{n})\\
-  \mathbf{b}&amp;\gets\mathbf{n}\times\mathbf{t}
-\end{aligned}
-\]</span></p>
-<p>现在得到的矩阵<span
-class="math inline">\(F^{-1}=\begin{bmatrix}\mathbf{t}&amp;\mathbf{b}&amp;\mathbf{n}\end{bmatrix}\)</span>就是一个正交矩阵了，对任意纹理空间中的<strong>向量</strong>，包括法向量<span
-class="math inline">\(\mathbf{w}\)</span>，都可以左乘这个矩阵得到对应的世界空间中的向量<span
-class="math inline">\(F^{-1}\mathbf{w}&#39;\)</span>。它定义的空间就称为<strong>切线空间</strong>，而矩阵<span
+class="math inline">\(\mathbf{n}\)</span>，正好与<strong>世界空间</strong>中点<span
+class="math inline">\(P\)</span>的原始法向量重合，而<span
+class="math inline">\(\mathbf{t},\mathbf{b}\)</span>则定义了<span
+class="math inline">\(\mathbf{n}\)</span>的切平面。对纹理空间中任意的<strong>法向量</strong><span
+class="math inline">\(\mathbf{w}\)</span>，都可以左乘这个矩阵得到对应的世界空间中的法向量<span
+class="math inline">\(\mathbf{n}&#39;=F^{-1}\mathbf{w}&#39;\)</span>。它定义的空间就称为<strong>切线空间</strong>，而矩阵<span
 class="math inline">\(F^{-1}\)</span>就是所谓的TBN矩阵。</p>
-<p>上述过程一个必须回答的问题是：为什么需要正交化？</p>
+<p>如果你认真思考，就会问出下面两个问题：</p>
+<ol type="1">
+<li>为什么需要正交化？不是我们直接出了<span
+class="math inline">\(\mathbf{a},\mathbf{b},\mathbf{c}\)</span>了吗？为什么不能直接用它作为<span
+class="math inline">\(F^{-1}\)</span>呢？</li>
+<li>正交化之后的基<span
+class="math inline">\(\mathbf{t},\mathbf{b},\mathbf{n}\)</span>和原始纹理空间的关系是如何的？能保证映射到真实空间中的法向量<span
+class="math inline">\(\mathbf{n}&#39;\)</span>和原始法向量<span
+class="math inline">\(\mathbf{n}\)</span>的相对位置关系正确吗？</li>
+</ol>
+<p>下面我们来依次回答这两个问题。</p>
 <h3 id="为什么要正交化">为什么要正交化</h3>
+<h3 id="法向量的方向">法向量的方向</h3>
 <h3 id="切线空间的优点">切线空间的优点</h3>
 <h3 id="games-101-作业三中的bump-mapping">GAMES 101 作业三中的Bump
 Mapping</h3>
@@ -669,9 +709,9 @@ Algorithm是计算机图形学中用于画直线的算法，它只涉及整型�
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
-              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
               <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
               <a href="/tags/%E6%B8%B8%E6%88%8F/" rel="tag"># 游戏</a>
           </div>
 
@@ -723,13 +763,13 @@ Algorithm是计算机图形学中用于画直线的算法，它只涉及整型�
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">270k</span>
+    <span title="站点总字数">271k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:05</span>
+    <span title="站点阅读时长">4:06</span>
   </span>
 </div>
 <div class="busuanzi-count">
