@@ -1,274 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Bump Mapping, Normal Mapping and Displacement Mapping</title>
-    <url>/2022/10/12/18/39/</url>
-    <content><![CDATA[<p>凹凸贴图（Bump
-mapping）是图形学中一种常用的用于改变物体视觉凹凸性的方法，但是网上很多介绍对它的原理和变体都非常模糊，甚至包含一些关键概念的错误。本文将详细介绍凹凸贴图及其变体（Normal
-Mapping和Displacement
-Mapping）的原理，并在代码上加以实现，以便让读者更好地理解这项技术。</p>
-<span id="more"></span>
-<h1 id="凹凸贴图bump-mapping">凹凸贴图（Bump Mapping）</h1>
-<p>现实中有很多物体表面都凹凸不平，比如橘子、砖墙等等，那么我们要如何用图形学的方法去渲染它们呢？最直接的方法就是把这些物体的表面细化为非常微小的三角形，然后走通用渲染流程。但是，由于凹凸分布过于密集，全部按实际模型渲染会导致不可接受的性能开销。</p>
-<p>为此，我们能不能假设这种细微凹凸表面是一层贴在光滑物体表面的<strong>高度图</strong>，每个点都表示了高度的增量。比如我们想得到一个凹凸的橘子，我们可以假想这个橘子本来是一个光滑的球体（尽管橘子不是球体，但这里可以做一个简便的假设），这个球体上的每一点都对应到一个高度图上的一点，记录了当前点的相对高度，比如0.1cm，-0.05cm等等，然后再把这个相对高度应用到球体这一点的实际高度上，就形成该点的凹凸。对所有的点都去计算高度增量，就可以让整个球体变得凹凸不平了。</p>
-<p>但是上面的方法还是实际上改变了球体上每个点的位置，而我们计算着色时，实际上只关心这个点的<strong>法线</strong>，有没有一种方法，可以不去实际改变点的位置，而是计算出<strong>改变这个点之后它的法线是怎么变化的</strong>，从而从视觉上营造出凹凸感（此时物体本身并没有任何变化）。这就是凹凸贴图做的事情。</p>
-<h2 id="纹理空间中的法线">纹理空间中的法线</h2>
-<p>前面已经说到了，我们可以用一张贴图<span
-class="math inline">\(\mathcal{M}\)</span>去记录对应点的相对于它法线的高度变化。比如真实空间中的某个点<span
-class="math inline">\(P\)</span>对应纹理坐标为<span
-class="math inline">\((u,v)\)</span>，而<span
-class="math inline">\(h(u,v)=0.5\)</span>，这就说明我们需要把点<span
-class="math inline">\(P\)</span><strong>沿着它的法线方向</strong><span
-class="math inline">\(\mathbf{n}\)</span>增高<span
-class="math inline">\(0.5\)</span>。然而我们并不想实际改变点<span
-class="math inline">\(P\)</span>，而只需要知道改变后的法线<span
-class="math inline">\(\mathbf{n}&#39;\)</span>就行了。</p>
-<p>那么怎么得到<span
-class="math inline">\(\mathbf{n}&#39;\)</span>呢？首先来看一下在纹理中怎么表示法线。如果我们把纹理的<span
-class="math inline">\(U\)</span>方向视为横轴，<span
-class="math inline">\(V\)</span>方向视为纵轴，再以<span
-class="math inline">\(W=U\times
-V\)</span>为竖轴，那么我们就建立起一个以<span
-class="math inline">\(UVW\)</span>为三轴的<strong>纹理空间</strong>。每个真实空间中点<span
-class="math inline">\(P\)</span>的法向量<span
-class="math inline">\(\mathbf{n}_P\)</span>都能对应到纹理空间中的向量<span
-class="math inline">\(\mathbf{w}_P=(0,0,1)\)</span>，但是这个向量的起点在<span
-class="math inline">\((u_P,v_P)\)</span>，其中<span
-class="math inline">\(u_P,v_P\)</span>是点<span
-class="math inline">\(P\)</span>的纹理坐标。换句话说，点<span
-class="math inline">\(P\)</span>首先对应了一个纹理坐标<span
-class="math inline">\((u_P,v_P)\)</span>，这个纹理坐标上有一个恒定的向量<span
-class="math inline">\(\mathbf{w}_P=(0,0,1)\)</span>，这个向量和坐标<span
-class="math inline">\((u_P,v_P)\)</span>一起，就对应了真实空间中<span
-class="math inline">\(P\)</span>的法向量<span
-class="math inline">\(\mathbf{n}_P\)</span>和<span
-class="math inline">\(P\)</span>本身。</p>
-<p>还记得我们上面强调了每个点高度的改变都是沿着它法线方向改变的吗？正是因为这样，我们才要把纹理空间中的每个点<span
-class="math inline">\((u,v)\)</span>处的法向量定义为垂直向上的<span
-class="math inline">\((0,0,1)\)</span>，这相当于是<strong>在纹理空间中模拟真实空间中的法向量，以及沿着法向量改变高度后的法向量如何变化</strong>。</p>
-<p>这个纹理空间的三轴分别是<span
-class="math inline">\(U,V,W\)</span>，每个<span
-class="math inline">\((u,v)\)</span>都定义了一个朝上的法线向量<span
-class="math inline">\(\mathbf{w}_{u,v}=(0,0,1)\)</span>。此外，这个空间还定义了每个点的相对高度<span
-class="math inline">\(h(u,v)\)</span>。我们关心的是，<strong>在这个空间中，点<span
-class="math inline">\((u,v)\)</span>在改变了相对高度<span
-class="math inline">\(h(u,v)\)</span>之后它新的法线向量<span
-class="math inline">\(\mathbf{w}&#39;_{u,v}\)</span>是什么</strong>。把这个新的法线<span
-class="math inline">\(\mathbf{w}&#39;_{u,v}\)</span>应用到真实空间中点<span
-class="math inline">\(P\)</span>的法线上，就是改变后的法线。</p>
-<p>下图表现了这个过程，注意我们先从<span
-class="math inline">\(UW\)</span>平面看去。点<span
-class="math inline">\(u\)</span>（先不管<span
-class="math inline">\(v\)</span>）原来的法线是<span
-class="math inline">\(\mathbf{w}\)</span>（绿色向量），在应用该点的相对高度<span
-class="math inline">\(h(u)\)</span>之后，新的法线是<span
-class="math inline">\(\mathbf{w}&#39;\)</span>（红色向量）。
-理论上来说，要准确地求出<span
-class="math inline">\(\mathbf{w}&#39;\)</span>需要知道该点的切线（红色虚线），但这比较困难。我们可以用相邻点<span
-class="math inline">\(u+1\)</span>去求近似切线，这是很容易办到的。</p>
-<p>具体来说，相邻点的高度我们知道是<span
-class="math inline">\(h(u+1)\)</span>，这样我们就能求出它在<span
-class="math inline">\(W\)</span>方向上的差，值为<span
-class="math inline">\(\Delta h(u)=h(u+1)-h(u)\)</span>，而<span
-class="math inline">\(U\)</span>方向上的差值就是<span
-class="math inline">\(1\)</span>，如此一来，我们就得到了一个近似的切线<span
-class="math inline">\((1,c\cdot\Delta h(u))\)</span>，这里的<span
-class="math inline">\(c\)</span>是一个系数用于调整斜率。知道了切线，我们就知道了法向量为<span
-class="math inline">\(\mathbf{w}&#39;=\text{normalize}(-c\cdot\Delta
-h(u),1)\)</span>。</p>
-<p>对于真正的三维纹理空间也是一样的，对于平面<span
-class="math inline">\(UW\)</span>，<span
-class="math inline">\(W\)</span>方向的差值为<span
-class="math inline">\(\Delta h(u)=h(u+1)-h(u)\)</span>，对于平面<span
-class="math inline">\(VW\)</span>，<span
-class="math inline">\(W\)</span>方向的插值为<span
-class="math inline">\(\Delta
-h(v)=h(v+1)-h(v)\)</span>。这样一来，近似法线就是<span
-class="math inline">\(\mathbf{w}&#39;=\text{normalize}(-c_1\Delta
-h(u),-c_2\Delta
-h(v),1)\)</span>。这就是纹理空间中变换相对高度后的法线。</p>
-<p><img data-src="/images/bump-map/1-1.png" /></p>
-<h2 id="纹理空间世界空间与tbn矩阵">纹理空间，世界空间与TBN矩阵</h2>
-<p>下面的问题是，既然我已经知道了<strong>纹理空间</strong>中变换高度后的法线<span
-class="math inline">\(\mathbf{w}&#39;\)</span>，同时也知道了世界空间中原本的法线<span
-class="math inline">\(\mathbf{n}\)</span>和纹理空间中原本的法线<span
-class="math inline">\(\mathbf{w}\)</span>，怎么才能得到世界空间中变换高度后的法线<span
-class="math inline">\(\mathbf{n}&#39;\)</span>。</p>
-<p>现在我们再捋一下世界空间和纹理空间这两个空间。在世界空间中，所有的向量都是一个<strong>绝对值</strong>。比如现在三角形上的一个顶点<span
-class="math inline">\(P\)</span>，它当前的法线是<span
-class="math inline">\((0,1,0)\)</span>，如果此时把三角形连同点<span
-class="math inline">\(P\)</span>任意旋转，那么<span
-class="math inline">\(P\)</span>的法向量也会随之改变，比如到了<span
-class="math inline">\((1,0,0)\)</span>。然而，在纹理空间中点<span
-class="math inline">\(P\)</span>对应的纹理坐标<span
-class="math inline">\((u,v)\)</span>和其之上的法向量<span
-class="math inline">\(\mathbf{w}_{u,v}\)</span>是没有改变的！同时，使用上述过程计算出来的纹理空间中新的法向量<span
-class="math inline">\(\mathbf{w}&#39;_{u,v}\)</span>也是没有改变的！这也就意味着纹理空间中的向量是一个<strong>相对值</strong>。无论世界空间中的点<span
-class="math inline">\(P\)</span>如何运动，纹理空间中变化前和变化后的法向量都不会随之运动，纹理空间中的法向量和世界空间中法向量始终保持了一致的相对位置关系！</p>
-<p>所以，我们现在的目标，就是要求出一个变换<span
-class="math inline">\(f\)</span>，<strong>对每个特定的点<span
-class="math inline">\(P\)</span></strong>，它能将世界空间中的法向量<span
-class="math inline">\(\mathbf{n}\)</span>变换为纹理空间中的一个法向量；那么它的逆变换<span
-class="math inline">\(f^{-1}\)</span>，就能把纹理空间中的法向量<span
-class="math inline">\(\mathbf{w}\)</span>映射为世界空间中的法向量。我们想要的，就是<span
-class="math inline">\(f^{-1}(\mathbf{w}&#39;)\)</span>。</p>
-<p>我们不妨先考虑逆变换<span
-class="math inline">\(f^{-1}\)</span>，它可以用一个矩阵<span
-class="math inline">\(F^{-1}=\begin{bmatrix}\mathbf{a}&amp;\mathbf{b}&amp;\mathbf{c}\end{bmatrix}\)</span>表示。我们实际上很容易知道<span
-class="math inline">\(\mathbf{c}=\mathbf{n}\)</span>，这是因为纹理空间中改变前的法向量<span
-class="math inline">\(\mathbf{w}\)</span>需要和世界空间中改变前的法向量<span
-class="math inline">\(\mathbf{n}\)</span>相对应：<span
-class="math inline">\(F^{-1}\mathbf{w}=\mathbf{n}\
-(\mathbf{w}=(0,0,1)^\top)\)</span>。我们还需要另外两个方程才能解出<span
-class="math inline">\(\mathbf{a},
-\mathbf{b}\)</span>。为此，我们可以通过点<span
-class="math inline">\(P\)</span>所在的三角形<span
-class="math inline">\(ABC\)</span>求解。</p>
-<p>为此，假设三角形<span class="math inline">\(ABC\)</span>的边<span
-class="math inline">\(AB\)</span>向量为<span
-class="math inline">\(\mathbf{e}_1\)</span>，边<span
-class="math inline">\(AC\)</span>向量为<span
-class="math inline">\(\mathbf{e}_2\)</span>；在纹理空间中，<span
-class="math inline">\(\mathbf{e}_1\)</span>对应的向量为<span
-class="math inline">\(\mathbf{g}_1\)</span>，<span
-class="math inline">\(\mathbf{e}_2\)</span>对应的向量为<span
-class="math inline">\(\mathbf{g}_2\)</span>。其中<span
-class="math inline">\(\mathbf{g}_1=(u_B-u_A,v_B-v_A,0)^\top\)</span>，<span
-class="math inline">\(\mathbf{g}_2=(u_C-u_A,v_C-v_A,0)^\top\)</span>。那么根据我们的定义，显然有下述方程成立：</p>
-<p><span class="math display">\[
-\begin{aligned}
-  \mathbf{e}_1&amp;=F^{-1}\mathbf{g}_1=\Delta u_1\mathbf{a}+\Delta
-v_1\mathbf{b}\\
-  \mathbf{e}_2&amp;=F^{-1}\mathbf{g}_2=\Delta u_2\mathbf{a}+\Delta
-v_2\mathbf{b}
-\end{aligned}
-\]</span></p>
-<p>其中<span class="math inline">\(\Delta u_1=u_B-u_A,\Delta
-v_1=v_B-v_A,\Delta u_2=u_C-u_A,\Delta v_2=v_C-v_A\)</span>。</p>
-<p>整理成矩阵相乘，就有：</p>
-<p><span class="math display">\[
-\begin{aligned}
-  \begin{bmatrix}
-    \mathbf{e}_1\\\mathbf{e}_2
-  \end{bmatrix}&amp;=\begin{bmatrix}
-    \Delta u_1 &amp; \Delta v_1\\
-    \Delta u_2 &amp; \Delta v_2
-  \end{bmatrix}\begin{bmatrix}
-    \mathbf{a}\\
-    \mathbf{b}
-  \end{bmatrix}\Rightarrow\\
-  \begin{bmatrix}
-    \mathbf{a}\\
-    \mathbf{b}
-  \end{bmatrix}&amp;=\begin{bmatrix}
-    \Delta u_1 &amp; \Delta v_1\\
-    \Delta u_2 &amp; \Delta v_2
-  \end{bmatrix}^{-1}\begin{bmatrix}
-    \mathbf{e}_1\\\mathbf{e}_2
-  \end{bmatrix}=\frac{1}{\Delta u_1\Delta v_2-\Delta u_2\Delta
-v_1}\begin{bmatrix}
-    \Delta v_2 &amp; -\Delta v_1\\
-    -\Delta u_2 &amp; \Delta u_1
-  \end{bmatrix}\begin{bmatrix}
-    \mathbf{e}_1\\\mathbf{e}_2
-  \end{bmatrix}
-\end{aligned}
-\]</span></p>
-<p>上式需要保证逆矩阵存在，即<span class="math inline">\(\Delta
-u_1\Delta v_2\not=\Delta u_2\Delta v_1\)</span>。</p>
-<p>但现在得到的<span
-class="math inline">\(\mathbf{a},\mathbf{b},\mathbf{c}\)</span>两两之间并不保证互相垂直，这是因为从上面的式子我们不难发现<span
-class="math inline">\(\mathbf{a}\)</span>和<span
-class="math inline">\(\mathbf{b}\)</span>是关于<span
-class="math inline">\(\mathbf{e}_1,\mathbf{e}_2\)</span>的线性组合，所以这两个基仍然在三角形<span
-class="math inline">\(ABC\)</span>所在的平面上，而这个平面不一定和向量<span
-class="math inline">\(\mathbf{n}\)</span>正交，而且<span
-class="math inline">\(\mathbf{a}\)</span>和<span
-class="math inline">\(\mathbf{b}\)</span>本身也不一定正交。</p>
-<p>所以作为求解<span
-class="math inline">\(F^{-1}\)</span>的最后一步，我们还要把这三个基正交化，我们可以使用Schmidt正交化：</p>
-<p><span class="math display">\[
-\begin{aligned}
-  \mathbf{t}&amp;=\text{normalize}(\mathbf{a}-(\mathbf{a}\cdot\mathbf{n})\mathbf{n})\\
-  \mathbf{b}&amp;=\mathbf{n}\times\mathbf{t}
-\end{aligned}
-\]</span></p>
-<p>这样一来，<span
-class="math inline">\(\mathbf{t},\mathbf{b},\mathbf{n}\)</span>就是两两正交的单位向量了，从而就得到了逆变换<span
-class="math inline">\(F^{-1}=\begin{bmatrix}\mathbf{t}&amp;\mathbf{b}&amp;\mathbf{n}\end{bmatrix}\)</span></p>
-<p>解出<span
-class="math inline">\(\mathbf{a},\mathbf{b}\)</span>之后，我们令<span
-class="math inline">\(\mathbf{t}\gets\text{normalize}(\mathbf{a}),\mathbf{b}\gets\text{normalize}(\mathbf{b})\)</span>，再加上之前得到的<span
-class="math inline">\(\mathbf{n}\)</span>，就得到了逆变换<span
-class="math inline">\(F^{-1}=\begin{bmatrix}\mathbf{t}&amp;\mathbf{b}&amp;\mathbf{n}\end{bmatrix}\)</span>。</p>
-<p>你也许会问，上面的推导过程我们为什么不直接用三角形的三个顶点，而要去用它的边呢？这是因为，<strong>向量</strong>和<strong>点</strong>本质上是不同的，尽管它们都可以用一个三维坐标表示。比如三维空间中的一个物体，它某个点的法向量是<span
-class="math inline">\((0,0,1)\)</span>，把物体整体平移了之后，这个点的坐标发生了变化，但是它的法向量还是<span
-class="math inline">\((0,0,1)\)</span>。既然我们只是向量感兴趣，那么所有的操作都是基于向量进行的。这一点务必理解。</p>
-<p>现在，<span
-class="math inline">\(F^{-1}\)</span>定义的空间就是以<span
-class="math inline">\(\mathbf{t},\mathbf{b},\mathbf{n}\)</span>为基的空间，这个空间的“<span
-class="math inline">\(Z\)</span>轴”就是<span
-class="math inline">\(\mathbf{n}\)</span>，正好与<strong>世界空间</strong>中点<span
-class="math inline">\(P\)</span>的原始法向量重合，而<span
-class="math inline">\(\mathbf{t},\mathbf{b}\)</span>则定义了<span
-class="math inline">\(\mathbf{n}\)</span>的切平面。对纹理空间中任意的<strong>法向量</strong><span
-class="math inline">\(\mathbf{w}\)</span>，都可以左乘这个矩阵得到对应的世界空间中的法向量<span
-class="math inline">\(\mathbf{n}&#39;=F^{-1}\mathbf{w}&#39;\)</span>。它定义的空间就称为<strong>切线空间</strong>，而矩阵<span
-class="math inline">\(F^{-1}\)</span>就是所谓的TBN矩阵。</p>
-<p>如果你认真思考，就会问出下面两个问题：</p>
-<ol type="1">
-<li>为什么需要正交化？不是我们直接出了<span
-class="math inline">\(\mathbf{a},\mathbf{b},\mathbf{c}\)</span>了吗？为什么不能直接用它作为<span
-class="math inline">\(F^{-1}\)</span>呢？</li>
-<li>正交化之后的基<span
-class="math inline">\(\mathbf{t},\mathbf{b},\mathbf{n}\)</span>和原始纹理空间的关系是如何的？能保证映射到真实空间中的法向量<span
-class="math inline">\(\mathbf{n}&#39;\)</span>和原始法向量<span
-class="math inline">\(\mathbf{n}\)</span>的相对位置关系正确吗？</li>
-</ol>
-<p>下面我们来依次回答这两个问题。</p>
-<h3 id="为什么要正交化">为什么要正交化</h3>
-<h3 id="法向量的方向">法向量的方向</h3>
-<h3 id="切线空间的优点">切线空间的优点</h3>
-<h3 id="games-101-作业三中的bump-mapping">GAMES 101 作业三中的Bump
-Mapping</h3>
-<h2 id="世界空间中的法线">世界空间中的法线</h2>
-<p>当我们得到<span
-class="math inline">\(\mathbf{w}&#39;\)</span>之后，只需要左乘<span
-class="math inline">\(F^{-1}\)</span>就能得到世界空间中变换后的坐标<span
-class="math inline">\(\mathbf{n}&#39;=F^{-1}\mathbf{w}&#39;\)</span>了。</p>
-<p>下面我们举个简单的例子。假定世界空间中有个三角形<span
-class="math inline">\(A(0,0,0),B(1,0,0),C(0,0,1)\)</span>，其上有一个点<span
-class="math inline">\(P(\frac{1}{2},0,\frac{1}{2})\)</span>，其法线<span
-class="math inline">\(\mathbf{n}=(\frac{\sqrt{3}}{3},\frac{\sqrt{3}}{3},\frac{\sqrt{3}}{3})^\top\)</span>，点<span
-class="math inline">\(A,B,C\)</span>对应的纹理坐标分别为<span
-class="math inline">\((0,0),(2,0),(0,1)\)</span>，且假定我们已经计算出来纹理空间中变换后的法向量为<span
-class="math inline">\(\mathbf{w}&#39;=(\frac{\sqrt{2}}{2},0,\frac{\sqrt{2}}{2})^\top\)</span>。</p>
-<h1 id="法线贴图normal-mapping">法线贴图（Normal Mapping）</h1>
-<p>在了解了凹凸贴图之后，法线贴图就很自然了。在凹凸贴图中，纹理空间中变换后的法线<span
-class="math inline">\(\mathbf{w}&#39;\)</span>是要手动去计算的，那为什么我们不直接把法线存储在这个点呢，就像一张RGB纹理图一样。</p>
-<p>在RGB纹理图中，每个点的RGB值都在<span
-class="math inline">\([0,1]\)</span>中，但是法线的每个元素都在<span
-class="math inline">\([-1,1]\)</span>中。所以要用RGB的贴图存储法线，就要对法线先加一，再除以二，就能把值的范围规约到<span
-class="math inline">\([0,1]\)</span>中。那么为什么我们看到一般的法线贴图都偏蓝色呢？这是因为法线的<span
-class="math inline">\(z\)</span>值比较大，就对应到RGB的蓝色值偏大，所以使得整个图呈现偏蓝的颜色。</p>
-<p>下图左侧是凹凸贴图，用灰度值表示每个点的高度；右侧是法线贴图，每个点都是一个RGB值。</p>
-<p><img data-src="/images/bump-map/2-1.png" /></p>
-<p>在从法线贴图中获取了变换后的法线之后，仍然需要像凹凸贴图一样，左乘<span
-class="math inline">\(F^{-1}\)</span>得到世界空间中变换后的法线。</p>
-<h1 id="位移贴图displacement-mapping">位移贴图（Displacement
-Mapping）</h1>
-]]></content>
-      <categories>
-        <category>数学 - 图形学</category>
-      </categories>
-      <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
-        <tag>计算机</tag>
-        <tag>游戏</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Bresenham算法画直线</title>
     <url>/2020/10/18/16/03/</url>
     <content><![CDATA[<p>Bresenham's
@@ -452,9 +184,30 @@ class="math inline">\(0&lt;k\le
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>计算机</tag>
         <tag>算法</tag>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Motion Matching -- 概念与发展</title>
+    <url>/2022/03/27/08/38/</url>
+    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
+Matching基本知识的介绍，放在此备份。</p>
+<span id="more"></span>
+<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
+]]></content>
+      <categories>
+        <category>游戏 - 动画</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+        <tag>动画</tag>
+        <tag>游戏</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -497,27 +250,6 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
         <tag>游戏</tag>
         <tag>生活</tag>
         <tag>刺客信条</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Motion Matching -- 概念与发展</title>
-    <url>/2022/03/27/08/38/</url>
-    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
-Matching基本知识的介绍，放在此备份。</p>
-<span id="more"></span>
-<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
-]]></content>
-      <categories>
-        <category>游戏 - 动画</category>
-      </categories>
-      <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
-        <tag>计算机</tag>
-        <tag>游戏</tag>
-        <tag>动画</tag>
-        <tag>机器学习</tag>
-        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -773,105 +505,8 @@ Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷
         <category>数学 - 数学分析</category>
       </categories>
       <tags>
+        <tag>随笔</tag>
         <tag>数学</tag>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>你为什么不笑了</title>
-    <url>/2022/10/29/00/35/</url>
-    <content><![CDATA[<p>你为什么不笑了？</p>
-<span id="more"></span>
-<p>奶奶，你为什么不笑了？<br />
-还记得，一年前的你，<br />
-走在春风里，<br />
-向着山顶慢慢登去。<br />
-你摘下路边的一朵浅梅，<br />
-捧在手心。<br />
-阳光洒下，<br />
-手中的梅花，也映衬出了你脸上的笑容。</p>
-<p>你的儿子女儿挽着你的手，<br />
-一步一步向山顶走去，<br />
-你看见一棵古树，<br />
-你说这是拍照好去处。<br />
-女儿扶着你，<br />
-你扶着树，<br />
-阳光洒下，<br />
-树上的绿叶，也甘愿陪衬你脸上的笑容。</p>
-<p>来到山顶，<br />
-黄花遍地，<br />
-你开心得像个孩子，<br />
-伸出双手，<br />
-比了两个大大的耶，<br />
-那时的你，真的好美。</p>
-<p>奶奶，从什么时候开始，你不笑了？<br />
-从拔掉爷爷呼吸机的那个夜晚开始，<br />
-你似乎一直睡得不好。<br />
-你还能梦见吗，<br />
-另一张空荡荡的床上，<br />
-曾经那个老人的模样？<br />
-从前他是那样健康，<br />
-如今却骨瘦嶙峋，<br />
-让时间风干了皮肤，<br />
-侵蚀了思想。<br />
-你还能看见吗，<br />
-那个明媚下午的阳光，<br />
-案前那个老人伏着阅读着，报刊也泛黄。</p>
-<p>奶奶，你为什么不笑了？<br />
-近日来，<br />
-你总是抱怨，<br />
-胸口有恙。<br />
-你变得啰嗦、唠叨，<br />
-总是对小事斤斤计量。<br />
-我好想你能多笑笑，<br />
-放下生活的疲劳，<br />
-忘却心中的郁结，<br />
-再回忆，<br />
-我们一起出游时，<br />
-小鸟的啼叫，<br />
-鲜花的绽放，<br />
-阳光的照耀，<br />
-我们手拉着手，<br />
-在田园中，聊些家常，传来欢笑。</p>
-<p>奶奶，时间真的很残酷，<br />
-也许当我走时，<br />
-这个世界便再无你的回响，<br />
-人生人寂，人来人往，<br />
-至我去时，此情已了，略无痕迹。</p>
-<p>奶奶，再让我看看你的笑，<br />
-那个阳光中，<br />
-像孩子般最天真的笑容。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>十二月的花</title>
-    <url>/2020/12/22/09/29/</url>
-    <content><![CDATA[<p>埙吹响了海岸<br />
-琴穿梭叶间<br />
-笛在天空啼鸣<br />
-伴奏着雪花片片</p>
-<p>孩子们欢笑着相聚<br />
-踏着雪<br />
-吱吱嘎嘎</p>
-<p>把欢乐捏成一团团棉<br />
-随风起舞<br />
-在阳光下<br />
-雪爱上了花</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -1139,6 +774,178 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
       </tags>
   </entry>
   <entry>
+    <title>一道有趣的概率题</title>
+    <url>/2022/10/20/23/59/</url>
+    <content><![CDATA[<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
+U(0,1)\)</span>独立同分布，令<span
+class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
+X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
+class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。换句话说，我们要求最先使得若干个独立同分布于<span
+class="math inline">\((0,1)\)</span>的随机变量之和大于<span
+class="math inline">\(1\)</span>的期望。</p>
+<span id="more"></span>
+<h1 id="问题定义">问题定义</h1>
+<p>这个问题的定义已经定义在上面了，这里再复述一遍：</p>
+<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
+U(0,1)\)</span>独立同分布，令<span
+class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
+X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
+class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。</p>
+<h1 id="引入函数">引入函数</h1>
+<p>乍一看这个题似乎无从下手，但是我们可以发现这里<span
+class="math inline">\(&gt;1\)</span>这个条件似乎可以换成任意一个<span
+class="math inline">\(&gt;t
+(t&gt;0)\)</span>，这启发我们用一个函数去表示我们要求的式子，然后通过求解一个“递推式”（实际上是一个微分方程）解出这个函数，进而得到某个具体点的值。</p>
+<p>从这个思路出发，我们不妨定义<span
+class="math inline">\(\tau_t:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le t
+\wedge X_1+\cdots+X_{n-1}+X_n&gt;t\}\)</span>，进而令<span
+class="math inline">\(f(t):=\mathbb{E}[X_1+\cdots+X_{\tau_t}]\)</span>。显然，我们的目标就是求<span
+class="math inline">\(f(1)\)</span>。</p>
+<h1 id="求解方程">求解方程</h1>
+<p>那么，怎么求出<span
+class="math inline">\(f(t)\)</span>呢？注意题目中的条件<span
+class="math inline">\(X_1,X_2,\cdots\sim
+U(0,1)\)</span>独立同分布，因此我们可以把<span
+class="math inline">\(f(t)\)</span>里面的<span
+class="math inline">\(X_1\)</span>拆出来，变成：</p>
+<p><span
+class="math display">\[f(t)=\mathbb{E}[X_1]+\mathbb{E}[X_2+\cdots+X_{\tau_t}]\]</span></p>
+<p>为了简便起见，我们不妨限定<span
+class="math inline">\(t&lt;0\)</span>。此时考虑两种情况：<span
+class="math inline">\(X_1=s&gt;t\)</span>和<span
+class="math inline">\(X_1=s\le t\)</span>。</p>
+<p>如果<span class="math inline">\(s&gt;t\)</span>，那么<span
+class="math inline">\(f(t)\)</span>就等于<span
+class="math inline">\(\mathbb{E}[X_1]\)</span>，所以这等价<span
+class="math inline">\(f(t|s&gt;t)=\mathbb{E}[X_1\vert
+X_1&gt;t]=\dfrac{1-t^2}{2}\)</span>。</p>
+<p>如果<span class="math inline">\(s\le
+t\)</span>，那么就相当于后面的<span
+class="math inline">\(X_2+\cdots+X_{\tau_t}&gt;t-s\)</span>且<span
+class="math inline">\(X_2+\cdots+X_{\tau_t-1}\le
+t-s\)</span>，再由独立同分布知道这就是<span
+class="math inline">\(f(t-s)\)</span>，但这是以<span
+class="math inline">\(X_t=s\le t\)</span>为条件的，所以实际上还要对<span
+class="math inline">\(s\)</span>求个积分，也就是：</p>
+<p><span class="math display">\[f(t|s\le
+t)=\frac{t^2}{2}+\int_{0}^tf(t-s)\mathrm{d}s\]</span></p>
+<p>把上面两个加起来，就有：</p>
+<p><span class="math display">\[f(t)=f(t|s\le
+t)+f(t|s&gt;t)=\frac{1}{2}+\int_0^tf(x)\mathrm{d}x\]</span></p>
+<p>进而得到微分方程及其初始值：</p>
+<p><span
+class="math display">\[f&#39;(t)=f(t),~~f(0)=\frac{1}{2}\]</span></p>
+<p>很容易求解得到<span
+class="math inline">\(f(t)=\mathrm{e}^t/2\)</span>，所以我们就能得到最终的答案<span
+class="math inline">\(f(1)=\mathrm{e}/2\)</span>。</p>
+]]></content>
+      <categories>
+        <category>数学 - 概率论</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+        <tag>概率论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>你为什么不笑了</title>
+    <url>/2022/10/29/00/35/</url>
+    <content><![CDATA[<p>你为什么不笑了？</p>
+<span id="more"></span>
+<p>奶奶，你为什么不笑了？<br />
+还记得，一年前的你，<br />
+走在春风里，<br />
+向着山顶慢慢登去。<br />
+你摘下路边的一朵浅梅，<br />
+捧在手心。<br />
+阳光洒下，<br />
+手中的梅花，也映衬出了你脸上的笑容。</p>
+<p>你的儿子女儿挽着你的手，<br />
+一步一步向山顶走去，<br />
+你看见一棵古树，<br />
+你说这是拍照好去处。<br />
+女儿扶着你，<br />
+你扶着树，<br />
+阳光洒下，<br />
+树上的绿叶，也甘愿陪衬你脸上的笑容。</p>
+<p>来到山顶，<br />
+黄花遍地，<br />
+你开心得像个孩子，<br />
+伸出双手，<br />
+比了两个大大的耶，<br />
+那时的你，真的好美。</p>
+<p>奶奶，从什么时候开始，你不笑了？<br />
+从拔掉爷爷呼吸机的那个夜晚开始，<br />
+你似乎一直睡得不好。<br />
+你还能梦见吗，<br />
+另一张空荡荡的床上，<br />
+曾经那个老人的模样？<br />
+从前他是那样健康，<br />
+如今却骨瘦嶙峋，<br />
+让时间风干了皮肤，<br />
+侵蚀了思想。<br />
+你还能看见吗，<br />
+那个明媚下午的阳光，<br />
+案前那个老人伏着阅读着，报刊也泛黄。</p>
+<p>奶奶，你为什么不笑了？<br />
+近日来，<br />
+你总是抱怨，<br />
+胸口有恙。<br />
+你变得啰嗦、唠叨，<br />
+总是对小事斤斤计量。<br />
+我好想你能多笑笑，<br />
+放下生活的疲劳，<br />
+忘却心中的郁结，<br />
+再回忆，<br />
+我们一起出游时，<br />
+小鸟的啼叫，<br />
+鲜花的绽放，<br />
+阳光的照耀，<br />
+我们手拉着手，<br />
+在田园中，聊些家常，传来欢笑。</p>
+<p>奶奶，时间真的很残酷，<br />
+也许当我走时，<br />
+这个世界便再无你的回响，<br />
+人生人寂，人来人往，<br />
+至我去时，此情已了，略无痕迹。</p>
+<p>奶奶，再让我看看你的笑，<br />
+那个阳光中，<br />
+像孩子般最天真的笑容。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>十二月的花</title>
+    <url>/2020/12/22/09/29/</url>
+    <content><![CDATA[<p>埙吹响了海岸<br />
+琴穿梭叶间<br />
+笛在天空啼鸣<br />
+伴奏着雪花片片</p>
+<p>孩子们欢笑着相聚<br />
+踏着雪<br />
+吱吱嘎嘎</p>
+<p>把欢乐捏成一团团棉<br />
+随风起舞<br />
+在阳光下<br />
+雪爱上了花</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>向量绕任意轴旋转的简单推导</title>
     <url>/2021/06/07/08/38/</url>
     <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
@@ -1301,112 +1108,9 @@ CPU @ 2.90GHz。</p>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
         <tag>计算机</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一道有趣的概率题</title>
-    <url>/2022/10/20/23/59/</url>
-    <content><![CDATA[<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
-U(0,1)\)</span>独立同分布，令<span
-class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
-X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
-class="math inline">\(\mathbb{E}[X_1+\cdots+X_n]\)</span>。换句话说，我们要求最先使得若干个独立同分布于<span
-class="math inline">\((0,1)\)</span>的随机变量之和大于<span
-class="math inline">\(1\)</span>的期望。</p>
-<span id="more"></span>
-<h1 id="问题定义">问题定义</h1>
-<p>这个问题的定义已经定义在上面了，这里再复述一遍：</p>
-<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
-U(0,1)\)</span>独立同分布，令<span
-class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
-X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
-class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。</p>
-<h1 id="引入函数">引入函数</h1>
-<p>乍一看这个题似乎无从下手，但是我们可以发现这里<span
-class="math inline">\(&gt;1\)</span>这个条件似乎可以换成任意一个<span
-class="math inline">\(&gt;t
-(t&gt;0)\)</span>，这启发我们用一个函数去表示我们要求的式子，然后通过求解一个“递推式”（实际上是一个微分方程）解出这个函数，进而得到某个具体点的值。</p>
-<p>从这个思路出发，我们不妨定义<span
-class="math inline">\(\tau_t:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le t
-\wedge X_1+\cdots+X_{n-1}+X_n&gt;t\}\)</span>，进而令<span
-class="math inline">\(f(t):=\mathbb{E}[X_1+\cdots+X_{\tau_t}]\)</span>。显然，我们的目标就是求<span
-class="math inline">\(f(1)\)</span>。</p>
-<h1 id="求解方程">求解方程</h1>
-<p>那么，怎么求出<span
-class="math inline">\(f(t)\)</span>呢？注意题目中的条件<span
-class="math inline">\(X_1,X_2,\cdots\sim
-U(0,1)\)</span>独立同分布，因此我们可以把<span
-class="math inline">\(f(t)\)</span>里面的<span
-class="math inline">\(X_1\)</span>拆出来，变成：</p>
-<p><span
-class="math display">\[f(t)=\mathbb{E}[X_1]+\mathbb{E}[X_2+\cdots+X_{\tau_t}]\]</span></p>
-<p>为了简便起见，我们不妨限定<span
-class="math inline">\(t&lt;0\)</span>。此时考虑两种情况：<span
-class="math inline">\(X_1=s&gt;t\)</span>和<span
-class="math inline">\(X_1=s\le t\)</span>。</p>
-<p>如果<span class="math inline">\(s&gt;t\)</span>，那么<span
-class="math inline">\(f(t)\)</span>就等于<span
-class="math inline">\(\mathbb{E}[X_1]\)</span>，所以这等价<span
-class="math inline">\(f(t|s&gt;t)=\mathbb{E}[X_1\vert
-X_1&gt;t]=\dfrac{1-t^2}{2}\)</span>。</p>
-<p>如果<span class="math inline">\(s\le
-t\)</span>，那么就相当于后面的<span
-class="math inline">\(X_2+\cdots+X_{\tau_t}&gt;t-s\)</span>且<span
-class="math inline">\(X_2+\cdots+X_{\tau_t-1}\le
-t-s\)</span>，再由独立同分布知道这就是<span
-class="math inline">\(f(t-s)\)</span>，但这是以<span
-class="math inline">\(X_t=s\le t\)</span>为条件的，所以实际上还要对<span
-class="math inline">\(s\)</span>求个积分，也就是：</p>
-<p><span class="math display">\[f(t|s\le
-t)=\frac{t^2}{2}+\int_{0}^tf(t-s)\mathrm{d}s\]</span></p>
-<p>把上面两个加起来，就有：</p>
-<p><span class="math display">\[f(t)=f(t|s\le
-t)+f(t|s&gt;t)=\frac{1}{2}+\int_0^tf(x)\mathrm{d}x\]</span></p>
-<p>进而得到微分方程及其初始值：</p>
-<p><span
-class="math display">\[f&#39;(t)=f(t),~~f(0)=\frac{1}{2}\]</span></p>
-<p>很容易求解得到<span
-class="math inline">\(f(t)=\mathrm{e}^t/2\)</span>，所以我们就能得到最终的答案<span
-class="math inline">\(f(1)=\mathrm{e}/2\)</span>。</p>
-]]></content>
-      <categories>
-        <category>数学 - 概率论</category>
-      </categories>
-      <tags>
+        <tag>随笔</tag>
         <tag>数学</tag>
-        <tag>随笔</tag>
-        <tag>概率论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>樱花</title>
-    <url>/2021/06/29/00/24/</url>
-    <content><![CDATA[<p>昨夜 我收到一封书札<br />
-旧纸上 缀满了一朵樱花<br />
-风干的墨迹 渗透了陌生人的迷茫<br />
-我慢慢 把信合上</p>
-<p>昨夜 我写了一封书札<br />
-述说着 近日的苦闷衷肠<br />
-窗外的灯火 依旧那么辉煌<br />
-我贴上 一朵樱花珍藏</p>
-<p>同样的夜晚 走过了岁月多少锋芒<br />
-心中仍 呐喊着一个熟悉人的回响<br />
-把信 随风寄向远方<br />
-留给陌生的他 打开新的过往<br />
-愿他不要怯懦 续写昨夜的感慨<br />
-还有清晨的阳光</p>
-<p>案台旁 樱花在绽放</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -1530,11 +1234,329 @@ H &amp;= \tan(A)R + Y
         <category>游戏 - 相机</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
-        <tag>游戏</tag>
         <tag>算法</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+        <tag>游戏</tag>
         <tag>相机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>樱花</title>
+    <url>/2021/06/29/00/24/</url>
+    <content><![CDATA[<p>昨夜 我收到一封书札<br />
+旧纸上 缀满了一朵樱花<br />
+风干的墨迹 渗透了陌生人的迷茫<br />
+我慢慢 把信合上</p>
+<p>昨夜 我写了一封书札<br />
+述说着 近日的苦闷衷肠<br />
+窗外的灯火 依旧那么辉煌<br />
+我贴上 一朵樱花珍藏</p>
+<p>同样的夜晚 走过了岁月多少锋芒<br />
+心中仍 呐喊着一个熟悉人的回响<br />
+把信 随风寄向远方<br />
+留给陌生的他 打开新的过往<br />
+愿他不要怯懦 续写昨夜的感慨<br />
+还有清晨的阳光</p>
+<p>案台旁 樱花在绽放</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用生成函数和复数巧解一道计数题</title>
+    <url>/2022/06/26/23/03/</url>
+    <content><![CDATA[<p>对集合<span
+class="math inline">\(\{1,2,\cdots,2000\}\)</span>，求出其中有多少子集，使得子集中的元素和为5的倍数。本文对<a
+href="https://youtu.be/bOXCLR3Wric">3Blue3Brown的解法</a>上进行总结，形成较为数学化的语言。本题背后有较为深刻的数学思想，故记载于此。</p>
+<span id="more"></span>
+<h1 id="把原问题转化为生成函数">把原问题转化为生成函数</h1>
+<p>原题是：对集合<span
+class="math inline">\(\mathcal{S}=\{1,2,\cdots,2000\}\)</span>，求出其中有多少子集，使得子集中的元素和为5的倍数。</p>
+<p>首先容易想到的是，可以采用穷举法，遍历<span
+class="math inline">\(\mathcal{S}\)</span>的每个子集，检查是否满足条件。但是，穷举法的复杂度是<span
+class="math inline">\(2^{2000}\)</span>，这对计算机来说都是一个天文数字。显然，需要另辟蹊径。</p>
+<p>不妨先简化一下题目：求出集合<span
+class="math inline">\(\mathcal{S}\)</span>中有多少个子集，使元素之和为<span
+class="math inline">\(5\)</span>，我们可以很快地列出这些集合：</p>
+<p><span class="math display">\[\{5\},\{1,4\},\{2,3\}\]</span></p>
+<p>换句话说，<span class="math inline">\(5\)</span>可以表示为：<span
+class="math inline">\(5=5=1+4=2+3\)</span>，如果我们把它表示成一个关于未知数<span
+class="math inline">\(x\)</span>的多项式，那么就有：</p>
+<p><span class="math display">\[x^5=x^0x^5=x^1x^4=x^2x^3\]</span></p>
+<p>什么情况会同时出现<span
+class="math inline">\(x^0,x^1,x^2,x^3,x^4,x^5\)</span>呢？答案是<strong>生成函数</strong>。这启发我们使用下面的生成函数：</p>
+<p><span class="math display">\[
+\begin{equation}
+\label{eq1}
+f(x)=(1+x)(1+x^2)(1+x^3)(1+x^4)(1+x^5)
+\end{equation}
+\]</span></p>
+<p>这个多项式展开之后的结果是：</p>
+<p><span
+class="math display">\[f(x)=1+x+x^2+2x^3+2x^4+{\color{red}3x^5}+\cdots\]</span></p>
+<p>注意五次项<span
+class="math inline">\(x^5\)</span>前面的系数是3，这是因为，<span
+class="math inline">\(x^5\)</span>有三个来源，分别是<span
+class="math inline">\(1x^5,x^1x^4,x^2x^3\)</span>，正好对应了之前简化题中的结果！</p>
+<p>现在分析一下，多项式<span
+class="math inline">\(\eqref{eq1}\)</span>中的每个<span
+class="math inline">\(x^i\)</span>项，都代表了整数<span
+class="math inline">\(i\)</span>，如果在括号<span
+class="math inline">\(1+x^i\)</span>中选择了<span
+class="math inline">\(x^i\)</span>，则表示把<span
+class="math inline">\(i\)</span>这个整数加入集合，如果选择了<span
+class="math inline">\(1\)</span>，则表示不加入<span
+class="math inline">\(i\)</span>。而把整个多项式展开之后的结果<span
+class="math inline">\(f(x)=c_0+c_1x+c_2x^2+\cdots\)</span>，项<span
+class="math inline">\(x^i\)</span>前面的系数<span
+class="math inline">\(c_i\)</span>，正好代表了元素之和为<span
+class="math inline">\(i\)</span>的集合的个数！</p>
+<p>这时候，我们就能把原问题转化为下面的生成函数：</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+\label{eq2}
+f(x)&amp;=(1+x)(1+x^2)(1+x^3)(1+x^4)(1+x^5)\cdots(1+x^{2000})\\
+&amp;=c_0+c_1x+c_2x^2+c_3x^3+c_4x^4+c_5x^5+\cdots
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>求出其中所有次数为<span
+class="math inline">\(5\)</span>的倍数的项系数之和：</p>
+<p><span class="math display">\[
+\begin{equation}
+\label{eq3}
+S=c_5+c_{10}+c_{15}+\cdots
+\end{equation}
+\]</span></p>
+<p>下面的问题就是如何求出<span class="math inline">\(S\)</span>。</p>
+<h1 id="转化为复数问题">转化为复数问题</h1>
+<p>显然，我们不可能把<span
+class="math inline">\(S\)</span>中的每一项都求出来，只能设法一次求出<span
+class="math inline">\(S\)</span>，那么怎么办呢？</p>
+<p>我们还是先考虑简化问题，假设现在生成函数是:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+f(x)&amp;=(1+x)(1+x^2)(1+x^3)(1+x^4)(1+x^5)\\
+&amp;=c_0+c_1x+c_2x^2+c_3x^3+c_4x^4+c_5x^5+\cdots
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>如果我们代入<span class="math inline">\(x=0\)</span>，可以求得<span
+class="math inline">\(f(0)=1\)</span>；如果代入<span
+class="math inline">\(x=1\)</span>，可以求得<span
+class="math inline">\(f(1)=2^5\)</span>；再代入<span
+class="math inline">\(x=-1\)</span>，有<span
+class="math inline">\(f(-1)=0\)</span>。用展开式表示结果：</p>
+<p><span class="math display">\[
+\begin{aligned}
+    c_0&amp;=1\\
+    c_0+c_1+c_2+c_3+c_4+c_5+\cdots &amp;=2^5\\
+    c_0-c_1+c_2-c_3+c_4-c_5+\cdots &amp;=0
+\end{aligned}
+\]</span></p>
+<p>通过后面两式，不难得到：</p>
+<p><span
+class="math display">\[c_1+c_3+c_5+\cdots=\frac{1}{2}2^5=2^4\]</span></p>
+<p>我们找到了所有奇数项系数之和，但是我们的目标是所有<span
+class="math inline">\(5\)</span>的倍数的项系数之和。但这个过程可以给我们一个启发：<strong>是否可以通过代入某些值到生成函数中，通过加减运算消去我们不关心的项，得到最终的结果</strong>。</p>
+<p>分析我们把<span class="math inline">\(-1\)</span>代入到<span
+class="math inline">\(f(x)\)</span>中每一项的过程，所有的偶数项<span
+class="math inline">\(x^{2k}\)</span>结果都是<span
+class="math inline">\(1\)</span>，所有的奇数项<span
+class="math inline">\(x^{2k-1}\)</span>结果都是<span
+class="math inline">\(-1\)</span>。换句话说：<span
+class="math inline">\(-1\)</span>这个值对函数<span
+class="math inline">\(f(x)\)</span>的未知项<span
+class="math inline">\(x^i\)</span>的循环次数为<span
+class="math inline">\(2\)</span>，或者，每两项<span
+class="math inline">\(-1\)</span>代入的结果都相同。同理，对<span
+class="math inline">\(1\)</span>来说，循环次数是<span
+class="math inline">\(1\)</span>。</p>
+<p>那么，什么时候循环次数是<span
+class="math inline">\(5\)</span>呢？也就是，代入哪个数<span
+class="math inline">\(\xi\)</span>，会使得<span
+class="math inline">\(\xi=\xi^6\)</span>，或者<span
+class="math inline">\(\xi^5=1\)</span>。显然，在复空间中，这个数就是<span
+class="math inline">\((\mathrm{e}^{\mathrm{i}\frac{2\pi}{5}})^t
+(t=1,2,3,4,5)\)</span>。也就是说，如果令<span
+class="math inline">\(\xi=\mathrm{e}^{\mathrm{i}\frac{2\pi}{5}}\)</span>，则有<span
+class="math inline">\(5\)</span>个数<span
+class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>满足我们的要求，其中<span
+class="math inline">\(\xi^5=1\)</span>就是我们熟知的实根。</p>
+<p>更关键的是，这几个数的和是<span
+class="math inline">\(0\)</span>：</p>
+<p><span
+class="math display">\[\xi+\xi^2+\xi^3+\xi^4+\xi^5=\frac{\xi(1-\xi^5)}{1-\xi}=0\]</span></p>
+<p>现在，分别把这五个值代入到展开的生成函数中，有：</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(\xi)=c_0+c_1\xi+c_2\xi^2+c_3\xi^3+c_4\xi^4+c_5\xi^5+\cdots\\
+f(\xi^2)=c_0+c_1\xi^2+c_2\xi^4+c_3\xi^1+c_4\xi^3+c_5\xi^5+\cdots\\
+f(\xi^3)=c_0+c_1\xi^3+c_2\xi^1+c_3\xi^4+c_4\xi^2+c_5\xi^5+\cdots\\
+f(\xi^4)=c_0+c_1\xi^4+c_2\xi^3+c_3\xi^2+c_4\xi^1+c_5\xi^5+\cdots\\
+f(\xi^5)=c_0+c_1\xi^5+c_2\xi^5+c_3\xi^5+c_4\xi^5+c_5\xi^5+\cdots
+\end{aligned}
+\]</span></p>
+<p>注意<span
+class="math inline">\(c_1,c_2,c_3,c_4\)</span>对应的项，正好都有<span
+class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>，把它们加起来，有：</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(\xi)+f(\xi^2)+f(\xi^3)+f(\xi^4)+f(\xi^5)&amp;=5c_0+5c_5\xi^5+5c_{10}\xi^5+5c_{15}\xi^5\\
+&amp;=5c_0+5c_5+5c_{10}+5c_{15}
+\end{aligned}
+\]</span></p>
+<p><span
+class="math inline">\(c_0=1\)</span>是已知的，所以上面的结果就变成了：</p>
+<p><span
+class="math display">\[f(\xi)+f(\xi^2)+f(\xi^3)+f(\xi^4)+f(\xi^5)=5+5c_5+5c_{10}+5c_{15}\]</span></p>
+<p>现在整个式子右边只留下常数和<span
+class="math inline">\(5\)</span>的倍数的项！</p>
+<p>唯一遗留的问题就是式子左侧的<span
+class="math inline">\(f(\xi)+f(\xi^2)+f(\xi^3)+f(\xi^4)+f(\xi^5)\)</span>是多少，或者说<span
+class="math inline">\(f(\xi)=(1+\xi)(1+\xi^2)(1+\xi^3)(1+\xi^4)(1+\xi^5)\)</span>是多少，因为只要知道了<span
+class="math inline">\(f(\xi)\)</span>，<span
+class="math inline">\(f(\xi^2),f(\xi^3),f(\xi^4)\)</span>的值也就知道了。</p>
+<p>这里的技巧是，因为<span
+class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>是方程<span
+class="math inline">\(z^5-1=0\)</span>的五个根，所以可以把它们表示成：</p>
+<p><span class="math display">\[
+\begin{equation}
+  z^5-1=(z-\xi)(z-\xi^2)(z-\xi^3)(z-\xi^4)(z-\xi^5)
+\end{equation}
+\]</span></p>
+<p>把<span class="math inline">\(z=-1\)</span>代入：</p>
+<p><span class="math display">\[
+\begin{equation}
+  2=(1+\xi)(1+\xi^2)(1+\xi^3)(1+\xi^4)(1+\xi^5)=f(\xi)
+\end{equation}
+\]</span></p>
+<p>从而，我们也就有<span
+class="math inline">\(f(\xi^2)=f(\xi^3)=f(\xi^4)=2\)</span>，而<span
+class="math inline">\(f(\xi^5)=2^5\)</span>。所以，我们就得到了：</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+  5+5c_5+5c_{10}+5c_{15}&amp;=4\times 2+2^5\\
+  1+c_5+c_{10}+c_{15}&amp;=\frac{1}{5}(4\times 2+2^5)\\
+  c_5+c_{10}+c_{15}&amp;=\frac{1}{5}(4\times 2+2^5)-1
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>这样一来我们考虑的简化版问题就得到了解决！</p>
+<p>按照这个思路，我们同样可以得到原始问题的解决，分为几步。</p>
+<p><strong>第一步</strong>：设<span
+class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>是方程<span
+class="math inline">\(z^5-1=0\)</span>的五个根，把它们分别代入生成函数<span
+class="math inline">\(f(x)\)</span>中，相加，就得到：</p>
+<p><span
+class="math display">\[c_0+c_5+c_{10}+\cdots=\frac{1}{5}(f(\xi)+f(\xi^2)+f(\xi^3)+f(\xi^4)+f(\xi^5))\]</span></p>
+<p><strong>第二步</strong>：把<span
+class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>表示为<span
+class="math inline">\(z^5-1=(z-\xi)(z-\xi^2)(z-\xi^3)(z-\xi^4)(z-\xi^5)\)</span>，通过代入<span
+class="math inline">\(z=-1\)</span>解出<span
+class="math inline">\((1+\xi)(1+\xi^2)(1+\xi^3)(1+\xi^4)(1+\xi^5)=2\)</span>。</p>
+<p><strong>第三步</strong>：把<span
+class="math inline">\(\xi\)</span>代入到生成函数<span
+class="math inline">\(f(x)\)</span>中，可以得到<span
+class="math inline">\(f(\xi)=2^{400}\)</span>，同理有<span
+class="math inline">\(f(\xi^2)=f(\xi^3)=f(\xi^4)=2^{400}\)</span>，同时有<span
+class="math inline">\(f(\xi^5)=2^{2000}\)</span>。</p>
+<p><strong>第四步</strong>：把所有值代回第一步中的结果，得到最终答案<span
+class="math inline">\(c_5+c_{10}=\frac{1}{5}(4\times
+2^{400}+2^{2000})-1\)</span>。</p>
+<h1 id="总结">总结</h1>
+<p>本题背后蕴藏着较为深刻的数学思想，一方面是巧用生成函数把一个计数问题转化为一个分析问题，另一方面是使用复数消去某些项，直接求出想要的结果。通过本题，我们可以充分了解到复数所蕴含的关于周期和频率的思想，从而也就能理解为什么傅里叶变换用复数表征。</p>
+<p>把本题稍微进行推广：对集合<span
+class="math inline">\(\mathcal{A}=\{1,2,3,\cdots,N\}\)</span>和正整数<span
+class="math inline">\(k\)</span>，其中<span
+class="math inline">\(k|N\)</span>。设<span
+class="math inline">\(\mathcal{A}\)</span>中满足元素之和为<span
+class="math inline">\(k\)</span>的倍数的子集个数为<span
+class="math inline">\(\mathfrak{P}_k\)</span>，你能求出<span
+class="math inline">\(\mathfrak{P}_k\)</span>的表达式吗？</p>
+]]></content>
+      <categories>
+        <category>数学 - 分析</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电影《误杀》短评</title>
+    <url>/2020/09/08/16/18/</url>
+    <content><![CDATA[<p>《误杀》是一部不失水准的悬疑片。实际上，在看完电影得知这是一部翻拍（翻拍自2015年的印度电影《误杀瞒天记》。实际上，它还有更早的来源）后，我竟然有些失落：要是这是我们自己的剧本该多好。但无论如何，本片从剧情、人物、节奏、立意、表现手法等方法，都是在水准线之上的作品，其中的若干不足完全是瑕不掩瑜的。8分是我对本片的总体评价。
+之后我将围绕本片进行，而不讨论有关其原版《误杀瞒天记》的内容。</p>
+<span id="more"></span>
+<h1 id="剧情与讲述">剧情与讲述</h1>
+<p>一言蔽之，本片讲述了一个关于“误杀”的故事。但看到最后，观众会发现，实际上，“误杀”并不成立，称之为“谋杀”，也是不为过的。本片没有直接点明这一点，是为了进一步突出电影的戏剧化效果。</p>
+<p>在剧情方面，电影是成功的。除了讲述男主制造不在场证据和他与局长的博弈之外，男主与家人的心理刻画，两位母亲形象的表现，都是相当具有感染力的。值得一提的是，本片大量致敬了以往的经典电影：《肖申克的救赎》，《活埋》，《蒙太奇》，《控方证人》，
+《天才枪手》，《猫鼠游戏》，《杀人回忆》等。在这里面，需要重点介绍一下《活埋》、《蒙太奇》和《杀人回忆》三部电影在本片中的作用。</p>
+<p>就讲述手段来看，本片仍然有比较显著的缺点，这重点体现了电影的开头和结尾两个部分。如果说本片一开头就致敬《活埋》并且将其作为一个伏笔的话，也未免太过着急或显眼。这段回忆式的致敬，也即对《肖申克的救赎》和《活埋》场景的再现，让观众在看完本片之后，难免会产生着墨过多的冗余感。这导致了两个问题：（1）电影的引入太过生硬；（2）电影的节奏难以统一。在电影结尾部分，导演显然致敬了韩国电影《杀人回忆》，以此将话语权交换给观众，让观众发声。这样的处理自然没有问题，然而，在国产电影标注Happy
+Ending的设定下，影片的结尾部分显然出现了导演表现力上的断裂：一方面，导演想让观众自我评判电影及男主的行为，另一方面，受制于各种不可描述的环境，导演又不得不以“坏人自白”和“好人自首”来草草收尾，这必然导致电影中期紧张的节奏和后期好人齐唱社会好的慢节奏形成冲突，导演再次致敬《杀人回忆》的结尾，就有狗尾续貂之嫌。</p>
+<p>抛开这两点显著的不足来看，本片在故事的讲述上无疑是成功的。中期影片节奏把控得相当精准，既能保持较快的节奏，时刻抓住观众想要知道后续的心，又能娓娓道来，不遗漏重要细节。譬如影片中间，男主到现场看新警察局装修情况的桥段，就在短短几分钟的情节内告诉了观众几个重要的细节：（1）男主仔细观察了地上的坑，再联系最后说尸体埋藏地点不方便透露，观众可以很简单地猜测到埋藏地点；（2）被子弹射死的山羊，是成为“替罪羊”的关键之物；（3）警官公报私仇，与李维杰进一步结怨，成为后面他引发众怒的导火索。</p>
+<p>另外一个值得注意的细节是，本片多次出现白色山羊，这显然是导演有意为之。在此，我引用豆瓣上的一篇影评对此的分析（
+https://movie.douban.com/review/12076729/ ），摘录如下：</p>
+<p>电影中羊的四次出现：第一次在湖边看到男主抛车（知道男主有罪），第二次被警察打死（代替男主受罚），第三次开棺验尸（作为替罪羊，帮男主掩埋真相），第四次男主决定认罪后，活羊重新出现，寺庙响起钟声（都预示着男主释然，已经放下心结，决心认罪接受惩罚）。</p>
+<h1 id="画面与音乐">画面与音乐</h1>
+<p>导演非常擅长使用电影中画面和音乐的技巧。电影中的音乐是烘托气氛和人物内心活动的重要工具，而画面则直接决定了观众的视觉体验。由于笔者缺乏视听的专业知识，难以用简洁明了的话语概括，故在此引用豆瓣另一篇影评对此的分析（
+https://movie.douban.com/review/12090128/ ），摘录如下：</p>
+<h2 id="交叉蒙太奇">交叉蒙太奇</h2>
+<p>这版《误杀》将“听经”改为“泰拳”，在电影前半段，就有一段很精彩的拳赛段落，这段拳赛是和素察上门交叉剪辑在一起的。</p>
+<p>李维杰之所以利用看拳赛为全家制造不在场证明，是因为“误杀”这件事发生的同时，也就是2号晚上，他就在看拳赛。</p>
+<p>李维杰2号出差给罗统的酒店维修网络，晚上完工后看到酒店房间塞的小卡片，决定去看泰拳休闲娱乐。同时，官二代素察来到灿班镇李维杰家里调戏大女儿，并与察觉不对劲的妈妈阿玉产生冲突。</p>
+<p>在这同一时间，不同空间，李维杰在看泰拳纠打，阿玉和大女儿在和素察纠打。导演对这两段戏采用了交叉蒙太奇的手法。</p>
+<p>一边是泰拳拳手踢到肚子，一边素察踢到阿玉，一边拳手倒地，一边素察倒地……而且“拳赛”和“误杀”两边的镜头时长越来越短，镜头切换越来越快，节奏也越来越紧张。</p>
+<p>通过这一手段，导演将李维杰完全不知情的状态，与官二代对妻女的欺凌和误杀剪辑在一起，观众在这段观影过程中是全知视角，神经逐渐被绷紧。</p>
+<p>这段交叉蒙太奇，既完成了误杀官二代的过程，又给后知后觉的李维杰出了一个难题。观众在紧张过后，心理继续被剧情调动：接下来李维杰和全家该怎么办？</p>
+<h2 id="慢镜头">慢镜头</h2>
+<p>《误杀》中的“慢镜头”大概有10次以上。</p>
+<p>尤其是最后在大雨里开棺启尸那场终极对决，几乎整段都使用了慢动作镜头。</p>
+<p>使用慢镜头的目的大概分为“制造滑稽效果”、“强调心理对时间的感受”或“凸显某一重要时刻”等，这部电影多次使用慢镜头的目的肯定是后两个。</p>
+<p>比如李维杰销毁素察的车这段戏，当时人物心理非常紧张。李维杰看到高速路上警察设卡和牧羊人路过时，都用慢镜头来强化李维杰当时紧张的心情。</p>
+<p>最后大雨是全片的高潮。慢镜头配上暴雨的场面调度，雨滴的速度也被放慢，不仅制造出震撼的视觉效果，也通过刻意放慢速度，主观上加长寻找尸体的时间，提升李维杰最后一击的震惊感。</p>
+<h2 id="布光">布光</h2>
+<p>《误杀》中利用布光塑造人物和烘托氛围最明显的，就是陈冲饰演的女警察局长。</p>
+<p>女警察局长这个角色非常复杂，她既要在下属面前树威，又迟迟攻破不了李维杰的手段，还要忍受母亲失去儿子的巨大痛苦，同时还得顾忌丈夫竞选市长。</p>
+<p>所以，导演对陈冲出场戏份的布光特别丰富。有一个镜头是陈冲在灿班镇警察局，脸上是百叶窗投下的如钢锯般的光影。这种非常特殊的光影投射在人物脸上，体现出当时人物内心巨大的痛苦和矛盾。</p>
+<p>除了陈冲，导演对主角李维杰和阿玉的布光也做了精心安排。</p>
+<p>比如李维杰从罗统回到家后，得知大女儿被侮辱，妻女又把素察误杀，从此全片的影调全部变成低调光（low
+key）。</p>
+<p>李维杰在得知这一痛心+震惊的消息时，脸上几乎没有打光。这样处理，非常鲜明地表现了李维杰和一家人的生活从此陷入黑暗。他们要在一点点微光中，找寻希望。</p>
+<p>观影时可以注意，电影仅仅在前15分钟和后15分钟有比较明亮的打光，从误杀案后就再无亮光，全片影调变得非常暗。</p>
+<h2 id="特殊音效">特殊音效</h2>
+<p>如果仔细听，电影在很多重要时刻都加入了特殊音效来渲染气氛。比如电影最后开棺，当镜头中显示的尸体不是素察而是一只羊时，背景音给了一声巨响，用来增强观众此时的心理感受。</p>
+<h1 id="主题与立意">主题与立意</h1>
+<p>关于本片的主题与立意，不同的观众自然有不同的想法。在这里，我认为有以下三点是比较明显的，即“法律正义”、“子女教育”与“选择冲突”。</p>
+<h2 id="法律正义">法律正义</h2>
+<p>法律是不是代表了正义？这是一个没有答案的问题。如果法律保证了正义，那么为什么还会有如此多不正义的事情发生？李维杰一家是受害者，但却不得不背负着杀人偿命的罪煞费心机制造一系列不在场证明（尽管杀人的事实客观成立）；但如果说法律不是正义，那么从客观来讲，它的确是保障社会稳定的最有效方法。警长的公报私仇最终还是遭到了愤怒民众的惩罚，滥用私权的局长拉韫也被撤职，正义还是到了。然而，在这正义之下，我们看到的，只有一个双输的局面：局长方全面溃败，李维杰方全家也将面临牢狱之灾。在这种法律正义的庇护之下，没有任何一方的权益得到了满足，也没有任何一个人获得了切实的好处。</p>
+<p>追根到底，这还是法律正义性的缺陷导致的必然结果。如果素察不是局长的儿子，李维杰一家人会得到应有的正义吗？如果李维杰没有看过那么多电影，或者一开始就束手就擒，平平被侮辱的真相能得到审判吗？尽管我们想要去解决这个问题，但现实是，人性的复杂根本无法用简单的“正义”得以阐释。法律无法接纳家长对子女的爱与纵容，也无法兼容“理性的公义”与“感性的迁就”的平衡。</p>
+<h2 id="子女教育">子女教育</h2>
+<p>子女教育是本片第二个十分明确的立意。小女儿安安目睹了母亲和姐姐杀人埋尸的全过程，然而却在父亲的指导下学会了如何撒谎。这在本片结尾她篡改分数体现得淋漓尽致。本来应该是天真无邪的女儿，却因为自己做的这个事情熟练地学会了如何撒谎、如何欺骗，相比“误杀”，这让男主是更难以接受的。注意到在这个时候，此刻男主一家已经完全不会被追查了：拉韫一家无权无势，所有证据烟消云散，没有人证、没有物证，他完全可以选择逍遥法外。然而，男主最后竟然选择了自首，这岂不是让他之前做的一切都白费了吗？如此说不通的逻辑，是在两件事之后得到的转变：（1）女儿修改成绩的试卷：身为父亲却言传身教教会了女儿最不能学会的恶习，这在男主心中是难以承担的。通过路人的口，我们知道男主自幼丧亲，如何做人是他立身之本，他可以为了家人背叛他的原则（在影片开头，他向僧人布施的情节可以体现他是一个对自身要求很高的人），也可以为了家人（女儿）重拾他的原则；（2）寺庙里的醒悟：寺庙是男主最后的救赎。当他第二次向僧人布施遭到拒绝的时候，他实际上内心是煎熬的。但在最后，为了暴乱不再延续，为了子女成长，他选择了“挡在最前面”，得到内心的自由。</p>
+<p>在素察方面，由于其父亲的疏于管教，母亲的溺爱，其最终的结局无非是“大快人心”的。和现实结合的同时，观众也能感受到父母对子女教育的重要性。身为警长的母亲，掌握着执法权而选择了包庇有过错的儿子；身为政客的父亲，只能责打自己的儿子来管教他。无法用公平的武器制裁亲人的犯罪，无法用有效的裁断约束亲人的叛逆，这样的警官，这样的政客，你们敢信任吗？正如在影片最后，男主在囚车中的自白一样，最后他竟然以这样的方式取得女儿的信任，这是荒诞而遗憾的。无论他之前在教育中出现了如何的问题，至少在现在，他用自己的行为证明了，他是一个伟大的父亲。</p>
+<h2 id="选择冲突">选择冲突</h2>
+<p>另外一个值得注意的点是，男主的选择奠定了本片的基调。本片有一个重复提及的细节：一开始，素察被平平击昏时，并没有当场死去。理由如下：（1）女主推车出去时，镜头给了素察一个手部特写；（2）男主多次凝视棺材；（3）男主第二次向僧人布施时遭到了拒绝，并且镜头显示了男主十分惊慌的表情；（4）影片高潮，揭开棺材时，棺材板上血淋淋的抓痕（这是最直接的证据，这表明素察是活活被憋死，或者被男主直接杀害的）；（5）影片最后，男主对局长夫妇致歉；（6）男主最后自首。结合这些或明或暗的事实，我们不难推出：在仓库素察只是被击昏，而真正导致素察死亡的原因是男主，为了“不让自己的家人受到伤害”，所以他选择了杀死素察，或见死不救。这个地方影片也有充分的暗示，一是影片开头致敬电影《活埋》的桥段，可以认为素察是被“活埋”致死；二是镜头给了被子弹射死的山羊的特写。</p>
+<p>以男主的标准来看，他在救与不救之间是经过了痛苦的煎熬的：小女儿安安用叉子划桌子的声音和素察在棺材里绝望地用手划棺材盖的声音是相似的。但最终，他选择了保护家人，直接或间接地杀死了素察。在影片结尾，他选择自首这点上，他没有欺骗，只是除了他自己之外，任何人都不知道，他只能用这种方式，对局长夫妇、对无辜的被他利用的路人、对自己的家人，表达愧疚，与忏悔。</p>
+<p>男主是纯粹的，而往往纯粹的人最容易陷入万劫不复的矛盾之中。</p>
+]]></content>
+      <categories>
+        <category>电影 - 国产电影</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>影评</tag>
       </tags>
   </entry>
   <entry>
@@ -1937,9 +1959,9 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
         <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -1959,293 +1981,350 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
       </tags>
   </entry>
   <entry>
-    <title>用生成函数和复数巧解一道计数题</title>
-    <url>/2022/06/26/23/03/</url>
-    <content><![CDATA[<p>对集合<span
-class="math inline">\(\{1,2,\cdots,2000\}\)</span>，求出其中有多少子集，使得子集中的元素和为5的倍数。本文对<a
-href="https://youtu.be/bOXCLR3Wric">3Blue3Brown的解法</a>上进行总结，形成较为数学化的语言。本题背后有较为深刻的数学思想，故记载于此。</p>
+    <title>Bump Mapping, Normal Mapping and Displacement Mapping</title>
+    <url>/2022/10/12/18/39/</url>
+    <content><![CDATA[<p>凹凸贴图（Bump
+mapping）是图形学中一种常用的用于改变物体视觉凹凸性的方法，但是网上很多介绍对它的原理和变体都非常模糊，甚至包含一些关键概念的错误。本文将详细介绍凹凸贴图及其变体（Normal
+Mapping和Displacement
+Mapping）的原理，并在代码上加以实现，以便让读者更好地理解这项技术。</p>
 <span id="more"></span>
-<h1 id="把原问题转化为生成函数">把原问题转化为生成函数</h1>
-<p>原题是：对集合<span
-class="math inline">\(\mathcal{S}=\{1,2,\cdots,2000\}\)</span>，求出其中有多少子集，使得子集中的元素和为5的倍数。</p>
-<p>首先容易想到的是，可以采用穷举法，遍历<span
-class="math inline">\(\mathcal{S}\)</span>的每个子集，检查是否满足条件。但是，穷举法的复杂度是<span
-class="math inline">\(2^{2000}\)</span>，这对计算机来说都是一个天文数字。显然，需要另辟蹊径。</p>
-<p>不妨先简化一下题目：求出集合<span
-class="math inline">\(\mathcal{S}\)</span>中有多少个子集，使元素之和为<span
-class="math inline">\(5\)</span>，我们可以很快地列出这些集合：</p>
-<p><span class="math display">\[\{5\},\{1,4\},\{2,3\}\]</span></p>
-<p>换句话说，<span class="math inline">\(5\)</span>可以表示为：<span
-class="math inline">\(5=5=1+4=2+3\)</span>，如果我们把它表示成一个关于未知数<span
-class="math inline">\(x\)</span>的多项式，那么就有：</p>
-<p><span class="math display">\[x^5=x^0x^5=x^1x^4=x^2x^3\]</span></p>
-<p>什么情况会同时出现<span
-class="math inline">\(x^0,x^1,x^2,x^3,x^4,x^5\)</span>呢？答案是<strong>生成函数</strong>。这启发我们使用下面的生成函数：</p>
-<p><span class="math display">\[
-\begin{equation}
-\label{eq1}
-f(x)=(1+x)(1+x^2)(1+x^3)(1+x^4)(1+x^5)
-\end{equation}
-\]</span></p>
-<p>这个多项式展开之后的结果是：</p>
-<p><span
-class="math display">\[f(x)=1+x+x^2+2x^3+2x^4+{\color{red}3x^5}+\cdots\]</span></p>
-<p>注意五次项<span
-class="math inline">\(x^5\)</span>前面的系数是3，这是因为，<span
-class="math inline">\(x^5\)</span>有三个来源，分别是<span
-class="math inline">\(1x^5,x^1x^4,x^2x^3\)</span>，正好对应了之前简化题中的结果！</p>
-<p>现在分析一下，多项式<span
-class="math inline">\(\eqref{eq1}\)</span>中的每个<span
-class="math inline">\(x^i\)</span>项，都代表了整数<span
-class="math inline">\(i\)</span>，如果在括号<span
-class="math inline">\(1+x^i\)</span>中选择了<span
-class="math inline">\(x^i\)</span>，则表示把<span
-class="math inline">\(i\)</span>这个整数加入集合，如果选择了<span
-class="math inline">\(1\)</span>，则表示不加入<span
-class="math inline">\(i\)</span>。而把整个多项式展开之后的结果<span
-class="math inline">\(f(x)=c_0+c_1x+c_2x^2+\cdots\)</span>，项<span
-class="math inline">\(x^i\)</span>前面的系数<span
-class="math inline">\(c_i\)</span>，正好代表了元素之和为<span
-class="math inline">\(i\)</span>的集合的个数！</p>
-<p>这时候，我们就能把原问题转化为下面的生成函数：</p>
-<p><span class="math display">\[
-\begin{equation}
-\begin{aligned}
-\label{eq2}
-f(x)&amp;=(1+x)(1+x^2)(1+x^3)(1+x^4)(1+x^5)\cdots(1+x^{2000})\\
-&amp;=c_0+c_1x+c_2x^2+c_3x^3+c_4x^4+c_5x^5+\cdots
-\end{aligned}
-\end{equation}
-\]</span></p>
-<p>求出其中所有次数为<span
-class="math inline">\(5\)</span>的倍数的项系数之和：</p>
-<p><span class="math display">\[
-\begin{equation}
-\label{eq3}
-S=c_5+c_{10}+c_{15}+\cdots
-\end{equation}
-\]</span></p>
-<p>下面的问题就是如何求出<span class="math inline">\(S\)</span>。</p>
-<h1 id="转化为复数问题">转化为复数问题</h1>
-<p>显然，我们不可能把<span
-class="math inline">\(S\)</span>中的每一项都求出来，只能设法一次求出<span
-class="math inline">\(S\)</span>，那么怎么办呢？</p>
-<p>我们还是先考虑简化问题，假设现在生成函数是:</p>
-<p><span class="math display">\[
-\begin{equation}
-\begin{aligned}
-f(x)&amp;=(1+x)(1+x^2)(1+x^3)(1+x^4)(1+x^5)\\
-&amp;=c_0+c_1x+c_2x^2+c_3x^3+c_4x^4+c_5x^5+\cdots
-\end{aligned}
-\end{equation}
-\]</span></p>
-<p>如果我们代入<span class="math inline">\(x=0\)</span>，可以求得<span
-class="math inline">\(f(0)=1\)</span>；如果代入<span
-class="math inline">\(x=1\)</span>，可以求得<span
-class="math inline">\(f(1)=2^5\)</span>；再代入<span
-class="math inline">\(x=-1\)</span>，有<span
-class="math inline">\(f(-1)=0\)</span>。用展开式表示结果：</p>
-<p><span class="math display">\[
-\begin{aligned}
-    c_0&amp;=1\\
-    c_0+c_1+c_2+c_3+c_4+c_5+\cdots &amp;=2^5\\
-    c_0-c_1+c_2-c_3+c_4-c_5+\cdots &amp;=0
-\end{aligned}
-\]</span></p>
-<p>通过后面两式，不难得到：</p>
-<p><span
-class="math display">\[c_1+c_3+c_5+\cdots=\frac{1}{2}2^5=2^4\]</span></p>
-<p>我们找到了所有奇数项系数之和，但是我们的目标是所有<span
-class="math inline">\(5\)</span>的倍数的项系数之和。但这个过程可以给我们一个启发：<strong>是否可以通过代入某些值到生成函数中，通过加减运算消去我们不关心的项，得到最终的结果</strong>。</p>
-<p>分析我们把<span class="math inline">\(-1\)</span>代入到<span
-class="math inline">\(f(x)\)</span>中每一项的过程，所有的偶数项<span
-class="math inline">\(x^{2k}\)</span>结果都是<span
-class="math inline">\(1\)</span>，所有的奇数项<span
-class="math inline">\(x^{2k-1}\)</span>结果都是<span
-class="math inline">\(-1\)</span>。换句话说：<span
-class="math inline">\(-1\)</span>这个值对函数<span
-class="math inline">\(f(x)\)</span>的未知项<span
-class="math inline">\(x^i\)</span>的循环次数为<span
-class="math inline">\(2\)</span>，或者，每两项<span
-class="math inline">\(-1\)</span>代入的结果都相同。同理，对<span
-class="math inline">\(1\)</span>来说，循环次数是<span
-class="math inline">\(1\)</span>。</p>
-<p>那么，什么时候循环次数是<span
-class="math inline">\(5\)</span>呢？也就是，代入哪个数<span
-class="math inline">\(\xi\)</span>，会使得<span
-class="math inline">\(\xi=\xi^6\)</span>，或者<span
-class="math inline">\(\xi^5=1\)</span>。显然，在复空间中，这个数就是<span
-class="math inline">\((\mathrm{e}^{\mathrm{i}\frac{2\pi}{5}})^t
-(t=1,2,3,4,5)\)</span>。也就是说，如果令<span
-class="math inline">\(\xi=\mathrm{e}^{\mathrm{i}\frac{2\pi}{5}}\)</span>，则有<span
-class="math inline">\(5\)</span>个数<span
-class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>满足我们的要求，其中<span
-class="math inline">\(\xi^5=1\)</span>就是我们熟知的实根。</p>
-<p>更关键的是，这几个数的和是<span
-class="math inline">\(0\)</span>：</p>
-<p><span
-class="math display">\[\xi+\xi^2+\xi^3+\xi^4+\xi^5=\frac{\xi(1-\xi^5)}{1-\xi}=0\]</span></p>
-<p>现在，分别把这五个值代入到展开的生成函数中，有：</p>
-<p><span class="math display">\[
-\begin{aligned}
-f(\xi)=c_0+c_1\xi+c_2\xi^2+c_3\xi^3+c_4\xi^4+c_5\xi^5+\cdots\\
-f(\xi^2)=c_0+c_1\xi^2+c_2\xi^4+c_3\xi^1+c_4\xi^3+c_5\xi^5+\cdots\\
-f(\xi^3)=c_0+c_1\xi^3+c_2\xi^1+c_3\xi^4+c_4\xi^2+c_5\xi^5+\cdots\\
-f(\xi^4)=c_0+c_1\xi^4+c_2\xi^3+c_3\xi^2+c_4\xi^1+c_5\xi^5+\cdots\\
-f(\xi^5)=c_0+c_1\xi^5+c_2\xi^5+c_3\xi^5+c_4\xi^5+c_5\xi^5+\cdots
-\end{aligned}
-\]</span></p>
-<p>注意<span
-class="math inline">\(c_1,c_2,c_3,c_4\)</span>对应的项，正好都有<span
-class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>，把它们加起来，有：</p>
+<h1 id="凹凸贴图bump-mapping">凹凸贴图（Bump Mapping）</h1>
+<p>现实中有很多物体表面都凹凸不平，比如橘子、砖墙等等，那么我们要如何用图形学的方法去渲染它们呢？最直接的方法就是把这些物体的表面细化为非常微小的三角形，然后走通用渲染流程。但是，由于凹凸分布过于密集，全部按实际模型渲染会导致不可接受的性能开销。</p>
+<p>为此，我们能不能假设这种细微凹凸表面是一层贴在光滑物体表面的<strong>高度图</strong>，每个点都表示了高度的增量。比如我们想得到一个凹凸的橘子，我们可以假想这个橘子本来是一个光滑的球体（尽管橘子不是球体，但这里可以做一个简便的假设），这个球体上的每一点都对应到一个高度图上的一点，记录了当前点的相对高度，比如0.1cm，-0.05cm等等，然后再把这个相对高度应用到球体这一点的实际高度上，就形成该点的凹凸。对所有的点都去计算高度增量，就可以让整个球体变得凹凸不平了。</p>
+<p>但是上面的方法还是实际上改变了球体上每个点的位置，而我们计算着色时，实际上只关心这个点的<strong>法线</strong>，有没有一种方法，可以不去实际改变点的位置，而是计算出<strong>改变这个点之后它的法线是怎么变化的</strong>，从而从视觉上营造出凹凸感（此时物体本身并没有任何变化）。这就是凹凸贴图做的事情。</p>
+<h2 id="纹理空间中的法线">纹理空间中的法线</h2>
+<p>前面已经说到了，我们可以用一张贴图<span
+class="math inline">\(\mathcal{M}\)</span>去记录对应点的相对于它法线的高度变化。比如真实空间中的某个点<span
+class="math inline">\(P\)</span>对应纹理坐标为<span
+class="math inline">\((u,v)\)</span>，而<span
+class="math inline">\(h(u,v)=0.5\)</span>，这就说明我们需要把点<span
+class="math inline">\(P\)</span><strong>沿着它的法线方向</strong><span
+class="math inline">\(\mathbf{n}\)</span>增高<span
+class="math inline">\(0.5\)</span>。然而我们并不想实际改变点<span
+class="math inline">\(P\)</span>，而只需要知道改变后的法线<span
+class="math inline">\(\mathbf{n}&#39;\)</span>就行了。</p>
+<p>那么怎么得到<span
+class="math inline">\(\mathbf{n}&#39;\)</span>呢？首先来看一下在纹理中怎么表示法线。如果我们把纹理的<span
+class="math inline">\(U\)</span>方向视为横轴，<span
+class="math inline">\(V\)</span>方向视为纵轴，再以<span
+class="math inline">\(W=U\times
+V\)</span>为竖轴，那么我们就建立起一个以<span
+class="math inline">\(UVW\)</span>为三轴的<strong>纹理空间</strong>。每个真实空间中点<span
+class="math inline">\(P\)</span>的法向量<span
+class="math inline">\(\mathbf{n}_P\)</span>都能对应到纹理空间中的向量<span
+class="math inline">\(\mathbf{w}_P=(0,0,1)\)</span>，但是这个向量的起点在<span
+class="math inline">\((u_P,v_P)\)</span>，其中<span
+class="math inline">\(u_P,v_P\)</span>是点<span
+class="math inline">\(P\)</span>的纹理坐标。换句话说，点<span
+class="math inline">\(P\)</span>首先对应了一个纹理坐标<span
+class="math inline">\((u_P,v_P)\)</span>，这个纹理坐标上有一个恒定的向量<span
+class="math inline">\(\mathbf{w}_P=(0,0,1)\)</span>，这个向量和坐标<span
+class="math inline">\((u_P,v_P)\)</span>一起，就对应了真实空间中<span
+class="math inline">\(P\)</span>的法向量<span
+class="math inline">\(\mathbf{n}_P\)</span>和<span
+class="math inline">\(P\)</span>本身。</p>
+<p>还记得我们上面强调了每个点高度的改变都是沿着它法线方向改变的吗？正是因为这样，我们才要把纹理空间中的每个点<span
+class="math inline">\((u,v)\)</span>处的法向量定义为垂直向上的<span
+class="math inline">\((0,0,1)\)</span>，这相当于是<strong>在纹理空间中模拟真实空间中的法向量，以及沿着法向量改变高度后的法向量如何变化</strong>。</p>
+<p>这个纹理空间的三轴分别是<span
+class="math inline">\(U,V,W\)</span>，每个<span
+class="math inline">\((u,v)\)</span>都定义了一个朝上的法线向量<span
+class="math inline">\(\mathbf{w}_{u,v}=(0,0,1)\)</span>。此外，这个空间还定义了每个点的相对高度<span
+class="math inline">\(h(u,v)\)</span>。我们关心的是，<strong>在这个空间中，点<span
+class="math inline">\((u,v)\)</span>在改变了相对高度<span
+class="math inline">\(h(u,v)\)</span>之后它新的法线向量<span
+class="math inline">\(\mathbf{w}&#39;_{u,v}\)</span>是什么</strong>。把这个新的法线<span
+class="math inline">\(\mathbf{w}&#39;_{u,v}\)</span>应用到真实空间中点<span
+class="math inline">\(P\)</span>的法线上，就是改变后的法线。</p>
+<p>下图表现了这个过程，注意我们先从<span
+class="math inline">\(UW\)</span>平面看去。点<span
+class="math inline">\(u\)</span>（先不管<span
+class="math inline">\(v\)</span>）原来的法线是<span
+class="math inline">\(\mathbf{w}\)</span>（绿色向量），在应用该点的相对高度<span
+class="math inline">\(h(u)\)</span>之后，新的法线是<span
+class="math inline">\(\mathbf{w}&#39;\)</span>（红色向量）。
+理论上来说，要准确地求出<span
+class="math inline">\(\mathbf{w}&#39;\)</span>需要知道该点的切线（红色虚线），但这比较困难。我们可以用相邻点<span
+class="math inline">\(u+1\)</span>去求近似切线，这是很容易办到的。</p>
+<p>具体来说，相邻点的高度我们知道是<span
+class="math inline">\(h(u+1)\)</span>，这样我们就能求出它在<span
+class="math inline">\(W\)</span>方向上的差，值为<span
+class="math inline">\(\Delta h(u)=h(u+1)-h(u)\)</span>，而<span
+class="math inline">\(U\)</span>方向上的差值就是<span
+class="math inline">\(1\)</span>，如此一来，我们就得到了一个近似的切线<span
+class="math inline">\((1,c\cdot\Delta h(u))\)</span>，这里的<span
+class="math inline">\(c\)</span>是一个系数用于调整斜率。知道了切线，我们就知道了法向量为<span
+class="math inline">\(\mathbf{w}&#39;=\text{normalize}(-c\cdot\Delta
+h(u),1)\)</span>。</p>
+<p>对于真正的三维纹理空间也是一样的，对于平面<span
+class="math inline">\(UW\)</span>，<span
+class="math inline">\(W\)</span>方向的差值为<span
+class="math inline">\(\Delta h(u)=h(u+1)-h(u)\)</span>，对于平面<span
+class="math inline">\(VW\)</span>，<span
+class="math inline">\(W\)</span>方向的插值为<span
+class="math inline">\(\Delta
+h(v)=h(v+1)-h(v)\)</span>。这样一来，近似法线就是<span
+class="math inline">\(\mathbf{w}&#39;=\text{normalize}(-c_1\Delta
+h(u),-c_2\Delta
+h(v),1)\)</span>。这就是纹理空间中变换相对高度后的法线。</p>
+<p><img data-src="/images/bump-map/1-1.png" /></p>
+<h2 id="纹理空间世界空间与tbn矩阵">纹理空间，世界空间与TBN矩阵</h2>
+<p>下面的问题是，既然我已经知道了<strong>纹理空间</strong>中变换高度后的法线<span
+class="math inline">\(\mathbf{w}&#39;\)</span>，同时也知道了世界空间中原本的法线<span
+class="math inline">\(\mathbf{n}\)</span>和纹理空间中原本的法线<span
+class="math inline">\(\mathbf{w}\)</span>，怎么才能得到世界空间中变换高度后的法线<span
+class="math inline">\(\mathbf{n}&#39;\)</span>。</p>
+<p>现在我们再捋一下世界空间和纹理空间这两个空间。在世界空间中，所有的向量都是一个<strong>绝对值</strong>。比如现在三角形上的一个顶点<span
+class="math inline">\(P\)</span>，它当前的法线是<span
+class="math inline">\((0,1,0)\)</span>，如果此时把三角形连同点<span
+class="math inline">\(P\)</span>任意旋转，那么<span
+class="math inline">\(P\)</span>的法向量也会随之改变，比如到了<span
+class="math inline">\((1,0,0)\)</span>。然而，在纹理空间中点<span
+class="math inline">\(P\)</span>对应的纹理坐标<span
+class="math inline">\((u,v)\)</span>和其之上的法向量<span
+class="math inline">\(\mathbf{w}_{u,v}\)</span>是没有改变的！同时，使用上述过程计算出来的纹理空间中新的法向量<span
+class="math inline">\(\mathbf{w}&#39;_{u,v}\)</span>也是没有改变的！这也就意味着纹理空间中的向量是一个<strong>相对值</strong>。无论世界空间中的点<span
+class="math inline">\(P\)</span>如何运动，纹理空间中变化前和变化后的法向量都不会随之运动，纹理空间中的法向量和世界空间中法向量始终保持了一致的相对位置关系！</p>
+<p>所以，我们现在的目标，就是要求出一个变换<span
+class="math inline">\(f\)</span>，<strong>对每个特定的点<span
+class="math inline">\(P\)</span></strong>，它能将世界空间中的法向量<span
+class="math inline">\(\mathbf{n}\)</span>变换为纹理空间中的一个法向量；那么它的逆变换<span
+class="math inline">\(f^{-1}\)</span>，就能把纹理空间中的法向量<span
+class="math inline">\(\mathbf{w}\)</span>映射为世界空间中的法向量。我们想要的，就是<span
+class="math inline">\(f^{-1}(\mathbf{w}&#39;)\)</span>。</p>
+<p>我们不妨先考虑逆变换<span
+class="math inline">\(f^{-1}\)</span>，它可以用一个矩阵<span
+class="math inline">\(F^{-1}=\begin{bmatrix}\mathbf{a}&amp;\mathbf{b}&amp;\mathbf{c}\end{bmatrix}\)</span>表示。我们实际上很容易知道<span
+class="math inline">\(\mathbf{c}=\mathbf{n}\)</span>，这是因为纹理空间中改变前的法向量<span
+class="math inline">\(\mathbf{w}\)</span>需要和世界空间中改变前的法向量<span
+class="math inline">\(\mathbf{n}\)</span>相对应：<span
+class="math inline">\(F^{-1}\mathbf{w}=\mathbf{n}\
+(\mathbf{w}=(0,0,1)^\top)\)</span>。我们还需要另外两个方程才能解出<span
+class="math inline">\(\mathbf{a},
+\mathbf{b}\)</span>。为此，我们可以通过点<span
+class="math inline">\(P\)</span>所在的三角形<span
+class="math inline">\(ABC\)</span>求解。</p>
+<p>为此，假设三角形<span class="math inline">\(ABC\)</span>的边<span
+class="math inline">\(AB\)</span>向量为<span
+class="math inline">\(\mathbf{e}_1\)</span>，边<span
+class="math inline">\(AC\)</span>向量为<span
+class="math inline">\(\mathbf{e}_2\)</span>；在纹理空间中，<span
+class="math inline">\(\mathbf{e}_1\)</span>对应的向量为<span
+class="math inline">\(\mathbf{g}_1\)</span>，<span
+class="math inline">\(\mathbf{e}_2\)</span>对应的向量为<span
+class="math inline">\(\mathbf{g}_2\)</span>。其中<span
+class="math inline">\(\mathbf{g}_1=(u_B-u_A,v_B-v_A,0)^\top\)</span>，<span
+class="math inline">\(\mathbf{g}_2=(u_C-u_A,v_C-v_A,0)^\top\)</span>。那么根据我们的定义，显然有下述方程成立：</p>
 <p><span class="math display">\[
 \begin{aligned}
-f(\xi)+f(\xi^2)+f(\xi^3)+f(\xi^4)+f(\xi^5)&amp;=5c_0+5c_5\xi^5+5c_{10}\xi^5+5c_{15}\xi^5\\
-&amp;=5c_0+5c_5+5c_{10}+5c_{15}
+  \mathbf{e}_1&amp;=F^{-1}\mathbf{g}_1=\Delta u_1\mathbf{a}+\Delta
+v_1\mathbf{b}\\
+  \mathbf{e}_2&amp;=F^{-1}\mathbf{g}_2=\Delta u_2\mathbf{a}+\Delta
+v_2\mathbf{b}
 \end{aligned}
 \]</span></p>
-<p><span
-class="math inline">\(c_0=1\)</span>是已知的，所以上面的结果就变成了：</p>
-<p><span
-class="math display">\[f(\xi)+f(\xi^2)+f(\xi^3)+f(\xi^4)+f(\xi^5)=5+5c_5+5c_{10}+5c_{15}\]</span></p>
-<p>现在整个式子右边只留下常数和<span
-class="math inline">\(5\)</span>的倍数的项！</p>
-<p>唯一遗留的问题就是式子左侧的<span
-class="math inline">\(f(\xi)+f(\xi^2)+f(\xi^3)+f(\xi^4)+f(\xi^5)\)</span>是多少，或者说<span
-class="math inline">\(f(\xi)=(1+\xi)(1+\xi^2)(1+\xi^3)(1+\xi^4)(1+\xi^5)\)</span>是多少，因为只要知道了<span
-class="math inline">\(f(\xi)\)</span>，<span
-class="math inline">\(f(\xi^2),f(\xi^3),f(\xi^4)\)</span>的值也就知道了。</p>
-<p>这里的技巧是，因为<span
-class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>是方程<span
-class="math inline">\(z^5-1=0\)</span>的五个根，所以可以把它们表示成：</p>
+<p>其中<span class="math inline">\(\Delta u_1=u_B-u_A,\Delta
+v_1=v_B-v_A,\Delta u_2=u_C-u_A,\Delta v_2=v_C-v_A\)</span>。</p>
+<p>整理成矩阵相乘，就有：</p>
 <p><span class="math display">\[
-\begin{equation}
-  z^5-1=(z-\xi)(z-\xi^2)(z-\xi^3)(z-\xi^4)(z-\xi^5)
-\end{equation}
-\]</span></p>
-<p>把<span class="math inline">\(z=-1\)</span>代入：</p>
-<p><span class="math display">\[
-\begin{equation}
-  2=(1+\xi)(1+\xi^2)(1+\xi^3)(1+\xi^4)(1+\xi^5)=f(\xi)
-\end{equation}
-\]</span></p>
-<p>从而，我们也就有<span
-class="math inline">\(f(\xi^2)=f(\xi^3)=f(\xi^4)=2\)</span>，而<span
-class="math inline">\(f(\xi^5)=2^5\)</span>。所以，我们就得到了：</p>
-<p><span class="math display">\[
-\begin{equation}
 \begin{aligned}
-  5+5c_5+5c_{10}+5c_{15}&amp;=4\times 2+2^5\\
-  1+c_5+c_{10}+c_{15}&amp;=\frac{1}{5}(4\times 2+2^5)\\
-  c_5+c_{10}+c_{15}&amp;=\frac{1}{5}(4\times 2+2^5)-1
+  \begin{bmatrix}
+    \mathbf{e}_1\\\mathbf{e}_2
+  \end{bmatrix}&amp;=\begin{bmatrix}
+    \Delta u_1 &amp; \Delta v_1\\
+    \Delta u_2 &amp; \Delta v_2
+  \end{bmatrix}\begin{bmatrix}
+    \mathbf{a}\\
+    \mathbf{b}
+  \end{bmatrix}\Rightarrow\\
+  \begin{bmatrix}
+    \mathbf{a}\\
+    \mathbf{b}
+  \end{bmatrix}&amp;=\begin{bmatrix}
+    \Delta u_1 &amp; \Delta v_1\\
+    \Delta u_2 &amp; \Delta v_2
+  \end{bmatrix}^{-1}\begin{bmatrix}
+    \mathbf{e}_1\\\mathbf{e}_2
+  \end{bmatrix}=\frac{1}{\Delta u_1\Delta v_2-\Delta u_2\Delta
+v_1}\begin{bmatrix}
+    \Delta v_2 &amp; -\Delta v_1\\
+    -\Delta u_2 &amp; \Delta u_1
+  \end{bmatrix}\begin{bmatrix}
+    \mathbf{e}_1\\\mathbf{e}_2
+  \end{bmatrix}
 \end{aligned}
-\end{equation}
 \]</span></p>
-<p>这样一来我们考虑的简化版问题就得到了解决！</p>
-<p>按照这个思路，我们同样可以得到原始问题的解决，分为几步。</p>
-<p><strong>第一步</strong>：设<span
-class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>是方程<span
-class="math inline">\(z^5-1=0\)</span>的五个根，把它们分别代入生成函数<span
-class="math inline">\(f(x)\)</span>中，相加，就得到：</p>
-<p><span
-class="math display">\[c_0+c_5+c_{10}+\cdots=\frac{1}{5}(f(\xi)+f(\xi^2)+f(\xi^3)+f(\xi^4)+f(\xi^5))\]</span></p>
-<p><strong>第二步</strong>：把<span
-class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>表示为<span
-class="math inline">\(z^5-1=(z-\xi)(z-\xi^2)(z-\xi^3)(z-\xi^4)(z-\xi^5)\)</span>，通过代入<span
-class="math inline">\(z=-1\)</span>解出<span
-class="math inline">\((1+\xi)(1+\xi^2)(1+\xi^3)(1+\xi^4)(1+\xi^5)=2\)</span>。</p>
-<p><strong>第三步</strong>：把<span
-class="math inline">\(\xi\)</span>代入到生成函数<span
-class="math inline">\(f(x)\)</span>中，可以得到<span
-class="math inline">\(f(\xi)=2^{400}\)</span>，同理有<span
-class="math inline">\(f(\xi^2)=f(\xi^3)=f(\xi^4)=2^{400}\)</span>，同时有<span
-class="math inline">\(f(\xi^5)=2^{2000}\)</span>。</p>
-<p><strong>第四步</strong>：把所有值代回第一步中的结果，得到最终答案<span
-class="math inline">\(c_5+c_{10}=\frac{1}{5}(4\times
-2^{400}+2^{2000})-1\)</span>。</p>
-<h1 id="总结">总结</h1>
-<p>本题背后蕴藏着较为深刻的数学思想，一方面是巧用生成函数把一个计数问题转化为一个分析问题，另一方面是使用复数消去某些项，直接求出想要的结果。通过本题，我们可以充分了解到复数所蕴含的关于周期和频率的思想，从而也就能理解为什么傅里叶变换用复数表征。</p>
-<p>把本题稍微进行推广：对集合<span
-class="math inline">\(\mathcal{A}=\{1,2,3,\cdots,N\}\)</span>和正整数<span
-class="math inline">\(k\)</span>，其中<span
-class="math inline">\(k|N\)</span>。设<span
-class="math inline">\(\mathcal{A}\)</span>中满足元素之和为<span
-class="math inline">\(k\)</span>的倍数的子集个数为<span
-class="math inline">\(\mathfrak{P}_k\)</span>，你能求出<span
-class="math inline">\(\mathfrak{P}_k\)</span>的表达式吗？</p>
+<p>上式需要保证逆矩阵存在，即<span class="math inline">\(\Delta
+u_1\Delta v_2\not=\Delta u_2\Delta v_1\)</span>。</p>
+<p>但现在得到的<span
+class="math inline">\(\mathbf{a},\mathbf{b},\mathbf{c}\)</span>两两之间并不保证互相垂直，这是因为从上面的式子我们不难发现<span
+class="math inline">\(\mathbf{a}\)</span>和<span
+class="math inline">\(\mathbf{b}\)</span>是关于<span
+class="math inline">\(\mathbf{e}_1,\mathbf{e}_2\)</span>的线性组合，所以这两个基仍然在三角形<span
+class="math inline">\(ABC\)</span>所在的平面上，而这个平面不一定和向量<span
+class="math inline">\(\mathbf{n}\)</span>正交，而且<span
+class="math inline">\(\mathbf{a}\)</span>和<span
+class="math inline">\(\mathbf{b}\)</span>本身也不一定正交。</p>
+<p>所以作为求解<span
+class="math inline">\(F^{-1}\)</span>的最后一步，我们还要把这三个基正交化，我们可以使用Schmidt正交化：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \mathbf{t}&amp;=\text{normalize}(\mathbf{a}-(\mathbf{a}\cdot\mathbf{n})\mathbf{n})\\
+  \mathbf{b}&amp;=\mathbf{n}\times\mathbf{t}
+\end{aligned}
+\]</span></p>
+<p>这样一来，<span
+class="math inline">\(\mathbf{t},\mathbf{b},\mathbf{n}\)</span>就是两两正交的单位向量了，从而就得到了逆变换<span
+class="math inline">\(F^{-1}=\begin{bmatrix}\mathbf{t}&amp;\mathbf{b}&amp;\mathbf{n}\end{bmatrix}\)</span>。由上面的过程可知，我们其实不用真正解出<span
+class="math inline">\(\mathbf{b}\)</span>，因为它可以通过<span
+class="math inline">\(\mathbf{n}\)</span>与<span
+class="math inline">\(\mathbf{t}\)</span>的叉乘求得。</p>
+<p>你也许会问，上面的推导过程我们为什么不直接用三角形的三个顶点，而要去用它的边呢？这是因为，<strong>向量</strong>和<strong>点</strong>本质上是不同的，尽管它们都可以用一个三维坐标表示。比如三维空间中的一个物体，它某个点的法向量是<span
+class="math inline">\((0,0,1)\)</span>，把物体整体平移了之后，这个点的坐标发生了变化，但是它的法向量还是<span
+class="math inline">\((0,0,1)\)</span>。既然我们只是向量感兴趣，那么所有的操作都是基于向量进行的。这一点务必理解。</p>
+<p>现在，<span
+class="math inline">\(F^{-1}\)</span>定义的空间就是以<span
+class="math inline">\(\mathbf{t},\mathbf{b},\mathbf{n}\)</span>为基的空间，这个空间的“<span
+class="math inline">\(Z\)</span>轴”就是<span
+class="math inline">\(\mathbf{n}\)</span>，正好与<strong>世界空间</strong>中点<span
+class="math inline">\(P\)</span>的原始法向量重合，而<span
+class="math inline">\(\mathbf{t},\mathbf{b}\)</span>则定义了<span
+class="math inline">\(\mathbf{n}\)</span>的切平面。对纹理空间中任意的<strong>法向量</strong><span
+class="math inline">\(\mathbf{w}\)</span>，都可以左乘这个矩阵得到对应的世界空间中的法向量<span
+class="math inline">\(\mathbf{n}&#39;=F^{-1}\mathbf{w}&#39;\)</span>。它定义的空间就称为<strong>切线空间</strong>，而矩阵<span
+class="math inline">\(F^{-1}\)</span>就是所谓的TBN矩阵。</p>
+<p>如果你还不理解，就这么思考。现在在纹理空间中有一个法向量<span
+class="math inline">\(\mathbf{w}&#39;\)</span>，它的坐标是基于<span
+class="math inline">\((1,0,0),(0,1,0),(0,0,1)\)</span>这三个标准正交基表示的。现在，需要把这个标准正交基“旋转”到世界空间中，让<span
+class="math inline">\((0,0,1)\)</span>和原来的法向量<span
+class="math inline">\(\mathbf{n}\)</span>对齐，再让另外两个轴旋转到某一个方向，这个方向能够反应三角形两条边的纹理变化方向。这样一来，<span
+class="math inline">\(\mathcal{w}&#39;\)</span>就能表示在这个新的基上的线性组合，得到的就是真实世界中变换后的法向量<span
+class="math inline">\(\mathbf{n}&#39;\)</span>。这个过程如下图所示（<span
+class="math inline">\(n(S_q,t_q)\)</span>就是这里的<span
+class="math inline">\(\mathbf{n}&#39;\)</span>，<span
+class="math inline">\(z=n_q\)</span>就是这里的<span
+class="math inline">\(\mathbf{n}\)</span>，<span
+class="math inline">\(xyz\)</span>定义的空间就是<strong>切线空间</strong>，它位于真实空间内）：</p>
+<p><img data-src="/images/bump-map/1-2.png" /></p>
+<p>如果你认真思考，就会问出下面两个问题：</p>
+<ol type="1">
+<li>为什么需要正交化？不是我们直接出了<span
+class="math inline">\(\mathbf{a},\mathbf{b},\mathbf{c}\)</span>了吗？为什么不能直接用它作为<span
+class="math inline">\(F^{-1}\)</span>呢？</li>
+<li>正交化之后的基<span
+class="math inline">\(\mathbf{t},\mathbf{b},\mathbf{n}\)</span>和原始纹理空间的关系是如何的？能保证映射到真实空间中的法向量<span
+class="math inline">\(\mathbf{n}&#39;\)</span>和原始法向量<span
+class="math inline">\(\mathbf{n}\)</span>的相对位置关系正确吗？</li>
+</ol>
+<p>下面我们来依次回答这两个问题。</p>
+<h3 id="为什么要正交化">为什么要正交化</h3>
+<p>这个问题的答案很简单：<strong>因为计算改变后的法向量<span
+class="math inline">\(\mathbf{w}&#39;\)</span>时是基于纹理空间进行的，而纹理空间一般来说（暂不考虑畸变的情况）就是由三个标准的正交基<span
+class="math inline">\(UVW\)</span>组成的。</strong></p>
+<p>举个例子，某点<span class="math inline">\(P\)</span>的法向量是<span
+class="math inline">\(\mathbf{n}\)</span>，是个可以任意改变的向量，它在纹理空间中对应了点<span
+class="math inline">\((u,v)\)</span>的一个向量<span
+class="math inline">\((0,0,1)\)</span>，这个我们之前已经明确了。现在，假设我们计算出来的改变后的法向量<span
+class="math inline">\(\mathbf{w}&#39;=(u&#39;,v&#39;,0)\)</span>正好在<span
+class="math inline">\(UV\)</span>平面上，也就是与<span
+class="math inline">\((0,0,1)\)</span>垂直，那么此时，如果我们直接用<span
+class="math inline">\(\mathbf{a},\mathbf{b},\mathbf{c}\)</span>把<span
+class="math inline">\(\mathbf{w}&#39;\)</span>映射回真实空间，那么我们会得到一个在三角形<span
+class="math inline">\(ABC\)</span>所定义的平面上的一个法向量<span
+class="math inline">\(\mathbf{n}&#39;=u&#39;\mathbf{a}+v&#39;\mathbf{b}\)</span>，这个法向量<strong>不一定</strong>和原来的法向量<span
+class="math inline">\(\mathbf{n}\)</span>，因为三角形<span
+class="math inline">\(ABC\)</span>不一定和<span
+class="math inline">\(\mathbf{n}\)</span>垂直。显然，<span
+class="math inline">\(\mathbf{n}&#39;\)</span>与<span
+class="math inline">\(\mathbf{n}\)</span>就没能保持在纹理空间中<span
+class="math inline">\(\mathbf{w}\)</span>与<span
+class="math inline">\(\mathbf{w}&#39;\)</span>一致的相对关系，即垂直关系。</p>
+<p>所以，为了得到正确的相对关系，我们必须让求得的<span
+class="math inline">\(\mathbf{a},\mathbf{b},\mathbf{c}\)</span>保持正交关系，正如在纹理空间中一样，这样才能让纹理空间中变换前后的法向量与真实空间中变换前后的法向量保持一致的相对关系。</p>
+<p>那这样一来，<span
+class="math inline">\(\mathbf{g}_1\)</span>不就不能映射回<span
+class="math inline">\(\mathbf{e}_1\)</span>了吗？对的，但是我们实际上真正关心的是<strong>法向量</strong>而不是三角形的某个边，它只是用来帮助我们构造TBN矩阵的工具，所以映射不回去也没有关系了。</p>
+<h3 id="法向量的方向">法向量的方向</h3>
+<p>紧接着就会有另一个问题：正交基，也就是切线空间有了，但是你怎么保证向量<span
+class="math inline">\(\mathbf{t},\mathbf{b}\)</span>的方向是正确的呢？或者说，经过变换后的真实空间的法向量<span
+class="math inline">\(\mathbf{n}&#39;=F^{-1}\mathbf{w}&#39;\)</span>的<strong>反向</strong>是否是正确的。你可以想象变换后的法向量<span
+class="math inline">\(\mathbf{n}&#39;\)</span>在绕着原来的法向量<span
+class="math inline">\(\mathbf{n}\)</span>以相同的夹角旋转（它们的起点相同），从而可以形成一个锥形，那么到底哪个方向才是真正的<span
+class="math inline">\(\mathbf{n}&#39;\)</span>呢？</p>
+<p>答案是：<strong>在凹凸贴图中不能保证方向的正确性，但误差是可以接受的</strong>。回想一下，我们在求解<span
+class="math inline">\(\mathbf{a},\mathbf{b},\mathbf{c}\)</span>时，让纹理空间中的<span
+class="math inline">\((0,0,1)\)</span>对应到真实空间的法向量<span
+class="math inline">\(\mathbf{n}\)</span>，这是没有问题的。然后把三角形的边和它在纹理空间中的纹理坐标向量进行对齐，进而求得<span
+class="math inline">\(\mathbf{a},\mathbf{b}\)</span>。这里其实做了一个假设，三角形内部的点的纹理坐标是可以通过三角形三个顶点的纹理坐标进行<strong>线性插值</strong>得到的。当然严格来讲，这不一定成立，因为任何一个点的纹理坐标都是可以任意指定的，但是一般来说，我们在制作纹理贴图的时候，会把模型作为一个整体制作，这基本上也就是一个线性关系。</p>
+<p>因为我们是把<span
+class="math inline">\(\mathbf{g}_1\)</span>映射到<span
+class="math inline">\(\mathbf{e}_1\)</span>、把<span
+class="math inline">\(\mathbf{g}_2\)</span>映射到<span
+class="math inline">\(\mathbf{e}_2\)</span>的，只要纹理贴图制作得比较规范，即便正交化了<span
+class="math inline">\(\mathbf{a},\mathbf{b}\)</span>，经过TBN矩阵转换后的世界空间的法向量<span
+class="math inline">\(\mathbf{w}&#39;\)</span>也不会偏离真实的法向量太远。这里可以顺便回答为什么在进行正交化的时候是<span
+class="math inline">\(\mathbf{n}\times \mathbf{t}\)</span>而不是<span
+class="math inline">\(\mathbf{t}\times
+\mathbf{n}\)</span>，这是因为在纹理空间中，<span
+class="math inline">\(\mathbf{n}\)</span>对应了<span
+class="math inline">\(\mathbf{w}=(0,0,1)\)</span>，<span
+class="math inline">\(\mathbf{t}\)</span>对应了<span
+class="math inline">\(\mathbf{u}=(1,0,0)\)</span>，如果要得到<span
+class="math inline">\(\mathbf{v}=(0,1,0)\)</span>，就只能是<span
+class="math inline">\(\mathbf{w}\times\mathbf{u}\)</span>。这对应到真实空间中，就是<span
+class="math inline">\(\mathbf{n}\times \mathbf{t}\)</span>。</p>
+<p>值得一提的是，在<strong>法线贴图</strong>中是可以保证变换后的法线<span
+class="math inline">\(\mathbf{n}&#39;\)</span>的方向是正确的，这个我们下面讲到法线贴图的时候稍加解释。</p>
+<p>上面说了这么多，切线空间带来的最大好处是，它和真实空间是一种相对关系，这意味着我们不需要为模型在每个不同的位置都制作贴图，极大减少了工作的复杂度，也更加灵活。</p>
+<h1 id="法线贴图normal-mapping">法线贴图（Normal Mapping）</h1>
+<p>在了解了凹凸贴图之后，法线贴图就很自然了。在凹凸贴图中，纹理空间中变换后的法线<span
+class="math inline">\(\mathbf{w}&#39;\)</span>是要手动去计算的，那为什么我们不直接把法线存储在这个点呢，就像一张RGB纹理图一样。</p>
+<p>在RGB纹理图中，每个点的RGB值都在<span
+class="math inline">\([0,1]\)</span>中，但是法线的每个元素都在<span
+class="math inline">\([-1,1]\)</span>中。所以要用RGB的贴图存储法线，就要对法线先加一，再除以二，就能把值的范围规约到<span
+class="math inline">\([0,1]\)</span>中。那么为什么我们看到一般的法线贴图都偏蓝色呢？这是因为法线的<span
+class="math inline">\(z\)</span>值比较大，就对应到RGB的蓝色值偏大，所以使得整个图呈现偏蓝的颜色。</p>
+<p>下图左侧是凹凸贴图，用灰度值表示每个点的高度；右侧是法线贴图，每个点都是一个RGB值。</p>
+<p><img data-src="/images/bump-map/2-1.png" /></p>
+<p>在从法线贴图中获取了变换后的法线之后，仍然需要像凹凸贴图一样，首先计算得到<span
+class="math inline">\(\mathbf{a},\mathbf{b},\mathbf{c}\)</span>，然后再正交化得到TBN矩阵，最后左乘TBN矩阵就了得到世界空间中变换后的法线。</p>
+<p>现在可以回答之前的一个问题：为什么使用法线贴图得到的变换后的法向量<span
+class="math inline">\(\mathbf{n}&#39;\)</span>就能保证它和<span
+class="math inline">\(\mathbf{n}\)</span>的相对关系是正确的？这是因为，<span
+class="math inline">\(F^{-1}=\begin{bmatrix}\mathbf{t}&amp;\mathbf{b}&amp;\mathbf{n}\end{bmatrix}\)</span>是一个正交矩阵，它代表的是把纹理空间中的法向量转换到世界空间中的法向量；那么它的逆（也就是它的转置，因为是正交矩阵）<span
+class="math inline">\(F\)</span>，就能够把世界空间中的法向量变换到纹理空间中的法向量。所以，给定一个模型（或者三角形），在制作它对应的法线贴图的时候，只要按照<span
+class="math inline">\(F\mathbf{n}&#39;\)</span>的方式在纹理空间中存储法线（<span
+class="math inline">\(\mathbf{n}&#39;\)</span>是艺术家制作决定的），就能通过逆变换<span
+class="math inline">\(F^{-1}\)</span>还原真实空间的法线。也就是说，只要存储和调用都用这样的<strong>同一套变换矩阵</strong>，得到的法线就一定是正确的。</p>
+<p>光线、观察方向等实际上也都是一种法向量，它自然也能被映射到纹理空间中，直接和<span
+class="math inline">\(\mathbf{w}&#39;\)</span>进行计算，而不需要把所有点都经过TBN矩阵变换到世界空间中再做Shading，这样一来就降低了计算量。</p>
+<h1 id="games-101-作业三中的bump-mapping">GAMES 101 作业三中的Bump
+Mapping</h1>
+<p>所以，从根本上讲，切线空间除了<span
+class="math inline">\(\mathbf{n}\)</span>需要被作为Z轴是明确的之外，剩下的两个轴（实际上是一个轴，也就是所谓的Tangents，另一个轴可以通过叉积求得）都是可以手动定义的。</p>
+<h1 id="位移贴图displacement-mapping">位移贴图（Displacement
+Mapping）</h1>
+<h1 id="参考文献">参考文献</h1>
+<p><a
+href="https://blog.matrixs.site/post/2022-01-07-%E8%A8%88%E7%AE%97%E6%A9%9F%E5%9C%96%E5%BD%A2%E5%AD%B8-games101%E4%BD%9C%E6%A5%AD3%E8%A3%9C%E5%85%85/%E5%9C%96%E5%BD%A2%E5%AD%B8%E7%B3%BB%E5%88%97_games101-homework3-normalmaps_and_bumpmaps_and_displacementmaps.html">圖形學系列
+Games101-Homework3-NormalMaps and BumpMaps and
+DisplacementMaps</a><br />
+<a href="https://zhuanlan.zhihu.com/p/139593847">切线空间（Tangent
+Space）完全解析</a><br />
+<a
+href="https://learnopengl-cn.github.io/05%20Advanced%20Lighting/04%20Normal%20Mapping/#_1">LearnOpenGL
+CN法线贴图</a><br />
+<a
+href="https://www.cnblogs.com/tiancaiwrk/p/11132437.html">深入浅出之切空间</a></p>
 ]]></content>
       <categories>
-        <category>数学 - 分析</category>
+        <category>数学 - 图形学</category>
       </categories>
       <tags>
+        <tag>计算机</tag>
+        <tag>随笔</tag>
         <tag>数学</tag>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>电影《误杀》短评</title>
-    <url>/2020/09/08/16/18/</url>
-    <content><![CDATA[<p>《误杀》是一部不失水准的悬疑片。实际上，在看完电影得知这是一部翻拍（翻拍自2015年的印度电影《误杀瞒天记》。实际上，它还有更早的来源）后，我竟然有些失落：要是这是我们自己的剧本该多好。但无论如何，本片从剧情、人物、节奏、立意、表现手法等方法，都是在水准线之上的作品，其中的若干不足完全是瑕不掩瑜的。8分是我对本片的总体评价。
-之后我将围绕本片进行，而不讨论有关其原版《误杀瞒天记》的内容。</p>
-<span id="more"></span>
-<h1 id="剧情与讲述">剧情与讲述</h1>
-<p>一言蔽之，本片讲述了一个关于“误杀”的故事。但看到最后，观众会发现，实际上，“误杀”并不成立，称之为“谋杀”，也是不为过的。本片没有直接点明这一点，是为了进一步突出电影的戏剧化效果。</p>
-<p>在剧情方面，电影是成功的。除了讲述男主制造不在场证据和他与局长的博弈之外，男主与家人的心理刻画，两位母亲形象的表现，都是相当具有感染力的。值得一提的是，本片大量致敬了以往的经典电影：《肖申克的救赎》，《活埋》，《蒙太奇》，《控方证人》，
-《天才枪手》，《猫鼠游戏》，《杀人回忆》等。在这里面，需要重点介绍一下《活埋》、《蒙太奇》和《杀人回忆》三部电影在本片中的作用。</p>
-<p>就讲述手段来看，本片仍然有比较显著的缺点，这重点体现了电影的开头和结尾两个部分。如果说本片一开头就致敬《活埋》并且将其作为一个伏笔的话，也未免太过着急或显眼。这段回忆式的致敬，也即对《肖申克的救赎》和《活埋》场景的再现，让观众在看完本片之后，难免会产生着墨过多的冗余感。这导致了两个问题：（1）电影的引入太过生硬；（2）电影的节奏难以统一。在电影结尾部分，导演显然致敬了韩国电影《杀人回忆》，以此将话语权交换给观众，让观众发声。这样的处理自然没有问题，然而，在国产电影标注Happy
-Ending的设定下，影片的结尾部分显然出现了导演表现力上的断裂：一方面，导演想让观众自我评判电影及男主的行为，另一方面，受制于各种不可描述的环境，导演又不得不以“坏人自白”和“好人自首”来草草收尾，这必然导致电影中期紧张的节奏和后期好人齐唱社会好的慢节奏形成冲突，导演再次致敬《杀人回忆》的结尾，就有狗尾续貂之嫌。</p>
-<p>抛开这两点显著的不足来看，本片在故事的讲述上无疑是成功的。中期影片节奏把控得相当精准，既能保持较快的节奏，时刻抓住观众想要知道后续的心，又能娓娓道来，不遗漏重要细节。譬如影片中间，男主到现场看新警察局装修情况的桥段，就在短短几分钟的情节内告诉了观众几个重要的细节：（1）男主仔细观察了地上的坑，再联系最后说尸体埋藏地点不方便透露，观众可以很简单地猜测到埋藏地点；（2）被子弹射死的山羊，是成为“替罪羊”的关键之物；（3）警官公报私仇，与李维杰进一步结怨，成为后面他引发众怒的导火索。</p>
-<p>另外一个值得注意的细节是，本片多次出现白色山羊，这显然是导演有意为之。在此，我引用豆瓣上的一篇影评对此的分析（
-https://movie.douban.com/review/12076729/ ），摘录如下：</p>
-<p>电影中羊的四次出现：第一次在湖边看到男主抛车（知道男主有罪），第二次被警察打死（代替男主受罚），第三次开棺验尸（作为替罪羊，帮男主掩埋真相），第四次男主决定认罪后，活羊重新出现，寺庙响起钟声（都预示着男主释然，已经放下心结，决心认罪接受惩罚）。</p>
-<h1 id="画面与音乐">画面与音乐</h1>
-<p>导演非常擅长使用电影中画面和音乐的技巧。电影中的音乐是烘托气氛和人物内心活动的重要工具，而画面则直接决定了观众的视觉体验。由于笔者缺乏视听的专业知识，难以用简洁明了的话语概括，故在此引用豆瓣另一篇影评对此的分析（
-https://movie.douban.com/review/12090128/ ），摘录如下：</p>
-<h2 id="交叉蒙太奇">交叉蒙太奇</h2>
-<p>这版《误杀》将“听经”改为“泰拳”，在电影前半段，就有一段很精彩的拳赛段落，这段拳赛是和素察上门交叉剪辑在一起的。</p>
-<p>李维杰之所以利用看拳赛为全家制造不在场证明，是因为“误杀”这件事发生的同时，也就是2号晚上，他就在看拳赛。</p>
-<p>李维杰2号出差给罗统的酒店维修网络，晚上完工后看到酒店房间塞的小卡片，决定去看泰拳休闲娱乐。同时，官二代素察来到灿班镇李维杰家里调戏大女儿，并与察觉不对劲的妈妈阿玉产生冲突。</p>
-<p>在这同一时间，不同空间，李维杰在看泰拳纠打，阿玉和大女儿在和素察纠打。导演对这两段戏采用了交叉蒙太奇的手法。</p>
-<p>一边是泰拳拳手踢到肚子，一边素察踢到阿玉，一边拳手倒地，一边素察倒地……而且“拳赛”和“误杀”两边的镜头时长越来越短，镜头切换越来越快，节奏也越来越紧张。</p>
-<p>通过这一手段，导演将李维杰完全不知情的状态，与官二代对妻女的欺凌和误杀剪辑在一起，观众在这段观影过程中是全知视角，神经逐渐被绷紧。</p>
-<p>这段交叉蒙太奇，既完成了误杀官二代的过程，又给后知后觉的李维杰出了一个难题。观众在紧张过后，心理继续被剧情调动：接下来李维杰和全家该怎么办？</p>
-<h2 id="慢镜头">慢镜头</h2>
-<p>《误杀》中的“慢镜头”大概有10次以上。</p>
-<p>尤其是最后在大雨里开棺启尸那场终极对决，几乎整段都使用了慢动作镜头。</p>
-<p>使用慢镜头的目的大概分为“制造滑稽效果”、“强调心理对时间的感受”或“凸显某一重要时刻”等，这部电影多次使用慢镜头的目的肯定是后两个。</p>
-<p>比如李维杰销毁素察的车这段戏，当时人物心理非常紧张。李维杰看到高速路上警察设卡和牧羊人路过时，都用慢镜头来强化李维杰当时紧张的心情。</p>
-<p>最后大雨是全片的高潮。慢镜头配上暴雨的场面调度，雨滴的速度也被放慢，不仅制造出震撼的视觉效果，也通过刻意放慢速度，主观上加长寻找尸体的时间，提升李维杰最后一击的震惊感。</p>
-<h2 id="布光">布光</h2>
-<p>《误杀》中利用布光塑造人物和烘托氛围最明显的，就是陈冲饰演的女警察局长。</p>
-<p>女警察局长这个角色非常复杂，她既要在下属面前树威，又迟迟攻破不了李维杰的手段，还要忍受母亲失去儿子的巨大痛苦，同时还得顾忌丈夫竞选市长。</p>
-<p>所以，导演对陈冲出场戏份的布光特别丰富。有一个镜头是陈冲在灿班镇警察局，脸上是百叶窗投下的如钢锯般的光影。这种非常特殊的光影投射在人物脸上，体现出当时人物内心巨大的痛苦和矛盾。</p>
-<p>除了陈冲，导演对主角李维杰和阿玉的布光也做了精心安排。</p>
-<p>比如李维杰从罗统回到家后，得知大女儿被侮辱，妻女又把素察误杀，从此全片的影调全部变成低调光（low
-key）。</p>
-<p>李维杰在得知这一痛心+震惊的消息时，脸上几乎没有打光。这样处理，非常鲜明地表现了李维杰和一家人的生活从此陷入黑暗。他们要在一点点微光中，找寻希望。</p>
-<p>观影时可以注意，电影仅仅在前15分钟和后15分钟有比较明亮的打光，从误杀案后就再无亮光，全片影调变得非常暗。</p>
-<h2 id="特殊音效">特殊音效</h2>
-<p>如果仔细听，电影在很多重要时刻都加入了特殊音效来渲染气氛。比如电影最后开棺，当镜头中显示的尸体不是素察而是一只羊时，背景音给了一声巨响，用来增强观众此时的心理感受。</p>
-<h1 id="主题与立意">主题与立意</h1>
-<p>关于本片的主题与立意，不同的观众自然有不同的想法。在这里，我认为有以下三点是比较明显的，即“法律正义”、“子女教育”与“选择冲突”。</p>
-<h2 id="法律正义">法律正义</h2>
-<p>法律是不是代表了正义？这是一个没有答案的问题。如果法律保证了正义，那么为什么还会有如此多不正义的事情发生？李维杰一家是受害者，但却不得不背负着杀人偿命的罪煞费心机制造一系列不在场证明（尽管杀人的事实客观成立）；但如果说法律不是正义，那么从客观来讲，它的确是保障社会稳定的最有效方法。警长的公报私仇最终还是遭到了愤怒民众的惩罚，滥用私权的局长拉韫也被撤职，正义还是到了。然而，在这正义之下，我们看到的，只有一个双输的局面：局长方全面溃败，李维杰方全家也将面临牢狱之灾。在这种法律正义的庇护之下，没有任何一方的权益得到了满足，也没有任何一个人获得了切实的好处。</p>
-<p>追根到底，这还是法律正义性的缺陷导致的必然结果。如果素察不是局长的儿子，李维杰一家人会得到应有的正义吗？如果李维杰没有看过那么多电影，或者一开始就束手就擒，平平被侮辱的真相能得到审判吗？尽管我们想要去解决这个问题，但现实是，人性的复杂根本无法用简单的“正义”得以阐释。法律无法接纳家长对子女的爱与纵容，也无法兼容“理性的公义”与“感性的迁就”的平衡。</p>
-<h2 id="子女教育">子女教育</h2>
-<p>子女教育是本片第二个十分明确的立意。小女儿安安目睹了母亲和姐姐杀人埋尸的全过程，然而却在父亲的指导下学会了如何撒谎。这在本片结尾她篡改分数体现得淋漓尽致。本来应该是天真无邪的女儿，却因为自己做的这个事情熟练地学会了如何撒谎、如何欺骗，相比“误杀”，这让男主是更难以接受的。注意到在这个时候，此刻男主一家已经完全不会被追查了：拉韫一家无权无势，所有证据烟消云散，没有人证、没有物证，他完全可以选择逍遥法外。然而，男主最后竟然选择了自首，这岂不是让他之前做的一切都白费了吗？如此说不通的逻辑，是在两件事之后得到的转变：（1）女儿修改成绩的试卷：身为父亲却言传身教教会了女儿最不能学会的恶习，这在男主心中是难以承担的。通过路人的口，我们知道男主自幼丧亲，如何做人是他立身之本，他可以为了家人背叛他的原则（在影片开头，他向僧人布施的情节可以体现他是一个对自身要求很高的人），也可以为了家人（女儿）重拾他的原则；（2）寺庙里的醒悟：寺庙是男主最后的救赎。当他第二次向僧人布施遭到拒绝的时候，他实际上内心是煎熬的。但在最后，为了暴乱不再延续，为了子女成长，他选择了“挡在最前面”，得到内心的自由。</p>
-<p>在素察方面，由于其父亲的疏于管教，母亲的溺爱，其最终的结局无非是“大快人心”的。和现实结合的同时，观众也能感受到父母对子女教育的重要性。身为警长的母亲，掌握着执法权而选择了包庇有过错的儿子；身为政客的父亲，只能责打自己的儿子来管教他。无法用公平的武器制裁亲人的犯罪，无法用有效的裁断约束亲人的叛逆，这样的警官，这样的政客，你们敢信任吗？正如在影片最后，男主在囚车中的自白一样，最后他竟然以这样的方式取得女儿的信任，这是荒诞而遗憾的。无论他之前在教育中出现了如何的问题，至少在现在，他用自己的行为证明了，他是一个伟大的父亲。</p>
-<h2 id="选择冲突">选择冲突</h2>
-<p>另外一个值得注意的点是，男主的选择奠定了本片的基调。本片有一个重复提及的细节：一开始，素察被平平击昏时，并没有当场死去。理由如下：（1）女主推车出去时，镜头给了素察一个手部特写；（2）男主多次凝视棺材；（3）男主第二次向僧人布施时遭到了拒绝，并且镜头显示了男主十分惊慌的表情；（4）影片高潮，揭开棺材时，棺材板上血淋淋的抓痕（这是最直接的证据，这表明素察是活活被憋死，或者被男主直接杀害的）；（5）影片最后，男主对局长夫妇致歉；（6）男主最后自首。结合这些或明或暗的事实，我们不难推出：在仓库素察只是被击昏，而真正导致素察死亡的原因是男主，为了“不让自己的家人受到伤害”，所以他选择了杀死素察，或见死不救。这个地方影片也有充分的暗示，一是影片开头致敬电影《活埋》的桥段，可以认为素察是被“活埋”致死；二是镜头给了被子弹射死的山羊的特写。</p>
-<p>以男主的标准来看，他在救与不救之间是经过了痛苦的煎熬的：小女儿安安用叉子划桌子的声音和素察在棺材里绝望地用手划棺材盖的声音是相似的。但最终，他选择了保护家人，直接或间接地杀死了素察。在影片结尾，他选择自首这点上，他没有欺骗，只是除了他自己之外，任何人都不知道，他只能用这种方式，对局长夫妇、对无辜的被他利用的路人、对自己的家人，表达愧疚，与忏悔。</p>
-<p>男主是纯粹的，而往往纯粹的人最容易陷入万劫不复的矛盾之中。</p>
-]]></content>
-      <categories>
-        <category>电影 - 国产电影</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>影评</tag>
+        <tag>游戏</tag>
       </tags>
   </entry>
   <entry>
@@ -3738,8 +3817,8 @@ href="https://naidb.miraheze.org/wiki/Image_Generation">NovelAI图像生成注�
         <category>随笔</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>计算机</tag>
+        <tag>随笔</tag>
         <tag>游戏</tag>
         <tag>深度学习</tag>
         <tag>工具</tag>
@@ -5661,9 +5740,9 @@ href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
         <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -6353,9 +6432,9 @@ BVH效率对比更加突出，我在<code>main.cpp</code>中连续调用了100�
         <category>数学 - 图形学</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
         <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
         <tag>游戏</tag>
         <tag>作业</tag>
       </tags>

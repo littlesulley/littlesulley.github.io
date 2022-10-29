@@ -33,13 +33,14 @@
 <meta property="og:description" content="凹凸贴图（Bump mapping）是图形学中一种常用的用于改变物体视觉凹凸性的方法，但是网上很多介绍对它的原理和变体都非常模糊，甚至包含一些关键概念的错误。本文将详细介绍凹凸贴图及其变体（Normal Mapping和Displacement Mapping）的原理，并在代码上加以实现，以便让读者更好地理解这项技术。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://sulley.cc/images/bump-map/1-1.png">
+<meta property="og:image" content="http://sulley.cc/images/bump-map/1-2.png">
 <meta property="og:image" content="http://sulley.cc/images/bump-map/2-1.png">
 <meta property="article:published_time" content="2022-10-12T10:39:31.000Z">
-<meta property="article:modified_time" content="2022-10-29T13:22:36.565Z">
+<meta property="article:modified_time" content="2022-10-29T16:45:37.391Z">
 <meta property="article:author" content="Sulley">
-<meta property="article:tag" content="数学">
-<meta property="article:tag" content="随笔">
 <meta property="article:tag" content="计算机">
+<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="数学">
 <meta property="article:tag" content="游戏">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://sulley.cc/images/bump-map/1-1.png">
@@ -169,9 +170,9 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%B9%E5%87%B8%E8%B4%B4%E5%9B%BEbump-mapping"><span class="nav-number">1.</span> <span class="nav-text">凹凸贴图（Bump Mapping）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E7%A9%BA%E9%97%B4%E4%B8%AD%E7%9A%84%E6%B3%95%E7%BA%BF"><span class="nav-number">1.1.</span> <span class="nav-text">纹理空间中的法线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E7%A9%BA%E9%97%B4%E4%B8%96%E7%95%8C%E7%A9%BA%E9%97%B4%E4%B8%8Etbn%E7%9F%A9%E9%98%B5"><span class="nav-number">1.2.</span> <span class="nav-text">纹理空间，世界空间与TBN矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%AD%A3%E4%BA%A4%E5%8C%96"><span class="nav-number">1.2.1.</span> <span class="nav-text">为什么要正交化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%95%E5%90%91%E9%87%8F%E7%9A%84%E6%96%B9%E5%90%91"><span class="nav-number">1.2.2.</span> <span class="nav-text">法向量的方向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E7%BA%BF%E7%A9%BA%E9%97%B4%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">切线空间的优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#games-101-%E4%BD%9C%E4%B8%9A%E4%B8%89%E4%B8%AD%E7%9A%84bump-mapping"><span class="nav-number">1.2.4.</span> <span class="nav-text">GAMES 101 作业三中的Bump
-Mapping</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%96%E7%95%8C%E7%A9%BA%E9%97%B4%E4%B8%AD%E7%9A%84%E6%B3%95%E7%BA%BF"><span class="nav-number">1.3.</span> <span class="nav-text">世界空间中的法线</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BEnormal-mapping"><span class="nav-number">2.</span> <span class="nav-text">法线贴图（Normal Mapping）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%8D%E7%A7%BB%E8%B4%B4%E5%9B%BEdisplacement-mapping"><span class="nav-number">3.</span> <span class="nav-text">位移贴图（Displacement
-Mapping）</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%B9%E5%87%B8%E8%B4%B4%E5%9B%BEbump-mapping"><span class="nav-number">1.</span> <span class="nav-text">凹凸贴图（Bump Mapping）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E7%A9%BA%E9%97%B4%E4%B8%AD%E7%9A%84%E6%B3%95%E7%BA%BF"><span class="nav-number">1.1.</span> <span class="nav-text">纹理空间中的法线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E7%A9%BA%E9%97%B4%E4%B8%96%E7%95%8C%E7%A9%BA%E9%97%B4%E4%B8%8Etbn%E7%9F%A9%E9%98%B5"><span class="nav-number">1.2.</span> <span class="nav-text">纹理空间，世界空间与TBN矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%AD%A3%E4%BA%A4%E5%8C%96"><span class="nav-number">1.2.1.</span> <span class="nav-text">为什么要正交化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%95%E5%90%91%E9%87%8F%E7%9A%84%E6%96%B9%E5%90%91"><span class="nav-number">1.2.2.</span> <span class="nav-text">法向量的方向</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BEnormal-mapping"><span class="nav-number">2.</span> <span class="nav-text">法线贴图（Normal Mapping）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#games-101-%E4%BD%9C%E4%B8%9A%E4%B8%89%E4%B8%AD%E7%9A%84bump-mapping"><span class="nav-number">3.</span> <span class="nav-text">GAMES 101 作业三中的Bump
+Mapping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%8D%E7%A7%BB%E8%B4%B4%E5%9B%BEdisplacement-mapping"><span class="nav-number">4.</span> <span class="nav-text">位移贴图（Displacement
+Mapping）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -307,7 +308,7 @@ Mapping）</span></a></li></ol></div>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-10-29 21:22:36" itemprop="dateModified" datetime="2022-10-29T21:22:36+08:00">2022-10-29</time>
+      <time title="修改时间：2022-10-30 00:45:37" itemprop="dateModified" datetime="2022-10-30T00:45:37+08:00">2022-10-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -347,14 +348,14 @@ Mapping）</span></a></li></ol></div>
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>6.9k</span>
+      <span>9.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>6 分钟</span>
+      <span>9 分钟</span>
     </span>
 </div>
 
@@ -557,12 +558,10 @@ class="math inline">\(F^{-1}\)</span>的最后一步，我们还要把这三个�
 \]</span></p>
 <p>这样一来，<span
 class="math inline">\(\mathbf{t},\mathbf{b},\mathbf{n}\)</span>就是两两正交的单位向量了，从而就得到了逆变换<span
-class="math inline">\(F^{-1}=\begin{bmatrix}\mathbf{t}&amp;\mathbf{b}&amp;\mathbf{n}\end{bmatrix}\)</span></p>
-<p>解出<span
-class="math inline">\(\mathbf{a},\mathbf{b}\)</span>之后，我们令<span
-class="math inline">\(\mathbf{t}\gets\text{normalize}(\mathbf{a}),\mathbf{b}\gets\text{normalize}(\mathbf{b})\)</span>，再加上之前得到的<span
-class="math inline">\(\mathbf{n}\)</span>，就得到了逆变换<span
-class="math inline">\(F^{-1}=\begin{bmatrix}\mathbf{t}&amp;\mathbf{b}&amp;\mathbf{n}\end{bmatrix}\)</span>。</p>
+class="math inline">\(F^{-1}=\begin{bmatrix}\mathbf{t}&amp;\mathbf{b}&amp;\mathbf{n}\end{bmatrix}\)</span>。由上面的过程可知，我们其实不用真正解出<span
+class="math inline">\(\mathbf{b}\)</span>，因为它可以通过<span
+class="math inline">\(\mathbf{n}\)</span>与<span
+class="math inline">\(\mathbf{t}\)</span>的叉乘求得。</p>
 <p>你也许会问，上面的推导过程我们为什么不直接用三角形的三个顶点，而要去用它的边呢？这是因为，<strong>向量</strong>和<strong>点</strong>本质上是不同的，尽管它们都可以用一个三维坐标表示。比如三维空间中的一个物体，它某个点的法向量是<span
 class="math inline">\((0,0,1)\)</span>，把物体整体平移了之后，这个点的坐标发生了变化，但是它的法向量还是<span
 class="math inline">\((0,0,1)\)</span>。既然我们只是向量感兴趣，那么所有的操作都是基于向量进行的。这一点务必理解。</p>
@@ -577,6 +576,19 @@ class="math inline">\(\mathbf{n}\)</span>的切平面。对纹理空间中任意
 class="math inline">\(\mathbf{w}\)</span>，都可以左乘这个矩阵得到对应的世界空间中的法向量<span
 class="math inline">\(\mathbf{n}&#39;=F^{-1}\mathbf{w}&#39;\)</span>。它定义的空间就称为<strong>切线空间</strong>，而矩阵<span
 class="math inline">\(F^{-1}\)</span>就是所谓的TBN矩阵。</p>
+<p>如果你还不理解，就这么思考。现在在纹理空间中有一个法向量<span
+class="math inline">\(\mathbf{w}&#39;\)</span>，它的坐标是基于<span
+class="math inline">\((1,0,0),(0,1,0),(0,0,1)\)</span>这三个标准正交基表示的。现在，需要把这个标准正交基“旋转”到世界空间中，让<span
+class="math inline">\((0,0,1)\)</span>和原来的法向量<span
+class="math inline">\(\mathbf{n}\)</span>对齐，再让另外两个轴旋转到某一个方向，这个方向能够反应三角形两条边的纹理变化方向。这样一来，<span
+class="math inline">\(\mathcal{w}&#39;\)</span>就能表示在这个新的基上的线性组合，得到的就是真实世界中变换后的法向量<span
+class="math inline">\(\mathbf{n}&#39;\)</span>。这个过程如下图所示（<span
+class="math inline">\(n(S_q,t_q)\)</span>就是这里的<span
+class="math inline">\(\mathbf{n}&#39;\)</span>，<span
+class="math inline">\(z=n_q\)</span>就是这里的<span
+class="math inline">\(\mathbf{n}\)</span>，<span
+class="math inline">\(xyz\)</span>定义的空间就是<strong>切线空间</strong>，它位于真实空间内）：</p>
+<p><img data-src="/images/bump-map/1-2.png" /></p>
 <p>如果你认真思考，就会问出下面两个问题：</p>
 <ol type="1">
 <li>为什么需要正交化？不是我们直接出了<span
@@ -589,22 +601,64 @@ class="math inline">\(\mathbf{n}\)</span>的相对位置关系正确吗？</li>
 </ol>
 <p>下面我们来依次回答这两个问题。</p>
 <h3 id="为什么要正交化">为什么要正交化</h3>
+<p>这个问题的答案很简单：<strong>因为计算改变后的法向量<span
+class="math inline">\(\mathbf{w}&#39;\)</span>时是基于纹理空间进行的，而纹理空间一般来说（暂不考虑畸变的情况）就是由三个标准的正交基<span
+class="math inline">\(UVW\)</span>组成的。</strong></p>
+<p>举个例子，某点<span class="math inline">\(P\)</span>的法向量是<span
+class="math inline">\(\mathbf{n}\)</span>，是个可以任意改变的向量，它在纹理空间中对应了点<span
+class="math inline">\((u,v)\)</span>的一个向量<span
+class="math inline">\((0,0,1)\)</span>，这个我们之前已经明确了。现在，假设我们计算出来的改变后的法向量<span
+class="math inline">\(\mathbf{w}&#39;=(u&#39;,v&#39;,0)\)</span>正好在<span
+class="math inline">\(UV\)</span>平面上，也就是与<span
+class="math inline">\((0,0,1)\)</span>垂直，那么此时，如果我们直接用<span
+class="math inline">\(\mathbf{a},\mathbf{b},\mathbf{c}\)</span>把<span
+class="math inline">\(\mathbf{w}&#39;\)</span>映射回真实空间，那么我们会得到一个在三角形<span
+class="math inline">\(ABC\)</span>所定义的平面上的一个法向量<span
+class="math inline">\(\mathbf{n}&#39;=u&#39;\mathbf{a}+v&#39;\mathbf{b}\)</span>，这个法向量<strong>不一定</strong>和原来的法向量<span
+class="math inline">\(\mathbf{n}\)</span>，因为三角形<span
+class="math inline">\(ABC\)</span>不一定和<span
+class="math inline">\(\mathbf{n}\)</span>垂直。显然，<span
+class="math inline">\(\mathbf{n}&#39;\)</span>与<span
+class="math inline">\(\mathbf{n}\)</span>就没能保持在纹理空间中<span
+class="math inline">\(\mathbf{w}\)</span>与<span
+class="math inline">\(\mathbf{w}&#39;\)</span>一致的相对关系，即垂直关系。</p>
+<p>所以，为了得到正确的相对关系，我们必须让求得的<span
+class="math inline">\(\mathbf{a},\mathbf{b},\mathbf{c}\)</span>保持正交关系，正如在纹理空间中一样，这样才能让纹理空间中变换前后的法向量与真实空间中变换前后的法向量保持一致的相对关系。</p>
+<p>那这样一来，<span
+class="math inline">\(\mathbf{g}_1\)</span>不就不能映射回<span
+class="math inline">\(\mathbf{e}_1\)</span>了吗？对的，但是我们实际上真正关心的是<strong>法向量</strong>而不是三角形的某个边，它只是用来帮助我们构造TBN矩阵的工具，所以映射不回去也没有关系了。</p>
 <h3 id="法向量的方向">法向量的方向</h3>
-<h3 id="切线空间的优点">切线空间的优点</h3>
-<h3 id="games-101-作业三中的bump-mapping">GAMES 101 作业三中的Bump
-Mapping</h3>
-<h2 id="世界空间中的法线">世界空间中的法线</h2>
-<p>当我们得到<span
-class="math inline">\(\mathbf{w}&#39;\)</span>之后，只需要左乘<span
-class="math inline">\(F^{-1}\)</span>就能得到世界空间中变换后的坐标<span
-class="math inline">\(\mathbf{n}&#39;=F^{-1}\mathbf{w}&#39;\)</span>了。</p>
-<p>下面我们举个简单的例子。假定世界空间中有个三角形<span
-class="math inline">\(A(0,0,0),B(1,0,0),C(0,0,1)\)</span>，其上有一个点<span
-class="math inline">\(P(\frac{1}{2},0,\frac{1}{2})\)</span>，其法线<span
-class="math inline">\(\mathbf{n}=(\frac{\sqrt{3}}{3},\frac{\sqrt{3}}{3},\frac{\sqrt{3}}{3})^\top\)</span>，点<span
-class="math inline">\(A,B,C\)</span>对应的纹理坐标分别为<span
-class="math inline">\((0,0),(2,0),(0,1)\)</span>，且假定我们已经计算出来纹理空间中变换后的法向量为<span
-class="math inline">\(\mathbf{w}&#39;=(\frac{\sqrt{2}}{2},0,\frac{\sqrt{2}}{2})^\top\)</span>。</p>
+<p>紧接着就会有另一个问题：正交基，也就是切线空间有了，但是你怎么保证向量<span
+class="math inline">\(\mathbf{t},\mathbf{b}\)</span>的方向是正确的呢？或者说，经过变换后的真实空间的法向量<span
+class="math inline">\(\mathbf{n}&#39;=F^{-1}\mathbf{w}&#39;\)</span>的<strong>反向</strong>是否是正确的。你可以想象变换后的法向量<span
+class="math inline">\(\mathbf{n}&#39;\)</span>在绕着原来的法向量<span
+class="math inline">\(\mathbf{n}\)</span>以相同的夹角旋转（它们的起点相同），从而可以形成一个锥形，那么到底哪个方向才是真正的<span
+class="math inline">\(\mathbf{n}&#39;\)</span>呢？</p>
+<p>答案是：<strong>在凹凸贴图中不能保证方向的正确性，但误差是可以接受的</strong>。回想一下，我们在求解<span
+class="math inline">\(\mathbf{a},\mathbf{b},\mathbf{c}\)</span>时，让纹理空间中的<span
+class="math inline">\((0,0,1)\)</span>对应到真实空间的法向量<span
+class="math inline">\(\mathbf{n}\)</span>，这是没有问题的。然后把三角形的边和它在纹理空间中的纹理坐标向量进行对齐，进而求得<span
+class="math inline">\(\mathbf{a},\mathbf{b}\)</span>。这里其实做了一个假设，三角形内部的点的纹理坐标是可以通过三角形三个顶点的纹理坐标进行<strong>线性插值</strong>得到的。当然严格来讲，这不一定成立，因为任何一个点的纹理坐标都是可以任意指定的，但是一般来说，我们在制作纹理贴图的时候，会把模型作为一个整体制作，这基本上也就是一个线性关系。</p>
+<p>因为我们是把<span
+class="math inline">\(\mathbf{g}_1\)</span>映射到<span
+class="math inline">\(\mathbf{e}_1\)</span>、把<span
+class="math inline">\(\mathbf{g}_2\)</span>映射到<span
+class="math inline">\(\mathbf{e}_2\)</span>的，只要纹理贴图制作得比较规范，即便正交化了<span
+class="math inline">\(\mathbf{a},\mathbf{b}\)</span>，经过TBN矩阵转换后的世界空间的法向量<span
+class="math inline">\(\mathbf{w}&#39;\)</span>也不会偏离真实的法向量太远。这里可以顺便回答为什么在进行正交化的时候是<span
+class="math inline">\(\mathbf{n}\times \mathbf{t}\)</span>而不是<span
+class="math inline">\(\mathbf{t}\times
+\mathbf{n}\)</span>，这是因为在纹理空间中，<span
+class="math inline">\(\mathbf{n}\)</span>对应了<span
+class="math inline">\(\mathbf{w}=(0,0,1)\)</span>，<span
+class="math inline">\(\mathbf{t}\)</span>对应了<span
+class="math inline">\(\mathbf{u}=(1,0,0)\)</span>，如果要得到<span
+class="math inline">\(\mathbf{v}=(0,1,0)\)</span>，就只能是<span
+class="math inline">\(\mathbf{w}\times\mathbf{u}\)</span>。这对应到真实空间中，就是<span
+class="math inline">\(\mathbf{n}\times \mathbf{t}\)</span>。</p>
+<p>值得一提的是，在<strong>法线贴图</strong>中是可以保证变换后的法线<span
+class="math inline">\(\mathbf{n}&#39;\)</span>的方向是正确的，这个我们下面讲到法线贴图的时候稍加解释。</p>
+<p>上面说了这么多，切线空间带来的最大好处是，它和真实空间是一种相对关系，这意味着我们不需要为模型在每个不同的位置都制作贴图，极大减少了工作的复杂度，也更加灵活。</p>
 <h1 id="法线贴图normal-mapping">法线贴图（Normal Mapping）</h1>
 <p>在了解了凹凸贴图之后，法线贴图就很自然了。在凹凸贴图中，纹理空间中变换后的法线<span
 class="math inline">\(\mathbf{w}&#39;\)</span>是要手动去计算的，那为什么我们不直接把法线存储在这个点呢，就像一张RGB纹理图一样。</p>
@@ -615,10 +669,36 @@ class="math inline">\([0,1]\)</span>中。那么为什么我们看到一般的�
 class="math inline">\(z\)</span>值比较大，就对应到RGB的蓝色值偏大，所以使得整个图呈现偏蓝的颜色。</p>
 <p>下图左侧是凹凸贴图，用灰度值表示每个点的高度；右侧是法线贴图，每个点都是一个RGB值。</p>
 <p><img data-src="/images/bump-map/2-1.png" /></p>
-<p>在从法线贴图中获取了变换后的法线之后，仍然需要像凹凸贴图一样，左乘<span
-class="math inline">\(F^{-1}\)</span>得到世界空间中变换后的法线。</p>
+<p>在从法线贴图中获取了变换后的法线之后，仍然需要像凹凸贴图一样，首先计算得到<span
+class="math inline">\(\mathbf{a},\mathbf{b},\mathbf{c}\)</span>，然后再正交化得到TBN矩阵，最后左乘TBN矩阵就了得到世界空间中变换后的法线。</p>
+<p>现在可以回答之前的一个问题：为什么使用法线贴图得到的变换后的法向量<span
+class="math inline">\(\mathbf{n}&#39;\)</span>就能保证它和<span
+class="math inline">\(\mathbf{n}\)</span>的相对关系是正确的？这是因为，<span
+class="math inline">\(F^{-1}=\begin{bmatrix}\mathbf{t}&amp;\mathbf{b}&amp;\mathbf{n}\end{bmatrix}\)</span>是一个正交矩阵，它代表的是把纹理空间中的法向量转换到世界空间中的法向量；那么它的逆（也就是它的转置，因为是正交矩阵）<span
+class="math inline">\(F\)</span>，就能够把世界空间中的法向量变换到纹理空间中的法向量。所以，给定一个模型（或者三角形），在制作它对应的法线贴图的时候，只要按照<span
+class="math inline">\(F\mathbf{n}&#39;\)</span>的方式在纹理空间中存储法线（<span
+class="math inline">\(\mathbf{n}&#39;\)</span>是艺术家制作决定的），就能通过逆变换<span
+class="math inline">\(F^{-1}\)</span>还原真实空间的法线。也就是说，只要存储和调用都用这样的<strong>同一套变换矩阵</strong>，得到的法线就一定是正确的。</p>
+<p>光线、观察方向等实际上也都是一种法向量，它自然也能被映射到纹理空间中，直接和<span
+class="math inline">\(\mathbf{w}&#39;\)</span>进行计算，而不需要把所有点都经过TBN矩阵变换到世界空间中再做Shading，这样一来就降低了计算量。</p>
+<h1 id="games-101-作业三中的bump-mapping">GAMES 101 作业三中的Bump
+Mapping</h1>
+<p>所以，从根本上讲，切线空间除了<span
+class="math inline">\(\mathbf{n}\)</span>需要被作为Z轴是明确的之外，剩下的两个轴（实际上是一个轴，也就是所谓的Tangents，另一个轴可以通过叉积求得）都是可以手动定义的。</p>
 <h1 id="位移贴图displacement-mapping">位移贴图（Displacement
 Mapping）</h1>
+<h1 id="参考文献">参考文献</h1>
+<p><a
+target="_blank" rel="noopener" href="https://blog.matrixs.site/post/2022-01-07-%E8%A8%88%E7%AE%97%E6%A9%9F%E5%9C%96%E5%BD%A2%E5%AD%B8-games101%E4%BD%9C%E6%A5%AD3%E8%A3%9C%E5%85%85/%E5%9C%96%E5%BD%A2%E5%AD%B8%E7%B3%BB%E5%88%97_games101-homework3-normalmaps_and_bumpmaps_and_displacementmaps.html">圖形學系列
+Games101-Homework3-NormalMaps and BumpMaps and
+DisplacementMaps</a><br />
+<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/139593847">切线空间（Tangent
+Space）完全解析</a><br />
+<a
+target="_blank" rel="noopener" href="https://learnopengl-cn.github.io/05%20Advanced%20Lighting/04%20Normal%20Mapping/#_1">LearnOpenGL
+CN法线贴图</a><br />
+<a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/tiancaiwrk/p/11132437.html">深入浅出之切空间</a></p>
 
     </div>
 
@@ -709,9 +789,9 @@ Algorithm是计算机图形学中用于画直线的算法，它只涉及整型�
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
-              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
               <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
+              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
               <a href="/tags/%E6%B8%B8%E6%88%8F/" rel="tag"># 游戏</a>
           </div>
 
@@ -763,13 +843,13 @@ Algorithm是计算机图形学中用于画直线的算法，它只涉及整型�
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">271k</span>
+    <span title="站点总字数">273k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:06</span>
+    <span title="站点阅读时长">4:08</span>
   </span>
 </div>
 <div class="busuanzi-count">
