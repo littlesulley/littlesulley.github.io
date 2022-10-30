@@ -190,27 +190,6 @@ class="math inline">\(0&lt;k\le
       </tags>
   </entry>
   <entry>
-    <title>Motion Matching -- 概念与发展</title>
-    <url>/2022/03/27/08/38/</url>
-    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
-Matching基本知识的介绍，放在此备份。</p>
-<span id="more"></span>
-<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
-]]></content>
-      <categories>
-        <category>游戏 - 动画</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>随笔</tag>
-        <tag>数学</tag>
-        <tag>动画</tag>
-        <tag>游戏</tag>
-        <tag>机器学习</tag>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《Assassain&#39;s Creed Valhalla》玩后感</title>
     <url>/2020/11/12/23/23/</url>
     <content><![CDATA[<p><code>刺客信条：英灵殿</code>（Assassin's Creed
@@ -269,6 +248,27 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
 <h2 id="latex">Latex</h2>
 <p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Motion Matching -- 概念与发展</title>
+    <url>/2022/03/27/08/38/</url>
+    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
+Matching基本知识的介绍，放在此备份。</p>
+<span id="more"></span>
+<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
+]]></content>
+      <categories>
+        <category>游戏 - 动画</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>游戏</tag>
+        <tag>数学</tag>
+        <tag>动画</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+      </tags>
   </entry>
   <entry>
     <title>无穷连根式求极限的充要条件</title>
@@ -507,6 +507,81 @@ Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷
       <tags>
         <tag>随笔</tag>
         <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一道有趣的概率题</title>
+    <url>/2022/10/20/23/59/</url>
+    <content><![CDATA[<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
+U(0,1)\)</span>独立同分布，令<span
+class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
+X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
+class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。换句话说，我们要求最先使得若干个独立同分布于<span
+class="math inline">\((0,1)\)</span>的随机变量之和大于<span
+class="math inline">\(1\)</span>的期望。</p>
+<span id="more"></span>
+<h1 id="问题定义">问题定义</h1>
+<p>这个问题的定义已经定义在上面了，这里再复述一遍：</p>
+<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
+U(0,1)\)</span>独立同分布，令<span
+class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
+X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
+class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。</p>
+<h1 id="引入函数">引入函数</h1>
+<p>乍一看这个题似乎无从下手，但是我们可以发现这里<span
+class="math inline">\(&gt;1\)</span>这个条件似乎可以换成任意一个<span
+class="math inline">\(&gt;t
+(t&gt;0)\)</span>，这启发我们用一个函数去表示我们要求的式子，然后通过求解一个“递推式”（实际上是一个微分方程）解出这个函数，进而得到某个具体点的值。</p>
+<p>从这个思路出发，我们不妨定义<span
+class="math inline">\(\tau_t:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le t
+\wedge X_1+\cdots+X_{n-1}+X_n&gt;t\}\)</span>，进而令<span
+class="math inline">\(f(t):=\mathbb{E}[X_1+\cdots+X_{\tau_t}]\)</span>。显然，我们的目标就是求<span
+class="math inline">\(f(1)\)</span>。</p>
+<h1 id="求解方程">求解方程</h1>
+<p>那么，怎么求出<span
+class="math inline">\(f(t)\)</span>呢？注意题目中的条件<span
+class="math inline">\(X_1,X_2,\cdots\sim
+U(0,1)\)</span>独立同分布，因此我们可以把<span
+class="math inline">\(f(t)\)</span>里面的<span
+class="math inline">\(X_1\)</span>拆出来，变成：</p>
+<p><span
+class="math display">\[f(t)=\mathbb{E}[X_1]+\mathbb{E}[X_2+\cdots+X_{\tau_t}]\]</span></p>
+<p>为了简便起见，我们不妨限定<span
+class="math inline">\(t&lt;0\)</span>。此时考虑两种情况：<span
+class="math inline">\(X_1=s&gt;t\)</span>和<span
+class="math inline">\(X_1=s\le t\)</span>。</p>
+<p>如果<span class="math inline">\(s&gt;t\)</span>，那么<span
+class="math inline">\(f(t)\)</span>就等于<span
+class="math inline">\(\mathbb{E}[X_1]\)</span>，所以这等价<span
+class="math inline">\(f(t|s&gt;t)=\mathbb{E}[X_1\vert
+X_1&gt;t]=\dfrac{1-t^2}{2}\)</span>。</p>
+<p>如果<span class="math inline">\(s\le
+t\)</span>，那么就相当于后面的<span
+class="math inline">\(X_2+\cdots+X_{\tau_t}&gt;t-s\)</span>且<span
+class="math inline">\(X_2+\cdots+X_{\tau_t-1}\le
+t-s\)</span>，再由独立同分布知道这就是<span
+class="math inline">\(f(t-s)\)</span>，但这是以<span
+class="math inline">\(X_t=s\le t\)</span>为条件的，所以实际上还要对<span
+class="math inline">\(s\)</span>求个积分，也就是：</p>
+<p><span class="math display">\[f(t|s\le
+t)=\frac{t^2}{2}+\int_{0}^tf(t-s)\mathrm{d}s\]</span></p>
+<p>把上面两个加起来，就有：</p>
+<p><span class="math display">\[f(t)=f(t|s\le
+t)+f(t|s&gt;t)=\frac{1}{2}+\int_0^tf(x)\mathrm{d}x\]</span></p>
+<p>进而得到微分方程及其初始值：</p>
+<p><span
+class="math display">\[f&#39;(t)=f(t),~~f(0)=\frac{1}{2}\]</span></p>
+<p>很容易求解得到<span
+class="math inline">\(f(t)=\mathrm{e}^t/2\)</span>，所以我们就能得到最终的答案<span
+class="math inline">\(f(1)=\mathrm{e}/2\)</span>。</p>
+]]></content>
+      <categories>
+        <category>数学 - 概率论</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+        <tag>概率论</tag>
       </tags>
   </entry>
   <entry>
@@ -774,178 +849,6 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
       </tags>
   </entry>
   <entry>
-    <title>一道有趣的概率题</title>
-    <url>/2022/10/20/23/59/</url>
-    <content><![CDATA[<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
-U(0,1)\)</span>独立同分布，令<span
-class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
-X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
-class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。换句话说，我们要求最先使得若干个独立同分布于<span
-class="math inline">\((0,1)\)</span>的随机变量之和大于<span
-class="math inline">\(1\)</span>的期望。</p>
-<span id="more"></span>
-<h1 id="问题定义">问题定义</h1>
-<p>这个问题的定义已经定义在上面了，这里再复述一遍：</p>
-<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
-U(0,1)\)</span>独立同分布，令<span
-class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
-X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
-class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。</p>
-<h1 id="引入函数">引入函数</h1>
-<p>乍一看这个题似乎无从下手，但是我们可以发现这里<span
-class="math inline">\(&gt;1\)</span>这个条件似乎可以换成任意一个<span
-class="math inline">\(&gt;t
-(t&gt;0)\)</span>，这启发我们用一个函数去表示我们要求的式子，然后通过求解一个“递推式”（实际上是一个微分方程）解出这个函数，进而得到某个具体点的值。</p>
-<p>从这个思路出发，我们不妨定义<span
-class="math inline">\(\tau_t:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le t
-\wedge X_1+\cdots+X_{n-1}+X_n&gt;t\}\)</span>，进而令<span
-class="math inline">\(f(t):=\mathbb{E}[X_1+\cdots+X_{\tau_t}]\)</span>。显然，我们的目标就是求<span
-class="math inline">\(f(1)\)</span>。</p>
-<h1 id="求解方程">求解方程</h1>
-<p>那么，怎么求出<span
-class="math inline">\(f(t)\)</span>呢？注意题目中的条件<span
-class="math inline">\(X_1,X_2,\cdots\sim
-U(0,1)\)</span>独立同分布，因此我们可以把<span
-class="math inline">\(f(t)\)</span>里面的<span
-class="math inline">\(X_1\)</span>拆出来，变成：</p>
-<p><span
-class="math display">\[f(t)=\mathbb{E}[X_1]+\mathbb{E}[X_2+\cdots+X_{\tau_t}]\]</span></p>
-<p>为了简便起见，我们不妨限定<span
-class="math inline">\(t&lt;0\)</span>。此时考虑两种情况：<span
-class="math inline">\(X_1=s&gt;t\)</span>和<span
-class="math inline">\(X_1=s\le t\)</span>。</p>
-<p>如果<span class="math inline">\(s&gt;t\)</span>，那么<span
-class="math inline">\(f(t)\)</span>就等于<span
-class="math inline">\(\mathbb{E}[X_1]\)</span>，所以这等价<span
-class="math inline">\(f(t|s&gt;t)=\mathbb{E}[X_1\vert
-X_1&gt;t]=\dfrac{1-t^2}{2}\)</span>。</p>
-<p>如果<span class="math inline">\(s\le
-t\)</span>，那么就相当于后面的<span
-class="math inline">\(X_2+\cdots+X_{\tau_t}&gt;t-s\)</span>且<span
-class="math inline">\(X_2+\cdots+X_{\tau_t-1}\le
-t-s\)</span>，再由独立同分布知道这就是<span
-class="math inline">\(f(t-s)\)</span>，但这是以<span
-class="math inline">\(X_t=s\le t\)</span>为条件的，所以实际上还要对<span
-class="math inline">\(s\)</span>求个积分，也就是：</p>
-<p><span class="math display">\[f(t|s\le
-t)=\frac{t^2}{2}+\int_{0}^tf(t-s)\mathrm{d}s\]</span></p>
-<p>把上面两个加起来，就有：</p>
-<p><span class="math display">\[f(t)=f(t|s\le
-t)+f(t|s&gt;t)=\frac{1}{2}+\int_0^tf(x)\mathrm{d}x\]</span></p>
-<p>进而得到微分方程及其初始值：</p>
-<p><span
-class="math display">\[f&#39;(t)=f(t),~~f(0)=\frac{1}{2}\]</span></p>
-<p>很容易求解得到<span
-class="math inline">\(f(t)=\mathrm{e}^t/2\)</span>，所以我们就能得到最终的答案<span
-class="math inline">\(f(1)=\mathrm{e}/2\)</span>。</p>
-]]></content>
-      <categories>
-        <category>数学 - 概率论</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>数学</tag>
-        <tag>概率论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>你为什么不笑了</title>
-    <url>/2022/10/29/00/35/</url>
-    <content><![CDATA[<p>你为什么不笑了？</p>
-<span id="more"></span>
-<p>奶奶，你为什么不笑了？<br />
-还记得，一年前的你，<br />
-走在春风里，<br />
-向着山顶慢慢登去。<br />
-你摘下路边的一朵浅梅，<br />
-捧在手心。<br />
-阳光洒下，<br />
-手中的梅花，也映衬出了你脸上的笑容。</p>
-<p>你的儿子女儿挽着你的手，<br />
-一步一步向山顶走去，<br />
-你看见一棵古树，<br />
-你说这是拍照好去处。<br />
-女儿扶着你，<br />
-你扶着树，<br />
-阳光洒下，<br />
-树上的绿叶，也甘愿陪衬你脸上的笑容。</p>
-<p>来到山顶，<br />
-黄花遍地，<br />
-你开心得像个孩子，<br />
-伸出双手，<br />
-比了两个大大的耶，<br />
-那时的你，真的好美。</p>
-<p>奶奶，从什么时候开始，你不笑了？<br />
-从拔掉爷爷呼吸机的那个夜晚开始，<br />
-你似乎一直睡得不好。<br />
-你还能梦见吗，<br />
-另一张空荡荡的床上，<br />
-曾经那个老人的模样？<br />
-从前他是那样健康，<br />
-如今却骨瘦嶙峋，<br />
-让时间风干了皮肤，<br />
-侵蚀了思想。<br />
-你还能看见吗，<br />
-那个明媚下午的阳光，<br />
-案前那个老人伏着阅读着，报刊也泛黄。</p>
-<p>奶奶，你为什么不笑了？<br />
-近日来，<br />
-你总是抱怨，<br />
-胸口有恙。<br />
-你变得啰嗦、唠叨，<br />
-总是对小事斤斤计量。<br />
-我好想你能多笑笑，<br />
-放下生活的疲劳，<br />
-忘却心中的郁结，<br />
-再回忆，<br />
-我们一起出游时，<br />
-小鸟的啼叫，<br />
-鲜花的绽放，<br />
-阳光的照耀，<br />
-我们手拉着手，<br />
-在田园中，聊些家常，传来欢笑。</p>
-<p>奶奶，时间真的很残酷，<br />
-也许当我走时，<br />
-这个世界便再无你的回响，<br />
-人生人寂，人来人往，<br />
-至我去时，此情已了，略无痕迹。</p>
-<p>奶奶，再让我看看你的笑，<br />
-那个阳光中，<br />
-像孩子般最天真的笑容。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>十二月的花</title>
-    <url>/2020/12/22/09/29/</url>
-    <content><![CDATA[<p>埙吹响了海岸<br />
-琴穿梭叶间<br />
-笛在天空啼鸣<br />
-伴奏着雪花片片</p>
-<p>孩子们欢笑着相聚<br />
-踏着雪<br />
-吱吱嘎嘎</p>
-<p>把欢乐捏成一团团棉<br />
-随风起舞<br />
-在阳光下<br />
-雪爱上了花</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>向量绕任意轴旋转的简单推导</title>
     <url>/2021/06/07/08/38/</url>
     <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
@@ -1114,6 +1017,103 @@ CPU @ 2.90GHz。</p>
       </tags>
   </entry>
   <entry>
+    <title>你为什么不笑了</title>
+    <url>/2022/10/29/00/35/</url>
+    <content><![CDATA[<p>你为什么不笑了？</p>
+<span id="more"></span>
+<p>奶奶，你为什么不笑了？<br />
+还记得，一年前的你，<br />
+走在春风里，<br />
+向着山顶慢慢登去。<br />
+你摘下路边的一朵浅梅，<br />
+捧在手心。<br />
+阳光洒下，<br />
+手中的梅花，也映衬出了你脸上的笑容。</p>
+<p>你的儿子女儿挽着你的手，<br />
+一步一步向山顶走去，<br />
+你看见一棵古树，<br />
+你说这是拍照好去处。<br />
+女儿扶着你，<br />
+你扶着树，<br />
+阳光洒下，<br />
+树上的绿叶，也甘愿陪衬你脸上的笑容。</p>
+<p>来到山顶，<br />
+黄花遍地，<br />
+你开心得像个孩子，<br />
+伸出双手，<br />
+比了两个大大的耶，<br />
+那时的你，真的好美。</p>
+<p>奶奶，从什么时候开始，你不笑了？<br />
+从拔掉爷爷呼吸机的那个夜晚开始，<br />
+你似乎一直睡得不好。<br />
+你还能梦见吗，<br />
+另一张空荡荡的床上，<br />
+曾经那个老人的模样？<br />
+从前他是那样健康，<br />
+如今却骨瘦嶙峋，<br />
+让时间风干了皮肤，<br />
+侵蚀了思想。<br />
+你还能看见吗，<br />
+那个明媚下午的阳光，<br />
+案前那个老人伏着阅读着，报刊也泛黄。</p>
+<p>奶奶，你为什么不笑了？<br />
+近日来，<br />
+你总是抱怨，<br />
+胸口有恙。<br />
+你变得啰嗦、唠叨，<br />
+总是对小事斤斤计量。<br />
+我好想你能多笑笑，<br />
+放下生活的疲劳，<br />
+忘却心中的郁结，<br />
+再回忆，<br />
+我们一起出游时，<br />
+小鸟的啼叫，<br />
+鲜花的绽放，<br />
+阳光的照耀，<br />
+我们手拉着手，<br />
+在田园中，聊些家常，传来欢笑。</p>
+<p>奶奶，时间真的很残酷，<br />
+也许当我走时，<br />
+这个世界便再无你的回响，<br />
+人生人寂，人来人往，<br />
+至我去时，此情已了，略无痕迹。</p>
+<p>奶奶，再让我看看你的笑，<br />
+那个阳光中，<br />
+像孩子般最天真的笑容。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>十二月的花</title>
+    <url>/2020/12/22/09/29/</url>
+    <content><![CDATA[<p>埙吹响了海岸<br />
+琴穿梭叶间<br />
+笛在天空啼鸣<br />
+伴奏着雪花片片</p>
+<p>孩子们欢笑着相聚<br />
+踏着雪<br />
+吱吱嘎嘎</p>
+<p>把欢乐捏成一团团棉<br />
+随风起舞<br />
+在阳光下<br />
+雪爱上了花</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>根据角色体型和俯角自动确定FreeLook镜头参数</title>
     <url>/2022/06/21/23/40/</url>
     <content><![CDATA[<p>最近项目涉及到一个需求：如何自动确定镜头的参数（在Unity中即为轨道的高度和半径）。这个问题可以形式化为：给定角色身高<span
@@ -1236,8 +1236,8 @@ H &amp;= \tan(A)R + Y
       <tags>
         <tag>算法</tag>
         <tag>随笔</tag>
-        <tag>数学</tag>
         <tag>游戏</tag>
+        <tag>数学</tag>
         <tag>相机</tag>
       </tags>
   </entry>
@@ -1267,230 +1267,6 @@ H &amp;= \tan(A)R + Y
         <tag>随笔</tag>
         <tag>生活</tag>
         <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>用生成函数和复数巧解一道计数题</title>
-    <url>/2022/06/26/23/03/</url>
-    <content><![CDATA[<p>对集合<span
-class="math inline">\(\{1,2,\cdots,2000\}\)</span>，求出其中有多少子集，使得子集中的元素和为5的倍数。本文对<a
-href="https://youtu.be/bOXCLR3Wric">3Blue3Brown的解法</a>上进行总结，形成较为数学化的语言。本题背后有较为深刻的数学思想，故记载于此。</p>
-<span id="more"></span>
-<h1 id="把原问题转化为生成函数">把原问题转化为生成函数</h1>
-<p>原题是：对集合<span
-class="math inline">\(\mathcal{S}=\{1,2,\cdots,2000\}\)</span>，求出其中有多少子集，使得子集中的元素和为5的倍数。</p>
-<p>首先容易想到的是，可以采用穷举法，遍历<span
-class="math inline">\(\mathcal{S}\)</span>的每个子集，检查是否满足条件。但是，穷举法的复杂度是<span
-class="math inline">\(2^{2000}\)</span>，这对计算机来说都是一个天文数字。显然，需要另辟蹊径。</p>
-<p>不妨先简化一下题目：求出集合<span
-class="math inline">\(\mathcal{S}\)</span>中有多少个子集，使元素之和为<span
-class="math inline">\(5\)</span>，我们可以很快地列出这些集合：</p>
-<p><span class="math display">\[\{5\},\{1,4\},\{2,3\}\]</span></p>
-<p>换句话说，<span class="math inline">\(5\)</span>可以表示为：<span
-class="math inline">\(5=5=1+4=2+3\)</span>，如果我们把它表示成一个关于未知数<span
-class="math inline">\(x\)</span>的多项式，那么就有：</p>
-<p><span class="math display">\[x^5=x^0x^5=x^1x^4=x^2x^3\]</span></p>
-<p>什么情况会同时出现<span
-class="math inline">\(x^0,x^1,x^2,x^3,x^4,x^5\)</span>呢？答案是<strong>生成函数</strong>。这启发我们使用下面的生成函数：</p>
-<p><span class="math display">\[
-\begin{equation}
-\label{eq1}
-f(x)=(1+x)(1+x^2)(1+x^3)(1+x^4)(1+x^5)
-\end{equation}
-\]</span></p>
-<p>这个多项式展开之后的结果是：</p>
-<p><span
-class="math display">\[f(x)=1+x+x^2+2x^3+2x^4+{\color{red}3x^5}+\cdots\]</span></p>
-<p>注意五次项<span
-class="math inline">\(x^5\)</span>前面的系数是3，这是因为，<span
-class="math inline">\(x^5\)</span>有三个来源，分别是<span
-class="math inline">\(1x^5,x^1x^4,x^2x^3\)</span>，正好对应了之前简化题中的结果！</p>
-<p>现在分析一下，多项式<span
-class="math inline">\(\eqref{eq1}\)</span>中的每个<span
-class="math inline">\(x^i\)</span>项，都代表了整数<span
-class="math inline">\(i\)</span>，如果在括号<span
-class="math inline">\(1+x^i\)</span>中选择了<span
-class="math inline">\(x^i\)</span>，则表示把<span
-class="math inline">\(i\)</span>这个整数加入集合，如果选择了<span
-class="math inline">\(1\)</span>，则表示不加入<span
-class="math inline">\(i\)</span>。而把整个多项式展开之后的结果<span
-class="math inline">\(f(x)=c_0+c_1x+c_2x^2+\cdots\)</span>，项<span
-class="math inline">\(x^i\)</span>前面的系数<span
-class="math inline">\(c_i\)</span>，正好代表了元素之和为<span
-class="math inline">\(i\)</span>的集合的个数！</p>
-<p>这时候，我们就能把原问题转化为下面的生成函数：</p>
-<p><span class="math display">\[
-\begin{equation}
-\begin{aligned}
-\label{eq2}
-f(x)&amp;=(1+x)(1+x^2)(1+x^3)(1+x^4)(1+x^5)\cdots(1+x^{2000})\\
-&amp;=c_0+c_1x+c_2x^2+c_3x^3+c_4x^4+c_5x^5+\cdots
-\end{aligned}
-\end{equation}
-\]</span></p>
-<p>求出其中所有次数为<span
-class="math inline">\(5\)</span>的倍数的项系数之和：</p>
-<p><span class="math display">\[
-\begin{equation}
-\label{eq3}
-S=c_5+c_{10}+c_{15}+\cdots
-\end{equation}
-\]</span></p>
-<p>下面的问题就是如何求出<span class="math inline">\(S\)</span>。</p>
-<h1 id="转化为复数问题">转化为复数问题</h1>
-<p>显然，我们不可能把<span
-class="math inline">\(S\)</span>中的每一项都求出来，只能设法一次求出<span
-class="math inline">\(S\)</span>，那么怎么办呢？</p>
-<p>我们还是先考虑简化问题，假设现在生成函数是:</p>
-<p><span class="math display">\[
-\begin{equation}
-\begin{aligned}
-f(x)&amp;=(1+x)(1+x^2)(1+x^3)(1+x^4)(1+x^5)\\
-&amp;=c_0+c_1x+c_2x^2+c_3x^3+c_4x^4+c_5x^5+\cdots
-\end{aligned}
-\end{equation}
-\]</span></p>
-<p>如果我们代入<span class="math inline">\(x=0\)</span>，可以求得<span
-class="math inline">\(f(0)=1\)</span>；如果代入<span
-class="math inline">\(x=1\)</span>，可以求得<span
-class="math inline">\(f(1)=2^5\)</span>；再代入<span
-class="math inline">\(x=-1\)</span>，有<span
-class="math inline">\(f(-1)=0\)</span>。用展开式表示结果：</p>
-<p><span class="math display">\[
-\begin{aligned}
-    c_0&amp;=1\\
-    c_0+c_1+c_2+c_3+c_4+c_5+\cdots &amp;=2^5\\
-    c_0-c_1+c_2-c_3+c_4-c_5+\cdots &amp;=0
-\end{aligned}
-\]</span></p>
-<p>通过后面两式，不难得到：</p>
-<p><span
-class="math display">\[c_1+c_3+c_5+\cdots=\frac{1}{2}2^5=2^4\]</span></p>
-<p>我们找到了所有奇数项系数之和，但是我们的目标是所有<span
-class="math inline">\(5\)</span>的倍数的项系数之和。但这个过程可以给我们一个启发：<strong>是否可以通过代入某些值到生成函数中，通过加减运算消去我们不关心的项，得到最终的结果</strong>。</p>
-<p>分析我们把<span class="math inline">\(-1\)</span>代入到<span
-class="math inline">\(f(x)\)</span>中每一项的过程，所有的偶数项<span
-class="math inline">\(x^{2k}\)</span>结果都是<span
-class="math inline">\(1\)</span>，所有的奇数项<span
-class="math inline">\(x^{2k-1}\)</span>结果都是<span
-class="math inline">\(-1\)</span>。换句话说：<span
-class="math inline">\(-1\)</span>这个值对函数<span
-class="math inline">\(f(x)\)</span>的未知项<span
-class="math inline">\(x^i\)</span>的循环次数为<span
-class="math inline">\(2\)</span>，或者，每两项<span
-class="math inline">\(-1\)</span>代入的结果都相同。同理，对<span
-class="math inline">\(1\)</span>来说，循环次数是<span
-class="math inline">\(1\)</span>。</p>
-<p>那么，什么时候循环次数是<span
-class="math inline">\(5\)</span>呢？也就是，代入哪个数<span
-class="math inline">\(\xi\)</span>，会使得<span
-class="math inline">\(\xi=\xi^6\)</span>，或者<span
-class="math inline">\(\xi^5=1\)</span>。显然，在复空间中，这个数就是<span
-class="math inline">\((\mathrm{e}^{\mathrm{i}\frac{2\pi}{5}})^t
-(t=1,2,3,4,5)\)</span>。也就是说，如果令<span
-class="math inline">\(\xi=\mathrm{e}^{\mathrm{i}\frac{2\pi}{5}}\)</span>，则有<span
-class="math inline">\(5\)</span>个数<span
-class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>满足我们的要求，其中<span
-class="math inline">\(\xi^5=1\)</span>就是我们熟知的实根。</p>
-<p>更关键的是，这几个数的和是<span
-class="math inline">\(0\)</span>：</p>
-<p><span
-class="math display">\[\xi+\xi^2+\xi^3+\xi^4+\xi^5=\frac{\xi(1-\xi^5)}{1-\xi}=0\]</span></p>
-<p>现在，分别把这五个值代入到展开的生成函数中，有：</p>
-<p><span class="math display">\[
-\begin{aligned}
-f(\xi)=c_0+c_1\xi+c_2\xi^2+c_3\xi^3+c_4\xi^4+c_5\xi^5+\cdots\\
-f(\xi^2)=c_0+c_1\xi^2+c_2\xi^4+c_3\xi^1+c_4\xi^3+c_5\xi^5+\cdots\\
-f(\xi^3)=c_0+c_1\xi^3+c_2\xi^1+c_3\xi^4+c_4\xi^2+c_5\xi^5+\cdots\\
-f(\xi^4)=c_0+c_1\xi^4+c_2\xi^3+c_3\xi^2+c_4\xi^1+c_5\xi^5+\cdots\\
-f(\xi^5)=c_0+c_1\xi^5+c_2\xi^5+c_3\xi^5+c_4\xi^5+c_5\xi^5+\cdots
-\end{aligned}
-\]</span></p>
-<p>注意<span
-class="math inline">\(c_1,c_2,c_3,c_4\)</span>对应的项，正好都有<span
-class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>，把它们加起来，有：</p>
-<p><span class="math display">\[
-\begin{aligned}
-f(\xi)+f(\xi^2)+f(\xi^3)+f(\xi^4)+f(\xi^5)&amp;=5c_0+5c_5\xi^5+5c_{10}\xi^5+5c_{15}\xi^5\\
-&amp;=5c_0+5c_5+5c_{10}+5c_{15}
-\end{aligned}
-\]</span></p>
-<p><span
-class="math inline">\(c_0=1\)</span>是已知的，所以上面的结果就变成了：</p>
-<p><span
-class="math display">\[f(\xi)+f(\xi^2)+f(\xi^3)+f(\xi^4)+f(\xi^5)=5+5c_5+5c_{10}+5c_{15}\]</span></p>
-<p>现在整个式子右边只留下常数和<span
-class="math inline">\(5\)</span>的倍数的项！</p>
-<p>唯一遗留的问题就是式子左侧的<span
-class="math inline">\(f(\xi)+f(\xi^2)+f(\xi^3)+f(\xi^4)+f(\xi^5)\)</span>是多少，或者说<span
-class="math inline">\(f(\xi)=(1+\xi)(1+\xi^2)(1+\xi^3)(1+\xi^4)(1+\xi^5)\)</span>是多少，因为只要知道了<span
-class="math inline">\(f(\xi)\)</span>，<span
-class="math inline">\(f(\xi^2),f(\xi^3),f(\xi^4)\)</span>的值也就知道了。</p>
-<p>这里的技巧是，因为<span
-class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>是方程<span
-class="math inline">\(z^5-1=0\)</span>的五个根，所以可以把它们表示成：</p>
-<p><span class="math display">\[
-\begin{equation}
-  z^5-1=(z-\xi)(z-\xi^2)(z-\xi^3)(z-\xi^4)(z-\xi^5)
-\end{equation}
-\]</span></p>
-<p>把<span class="math inline">\(z=-1\)</span>代入：</p>
-<p><span class="math display">\[
-\begin{equation}
-  2=(1+\xi)(1+\xi^2)(1+\xi^3)(1+\xi^4)(1+\xi^5)=f(\xi)
-\end{equation}
-\]</span></p>
-<p>从而，我们也就有<span
-class="math inline">\(f(\xi^2)=f(\xi^3)=f(\xi^4)=2\)</span>，而<span
-class="math inline">\(f(\xi^5)=2^5\)</span>。所以，我们就得到了：</p>
-<p><span class="math display">\[
-\begin{equation}
-\begin{aligned}
-  5+5c_5+5c_{10}+5c_{15}&amp;=4\times 2+2^5\\
-  1+c_5+c_{10}+c_{15}&amp;=\frac{1}{5}(4\times 2+2^5)\\
-  c_5+c_{10}+c_{15}&amp;=\frac{1}{5}(4\times 2+2^5)-1
-\end{aligned}
-\end{equation}
-\]</span></p>
-<p>这样一来我们考虑的简化版问题就得到了解决！</p>
-<p>按照这个思路，我们同样可以得到原始问题的解决，分为几步。</p>
-<p><strong>第一步</strong>：设<span
-class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>是方程<span
-class="math inline">\(z^5-1=0\)</span>的五个根，把它们分别代入生成函数<span
-class="math inline">\(f(x)\)</span>中，相加，就得到：</p>
-<p><span
-class="math display">\[c_0+c_5+c_{10}+\cdots=\frac{1}{5}(f(\xi)+f(\xi^2)+f(\xi^3)+f(\xi^4)+f(\xi^5))\]</span></p>
-<p><strong>第二步</strong>：把<span
-class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>表示为<span
-class="math inline">\(z^5-1=(z-\xi)(z-\xi^2)(z-\xi^3)(z-\xi^4)(z-\xi^5)\)</span>，通过代入<span
-class="math inline">\(z=-1\)</span>解出<span
-class="math inline">\((1+\xi)(1+\xi^2)(1+\xi^3)(1+\xi^4)(1+\xi^5)=2\)</span>。</p>
-<p><strong>第三步</strong>：把<span
-class="math inline">\(\xi\)</span>代入到生成函数<span
-class="math inline">\(f(x)\)</span>中，可以得到<span
-class="math inline">\(f(\xi)=2^{400}\)</span>，同理有<span
-class="math inline">\(f(\xi^2)=f(\xi^3)=f(\xi^4)=2^{400}\)</span>，同时有<span
-class="math inline">\(f(\xi^5)=2^{2000}\)</span>。</p>
-<p><strong>第四步</strong>：把所有值代回第一步中的结果，得到最终答案<span
-class="math inline">\(c_5+c_{10}=\frac{1}{5}(4\times
-2^{400}+2^{2000})-1\)</span>。</p>
-<h1 id="总结">总结</h1>
-<p>本题背后蕴藏着较为深刻的数学思想，一方面是巧用生成函数把一个计数问题转化为一个分析问题，另一方面是使用复数消去某些项，直接求出想要的结果。通过本题，我们可以充分了解到复数所蕴含的关于周期和频率的思想，从而也就能理解为什么傅里叶变换用复数表征。</p>
-<p>把本题稍微进行推广：对集合<span
-class="math inline">\(\mathcal{A}=\{1,2,3,\cdots,N\}\)</span>和正整数<span
-class="math inline">\(k\)</span>，其中<span
-class="math inline">\(k|N\)</span>。设<span
-class="math inline">\(\mathcal{A}\)</span>中满足元素之和为<span
-class="math inline">\(k\)</span>的倍数的子集个数为<span
-class="math inline">\(\mathfrak{P}_k\)</span>，你能求出<span
-class="math inline">\(\mathfrak{P}_k\)</span>的表达式吗？</p>
-]]></content>
-      <categories>
-        <category>数学 - 分析</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -1557,6 +1333,22 @@ key）。</p>
         <tag>随笔</tag>
         <tag>生活</tag>
         <tag>影评</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>西湖夜歌</title>
+    <url>/2021/07/09/22/55/</url>
+    <content><![CDATA[<p>霓光半遮影<br />
+湖波轻颤合韵起<br />
+半句寻谁去</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -1965,19 +1757,227 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
       </tags>
   </entry>
   <entry>
-    <title>西湖夜歌</title>
-    <url>/2021/07/09/22/55/</url>
-    <content><![CDATA[<p>霓光半遮影<br />
-湖波轻颤合韵起<br />
-半句寻谁去</p>
+    <title>用生成函数和复数巧解一道计数题</title>
+    <url>/2022/06/26/23/03/</url>
+    <content><![CDATA[<p>对集合<span
+class="math inline">\(\{1,2,\cdots,2000\}\)</span>，求出其中有多少子集，使得子集中的元素和为5的倍数。本文对<a
+href="https://youtu.be/bOXCLR3Wric">3Blue3Brown的解法</a>上进行总结，形成较为数学化的语言。本题背后有较为深刻的数学思想，故记载于此。</p>
+<span id="more"></span>
+<h1 id="把原问题转化为生成函数">把原问题转化为生成函数</h1>
+<p>原题是：对集合<span
+class="math inline">\(\mathcal{S}=\{1,2,\cdots,2000\}\)</span>，求出其中有多少子集，使得子集中的元素和为5的倍数。</p>
+<p>首先容易想到的是，可以采用穷举法，遍历<span
+class="math inline">\(\mathcal{S}\)</span>的每个子集，检查是否满足条件。但是，穷举法的复杂度是<span
+class="math inline">\(2^{2000}\)</span>，这对计算机来说都是一个天文数字。显然，需要另辟蹊径。</p>
+<p>不妨先简化一下题目：求出集合<span
+class="math inline">\(\mathcal{S}\)</span>中有多少个子集，使元素之和为<span
+class="math inline">\(5\)</span>，我们可以很快地列出这些集合：</p>
+<p><span class="math display">\[\{5\},\{1,4\},\{2,3\}\]</span></p>
+<p>换句话说，<span class="math inline">\(5\)</span>可以表示为：<span
+class="math inline">\(5=5=1+4=2+3\)</span>，如果我们把它表示成一个关于未知数<span
+class="math inline">\(x\)</span>的多项式，那么就有：</p>
+<p><span class="math display">\[x^5=x^0x^5=x^1x^4=x^2x^3\]</span></p>
+<p>什么情况会同时出现<span
+class="math inline">\(x^0,x^1,x^2,x^3,x^4,x^5\)</span>呢？答案是<strong>生成函数</strong>。这启发我们使用下面的生成函数：</p>
+<p><span class="math display">\[
+\begin{equation}
+\label{eq1}
+f(x)=(1+x)(1+x^2)(1+x^3)(1+x^4)(1+x^5)
+\end{equation}
+\]</span></p>
+<p>这个多项式展开之后的结果是：</p>
+<p><span
+class="math display">\[f(x)=1+x+x^2+2x^3+2x^4+{\color{red}3x^5}+\cdots\]</span></p>
+<p>注意五次项<span
+class="math inline">\(x^5\)</span>前面的系数是3，这是因为，<span
+class="math inline">\(x^5\)</span>有三个来源，分别是<span
+class="math inline">\(1x^5,x^1x^4,x^2x^3\)</span>，正好对应了之前简化题中的结果！</p>
+<p>现在分析一下，多项式<span
+class="math inline">\(\eqref{eq1}\)</span>中的每个<span
+class="math inline">\(x^i\)</span>项，都代表了整数<span
+class="math inline">\(i\)</span>，如果在括号<span
+class="math inline">\(1+x^i\)</span>中选择了<span
+class="math inline">\(x^i\)</span>，则表示把<span
+class="math inline">\(i\)</span>这个整数加入集合，如果选择了<span
+class="math inline">\(1\)</span>，则表示不加入<span
+class="math inline">\(i\)</span>。而把整个多项式展开之后的结果<span
+class="math inline">\(f(x)=c_0+c_1x+c_2x^2+\cdots\)</span>，项<span
+class="math inline">\(x^i\)</span>前面的系数<span
+class="math inline">\(c_i\)</span>，正好代表了元素之和为<span
+class="math inline">\(i\)</span>的集合的个数！</p>
+<p>这时候，我们就能把原问题转化为下面的生成函数：</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+\label{eq2}
+f(x)&amp;=(1+x)(1+x^2)(1+x^3)(1+x^4)(1+x^5)\cdots(1+x^{2000})\\
+&amp;=c_0+c_1x+c_2x^2+c_3x^3+c_4x^4+c_5x^5+\cdots
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>求出其中所有次数为<span
+class="math inline">\(5\)</span>的倍数的项系数之和：</p>
+<p><span class="math display">\[
+\begin{equation}
+\label{eq3}
+S=c_5+c_{10}+c_{15}+\cdots
+\end{equation}
+\]</span></p>
+<p>下面的问题就是如何求出<span class="math inline">\(S\)</span>。</p>
+<h1 id="转化为复数问题">转化为复数问题</h1>
+<p>显然，我们不可能把<span
+class="math inline">\(S\)</span>中的每一项都求出来，只能设法一次求出<span
+class="math inline">\(S\)</span>，那么怎么办呢？</p>
+<p>我们还是先考虑简化问题，假设现在生成函数是:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+f(x)&amp;=(1+x)(1+x^2)(1+x^3)(1+x^4)(1+x^5)\\
+&amp;=c_0+c_1x+c_2x^2+c_3x^3+c_4x^4+c_5x^5+\cdots
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>如果我们代入<span class="math inline">\(x=0\)</span>，可以求得<span
+class="math inline">\(f(0)=1\)</span>；如果代入<span
+class="math inline">\(x=1\)</span>，可以求得<span
+class="math inline">\(f(1)=2^5\)</span>；再代入<span
+class="math inline">\(x=-1\)</span>，有<span
+class="math inline">\(f(-1)=0\)</span>。用展开式表示结果：</p>
+<p><span class="math display">\[
+\begin{aligned}
+    c_0&amp;=1\\
+    c_0+c_1+c_2+c_3+c_4+c_5+\cdots &amp;=2^5\\
+    c_0-c_1+c_2-c_3+c_4-c_5+\cdots &amp;=0
+\end{aligned}
+\]</span></p>
+<p>通过后面两式，不难得到：</p>
+<p><span
+class="math display">\[c_1+c_3+c_5+\cdots=\frac{1}{2}2^5=2^4\]</span></p>
+<p>我们找到了所有奇数项系数之和，但是我们的目标是所有<span
+class="math inline">\(5\)</span>的倍数的项系数之和。但这个过程可以给我们一个启发：<strong>是否可以通过代入某些值到生成函数中，通过加减运算消去我们不关心的项，得到最终的结果</strong>。</p>
+<p>分析我们把<span class="math inline">\(-1\)</span>代入到<span
+class="math inline">\(f(x)\)</span>中每一项的过程，所有的偶数项<span
+class="math inline">\(x^{2k}\)</span>结果都是<span
+class="math inline">\(1\)</span>，所有的奇数项<span
+class="math inline">\(x^{2k-1}\)</span>结果都是<span
+class="math inline">\(-1\)</span>。换句话说：<span
+class="math inline">\(-1\)</span>这个值对函数<span
+class="math inline">\(f(x)\)</span>的未知项<span
+class="math inline">\(x^i\)</span>的循环次数为<span
+class="math inline">\(2\)</span>，或者，每两项<span
+class="math inline">\(-1\)</span>代入的结果都相同。同理，对<span
+class="math inline">\(1\)</span>来说，循环次数是<span
+class="math inline">\(1\)</span>。</p>
+<p>那么，什么时候循环次数是<span
+class="math inline">\(5\)</span>呢？也就是，代入哪个数<span
+class="math inline">\(\xi\)</span>，会使得<span
+class="math inline">\(\xi=\xi^6\)</span>，或者<span
+class="math inline">\(\xi^5=1\)</span>。显然，在复空间中，这个数就是<span
+class="math inline">\((\mathrm{e}^{\mathrm{i}\frac{2\pi}{5}})^t
+(t=1,2,3,4,5)\)</span>。也就是说，如果令<span
+class="math inline">\(\xi=\mathrm{e}^{\mathrm{i}\frac{2\pi}{5}}\)</span>，则有<span
+class="math inline">\(5\)</span>个数<span
+class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>满足我们的要求，其中<span
+class="math inline">\(\xi^5=1\)</span>就是我们熟知的实根。</p>
+<p>更关键的是，这几个数的和是<span
+class="math inline">\(0\)</span>：</p>
+<p><span
+class="math display">\[\xi+\xi^2+\xi^3+\xi^4+\xi^5=\frac{\xi(1-\xi^5)}{1-\xi}=0\]</span></p>
+<p>现在，分别把这五个值代入到展开的生成函数中，有：</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(\xi)=c_0+c_1\xi+c_2\xi^2+c_3\xi^3+c_4\xi^4+c_5\xi^5+\cdots\\
+f(\xi^2)=c_0+c_1\xi^2+c_2\xi^4+c_3\xi^1+c_4\xi^3+c_5\xi^5+\cdots\\
+f(\xi^3)=c_0+c_1\xi^3+c_2\xi^1+c_3\xi^4+c_4\xi^2+c_5\xi^5+\cdots\\
+f(\xi^4)=c_0+c_1\xi^4+c_2\xi^3+c_3\xi^2+c_4\xi^1+c_5\xi^5+\cdots\\
+f(\xi^5)=c_0+c_1\xi^5+c_2\xi^5+c_3\xi^5+c_4\xi^5+c_5\xi^5+\cdots
+\end{aligned}
+\]</span></p>
+<p>注意<span
+class="math inline">\(c_1,c_2,c_3,c_4\)</span>对应的项，正好都有<span
+class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>，把它们加起来，有：</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(\xi)+f(\xi^2)+f(\xi^3)+f(\xi^4)+f(\xi^5)&amp;=5c_0+5c_5\xi^5+5c_{10}\xi^5+5c_{15}\xi^5\\
+&amp;=5c_0+5c_5+5c_{10}+5c_{15}
+\end{aligned}
+\]</span></p>
+<p><span
+class="math inline">\(c_0=1\)</span>是已知的，所以上面的结果就变成了：</p>
+<p><span
+class="math display">\[f(\xi)+f(\xi^2)+f(\xi^3)+f(\xi^4)+f(\xi^5)=5+5c_5+5c_{10}+5c_{15}\]</span></p>
+<p>现在整个式子右边只留下常数和<span
+class="math inline">\(5\)</span>的倍数的项！</p>
+<p>唯一遗留的问题就是式子左侧的<span
+class="math inline">\(f(\xi)+f(\xi^2)+f(\xi^3)+f(\xi^4)+f(\xi^5)\)</span>是多少，或者说<span
+class="math inline">\(f(\xi)=(1+\xi)(1+\xi^2)(1+\xi^3)(1+\xi^4)(1+\xi^5)\)</span>是多少，因为只要知道了<span
+class="math inline">\(f(\xi)\)</span>，<span
+class="math inline">\(f(\xi^2),f(\xi^3),f(\xi^4)\)</span>的值也就知道了。</p>
+<p>这里的技巧是，因为<span
+class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>是方程<span
+class="math inline">\(z^5-1=0\)</span>的五个根，所以可以把它们表示成：</p>
+<p><span class="math display">\[
+\begin{equation}
+  z^5-1=(z-\xi)(z-\xi^2)(z-\xi^3)(z-\xi^4)(z-\xi^5)
+\end{equation}
+\]</span></p>
+<p>把<span class="math inline">\(z=-1\)</span>代入：</p>
+<p><span class="math display">\[
+\begin{equation}
+  2=(1+\xi)(1+\xi^2)(1+\xi^3)(1+\xi^4)(1+\xi^5)=f(\xi)
+\end{equation}
+\]</span></p>
+<p>从而，我们也就有<span
+class="math inline">\(f(\xi^2)=f(\xi^3)=f(\xi^4)=2\)</span>，而<span
+class="math inline">\(f(\xi^5)=2^5\)</span>。所以，我们就得到了：</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+  5+5c_5+5c_{10}+5c_{15}&amp;=4\times 2+2^5\\
+  1+c_5+c_{10}+c_{15}&amp;=\frac{1}{5}(4\times 2+2^5)\\
+  c_5+c_{10}+c_{15}&amp;=\frac{1}{5}(4\times 2+2^5)-1
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>这样一来我们考虑的简化版问题就得到了解决！</p>
+<p>按照这个思路，我们同样可以得到原始问题的解决，分为几步。</p>
+<p><strong>第一步</strong>：设<span
+class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>是方程<span
+class="math inline">\(z^5-1=0\)</span>的五个根，把它们分别代入生成函数<span
+class="math inline">\(f(x)\)</span>中，相加，就得到：</p>
+<p><span
+class="math display">\[c_0+c_5+c_{10}+\cdots=\frac{1}{5}(f(\xi)+f(\xi^2)+f(\xi^3)+f(\xi^4)+f(\xi^5))\]</span></p>
+<p><strong>第二步</strong>：把<span
+class="math inline">\(\xi,\xi^2,\xi^3,\xi^4,\xi^5\)</span>表示为<span
+class="math inline">\(z^5-1=(z-\xi)(z-\xi^2)(z-\xi^3)(z-\xi^4)(z-\xi^5)\)</span>，通过代入<span
+class="math inline">\(z=-1\)</span>解出<span
+class="math inline">\((1+\xi)(1+\xi^2)(1+\xi^3)(1+\xi^4)(1+\xi^5)=2\)</span>。</p>
+<p><strong>第三步</strong>：把<span
+class="math inline">\(\xi\)</span>代入到生成函数<span
+class="math inline">\(f(x)\)</span>中，可以得到<span
+class="math inline">\(f(\xi)=2^{400}\)</span>，同理有<span
+class="math inline">\(f(\xi^2)=f(\xi^3)=f(\xi^4)=2^{400}\)</span>，同时有<span
+class="math inline">\(f(\xi^5)=2^{2000}\)</span>。</p>
+<p><strong>第四步</strong>：把所有值代回第一步中的结果，得到最终答案<span
+class="math inline">\(c_5+c_{10}=\frac{1}{5}(4\times
+2^{400}+2^{2000})-1\)</span>。</p>
+<h1 id="总结">总结</h1>
+<p>本题背后蕴藏着较为深刻的数学思想，一方面是巧用生成函数把一个计数问题转化为一个分析问题，另一方面是使用复数消去某些项，直接求出想要的结果。通过本题，我们可以充分了解到复数所蕴含的关于周期和频率的思想，从而也就能理解为什么傅里叶变换用复数表征。</p>
+<p>把本题稍微进行推广：对集合<span
+class="math inline">\(\mathcal{A}=\{1,2,3,\cdots,N\}\)</span>和正整数<span
+class="math inline">\(k\)</span>，其中<span
+class="math inline">\(k|N\)</span>。设<span
+class="math inline">\(\mathcal{A}\)</span>中满足元素之和为<span
+class="math inline">\(k\)</span>的倍数的子集个数为<span
+class="math inline">\(\mathfrak{P}_k\)</span>，你能求出<span
+class="math inline">\(\mathfrak{P}_k\)</span>的表达式吗？</p>
 ]]></content>
       <categories>
-        <category>随笔</category>
+        <category>数学 - 分析</category>
       </categories>
       <tags>
         <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -2300,10 +2300,95 @@ class="math inline">\(F^{-1}\)</span>还原真实空间的法线。也就是说�
 class="math inline">\(\mathbf{w}&#39;\)</span>进行计算，而不需要把所有点都经过TBN矩阵变换到世界空间中再做Shading，这样一来就降低了计算量。</p>
 <h1 id="games-101-作业三中的bump-mapping">GAMES 101 作业三中的Bump
 Mapping</h1>
+<p>GAMES101的作业三也让我们实现了一个简单的Bump
+Mapping，下面是代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Eigen::Vector3f <span class="title">bump_fragment_shader</span><span class="params">(<span class="type">const</span> fragment_shader_payload&amp; payload)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    </span><br><span class="line">    Eigen::Vector3f ka = Eigen::<span class="built_in">Vector3f</span>(<span class="number">0.005</span>, <span class="number">0.005</span>, <span class="number">0.005</span>);</span><br><span class="line">    Eigen::Vector3f kd = payload.color;</span><br><span class="line">    Eigen::Vector3f ks = Eigen::<span class="built_in">Vector3f</span>(<span class="number">0.7937</span>, <span class="number">0.7937</span>, <span class="number">0.7937</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> l1 = light&#123;&#123;<span class="number">20</span>, <span class="number">20</span>, <span class="number">20</span>&#125;, &#123;<span class="number">500</span>, <span class="number">500</span>, <span class="number">500</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">auto</span> l2 = light&#123;&#123;<span class="number">-20</span>, <span class="number">20</span>, <span class="number">0</span>&#125;, &#123;<span class="number">500</span>, <span class="number">500</span>, <span class="number">500</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">    std::vector&lt;light&gt; lights = &#123;l1, l2&#125;;</span><br><span class="line">    Eigen::Vector3f amb_light_intensity&#123;<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>&#125;;</span><br><span class="line">    Eigen::Vector3f eye_pos&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> p = <span class="number">150</span>;</span><br><span class="line"></span><br><span class="line">    Eigen::Vector3f color = payload.color; </span><br><span class="line">    Eigen::Vector3f point = payload.view_pos;</span><br><span class="line">    Eigen::Vector3f normal = payload.normal;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> kh = <span class="number">0.2</span>, kn = <span class="number">0.1</span>;</span><br><span class="line"></span><br><span class="line">    Vector3f n = normal.<span class="built_in">normalized</span>();</span><br><span class="line">    <span class="type">float</span> d = <span class="built_in">sqrt</span>(n.<span class="built_in">x</span>() * n.<span class="built_in">x</span>() + n.<span class="built_in">z</span>() * n.<span class="built_in">z</span>());</span><br><span class="line">    <span class="function">Vector3f <span class="title">t</span> <span class="params">(-n.x() * n.y() / d, d, -n.z() * n.y() / d)</span></span>;</span><br><span class="line">    Vector3f b = n.<span class="built_in">cross</span>(t);</span><br><span class="line"></span><br><span class="line">    Matrix3f TBN;</span><br><span class="line">    TBN.<span class="built_in">col</span>(<span class="number">0</span>) = t, TBN.<span class="built_in">col</span>(<span class="number">1</span>) = b, TBN.<span class="built_in">col</span>(<span class="number">2</span>) = n;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> u = payload.tex_coords.<span class="built_in">x</span>(), v = payload.tex_coords.<span class="built_in">y</span>();</span><br><span class="line">    <span class="type">float</span> w = payload.texture-&gt;width, h = payload.texture-&gt;height;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> dU = kh * kn * (payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u + <span class="number">1.0f</span> / w, v).<span class="built_in">norm</span>() - payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u, v).<span class="built_in">norm</span>());</span><br><span class="line">    <span class="type">float</span> dV = kh * kn * (payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u, v + <span class="number">1.0f</span> / h).<span class="built_in">norm</span>() - payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u, v).<span class="built_in">norm</span>());</span><br><span class="line"></span><br><span class="line">    <span class="function">Vector3f <span class="title">ln</span> <span class="params">(-dU, -dV, <span class="number">1</span>)</span></span>;</span><br><span class="line">    normal = TBN * ln;</span><br><span class="line"></span><br><span class="line">    Eigen::Vector3f result_color = normal.<span class="built_in">normalized</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result_color * <span class="number">255.f</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先定义了环境光、漫反射和镜面反射的系数，然后定义了光线和观察位置，之后求出了TBN矩阵与纹理空间中的法向量，最后转换到了世界空间中进行着色。</p>
+<p>这里通过<code>dU</code>和<code>dV</code>得到的就是我们一开始讲的纹理空间中变换后的法向量<span
+class="math inline">\((-c_1\Delta h(u),-c_2\Delta
+h(v),1)^\top\)</span>，只不过这里是在乘了TBN矩阵之后再进行的归一化。</p>
+<p>但是这里的TBN计算方式，和我们上面提到的完全不一样。<span
+class="math inline">\(\mathbf{n}\)</span>倒是正确的，它直接用了当前的法向量：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Vector3f n = normal.<span class="built_in">normalized</span>();</span><br></pre></td></tr></table></figure>
+<p>但是计算<span
+class="math inline">\(\mathbf{t}\)</span>就完全让人摸不着头脑了（<span
+class="math inline">\(\mathbf{b}\)</span>可以通过叉乘实现）：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">float</span> d = <span class="built_in">sqrt</span>(n.<span class="built_in">x</span>() * n.<span class="built_in">x</span>() + n.<span class="built_in">z</span>() * n.<span class="built_in">z</span>());</span><br><span class="line"><span class="function">Vector3f <span class="title">t</span> <span class="params">(-n.x() * n.y() / d, d, -n.z() * n.y() / d)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>翻译成数学公式就是：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \mathbf{t} &amp;= \left(\frac{-xy}{\sqrt{x^2+z^2}}, \sqrt{x^2+z^2},
+\frac{-zy}{\sqrt{x^2+z^2}}\right)^\top
+\end{aligned}
+\]</span></p>
+<p>可以验证这是一个与<span
+class="math inline">\(\mathbf{n}=(x,y,z)^\top\)</span>垂直的单位向量。</p>
+<p>这两行代码是什么意思呢？其实，这里这里是对向量进行了旋转操作。如下图所示，先把<span
+class="math inline">\(\mathbf{n}\)</span>拆成它在XZ平面和Y轴上的分量<span
+class="math inline">\(\mathbf{n}_{xz}\)</span>和<span
+class="math inline">\(\mathbf{n}_y\)</span>。现在我们的目标就是在由<span
+class="math inline">\(\mathbf{n}_{xz}\)</span>和<span
+class="math inline">\(\mathbf{n}_y\)</span>所定义的平面上的任意一个向量，都得到它在同一个平面上的垂直向量。对<span
+class="math inline">\(\mathbf{n}_{xz}\)</span>来说，这个向量就是<span
+class="math inline">\(\mathbf{n}_y\)</span>；对<span
+class="math inline">\(\mathbf{n}\)</span>来说，这个向量就是<span
+class="math inline">\(\mathbf{t}\)</span>。所以本质上我们是要求一个旋转矩阵，它可以得到该平面上与一个向量垂直的向量。</p>
+<p><img data-src="/images/bump-map/2-2.png" /></p>
+<p>这个变换很简单，就是先将它绕着Y轴旋转<span
+class="math inline">\(\theta\)</span>°，这里的<span
+class="math inline">\(\theta\)</span>是<span
+class="math inline">\(\mathbf{n}_{xz}\)</span>与X轴形成的夹角，得到的向量会在平面XY上；然后绕着Z轴旋转90°；最后绕Y轴旋转<span
+class="math inline">\(-\theta\)</span>°，得到的向量就是与给定向量在平面内垂直的向量。这三个连续操作可以写成三个矩阵的乘积：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+  \cos(\theta) &amp; 0 &amp; -\sin(\theta)\\
+  0 &amp; 1 &amp; 0\\
+  \sin(\theta) &amp; 0 &amp; \cos(\theta)
+\end{bmatrix}
+\begin{bmatrix}
+  0 &amp; -1 &amp; 0\\
+  1 &amp; 0 &amp; 0 \\
+  0 &amp; 0 &amp; 1\\
+\end{bmatrix}
+\begin{bmatrix}
+  \cos(\theta) &amp; 0 &amp; \sin(\theta)\\
+  0 &amp; 1 &amp; 0\\
+  -\sin(\theta) &amp; 0 &amp; \cos(\theta)
+\end{bmatrix}=
+\begin{bmatrix}
+  \sin^2(\theta) &amp; -\cos(\theta) &amp; -\sin(\theta)\cos(\theta)\\
+  \cos(\theta) &amp; 0 &amp; \sin(\theta)\\
+  -\sin(\theta)\cos(\theta) &amp; -\sin(\theta) &amp; \cos^2(\theta)
+\end{bmatrix}
+\]</span></p>
+<p>再由<span
+class="math inline">\(\cos(\theta)=\frac{x}{\sqrt{x^2+z^2}},\sin(\theta)=\frac{z}{\sqrt{x^2+z^2}}\)</span>，可知，变换矩阵为：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+  \frac{z^2}{x^2+z^2} &amp; -\frac{x}{\sqrt{x^2+z^2}} &amp;
+-\frac{xz}{x^2+z^2}\\
+  \frac{x}{\sqrt{x^2+z^2}} &amp; 0 &amp; \frac{z}{\sqrt{x^2+z^2}}\\
+  -\frac{xz}{x^2+z^2} &amp; -\frac{z}{\sqrt{x^2+z^2}} &amp;
+\frac{x^2}{x^2+z^2}
+\end{bmatrix}
+\]</span></p>
+<p>所以，<span
+class="math inline">\((x,y,z)^\top\)</span>变换后的结果就是<span
+class="math inline">\(\mathbf{t}=\left(\frac{-xy}{\sqrt{x^2+z^2}},
+\sqrt{x^2+z^2}, \frac{-zy}{\sqrt{x^2+z^2}}\right)^\top\)</span>。</p>
 <p>所以，从根本上讲，切线空间除了<span
-class="math inline">\(\mathbf{n}\)</span>需要被作为Z轴是明确的之外，剩下的两个轴（实际上是一个轴，也就是所谓的Tangents，另一个轴可以通过叉积求得）都是可以手动定义的。</p>
+class="math inline">\(\mathbf{n}\)</span>需要被作为Z轴是明确的之外，剩下的两个轴（实际上是一个轴，也就是所谓的Tangents，另一个轴可以通过叉积求得）都是可以手动定义的。只要在制作存储法线贴图和使用法线贴图时保持一致即可。</p>
 <h1 id="位移贴图displacement-mapping">位移贴图（Displacement
 Mapping）</h1>
+<p>分析Bump mapping和Normal
+mapping不难发现，它们实际上是通过改变法线制造一种假象，这时候物体本身没有丝毫变化。这种方法难以处理由凹凸表面带来的自阴影，并且物体的边界会露馅。</p>
+<p>Displacement
+mapping真的去改变每个点在空间的位置，从而得到更加真实的结果。</p>
+<p>下面是GAMES101 作业三中关于displacement mapping的代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Eigen::Vector3f <span class="title">displacement_fragment_shader</span><span class="params">(<span class="type">const</span> fragment_shader_payload&amp; payload)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    </span><br><span class="line">    Eigen::Vector3f ka = Eigen::<span class="built_in">Vector3f</span>(<span class="number">0.005</span>, <span class="number">0.005</span>, <span class="number">0.005</span>);</span><br><span class="line">    Eigen::Vector3f kd = payload.color;</span><br><span class="line">    Eigen::Vector3f ks = Eigen::<span class="built_in">Vector3f</span>(<span class="number">0.7937</span>, <span class="number">0.7937</span>, <span class="number">0.7937</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> l1 = light&#123;&#123;<span class="number">20</span>, <span class="number">20</span>, <span class="number">20</span>&#125;, &#123;<span class="number">500</span>, <span class="number">500</span>, <span class="number">500</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">auto</span> l2 = light&#123;&#123;<span class="number">-20</span>, <span class="number">20</span>, <span class="number">0</span>&#125;, &#123;<span class="number">500</span>, <span class="number">500</span>, <span class="number">500</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">    std::vector&lt;light&gt; lights = &#123;l1, l2&#125;;</span><br><span class="line">    Eigen::Vector3f amb_light_intensity&#123;<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>&#125;;</span><br><span class="line">    Eigen::Vector3f eye_pos&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> p = <span class="number">150</span>;</span><br><span class="line"></span><br><span class="line">    Eigen::Vector3f color = payload.color; </span><br><span class="line">    Eigen::Vector3f point = payload.view_pos;</span><br><span class="line">    Eigen::Vector3f normal = payload.normal;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> kh = <span class="number">0.2</span>, kn = <span class="number">0.1</span>;</span><br><span class="line">    </span><br><span class="line">    Vector3f n = normal.<span class="built_in">normalized</span>();</span><br><span class="line">    <span class="type">float</span> d = <span class="built_in">sqrt</span>(n.<span class="built_in">x</span>() * n.<span class="built_in">x</span>() + n.<span class="built_in">z</span>() * n.<span class="built_in">z</span>());</span><br><span class="line">    <span class="function">Vector3f <span class="title">t</span> <span class="params">(n.x() * n.y() / d, d, n.z() * n.y() / d)</span></span>;</span><br><span class="line">    Vector3f b = n.<span class="built_in">cross</span>(t);</span><br><span class="line"></span><br><span class="line">    Matrix3f TBN;</span><br><span class="line">    TBN.<span class="built_in">col</span>(<span class="number">0</span>) = t, TBN.<span class="built_in">col</span>(<span class="number">1</span>) = b, TBN.<span class="built_in">col</span>(<span class="number">2</span>) = n;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> u = payload.tex_coords.<span class="built_in">x</span>(), v = payload.tex_coords.<span class="built_in">y</span>();</span><br><span class="line">    <span class="type">float</span> w = payload.texture-&gt;width, h = payload.texture-&gt;height;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> dU = kh * kn * (payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u + <span class="number">1.0f</span> / w, v).<span class="built_in">norm</span>() - payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u, v).<span class="built_in">norm</span>());</span><br><span class="line">    <span class="type">float</span> dV = kh * kn * (payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u, v + <span class="number">1.0f</span> / h).<span class="built_in">norm</span>() - payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u, v).<span class="built_in">norm</span>());</span><br><span class="line"></span><br><span class="line">    <span class="function">Vector3f <span class="title">ln</span> <span class="params">(-dU, -dV, <span class="number">1</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    point += (kn * normal * payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u, v).<span class="built_in">norm</span>()); <span class="comment">// Core code</span></span><br><span class="line">    normal = (TBN * ln).<span class="built_in">normalized</span>();</span><br><span class="line">    </span><br><span class="line">    Eigen::Vector3f result_color = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; light : lights)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Calculate the square distance r^2</span></span><br><span class="line">        <span class="type">float</span> square_distance = (light.position - point).<span class="built_in">squaredNorm</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Calculate the light direction, view direction, normal, and half vector</span></span><br><span class="line">        Vector3f l = (light.position - point).<span class="built_in">normalized</span>();</span><br><span class="line">        Vector3f v = (eye_pos - point).<span class="built_in">normalized</span>();</span><br><span class="line">        Vector3f n = normal.<span class="built_in">normalized</span>();</span><br><span class="line">        Vector3f h = (l + v).<span class="built_in">normalized</span>();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// The light intensity</span></span><br><span class="line">        Vector3f I = light.intensity;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Calculate the ambient light, diffuse light and specular light</span></span><br><span class="line">        Vector3f ambient_light = ka.<span class="built_in">cwiseProduct</span>(amb_light_intensity);</span><br><span class="line">        Vector3f diffuse_light = kd.<span class="built_in">cwiseProduct</span>(I / square_distance) * std::<span class="built_in">max</span>(<span class="number">0.0f</span>, n.<span class="built_in">dot</span>(l));</span><br><span class="line">        Vector3f specular_light = ks.<span class="built_in">cwiseProduct</span>(I / square_distance) * std::<span class="built_in">pow</span>(std::<span class="built_in">max</span>(<span class="number">0.0f</span>, n.<span class="built_in">dot</span>(h)), p);</span><br><span class="line"></span><br><span class="line">        result_color += ambient_light + diffuse_light + specular_light;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result_color * <span class="number">255.f</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>仔细观察代码，不难发现它最核心的代码就一行：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">point += (kn * normal * payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u, v).<span class="built_in">norm</span>());</span><br></pre></td></tr></table></figure>
+<p>这一行代码的意思是点在空间中的位置实际地被改变了。这会影响下面光照距离、观察方向、光照方向的计算，从而改变着色结果。</p>
 <h1 id="参考文献">参考文献</h1>
 <p><a
 href="https://blog.matrixs.site/post/2022-01-07-%E8%A8%88%E7%AE%97%E6%A9%9F%E5%9C%96%E5%BD%A2%E5%AD%B8-games101%E4%BD%9C%E6%A5%AD3%E8%A3%9C%E5%85%85/%E5%9C%96%E5%BD%A2%E5%AD%B8%E7%B3%BB%E5%88%97_games101-homework3-normalmaps_and_bumpmaps_and_displacementmaps.html">圖形學系列
@@ -2323,8 +2408,8 @@ href="https://www.cnblogs.com/tiancaiwrk/p/11132437.html">深入浅出之切空�
       <tags>
         <tag>计算机</tag>
         <tag>随笔</tag>
-        <tag>数学</tag>
         <tag>游戏</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -6434,8 +6519,8 @@ BVH效率对比更加突出，我在<code>main.cpp</code>中连续调用了100�
       <tags>
         <tag>计算机</tag>
         <tag>随笔</tag>
-        <tag>数学</tag>
         <tag>游戏</tag>
+        <tag>数学</tag>
         <tag>作业</tag>
       </tags>
   </entry>

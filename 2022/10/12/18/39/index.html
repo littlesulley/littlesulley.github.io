@@ -35,13 +35,14 @@
 <meta property="og:image" content="http://sulley.cc/images/bump-map/1-1.png">
 <meta property="og:image" content="http://sulley.cc/images/bump-map/1-2.png">
 <meta property="og:image" content="http://sulley.cc/images/bump-map/2-1.png">
+<meta property="og:image" content="http://sulley.cc/images/bump-map/2-2.png">
 <meta property="article:published_time" content="2022-10-12T10:39:31.000Z">
-<meta property="article:modified_time" content="2022-10-29T16:45:37.391Z">
+<meta property="article:modified_time" content="2022-10-30T16:32:37.201Z">
 <meta property="article:author" content="Sulley">
 <meta property="article:tag" content="计算机">
 <meta property="article:tag" content="随笔">
-<meta property="article:tag" content="数学">
 <meta property="article:tag" content="游戏">
+<meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://sulley.cc/images/bump-map/1-1.png">
 
@@ -308,7 +309,7 @@ Mapping）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" h
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-10-30 00:45:37" itemprop="dateModified" datetime="2022-10-30T00:45:37+08:00">2022-10-30</time>
+      <time title="修改时间：2022-10-31 00:32:37" itemprop="dateModified" datetime="2022-10-31T00:32:37+08:00">2022-10-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -348,14 +349,14 @@ Mapping）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" h
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>9.5k</span>
+      <span>16k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>9 分钟</span>
+      <span>14 分钟</span>
     </span>
 </div>
 
@@ -683,10 +684,95 @@ class="math inline">\(F^{-1}\)</span>还原真实空间的法线。也就是说�
 class="math inline">\(\mathbf{w}&#39;\)</span>进行计算，而不需要把所有点都经过TBN矩阵变换到世界空间中再做Shading，这样一来就降低了计算量。</p>
 <h1 id="games-101-作业三中的bump-mapping">GAMES 101 作业三中的Bump
 Mapping</h1>
+<p>GAMES101的作业三也让我们实现了一个简单的Bump
+Mapping，下面是代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Eigen::Vector3f <span class="title">bump_fragment_shader</span><span class="params">(<span class="type">const</span> fragment_shader_payload&amp; payload)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    </span><br><span class="line">    Eigen::Vector3f ka = Eigen::<span class="built_in">Vector3f</span>(<span class="number">0.005</span>, <span class="number">0.005</span>, <span class="number">0.005</span>);</span><br><span class="line">    Eigen::Vector3f kd = payload.color;</span><br><span class="line">    Eigen::Vector3f ks = Eigen::<span class="built_in">Vector3f</span>(<span class="number">0.7937</span>, <span class="number">0.7937</span>, <span class="number">0.7937</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> l1 = light&#123;&#123;<span class="number">20</span>, <span class="number">20</span>, <span class="number">20</span>&#125;, &#123;<span class="number">500</span>, <span class="number">500</span>, <span class="number">500</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">auto</span> l2 = light&#123;&#123;<span class="number">-20</span>, <span class="number">20</span>, <span class="number">0</span>&#125;, &#123;<span class="number">500</span>, <span class="number">500</span>, <span class="number">500</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">    std::vector&lt;light&gt; lights = &#123;l1, l2&#125;;</span><br><span class="line">    Eigen::Vector3f amb_light_intensity&#123;<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>&#125;;</span><br><span class="line">    Eigen::Vector3f eye_pos&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> p = <span class="number">150</span>;</span><br><span class="line"></span><br><span class="line">    Eigen::Vector3f color = payload.color; </span><br><span class="line">    Eigen::Vector3f point = payload.view_pos;</span><br><span class="line">    Eigen::Vector3f normal = payload.normal;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> kh = <span class="number">0.2</span>, kn = <span class="number">0.1</span>;</span><br><span class="line"></span><br><span class="line">    Vector3f n = normal.<span class="built_in">normalized</span>();</span><br><span class="line">    <span class="type">float</span> d = <span class="built_in">sqrt</span>(n.<span class="built_in">x</span>() * n.<span class="built_in">x</span>() + n.<span class="built_in">z</span>() * n.<span class="built_in">z</span>());</span><br><span class="line">    <span class="function">Vector3f <span class="title">t</span> <span class="params">(-n.x() * n.y() / d, d, -n.z() * n.y() / d)</span></span>;</span><br><span class="line">    Vector3f b = n.<span class="built_in">cross</span>(t);</span><br><span class="line"></span><br><span class="line">    Matrix3f TBN;</span><br><span class="line">    TBN.<span class="built_in">col</span>(<span class="number">0</span>) = t, TBN.<span class="built_in">col</span>(<span class="number">1</span>) = b, TBN.<span class="built_in">col</span>(<span class="number">2</span>) = n;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> u = payload.tex_coords.<span class="built_in">x</span>(), v = payload.tex_coords.<span class="built_in">y</span>();</span><br><span class="line">    <span class="type">float</span> w = payload.texture-&gt;width, h = payload.texture-&gt;height;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> dU = kh * kn * (payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u + <span class="number">1.0f</span> / w, v).<span class="built_in">norm</span>() - payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u, v).<span class="built_in">norm</span>());</span><br><span class="line">    <span class="type">float</span> dV = kh * kn * (payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u, v + <span class="number">1.0f</span> / h).<span class="built_in">norm</span>() - payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u, v).<span class="built_in">norm</span>());</span><br><span class="line"></span><br><span class="line">    <span class="function">Vector3f <span class="title">ln</span> <span class="params">(-dU, -dV, <span class="number">1</span>)</span></span>;</span><br><span class="line">    normal = TBN * ln;</span><br><span class="line"></span><br><span class="line">    Eigen::Vector3f result_color = normal.<span class="built_in">normalized</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result_color * <span class="number">255.f</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先定义了环境光、漫反射和镜面反射的系数，然后定义了光线和观察位置，之后求出了TBN矩阵与纹理空间中的法向量，最后转换到了世界空间中进行着色。</p>
+<p>这里通过<code>dU</code>和<code>dV</code>得到的就是我们一开始讲的纹理空间中变换后的法向量<span
+class="math inline">\((-c_1\Delta h(u),-c_2\Delta
+h(v),1)^\top\)</span>，只不过这里是在乘了TBN矩阵之后再进行的归一化。</p>
+<p>但是这里的TBN计算方式，和我们上面提到的完全不一样。<span
+class="math inline">\(\mathbf{n}\)</span>倒是正确的，它直接用了当前的法向量：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vector3f n = normal.<span class="built_in">normalized</span>();</span><br></pre></td></tr></table></figure>
+<p>但是计算<span
+class="math inline">\(\mathbf{t}\)</span>就完全让人摸不着头脑了（<span
+class="math inline">\(\mathbf{b}\)</span>可以通过叉乘实现）：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> d = <span class="built_in">sqrt</span>(n.<span class="built_in">x</span>() * n.<span class="built_in">x</span>() + n.<span class="built_in">z</span>() * n.<span class="built_in">z</span>());</span><br><span class="line"><span class="function">Vector3f <span class="title">t</span> <span class="params">(-n.x() * n.y() / d, d, -n.z() * n.y() / d)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>翻译成数学公式就是：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \mathbf{t} &amp;= \left(\frac{-xy}{\sqrt{x^2+z^2}}, \sqrt{x^2+z^2},
+\frac{-zy}{\sqrt{x^2+z^2}}\right)^\top
+\end{aligned}
+\]</span></p>
+<p>可以验证这是一个与<span
+class="math inline">\(\mathbf{n}=(x,y,z)^\top\)</span>垂直的单位向量。</p>
+<p>这两行代码是什么意思呢？其实，这里这里是对向量进行了旋转操作。如下图所示，先把<span
+class="math inline">\(\mathbf{n}\)</span>拆成它在XZ平面和Y轴上的分量<span
+class="math inline">\(\mathbf{n}_{xz}\)</span>和<span
+class="math inline">\(\mathbf{n}_y\)</span>。现在我们的目标就是在由<span
+class="math inline">\(\mathbf{n}_{xz}\)</span>和<span
+class="math inline">\(\mathbf{n}_y\)</span>所定义的平面上的任意一个向量，都得到它在同一个平面上的垂直向量。对<span
+class="math inline">\(\mathbf{n}_{xz}\)</span>来说，这个向量就是<span
+class="math inline">\(\mathbf{n}_y\)</span>；对<span
+class="math inline">\(\mathbf{n}\)</span>来说，这个向量就是<span
+class="math inline">\(\mathbf{t}\)</span>。所以本质上我们是要求一个旋转矩阵，它可以得到该平面上与一个向量垂直的向量。</p>
+<p><img data-src="/images/bump-map/2-2.png" /></p>
+<p>这个变换很简单，就是先将它绕着Y轴旋转<span
+class="math inline">\(\theta\)</span>°，这里的<span
+class="math inline">\(\theta\)</span>是<span
+class="math inline">\(\mathbf{n}_{xz}\)</span>与X轴形成的夹角，得到的向量会在平面XY上；然后绕着Z轴旋转90°；最后绕Y轴旋转<span
+class="math inline">\(-\theta\)</span>°，得到的向量就是与给定向量在平面内垂直的向量。这三个连续操作可以写成三个矩阵的乘积：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+  \cos(\theta) &amp; 0 &amp; -\sin(\theta)\\
+  0 &amp; 1 &amp; 0\\
+  \sin(\theta) &amp; 0 &amp; \cos(\theta)
+\end{bmatrix}
+\begin{bmatrix}
+  0 &amp; -1 &amp; 0\\
+  1 &amp; 0 &amp; 0 \\
+  0 &amp; 0 &amp; 1\\
+\end{bmatrix}
+\begin{bmatrix}
+  \cos(\theta) &amp; 0 &amp; \sin(\theta)\\
+  0 &amp; 1 &amp; 0\\
+  -\sin(\theta) &amp; 0 &amp; \cos(\theta)
+\end{bmatrix}=
+\begin{bmatrix}
+  \sin^2(\theta) &amp; -\cos(\theta) &amp; -\sin(\theta)\cos(\theta)\\
+  \cos(\theta) &amp; 0 &amp; \sin(\theta)\\
+  -\sin(\theta)\cos(\theta) &amp; -\sin(\theta) &amp; \cos^2(\theta)
+\end{bmatrix}
+\]</span></p>
+<p>再由<span
+class="math inline">\(\cos(\theta)=\frac{x}{\sqrt{x^2+z^2}},\sin(\theta)=\frac{z}{\sqrt{x^2+z^2}}\)</span>，可知，变换矩阵为：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+  \frac{z^2}{x^2+z^2} &amp; -\frac{x}{\sqrt{x^2+z^2}} &amp;
+-\frac{xz}{x^2+z^2}\\
+  \frac{x}{\sqrt{x^2+z^2}} &amp; 0 &amp; \frac{z}{\sqrt{x^2+z^2}}\\
+  -\frac{xz}{x^2+z^2} &amp; -\frac{z}{\sqrt{x^2+z^2}} &amp;
+\frac{x^2}{x^2+z^2}
+\end{bmatrix}
+\]</span></p>
+<p>所以，<span
+class="math inline">\((x,y,z)^\top\)</span>变换后的结果就是<span
+class="math inline">\(\mathbf{t}=\left(\frac{-xy}{\sqrt{x^2+z^2}},
+\sqrt{x^2+z^2}, \frac{-zy}{\sqrt{x^2+z^2}}\right)^\top\)</span>。</p>
 <p>所以，从根本上讲，切线空间除了<span
-class="math inline">\(\mathbf{n}\)</span>需要被作为Z轴是明确的之外，剩下的两个轴（实际上是一个轴，也就是所谓的Tangents，另一个轴可以通过叉积求得）都是可以手动定义的。</p>
+class="math inline">\(\mathbf{n}\)</span>需要被作为Z轴是明确的之外，剩下的两个轴（实际上是一个轴，也就是所谓的Tangents，另一个轴可以通过叉积求得）都是可以手动定义的。只要在制作存储法线贴图和使用法线贴图时保持一致即可。</p>
 <h1 id="位移贴图displacement-mapping">位移贴图（Displacement
 Mapping）</h1>
+<p>分析Bump mapping和Normal
+mapping不难发现，它们实际上是通过改变法线制造一种假象，这时候物体本身没有丝毫变化。这种方法难以处理由凹凸表面带来的自阴影，并且物体的边界会露馅。</p>
+<p>Displacement
+mapping真的去改变每个点在空间的位置，从而得到更加真实的结果。</p>
+<p>下面是GAMES101 作业三中关于displacement mapping的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Eigen::Vector3f <span class="title">displacement_fragment_shader</span><span class="params">(<span class="type">const</span> fragment_shader_payload&amp; payload)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    </span><br><span class="line">    Eigen::Vector3f ka = Eigen::<span class="built_in">Vector3f</span>(<span class="number">0.005</span>, <span class="number">0.005</span>, <span class="number">0.005</span>);</span><br><span class="line">    Eigen::Vector3f kd = payload.color;</span><br><span class="line">    Eigen::Vector3f ks = Eigen::<span class="built_in">Vector3f</span>(<span class="number">0.7937</span>, <span class="number">0.7937</span>, <span class="number">0.7937</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> l1 = light&#123;&#123;<span class="number">20</span>, <span class="number">20</span>, <span class="number">20</span>&#125;, &#123;<span class="number">500</span>, <span class="number">500</span>, <span class="number">500</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">auto</span> l2 = light&#123;&#123;<span class="number">-20</span>, <span class="number">20</span>, <span class="number">0</span>&#125;, &#123;<span class="number">500</span>, <span class="number">500</span>, <span class="number">500</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">    std::vector&lt;light&gt; lights = &#123;l1, l2&#125;;</span><br><span class="line">    Eigen::Vector3f amb_light_intensity&#123;<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>&#125;;</span><br><span class="line">    Eigen::Vector3f eye_pos&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> p = <span class="number">150</span>;</span><br><span class="line"></span><br><span class="line">    Eigen::Vector3f color = payload.color; </span><br><span class="line">    Eigen::Vector3f point = payload.view_pos;</span><br><span class="line">    Eigen::Vector3f normal = payload.normal;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> kh = <span class="number">0.2</span>, kn = <span class="number">0.1</span>;</span><br><span class="line">    </span><br><span class="line">    Vector3f n = normal.<span class="built_in">normalized</span>();</span><br><span class="line">    <span class="type">float</span> d = <span class="built_in">sqrt</span>(n.<span class="built_in">x</span>() * n.<span class="built_in">x</span>() + n.<span class="built_in">z</span>() * n.<span class="built_in">z</span>());</span><br><span class="line">    <span class="function">Vector3f <span class="title">t</span> <span class="params">(n.x() * n.y() / d, d, n.z() * n.y() / d)</span></span>;</span><br><span class="line">    Vector3f b = n.<span class="built_in">cross</span>(t);</span><br><span class="line"></span><br><span class="line">    Matrix3f TBN;</span><br><span class="line">    TBN.<span class="built_in">col</span>(<span class="number">0</span>) = t, TBN.<span class="built_in">col</span>(<span class="number">1</span>) = b, TBN.<span class="built_in">col</span>(<span class="number">2</span>) = n;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> u = payload.tex_coords.<span class="built_in">x</span>(), v = payload.tex_coords.<span class="built_in">y</span>();</span><br><span class="line">    <span class="type">float</span> w = payload.texture-&gt;width, h = payload.texture-&gt;height;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> dU = kh * kn * (payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u + <span class="number">1.0f</span> / w, v).<span class="built_in">norm</span>() - payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u, v).<span class="built_in">norm</span>());</span><br><span class="line">    <span class="type">float</span> dV = kh * kn * (payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u, v + <span class="number">1.0f</span> / h).<span class="built_in">norm</span>() - payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u, v).<span class="built_in">norm</span>());</span><br><span class="line"></span><br><span class="line">    <span class="function">Vector3f <span class="title">ln</span> <span class="params">(-dU, -dV, <span class="number">1</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    point += (kn * normal * payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u, v).<span class="built_in">norm</span>()); <span class="comment">// Core code</span></span><br><span class="line">    normal = (TBN * ln).<span class="built_in">normalized</span>();</span><br><span class="line">    </span><br><span class="line">    Eigen::Vector3f result_color = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; light : lights)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Calculate the square distance r^2</span></span><br><span class="line">        <span class="type">float</span> square_distance = (light.position - point).<span class="built_in">squaredNorm</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Calculate the light direction, view direction, normal, and half vector</span></span><br><span class="line">        Vector3f l = (light.position - point).<span class="built_in">normalized</span>();</span><br><span class="line">        Vector3f v = (eye_pos - point).<span class="built_in">normalized</span>();</span><br><span class="line">        Vector3f n = normal.<span class="built_in">normalized</span>();</span><br><span class="line">        Vector3f h = (l + v).<span class="built_in">normalized</span>();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// The light intensity</span></span><br><span class="line">        Vector3f I = light.intensity;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Calculate the ambient light, diffuse light and specular light</span></span><br><span class="line">        Vector3f ambient_light = ka.<span class="built_in">cwiseProduct</span>(amb_light_intensity);</span><br><span class="line">        Vector3f diffuse_light = kd.<span class="built_in">cwiseProduct</span>(I / square_distance) * std::<span class="built_in">max</span>(<span class="number">0.0f</span>, n.<span class="built_in">dot</span>(l));</span><br><span class="line">        Vector3f specular_light = ks.<span class="built_in">cwiseProduct</span>(I / square_distance) * std::<span class="built_in">pow</span>(std::<span class="built_in">max</span>(<span class="number">0.0f</span>, n.<span class="built_in">dot</span>(h)), p);</span><br><span class="line"></span><br><span class="line">        result_color += ambient_light + diffuse_light + specular_light;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result_color * <span class="number">255.f</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>仔细观察代码，不难发现它最核心的代码就一行：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">point += (kn * normal * payload.texture-&gt;<span class="built_in">getColorBilinear</span>(u, v).<span class="built_in">norm</span>());</span><br></pre></td></tr></table></figure>
+<p>这一行代码的意思是点在空间中的位置实际地被改变了。这会影响下面光照距离、观察方向、光照方向的计算，从而改变着色结果。</p>
 <h1 id="参考文献">参考文献</h1>
 <p><a
 target="_blank" rel="noopener" href="https://blog.matrixs.site/post/2022-01-07-%E8%A8%88%E7%AE%97%E6%A9%9F%E5%9C%96%E5%BD%A2%E5%AD%B8-games101%E4%BD%9C%E6%A5%AD3%E8%A3%9C%E5%85%85/%E5%9C%96%E5%BD%A2%E5%AD%B8%E7%B3%BB%E5%88%97_games101-homework3-normalmaps_and_bumpmaps_and_displacementmaps.html">圖形學系列
@@ -791,8 +877,8 @@ Algorithm是计算机图形学中用于画直线的算法，它只涉及整型�
           <div class="post-tags">
               <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
               <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
-              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
               <a href="/tags/%E6%B8%B8%E6%88%8F/" rel="tag"># 游戏</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
           </div>
 
         
@@ -843,13 +929,13 @@ Algorithm是计算机图形学中用于画直线的算法，它只涉及整型�
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">273k</span>
+    <span title="站点总字数">279k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:08</span>
+    <span title="站点阅读时长">4:14</span>
   </span>
 </div>
 <div class="busuanzi-count">
