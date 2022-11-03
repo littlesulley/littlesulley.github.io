@@ -57,8 +57,12 @@
 <meta property="og:image" content="http://sulley.cc/images/games101/7-6.png">
 <meta property="og:image" content="http://sulley.cc/images/games101/7-7.png">
 <meta property="og:image" content="http://sulley.cc/images/games101/7-8.png">
+<meta property="og:image" content="http://sulley.cc/images/games101/8-1.png">
+<meta property="og:image" content="http://sulley.cc/images/games101/8-2.png">
+<meta property="og:image" content="http://sulley.cc/images/games101/8-3.png">
+<meta property="og:image" content="http://sulley.cc/images/games101/8-4.png">
 <meta property="article:published_time" content="2022-10-08T03:01:20.000Z">
-<meta property="article:modified_time" content="2022-11-02T14:16:29.708Z">
+<meta property="article:modified_time" content="2022-11-03T13:33:49.422Z">
 <meta property="article:author" content="Sulley">
 <meta property="article:tag" content="计算机">
 <meta property="article:tag" content="随笔">
@@ -227,7 +231,9 @@ function in Triangle.hpp</span></a></li><li class="nav-item nav-level-3"><a clas
 in BVH.cpp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bonus-multi-threading"><span class="nav-number">7.6.</span> <span class="nav-text">Bonus: Multi-threading</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bonus-microfacet"><span class="nav-number">7.7.</span> <span class="nav-text">Bonus: Microfacet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#implementing-the-normal-distribution"><span class="nav-number">7.7.1.</span> <span class="nav-text">Implementing the normal
 distribution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#implementing-the-shadow-masking-term"><span class="nav-number">7.7.2.</span> <span class="nav-text">Implementing the
 shadow-masking term</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#implementing-brdf"><span class="nav-number">7.7.3.</span> <span class="nav-text">Implementing BRDF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#using-sphere-to-explore-the-effect-of-roughness"><span class="nav-number">7.7.4.</span> <span class="nav-text">Using sphere to
-explore the effect of roughness</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#summary-1"><span class="nav-number">7.8.</span> <span class="nav-text">Summary</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%9C%E4%B8%9A%E5%85%AB"><span class="nav-number">8.</span> <span class="nav-text">作业八</span></a></li></ol></div>
+explore the effect of roughness</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#summary-1"><span class="nav-number">7.8.</span> <span class="nav-text">Summary</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%9C%E4%B8%9A%E5%85%AB"><span class="nav-number">8.</span> <span class="nav-text">作业八</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#creating-rope-in-rope.cpp"><span class="nav-number">8.1.</span> <span class="nav-text">Creating rope in
+rope.cpp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#simulation-via-euler-method"><span class="nav-number">8.2.</span> <span class="nav-text">Simulation via euler method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#simulation-via-verlet-and-adding-vetlet-damping"><span class="nav-number">8.3.</span> <span class="nav-text">Simulation via
+Verlet and adding Vetlet damping</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -363,7 +369,7 @@ explore the effect of roughness</span></a></li></ol></li><li class="nav-item nav
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-02 22:16:29" itemprop="dateModified" datetime="2022-11-02T22:16:29+08:00">2022-11-02</time>
+      <time title="修改时间：2022-11-03 21:33:49" itemprop="dateModified" datetime="2022-11-03T21:33:49+08:00">2022-11-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -403,14 +409,14 @@ explore the effect of roughness</span></a></li></ol></li><li class="nav-item nav
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>70k</span>
+      <span>73k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1:04</span>
+      <span>1:07</span>
     </span>
 </div>
 
@@ -1302,6 +1308,43 @@ class="math inline">\(k_s\)</span>。</li>
 <li>最后，把直接光照和间接光照加起来，就是这一点在给定入射光线和出射光线时接受到的能量。</li>
 </ul>
 <h1 id="作业八">作业八</h1>
+<p>本次作业将实现一个质点弹簧系统。下面按照作业要求依次说明。</p>
+<h2 id="creating-rope-in-rope.cpp">Creating rope in
+<code>rope.cpp</code></h2>
+<p>首先需要在<code>rope.cpp</code>中创建绳子对象。每个绳子由<code>num_nodes</code>个质点组成，每两个质点之间有一根弹簧。质点本身有质量、位置以及是否被钉住这样一个属性；每个弹簧包含它连接的两个质点和弹簧系数<code>k</code>。对<code>num_nodes</code>个质点的弹簧，我们需要构造<code>num_nodes</code>个质点和<code>num_nodes - 1</code>个弹簧。</p>
+<p>代码如下:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Rope::<span class="built_in">Rope</span>(Vector2D start, Vector2D end, <span class="type">int</span> num_nodes, <span class="type">float</span> node_mass, <span class="type">float</span> k, vector&lt;<span class="type">int</span>&gt; pinned_nodes)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// TODO (Part 1): Create a rope starting at `start`, ending at `end`, and containing `num_nodes` nodes.</span></span><br><span class="line">    Vector2D step = (end - start) / (num_nodes - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    vector&lt;Mass *&gt; _masses;</span><br><span class="line">    vector&lt;Spring *&gt; _springs;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; num_nodes; ++i) &#123;</span><br><span class="line">        Mass* mass = <span class="keyword">new</span> <span class="built_in">Mass</span>(start + i * step, node_mass, <span class="literal">false</span>);</span><br><span class="line">        _masses.<span class="built_in">push_back</span>(mass);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; num_nodes - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        Spring* spring = <span class="keyword">new</span> <span class="built_in">Spring</span>(_masses[i], _masses[i + <span class="number">1</span>], k);</span><br><span class="line">        _springs.<span class="built_in">push_back</span>(spring);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;i : pinned_nodes) &#123;</span><br><span class="line">        _masses[i]-&gt;pinned = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    masses = _masses;</span><br><span class="line">    springs = _springs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译之后可以得到下图的结果：</p>
+<p><img data-src="/images/games101/8-1.png" /></p>
+<h2 id="simulation-via-euler-method">Simulation via euler method</h2>
+<p>接下来实现显式欧拉和半隐式欧拉方法模拟弹簧运动。胡克定律：</p>
+<p><span class="math display">\[\mathbf{f}_{\mathbf{b}\to
+\mathbf{a}}=-k_s\frac{\mathbf{b}-\mathbf{a}}{\|\mathbf{b}-\mathbf{a}\|}(\|\mathbf{b}-\mathbf{a}\|-\ell)\]</span></p>
+<p>其中<span
+class="math inline">\(\ell\)</span>是弹簧没有任何拉伸时的长度。</p>
+<p>下面是代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Rope::simulateEuler</span><span class="params">(<span class="type">float</span> <span class="type">delta_t</span>, Vector2D gravity)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;s : springs)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// TODO (Part 2): Use Hooke&#x27;s law to calculate the force on a node</span></span><br><span class="line">        Vector2D vec = s-&gt;m2-&gt;position - s-&gt;m1-&gt;position;</span><br><span class="line">        Vector2D force = -s-&gt;k * vec.<span class="built_in">unit</span>() * (vec.<span class="built_in">norm</span>() - s-&gt;rest_length);</span><br><span class="line"></span><br><span class="line">        s-&gt;m2-&gt;forces += force;</span><br><span class="line">        s-&gt;m1-&gt;forces += -force;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;m : masses)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!m-&gt;pinned)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// TODO (Part 2): Add the force due to gravity, then compute the new velocity and position</span></span><br><span class="line">            m-&gt;forces += gravity * m-&gt;mass;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// TODO (Part 2): Add global damping</span></span><br><span class="line">            <span class="type">float</span> kd = <span class="number">0.1</span>;</span><br><span class="line">            m-&gt;forces += -kd * m-&gt;velocity;</span><br><span class="line"></span><br><span class="line">            Vector2D <span class="type">a_t</span> = m-&gt;forces / m-&gt;mass;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Explicit Euler method</span></span><br><span class="line">            <span class="comment">// m-&gt;position += m-&gt;velocity * delta_t;</span></span><br><span class="line">            <span class="comment">// m-&gt;velocity += a_t * delta_t;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// Semi-implicit Euler method</span></span><br><span class="line">            m-&gt;velocity += <span class="type">a_t</span> * <span class="type">delta_t</span>;</span><br><span class="line">            m-&gt;position += m-&gt;velocity * <span class="type">delta_t</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Reset all forces on each mass</span></span><br><span class="line">        m-&gt;forces = <span class="built_in">Vector2D</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先对每个弹簧，基于胡克定律累加每个质点的力；然后对每个质点，加上重力，应用全局阻尼，最后更新位置和速度即可。显式欧拉和半隐式欧拉方法的本质区别在于：半隐式欧拉考虑了加速度，因此更加准确。</p>
+<p>为了让质点下降的速度慢一些，可以在<code>application.h</code>中把<code>gravity</code>改小一点：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gravity = <span class="built_in">Vector2D</span>(<span class="number">0</span>, <span class="number">-0.1</span>);</span><br></pre></td></tr></table></figure>
+<p>得到的结果如下（蓝色）：</p>
+<p><img data-src="/images/games101/8-2.png" /></p>
+<h2 id="simulation-via-verlet-and-adding-vetlet-damping">Simulation via
+Verlet and adding Vetlet damping</h2>
+<p>使用Verlet模拟，公式如下：</p>
+<p><span
+class="math display">\[\mathbf{x}_{t+1}=\mathbf{x}_t+(1-k_d)(\mathbf{x}_t-\mathbf{x}_{t-1})+\mathbf{a}_t(\Delta
+t)^2\]</span></p>
+<p>其中<span
+class="math inline">\(k_d\)</span>是阻尼系数。我们不难写出下面的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Rope::simulateVerlet</span><span class="params">(<span class="type">float</span> <span class="type">delta_t</span>, Vector2D gravity)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;s : springs)</span><br><span class="line">    &#123;</span><br><span class="line">        Vector2D vec = s-&gt;m2-&gt;position - s-&gt;m1-&gt;position;</span><br><span class="line">        Vector2D force = -s-&gt;k * vec.<span class="built_in">unit</span>() * (vec.<span class="built_in">norm</span>() - s-&gt;rest_length);</span><br><span class="line"></span><br><span class="line">        s-&gt;m2-&gt;forces += force;</span><br><span class="line">        s-&gt;m1-&gt;forces += -force;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;m : masses)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!m-&gt;pinned)</span><br><span class="line">        &#123;</span><br><span class="line">            m-&gt;forces += gravity * m-&gt;mass;</span><br><span class="line">            Vector2D <span class="type">a_t</span> = m-&gt;forces / m-&gt;mass;</span><br><span class="line"></span><br><span class="line">            Vector2D temp_position = m-&gt;position;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// TODO (Part 3.1): Set the new position of the rope mass</span></span><br><span class="line">            <span class="comment">// TODO (Part 4): Add global Verlet damping</span></span><br><span class="line">            <span class="type">double</span> damping_factor = <span class="number">0.00005</span>;</span><br><span class="line"></span><br><span class="line">            m-&gt;position = m-&gt;position + (<span class="number">1</span> - damping_factor) * (m-&gt;position - m-&gt;last_position) + <span class="type">a_t</span> * <span class="type">delta_t</span> * <span class="type">delta_t</span>;</span><br><span class="line">            m-&gt;last_position = temp_position;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Reset all forces on each mass</span></span><br><span class="line">        m-&gt;forces = <span class="built_in">Vector2D</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果我们置<span
+class="math inline">\(k_d=0\)</span>，则弹簧永远不会停下来：</p>
+<p><img data-src="/images/games101/8-3.png" /></p>
+<p>如果令<span
+class="math inline">\(k_d=0.00005\)</span>，则弹簧能够停止：</p>
+<p><img data-src="/images/games101/8-4.png" /></p>
+<p>至此，我们已完成了GAMES101 所有作业！完结撒花！</p>
 
     </div>
 
@@ -1443,13 +1486,13 @@ role="doc-noteref"><sup>1</sup></a> 给出修正插值。</p></p></div>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">296k</span>
+    <span title="站点总字数">299k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:29</span>
+    <span title="站点阅读时长">4:32</span>
   </span>
 </div>
 <div class="busuanzi-count">
