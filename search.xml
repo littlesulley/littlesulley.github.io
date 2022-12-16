@@ -80,7 +80,8 @@ the following equation:</p>
 \end{equation}
 \]</span></p>
 <p>where <span class="math inline">\(k\)</span> is an unknown
-coefficient satisfying <span class="math inline">\(k&gt;0\)</span>.
+coefficient satisfying <span class="math inline">\(k&gt;1\)</span> as we
+want the look-at target is farther than the follow target to our camera.
 Before wo go ahead solving this equation, we should determine <span
 class="math inline">\(\mathbf{t}_1\)</span> at the first place.</p>
 <h2 id="determining-mathbft_1">Determining <span
@@ -251,82 +252,196 @@ y}{\sqrt{(\Delta x)^2+(\Delta y)^2}}\cos\theta\\
 \cos\alpha\sin\theta-\sin\alpha\cos\theta \\
     \frac{t_1}{\sqrt{(\Delta x)^2+(\Delta y)^2}} &amp;=
 \sin(\theta-\alpha) \\
-    \theta &amp;= \alpha + \arcsin\left(\frac{t_1}{\sqrt{(\Delta
-x)^2+(\Delta y)^2}}\right)\\
+    \theta &amp;= {\color{cyan}\alpha} + {\color{pink}\beta}\\
     \theta &amp;= {\color{cyan}\arcsin\left(\frac{\Delta
 y}{\sqrt{(\Delta x)^2+(\Delta y)^2}}\right)}+
-\arcsin\left(\frac{t_1}{\sqrt{(\Delta x)^2+(\Delta y)^2}}\right)
+{\color{pink}\arcsin\left(\frac{t_1}{\sqrt{(\Delta x)^2+(\Delta
+y)^2}}\right)}
 \end{aligned}
 \label{eq14}
 \end{equation}
 \]</span></p>
-<p>It's particularly noteworthy that the tinted part should be modified
-according to the sign of <span class="math inline">\(\Delta x\)</span>
-and <span class="math inline">\(\Delta y\)</span>. A simple observation
-is:</p>
+<p>The tinted values <span
+class="math inline">\({\color{cyan}\alpha=\arcsin\left(\frac{\Delta
+y}{\sqrt{(\Delta x)^2+(\Delta y)^2}}\right)}\)</span> and <span
+class="math inline">\({\color{pink}\beta=\arcsin\left(\frac{t_1}{\sqrt{(\Delta
+x)^2+(\Delta y)^2}}\right)}\)</span> should be calibrated according to
+the sign of <span class="math inline">\(\Delta x\)</span> and <span
+class="math inline">\(\Delta y\)</span>. It's particularly noteworthy
+that when <span class="math inline">\({\color{pink}\beta=0}\)</span>,
+<span class="math inline">\({\color{cyan}\alpha}\)</span> should be:</p>
 <ul>
 <li><span class="math inline">\(\Delta x&gt;0\)</span> and <span
 class="math inline">\(\Delta y&gt;0\)</span>, <span
-class="math inline">\(\theta\in[-\pi,-\pi/2]\)</span></li>
+class="math inline">\({\color{cyan}\alpha\in[-\pi,-\pi/2]}\)</span></li>
 <li><span class="math inline">\(\Delta x&gt;0\)</span> and <span
 class="math inline">\(\Delta y&lt;0\)</span>, <span
-class="math inline">\(\theta\in[\pi/2,\pi]\)</span></li>
+class="math inline">\({\color{cyan}\alpha\in[\pi/2,\pi]}\)</span></li>
 <li><span class="math inline">\(\Delta x&lt;0\)</span> and <span
 class="math inline">\(\Delta y&gt;0\)</span>, <span
-class="math inline">\(\theta\in[-\pi/2,0]\)</span></li>
+class="math inline">\({\color{cyan}\alpha\in[-\pi/2,0]}\)</span></li>
 <li><span class="math inline">\(\Delta x&lt;0\)</span> and <span
 class="math inline">\(\Delta y&gt;0\)</span>, <span
-class="math inline">\(\theta\in[0,\pi/2]\)</span></li>
+class="math inline">\({\color{cyan}\alpha\in[0,\pi/2]}\)</span></li>
 </ul>
-<p>The value returned by <span
+<p>However, the value returned by <span
 class="math inline">\(\arcsin(\cdot)\)</span> lies within <span
-class="math inline">\([-\pi/2,\pi/2]\)</span> should be further altered
-according to the observation above. It can be easily concluded that
-(assume the raw returned value is <span
-class="math inline">\(\hat{\alpha}\)</span>):</p>
+class="math inline">\([-\pi/2,\pi/2]\)</span> and should be further
+altered according to the observation above. It can be easily concluded
+that:</p>
 <p><span class="math display">\[
 \begin{equation}
-    \alpha=\begin{cases}
-        \hat{\alpha}-\pi,~&amp;\Delta x&gt;0\\
-        -\hat{\alpha},~&amp;\Delta x\le 0
+    \hat{\alpha}=\begin{cases}
+        {\color{cyan}\alpha}-\pi,~&amp;\Delta x&gt;0\\
+        -{\color{cyan}\alpha},~&amp;\Delta x\le 0
     \end{cases}
+\label{eq15}
 \end{equation}
 \]</span></p>
+<p>For <span class="math inline">\(\beta\)</span>, we notice that when
+<span class="math inline">\(t_1\)</span> is positive and gets larger,
+the camera's yaw will decrease, so the real beta will be <span
+class="math inline">\(\hat{\beta}=-{\color{pink}\beta}\)</span>. Summing
+up the corrected values, we reach the true camera yaw <span
+class="math inline">\(\hat{\theta}=\hat{\alpha}+\hat{\beta}\)</span>.</p>
 <p>The second problem, which is very palpable, is that <span
 class="math inline">\(\frac{t_1}{\sqrt{(\Delta x)^2+(\Delta
 y)^2}}\)</span> can be smaller than <span
 class="math inline">\(-1\)</span> or larger than <span
-class="math inline">\(1\)</span>, when the denominator is small. If this
-value exceeds the bound and we clip it, the resulting yaw <span
+class="math inline">\(1\)</span>, when the denominator — the distance
+between follow point and look-at point — is small. If this value exceeds
+the bound and we clip it, the resulting yaw <span
 class="math inline">\(\theta\)</span> and the subsequent pitch <span
 class="math inline">\(\varphi\)</span> would be incorrect, making odd
 camera artifacts.</p>
 <p>Here are several potential workarounds to deal with this issue:</p>
 <ul>
-<li></li>
+<li>Dynamically adapts <span class="math inline">\(a_x\)</span> to
+ensure the absolute value of <span class="math inline">\(t_1\)</span> is
+no larger than <span class="math inline">\(\sqrt{(\Delta x)^2+(\Delta
+y)^2}\)</span>.</li>
+<li>Introduce the concept of <strong>soft zone</strong> and apply
+damping just as Cinemachine does.</li>
 </ul>
-<p>Here we leave out the case when <span class="math inline">\(\Delta
-x=\Delta y =0\)</span> since usually the player character and the enemy
-will not be on the up axis at the same time.</p>
-<p>Once we have <span class="math inline">\(\theta\)</span>, we can
-easily find out <span class="math inline">\(\varphi\)</span>. By <span
-class="math inline">\(\eqref{eq11}\)</span> (or <span
+<p>Method two might be a better way because it has smooth result. We
+will get to this in later sections of this post, and now we focus on
+implementing method one, which is much simpler to achieve using
+blueprint. All we need to do is to set a <code>BeginAdaptDistance</code>
+and <code>EndAdaptDistance</code> that adapts <span
+class="math inline">\(a_x\)</span> when <span
+class="math inline">\(\sqrt{(\Delta x)^2+(\Delta y)^2}\)</span> is
+within the range of <span
+class="math inline">\([\text{EndAdaptDistance},\text{BeginAdaptDistance}]\)</span>.
+More concretely, when the distance is within the range, new <span
+class="math inline">\(a_x\)</span> will be <span
+class="math inline">\(a_x\frac{\text{CurrentDistance}-\text{EndAdaptDistance}}{\text{BeginAdaptDistance}-\text{EndAdaptDistance}}\)</span>.
+When both values are set to zero, no scale is applied, when <span
+class="math inline">\(\text{EndAdaptDistance}\)</span> is negative,
+<span class="math inline">\(a_x\)</span> will have its minimum (the
+absolute value) greater than zero. It is very effective and flexible to
+use this value in order for avoiding zero-division as will be introduced
+in <span class="math inline">\(\eqref{eq16}\)</span>. Directly clamping
+<span class="math inline">\(t_1\)</span> between <span
+class="math inline">\([-\sqrt{(\Delta x)^2+(\Delta y)^2},\sqrt{(\Delta
+x)^2+(\Delta y)^2}]\)</span> will not bring about satisfactory
+results.</p>
+<p>Note that we leave out the case when <span
+class="math inline">\(\Delta x=\Delta y =0\)</span> since for most of
+the time the player character and the enemy will not be on the up axis
+at the same time.</p>
+<p>Once we have <span class="math inline">\(\hat{\theta}\)</span>, we
+can easily find out <span class="math inline">\(\varphi\)</span>. By
+<span class="math inline">\(\eqref{eq11}\)</span> (or <span
 class="math inline">\(\eqref{eq12}\)</span> equivalently), we have:</p>
 <p><span class="math display">\[
 \begin{equation}
-    \varphi=\arctan\left(\frac{\Delta z\cos\theta}{\Delta
-x-t_1\sin\theta}\right)
+    \varphi=\arctan\left(\frac{\Delta z\cos\hat{\theta}}{\Delta
+x-t_1\sin\hat{\theta}}\right)
 \label{eq16}
 \end{equation}
 \]</span></p>
-<h2
-id="final-camera-location-and-rotation-and-blueprint-implementation">Final
-camera location and rotation and blueprint implementation</h2>
+<p>You may ask what will happen if <span class="math inline">\(\Delta
+x-t_1\sin\hat{\theta}\)</span> is close to zero? Well, this could not be
+a problem as we have already dynamically adapted <span
+class="math inline">\(t_1\)</span> with respect to the follow-lookat
+distance, as long as</p>
+<p>What are <span class="math inline">\(\varphi,\hat{\theta}\)</span>
+when <span class="math inline">\(t_1=0\)</span>? From <span
+class="math inline">\(\eqref{eq14}\)</span>, we know <span
+class="math inline">\(\hat{\theta}=\hat{\alpha}\)</span>; then from
+<span class="math inline">\(\eqref{eq14}\eqref{eq16}\)</span> and using
+the fact that <span
+class="math inline">\(\cos(\arcsin(x))=\sqrt{1-x^2}\)</span>, we have
+<span class="math inline">\(\varphi=-\arctan\left(\frac{\Delta
+z}{\sqrt{(\Delta x)^2+(\Delta y)^2}}\right)\)</span>.</p>
+<h2 id="final-camera-location-and-rotation">Final camera location and
+rotation</h2>
+<p>To summarize, we first compute <span
+class="math inline">\(\alpha\)</span> and <span
+class="math inline">\(\beta\)</span> with <span
+class="math inline">\(\eqref{eq14}\)</span>:</p>
+<p><span class="math display">\[
+\alpha=\arcsin\left(\frac{\Delta y}{\sqrt{(\Delta x)^2+(\Delta
+y)^2}}\right),~\beta=\arcsin\left(\frac{t_1}{\sqrt{(\Delta x)^2+(\Delta
+y)^2}}\right)
+\]</span></p>
+<p>Then we calibrate <span class="math inline">\(\alpha\)</span> and
+<span class="math inline">\(\beta\)</span>:</p>
+<p><span class="math display">\[
+\hat{\alpha}=\begin{cases}
+        \alpha-\pi,~&amp;\Delta x&gt;0\\
+        -\alpha,~&amp;\Delta x\le 0
+\end{cases},~~~\hat{\beta}=-\beta
+\]</span></p>
+<p>the addition is the yaw we want: <span
+class="math inline">\(\hat{\theta}=\hat{\alpha}+\hat{\beta}\)</span>. To
+remedy the issue of overflowing when <span
+class="math inline">\(\sqrt{(\Delta x)^2+(\Delta y)^2}\)</span> is
+small, we can set an range in which the raw screen offset <span
+class="math inline">\(a_x\)</span> is dynamically adjusted and achieve
+smooth camera motion.</p>
+<p>The camera pitch can be readily computed:</p>
+<p><span class="math display">\[\varphi=\arctan\left(\frac{\Delta
+z\cos\hat{\theta}}{\Delta x-t_1\sin\hat{\theta}}\right)\]</span></p>
 <p>Eventually, we can compute the camera location and rotation. Location
 is <span
 class="math inline">\(\mathbf{x}+\mathbf{a}+\mathbf{t}_1\)</span>, and
 rotation can be set to look at <span
 class="math inline">\(\mathbf{b}\)</span>.</p>
+<p>Here is a video showcasing this camera with different parameter
+values.</p>
+<video src="/images/1v1camera/showcase1.mp4" preload="metadata" controlslist="nodownload" controls playsinline poster=""></video>
+<p>Here is the blueprint I make to implement this camera. It is now a
+little out of order and I will make it more readable and extensible in
+next sections.</p>
+<p>In the main graph, we get camera yaw and pitch, get camera / rotation
+and set them in each frame.</p>
+<p><img data-src="/images/1v1camera/2.png" /></p>
+<p>The <code>GetCameraYawAndPitch</code> function starts with applying
+the follow position and look-at position offset. Note that the follow
+position offset is based on the follow target's local coordinate.</p>
+<p><img data-src="/images/1v1camera/3.png" /></p>
+<p>Then, we store temporary variables including <span
+class="math inline">\(\Delta X,\Delta Y,\Delta Z\)</span> and <span
+class="math inline">\(t_1\)</span>.</p>
+<p><img data-src="/images/1v1camera/4.png" /></p>
+<p>Last, we compute yaw and pitch, and return them.</p>
+<p><img data-src="/images/1v1camera/5.png" /></p>
+<p>The <code>GetT1</code> function computes and returns <span
+class="math inline">\(t_1\)</span>. We dynamically scale <span
+class="math inline">\(a_x\)</span> according to the current
+follow-lookat distance (in the XY plane).</p>
+<p><img data-src="/images/1v1camera/6.png" /> <img
+src="/images/1v1camera/7.png" /></p>
+<p>The <code>GetCameraLocation</code> sums up the three components.</p>
+<p><img data-src="/images/1v1camera/8.png" /></p>
+<p>The <code>GetCameraRotation</code> forces the camera to orient to the
+look-at target.</p>
+<p><img data-src="/images/1v1camera/9.png" /></p>
+<h1 id="enhancement-one-finer-control-over-the-screen-space">Enhancement
+One: Finer Control Over The Screen Space</h1>
+<h1 id="enhancement-two-damping">Enhancement Two: Damping</h1>
+<h1 id="implement-with-code">Implement with Code</h1>
 ]]></content>
       <categories>
         <category>游戏 - 相机</category>
@@ -529,6 +644,27 @@ class="math inline">\(0&lt;k\le
       </tags>
   </entry>
   <entry>
+    <title>Motion Matching -- 概念与发展</title>
+    <url>/2022/03/27/08/38/</url>
+    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
+Matching基本知识的介绍，放在此备份。</p>
+<span id="more"></span>
+<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
+]]></content>
+      <categories>
+        <category>游戏 - 动画</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>随笔</tag>
+        <tag>计算机</tag>
+        <tag>动画</tag>
+        <tag>游戏</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>A Brief Note on Version Control and Project Organization</title>
     <url>/2022/11/21/16/03/</url>
     <content><![CDATA[<p>This is a brief note about the e-book <a
@@ -698,24 +834,6 @@ As a team, you need to agree on your guidelines</p>
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2020/09/07/23/00/</url>
-    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
-<span id="more"></span>
-<h1 id="测试">测试</h1>
-<h2 id="代码">代码</h2>
-<p>现在来测试一下代码</p>
-<details class="note info no-icon"><summary><p>This is a code test</p>
-</summary>
-<h4 id="details-and-code">Details and code</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
-
-</details>
-<h2 id="latex">Latex</h2>
-<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
-]]></content>
-  </entry>
-  <entry>
     <title>《Assassain&#39;s Creed Valhalla》玩后感</title>
     <url>/2020/11/12/23/23/</url>
     <content><![CDATA[<p><code>刺客信条：英灵殿</code>（Assassin's Creed
@@ -756,6 +874,24 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
         <tag>生活</tag>
         <tag>刺客信条</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/09/07/23/00/</url>
+    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
+<span id="more"></span>
+<h1 id="测试">测试</h1>
+<h2 id="代码">代码</h2>
+<p>现在来测试一下代码</p>
+<details class="note info no-icon"><summary><p>This is a code test</p>
+</summary>
+<h4 id="details-and-code">Details and code</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
+
+</details>
+<h2 id="latex">Latex</h2>
+<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
+]]></content>
   </entry>
   <entry>
     <title>无穷连根式求极限的充要条件</title>
@@ -1261,27 +1397,6 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
       </tags>
   </entry>
   <entry>
-    <title>Motion Matching -- 概念与发展</title>
-    <url>/2022/03/27/08/38/</url>
-    <content><![CDATA[<p>这是我在组内分享的一次关于Motion
-Matching基本知识的介绍，放在此备份。</p>
-<span id="more"></span>
-<div class="pdf-container" data-target="/resources/pdf/MotionMatching-概念与发展.pdf" data-height="800px"></div>
-]]></content>
-      <categories>
-        <category>游戏 - 动画</category>
-      </categories>
-      <tags>
-        <tag>数学</tag>
-        <tag>随笔</tag>
-        <tag>计算机</tag>
-        <tag>游戏</tag>
-        <tag>动画</tag>
-        <tag>机器学习</tag>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>一道有趣的概率题</title>
     <url>/2022/10/20/23/59/</url>
     <content><![CDATA[<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
@@ -1747,6 +1862,34 @@ H &amp;= \tan(A)R + Y
         <tag>相机</tag>
         <tag>算法</tag>
         <tag>游戏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>樱花</title>
+    <url>/2021/06/29/00/24/</url>
+    <content><![CDATA[<p>昨夜 我收到一封书札<br />
+旧纸上 缀满了一朵樱花<br />
+风干的墨迹 渗透了陌生人的迷茫<br />
+我慢慢 把信合上</p>
+<p>昨夜 我写了一封书札<br />
+述说着 近日的苦闷衷肠<br />
+窗外的灯火 依旧那么辉煌<br />
+我贴上 一朵樱花珍藏</p>
+<p>同样的夜晚 走过了岁月多少锋芒<br />
+心中仍 呐喊着一个熟悉人的回响<br />
+把信 随风寄向远方<br />
+留给陌生的他 打开新的过往<br />
+愿他不要怯懦 续写昨夜的感慨<br />
+还有清晨的阳光</p>
+<p>案台旁 樱花在绽放</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -2450,34 +2593,6 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
     <content><![CDATA[<p>霓光半遮影<br />
 湖波轻颤合韵起<br />
 半句寻谁去</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>樱花</title>
-    <url>/2021/06/29/00/24/</url>
-    <content><![CDATA[<p>昨夜 我收到一封书札<br />
-旧纸上 缀满了一朵樱花<br />
-风干的墨迹 渗透了陌生人的迷茫<br />
-我慢慢 把信合上</p>
-<p>昨夜 我写了一封书札<br />
-述说着 近日的苦闷衷肠<br />
-窗外的灯火 依旧那么辉煌<br />
-我贴上 一朵樱花珍藏</p>
-<p>同样的夜晚 走过了岁月多少锋芒<br />
-心中仍 呐喊着一个熟悉人的回响<br />
-把信 随风寄向远方<br />
-留给陌生的他 打开新的过往<br />
-愿他不要怯懦 续写昨夜的感慨<br />
-还有清晨的阳光</p>
-<p>案台旁 樱花在绽放</p>
 ]]></content>
       <categories>
         <category>随笔</category>

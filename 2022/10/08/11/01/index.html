@@ -1387,23 +1387,6 @@ class="footnote-ref" id="fnref8"
 role="doc-noteref"><sup>8</sup></a>。</p></p></div>
     </li>
     <li class="popular-posts-item">
-        <div class="popular-posts-date">2022-12-11</div>
-      <div class="popular-posts-title"><a href="/2022/12/11/09/16/" rel="bookmark">Implementing A Minimum 1V1 Camera in UE (akin to FramingTransposer + Composer in Cinemachine)</a></div>
-        <div class="popular-posts-excerpt"><p><p>The camera system inside Unreal Engine provides very basic functions.
-It merely enables the camera to follow a target with limited adjustable
-paramters such as offset, camera distance, lag, etc. We would like a
-more powerful camera system, like the Cinemachine toolset in Unity, to
-facilitate creating more interesting and compelling visual experience
-for gameplay. In most 3D adventure games, a 1v1 camera is required when
-you fight with a BOSS and you need to look at the BOSS however you move
-and cast skills. Unfortunately, 1v1 camera is not a built-in function in
-UE, so we have to implement our own version of 1v1 camera.</p>
-<p>In this post, I will share with you how to implement a minimum 1v1
-camera in UE using only blueprints, based on some simple mathematics. If
-you are more familiar with coding, you can also implement this 1v1
-camera with only few lines of code.</p></p></div>
-    </li>
-    <li class="popular-posts-item">
         <div class="popular-posts-date">2021-08-14</div>
       <div class="popular-posts-title"><a href="/2021/08/14/23/31/" rel="bookmark">矫正透视投影插值及属性插值详解</a></div>
         <div class="popular-posts-excerpt"><p><p>三角形是图形学的基本几何形状，空间中的三角形<span
@@ -1425,6 +1408,23 @@ class="math inline">\((x_{P},y_{P},z_{P})\)</span>。这是因为从三维空间
 Projection），这个投影是非线性的，因此变换前的重心坐标并不能和变换后的重心坐标保持线性关系，从而对三角形顶点的属性插值也不是线性关系。这就需要对透视投影下的重心坐标插值进行修正。本文从透视投影本身出发，说明其非线性性，并根据论文《Perspective-Correct
 Interpolation》<a href="#fn1" class="footnote-ref" id="fnref1"
 role="doc-noteref"><sup>1</sup></a> 给出修正插值。</p></p></div>
+    </li>
+    <li class="popular-posts-item">
+        <div class="popular-posts-date">2022-12-11</div>
+      <div class="popular-posts-title"><a href="/2022/12/11/09/16/" rel="bookmark">Implementing A Minimum 1V1 Camera in UE (akin to FramingTransposer + Composer in Cinemachine)</a></div>
+        <div class="popular-posts-excerpt"><p><p>The camera system inside Unreal Engine provides very basic functions.
+It merely enables the camera to follow a target with limited adjustable
+paramters such as offset, camera distance, lag, etc. We would like a
+more powerful camera system, like the Cinemachine toolset in Unity, to
+facilitate creating more interesting and compelling visual experience
+for gameplay. In most 3D adventure games, a 1v1 camera is required when
+you fight with a BOSS and you need to look at the BOSS however you move
+and cast skills. Unfortunately, 1v1 camera is not a built-in function in
+UE, so we have to implement our own version of 1v1 camera.</p>
+<p>In this post, I will share with you how to implement a minimum 1v1
+camera in UE using only blueprints, based on some simple mathematics. If
+you are more familiar with coding, you can also implement this 1v1
+camera with only few lines of code.</p></p></div>
     </li>
   </ul>
 
@@ -1503,13 +1503,13 @@ role="doc-noteref"><sup>1</sup></a> 给出修正插值。</p></p></div>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">312k</span>
+    <span title="站点总字数">316k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:44</span>
+    <span title="站点阅读时长">4:47</span>
   </span>
 </div>
 <div class="busuanzi-count">
