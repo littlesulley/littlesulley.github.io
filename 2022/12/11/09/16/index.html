@@ -41,13 +41,13 @@
 <meta property="og:image" content="http://sulley.cc/images/1v1camera/8.png">
 <meta property="og:image" content="http://sulley.cc/images/1v1camera/9.png">
 <meta property="article:published_time" content="2022-12-11T01:16:34.000Z">
-<meta property="article:modified_time" content="2022-12-16T17:12:00.307Z">
+<meta property="article:modified_time" content="2022-12-17T16:01:02.594Z">
 <meta property="article:author" content="Sulley">
-<meta property="article:tag" content="数学">
-<meta property="article:tag" content="随笔">
 <meta property="article:tag" content="计算机">
-<meta property="article:tag" content="UE">
+<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="数学">
 <meta property="article:tag" content="相机">
+<meta property="article:tag" content="UE">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://sulley.cc/images/1v1camera/1.png">
 
@@ -180,7 +180,10 @@
 with A Simple Case: Mathematical Derivation for Camera Location and
 Rotation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#constructing-the-equation"><span class="nav-number">1.1.</span> <span class="nav-text">Constructing the equation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#determining-mathbft_1"><span class="nav-number">1.2.</span> <span class="nav-text">Determining \(\mathbf{t}_1\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#determining-varphi-and-theta"><span class="nav-number">1.3.</span> <span class="nav-text">Determining \(\varphi\) and \(\theta\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#final-camera-location-and-rotation"><span class="nav-number">1.4.</span> <span class="nav-text">Final camera location and
 rotation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#enhancement-one-finer-control-over-the-screen-space"><span class="nav-number">2.</span> <span class="nav-text">Enhancement
-One: Finer Control Over The Screen Space</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#enhancement-two-damping"><span class="nav-number">3.</span> <span class="nav-text">Enhancement Two: Damping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#implement-with-code"><span class="nav-number">4.</span> <span class="nav-text">Implement with Code</span></a></li></ol></div>
+One: Finer Control Over The Screen Space</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#determining-mathbft_2"><span class="nav-number">2.1.</span> <span class="nav-text">Determining \(\mathbf{t}_2\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#determining-new-varphi-and-theta"><span class="nav-number">2.2.</span> <span class="nav-text">Determining new \(\varphi\) and \(\theta\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#but-what-about-the-look-at-position..."><span class="nav-number">2.3.</span> <span class="nav-text">But what about the
+look-at position...?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#enhancement-two-emulate-cinemachine-by-using-incremental-change-and-adding-damping"><span class="nav-number">3.</span> <span class="nav-text">Enhancement
+Two: Emulate Cinemachine by using Incremental Change and Adding
+Damping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#implement-with-code"><span class="nav-number">4.</span> <span class="nav-text">Implement with Code</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -316,7 +319,7 @@ One: Finer Control Over The Screen Space</span></a></li><li class="nav-item nav-
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-12-17 01:12:00" itemprop="dateModified" datetime="2022-12-17T01:12:00+08:00">2022-12-17</time>
+      <time title="修改时间：2022-12-18 00:01:02" itemprop="dateModified" datetime="2022-12-18T00:01:02+08:00">2022-12-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -356,14 +359,14 @@ One: Finer Control Over The Screen Space</span></a></li><li class="nav-item nav-
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>12k</span>
+      <span>16k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>11 分钟</span>
+      <span>15 分钟</span>
     </span>
 </div>
 
@@ -697,15 +700,15 @@ damping just as Cinemachine does.</li>
 <p>Method two might be a better way because it has smooth result. We
 will get to this in later sections of this post, and now we focus on
 implementing method one, which is much simpler to achieve using
-blueprint. All we need to do is to set a <code>BeginAdaptDistance</code>
-and <code>EndAdaptDistance</code> that adapts <span
-class="math inline">\(a_x\)</span> when <span
+blueprint. All we need to do is to set a
+<code>BeginAdaptDistanceX</code> and <code>EndAdaptDistanceX</code> that
+adapts <span class="math inline">\(a_x\)</span> when <span
 class="math inline">\(\sqrt{(\Delta x)^2+(\Delta y)^2}\)</span> is
 within the range of <span
-class="math inline">\([\text{EndAdaptDistance},\text{BeginAdaptDistance}]\)</span>.
+class="math inline">\([\text{EndAdaptDistanceX},\text{BeginAdaptDistanceX}]\)</span>.
 More concretely, when the distance is within the range, new <span
 class="math inline">\(a_x\)</span> will be <span
-class="math inline">\(a_x\frac{\text{CurrentDistance}-\text{EndAdaptDistance}}{\text{BeginAdaptDistance}-\text{EndAdaptDistance}}\)</span>.
+class="math inline">\(a_x\frac{\text{CurrentDistance}-\text{EndAdaptDistanceX}}{\text{BeginAdaptDistanceX}-\text{EndAdaptDistanceX}}\)</span>.
 When both values are set to zero, no scale is applied, when <span
 class="math inline">\(\text{EndAdaptDistance}\)</span> is negative,
 <span class="math inline">\(a_x\)</span> will have its minimum (the
@@ -735,7 +738,8 @@ x-t_1\sin\hat{\theta}}\right)
 x-t_1\sin\hat{\theta}\)</span> is close to zero? Well, this could not be
 a problem as we have already dynamically adapted <span
 class="math inline">\(t_1\)</span> with respect to the follow-lookat
-distance, as long as</p>
+distance, as long as the values of <code>BeginAdaptDistanceX</code> and
+<code>EndAdaptDistanceX</code> are property set.</p>
 <p>What are <span class="math inline">\(\varphi,\hat{\theta}\)</span>
 when <span class="math inline">\(t_1=0\)</span>? From <span
 class="math inline">\(\eqref{eq14}\)</span>, we know <span
@@ -811,7 +815,147 @@ look-at target.</p>
 <p><img data-src="/images/1v1camera/9.png" /></p>
 <h1 id="enhancement-one-finer-control-over-the-screen-space">Enhancement
 One: Finer Control Over The Screen Space</h1>
-<h1 id="enhancement-two-damping">Enhancement Two: Damping</h1>
+<p>To getter a finer control of the follow point and look-at point on
+the screen space, we would like to introduce three more paramters
+<code>Follow Screen Y</code>, <code>Lookat Screen X</code> and
+<code>Lookat Screen Y</code> respectively denoting the Y axis screen
+position of the follow point, the X axis screen position of the lookat
+point and the Y axis screen position of the lookat point.</p>
+<h2 id="determining-mathbft_2">Determining <span
+class="math inline">\(\mathbf{t}_2\)</span></h2>
+<p>Assume <span class="math inline">\(\mathbf{t}_2\)</span> as the
+Y-axis offset applied to the camera, <span
+class="math inline">\(a_y\in[-0.5,0.5]\)</span> is the value of
+<code>Follow Screen Y</code>. When <span
+class="math inline">\(a_y=-0.5\)</span>, the follow point lies at the
+bottom edge of the screen, and at the top edge when <span
+class="math inline">\(a_y=0.5\)</span>. Following what we do for <span
+class="math inline">\(\mathbf{t}_1\)</span>, we can easily express <span
+class="math inline">\(\mathbf{t}_2\)</span> as:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \mathbf{t}_2=t_2\begin{pmatrix}
+    -\sin\varphi\cos\theta\\
+    -\sin\varphi\sin\theta\\
+    \cos\varphi
+    \end{pmatrix},~~t_2=-\frac{2a_yr}{\text{AspectRatio}}\tan\left(\frac{\text{fov}}{2}\right)
+\end{equation}
+\]</span></p>
+<p>where <span
+class="math inline">\(\mathbf{u}=(\sin\varphi\cos\theta,\sin\varphi\sin\theta,-\cos\varphi)^\top\)</span>
+is camera's local up vector from the cross product of camera's local
+forward vector <span
+class="math inline">\(\mathbf{f}=(-\cos\varphi\cos\theta,-\cos\varphi\sin\theta,-\sin\varphi)^\top\)</span>
+and camera's local right vector <span
+class="math inline">\(\mathbf{r}=(\sin\theta,-\cos\theta,0)^\top\)</span>
+(note again UE uses the left-hand rule). <span
+class="math inline">\(\text{AspectRatio}\)</span> is camera's aspect
+ratio (usually 16:9).</p>
+<h2 id="determining-new-varphi-and-theta">Determining new <span
+class="math inline">\(\varphi\)</span> and <span
+class="math inline">\(\theta\)</span></h2>
+<p>Going back to <span class="math inline">\(\eqref{main}\)</span> and
+adding <span class="math inline">\(\mathbf{t}_2\)</span>, we have:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \mathbf{b}-\mathbf{a}-\mathbf{x}-\mathbf{t}_1-\mathbf{t}_2=-k\mathbf{x}
+\label{eq18}
+\end{equation}
+\]</span></p>
+<p>Then we have:</p>
+<p><span class="math display">\[
+\begin{align}
+    (1-k)r\cos\varphi\cos\theta+t_1\sin\theta-t_2\sin\varphi\cos\theta
+&amp;= \Delta x \label{eq19}\\
+    (1-k)r\cos\varphi\sin\theta-t_1\cos\theta-t_2\sin\varphi\sin\theta
+&amp;= \Delta y \label{eq20}\\
+    (1-k)r\sin\varphi+t_2\cos\varphi &amp;= \Delta z \label{eq21}
+\end{align}
+\]</span></p>
+<p>Interestingly, the resulting <span
+class="math inline">\(\hat{\theta}\)</span> by combining <span
+class="math inline">\(\eqref{eq19}\)</span> and <span
+class="math inline">\(\eqref{eq20}\)</span> remains the same as <span
+class="math inline">\(\eqref{eq14}\)</span>. So we do not need to change
+the way we compute <span
+class="math inline">\(\hat{\theta}\)</span>.</p>
+<p>For <span class="math inline">\(\varphi\)</span>, it's a little
+tricky. First, we rewrite <span
+class="math inline">\(\eqref{eq21}\)</span> as <span
+class="math inline">\((1-k)r=\frac{\Delta
+z+t_2\cos\varphi}{\sin\varphi}\)</span>, we plug it into <span
+class="math inline">\(\eqref{eq19}\)</span>:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \frac{\Delta x-t_1\sin\theta}{\cos\theta}=\frac{\Delta
+z\cos\varphi+t_2}{\sin\varphi}
+\end{equation}
+\]</span></p>
+<p>This leads to <span class="math inline">\(A\sin\varphi-\Delta
+z\cos\varphi=t_2\)</span> (we let <span
+class="math inline">\(A=\frac{\Delta
+x-t_1\sin\theta}{\cos\theta}\)</span>). We can use the same technique
+for computing <span class="math inline">\(\hat{\theta}\)</span> to solve
+<span class="math inline">\(\hat{\varphi}\)</span>. That will be:</p>
+<p><span class="math display">\[
+\small
+\begin{equation}
+\begin{aligned}
+    \varphi &amp;= {\color{cyan}\gamma} + {\color{pink}\tau}\\
+    \varphi &amp;= {\color{cyan}\arcsin\left(\frac{\Delta
+z}{\sqrt{A^2+(\Delta z)^2}}\right)}+
+{\color{pink}\arcsin\left(\frac{t_2}{\sqrt{A^2+(\Delta z)^2}}\right)}
+\end{aligned}
+\label{eq23}
+\end{equation}
+\]</span></p>
+<p>When <span class="math inline">\(t_2=0\)</span> and with the identity
+<span class="math inline">\(\tan(\arcsin(x))=x/\sqrt{1-x^2}\)</span>, we
+have <span class="math inline">\(\varphi_{t_2=0}=\pm\frac{\Delta
+z\cos\hat{\theta}}{\Delta x-t_1\sin\hat{\theta}}\)</span>. The only
+thing left is to determine the real value of <span
+class="math inline">\({\color{cyan}\gamma}\)</span> and <span
+class="math inline">\({\color{pink}\tau}\)</span>. Through experiment,
+we know both signs are positive.</p>
+<p>Besides, we also introduce <code>BeginAdaptDistanceY</code> and
+<code>EndAdaptDistanceY</code>, in analogy to what we do for
+<code>ScreenX</code>, to dynamically scale <span
+class="math inline">\(a_y\)</span> when the follow point and the look-at
+position is close. In this way, we achieve smooth camera move for both
+<code>ScreenX</code> and <code>ScreenY</code>.</p>
+<h2 id="but-what-about-the-look-at-position...">But what about the
+look-at position...?</h2>
+<p>We introduce four new parameters, <span
+class="math inline">\(\Theta\)</span>, the yaw angle based on camera's
+local space and <span class="math inline">\(b_x=\text{Lookat Screen
+X}\)</span>, and <span class="math inline">\(\Phi\)</span>, the pitch
+angle based on camera's local space and <span
+class="math inline">\(b_y=\text{Lookat Screen Y}\)</span>. We adjust
+<span class="math inline">\(\Theta\)</span> and <span
+class="math inline">\(\Phi\)</span> (i.e., rotating camera at its own
+local coordinate) to accommodate look-at position manupulation on screen
+space.</p>
+<p>Nonetheless, when biasing the look-at point on screen space, we will
+encounter some problems. If we allow for camera rotation at its local
+coordinate, the values of <span class="math inline">\(t_1\)</span> and
+<span class="math inline">\(t_2\)</span> computed above would be wrong,
+because the local orientation of camera can significantly influence the
+follow position on screen space. Now that the determination of <span
+class="math inline">\(t_1, t_2\)</span> and the determination of
+camera's local orientation are entangled, establishing and solving the
+equation can be very difficult, particularly for an explicit
+solution.</p>
+<p>(*: There might be a nice explicit solution, but for now I won't
+manage to solve it out. Perhaps for someday in the future I will take a
+shot.)</p>
+<p>What we gonna do to mitigate this issue is to increment camera
+position and orientation, rather than hard-set it at its "correct"
+position and orientation. This is exactly what Cinemachine does for
+camera motion.</p>
+<h1
+id="enhancement-two-emulate-cinemachine-by-using-incremental-change-and-adding-damping">Enhancement
+Two: Emulate Cinemachine by using Incremental Change and Adding
+Damping</h1>
 <h1 id="implement-with-code">Implement with Code</h1>
 
     </div>
@@ -889,11 +1033,11 @@ Developers》的阅读笔记，放在此备份供参阅。</p></p></div>
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
-              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
               <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
-              <a href="/tags/UE/" rel="tag"># UE</a>
+              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
               <a href="/tags/%E7%9B%B8%E6%9C%BA/" rel="tag"># 相机</a>
+              <a href="/tags/UE/" rel="tag"># UE</a>
           </div>
 
         
@@ -941,13 +1085,13 @@ Developers》的阅读笔记，放在此备份供参阅。</p></p></div>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">316k</span>
+    <span title="站点总字数">320k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:47</span>
+    <span title="站点阅读时长">4:51</span>
   </span>
 </div>
 <div class="busuanzi-count">
