@@ -41,7 +41,7 @@
 <meta property="og:image" content="http://sulley.cc/images/1v1camera/8.png">
 <meta property="og:image" content="http://sulley.cc/images/1v1camera/9.png">
 <meta property="article:published_time" content="2022-12-11T01:16:34.000Z">
-<meta property="article:modified_time" content="2022-12-17T16:01:02.594Z">
+<meta property="article:modified_time" content="2022-12-17T16:20:13.301Z">
 <meta property="article:author" content="Sulley">
 <meta property="article:tag" content="计算机">
 <meta property="article:tag" content="随笔">
@@ -181,9 +181,9 @@ with A Simple Case: Mathematical Derivation for Camera Location and
 Rotation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#constructing-the-equation"><span class="nav-number">1.1.</span> <span class="nav-text">Constructing the equation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#determining-mathbft_1"><span class="nav-number">1.2.</span> <span class="nav-text">Determining \(\mathbf{t}_1\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#determining-varphi-and-theta"><span class="nav-number">1.3.</span> <span class="nav-text">Determining \(\varphi\) and \(\theta\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#final-camera-location-and-rotation"><span class="nav-number">1.4.</span> <span class="nav-text">Final camera location and
 rotation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#enhancement-one-finer-control-over-the-screen-space"><span class="nav-number">2.</span> <span class="nav-text">Enhancement
 One: Finer Control Over The Screen Space</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#determining-mathbft_2"><span class="nav-number">2.1.</span> <span class="nav-text">Determining \(\mathbf{t}_2\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#determining-new-varphi-and-theta"><span class="nav-number">2.2.</span> <span class="nav-text">Determining new \(\varphi\) and \(\theta\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#but-what-about-the-look-at-position..."><span class="nav-number">2.3.</span> <span class="nav-text">But what about the
-look-at position...?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#enhancement-two-emulate-cinemachine-by-using-incremental-change-and-adding-damping"><span class="nav-number">3.</span> <span class="nav-text">Enhancement
-Two: Emulate Cinemachine by using Incremental Change and Adding
-Damping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#implement-with-code"><span class="nav-number">4.</span> <span class="nav-text">Implement with Code</span></a></li></ol></div>
+look-at position...?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#enhancement-two-emulate-cinemachine-by-using-incremental-motion-and-adding-damping"><span class="nav-number">3.</span> <span class="nav-text">Enhancement
+Two: Emulate Cinemachine by using Incremental Motion and Adding
+Damping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -319,7 +319,7 @@ Damping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-12-18 00:01:02" itemprop="dateModified" datetime="2022-12-18T00:01:02+08:00">2022-12-18</time>
+      <time title="修改时间：2022-12-18 00:20:13" itemprop="dateModified" datetime="2022-12-18T00:20:13+08:00">2022-12-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -815,15 +815,16 @@ look-at target.</p>
 <p><img data-src="/images/1v1camera/9.png" /></p>
 <h1 id="enhancement-one-finer-control-over-the-screen-space">Enhancement
 One: Finer Control Over The Screen Space</h1>
-<p>To getter a finer control of the follow point and look-at point on
-the screen space, we would like to introduce three more paramters
+<p>To get a finer control of the follow point and look-at point on the
+screen space, we would like to introduce three more paramters
 <code>Follow Screen Y</code>, <code>Lookat Screen X</code> and
 <code>Lookat Screen Y</code> respectively denoting the Y axis screen
 position of the follow point, the X axis screen position of the lookat
-point and the Y axis screen position of the lookat point.</p>
+point and the Y axis screen position of the lookat point. We first talk
+about <code>Follow Screen Y</code>.</p>
 <h2 id="determining-mathbft_2">Determining <span
 class="math inline">\(\mathbf{t}_2\)</span></h2>
-<p>Assume <span class="math inline">\(\mathbf{t}_2\)</span> as the
+<p>Assume <span class="math inline">\(\mathbf{t}_2\)</span> is the
 Y-axis offset applied to the camera, <span
 class="math inline">\(a_y\in[-0.5,0.5]\)</span> is the value of
 <code>Follow Screen Y</code>. When <span
@@ -953,10 +954,10 @@ position and orientation, rather than hard-set it at its "correct"
 position and orientation. This is exactly what Cinemachine does for
 camera motion.</p>
 <h1
-id="enhancement-two-emulate-cinemachine-by-using-incremental-change-and-adding-damping">Enhancement
-Two: Emulate Cinemachine by using Incremental Change and Adding
+id="enhancement-two-emulate-cinemachine-by-using-incremental-motion-and-adding-damping">Enhancement
+Two: Emulate Cinemachine by using Incremental Motion and Adding
 Damping</h1>
-<h1 id="implement-with-code">Implement with Code</h1>
+<h1 id="code">Code</h1>
 
     </div>
 
