@@ -40,8 +40,21 @@
 <meta property="og:image" content="http://sulley.cc/images/1v1camera/6.png">
 <meta property="og:image" content="http://sulley.cc/images/1v1camera/8.png">
 <meta property="og:image" content="http://sulley.cc/images/1v1camera/9.png">
+<meta property="og:image" content="http://sulley.cc/images/1v1camera/10.png">
+<meta property="og:image" content="http://sulley.cc/images/1v1camera/11.png">
+<meta property="og:image" content="http://sulley.cc/images/1v1camera/12.png">
+<meta property="og:image" content="http://sulley.cc/images/1v1camera/13.png">
+<meta property="og:image" content="http://sulley.cc/images/1v1camera/14.png">
+<meta property="og:image" content="http://sulley.cc/images/1v1camera/15.png">
+<meta property="og:image" content="http://sulley.cc/images/1v1camera/16.png">
+<meta property="og:image" content="http://sulley.cc/images/1v1camera/17.png">
+<meta property="og:image" content="http://sulley.cc/images/1v1camera/18.png">
+<meta property="og:image" content="http://sulley.cc/images/1v1camera/19.png">
+<meta property="og:image" content="http://sulley.cc/images/1v1camera/20.png">
+<meta property="og:image" content="http://sulley.cc/images/1v1camera/21.png">
+<meta property="og:image" content="http://sulley.cc/images/1v1camera/22.png">
 <meta property="article:published_time" content="2022-12-11T01:16:34.000Z">
-<meta property="article:modified_time" content="2022-12-17T16:20:13.301Z">
+<meta property="article:modified_time" content="2022-12-21T15:12:17.381Z">
 <meta property="article:author" content="Sulley">
 <meta property="article:tag" content="计算机">
 <meta property="article:tag" content="随笔">
@@ -179,11 +192,12 @@
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#start-with-a-simple-case-mathematical-derivation-for-camera-location-and-rotation"><span class="nav-number">1.</span> <span class="nav-text">Start
 with A Simple Case: Mathematical Derivation for Camera Location and
 Rotation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#constructing-the-equation"><span class="nav-number">1.1.</span> <span class="nav-text">Constructing the equation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#determining-mathbft_1"><span class="nav-number">1.2.</span> <span class="nav-text">Determining \(\mathbf{t}_1\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#determining-varphi-and-theta"><span class="nav-number">1.3.</span> <span class="nav-text">Determining \(\varphi\) and \(\theta\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#final-camera-location-and-rotation"><span class="nav-number">1.4.</span> <span class="nav-text">Final camera location and
-rotation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#enhancement-one-finer-control-over-the-screen-space"><span class="nav-number">2.</span> <span class="nav-text">Enhancement
-One: Finer Control Over The Screen Space</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#determining-mathbft_2"><span class="nav-number">2.1.</span> <span class="nav-text">Determining \(\mathbf{t}_2\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#determining-new-varphi-and-theta"><span class="nav-number">2.2.</span> <span class="nav-text">Determining new \(\varphi\) and \(\theta\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#but-what-about-the-look-at-position..."><span class="nav-number">2.3.</span> <span class="nav-text">But what about the
-look-at position...?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#enhancement-two-emulate-cinemachine-by-using-incremental-motion-and-adding-damping"><span class="nav-number">3.</span> <span class="nav-text">Enhancement
-Two: Emulate Cinemachine by using Incremental Motion and Adding
-Damping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li></ol></div>
+rotation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#finer-control-over-the-screen-space"><span class="nav-number">2.</span> <span class="nav-text">Finer Control Over The
+Screen Space</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#determining-mathbft_2"><span class="nav-number">2.1.</span> <span class="nav-text">Determining \(\mathbf{t}_2\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#determining-new-varphi-and-theta"><span class="nav-number">2.2.</span> <span class="nav-text">Determining new \(\varphi\) and \(\theta\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#but-what-about-the-look-at-position..."><span class="nav-number">2.3.</span> <span class="nav-text">But what about the
+look-at position...?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#emulate-cinemachine-by-using-incremental-motion-and-adding-damping"><span class="nav-number">3.</span> <span class="nav-text">Emulate
+Cinemachine by using Incremental Motion and Adding Damping</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#high-level-workflow-and-the-initialize-function"><span class="nav-number">3.1.</span> <span class="nav-text">High-level
+workflow and the Initialize function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-camera-rotation"><span class="nav-number">3.2.</span> <span class="nav-text">Set camera rotation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-camera-position"><span class="nav-number">3.3.</span> <span class="nav-text">Set camera position</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#result"><span class="nav-number">3.4.</span> <span class="nav-text">Result</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#code-framework"><span class="nav-number">4.1.</span> <span class="nav-text">Code framework</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#implementing-framingtransposer"><span class="nav-number">4.2.</span> <span class="nav-text">Implementing
+FramingTransposer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#implementing-composer"><span class="nav-number">4.3.</span> <span class="nav-text">Implementing Composer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#use-in-unreal-engine"><span class="nav-number">4.4.</span> <span class="nav-text">Use in Unreal Engine</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -319,7 +333,7 @@ Damping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-12-18 00:20:13" itemprop="dateModified" datetime="2022-12-18T00:20:13+08:00">2022-12-18</time>
+      <time title="修改时间：2022-12-21 23:12:17" itemprop="dateModified" datetime="2022-12-21T23:12:17+08:00">2022-12-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -359,14 +373,14 @@ Damping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>16k</span>
+      <span>20k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>15 分钟</span>
+      <span>19 分钟</span>
     </span>
 </div>
 
@@ -700,12 +714,12 @@ damping just as Cinemachine does.</li>
 <p>Method two might be a better way because it has smooth result. We
 will get to this in later sections of this post, and now we focus on
 implementing method one, which is much simpler to achieve using
-blueprint. All we need to do is to set a
+blueprint. <span id="scale">All we need to do is to set a
 <code>BeginAdaptDistanceX</code> and <code>EndAdaptDistanceX</code> that
 adapts <span class="math inline">\(a_x\)</span> when <span
 class="math inline">\(\sqrt{(\Delta x)^2+(\Delta y)^2}\)</span> is
 within the range of <span
-class="math inline">\([\text{EndAdaptDistanceX},\text{BeginAdaptDistanceX}]\)</span>.
+class="math inline">\([\text{EndAdaptDistanceX},\text{BeginAdaptDistanceX}]\)</span>.</span>
 More concretely, when the distance is within the range, new <span
 class="math inline">\(a_x\)</span> will be <span
 class="math inline">\(a_x\frac{\text{CurrentDistance}-\text{EndAdaptDistanceX}}{\text{BeginAdaptDistanceX}-\text{EndAdaptDistanceX}}\)</span>.
@@ -739,7 +753,7 @@ x-t_1\sin\hat{\theta}\)</span> is close to zero? Well, this could not be
 a problem as we have already dynamically adapted <span
 class="math inline">\(t_1\)</span> with respect to the follow-lookat
 distance, as long as the values of <code>BeginAdaptDistanceX</code> and
-<code>EndAdaptDistanceX</code> are property set.</p>
+<code>EndAdaptDistanceX</code> are properly set.</p>
 <p>What are <span class="math inline">\(\varphi,\hat{\theta}\)</span>
 when <span class="math inline">\(t_1=0\)</span>? From <span
 class="math inline">\(\eqref{eq14}\)</span>, we know <span
@@ -772,7 +786,7 @@ y)^2}}\right)
 class="math inline">\(\hat{\theta}=\hat{\alpha}+\hat{\beta}\)</span>. To
 remedy the issue of overflowing when <span
 class="math inline">\(\sqrt{(\Delta x)^2+(\Delta y)^2}\)</span> is
-small, we can set an range in which the raw screen offset <span
+small, we impose an range in which the raw screen offset <span
 class="math inline">\(a_x\)</span> is dynamically adjusted and achieve
 smooth camera motion.</p>
 <p>The camera pitch can be readily computed:</p>
@@ -813,8 +827,8 @@ src="/images/1v1camera/7.png" /></p>
 <p>The <code>GetCameraRotation</code> forces the camera to orient to the
 look-at target.</p>
 <p><img data-src="/images/1v1camera/9.png" /></p>
-<h1 id="enhancement-one-finer-control-over-the-screen-space">Enhancement
-One: Finer Control Over The Screen Space</h1>
+<h1 id="finer-control-over-the-screen-space">Finer Control Over The
+Screen Space</h1>
 <p>To get a finer control of the follow point and look-at point on the
 screen space, we would like to introduce three more paramters
 <code>Follow Screen Y</code>, <code>Lookat Screen X</code> and
@@ -954,10 +968,130 @@ position and orientation, rather than hard-set it at its "correct"
 position and orientation. This is exactly what Cinemachine does for
 camera motion.</p>
 <h1
-id="enhancement-two-emulate-cinemachine-by-using-incremental-motion-and-adding-damping">Enhancement
-Two: Emulate Cinemachine by using Incremental Motion and Adding
-Damping</h1>
+id="emulate-cinemachine-by-using-incremental-motion-and-adding-damping">Emulate
+Cinemachine by using Incremental Motion and Adding Damping</h1>
+<p>Our solution is to emulate Cinemachine in Unity through incrementally
+changing camera position and rotation. This paradigm also enjoys the
+benifit of adding damping easily. To increment camera motion, we only
+need to calculate the desired position and rotation, and interpolate
+between its current state and its desired state.</p>
+<p>Let us go through the process by showing the blueprints.</p>
+<h2 id="high-level-workflow-and-the-initialize-function">High-level
+workflow and the <code>Initialize</code> function</h2>
+<p>The high-level steps are pretty simple: we first determine and set
+camera rotation, then set camera position. <code>FirstFrame</code> is a
+boolean variable used to indicate whether the current tick is the first
+frame during execution. If it is, no damping will be applied.</p>
+<p><img data-src="/images/1v1camera/10.png" /></p>
+<p>The <code>Initialize</code> function integrates the follow offset and
+look-at offset to get the real follow position and lookat position.</p>
+<p><img data-src="/images/1v1camera/11.png" /></p>
+<h2 id="set-camera-rotation">Set camera rotation</h2>
+<p>The <code>Set Camera Rotation</code> function gets the delta rotation
+(after damping), and then rotates camera accordingly.</p>
+<p><img data-src="/images/1v1camera/12.png" /></p>
+<p>Similarly, the <code>Set Camera Position</code> function gets the
+delta position (after damping), and then shifts camera in its local
+reference frame, not changing camera orientation.</p>
+<p><img data-src="/images/1v1camera/13.png" /></p>
+<p>The first part of the <code>Get Delta Rotation</code> function
+examines whether camera is too close to the look-at target. If it is the
+case, the camera will not update its rotation.</p>
+<p><img data-src="/images/1v1camera/14.png" /></p>
+<p>Then, the second part of <code>Get Delta Rotation</code> computes the
+difference between current rotation and the desired rotation, taking the
+given look-at screen offset into account.</p>
+<p><img data-src="/images/1v1camera/15.png" /></p>
+<p>Last, the third part of <code>Get Delta Rotation</code> optionally
+applies damping to the difference rotation and returns the damped
+result.</p>
+<p><img data-src="/images/1v1camera/16.png" /></p>
+<p>Going inside the <code>Damp Rotation</code> function, we find it
+separately damps each of the rotation component roll, pitch and yaw, all
+using the <code>Damper</code> function.</p>
+<p><img data-src="/images/1v1camera/17.png" /></p>
+<p>The <code>Damper</code> function, however, is a simple exponential
+decay operator that leaves a particular negligible residual after
+<code>Damp Time</code>. It can be formulated as:</p>
+<p><span
+class="math display">\[\text{DampedInput}=\text{RawInput}\cdot\left(1-\mathrm{e}^{\ln(k)\frac{\Delta
+T}{T}}\right)\]</span></p>
+<p>where <span class="math inline">\(k\)</span> is the negligible
+residual, say <span class="math inline">\(0.01\)</span>, and <span
+class="math inline">\(T\)</span> is the expected damp time.</p>
+<p><img data-src="/images/1v1camera/18.png" /></p>
+<h2 id="set-camera-position">Set camera position</h2>
+<p>The <code>Get Delta Position</code> has a similar workflow. It first
+computes the scaled follow screen offset. We have introduced it in the
+first section (see <a href="#scale">here</a>).</p>
+<p><img data-src="/images/1v1camera/19.png" /></p>
+<p>Then, it converts the follow position from world space to camera's
+local space. It is a little bit relating to mathematics. Put it simply,
+assume the camera's local forward vector is <span
+class="math inline">\(\mathbf{f}\)</span>, right vector is <span
+class="math inline">\(\mathbf{r}\)</span> and up vector is <span
+class="math inline">\(\mathbf{u}\)</span>, and the world space follow
+position is <span
+class="math inline">\(\mathbf{a}=(x,y,z)^\top\)</span>. The local
+coordinate of <span class="math inline">\(\mathbf{a}\)</span> would
+be:</p>
+<p><span class="math display">\[\mathbf{a}&#39;=\begin{bmatrix}
+    \mathbf{f}^\top\\
+    \mathbf{r}^\top\\
+    \mathbf{u}^\top
+\end{bmatrix}\mathbf{a}=\begin{bmatrix}
+    \mathbf{f}_x &amp; \mathbf{f}_y &amp; \mathbf{f}_z\\
+    \mathbf{r}_x &amp; \mathbf{r}_y &amp; \mathbf{r}_z\\
+    \mathbf{u}_x &amp; \mathbf{u}_y &amp; \mathbf{u}_z
+\end{bmatrix}\begin{bmatrix}
+    x\\
+    y\\
+    z
+\end{bmatrix}\]</span></p>
+<p><img data-src="/images/1v1camera/20.png" /></p>
+<p>A local space coordiante facilitates computing the difference between
+current camera position and desired position. Follow screen offset is
+also incorporated.</p>
+<p><img data-src="/images/1v1camera/21.png" /></p>
+<p>Last, we damp the difference position and returns the result. The
+<code>Damp Position</code> function manipulates three
+<code>Raw Delta Position</code> components instead of two as we did in
+<code>Damp Rotation</code>.</p>
+<p><img data-src="/images/1v1camera/22.png" /></p>
+<h2 id="result">Result</h2>
+<p>OK, let us enjoy our achievements! We can freely play with various
+parameters and see how the camera responses. You may notice that only
+setting up the follow damping leads to camera jitter, not drastic but
+still perceptible. A possible reason for this phenomenon is the unstable
+tick rate on my PC. We can, of course, increase the frame rate, but a
+more robust solution is to modify our damping algorithm. Rather than
+directly use <code>DeltaTime</code> as the damping step size, we can
+further split <code>DeltaTime</code> into several sub-delta time steps,
+and simulate damping for each time step upon the last simulation,
+finally having a much more smooth damping result. This is exactly what
+Cinemachine does when <code>DeltaTime</code> is unstable.</p>
+<video src="/images/1v1camera/showcase2.mp4" preload="metadata" controlslist="nodownload" controls playsinline poster=""></video>
+<p>Another potential enhancement is to add the concept of <strong>Soft
+Zone</strong>, which defines a rectangular area in screen space where
+follow / look-at point is allowed to move around and the rest screen
+space where follow / look-at point will never show up in. In other
+words, the follow / look-at position is hard restricted in the soft
+zone. It provides a more flexible screen space control over our point of
+interest.</p>
+<p>(*: I've already added soft zone and the improved damping algorithm
+in both blueprints and code implementation. Feel free to use and modify
+as whatever you like.)</p>
 <h1 id="code">Code</h1>
+<p>Our last step is to code-implement the Cinemachine-like 1v1 camera
+system. It is not hard but as we want a more practical, robust and
+extensible camera system, we would like to organize the code in a more
+systematical way. Cinemachine makes a great example (thank you,
+Cinemachine).</p>
+<h2 id="code-framework">Code framework</h2>
+<h2 id="implementing-framingtransposer">Implementing
+<code>FramingTransposer</code></h2>
+<h2 id="implementing-composer">Implementing <code>Composer</code></h2>
+<h2 id="use-in-unreal-engine">Use in Unreal Engine</h2>
 
     </div>
 
@@ -1000,17 +1134,16 @@ Mapping和Displacement
 Mapping）的原理，并在代码上加以实现，以便让读者更好地理解这项技术。</p></p></div>
     </li>
     <li class="popular-posts-item">
-        <div class="popular-posts-date">2022-06-26</div>
-      <div class="popular-posts-title"><a href="/2022/06/26/23/03/" rel="bookmark">用生成函数和复数巧解一道计数题</a></div>
-        <div class="popular-posts-excerpt"><p><p>对集合<span
-class="math inline">\(\{1,2,\cdots,2000\}\)</span>，求出其中有多少子集，使得子集中的元素和为5的倍数。本文对<a
-target="_blank" rel="noopener" href="https://youtu.be/bOXCLR3Wric">3Blue3Brown的解法</a>上进行总结，形成较为数学化的语言。本题背后有较为深刻的数学思想，故记载于此。</p></p></div>
-    </li>
-    <li class="popular-posts-item">
         <div class="popular-posts-date">2022-05-05</div>
       <div class="popular-posts-title"><a href="/2022/05/05/21/40/" rel="bookmark">《Real-Time Cameras》笔记</a></div>
         <div class="popular-posts-excerpt"><p><p>本文是《Real-Time Cameras: A Guide for Game Designers and
 Developers》的阅读笔记，放在此备份供参阅。</p></p></div>
+    </li>
+    <li class="popular-posts-item">
+        <div class="popular-posts-date">2022-10-08</div>
+      <div class="popular-posts-title"><a href="/2022/10/08/11/01/" rel="bookmark">GAMES101疑难点及作业详解</a></div>
+        <div class="popular-posts-excerpt"><p><p>很早之前就想跟着做完GAMES101，但是拖延症一直让我拖到了现在，我决定不再鸽下去！本篇Blog主要记录在GAMES101学习中遇到的疑难问题，整理Bonus
+Material，以及详解每一课的作业（含提高题）。如有任何错误、遗漏，欢迎读者指出赐教！</p></p></div>
     </li>
   </ul>
 
@@ -1086,13 +1219,13 @@ Developers》的阅读笔记，放在此备份供参阅。</p></p></div>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">320k</span>
+    <span title="站点总字数">325k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:51</span>
+    <span title="站点阅读时长">4:55</span>
   </span>
 </div>
 <div class="busuanzi-count">
