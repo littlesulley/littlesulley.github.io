@@ -679,247 +679,6 @@ Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷
       </tags>
   </entry>
   <entry>
-    <title>你为什么不笑了</title>
-    <url>/2022/10/29/00/35/</url>
-    <content><![CDATA[<p>你为什么不笑了？</p>
-<span id="more"></span>
-<p>奶奶，你为什么不笑了？<br />
-还记得，一年前的你，<br />
-走在春风里，<br />
-向着山顶慢慢登去。<br />
-你摘下路边的一朵浅梅，<br />
-捧在手心。<br />
-阳光洒下，<br />
-手中的梅花，也映衬出了你脸上的笑容。</p>
-<p>你的儿子女儿挽着你的手，<br />
-一步一步向山顶走去，<br />
-你看见一棵古树，<br />
-你说这是拍照好去处。<br />
-女儿扶着你，<br />
-你扶着树，<br />
-阳光洒下，<br />
-树上的绿叶，也甘愿陪衬你脸上的笑容。</p>
-<p>来到山顶，<br />
-黄花遍地，<br />
-你开心得像个孩子，<br />
-伸出双手，<br />
-比了两个大大的耶，<br />
-那时的你，真的好美。</p>
-<p>奶奶，从什么时候开始，你不笑了？<br />
-从拔掉爷爷呼吸机的那个夜晚开始，<br />
-你似乎一直睡得不好。<br />
-你还能梦见吗，<br />
-另一张空荡荡的床上，<br />
-曾经那个老人的模样？<br />
-从前他是那样健康，<br />
-如今却骨瘦嶙峋，<br />
-让时间风干了皮肤，<br />
-侵蚀了思想。<br />
-你还能看见吗，<br />
-那个明媚下午的阳光，<br />
-案前那个老人伏着阅读着，报刊也泛黄。</p>
-<p>奶奶，你为什么不笑了？<br />
-近日来，<br />
-你总是抱怨，<br />
-胸口有恙。<br />
-你变得啰嗦、唠叨，<br />
-总是对小事斤斤计量。<br />
-我好想你能多笑笑，<br />
-放下生活的疲劳，<br />
-忘却心中的郁结，<br />
-再回忆，<br />
-我们一起出游时，<br />
-小鸟的啼叫，<br />
-鲜花的绽放，<br />
-阳光的照耀，<br />
-我们手拉着手，<br />
-在田园中，聊些家常，传来欢笑。</p>
-<p>奶奶，时间真的很残酷，<br />
-也许当我走时，<br />
-这个世界便再无你的回响，<br />
-人生人寂，人来人往，<br />
-至我去时，此情已了，略无痕迹。</p>
-<p>奶奶，再让我看看你的笑，<br />
-那个阳光中，<br />
-像孩子般最天真的笑容。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>向量绕任意轴旋转的简单推导</title>
-    <url>/2021/06/07/08/38/</url>
-    <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
-<span id="more"></span>
-<h1 id="方法一向量分解">方法一：向量分解</h1>
-<h2 id="推导过程">推导过程</h2>
-<p>首先介绍一个最容易理解的方法——向量分解。假设要旋转的向量是<span
-class="math inline">\(\mathbf{p}\)</span>，要旋转的轴是<span
-class="math inline">\(\mathbf{n}\)</span>，是一个单位向量，要旋转的角度是<span
-class="math inline">\(\theta\)</span>。再设旋转后的轴是<span
-class="math inline">\(\mathbf{p}&#39;\)</span>。</p>
-<p>现在我们把<span
-class="math inline">\(\mathbf{p}\)</span>分解为两个向量，一个平行于<span
-class="math inline">\(\mathbf{n}\)</span>，另一个垂直于<span
-class="math inline">\(\mathbf{n}\)</span>，即： <span
-class="math display">\[\mathbf{p}=\mathbf{p}_\perp+\mathbf{p}_\parallel\]</span>
-容易知道，平行于<span
-class="math inline">\(\mathbf{n}\)</span>的分向量<span
-class="math inline">\(\mathbf{p}_\parallel\)</span>就是<span
-class="math inline">\(\mathbf{p}\)</span>在<span
-class="math inline">\(\mathbf{n}\)</span>上的投影（推导过程略）： <span
-class="math display">\[\mathbf{p}_\parallel=(\mathbf{n}\cdot\mathbf{p})\mathbf{n}\]</span>
-从而就能得到<span class="math inline">\(\mathbf{p}_\perp\)</span>：
-<span
-class="math display">\[\mathbf{p}_\perp=\mathbf{p}-\mathbf{p}_\parallel\]</span>
-同样地可以将旋转后的向量分解： <span
-class="math display">\[\mathbf{p}&#39;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\]</span>
-显然，旋转后的向量对应的平行分量<span
-class="math inline">\(\mathbf{p}&#39;_\parallel\)</span>是不变的： <span
-class="math display">\[\mathbf{p}&#39;_\parallel=\mathbf{p}_\parallel\]</span>
-这里的关键在于求垂直分量<span
-class="math inline">\(\mathbf{p}&#39;_\perp\)</span>。</p>
-<figure>
-<img data-src="/images/arbitrary_rotation/1.png"
-alt="将向量分解为一个平行向量和一个垂直向量" />
-<figcaption
-aria-hidden="true">将向量分解为一个平行向量和一个垂直向量</figcaption>
-</figure>
-<p>根据已知的旋转轴<span
-class="math inline">\(\mathbf{n}\)</span>，我们就知道它对应的平面<span
-class="math inline">\(V\)</span>，而向量<span
-class="math inline">\(\mathbf{p}\)</span>与<span
-class="math inline">\(\mathbf{p}&#39;\)</span>的垂直分量就在该平面内。该平面的维度是2，因此只需要找到两个基向量，就可以通过这两个基向量的线性组合表示该平面的任意向量。</p>
-<p>其中一个基向量我们已经找到了，就是<span
-class="math inline">\(\mathbf{p}_\perp\)</span>，而另一个我们可以通过<span
-class="math inline">\(\mathbf{n}\)</span>与<span
-class="math inline">\(\mathbf{p}_\perp\)</span>的叉乘实现，得到的向量与<span
-class="math inline">\(\mathbf{n}\)</span>和<span
-class="math inline">\(\mathbf{p}_\perp\)</span>垂直，且在平面<span
-class="math inline">\(V\)</span>内。且注意到： <span
-class="math display">\[\mathbf{n}\times
-\mathbf{p}_\perp=\mathbf{n}\times(\mathbf{p}-\mathbf{p}_\parallel)=\mathbf{n}\times\mathbf{p}-\mathbf{n}\times\mathbf{p}_\parallel=\mathbf{n}\times\mathbf{p}\]</span>
-并且有： <span class="math display">\[\|\mathbf{n}\times
-\mathbf{p}\|=\|\mathbf{n}\times
-\mathbf{p}_\perp\|=\|\mathbf{n}\|\cdot\|\mathbf{p}_\perp\|\cdot\sin(\pi/2)=\|\mathbf{p}_\perp\|\]</span>
-进而我们能导出旋转后的垂直分量<span
-class="math inline">\(\mathbf{p}&#39;_\perp\)</span>： <span
-class="math display">\[\mathbf{p}&#39;_\perp=\cos(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{p}_\perp}{\|\mathbf{p}_\perp\|}+\sin(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{n}\times\mathbf{p}}{\|\mathbf{n}\times\mathbf{p}\|}=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})\]</span>
-最后，我们得到旋转后的向量<span
-class="math inline">\(\mathbf{p}&#39;\)</span>：</p>
-<p><span class="math display">\[
-\begin{aligned}
-\mathbf{p}&#39;&amp;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\\
-&amp;=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})+\mathbf{p}_\parallel\\
-&amp;=\cos(\theta)(\mathbf{p}-\mathbf{p}_\parallel)+\mathbf{p}_\parallel+\sin(\theta)(\mathbf{n}\times\mathbf{p})\\
-&amp;=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p})
-\end{aligned}
-\]</span></p>
-<p>搞定！</p>
-<h2 id="矩阵形式">矩阵形式</h2>
-<p>我们知道向量的叉乘可以表示为： <span class="math display">\[
-\mathbf{n}\times\mathbf{p}=
-\begin{bmatrix}
-0&amp;-n_z&amp;n_y\\
-n_z&amp;0&amp;-n_x\\
--n_y&amp;n_x&amp;0
-\end{bmatrix}
-\mathbf{p}=\mathbf{N}\mathbf{p}
-\]</span> 注意到，矩阵<span
-class="math inline">\(\mathbf{N}\)</span>有如下的性质： <span
-class="math display">\[\mathbf{N}(\mathbf{N}\mathbf{p})=\mathbf{N}^2\mathbf{p}=\mathbf{n}\times(\mathbf{n}\times\mathbf{p})\]</span>
-所以我们可以把旋转公式写成下述形式： <span
-class="math display">\[\mathbf{p}&#39;=\mathbf{p}+(1-\cos(\theta))\mathbf{N}^2\mathbf{p}+\sin(\theta)\mathbf{N}\mathbf{p}=\mathbf{R}\mathbf{p}\]</span>
-其中<span
-class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>。上面的等式需要注意到<span
-class="math inline">\((\mathbf{n}\cdot\mathbf{p})\mathbf{n}=\mathbf{p}+\mathbf{N}^2\mathbf{p}\)</span>。</p>
-<p>所以，使用Rodrigues'旋转公式，只需要首先令<span
-class="math inline">\(\mathbf{N}=\begin{bmatrix}0&amp;-n_z&amp;n_y\\n_z&amp;0&amp;-n_x\\-n_y&amp;n_x&amp;0\end{bmatrix}\)</span>，然后再计算<span
-class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>，就能得到旋转后的向量为<span
-class="math inline">\(\mathbf{p}&#39;=\mathbf{R}\mathbf{p}\)</span>。</p>
-<h1 id="方法二坐标轴对齐">方法二：坐标轴对齐</h1>
-<p>既然直接绕着任意轴旋转比较困难，那为啥不先进行整个空间的旋转，把旋转轴旋转为坐标轴，这样就能把向量绕任意轴旋转转化为向量绕标准坐标轴旋转。这就是我们非常熟悉的问题了。</p>
-<p>假定我们考虑的是三维空间的旋转（对更高维的情况容易推论），即标准坐标系为<span
-class="math inline">\(\mathbf{x}=(1,0,0),\mathbf{y}=(0,1,0),\mathbf{z}=(0,0,1)\)</span>。我们有旋转轴<span
-class="math inline">\(\mathbf{n},\Vert\mathbf{n}\Vert=1\)</span>和待旋转向量<span
-class="math inline">\(\mathbf{p}\)</span>。</p>
-<p>首先，我们构建一个坐标系<span
-class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>，该坐标系的一个轴就是<span
-class="math inline">\(\mathbf{n}\)</span>，我们利用叉乘实现：</p>
-<p><span class="math display">\[
-\mathbf{u}=\mathbf{n},\qquad
-\mathbf{v}=\frac{\mathbf{n}\times\mathbf{p}}{\Vert\mathbf{n}\times\mathbf{p}\Vert},\qquad
-\mathbf{w}=\mathbf{n}\times \mathbf{v}
-\]</span></p>
-<p>现在，我们要把坐标轴<span
-class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>分别旋转到坐标轴<span
-class="math inline">\(\mathbf{x},\mathbf{y},\mathbf{z}\)</span>的位置，这可以用下面的旋转矩阵实现：</p>
-<p><span class="math display">\[
-\mathbf{Q}=
-\begin{bmatrix}
-\mathbf{u}\\
-\mathbf{v}\\
-\mathbf{w}
-\end{bmatrix}=
-\begin{bmatrix}
-x_u&amp;y_u&amp;z_u\\
-x_v&amp;y_v&amp;z_v\\
-x_w&amp;y_w&amp;z_w
-\end{bmatrix}
-\]</span></p>
-<p>很容易验证：<span
-class="math inline">\(\mathbf{x}=\mathbf{Q}\mathbf{u},\mathbf{y}=\mathbf{Q}\mathbf{v},\mathbf{z}=\mathbf{Q}\mathbf{w}\)</span>，从而就有<span
-class="math inline">\(\mathbf{I}=\mathbf{Q}\mathbf{Q}^\top=\mathbf{Q}^\top\mathbf{Q}\)</span>，这就验证了<span
-class="math inline">\(\mathbf{Q}\)</span>是正交的。</p>
-<p>现在，原来的向量<span
-class="math inline">\(\mathbf{p}\)</span>就变成了<span
-class="math inline">\(\mathbf{Q}\mathbf{p}\)</span>，原来绕<span
-class="math inline">\(\mathbf{n}\)</span>旋转（也就是绕<span
-class="math inline">\(\mathbf{u}\)</span>旋转）就变成了绕<span
-class="math inline">\(\mathbf{x}\)</span>旋转，而我们知道绕<span
-class="math inline">\(\mathbf{x}\)</span>轴旋转<span
-class="math inline">\(\theta\)</span>的旋转矩阵是： <span
-class="math display">\[
-\mathbf{T}=
-\begin{bmatrix}
-1&amp;0&amp;0\\
-0&amp;\cos(\theta)&amp;-\sin(\theta)\\
-0&amp;\sin(\theta)&amp;\cos(\theta)
-\end{bmatrix}
-\]</span> 因此，旋转后的向量就是<span
-class="math inline">\(\mathbf{T}\mathbf{Q}\mathbf{p}\)</span>。现在，只需要把旋转后的向量再旋转回原来的位置就好了，我们只需要再乘以<span
-class="math inline">\(\mathbf{Q}\)</span>的逆即可。由于<span
-class="math inline">\(\mathbf{Q}\)</span>是正交的，所以有<span
-class="math inline">\(\mathbf{Q}^{-1}=\mathbf{Q}^\top\)</span>。把上面的结果合起来，就能得到最终的结果是：
-<span class="math display">\[\mathbf{p}&#39;=\mathbf{Q}^\top
-\mathbf{T}\mathbf{Q}\mathbf{p}\]</span></p>
-<h1 id="检验">检验</h1>
-<p>现在我们用代码来检验一下上述三种方法是否能得到同样的结果，以及它们的运算效率如何。比较的方法包括：
-1. 向量分解-向量形式 2. 向量分解-矩阵形式 3. 对标轴对齐</p>
-<p>程序在虚拟机上运行，RAM为4G，硬盘20G，处理器为2个Intel Core i5-10400F
-CPU @ 2.90GHz。</p>
-<p>代码如下： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;eigen3/Eigen/Eigen&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> PI = <span class="number">3.1415926</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the vector form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeVector</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f rotatedVector = <span class="built_in">cos</span>(rotationAngle) * p </span><br><span class="line">                                + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * (n.<span class="built_in">dot</span>(p)) * n </span><br><span class="line">                                + <span class="built_in">sin</span>(rotationAngle) * (n.<span class="built_in">cross</span>(p));</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the vector form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the matrix form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeMatrix</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Matrix3f N = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">N &lt;&lt; <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">2</span>), <span class="built_in">n</span>(<span class="number">1</span>),</span><br><span class="line">     <span class="built_in">n</span>(<span class="number">2</span>), <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">0</span>),</span><br><span class="line">     -<span class="built_in">n</span>(<span class="number">1</span>), <span class="built_in">n</span>(<span class="number">0</span>), <span class="number">0</span>;</span><br><span class="line">Eigen::Matrix3f R = Eigen::Matrix3f::<span class="built_in">Identity</span>() + <span class="built_in">sin</span>(rotationAngle) * N + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * N * N;</span><br><span class="line">Eigen::Vector3f rotatedVector = R * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the matrix form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using axis coordination</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AxisCoordination</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f crossed = n.<span class="built_in">cross</span>(p);</span><br><span class="line">Eigen::Vector3f u = n;</span><br><span class="line">Eigen::Vector3f v = crossed / crossed.<span class="built_in">norm</span>();</span><br><span class="line">Eigen::Vector3f w = n.<span class="built_in">cross</span>(v);</span><br><span class="line">Eigen::Matrix3f Q = Eigen::Matrix3f::<span class="built_in">Identity</span>(), T = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">0</span>) = u;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">1</span>) = v;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">2</span>) = w;</span><br><span class="line">T &lt;&lt; <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">cos</span>(rotationAngle), -<span class="built_in">sin</span>(rotationAngle),</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">sin</span>(rotationAngle), <span class="built_in">cos</span>(rotationAngle);</span><br><span class="line">Eigen::Vector3f rotatedVector = Q.<span class="built_in">transpose</span>() * T * Q * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: axis coordination. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> angle = <span class="number">60</span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">p</span><span class="params">(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>)</span></span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">n</span><span class="params">(<span class="number">2.0</span>, <span class="number">8.6</span>, <span class="number">-3.1</span>)</span></span>;</span><br><span class="line">    n.<span class="built_in">normalize</span>(); </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// execute functions</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The vector p is (&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;The rotation axis n is (&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">DecomposeVector</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">DecomposeMatrix</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">AxisCoordination</span>(n, p, angle);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 输出是： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.213724</span>,<span class="number">0.919011</span>,<span class="number">-0.331271</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.016354</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">3.57449</span>,<span class="number">0.643966</span>,<span class="number">0.899062</span>). The time used is <span class="number">0.016642</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.021062</span></span></span><br></pre></td></tr></table></figure> 再多试几组：
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">-654.1</span>,<span class="number">12.88</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.995044</span>,<span class="number">0.0136933</span>,<span class="number">-0.0984901</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.015503</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">-59.7309</span>,<span class="number">-338.298</span>,<span class="number">-556.777</span>). The time used is <span class="number">0.015297</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.021547</span></span></span><br></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">32.5</span>,<span class="number">45.1</span>,<span class="number">-2.2</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.57735</span>,<span class="number">0.57735</span>,<span class="number">0.57735</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.015558</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">5.16667</span>,<span class="number">52.4667</span>,<span class="number">17.7667</span>). The time used is <span class="number">0.015215</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.020841</span></span></span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">666</span>,<span class="number">0</span>,<span class="number">0</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.01517</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">0</span>,<span class="number">666</span>,<span class="number">0</span>). The time used is <span class="number">0.015402</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.020898</span></span></span><br></pre></td></tr></table></figure>
-<p>最后一组出现了精度问题，所以代码中还应该加入判断 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">abs</span>(value - <span class="built_in">round</span>(value)) &lt; epsilon)</span><br><span class="line">     value = <span class="built_in">round</span>(value);</span><br></pre></td></tr></table></figure></p>
-<p>从上面的例子来看，<strong>向量分解-向量形式</strong>与<strong>向量分解-矩阵形式</strong>运行效率是一致的，而<strong>坐标轴对齐</strong>的效率较低，这主要是由计算三次矩阵乘法导致的。</p>
-]]></content>
-      <categories>
-        <category>数学 - 图形学</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>随笔</tag>
-        <tag>数学</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《游戏设计的236个技巧》笔记</title>
     <url>/2021/08/17/01/07/</url>
     <content><![CDATA[<p>本文是《游戏设计的236个技巧：游戏机制、关卡设计和镜头窍门》的笔记。</p>
@@ -1184,30 +943,6 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
       </tags>
   </entry>
   <entry>
-    <title>十二月的花</title>
-    <url>/2020/12/22/09/29/</url>
-    <content><![CDATA[<p>埙吹响了海岸<br />
-琴穿梭叶间<br />
-笛在天空啼鸣<br />
-伴奏着雪花片片</p>
-<p>孩子们欢笑着相聚<br />
-踏着雪<br />
-吱吱嘎嘎</p>
-<p>把欢乐捏成一团团棉<br />
-随风起舞<br />
-在阳光下<br />
-雪爱上了花</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>一道有趣的概率题</title>
     <url>/2022/10/20/23/59/</url>
     <content><![CDATA[<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
@@ -1280,6 +1015,271 @@ class="math inline">\(f(1)=\mathrm{e}/2\)</span>。</p>
         <tag>随笔</tag>
         <tag>数学</tag>
         <tag>概率论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>你为什么不笑了</title>
+    <url>/2022/10/29/00/35/</url>
+    <content><![CDATA[<p>你为什么不笑了？</p>
+<span id="more"></span>
+<p>奶奶，你为什么不笑了？<br />
+还记得，一年前的你，<br />
+走在春风里，<br />
+向着山顶慢慢登去。<br />
+你摘下路边的一朵浅梅，<br />
+捧在手心。<br />
+阳光洒下，<br />
+手中的梅花，也映衬出了你脸上的笑容。</p>
+<p>你的儿子女儿挽着你的手，<br />
+一步一步向山顶走去，<br />
+你看见一棵古树，<br />
+你说这是拍照好去处。<br />
+女儿扶着你，<br />
+你扶着树，<br />
+阳光洒下，<br />
+树上的绿叶，也甘愿陪衬你脸上的笑容。</p>
+<p>来到山顶，<br />
+黄花遍地，<br />
+你开心得像个孩子，<br />
+伸出双手，<br />
+比了两个大大的耶，<br />
+那时的你，真的好美。</p>
+<p>奶奶，从什么时候开始，你不笑了？<br />
+从拔掉爷爷呼吸机的那个夜晚开始，<br />
+你似乎一直睡得不好。<br />
+你还能梦见吗，<br />
+另一张空荡荡的床上，<br />
+曾经那个老人的模样？<br />
+从前他是那样健康，<br />
+如今却骨瘦嶙峋，<br />
+让时间风干了皮肤，<br />
+侵蚀了思想。<br />
+你还能看见吗，<br />
+那个明媚下午的阳光，<br />
+案前那个老人伏着阅读着，报刊也泛黄。</p>
+<p>奶奶，你为什么不笑了？<br />
+近日来，<br />
+你总是抱怨，<br />
+胸口有恙。<br />
+你变得啰嗦、唠叨，<br />
+总是对小事斤斤计量。<br />
+我好想你能多笑笑，<br />
+放下生活的疲劳，<br />
+忘却心中的郁结，<br />
+再回忆，<br />
+我们一起出游时，<br />
+小鸟的啼叫，<br />
+鲜花的绽放，<br />
+阳光的照耀，<br />
+我们手拉着手，<br />
+在田园中，聊些家常，传来欢笑。</p>
+<p>奶奶，时间真的很残酷，<br />
+也许当我走时，<br />
+这个世界便再无你的回响，<br />
+人生人寂，人来人往，<br />
+至我去时，此情已了，略无痕迹。</p>
+<p>奶奶，再让我看看你的笑，<br />
+那个阳光中，<br />
+像孩子般最天真的笑容。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>十二月的花</title>
+    <url>/2020/12/22/09/29/</url>
+    <content><![CDATA[<p>埙吹响了海岸<br />
+琴穿梭叶间<br />
+笛在天空啼鸣<br />
+伴奏着雪花片片</p>
+<p>孩子们欢笑着相聚<br />
+踏着雪<br />
+吱吱嘎嘎</p>
+<p>把欢乐捏成一团团棉<br />
+随风起舞<br />
+在阳光下<br />
+雪爱上了花</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>向量绕任意轴旋转的简单推导</title>
+    <url>/2021/06/07/08/38/</url>
+    <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
+<span id="more"></span>
+<h1 id="方法一向量分解">方法一：向量分解</h1>
+<h2 id="推导过程">推导过程</h2>
+<p>首先介绍一个最容易理解的方法——向量分解。假设要旋转的向量是<span
+class="math inline">\(\mathbf{p}\)</span>，要旋转的轴是<span
+class="math inline">\(\mathbf{n}\)</span>，是一个单位向量，要旋转的角度是<span
+class="math inline">\(\theta\)</span>。再设旋转后的轴是<span
+class="math inline">\(\mathbf{p}&#39;\)</span>。</p>
+<p>现在我们把<span
+class="math inline">\(\mathbf{p}\)</span>分解为两个向量，一个平行于<span
+class="math inline">\(\mathbf{n}\)</span>，另一个垂直于<span
+class="math inline">\(\mathbf{n}\)</span>，即： <span
+class="math display">\[\mathbf{p}=\mathbf{p}_\perp+\mathbf{p}_\parallel\]</span>
+容易知道，平行于<span
+class="math inline">\(\mathbf{n}\)</span>的分向量<span
+class="math inline">\(\mathbf{p}_\parallel\)</span>就是<span
+class="math inline">\(\mathbf{p}\)</span>在<span
+class="math inline">\(\mathbf{n}\)</span>上的投影（推导过程略）： <span
+class="math display">\[\mathbf{p}_\parallel=(\mathbf{n}\cdot\mathbf{p})\mathbf{n}\]</span>
+从而就能得到<span class="math inline">\(\mathbf{p}_\perp\)</span>：
+<span
+class="math display">\[\mathbf{p}_\perp=\mathbf{p}-\mathbf{p}_\parallel\]</span>
+同样地可以将旋转后的向量分解： <span
+class="math display">\[\mathbf{p}&#39;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\]</span>
+显然，旋转后的向量对应的平行分量<span
+class="math inline">\(\mathbf{p}&#39;_\parallel\)</span>是不变的： <span
+class="math display">\[\mathbf{p}&#39;_\parallel=\mathbf{p}_\parallel\]</span>
+这里的关键在于求垂直分量<span
+class="math inline">\(\mathbf{p}&#39;_\perp\)</span>。</p>
+<figure>
+<img data-src="/images/arbitrary_rotation/1.png"
+alt="将向量分解为一个平行向量和一个垂直向量" />
+<figcaption
+aria-hidden="true">将向量分解为一个平行向量和一个垂直向量</figcaption>
+</figure>
+<p>根据已知的旋转轴<span
+class="math inline">\(\mathbf{n}\)</span>，我们就知道它对应的平面<span
+class="math inline">\(V\)</span>，而向量<span
+class="math inline">\(\mathbf{p}\)</span>与<span
+class="math inline">\(\mathbf{p}&#39;\)</span>的垂直分量就在该平面内。该平面的维度是2，因此只需要找到两个基向量，就可以通过这两个基向量的线性组合表示该平面的任意向量。</p>
+<p>其中一个基向量我们已经找到了，就是<span
+class="math inline">\(\mathbf{p}_\perp\)</span>，而另一个我们可以通过<span
+class="math inline">\(\mathbf{n}\)</span>与<span
+class="math inline">\(\mathbf{p}_\perp\)</span>的叉乘实现，得到的向量与<span
+class="math inline">\(\mathbf{n}\)</span>和<span
+class="math inline">\(\mathbf{p}_\perp\)</span>垂直，且在平面<span
+class="math inline">\(V\)</span>内。且注意到： <span
+class="math display">\[\mathbf{n}\times
+\mathbf{p}_\perp=\mathbf{n}\times(\mathbf{p}-\mathbf{p}_\parallel)=\mathbf{n}\times\mathbf{p}-\mathbf{n}\times\mathbf{p}_\parallel=\mathbf{n}\times\mathbf{p}\]</span>
+并且有： <span class="math display">\[\|\mathbf{n}\times
+\mathbf{p}\|=\|\mathbf{n}\times
+\mathbf{p}_\perp\|=\|\mathbf{n}\|\cdot\|\mathbf{p}_\perp\|\cdot\sin(\pi/2)=\|\mathbf{p}_\perp\|\]</span>
+进而我们能导出旋转后的垂直分量<span
+class="math inline">\(\mathbf{p}&#39;_\perp\)</span>： <span
+class="math display">\[\mathbf{p}&#39;_\perp=\cos(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{p}_\perp}{\|\mathbf{p}_\perp\|}+\sin(\theta)\|\mathbf{p}_\perp\|\cdot\frac{\mathbf{n}\times\mathbf{p}}{\|\mathbf{n}\times\mathbf{p}\|}=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})\]</span>
+最后，我们得到旋转后的向量<span
+class="math inline">\(\mathbf{p}&#39;\)</span>：</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbf{p}&#39;&amp;=\mathbf{p}&#39;_\perp+\mathbf{p}&#39;_\parallel\\
+&amp;=\cos(\theta)\mathbf{p}_\perp+\sin(\theta)(\mathbf{n}\times\mathbf{p})+\mathbf{p}_\parallel\\
+&amp;=\cos(\theta)(\mathbf{p}-\mathbf{p}_\parallel)+\mathbf{p}_\parallel+\sin(\theta)(\mathbf{n}\times\mathbf{p})\\
+&amp;=\cos(\theta)\mathbf{p}+(1-\cos(\theta))(\mathbf{n}\cdot\mathbf{p})\mathbf{n}+\sin(\theta)(\mathbf{n}\times\mathbf{p})
+\end{aligned}
+\]</span></p>
+<p>搞定！</p>
+<h2 id="矩阵形式">矩阵形式</h2>
+<p>我们知道向量的叉乘可以表示为： <span class="math display">\[
+\mathbf{n}\times\mathbf{p}=
+\begin{bmatrix}
+0&amp;-n_z&amp;n_y\\
+n_z&amp;0&amp;-n_x\\
+-n_y&amp;n_x&amp;0
+\end{bmatrix}
+\mathbf{p}=\mathbf{N}\mathbf{p}
+\]</span> 注意到，矩阵<span
+class="math inline">\(\mathbf{N}\)</span>有如下的性质： <span
+class="math display">\[\mathbf{N}(\mathbf{N}\mathbf{p})=\mathbf{N}^2\mathbf{p}=\mathbf{n}\times(\mathbf{n}\times\mathbf{p})\]</span>
+所以我们可以把旋转公式写成下述形式： <span
+class="math display">\[\mathbf{p}&#39;=\mathbf{p}+(1-\cos(\theta))\mathbf{N}^2\mathbf{p}+\sin(\theta)\mathbf{N}\mathbf{p}=\mathbf{R}\mathbf{p}\]</span>
+其中<span
+class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>。上面的等式需要注意到<span
+class="math inline">\((\mathbf{n}\cdot\mathbf{p})\mathbf{n}=\mathbf{p}+\mathbf{N}^2\mathbf{p}\)</span>。</p>
+<p>所以，使用Rodrigues'旋转公式，只需要首先令<span
+class="math inline">\(\mathbf{N}=\begin{bmatrix}0&amp;-n_z&amp;n_y\\n_z&amp;0&amp;-n_x\\-n_y&amp;n_x&amp;0\end{bmatrix}\)</span>，然后再计算<span
+class="math inline">\(\mathbf{R}=\mathbf{I}+\sin(\theta)\mathbf{N}+(1-\cos(\theta))\mathbf{N}^2\)</span>，就能得到旋转后的向量为<span
+class="math inline">\(\mathbf{p}&#39;=\mathbf{R}\mathbf{p}\)</span>。</p>
+<h1 id="方法二坐标轴对齐">方法二：坐标轴对齐</h1>
+<p>既然直接绕着任意轴旋转比较困难，那为啥不先进行整个空间的旋转，把旋转轴旋转为坐标轴，这样就能把向量绕任意轴旋转转化为向量绕标准坐标轴旋转。这就是我们非常熟悉的问题了。</p>
+<p>假定我们考虑的是三维空间的旋转（对更高维的情况容易推论），即标准坐标系为<span
+class="math inline">\(\mathbf{x}=(1,0,0),\mathbf{y}=(0,1,0),\mathbf{z}=(0,0,1)\)</span>。我们有旋转轴<span
+class="math inline">\(\mathbf{n},\Vert\mathbf{n}\Vert=1\)</span>和待旋转向量<span
+class="math inline">\(\mathbf{p}\)</span>。</p>
+<p>首先，我们构建一个坐标系<span
+class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>，该坐标系的一个轴就是<span
+class="math inline">\(\mathbf{n}\)</span>，我们利用叉乘实现：</p>
+<p><span class="math display">\[
+\mathbf{u}=\mathbf{n},\qquad
+\mathbf{v}=\frac{\mathbf{n}\times\mathbf{p}}{\Vert\mathbf{n}\times\mathbf{p}\Vert},\qquad
+\mathbf{w}=\mathbf{n}\times \mathbf{v}
+\]</span></p>
+<p>现在，我们要把坐标轴<span
+class="math inline">\(\mathbf{u},\mathbf{v},\mathbf{w}\)</span>分别旋转到坐标轴<span
+class="math inline">\(\mathbf{x},\mathbf{y},\mathbf{z}\)</span>的位置，这可以用下面的旋转矩阵实现：</p>
+<p><span class="math display">\[
+\mathbf{Q}=
+\begin{bmatrix}
+\mathbf{u}\\
+\mathbf{v}\\
+\mathbf{w}
+\end{bmatrix}=
+\begin{bmatrix}
+x_u&amp;y_u&amp;z_u\\
+x_v&amp;y_v&amp;z_v\\
+x_w&amp;y_w&amp;z_w
+\end{bmatrix}
+\]</span></p>
+<p>很容易验证：<span
+class="math inline">\(\mathbf{x}=\mathbf{Q}\mathbf{u},\mathbf{y}=\mathbf{Q}\mathbf{v},\mathbf{z}=\mathbf{Q}\mathbf{w}\)</span>，从而就有<span
+class="math inline">\(\mathbf{I}=\mathbf{Q}\mathbf{Q}^\top=\mathbf{Q}^\top\mathbf{Q}\)</span>，这就验证了<span
+class="math inline">\(\mathbf{Q}\)</span>是正交的。</p>
+<p>现在，原来的向量<span
+class="math inline">\(\mathbf{p}\)</span>就变成了<span
+class="math inline">\(\mathbf{Q}\mathbf{p}\)</span>，原来绕<span
+class="math inline">\(\mathbf{n}\)</span>旋转（也就是绕<span
+class="math inline">\(\mathbf{u}\)</span>旋转）就变成了绕<span
+class="math inline">\(\mathbf{x}\)</span>旋转，而我们知道绕<span
+class="math inline">\(\mathbf{x}\)</span>轴旋转<span
+class="math inline">\(\theta\)</span>的旋转矩阵是： <span
+class="math display">\[
+\mathbf{T}=
+\begin{bmatrix}
+1&amp;0&amp;0\\
+0&amp;\cos(\theta)&amp;-\sin(\theta)\\
+0&amp;\sin(\theta)&amp;\cos(\theta)
+\end{bmatrix}
+\]</span> 因此，旋转后的向量就是<span
+class="math inline">\(\mathbf{T}\mathbf{Q}\mathbf{p}\)</span>。现在，只需要把旋转后的向量再旋转回原来的位置就好了，我们只需要再乘以<span
+class="math inline">\(\mathbf{Q}\)</span>的逆即可。由于<span
+class="math inline">\(\mathbf{Q}\)</span>是正交的，所以有<span
+class="math inline">\(\mathbf{Q}^{-1}=\mathbf{Q}^\top\)</span>。把上面的结果合起来，就能得到最终的结果是：
+<span class="math display">\[\mathbf{p}&#39;=\mathbf{Q}^\top
+\mathbf{T}\mathbf{Q}\mathbf{p}\]</span></p>
+<h1 id="检验">检验</h1>
+<p>现在我们用代码来检验一下上述三种方法是否能得到同样的结果，以及它们的运算效率如何。比较的方法包括：
+1. 向量分解-向量形式 2. 向量分解-矩阵形式 3. 对标轴对齐</p>
+<p>程序在虚拟机上运行，RAM为4G，硬盘20G，处理器为2个Intel Core i5-10400F
+CPU @ 2.90GHz。</p>
+<p>代码如下： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;eigen3/Eigen/Eigen&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> PI = <span class="number">3.1415926</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the vector form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeVector</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f rotatedVector = <span class="built_in">cos</span>(rotationAngle) * p </span><br><span class="line">                                + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * (n.<span class="built_in">dot</span>(p)) * n </span><br><span class="line">                                + <span class="built_in">sin</span>(rotationAngle) * (n.<span class="built_in">cross</span>(p));</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the vector form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using vector decomposation - the matrix form</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DecomposeMatrix</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Matrix3f N = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">N &lt;&lt; <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">2</span>), <span class="built_in">n</span>(<span class="number">1</span>),</span><br><span class="line">     <span class="built_in">n</span>(<span class="number">2</span>), <span class="number">0</span>, -<span class="built_in">n</span>(<span class="number">0</span>),</span><br><span class="line">     -<span class="built_in">n</span>(<span class="number">1</span>), <span class="built_in">n</span>(<span class="number">0</span>), <span class="number">0</span>;</span><br><span class="line">Eigen::Matrix3f R = Eigen::Matrix3f::<span class="built_in">Identity</span>() + <span class="built_in">sin</span>(rotationAngle) * N + (<span class="number">1</span> - <span class="built_in">cos</span>(rotationAngle)) * N * N;</span><br><span class="line">Eigen::Vector3f rotatedVector = R * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: vector decomposition - the matrix form. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotation using axis coordination</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AxisCoordination</span><span class="params">(<span class="type">const</span> Eigen::Vector3f &amp;n, <span class="type">const</span> Eigen::Vector3f &amp;p, <span class="type">float</span> angle)</span> </span>&#123;</span><br><span class="line"><span class="type">double</span> rotationAngle = angle / <span class="number">180.0</span> * PI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> startTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">Eigen::Vector3f crossed = n.<span class="built_in">cross</span>(p);</span><br><span class="line">Eigen::Vector3f u = n;</span><br><span class="line">Eigen::Vector3f v = crossed / crossed.<span class="built_in">norm</span>();</span><br><span class="line">Eigen::Vector3f w = n.<span class="built_in">cross</span>(v);</span><br><span class="line">Eigen::Matrix3f Q = Eigen::Matrix3f::<span class="built_in">Identity</span>(), T = Eigen::Matrix3f::<span class="built_in">Identity</span>();</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">0</span>) = u;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">1</span>) = v;</span><br><span class="line">Q.<span class="built_in">row</span>(<span class="number">2</span>) = w;</span><br><span class="line">T &lt;&lt; <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">cos</span>(rotationAngle), -<span class="built_in">sin</span>(rotationAngle),</span><br><span class="line">     <span class="number">0</span>, <span class="built_in">sin</span>(rotationAngle), <span class="built_in">cos</span>(rotationAngle);</span><br><span class="line">Eigen::Vector3f rotatedVector = Q.<span class="built_in">transpose</span>() * T * Q * p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> endTime = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="type">double</span> deltaTime = std::chrono::<span class="built_in">duration</span>&lt;<span class="type">double</span>, std::milli&gt;(endTime-startTime).<span class="built_in">count</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Method: axis coordination. The rotated vector p&#x27; is (&quot;</span> </span><br><span class="line">     &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">rotatedVector</span>(<span class="number">2</span>)</span><br><span class="line">     &lt;&lt; <span class="string">&quot;). The time used is &quot;</span> &lt;&lt; deltaTime &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> angle = <span class="number">60</span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">p</span><span class="params">(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>)</span></span>;</span><br><span class="line">    <span class="function">Eigen::Vector3f <span class="title">n</span><span class="params">(<span class="number">2.0</span>, <span class="number">8.6</span>, <span class="number">-3.1</span>)</span></span>;</span><br><span class="line">    n.<span class="built_in">normalize</span>(); </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// execute functions</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The vector p is (&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">p</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;The rotation axis n is (&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">0</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">1</span>) &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; <span class="built_in">n</span>(<span class="number">2</span>) &lt;&lt; <span class="string">&quot;). &quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">DecomposeVector</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">DecomposeMatrix</span>(n, p, angle);</span><br><span class="line">    <span class="built_in">AxisCoordination</span>(n, p, angle);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 输出是： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.213724</span>,<span class="number">0.919011</span>,<span class="number">-0.331271</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.016354</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">3.57449</span>,<span class="number">0.643966</span>,<span class="number">0.899062</span>). The time used is <span class="number">0.016642</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (3.57449,0.643966,0.899062). The time used is 0.021062</span></span></span><br></pre></td></tr></table></figure> 再多试几组：
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">1</span>,<span class="number">-654.1</span>,<span class="number">12.88</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.995044</span>,<span class="number">0.0136933</span>,<span class="number">-0.0984901</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.015503</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">-59.7309</span>,<span class="number">-338.298</span>,<span class="number">-556.777</span>). The time used is <span class="number">0.015297</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (-59.7309,-338.298,-556.777). The time used is 0.021547</span></span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">32.5</span>,<span class="number">45.1</span>,<span class="number">-2.2</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0.57735</span>,<span class="number">0.57735</span>,<span class="number">0.57735</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.015558</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">5.16667</span>,<span class="number">52.4667</span>,<span class="number">17.7667</span>). The time used is <span class="number">0.015215</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (5.16667,52.4667,17.7667). The time used is 0.020841</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">The vector p <span class="title">is</span> <span class="params">(<span class="number">666</span>,<span class="number">0</span>,<span class="number">0</span>)</span>. The rotation axis n <span class="title">is</span> <span class="params">(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)</span>. </span></span><br><span class="line"><span class="function">Method: vector decomposition - the vector form. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.01517</span></span></span><br><span class="line"><span class="string"><span class="function">Method: vector decomposition - the matrix form. The rotated vector p&#x27;</span> is (<span class="number">0</span>,<span class="number">666</span>,<span class="number">0</span>). The time used is <span class="number">0.015402</span></span></span><br><span class="line"><span class="function">Method: axis coordination. The rotated vector p<span class="string">&#x27; is (1.78454e-05,666,0). The time used is 0.020898</span></span></span><br></pre></td></tr></table></figure>
+<p>最后一组出现了精度问题，所以代码中还应该加入判断 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">abs</span>(value - <span class="built_in">round</span>(value)) &lt; epsilon)</span><br><span class="line">     value = <span class="built_in">round</span>(value);</span><br></pre></td></tr></table></figure></p>
+<p>从上面的例子来看，<strong>向量分解-向量形式</strong>与<strong>向量分解-矩阵形式</strong>运行效率是一致的，而<strong>坐标轴对齐</strong>的效率较低，这主要是由计算三次矩阵乘法导致的。</p>
+]]></content>
+      <categories>
+        <category>数学 - 图形学</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -2147,762 +2147,6 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <tag>随笔</tag>
         <tag>生活</tag>
         <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Implementing A Minimum 1V1 Camera in UE (akin to FramingTransposer + Composer in Cinemachine)</title>
-    <url>/2022/12/11/09/16/</url>
-    <content><![CDATA[<p>The camera system inside Unreal Engine provides very basic functions.
-It merely enables the camera to follow a target with limited adjustable
-paramters such as offset, camera distance, lag, etc. We would like a
-more powerful camera system, like the Cinemachine toolset in Unity, to
-facilitate creating more interesting and compelling visual experience
-for gameplay. In most 3D adventure games, a 1v1 camera is required when
-you fight with a BOSS and you need to look at the BOSS however you move
-and cast skills. Unfortunately, 1v1 camera is not a built-in function in
-UE, so we have to implement our own version of 1v1 camera.</p>
-<p>In this post, I will share with you how to implement a minimum 1v1
-camera in UE using only blueprints, based on some simple mathematics. If
-you are more familiar with coding, you can also implement this 1v1
-camera with only few lines of code.</p>
-<span id="more"></span>
-<h1
-id="start-with-a-simple-case-mathematical-derivation-for-camera-location-and-rotation">Start
-with A Simple Case: Mathematical Derivation for Camera Location and
-Rotation</h1>
-<h2 id="constructing-the-equation">Constructing the equation</h2>
-<p>The most crucial two parts of any camera behavior are the
-<strong>location</strong> and <strong>rotation</strong>, the former
-determines where the camera is and the latter controls where the camera
-looks at.</p>
-<p>Let us first begin with a simple case: assume the follow location is
-<span class="math inline">\(\mathbf{a}\)</span>, the look-at location is
-<span class="math inline">\(\mathbf{b}\)</span>, and the look-at point
-is fixed at the center of the screen. We introduce a
-<code>Follow Screen X</code> parameter (denoted by <span
-class="math inline">\(a_x\)</span>) controlling the relative x-axis
-offset of the follow point on the screen space. If <span
-class="math inline">\(a_x=0\)</span>, the follow point will be on the
-center of the screen; if <span class="math inline">\(a_x=0.5\)</span>,
-the follow point will be on the rightmost position of the screen; if
-<span class="math inline">\(a_x=-0.5\)</span>, it will be on the
-leftmost position of the screen. At this stage, we do not take
-<code>Follow Screen Y</code> into consideration for simplication.</p>
-<p>To determine camera location and rotation, consider a sphere centered
-at the origin. Assume camera distance (the distance of the camera to the
-follow point) is <span class="math inline">\(r\)</span>, pitch angle
-<span class="math inline">\(\varphi\in[-\pi/2,\pi/2]\)</span>, yaw angle
-<span class="math inline">\(\theta\in[-\pi,\pi]\)</span>, we can write
-down the camera location before applying the follow point offset:</p>
-<p><span class="math display">\[
-\begin{equation}
-\mathbf{x}=\begin{pmatrix}
-r\cos\varphi\cos\theta\\
-r\cos\varphi\sin\theta\\
-r\sin\varphi
-\end{pmatrix}
-\label{x}
-\end{equation}
-\]</span></p>
-<p>Note that <span class="math inline">\(\eqref{x}\)</span> is the
-<strong>raw camera location</strong> relative to the origin. The look-at
-direction, however, is <span
-class="math inline">\(-\mathbf{x}/r\)</span>, and the <strong>actual
-camera location</strong> is <span
-class="math inline">\(\mathbf{a}+\mathbf{x}\)</span>. For integrating
-<span class="math inline">\(a_x\)</span>, we can assume the camera
-offset is <span class="math inline">\(\mathbf{t}_1\)</span>, hence, the
-<strong>final camera location</strong> is <span
-class="math inline">\(\mathbf{a}+\mathbf{x}+\mathbf{t}_1\)</span>, and
-the look-at direction from camera to <span
-class="math inline">\(\mathbf{b}\)</span> is <span
-class="math inline">\(\mathbf{b}-(\mathbf{a}+\mathbf{x}+\mathbf{t}_1)\)</span>.
-Because <span class="math inline">\(\mathbf{t}_1\)</span> does not
-change the orientation of camera, the camera's look-at direction, as we
-have stated above, is still <span
-class="math inline">\(-\mathbf{x}/r\)</span>. It is obvious that we have
-the following equation:</p>
-<p><span class="math display">\[
-\begin{equation}
-    \mathbf{b}-\mathbf{a}-\mathbf{x}-\mathbf{t}_1=-k\mathbf{x}
-\label{main}
-\end{equation}
-\]</span></p>
-<p>where <span class="math inline">\(k\)</span> is an unknown
-coefficient satisfying <span class="math inline">\(k&gt;1\)</span> as we
-want the look-at target is farther than the follow target to our camera.
-Before wo go ahead solving this equation, we should determine <span
-class="math inline">\(\mathbf{t}_1\)</span> at the first place.</p>
-<h2 id="determining-mathbft_1">Determining <span
-class="math inline">\(\mathbf{t}_1\)</span></h2>
-<p>We can easily express <span
-class="math inline">\(\mathbf{t}_1\)</span> in terms of <span
-class="math inline">\(a_x, r\)</span> and the field of view of the
-camera. As shown in the following figure, we have:</p>
-<p><span class="math display">\[
-\begin{equation}
-    \frac{N}{r}=\tan\left(\frac{\text{fov}}{2}\right)\Rightarrow
-N=r\tan\left(\frac{\text{fov}}{2}\right)
-\label{N}
-\end{equation}
-\]</span></p>
-<p>where <span class="math inline">\(N\)</span> is the world-space
-length of half screen. Then, the offset amount is <span
-class="math inline">\(2a_xN\)</span> (note that when <span
-class="math inline">\(a_x=0.5\)</span>, the offset amount will be <span
-class="math inline">\(N\)</span>), and the offset direction will be the
-opposite of the sign of <span class="math inline">\(a_x\)</span>. That
-is, is <span class="math inline">\(a_x&gt;0\)</span>, camera will
-translate left, otherwise it will translate right.</p>
-<p><img data-src="/images/1v1camera/1.png" /></p>
-<p>Plug <span class="math inline">\(\eqref{N}\)</span> into <span
-class="math inline">\(-2x_aN\)</span>, the directional offset magnitude
-will be <span
-class="math inline">\(-2a_xr\tan\left(\frac{\text{fov}}{2}\right)\)</span>.</p>
-<p>A remaining question is which unit vector this offset will be applied
-along? The answer is the camera's local right direction. It can be
-readily computed by taking the cross product between camera's local unit
-forward vector <span class="math inline">\(-\mathbf{x}/r\)</span> and
-world space up vector <span
-class="math inline">\((0,0,1)^\top\)</span>:</p>
-<p><span class="math display">\[
-\begin{equation}
-    \begin{pmatrix}
-    -\cos\varphi\cos\theta\\
-    -\cos\varphi\sin\theta\\
-    -\sin\varphi
-    \end{pmatrix}\times
-    \begin{pmatrix}
-    0\\
-    0\\
-    1
-    \end{pmatrix}=
-    \begin{pmatrix}
-    -\cos\varphi\sin\theta\\
-    \cos\varphi\cos\theta\\
-    0
-    \end{pmatrix}
-\end{equation}
-\]</span></p>
-<p>Normalizing the result, and considering that UE's coordiante system
-is based on the left-hand rule, the local unit right vector will be
-<span class="math inline">\((\sin\theta, -\cos\theta, 0)^\top\)</span>.
-Thus, the consequent offset vector is:</p>
-<p><span class="math display">\[
-\begin{equation}
-    \mathbf{t}_1=t_1\begin{pmatrix}
-    \sin\theta\\
-    -\cos\theta\\
-    0
-    \end{pmatrix},~~t_1=-2a_xr\tan\left(\frac{\text{fov}}{2}\right)
-\end{equation}
-\]</span></p>
-<h2 id="determining-varphi-and-theta">Determining <span
-class="math inline">\(\varphi\)</span> and <span
-class="math inline">\(\theta\)</span></h2>
-<p>With <span class="math inline">\(\mathbf{t}_1\)</span>, we can now
-determine <span class="math inline">\(\varphi\)</span> and <span
-class="math inline">\(\theta\)</span>. Expanding <span
-class="math inline">\(\eqref{main}\)</span>, we have:</p>
-<p><span class="math display">\[
-\begin{equation}
-    \begin{pmatrix}
-    x_B\\
-    y_B\\
-    z_B
-    \end{pmatrix}-
-    \begin{pmatrix}
-    x_A\\
-    y_A\\
-    z_A
-    \end{pmatrix}-
-    \begin{pmatrix}
-    r\cos\varphi\cos\theta\\
-    r\cos\varphi\sin\theta\\
-    r\sin\varphi
-    \end{pmatrix}-
-    \begin{pmatrix}
-    t_1\sin\theta\\
-    -t_1\cos\theta\\
-    0
-    \end{pmatrix}=-k\begin{pmatrix}
-    r\cos\varphi\cos\theta\\
-    r\cos\varphi\sin\theta\\
-    r\sin\varphi
-    \end{pmatrix}
-\label{eq6}
-\end{equation}
-\]</span></p>
-<p>Simplifying <span class="math inline">\(\eqref{eq6}\)</span>, we
-have:</p>
-<p><span class="math display">\[
-\begin{pmatrix}
-\Delta x\\
-\Delta y\\
-\Delta z
-\end{pmatrix}=
-\begin{pmatrix}
-    (1-k)r\cos\varphi\cos\theta+t_1\sin\theta\\
-    (1-k)r\cos\varphi\sin\theta-t_1\cos\theta\\
-    (1-k)r\sin\varphi
-\end{pmatrix}
-\]</span></p>
-<p>which leads to three equations:</p>
-<p><span class="math display">\[
-\begin{align}
-    (1-k)r\cos\varphi\cos\theta+t_1\sin\theta &amp;= \Delta x
-\label{eq7}\\
-    (1-k)r\cos\varphi\sin\theta-t_1\cos\theta &amp;= \Delta y
-\label{eq8}\\
-    (1-k)r\sin\varphi &amp;= \Delta z \label{eq9}
-\end{align}
-\]</span></p>
-<p>Rewrite <span class="math inline">\(\eqref{eq9}\)</span>, we
-have:</p>
-<p><span class="math display">\[
-\begin{equation}
-    (1-k)r=\frac{\Delta z}{\sin\varphi}
-    \label{eq10}
-\end{equation}
-\]</span></p>
-<p>Plug <span class="math inline">\(\eqref{eq10}\)</span> into <span
-class="math inline">\(\eqref{eq7}\)</span> and <span
-class="math inline">\(\eqref{eq8}\)</span>:</p>
-<p><span class="math display">\[
-\begin{align}
-    \frac{\Delta z}{\tan\varphi}\cos\theta+t_1\sin\theta &amp;= \Delta x
-\label{eq11}\\
-    \frac{\Delta z}{\tan\varphi}\sin\theta-t_1\cos\theta &amp;= \Delta y
-\label{eq12}\\
-\end{align}
-\]</span></p>
-<p>Combining <span class="math inline">\(\eqref{eq11}\)</span> and <span
-class="math inline">\(\eqref{eq12}\)</span>, we have:</p>
-<p><span class="math display">\[
-\begin{equation}
-    \frac{\Delta x - t_1\sin\theta}{\cos\theta}=\frac{\Delta y
-+t_1\cos\theta}{\sin\theta}\Rightarrow \Delta x\sin\theta-\Delta
-y\cos\theta=t_1
-\label{eq13}
-\end{equation}
-\]</span></p>
-<p>To note, when <span class="math inline">\(\theta=0\)</span> or <span
-class="math inline">\(\theta=\pi\)</span>, the above equation also
-holds. Divided by <span class="math inline">\(\sqrt{(\Delta x)^2+(\Delta
-y)^2}\)</span> on both sides, we have:</p>
-<p><span class="math display">\[
-\small
-\begin{equation}
-\begin{aligned}
-    \frac{t_1}{\sqrt{(\Delta x)^2+(\Delta y)^2}} &amp;= \frac{\Delta
-x}{\sqrt{(\Delta x)^2+(\Delta y)^2}}\sin\theta-\frac{\Delta
-y}{\sqrt{(\Delta x)^2+(\Delta y)^2}}\cos\theta\\
-    \frac{t_1}{\sqrt{(\Delta x)^2+(\Delta y)^2}} &amp;=
-\cos\alpha\sin\theta-\sin\alpha\cos\theta \\
-    \frac{t_1}{\sqrt{(\Delta x)^2+(\Delta y)^2}} &amp;=
-\sin(\theta-\alpha) \\
-    \theta &amp;= {\color{cyan}\alpha} + {\color{pink}\beta}\\
-    \theta &amp;= {\color{cyan}\arcsin\left(\frac{\Delta
-y}{\sqrt{(\Delta x)^2+(\Delta y)^2}}\right)}+
-{\color{pink}\arcsin\left(\frac{t_1}{\sqrt{(\Delta x)^2+(\Delta
-y)^2}}\right)}
-\end{aligned}
-\label{eq14}
-\end{equation}
-\]</span></p>
-<p>The tinted values <span
-class="math inline">\({\color{cyan}\alpha=\arcsin\left(\frac{\Delta
-y}{\sqrt{(\Delta x)^2+(\Delta y)^2}}\right)}\)</span> and <span
-class="math inline">\({\color{pink}\beta=\arcsin\left(\frac{t_1}{\sqrt{(\Delta
-x)^2+(\Delta y)^2}}\right)}\)</span> should be calibrated according to
-the sign of <span class="math inline">\(\Delta x\)</span> and <span
-class="math inline">\(\Delta y\)</span>. It's particularly noteworthy
-that when <span class="math inline">\({\color{pink}\beta=0}\)</span>,
-<span class="math inline">\({\color{cyan}\alpha}\)</span> should be:</p>
-<ul>
-<li><span class="math inline">\(\Delta x&gt;0\)</span> and <span
-class="math inline">\(\Delta y&gt;0\)</span>, <span
-class="math inline">\({\color{cyan}\alpha\in[-\pi,-\pi/2]}\)</span></li>
-<li><span class="math inline">\(\Delta x&gt;0\)</span> and <span
-class="math inline">\(\Delta y&lt;0\)</span>, <span
-class="math inline">\({\color{cyan}\alpha\in[\pi/2,\pi]}\)</span></li>
-<li><span class="math inline">\(\Delta x&lt;0\)</span> and <span
-class="math inline">\(\Delta y&gt;0\)</span>, <span
-class="math inline">\({\color{cyan}\alpha\in[-\pi/2,0]}\)</span></li>
-<li><span class="math inline">\(\Delta x&lt;0\)</span> and <span
-class="math inline">\(\Delta y&gt;0\)</span>, <span
-class="math inline">\({\color{cyan}\alpha\in[0,\pi/2]}\)</span></li>
-</ul>
-<p>However, the value returned by <span
-class="math inline">\(\arcsin(\cdot)\)</span> lies within <span
-class="math inline">\([-\pi/2,\pi/2]\)</span> and should be further
-altered according to the observation above. It can be easily concluded
-that:</p>
-<p><span class="math display">\[
-\begin{equation}
-    \hat{\alpha}=\begin{cases}
-        {\color{cyan}\alpha}-\pi,~&amp;\Delta x&gt;0\\
-        -{\color{cyan}\alpha},~&amp;\Delta x\le 0
-    \end{cases}
-\label{eq15}
-\end{equation}
-\]</span></p>
-<p>For <span class="math inline">\(\beta\)</span>, we notice that when
-<span class="math inline">\(t_1\)</span> is positive and gets larger,
-the camera's yaw will decrease, so the real beta will be <span
-class="math inline">\(\hat{\beta}=-{\color{pink}\beta}\)</span>. Summing
-up the corrected values, we reach the true camera yaw <span
-class="math inline">\(\hat{\theta}=\hat{\alpha}+\hat{\beta}\)</span>.</p>
-<p>The second problem, which is very palpable, is that <span
-class="math inline">\(\frac{t_1}{\sqrt{(\Delta x)^2+(\Delta
-y)^2}}\)</span> can be smaller than <span
-class="math inline">\(-1\)</span> or larger than <span
-class="math inline">\(1\)</span>, when the denominator — the distance
-between follow point and look-at point — is small. If this value exceeds
-the bound and we clip it, the resulting yaw <span
-class="math inline">\(\theta\)</span> and the subsequent pitch <span
-class="math inline">\(\varphi\)</span> would be incorrect, making odd
-camera artifacts.</p>
-<p>Here are several potential workarounds to deal with this issue:</p>
-<ul>
-<li>Dynamically adapts <span class="math inline">\(a_x\)</span> to
-ensure the absolute value of <span class="math inline">\(t_1\)</span> is
-no larger than <span class="math inline">\(\sqrt{(\Delta x)^2+(\Delta
-y)^2}\)</span>.</li>
-<li>Introduce the concept of <strong>soft zone</strong> and apply
-damping just as Cinemachine does.</li>
-</ul>
-<p>Method two might be a better way because it has smooth result. We
-will get to this in later sections of this post, and now we focus on
-implementing method one, which is much simpler to achieve using
-blueprint. <span id="scale">All we need to do is to set a
-<code>BeginAdaptDistanceX</code> and <code>EndAdaptDistanceX</code> that
-adapts <span class="math inline">\(a_x\)</span> when <span
-class="math inline">\(\sqrt{(\Delta x)^2+(\Delta y)^2}\)</span> is
-within the range of <span
-class="math inline">\([\text{EndAdaptDistanceX},\text{BeginAdaptDistanceX}]\)</span>.</span>
-More concretely, when the distance is within the range, new <span
-class="math inline">\(a_x\)</span> will be <span
-class="math inline">\(a_x\frac{\text{CurrentDistance}-\text{EndAdaptDistanceX}}{\text{BeginAdaptDistanceX}-\text{EndAdaptDistanceX}}\)</span>.
-When both values are set to zero, no scale is applied, when <span
-class="math inline">\(\text{EndAdaptDistance}\)</span> is negative,
-<span class="math inline">\(a_x\)</span> will have its minimum (the
-absolute value) greater than zero. It is very effective and flexible to
-use this value in order for avoiding zero-division as will be introduced
-in <span class="math inline">\(\eqref{eq16}\)</span>. Directly clamping
-<span class="math inline">\(t_1\)</span> between <span
-class="math inline">\([-\sqrt{(\Delta x)^2+(\Delta y)^2},\sqrt{(\Delta
-x)^2+(\Delta y)^2}]\)</span> will not bring about satisfactory
-results.</p>
-<p>Note that we leave out the case when <span
-class="math inline">\(\Delta x=\Delta y =0\)</span> since for most of
-the time the player character and the enemy will not be on the up axis
-at the same time.</p>
-<p>Once we have <span class="math inline">\(\hat{\theta}\)</span>, we
-can easily find out <span class="math inline">\(\varphi\)</span>. By
-<span class="math inline">\(\eqref{eq11}\)</span> (or <span
-class="math inline">\(\eqref{eq12}\)</span> equivalently), we have:</p>
-<p><span class="math display">\[
-\begin{equation}
-    \varphi=\arctan\left(\frac{\Delta z\cos\hat{\theta}}{\Delta
-x-t_1\sin\hat{\theta}}\right)
-\label{eq16}
-\end{equation}
-\]</span></p>
-<p>You may ask what will happen if <span class="math inline">\(\Delta
-x-t_1\sin\hat{\theta}\)</span> is close to zero? Well, this could not be
-a problem as we have already dynamically adapted <span
-class="math inline">\(t_1\)</span> with respect to the follow-lookat
-distance, as long as the values of <code>BeginAdaptDistanceX</code> and
-<code>EndAdaptDistanceX</code> are properly set.</p>
-<p>What are <span class="math inline">\(\varphi,\hat{\theta}\)</span>
-when <span class="math inline">\(t_1=0\)</span>? From <span
-class="math inline">\(\eqref{eq14}\)</span>, we know <span
-class="math inline">\(\hat{\theta}=\hat{\alpha}\)</span>; then from
-<span class="math inline">\(\eqref{eq14}\eqref{eq16}\)</span> and using
-the fact that <span
-class="math inline">\(\cos(\arcsin(x))=\sqrt{1-x^2}\)</span>, we have
-<span class="math inline">\(\varphi=-\arctan\left(\frac{\Delta
-z}{\sqrt{(\Delta x)^2+(\Delta y)^2}}\right)\)</span>.</p>
-<h2 id="final-camera-location-and-rotation">Final camera location and
-rotation</h2>
-<p>To summarize, we first compute <span
-class="math inline">\(\alpha\)</span> and <span
-class="math inline">\(\beta\)</span> with <span
-class="math inline">\(\eqref{eq14}\)</span>:</p>
-<p><span class="math display">\[
-\alpha=\arcsin\left(\frac{\Delta y}{\sqrt{(\Delta x)^2+(\Delta
-y)^2}}\right),~\beta=\arcsin\left(\frac{t_1}{\sqrt{(\Delta x)^2+(\Delta
-y)^2}}\right)
-\]</span></p>
-<p>Then we calibrate <span class="math inline">\(\alpha\)</span> and
-<span class="math inline">\(\beta\)</span>:</p>
-<p><span class="math display">\[
-\hat{\alpha}=\begin{cases}
-        \alpha-\pi,~&amp;\Delta x&gt;0\\
-        -\alpha,~&amp;\Delta x\le 0
-\end{cases},~~~\hat{\beta}=-\beta
-\]</span></p>
-<p>the addition is the yaw we want: <span
-class="math inline">\(\hat{\theta}=\hat{\alpha}+\hat{\beta}\)</span>. To
-remedy the issue of overflowing when <span
-class="math inline">\(\sqrt{(\Delta x)^2+(\Delta y)^2}\)</span> is
-small, we impose an range in which the raw screen offset <span
-class="math inline">\(a_x\)</span> is dynamically adjusted and achieve
-smooth camera motion.</p>
-<p>The camera pitch can be readily computed:</p>
-<p><span class="math display">\[\varphi=\arctan\left(\frac{\Delta
-z\cos\hat{\theta}}{\Delta x-t_1\sin\hat{\theta}}\right)\]</span></p>
-<p>Eventually, we can compute the camera location and rotation. Location
-is <span
-class="math inline">\(\mathbf{x}+\mathbf{a}+\mathbf{t}_1\)</span>, and
-rotation can be set to look at <span
-class="math inline">\(\mathbf{b}\)</span>.</p>
-<p>Here is a video showcasing this camera with different parameter
-values.</p>
-<video src="/images/1v1camera/showcase1.mp4" preload="metadata" controlslist="nodownload" controls playsinline poster=""></video>
-<p>Here is the blueprint I make to implement this camera. It is now a
-little out of order and I will make it more readable and extensible in
-next sections.</p>
-<p>In the main graph, we get camera yaw and pitch, get camera / rotation
-and set them in each frame.</p>
-<p><img data-src="/images/1v1camera/2.png" /></p>
-<p>The <code>GetCameraYawAndPitch</code> function starts with applying
-the follow position and look-at position offset. Note that the follow
-position offset is based on the follow target's local coordinate.</p>
-<p><img data-src="/images/1v1camera/3.png" /></p>
-<p>Then, we store temporary variables including <span
-class="math inline">\(\Delta X,\Delta Y,\Delta Z\)</span> and <span
-class="math inline">\(t_1\)</span>.</p>
-<p><img data-src="/images/1v1camera/4.png" /></p>
-<p>Last, we compute yaw and pitch, and return them.</p>
-<p><img data-src="/images/1v1camera/5.png" /></p>
-<p>The <code>GetT1</code> function computes and returns <span
-class="math inline">\(t_1\)</span>. We dynamically scale <span
-class="math inline">\(a_x\)</span> according to the current
-follow-lookat distance (in the XY plane).</p>
-<p><img data-src="/images/1v1camera/6.png" /> <img
-src="/images/1v1camera/7.png" /></p>
-<p>The <code>GetCameraLocation</code> sums up the three components.</p>
-<p><img data-src="/images/1v1camera/8.png" /></p>
-<p>The <code>GetCameraRotation</code> forces the camera to orient to the
-look-at target.</p>
-<p><img data-src="/images/1v1camera/9.png" /></p>
-<h1 id="finer-control-over-the-screen-space">Finer Control Over The
-Screen Space</h1>
-<p>To get a finer control of the follow point and look-at point on the
-screen space, we would like to introduce three more paramters
-<code>Follow Screen Y</code>, <code>Lookat Screen X</code> and
-<code>Lookat Screen Y</code> respectively denoting the Y axis screen
-position of the follow point, the X axis screen position of the lookat
-point and the Y axis screen position of the lookat point. We first talk
-about <code>Follow Screen Y</code>.</p>
-<h2 id="determining-mathbft_2">Determining <span
-class="math inline">\(\mathbf{t}_2\)</span></h2>
-<p>Assume <span class="math inline">\(\mathbf{t}_2\)</span> is the
-Y-axis offset applied to the camera, <span
-class="math inline">\(a_y\in[-0.5,0.5]\)</span> is the value of
-<code>Follow Screen Y</code>. When <span
-class="math inline">\(a_y=-0.5\)</span>, the follow point lies at the
-bottom edge of the screen, and at the top edge when <span
-class="math inline">\(a_y=0.5\)</span>. Following what we do for <span
-class="math inline">\(\mathbf{t}_1\)</span>, we can easily express <span
-class="math inline">\(\mathbf{t}_2\)</span> as:</p>
-<p><span class="math display">\[
-\begin{equation}
-    \mathbf{t}_2=t_2\begin{pmatrix}
-    -\sin\varphi\cos\theta\\
-    -\sin\varphi\sin\theta\\
-    \cos\varphi
-    \end{pmatrix},~~t_2=-\frac{2a_yr}{\text{AspectRatio}}\tan\left(\frac{\text{fov}}{2}\right)
-\end{equation}
-\]</span></p>
-<p>where <span
-class="math inline">\(\mathbf{u}=(\sin\varphi\cos\theta,\sin\varphi\sin\theta,-\cos\varphi)^\top\)</span>
-is camera's local up vector from the cross product of camera's local
-forward vector <span
-class="math inline">\(\mathbf{f}=(-\cos\varphi\cos\theta,-\cos\varphi\sin\theta,-\sin\varphi)^\top\)</span>
-and camera's local right vector <span
-class="math inline">\(\mathbf{r}=(\sin\theta,-\cos\theta,0)^\top\)</span>
-(note again UE uses the left-hand rule). <span
-class="math inline">\(\text{AspectRatio}\)</span> is camera's aspect
-ratio (usually 16:9).</p>
-<h2 id="determining-new-varphi-and-theta">Determining new <span
-class="math inline">\(\varphi\)</span> and <span
-class="math inline">\(\theta\)</span></h2>
-<p>Going back to <span class="math inline">\(\eqref{main}\)</span> and
-adding <span class="math inline">\(\mathbf{t}_2\)</span>, we have:</p>
-<p><span class="math display">\[
-\begin{equation}
-    \mathbf{b}-\mathbf{a}-\mathbf{x}-\mathbf{t}_1-\mathbf{t}_2=-k\mathbf{x}
-\label{eq18}
-\end{equation}
-\]</span></p>
-<p>Then we have:</p>
-<p><span class="math display">\[
-\begin{align}
-    (1-k)r\cos\varphi\cos\theta+t_1\sin\theta-t_2\sin\varphi\cos\theta
-&amp;= \Delta x \label{eq19}\\
-    (1-k)r\cos\varphi\sin\theta-t_1\cos\theta-t_2\sin\varphi\sin\theta
-&amp;= \Delta y \label{eq20}\\
-    (1-k)r\sin\varphi+t_2\cos\varphi &amp;= \Delta z \label{eq21}
-\end{align}
-\]</span></p>
-<p>Interestingly, the resulting <span
-class="math inline">\(\hat{\theta}\)</span> by combining <span
-class="math inline">\(\eqref{eq19}\)</span> and <span
-class="math inline">\(\eqref{eq20}\)</span> remains the same as <span
-class="math inline">\(\eqref{eq14}\)</span>. So we do not need to change
-the way we compute <span
-class="math inline">\(\hat{\theta}\)</span>.</p>
-<p>For <span class="math inline">\(\varphi\)</span>, it's a little
-tricky. First, we rewrite <span
-class="math inline">\(\eqref{eq21}\)</span> as <span
-class="math inline">\((1-k)r=\frac{\Delta
-z+t_2\cos\varphi}{\sin\varphi}\)</span>, we plug it into <span
-class="math inline">\(\eqref{eq19}\)</span>:</p>
-<p><span class="math display">\[
-\begin{equation}
-    \frac{\Delta x-t_1\sin\theta}{\cos\theta}=\frac{\Delta
-z\cos\varphi+t_2}{\sin\varphi}
-\end{equation}
-\]</span></p>
-<p>This leads to <span class="math inline">\(A\sin\varphi-\Delta
-z\cos\varphi=t_2\)</span> (we let <span
-class="math inline">\(A=\frac{\Delta
-x-t_1\sin\theta}{\cos\theta}\)</span>). We can use the same technique
-for computing <span class="math inline">\(\hat{\theta}\)</span> to solve
-<span class="math inline">\(\hat{\varphi}\)</span>. That will be:</p>
-<p><span class="math display">\[
-\small
-\begin{equation}
-\begin{aligned}
-    \varphi &amp;= {\color{cyan}\gamma} + {\color{pink}\tau}\\
-    \varphi &amp;= {\color{cyan}\arcsin\left(\frac{\Delta
-z}{\sqrt{A^2+(\Delta z)^2}}\right)}+
-{\color{pink}\arcsin\left(\frac{t_2}{\sqrt{A^2+(\Delta z)^2}}\right)}
-\end{aligned}
-\label{eq23}
-\end{equation}
-\]</span></p>
-<p>When <span class="math inline">\(t_2=0\)</span> and with the identity
-<span class="math inline">\(\tan(\arcsin(x))=x/\sqrt{1-x^2}\)</span>, we
-have <span class="math inline">\(\varphi_{t_2=0}=\pm\frac{\Delta
-z\cos\hat{\theta}}{\Delta x-t_1\sin\hat{\theta}}\)</span>. The only
-thing left is to determine the real value of <span
-class="math inline">\({\color{cyan}\gamma}\)</span> and <span
-class="math inline">\({\color{pink}\tau}\)</span>. Through experiment,
-we know both signs are positive.</p>
-<p>Besides, we also introduce <code>BeginAdaptDistanceY</code> and
-<code>EndAdaptDistanceY</code>, in analogy to what we do for
-<code>ScreenX</code>, to dynamically scale <span
-class="math inline">\(a_y\)</span> when the follow point and the look-at
-position is close. In this way, we achieve smooth camera move for both
-<code>ScreenX</code> and <code>ScreenY</code>.</p>
-<h2 id="but-what-about-the-look-at-position...">But what about the
-look-at position...?</h2>
-<p>We introduce four new parameters, <span
-class="math inline">\(\Theta\)</span>, the yaw angle based on camera's
-local space and <span class="math inline">\(b_x=\text{Lookat Screen
-X}\)</span>, and <span class="math inline">\(\Phi\)</span>, the pitch
-angle based on camera's local space and <span
-class="math inline">\(b_y=\text{Lookat Screen Y}\)</span>. We adjust
-<span class="math inline">\(\Theta\)</span> and <span
-class="math inline">\(\Phi\)</span> (i.e., rotating camera at its own
-local coordinate) to accommodate look-at position manupulation on screen
-space.</p>
-<p>Nonetheless, when biasing the look-at point on screen space, we will
-encounter some problems. If we allow for camera rotation at its local
-coordinate, the values of <span class="math inline">\(t_1\)</span> and
-<span class="math inline">\(t_2\)</span> computed above would be wrong,
-because the local orientation of camera can significantly influence the
-follow position on screen space. Now that the determination of <span
-class="math inline">\(t_1, t_2\)</span> and the determination of
-camera's local orientation are entangled, establishing and solving the
-equation can be very difficult, particularly for an explicit
-solution.</p>
-<p>(*: There might be a nice explicit solution, but for now I won't
-manage to solve it out. Perhaps for someday in the future I will take a
-shot.)</p>
-<p>What we gonna do to mitigate this issue is to increment camera
-position and orientation, rather than hard-set it at its "correct"
-position and orientation. This is exactly what Cinemachine does for
-camera motion.</p>
-<h1
-id="emulate-cinemachine-by-using-incremental-motion-and-adding-damping">Emulate
-Cinemachine by using Incremental Motion and Adding Damping</h1>
-<p>Our solution is to emulate Cinemachine in Unity through incrementally
-changing camera position and rotation. This paradigm also enjoys the
-benifit of adding damping easily. To increment camera motion, we only
-need to calculate the desired position and rotation, and interpolate
-between its current state and its desired state.</p>
-<p>Let us go through the process by showing the blueprints.</p>
-<h2 id="high-level-workflow-and-the-initialize-function">High-level
-workflow and the <code>Initialize</code> function</h2>
-<p>The high-level steps are pretty simple: we first determine and set
-camera rotation, then set camera position. <code>FirstFrame</code> is a
-boolean variable used to indicate whether the current tick is the first
-frame during execution. If it is, no damping will be applied.</p>
-<p><img data-src="/images/1v1camera/10.png" /></p>
-<p>The <code>Initialize</code> function integrates the follow offset and
-look-at offset to get the real follow position and lookat position.</p>
-<p><img data-src="/images/1v1camera/11.png" /></p>
-<h2 id="set-camera-rotation">Set camera rotation</h2>
-<p>The <code>Set Camera Rotation</code> function gets the delta rotation
-(after damping), and then rotates camera accordingly.</p>
-<p><img data-src="/images/1v1camera/12.png" /></p>
-<p>Similarly, the <code>Set Camera Position</code> function gets the
-delta position (after damping), and then shifts camera in its local
-reference frame, not changing camera orientation.</p>
-<p><img data-src="/images/1v1camera/13.png" /></p>
-<p>The first part of the <code>Get Delta Rotation</code> function
-examines whether camera is too close to the look-at target. If it is the
-case, the camera will not update its rotation.</p>
-<p><img data-src="/images/1v1camera/14.png" /></p>
-<p>Then, the second part of <code>Get Delta Rotation</code> computes the
-difference between current rotation and the desired rotation, taking the
-given look-at screen offset into account.</p>
-<p><img data-src="/images/1v1camera/15.png" /></p>
-<p>Last, the third part of <code>Get Delta Rotation</code> optionally
-applies damping to the difference rotation and returns the damped
-result.</p>
-<p><img data-src="/images/1v1camera/16.png" /></p>
-<p>Going inside the <code>Damp Rotation</code> function, we find it
-separately damps each of the rotation component roll, pitch and yaw, all
-using the <code>Damper</code> function.</p>
-<p><img data-src="/images/1v1camera/17.png" /></p>
-<p>The <code>Damper</code> function, however, is a simple exponential
-decay operator that leaves a particular negligible residual after
-<code>Damp Time</code>. It can be formulated as:</p>
-<p><span
-class="math display">\[\text{DampedInput}=\text{RawInput}\cdot\left(1-\mathrm{e}^{\ln(k)\frac{\Delta
-T}{T}}\right)\]</span></p>
-<p>where <span class="math inline">\(k\)</span> is the negligible
-residual, say <span class="math inline">\(0.01\)</span>, and <span
-class="math inline">\(T\)</span> is the expected damp time.</p>
-<p><img data-src="/images/1v1camera/18.png" /></p>
-<h2 id="set-camera-position">Set camera position</h2>
-<p>The <code>Get Delta Position</code> has a similar workflow. It first
-computes the scaled follow screen offset. We have introduced it in the
-first section (see <a href="#scale">here</a>).</p>
-<p><img data-src="/images/1v1camera/19.png" /></p>
-<p>Then, it converts the follow position from world space to camera's
-local space. It is a little bit relating to mathematics. Put it simply,
-assume the camera's local forward vector is <span
-class="math inline">\(\mathbf{f}\)</span>, right vector is <span
-class="math inline">\(\mathbf{r}\)</span> and up vector is <span
-class="math inline">\(\mathbf{u}\)</span>, and the world space follow
-position is <span
-class="math inline">\(\mathbf{a}=(x,y,z)^\top\)</span>. The local
-coordinate of <span class="math inline">\(\mathbf{a}\)</span> would
-be:</p>
-<p><span class="math display">\[\mathbf{a}&#39;=\begin{bmatrix}
-    \mathbf{f}^\top\\
-    \mathbf{r}^\top\\
-    \mathbf{u}^\top
-\end{bmatrix}\mathbf{a}=\begin{bmatrix}
-    \mathbf{f}_x &amp; \mathbf{f}_y &amp; \mathbf{f}_z\\
-    \mathbf{r}_x &amp; \mathbf{r}_y &amp; \mathbf{r}_z\\
-    \mathbf{u}_x &amp; \mathbf{u}_y &amp; \mathbf{u}_z
-\end{bmatrix}\begin{bmatrix}
-    x\\
-    y\\
-    z
-\end{bmatrix}\]</span></p>
-<p><img data-src="/images/1v1camera/20.png" /></p>
-<p>A local space coordiante facilitates computing the difference between
-current camera position and desired position. Follow screen offset is
-also incorporated.</p>
-<p><img data-src="/images/1v1camera/21.png" /></p>
-<p>Last, we damp the difference position and returns the result. The
-<code>Damp Position</code> function manipulates three
-<code>Raw Delta Position</code> components instead of two as we did in
-<code>Damp Rotation</code>.</p>
-<p><img data-src="/images/1v1camera/22.png" /></p>
-<h2 id="result">Result</h2>
-<p>OK, let us enjoy our achievements! We can freely play with various
-parameters and see how the camera responses. You may notice that only
-setting up the follow damping leads to camera jitter, not drastic but
-still perceptible. A possible reason for this phenomenon is the unstable
-tick rate on my PC. We can, of course, increase the frame rate, but a
-more robust solution is to modify our damping algorithm. Rather than
-directly use <code>DeltaTime</code> as the damping step size, we can
-further split <code>DeltaTime</code> into several sub-delta time steps,
-and simulate damping for each time step upon the last simulation,
-finally having a much more smooth damping result. This is exactly what
-Cinemachine does when <code>DeltaTime</code> is unstable.</p>
-<video src="/images/1v1camera/showcase2.mp4" preload="metadata" controlslist="nodownload" controls playsinline poster=""></video>
-<p>Another potential enhancement is to add the concept of <strong>Soft
-Zone</strong>, which defines a rectangular area in screen space where
-follow / look-at point is allowed to move around and the rest screen
-space where follow / look-at point will never show up in. In other
-words, the follow / look-at position is hard restricted in the soft
-zone. It provides a more flexible screen space control over our point of
-interest.</p>
-<p>(*: I've already added soft zone and the improved damping algorithm
-in both blueprints and code implementation. Feel free to use and modify
-as whatever you like.)</p>
-<p><strong>Complementary note</strong></p>
-<p>The improved damping algorithm is not difficult to implement. Suppose
-we want to split <code>DeltaTime</code> <span
-class="math inline">\(\Delta T\)</span> into <span
-class="math inline">\(n\)</span> equal sub-parts, each of which is <span
-class="math inline">\(\Delta T/n\)</span>. Then the decay factor is
-<span class="math inline">\(\mathrm{e}^{\ln(k)\frac{\Delta
-T}{nT}}\)</span>. The original delta amount is <span
-class="math inline">\(I\)</span>, and the split segment will be <span
-class="math inline">\(I/n\)</span>. The simulation progressively damps
-each segment <span class="math inline">\(I/n\)</span> using the decay
-factor <span class="math inline">\(\mathrm{e}^{\ln(k)\frac{\Delta
-T}{nT}}\)</span>.</p>
-<p>In the first iteration, the residual is <span
-class="math inline">\(\frac{I}{n}\mathrm{e}^{\ln(k)\frac{\Delta
-T}{nT}}\)</span>, or the actor traverses <span
-class="math inline">\(\frac{I}{n}(1-\mathrm{e}^{\ln(k)\frac{\Delta
-T}{nT}})\)</span> in other words. In the second iteration, the residual
-will be:</p>
-<p><span
-class="math display">\[\left(\frac{I}{n}\mathrm{e}^{\ln(k)\frac{\Delta
-T}{nT}}+\frac{I}{n}\right)\mathrm{e}^{\ln(k)\frac{\Delta
-T}{nT}}=\frac{I}{n}\left(\left(\mathrm{e}^{\ln(k)\frac{\Delta
-T}{nT}}\right)^2+\mathrm{e}^{\ln(k)\frac{\Delta
-T}{nT}}\right)\]</span></p>
-<p>This process terminates until the last <span
-class="math inline">\(n\)</span>-th iteration, where the final residual
-will be:</p>
-<p><span
-class="math display">\[\frac{I}{n}\left(\left(\mathrm{e}^{\ln(k)\frac{\Delta
-T}{nT}}\right)^n+\cdots+\mathrm{e}^{\ln(k)\frac{\Delta
-T}{nT}}\right)=\frac{I}{n}\cdot\frac{\mathrm{e}^{\ln(k)\frac{\Delta
-T}{nT}}(1-\mathrm{e}^{\ln(k)\frac{\Delta
-T}{T}})}{1-\mathrm{e}^{\ln(k)\frac{\Delta T}{nT}}}\]</span></p>
-<p>Compared with the original residual without multi-step simulation
-<span class="math inline">\(I\cdot \mathrm{e}^{\ln(k)\frac{\Delta
-T}{T}}\)</span>, the simulated result will almost always be larger than
-the non-simulated conterpart, implying that the actor moves less within
-duration <span class="math inline">\(\Delta T\)</span>. This makes the
-actor behave more smooth under deltatime variability.</p>
-<h1 id="code">Code</h1>
-<p>Our last step is to code-implement the Cinemachine-like 1v1 camera
-system. It is not hard but as we want a more practical, robust and
-extensible camera system, we would like to organize the code in a more
-systematical way. Cinemachine makes a great example (thank you,
-Cinemachine).</p>
-<h2 id="code-framework">Code framework</h2>
-<h2 id="implementing-framingtransposer">Implementing
-<code>FramingTransposer</code></h2>
-<h2 id="implementing-composer">Implementing <code>Composer</code></h2>
-<h2 id="use-in-unreal-engine">Use in Unreal Engine</h2>
-]]></content>
-      <categories>
-        <category>游戏 - 相机</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>随笔</tag>
-        <tag>数学</tag>
-        <tag>相机</tag>
-        <tag>UE</tag>
       </tags>
   </entry>
   <entry>
@@ -3921,6 +3165,874 @@ Designer画一个简单的行为树</h1>
       <tags>
         <tag>随笔</tag>
         <tag>游戏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Implementing A Minimum 1V1 Camera in UE (akin to FramingTransposer + Composer in Cinemachine)</title>
+    <url>/2022/12/11/09/16/</url>
+    <content><![CDATA[<p>The camera system inside Unreal Engine provides very basic functions.
+It merely enables the camera to follow a target with limited adjustable
+paramters such as offset, camera distance, lag, etc. We would like a
+more powerful camera system, like the Cinemachine toolset in Unity, to
+facilitate creating more interesting and compelling visual experience
+for gameplay. In most 3D adventure games, a 1v1 camera is required when
+you fight with a BOSS and you need to look at the BOSS however you move
+and cast skills. Unfortunately, 1v1 camera is not a built-in function in
+UE, so we have to implement our own version of 1v1 camera.</p>
+<p>In this post, I will share with you how to implement a minimum 1v1
+camera in UE using only blueprints, based on some simple mathematics. If
+you are more familiar with coding, you can also implement this 1v1
+camera with only few lines of code.</p>
+<span id="more"></span>
+<h1
+id="start-with-a-simple-case-mathematical-derivation-for-camera-location-and-rotation">Start
+with A Simple Case: Mathematical Derivation for Camera Location and
+Rotation</h1>
+<h2 id="constructing-the-equation">Constructing the equation</h2>
+<p>The most crucial two parts of any camera behavior are the
+<strong>location</strong> and <strong>rotation</strong>, the former
+determines where the camera is and the latter controls where the camera
+looks at.</p>
+<p>Let us first begin with a simple case: assume the follow location is
+<span class="math inline">\(\mathbf{a}\)</span>, the look-at location is
+<span class="math inline">\(\mathbf{b}\)</span>, and the look-at point
+is fixed at the center of the screen. We introduce a
+<code>Follow Screen X</code> parameter (denoted by <span
+class="math inline">\(a_x\)</span>) controlling the relative x-axis
+offset of the follow point on the screen space. If <span
+class="math inline">\(a_x=0\)</span>, the follow point will be on the
+center of the screen; if <span class="math inline">\(a_x=0.5\)</span>,
+the follow point will be on the rightmost position of the screen; if
+<span class="math inline">\(a_x=-0.5\)</span>, it will be on the
+leftmost position of the screen. At this stage, we do not take
+<code>Follow Screen Y</code> into consideration for simplication.</p>
+<p>To determine camera location and rotation, consider a sphere centered
+at the origin. Assume camera distance (the distance of the camera to the
+follow point) is <span class="math inline">\(r\)</span>, pitch angle
+<span class="math inline">\(\varphi\in[-\pi/2,\pi/2]\)</span>, yaw angle
+<span class="math inline">\(\theta\in[-\pi,\pi]\)</span>, we can write
+down the camera location before applying the follow point offset:</p>
+<p><span class="math display">\[
+\begin{equation}
+\mathbf{x}=\begin{pmatrix}
+r\cos\varphi\cos\theta\\
+r\cos\varphi\sin\theta\\
+r\sin\varphi
+\end{pmatrix}
+\label{x}
+\end{equation}
+\]</span></p>
+<p>Note that <span class="math inline">\(\eqref{x}\)</span> is the
+<strong>raw camera location</strong> relative to the origin. The look-at
+direction, however, is <span
+class="math inline">\(-\mathbf{x}/r\)</span>, and the <strong>actual
+camera location</strong> is <span
+class="math inline">\(\mathbf{a}+\mathbf{x}\)</span>. For integrating
+<span class="math inline">\(a_x\)</span>, we can assume the camera
+offset is <span class="math inline">\(\mathbf{t}_1\)</span>, hence, the
+<strong>final camera location</strong> is <span
+class="math inline">\(\mathbf{a}+\mathbf{x}+\mathbf{t}_1\)</span>, and
+the look-at direction from camera to <span
+class="math inline">\(\mathbf{b}\)</span> is <span
+class="math inline">\(\mathbf{b}-(\mathbf{a}+\mathbf{x}+\mathbf{t}_1)\)</span>.
+Because <span class="math inline">\(\mathbf{t}_1\)</span> does not
+change the orientation of camera, the camera's look-at direction, as we
+have stated above, is still <span
+class="math inline">\(-\mathbf{x}/r\)</span>. It is obvious that we have
+the following equation:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \mathbf{b}-\mathbf{a}-\mathbf{x}-\mathbf{t}_1=-k\mathbf{x}
+\label{main}
+\end{equation}
+\]</span></p>
+<p>where <span class="math inline">\(k\)</span> is an unknown
+coefficient satisfying <span class="math inline">\(k&gt;1\)</span> as we
+want the look-at target is farther than the follow target to our camera.
+Before wo go ahead solving this equation, we should determine <span
+class="math inline">\(\mathbf{t}_1\)</span> at the first place.</p>
+<h2 id="determining-mathbft_1">Determining <span
+class="math inline">\(\mathbf{t}_1\)</span></h2>
+<p>We can easily express <span
+class="math inline">\(\mathbf{t}_1\)</span> in terms of <span
+class="math inline">\(a_x, r\)</span> and the field of view of the
+camera. As shown in the following figure, we have:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \frac{N}{r}=\tan\left(\frac{\text{fov}}{2}\right)\Rightarrow
+N=r\tan\left(\frac{\text{fov}}{2}\right)
+\label{N}
+\end{equation}
+\]</span></p>
+<p>where <span class="math inline">\(N\)</span> is the world-space
+length of half screen. Then, the offset amount is <span
+class="math inline">\(2a_xN\)</span> (note that when <span
+class="math inline">\(a_x=0.5\)</span>, the offset amount will be <span
+class="math inline">\(N\)</span>), and the offset direction will be the
+opposite of the sign of <span class="math inline">\(a_x\)</span>. That
+is, is <span class="math inline">\(a_x&gt;0\)</span>, camera will
+translate left, otherwise it will translate right.</p>
+<p><img data-src="/images/1v1camera/1.png" /></p>
+<p>Plug <span class="math inline">\(\eqref{N}\)</span> into <span
+class="math inline">\(-2x_aN\)</span>, the directional offset magnitude
+will be <span
+class="math inline">\(-2a_xr\tan\left(\frac{\text{fov}}{2}\right)\)</span>.</p>
+<p>A remaining question is which unit vector this offset will be applied
+along? The answer is the camera's local right direction. It can be
+readily computed by taking the cross product between camera's local unit
+forward vector <span class="math inline">\(-\mathbf{x}/r\)</span> and
+world space up vector <span
+class="math inline">\((0,0,1)^\top\)</span>:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \begin{pmatrix}
+    -\cos\varphi\cos\theta\\
+    -\cos\varphi\sin\theta\\
+    -\sin\varphi
+    \end{pmatrix}\times
+    \begin{pmatrix}
+    0\\
+    0\\
+    1
+    \end{pmatrix}=
+    \begin{pmatrix}
+    -\cos\varphi\sin\theta\\
+    \cos\varphi\cos\theta\\
+    0
+    \end{pmatrix}
+\end{equation}
+\]</span></p>
+<p>Normalizing the result, and considering that UE's coordiante system
+is based on the left-hand rule, the local unit right vector will be
+<span class="math inline">\((\sin\theta, -\cos\theta, 0)^\top\)</span>.
+Thus, the consequent offset vector is:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \mathbf{t}_1=t_1\begin{pmatrix}
+    \sin\theta\\
+    -\cos\theta\\
+    0
+    \end{pmatrix},~~t_1=-2a_xr\tan\left(\frac{\text{fov}}{2}\right)
+\end{equation}
+\]</span></p>
+<h2 id="determining-varphi-and-theta">Determining <span
+class="math inline">\(\varphi\)</span> and <span
+class="math inline">\(\theta\)</span></h2>
+<p>With <span class="math inline">\(\mathbf{t}_1\)</span>, we can now
+determine <span class="math inline">\(\varphi\)</span> and <span
+class="math inline">\(\theta\)</span>. Expanding <span
+class="math inline">\(\eqref{main}\)</span>, we have:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \begin{pmatrix}
+    x_B\\
+    y_B\\
+    z_B
+    \end{pmatrix}-
+    \begin{pmatrix}
+    x_A\\
+    y_A\\
+    z_A
+    \end{pmatrix}-
+    \begin{pmatrix}
+    r\cos\varphi\cos\theta\\
+    r\cos\varphi\sin\theta\\
+    r\sin\varphi
+    \end{pmatrix}-
+    \begin{pmatrix}
+    t_1\sin\theta\\
+    -t_1\cos\theta\\
+    0
+    \end{pmatrix}=-k\begin{pmatrix}
+    r\cos\varphi\cos\theta\\
+    r\cos\varphi\sin\theta\\
+    r\sin\varphi
+    \end{pmatrix}
+\label{eq6}
+\end{equation}
+\]</span></p>
+<p>Simplifying <span class="math inline">\(\eqref{eq6}\)</span>, we
+have:</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+\Delta x\\
+\Delta y\\
+\Delta z
+\end{pmatrix}=
+\begin{pmatrix}
+    (1-k)r\cos\varphi\cos\theta+t_1\sin\theta\\
+    (1-k)r\cos\varphi\sin\theta-t_1\cos\theta\\
+    (1-k)r\sin\varphi
+\end{pmatrix}
+\]</span></p>
+<p>which leads to three equations:</p>
+<p><span class="math display">\[
+\begin{align}
+    (1-k)r\cos\varphi\cos\theta+t_1\sin\theta &amp;= \Delta x
+\label{eq7}\\
+    (1-k)r\cos\varphi\sin\theta-t_1\cos\theta &amp;= \Delta y
+\label{eq8}\\
+    (1-k)r\sin\varphi &amp;= \Delta z \label{eq9}
+\end{align}
+\]</span></p>
+<p>Rewrite <span class="math inline">\(\eqref{eq9}\)</span>, we
+have:</p>
+<p><span class="math display">\[
+\begin{equation}
+    (1-k)r=\frac{\Delta z}{\sin\varphi}
+    \label{eq10}
+\end{equation}
+\]</span></p>
+<p>Plug <span class="math inline">\(\eqref{eq10}\)</span> into <span
+class="math inline">\(\eqref{eq7}\)</span> and <span
+class="math inline">\(\eqref{eq8}\)</span>:</p>
+<p><span class="math display">\[
+\begin{align}
+    \frac{\Delta z}{\tan\varphi}\cos\theta+t_1\sin\theta &amp;= \Delta x
+\label{eq11}\\
+    \frac{\Delta z}{\tan\varphi}\sin\theta-t_1\cos\theta &amp;= \Delta y
+\label{eq12}\\
+\end{align}
+\]</span></p>
+<p>Combining <span class="math inline">\(\eqref{eq11}\)</span> and <span
+class="math inline">\(\eqref{eq12}\)</span>, we have:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \frac{\Delta x - t_1\sin\theta}{\cos\theta}=\frac{\Delta y
++t_1\cos\theta}{\sin\theta}\Rightarrow \Delta x\sin\theta-\Delta
+y\cos\theta=t_1
+\label{eq13}
+\end{equation}
+\]</span></p>
+<p>To note, when <span class="math inline">\(\theta=0\)</span> or <span
+class="math inline">\(\theta=\pi\)</span>, the above equation also
+holds. Divided by <span class="math inline">\(\sqrt{(\Delta x)^2+(\Delta
+y)^2}\)</span> on both sides, we have:</p>
+<p><span class="math display">\[
+\small
+\begin{equation}
+\begin{aligned}
+    \frac{t_1}{\sqrt{(\Delta x)^2+(\Delta y)^2}} &amp;= \frac{\Delta
+x}{\sqrt{(\Delta x)^2+(\Delta y)^2}}\sin\theta-\frac{\Delta
+y}{\sqrt{(\Delta x)^2+(\Delta y)^2}}\cos\theta\\
+    \frac{t_1}{\sqrt{(\Delta x)^2+(\Delta y)^2}} &amp;=
+\cos\alpha\sin\theta-\sin\alpha\cos\theta \\
+    \frac{t_1}{\sqrt{(\Delta x)^2+(\Delta y)^2}} &amp;=
+\sin(\theta-\alpha) \\
+    \theta &amp;= {\color{cyan}\alpha} + {\color{pink}\beta}\\
+    \theta &amp;= {\color{cyan}\arcsin\left(\frac{\Delta
+y}{\sqrt{(\Delta x)^2+(\Delta y)^2}}\right)}+
+{\color{pink}\arcsin\left(\frac{t_1}{\sqrt{(\Delta x)^2+(\Delta
+y)^2}}\right)}
+\end{aligned}
+\label{eq14}
+\end{equation}
+\]</span></p>
+<p>The tinted values <span
+class="math inline">\({\color{cyan}\alpha=\arcsin\left(\frac{\Delta
+y}{\sqrt{(\Delta x)^2+(\Delta y)^2}}\right)}\)</span> and <span
+class="math inline">\({\color{pink}\beta=\arcsin\left(\frac{t_1}{\sqrt{(\Delta
+x)^2+(\Delta y)^2}}\right)}\)</span> should be calibrated according to
+the sign of <span class="math inline">\(\Delta x\)</span> and <span
+class="math inline">\(\Delta y\)</span>. It's particularly noteworthy
+that when <span class="math inline">\({\color{pink}\beta=0}\)</span>,
+<span class="math inline">\({\color{cyan}\alpha}\)</span> should be:</p>
+<ul>
+<li><span class="math inline">\(\Delta x&gt;0\)</span> and <span
+class="math inline">\(\Delta y&gt;0\)</span>, <span
+class="math inline">\({\color{cyan}\alpha\in[-\pi,-\pi/2]}\)</span></li>
+<li><span class="math inline">\(\Delta x&gt;0\)</span> and <span
+class="math inline">\(\Delta y&lt;0\)</span>, <span
+class="math inline">\({\color{cyan}\alpha\in[\pi/2,\pi]}\)</span></li>
+<li><span class="math inline">\(\Delta x&lt;0\)</span> and <span
+class="math inline">\(\Delta y&gt;0\)</span>, <span
+class="math inline">\({\color{cyan}\alpha\in[-\pi/2,0]}\)</span></li>
+<li><span class="math inline">\(\Delta x&lt;0\)</span> and <span
+class="math inline">\(\Delta y&gt;0\)</span>, <span
+class="math inline">\({\color{cyan}\alpha\in[0,\pi/2]}\)</span></li>
+</ul>
+<p>However, the value returned by <span
+class="math inline">\(\arcsin(\cdot)\)</span> lies within <span
+class="math inline">\([-\pi/2,\pi/2]\)</span> and should be further
+altered according to the observation above. It can be easily concluded
+that:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \hat{\alpha}=\begin{cases}
+        {\color{cyan}\alpha}-\pi,~&amp;\Delta x&gt;0\\
+        -{\color{cyan}\alpha},~&amp;\Delta x\le 0
+    \end{cases}
+\label{eq15}
+\end{equation}
+\]</span></p>
+<p>For <span class="math inline">\(\beta\)</span>, we notice that when
+<span class="math inline">\(t_1\)</span> is positive and gets larger,
+the camera's yaw will decrease, so the real beta will be <span
+class="math inline">\(\hat{\beta}=-{\color{pink}\beta}\)</span>. Summing
+up the corrected values, we reach the true camera yaw <span
+class="math inline">\(\hat{\theta}=\hat{\alpha}+\hat{\beta}\)</span>.</p>
+<p>The second problem, which is very palpable, is that <span
+class="math inline">\(\frac{t_1}{\sqrt{(\Delta x)^2+(\Delta
+y)^2}}\)</span> can be smaller than <span
+class="math inline">\(-1\)</span> or larger than <span
+class="math inline">\(1\)</span>, when the denominator — the distance
+between follow point and look-at point — is small. If this value exceeds
+the bound and we clip it, the resulting yaw <span
+class="math inline">\(\theta\)</span> and the subsequent pitch <span
+class="math inline">\(\varphi\)</span> would be incorrect, making odd
+camera artifacts.</p>
+<p>Here are several potential workarounds to deal with this issue:</p>
+<ul>
+<li>Dynamically adapts <span class="math inline">\(a_x\)</span> to
+ensure the absolute value of <span class="math inline">\(t_1\)</span> is
+no larger than <span class="math inline">\(\sqrt{(\Delta x)^2+(\Delta
+y)^2}\)</span>.</li>
+<li>Introduce the concept of <strong>soft zone</strong> and apply
+damping just as Cinemachine does.</li>
+</ul>
+<p>Method two might be a better way because it has smooth result. We
+will get to this in later sections of this post, and now we focus on
+implementing method one, which is much simpler to achieve using
+blueprint. <span id="scale">All we need to do is to set a
+<code>BeginAdaptDistanceX</code> and <code>EndAdaptDistanceX</code> that
+adapts <span class="math inline">\(a_x\)</span> when <span
+class="math inline">\(\sqrt{(\Delta x)^2+(\Delta y)^2}\)</span> is
+within the range of <span
+class="math inline">\([\text{EndAdaptDistanceX},\text{BeginAdaptDistanceX}]\)</span>.</span>
+More concretely, when the distance is within the range, new <span
+class="math inline">\(a_x\)</span> will be <span
+class="math inline">\(a_x\frac{\text{CurrentDistance}-\text{EndAdaptDistanceX}}{\text{BeginAdaptDistanceX}-\text{EndAdaptDistanceX}}\)</span>.
+When both values are set to zero, no scale is applied, when <span
+class="math inline">\(\text{EndAdaptDistance}\)</span> is negative,
+<span class="math inline">\(a_x\)</span> will have its minimum (the
+absolute value) greater than zero. It is very effective and flexible to
+use this value in order for avoiding zero-division as will be introduced
+in <span class="math inline">\(\eqref{eq16}\)</span>. Directly clamping
+<span class="math inline">\(t_1\)</span> between <span
+class="math inline">\([-\sqrt{(\Delta x)^2+(\Delta y)^2},\sqrt{(\Delta
+x)^2+(\Delta y)^2}]\)</span> will not bring about satisfactory
+results.</p>
+<p>Note that we leave out the case when <span
+class="math inline">\(\Delta x=\Delta y =0\)</span> since for most of
+the time the player character and the enemy will not be on the up axis
+at the same time.</p>
+<p>Once we have <span class="math inline">\(\hat{\theta}\)</span>, we
+can easily find out <span class="math inline">\(\varphi\)</span>. By
+<span class="math inline">\(\eqref{eq11}\)</span> (or <span
+class="math inline">\(\eqref{eq12}\)</span> equivalently), we have:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \varphi=\arctan\left(\frac{\Delta z\cos\hat{\theta}}{\Delta
+x-t_1\sin\hat{\theta}}\right)
+\label{eq16}
+\end{equation}
+\]</span></p>
+<p>You may ask what will happen if <span class="math inline">\(\Delta
+x-t_1\sin\hat{\theta}\)</span> is close to zero? Well, this could not be
+a problem as we have already dynamically adapted <span
+class="math inline">\(t_1\)</span> with respect to the follow-lookat
+distance, as long as the values of <code>BeginAdaptDistanceX</code> and
+<code>EndAdaptDistanceX</code> are properly set.</p>
+<p>What are <span class="math inline">\(\varphi,\hat{\theta}\)</span>
+when <span class="math inline">\(t_1=0\)</span>? From <span
+class="math inline">\(\eqref{eq14}\)</span>, we know <span
+class="math inline">\(\hat{\theta}=\hat{\alpha}\)</span>; then from
+<span class="math inline">\(\eqref{eq14}\eqref{eq16}\)</span> and using
+the fact that <span
+class="math inline">\(\cos(\arcsin(x))=\sqrt{1-x^2}\)</span>, we have
+<span class="math inline">\(\varphi=-\arctan\left(\frac{\Delta
+z}{\sqrt{(\Delta x)^2+(\Delta y)^2}}\right)\)</span>.</p>
+<h2 id="final-camera-location-and-rotation">Final camera location and
+rotation</h2>
+<p>To summarize, we first compute <span
+class="math inline">\(\alpha\)</span> and <span
+class="math inline">\(\beta\)</span> with <span
+class="math inline">\(\eqref{eq14}\)</span>:</p>
+<p><span class="math display">\[
+\alpha=\arcsin\left(\frac{\Delta y}{\sqrt{(\Delta x)^2+(\Delta
+y)^2}}\right),~\beta=\arcsin\left(\frac{t_1}{\sqrt{(\Delta x)^2+(\Delta
+y)^2}}\right)
+\]</span></p>
+<p>Then we calibrate <span class="math inline">\(\alpha\)</span> and
+<span class="math inline">\(\beta\)</span>:</p>
+<p><span class="math display">\[
+\hat{\alpha}=\begin{cases}
+        \alpha-\pi,~&amp;\Delta x&gt;0\\
+        -\alpha,~&amp;\Delta x\le 0
+\end{cases},~~~\hat{\beta}=-\beta
+\]</span></p>
+<p>the addition is the yaw we want: <span
+class="math inline">\(\hat{\theta}=\hat{\alpha}+\hat{\beta}\)</span>. To
+remedy the issue of overflowing when <span
+class="math inline">\(\sqrt{(\Delta x)^2+(\Delta y)^2}\)</span> is
+small, we impose an range in which the raw screen offset <span
+class="math inline">\(a_x\)</span> is dynamically adjusted and achieve
+smooth camera motion.</p>
+<p>The camera pitch can be readily computed:</p>
+<p><span class="math display">\[\varphi=\arctan\left(\frac{\Delta
+z\cos\hat{\theta}}{\Delta x-t_1\sin\hat{\theta}}\right)\]</span></p>
+<p>Eventually, we can compute the camera location and rotation. Location
+is <span
+class="math inline">\(\mathbf{x}+\mathbf{a}+\mathbf{t}_1\)</span>, and
+rotation can be set to look at <span
+class="math inline">\(\mathbf{b}\)</span>.</p>
+<p>Here is a video showcasing this camera with different parameter
+values.</p>
+<video src="/images/1v1camera/showcase1.mp4" preload="metadata" controlslist="nodownload" controls playsinline poster=""></video>
+<p>Here is the blueprint I make to implement this camera. It is now a
+little out of order and I will make it more readable and extensible in
+next sections.</p>
+<p>In the main graph, we get camera yaw and pitch, get camera / rotation
+and set them in each frame.</p>
+<p><img data-src="/images/1v1camera/2.png" /></p>
+<p>The <code>GetCameraYawAndPitch</code> function starts with applying
+the follow position and look-at position offset. Note that the follow
+position offset is based on the follow target's local coordinate.</p>
+<p><img data-src="/images/1v1camera/3.png" /></p>
+<p>Then, we store temporary variables including <span
+class="math inline">\(\Delta X,\Delta Y,\Delta Z\)</span> and <span
+class="math inline">\(t_1\)</span>.</p>
+<p><img data-src="/images/1v1camera/4.png" /></p>
+<p>Last, we compute yaw and pitch, and return them.</p>
+<p><img data-src="/images/1v1camera/5.png" /></p>
+<p>The <code>GetT1</code> function computes and returns <span
+class="math inline">\(t_1\)</span>. We dynamically scale <span
+class="math inline">\(a_x\)</span> according to the current
+follow-lookat distance (in the XY plane).</p>
+<p><img data-src="/images/1v1camera/6.png" /> <img
+src="/images/1v1camera/7.png" /></p>
+<p>The <code>GetCameraLocation</code> sums up the three components.</p>
+<p><img data-src="/images/1v1camera/8.png" /></p>
+<p>The <code>GetCameraRotation</code> forces the camera to orient to the
+look-at target.</p>
+<p><img data-src="/images/1v1camera/9.png" /></p>
+<h1 id="finer-control-over-the-screen-space">Finer Control Over The
+Screen Space</h1>
+<p>To get a finer control of the follow point and look-at point on the
+screen space, we would like to introduce three more paramters
+<code>Follow Screen Y</code>, <code>Lookat Screen X</code> and
+<code>Lookat Screen Y</code> respectively denoting the Y axis screen
+position of the follow point, the X axis screen position of the lookat
+point and the Y axis screen position of the lookat point. We first talk
+about <code>Follow Screen Y</code>.</p>
+<h2 id="determining-mathbft_2">Determining <span
+class="math inline">\(\mathbf{t}_2\)</span></h2>
+<p>Assume <span class="math inline">\(\mathbf{t}_2\)</span> is the
+Y-axis offset applied to the camera, <span
+class="math inline">\(a_y\in[-0.5,0.5]\)</span> is the value of
+<code>Follow Screen Y</code>. When <span
+class="math inline">\(a_y=-0.5\)</span>, the follow point lies at the
+bottom edge of the screen, and at the top edge when <span
+class="math inline">\(a_y=0.5\)</span>. Following what we do for <span
+class="math inline">\(\mathbf{t}_1\)</span>, we can easily express <span
+class="math inline">\(\mathbf{t}_2\)</span> as:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \mathbf{t}_2=t_2\begin{pmatrix}
+    -\sin\varphi\cos\theta\\
+    -\sin\varphi\sin\theta\\
+    \cos\varphi
+    \end{pmatrix},~~t_2=-\frac{2a_yr}{\text{AspectRatio}}\tan\left(\frac{\text{fov}}{2}\right)
+\end{equation}
+\]</span></p>
+<p>where <span
+class="math inline">\(\mathbf{u}=(\sin\varphi\cos\theta,\sin\varphi\sin\theta,-\cos\varphi)^\top\)</span>
+is camera's local up vector from the cross product of camera's local
+forward vector <span
+class="math inline">\(\mathbf{f}=(-\cos\varphi\cos\theta,-\cos\varphi\sin\theta,-\sin\varphi)^\top\)</span>
+and camera's local right vector <span
+class="math inline">\(\mathbf{r}=(\sin\theta,-\cos\theta,0)^\top\)</span>
+(note again UE uses the left-hand rule). <span
+class="math inline">\(\text{AspectRatio}\)</span> is camera's aspect
+ratio (usually 16:9).</p>
+<h2 id="determining-new-varphi-and-theta">Determining new <span
+class="math inline">\(\varphi\)</span> and <span
+class="math inline">\(\theta\)</span></h2>
+<p>Going back to <span class="math inline">\(\eqref{main}\)</span> and
+adding <span class="math inline">\(\mathbf{t}_2\)</span>, we have:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \mathbf{b}-\mathbf{a}-\mathbf{x}-\mathbf{t}_1-\mathbf{t}_2=-k\mathbf{x}
+\label{eq18}
+\end{equation}
+\]</span></p>
+<p>Then we have:</p>
+<p><span class="math display">\[
+\begin{align}
+    (1-k)r\cos\varphi\cos\theta+t_1\sin\theta-t_2\sin\varphi\cos\theta
+&amp;= \Delta x \label{eq19}\\
+    (1-k)r\cos\varphi\sin\theta-t_1\cos\theta-t_2\sin\varphi\sin\theta
+&amp;= \Delta y \label{eq20}\\
+    (1-k)r\sin\varphi+t_2\cos\varphi &amp;= \Delta z \label{eq21}
+\end{align}
+\]</span></p>
+<p>Interestingly, the resulting <span
+class="math inline">\(\hat{\theta}\)</span> by combining <span
+class="math inline">\(\eqref{eq19}\)</span> and <span
+class="math inline">\(\eqref{eq20}\)</span> remains the same as <span
+class="math inline">\(\eqref{eq14}\)</span>. So we do not need to change
+the way we compute <span
+class="math inline">\(\hat{\theta}\)</span>.</p>
+<p>For <span class="math inline">\(\varphi\)</span>, it's a little
+tricky. First, we rewrite <span
+class="math inline">\(\eqref{eq21}\)</span> as <span
+class="math inline">\((1-k)r=\frac{\Delta
+z+t_2\cos\varphi}{\sin\varphi}\)</span>, we plug it into <span
+class="math inline">\(\eqref{eq19}\)</span>:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \frac{\Delta x-t_1\sin\theta}{\cos\theta}=\frac{\Delta
+z\cos\varphi+t_2}{\sin\varphi}
+\end{equation}
+\]</span></p>
+<p>This leads to <span class="math inline">\(A\sin\varphi-\Delta
+z\cos\varphi=t_2\)</span> (we let <span
+class="math inline">\(A=\frac{\Delta
+x-t_1\sin\theta}{\cos\theta}\)</span>). We can use the same technique
+for computing <span class="math inline">\(\hat{\theta}\)</span> to solve
+<span class="math inline">\(\hat{\varphi}\)</span>. That will be:</p>
+<p><span class="math display">\[
+\small
+\begin{equation}
+\begin{aligned}
+    \varphi &amp;= {\color{cyan}\gamma} + {\color{pink}\tau}\\
+    \varphi &amp;= {\color{cyan}\arcsin\left(\frac{\Delta
+z}{\sqrt{A^2+(\Delta z)^2}}\right)}+
+{\color{pink}\arcsin\left(\frac{t_2}{\sqrt{A^2+(\Delta z)^2}}\right)}
+\end{aligned}
+\label{eq23}
+\end{equation}
+\]</span></p>
+<p>When <span class="math inline">\(t_2=0\)</span> and with the identity
+<span class="math inline">\(\tan(\arcsin(x))=x/\sqrt{1-x^2}\)</span>, we
+have <span class="math inline">\(\varphi_{t_2=0}=\pm\frac{\Delta
+z\cos\hat{\theta}}{\Delta x-t_1\sin\hat{\theta}}\)</span>. The only
+thing left is to determine the real value of <span
+class="math inline">\({\color{cyan}\gamma}\)</span> and <span
+class="math inline">\({\color{pink}\tau}\)</span>. Through experiment,
+we know both signs are positive.</p>
+<p>Besides, we also introduce <code>BeginAdaptDistanceY</code> and
+<code>EndAdaptDistanceY</code>, in analogy to what we do for
+<code>ScreenX</code>, to dynamically scale <span
+class="math inline">\(a_y\)</span> when the follow point and the look-at
+position is close. In this way, we achieve smooth camera move for both
+<code>ScreenX</code> and <code>ScreenY</code>.</p>
+<h2 id="but-what-about-the-look-at-position...">But what about the
+look-at position...?</h2>
+<p>We introduce four new parameters, <span
+class="math inline">\(\Theta\)</span>, the yaw angle based on camera's
+local space and <span class="math inline">\(b_x=\text{Lookat Screen
+X}\)</span>, and <span class="math inline">\(\Phi\)</span>, the pitch
+angle based on camera's local space and <span
+class="math inline">\(b_y=\text{Lookat Screen Y}\)</span>. We adjust
+<span class="math inline">\(\Theta\)</span> and <span
+class="math inline">\(\Phi\)</span> (i.e., rotating camera at its own
+local coordinate) to accommodate look-at position manupulation on screen
+space.</p>
+<p>Nonetheless, when biasing the look-at point on screen space, we will
+encounter some problems. If we allow for camera rotation at its local
+coordinate, the values of <span class="math inline">\(t_1\)</span> and
+<span class="math inline">\(t_2\)</span> computed above would be wrong,
+because the local orientation of camera can significantly influence the
+follow position on screen space. Now that the determination of <span
+class="math inline">\(t_1, t_2\)</span> and the determination of
+camera's local orientation are entangled, establishing and solving the
+equation can be very difficult, particularly for an explicit
+solution.</p>
+<p>(*: There might be a nice explicit solution, but for now I won't
+manage to solve it out. Perhaps for someday in the future I will take a
+shot.)</p>
+<p>What we gonna do to mitigate this issue is to increment camera
+position and orientation, rather than hard-set it at its "correct"
+position and orientation. This is exactly what Cinemachine does for
+camera motion.</p>
+<h1
+id="emulate-cinemachine-by-using-incremental-motion-and-adding-damping">Emulate
+Cinemachine by using Incremental Motion and Adding Damping</h1>
+<p>Our solution is to emulate Cinemachine in Unity through incrementally
+changing camera position and rotation. This paradigm also enjoys the
+benifit of adding damping easily. To increment camera motion, we only
+need to calculate the desired position and rotation, and interpolate
+between its current state and its desired state.</p>
+<p>Let us go through the process by showing the blueprints.</p>
+<h2 id="high-level-workflow-and-the-initialize-function">High-level
+workflow and the <code>Initialize</code> function</h2>
+<p>The high-level steps are pretty simple: we first determine and set
+camera rotation, then set camera position. <code>FirstFrame</code> is a
+boolean variable used to indicate whether the current tick is the first
+frame during execution. If it is, no damping will be applied.</p>
+<p><img data-src="/images/1v1camera/10.png" /></p>
+<p>The <code>Initialize</code> function integrates the follow offset and
+look-at offset to get the real follow position and lookat position.</p>
+<p><img data-src="/images/1v1camera/11.png" /></p>
+<h2 id="set-camera-rotation">Set camera rotation</h2>
+<p>The <code>Set Camera Rotation</code> function gets the delta rotation
+(after damping), and then rotates camera accordingly.</p>
+<p><img data-src="/images/1v1camera/12.png" /></p>
+<p>Similarly, the <code>Set Camera Position</code> function gets the
+delta position (after damping), and then shifts camera in its local
+reference frame, not changing camera orientation.</p>
+<p><img data-src="/images/1v1camera/13.png" /></p>
+<p>The first part of the <code>Get Delta Rotation</code> function
+examines whether camera is too close to the look-at target. If it is the
+case, the camera will not update its rotation.</p>
+<p><img data-src="/images/1v1camera/14.png" /></p>
+<p>Then, the second part of <code>Get Delta Rotation</code> computes the
+difference between current rotation and the desired rotation, taking the
+given look-at screen offset into account.</p>
+<p><img data-src="/images/1v1camera/15.png" /></p>
+<p>Last, the third part of <code>Get Delta Rotation</code> optionally
+applies damping to the difference rotation and returns the damped
+result.</p>
+<p><img data-src="/images/1v1camera/16.png" /></p>
+<p>Going inside the <code>Damp Rotation</code> function, we find it
+separately damps each of the rotation component roll, pitch and yaw, all
+using the <code>Damper</code> function.</p>
+<p><img data-src="/images/1v1camera/17.png" /></p>
+<p>The <code>Damper</code> function, however, is a simple exponential
+decay operator that leaves a particular negligible residual after
+<code>Damp Time</code>. It can be formulated as:</p>
+<p><span
+class="math display">\[\text{DampedInput}=\text{RawInput}\cdot\left(1-\mathrm{e}^{\ln(k)\frac{\Delta
+T}{T}}\right)\]</span></p>
+<p>where <span class="math inline">\(k\)</span> is the negligible
+residual, say <span class="math inline">\(0.01\)</span>, and <span
+class="math inline">\(T\)</span> is the expected damp time.</p>
+<p><img data-src="/images/1v1camera/18.png" /></p>
+<h2 id="set-camera-position">Set camera position</h2>
+<p>The <code>Get Delta Position</code> has a similar workflow. It first
+computes the scaled follow screen offset. We have introduced it in the
+first section (see <a href="#scale">here</a>).</p>
+<p><img data-src="/images/1v1camera/19.png" /></p>
+<p>Then, it converts the follow position from world space to camera's
+local space. It is a little bit relating to mathematics. Put it simply,
+assume the camera's local forward vector is <span
+class="math inline">\(\mathbf{f}\)</span>, right vector is <span
+class="math inline">\(\mathbf{r}\)</span> and up vector is <span
+class="math inline">\(\mathbf{u}\)</span>, and the world space follow
+position is <span
+class="math inline">\(\mathbf{a}=(x,y,z)^\top\)</span>. The local
+coordinate of <span class="math inline">\(\mathbf{a}\)</span> would
+be:</p>
+<p><span class="math display">\[\mathbf{a}&#39;=\begin{bmatrix}
+    \mathbf{f}^\top\\
+    \mathbf{r}^\top\\
+    \mathbf{u}^\top
+\end{bmatrix}\mathbf{a}=\begin{bmatrix}
+    \mathbf{f}_x &amp; \mathbf{f}_y &amp; \mathbf{f}_z\\
+    \mathbf{r}_x &amp; \mathbf{r}_y &amp; \mathbf{r}_z\\
+    \mathbf{u}_x &amp; \mathbf{u}_y &amp; \mathbf{u}_z
+\end{bmatrix}\begin{bmatrix}
+    x\\
+    y\\
+    z
+\end{bmatrix}\]</span></p>
+<p><img data-src="/images/1v1camera/20.png" /></p>
+<p>A local space coordiante facilitates computing the difference between
+current camera position and desired position. Follow screen offset is
+also incorporated.</p>
+<p><img data-src="/images/1v1camera/21.png" /></p>
+<p>Last, we damp the difference position and returns the result. The
+<code>Damp Position</code> function manipulates three
+<code>Raw Delta Position</code> components instead of two as we did in
+<code>Damp Rotation</code>.</p>
+<p><img data-src="/images/1v1camera/22.png" /></p>
+<h2 id="result">Result</h2>
+<p>OK, let us enjoy our achievements! We can freely play with various
+parameters and see how the camera responses. You may notice that only
+setting up the follow damping leads to camera jitter, not drastic but
+still perceptible. A possible reason for this phenomenon is the unstable
+tick rate on my PC. We can, of course, increase the frame rate, but a
+more robust solution is to modify our damping algorithm. Rather than
+directly use <code>DeltaTime</code> as the damping step size, we can
+further split <code>DeltaTime</code> into several sub-delta time steps,
+and simulate damping for each time step upon the last simulation,
+finally having a much more smooth damping result. This is exactly what
+Cinemachine does when <code>DeltaTime</code> is unstable.</p>
+<video src="/images/1v1camera/showcase2.mp4" preload="metadata" controlslist="nodownload" controls playsinline poster=""></video>
+<p>Another potential enhancement is to add the concept of <strong>Soft
+Zone</strong>, which defines a rectangular area in screen space where
+follow / look-at point is allowed to move around and the rest screen
+space where follow / look-at point will never show up in. In other
+words, the follow / look-at position is hard restricted in the soft
+zone. It provides a more flexible screen space control over our point of
+interest.</p>
+<p>(*: I've already added soft zone and the improved damping algorithm
+in both blueprints and code implementation. Feel free to use and modify
+as whatever you like.)</p>
+<p><strong>Complementary note</strong></p>
+<p>The improved damping algorithm is not difficult to implement. Suppose
+we want to split <code>DeltaTime</code> <span
+class="math inline">\(\Delta T\)</span> into <span
+class="math inline">\(n\)</span> equal sub-parts, each of which is <span
+class="math inline">\(\Delta T/n\)</span>. Then the decay factor is
+<span class="math inline">\(\mathrm{e}^{\ln(k)\frac{\Delta
+T}{nT}}\)</span>. The original delta amount is <span
+class="math inline">\(I\)</span>, and the split segment will be <span
+class="math inline">\(I/n\)</span>. The simulation progressively damps
+each segment <span class="math inline">\(I/n\)</span> using the decay
+factor <span class="math inline">\(\mathrm{e}^{\ln(k)\frac{\Delta
+T}{nT}}\)</span>.</p>
+<p>In the first iteration, the residual is <span
+class="math inline">\(\frac{I}{n}\mathrm{e}^{\ln(k)\frac{\Delta
+T}{nT}}\)</span>, or the actor traverses <span
+class="math inline">\(\frac{I}{n}(1-\mathrm{e}^{\ln(k)\frac{\Delta
+T}{nT}})\)</span> in other words. In the second iteration, the residual
+will be:</p>
+<p><span
+class="math display">\[\left(\frac{I}{n}\mathrm{e}^{\ln(k)\frac{\Delta
+T}{nT}}+\frac{I}{n}\right)\mathrm{e}^{\ln(k)\frac{\Delta
+T}{nT}}=\frac{I}{n}\left(\left(\mathrm{e}^{\ln(k)\frac{\Delta
+T}{nT}}\right)^2+\mathrm{e}^{\ln(k)\frac{\Delta
+T}{nT}}\right)\]</span></p>
+<p>This process terminates until the last <span
+class="math inline">\(n\)</span>-th iteration, where the final residual
+will be:</p>
+<p><span
+class="math display">\[\frac{I}{n}\left(\left(\mathrm{e}^{\ln(k)\frac{\Delta
+T}{nT}}\right)^n+\cdots+\mathrm{e}^{\ln(k)\frac{\Delta
+T}{nT}}\right)=\frac{I}{n}\cdot\frac{\mathrm{e}^{\ln(k)\frac{\Delta
+T}{nT}}(1-\mathrm{e}^{\ln(k)\frac{\Delta
+T}{T}})}{1-\mathrm{e}^{\ln(k)\frac{\Delta T}{nT}}}\]</span></p>
+<p>Compared with the original residual without multi-step simulation
+<span class="math inline">\(I\cdot \mathrm{e}^{\ln(k)\frac{\Delta
+T}{T}}\)</span>, the simulated result will almost always be larger than
+the non-simulated conterpart, implying that the actor moves less within
+duration <span class="math inline">\(\Delta T\)</span>. This makes the
+actor behave more smooth under deltatime variability.</p>
+<h1 id="code">Code</h1>
+<p>Our last step is to code-implement the Cinemachine-like 1v1 camera
+system. It is not hard but as we want a more practical, robust and
+extensible camera system, we would like to organize the code in a more
+systematical way. Cinemachine makes a great example (thank you,
+Cinemachine).</p>
+<h2 id="code-framework">Code framework</h2>
+<p>The overall code framework can be simply illustrated using the
+following class diagram:</p>
+<pre class="mermaid">
+classDiagram
+class AMECameraBase { 
+    USceneComponent* SceneRootComponent
+    UMECameraSettingsComponent* MainMECameraComponent
+    UCameraComponent* MainCamera
+    UMECameraSettingsComponent* GetSettingsComponent()
+    UCameraComponent* GetCameraComponent()
+}
+AMECameraBase --&gt; AActor : Inherit
+UMECameraLibrary --&gt; UBlueprintFunctionLibrary : Inherit
+class UMECameraLibrary {
+    static void DamperValue(EDampMethod DampMethod, const float&amp; DeltaSeconds, const float&amp; Input, float DampTime, double&amp; Output, float Residual &#x3D; 0.01)
+    static void DamperVectorWithSameDampTime(EDampMethod DampMethod, const float&amp; DeltaSeconds, const FVector&amp; Input, float DampTime, FVector&amp; Output, float Residual &#x3D; 0.01)
+    static void DamperVectorWithDifferentDampTime(EDampMethod DampMethod, const float&amp; DeltaSeconds, const FVector&amp; Input, FVector DampTime, FVector&amp; Output, float Residual &#x3D; 0.01)
+    static void DamperRotatorWithSameDampTime(EDampMethod DampMethod, const float&amp; DeltaSeconds, const FRotator&amp; Input, float DampTime, FRotator&amp; Output, float Residual &#x3D; 0.01)
+    static void DamperRotatorWithDifferentDampTime(EDampMethod DampMethod, const float&amp; DeltaSeconds, const FRotator&amp; Input, FVector DampTime, FRotator&amp; Output, float Residual &#x3D; 0.01)
+    static AMECameraBase* CallCamera(TSubclassOf&lt;AMECameraBase&gt; CameraClass, AActor* FollowTarget, AActor* AimTarget, float BlendTime, enum EViewTargetBlendFunction BlendFunc, float BlendExp, bool bLockOutgoing)
+}
+</pre>
+<pre class="mermaid">
+classDiagram
+class UMECameraComponentBase {
+    EStage Stage
+    AActor* OwningActor
+    UMECameraSettingsComponent* OwningSettingComponent
+    UCameraComponent* OwningCamera
+    virtual void UpdateComponent(float DeltaTime)
+}
+UMECameraComponentBase &lt;-- UMECameraComponentFollow : Inherit
+UMECameraComponentBase &lt;-- UMECameraComponentAim : Inherit
+class UMECameraComponentFollow {
+    TObjectPtr~AActor~ FollowTarget
+    virtual void UpdateComponent(float DeltaTime) override
+}
+class UMECameraComponentAim {
+    TObjectPtr~AActor~ AimTarget
+    virtual void UpdateComponent(float DeltaTime) override
+}
+UMECameraComponentFollow &lt;-- UFramingFollow : Inherit
+class UFramingFollow {
+    float CameraDistance
+    FVector FollowOffset
+    EDampMethod DampMethod
+    float DampResidual
+    FVector FollowDamping
+    FVector2f ScreenOffset
+    FVector2f AdaptiveScreenOffsetDistanceX
+    FVector2f AdaptiveScreenOffsetDistanceY
+    FVector2f ScreenOffsetWidth
+    FVector2f ScreenOffsetHeight
+    virtual void UpdateComponent(float DeltaTime) override
+}
+UMECameraComponentAim &lt;-- UTargetingAim : Inherit
+class UTargetingAim {
+    FVector AimOffset
+    EDampMethod DampMethod
+    float DampResidual
+    FVector AimDamping
+    FVector2f ScreenOffset
+    FVector2f ScreenOffsetWidth
+    FVector2f ScreenOffsetHeight
+    virtual void UpdateComponent(float DeltaTime) override
+}
+UMECameraComponentFollow &lt;-- USimpleFollow : Inherit
+UMECameraComponentFollow &lt;-- UOrbitFollow : Inherit
+UMECameraComponentFollow &lt;-- UHardLockFollow : Inherit
+UMECameraComponentAim &lt;-- UPlayerControlAim : Inherit
+UMECameraComponentAim &lt;-- UGroupTargetingAim : Inherit
+UMECameraComponentAim &lt;-- UHardLockAim : Inherit
+</pre>
+<pre class="mermaid">
+classDiagram
+USceneComponent &lt;-- UMECameraSettingsComponent : Inherit
+class UMECameraSettingsComponent {
+    TObjectPtr~UMECameraComponentFollow~ FollowComponent
+    TObjectPtr ~UMECameraComponentAim~ AimComponent
+    TArray~UMECameraExtensionBase*~ Extensions
+    TArray~UMECameraComponentBase*~ ComponentContainer
+	TObjectPtr~AActor~ FollowTarget
+	TObjectPtr~AActor~ AimTarget
+    AActor* SetFollowTarget(AActor* NewFollowTarget)
+    void UpdateFollowTarget(AActor* NewFollowTarget)
+    AActor* GetFollowTarget() const
+    AActor* SetAimTarget(AActor* NewAimTarget)
+    void UpdateAimTarget(AActor* NewAimTarget)
+    AActor* GetAimTarget() const
+    virtual void InitializeMECameraComponents()
+    virtual void InitializeMECameraComponent(UMECameraComponentBase* Component)
+    virtual void PostEditChangeProperty(FPropertyChangedEvent&amp; PropertyChangedEvent) override
+}
+</pre>
+<h2 id="implementing-framingfollow">Implementing
+<code>FramingFollow</code></h2>
+<p><code>FramingFollow</code> is akin to <code>Framing Transposer</code>
+in Cinemachine. Here is my simple-to-understand implementation:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">UFramingFollow::UpdateComponent</span><span class="params">(<span class="type">float</span> DeltaTime)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Super::<span class="built_in">UpdateComponent</span>(DeltaTime);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (FollowTarget != <span class="literal">nullptr</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		FVector FollowPosition = <span class="built_in">GetRealFollowPosition</span>();</span><br><span class="line"></span><br><span class="line">		<span class="comment">/** Get real screen offset. */</span></span><br><span class="line">		FVector AimPosition = <span class="built_in">FVector</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">		FVector2f RealScreenOffset = <span class="built_in">FVector2f</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">GetOwningSettingComponent</span>()-&gt;<span class="built_in">GetAimComponent</span>() != <span class="literal">nullptr</span> &amp;&amp; <span class="built_in">GetOwningSettingComponent</span>()-&gt;<span class="built_in">GetAimComponent</span>()-&gt;<span class="built_in">GetAimTarget</span>() != <span class="literal">nullptr</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			AimPosition = <span class="built_in">GetOwningSettingComponent</span>()-&gt;<span class="built_in">GetAimComponent</span>()-&gt;<span class="built_in">GetRealAimPosition</span>();</span><br><span class="line">			RealScreenOffset = <span class="built_in">GetAdaptiveScreenOffset</span>(FollowPosition, AimPosition);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> RealScreenOffset = ScreenOffset;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/** Transform from world space to local space. */</span></span><br><span class="line">		FVector LocalSpaceFollowPosition = <span class="built_in">GetLocalSpacePosition</span>(FollowPosition);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/** Temporary (before damping) delta position. */</span></span><br><span class="line">		FVector TempDeltaPosition = <span class="built_in">FVector</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/** First move the camera along the local space X axis. */</span></span><br><span class="line">		<span class="built_in">SetForwardDelta</span>(LocalSpaceFollowPosition, TempDeltaPosition);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/** Then move the camera along the local space YZ plane. */</span></span><br><span class="line">		<span class="type">float</span> W = <span class="built_in">SetYZPlaneDelta</span>(LocalSpaceFollowPosition, TempDeltaPosition, RealScreenOffset);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/** Get damped delta position. */</span></span><br><span class="line">		FVector DampedDeltaPosition = <span class="built_in">DampDeltaPosition</span>(LocalSpaceFollowPosition, TempDeltaPosition, DeltaTime, RealScreenOffset, W);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/** Apply damped delta position. */</span></span><br><span class="line">		<span class="built_in">GetOwningActor</span>()-&gt;<span class="built_in">AddActorLocalOffset</span>(DampedDeltaPosition);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">FVector <span class="title">UFramingFollow::GetRealFollowPosition</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	FVector ActorLocation = FollowTarget-&gt;<span class="built_in">GetActorLocation</span>();</span><br><span class="line">	FRotator ActorRotation = FollowTarget-&gt;<span class="built_in">GetActorRotation</span>();</span><br><span class="line">	FVector LocalOffset = UKismetMathLibrary::<span class="built_in">GreaterGreater_VectorRotator</span>(FollowOffset, ActorRotation);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ActorLocation + LocalOffset;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">FVector2f <span class="title">UFramingFollow::GetAdaptiveScreenOffset</span><span class="params">(<span class="type">const</span> FVector&amp; FollowPosition, <span class="type">const</span> FVector&amp; AimPosition)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	FVector Diff = FollowPosition - AimPosition;</span><br><span class="line">	<span class="type">float</span> ProjectedDistance = FMath::<span class="built_in">Sqrt</span>(FMath::<span class="built_in">Square</span>(Diff.X) + FMath::<span class="built_in">Square</span>(Diff.Y));</span><br><span class="line"></span><br><span class="line">	FVector2f OutRange = <span class="built_in">FVector2f</span>(<span class="number">1.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	FVector2f RealScreenOffset;</span><br><span class="line">	RealScreenOffset.X = ScreenOffset.X * FMath::<span class="built_in">GetMappedRangeValueClamped</span>(AdaptiveScreenOffsetDistanceX, OutRange, ProjectedDistance);</span><br><span class="line">	RealScreenOffset.Y = ScreenOffset.Y * FMath::<span class="built_in">GetMappedRangeValueClamped</span>(AdaptiveScreenOffsetDistanceY, OutRange, ProjectedDistance);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> RealScreenOffset;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">FVector <span class="title">UFramingFollow::GetLocalSpacePosition</span><span class="params">(<span class="type">const</span> FVector&amp; FollowPosition)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	FVector Diff = FollowPosition - <span class="built_in">GetOwningActor</span>()-&gt;<span class="built_in">GetActorLocation</span>();</span><br><span class="line"></span><br><span class="line">	FVector ForwardVector = <span class="built_in">GetOwningActor</span>()-&gt;<span class="built_in">GetActorForwardVector</span>();</span><br><span class="line">	FVector RightVector = <span class="built_in">GetOwningActor</span>()-&gt;<span class="built_in">GetActorRightVector</span>();</span><br><span class="line">	FVector UpVector = <span class="built_in">GetOwningActor</span>()-&gt;<span class="built_in">GetActorUpVector</span>();</span><br><span class="line"></span><br><span class="line">	FVector LocalSpaceFollowPosition =</span><br><span class="line">		UKismetMathLibrary::<span class="built_in">MakeVector</span>(ForwardVector.X, RightVector.X, UpVector.X) * Diff.X +</span><br><span class="line">		UKismetMathLibrary::<span class="built_in">MakeVector</span>(ForwardVector.Y, RightVector.Y, UpVector.Y) * Diff.Y +</span><br><span class="line">		UKismetMathLibrary::<span class="built_in">MakeVector</span>(ForwardVector.Z, RightVector.Z, UpVector.Z) * Diff.Z;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> LocalSpaceFollowPosition;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">UFramingFollow::SetForwardDelta</span><span class="params">(<span class="type">const</span> FVector&amp; LocalSpaceFollowPosition, FVector&amp; TempDeltaPosition)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	TempDeltaPosition.X = LocalSpaceFollowPosition.X - CameraDistance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">float</span> <span class="title">UFramingFollow::SetYZPlaneDelta</span><span class="params">(<span class="type">const</span> FVector&amp; LocalSpaceFollowPosition, FVector&amp; TempDeltaPosition, <span class="type">const</span> FVector2f&amp; RealScreenOffset)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">float</span> W = UKismetMathLibrary::<span class="built_in">DegTan</span>(<span class="built_in">GetOwningCamera</span>()-&gt;FieldOfView / <span class="number">2.0f</span>) * CameraDistance * <span class="number">2.0f</span>;</span><br><span class="line">	<span class="type">float</span> ExpectedPositionY = W * RealScreenOffset.X;</span><br><span class="line">	<span class="type">float</span> ExpectedPositionZ = W / <span class="built_in">GetOwningCamera</span>()-&gt;AspectRatio * RealScreenOffset.Y;</span><br><span class="line"></span><br><span class="line">	TempDeltaPosition.Y = LocalSpaceFollowPosition.Y - ExpectedPositionY;</span><br><span class="line">	TempDeltaPosition.Z = LocalSpaceFollowPosition.Z - ExpectedPositionZ;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> W;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">FVector <span class="title">UFramingFollow::DampDeltaPosition</span><span class="params">(<span class="type">const</span> FVector&amp; LocalSpaceFollowPosition, <span class="type">const</span> FVector&amp; TempDeltaPosition, <span class="type">float</span> DeltaTime, <span class="type">const</span> FVector2f&amp; RealScreenOffset, <span class="type">float</span>&amp; W)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	FVector DampedDeltaPosition = <span class="built_in">FVector</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	UMECameraLibrary::<span class="built_in">DamperVectorWithDifferentDampTime</span>(DampMethod, DeltaTime, TempDeltaPosition, FollowDamping, DampedDeltaPosition, DampResidual);</span><br><span class="line">	<span class="built_in">EnsureWithinBounds</span>(LocalSpaceFollowPosition, DampedDeltaPosition, RealScreenOffset, W);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> DampedDeltaPosition;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">UFramingFollow::EnsureWithinBounds</span><span class="params">(<span class="type">const</span> FVector&amp; LocalSpaceFollowPosition, FVector&amp; DampedDeltaPosition, <span class="type">const</span> FVector2f&amp; RealScreenOffset, <span class="type">float</span>&amp; W)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">float</span> LeftBound = (RealScreenOffset.X + ScreenOffsetWidth.X) * W;</span><br><span class="line">	<span class="type">float</span> RightBound = (RealScreenOffset.X + ScreenOffsetWidth.Y) * W;</span><br><span class="line">	<span class="type">float</span> BottomBound = (RealScreenOffset.Y + ScreenOffsetHeight.X) * W / <span class="built_in">GetOwningCamera</span>()-&gt;AspectRatio;</span><br><span class="line">	<span class="type">float</span> TopBound = (RealScreenOffset.Y + ScreenOffsetHeight.Y) * W / <span class="built_in">GetOwningCamera</span>()-&gt;AspectRatio;</span><br><span class="line"></span><br><span class="line">	FVector ResultLocalSpacePosition = LocalSpaceFollowPosition - DampedDeltaPosition;</span><br><span class="line">	<span class="keyword">if</span> (ResultLocalSpacePosition.Y &lt; LeftBound)   DampedDeltaPosition.Y += ResultLocalSpacePosition.Y - LeftBound;</span><br><span class="line">	<span class="keyword">if</span> (ResultLocalSpacePosition.Y &gt; RightBound)  DampedDeltaPosition.Y += ResultLocalSpacePosition.Y - RightBound;</span><br><span class="line">	<span class="keyword">if</span> (ResultLocalSpacePosition.Z &lt; BottomBound) DampedDeltaPosition.Z += ResultLocalSpacePosition.Z - BottomBound;</span><br><span class="line">	<span class="keyword">if</span> (ResultLocalSpacePosition.Z &gt; TopBound)    DampedDeltaPosition.Z += ResultLocalSpacePosition.Z - TopBound;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="implementing-targetingaim">Implementing
+<code>TargetingAim</code></h2>
+<p><code>TargetingAim</code> serves the same function as
+<code>Composer</code> in Cinemachine. It only sets the camera rotation
+and keeps the aim target at a fixed position on screen. Here is the
+implementation:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">UTargetingAim::UpdateComponent</span><span class="params">(<span class="type">float</span> DeltaTime)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Super::<span class="built_in">UpdateComponent</span>(DeltaTime);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (AimTarget != <span class="literal">nullptr</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">/** Get the *real* aim position, based on actor&#x27;s local space. */</span></span><br><span class="line">		FVector AimPosition = <span class="built_in">GetRealAimPosition</span>();</span><br><span class="line"></span><br><span class="line">		<span class="comment">/** If camera is too close to aim target, return. */</span></span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">CheckIfTooClose</span>(AimPosition)) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/** Temporary delta rotation before damping. */</span></span><br><span class="line">		FRotator TempDeltaRotation = <span class="built_in">FRotator</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/** Set delta rotation. */</span></span><br><span class="line">		<span class="built_in">SetDeltaRotation</span>(AimPosition, TempDeltaRotation);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/** Get damped delta rotation. */</span></span><br><span class="line">		FRotator DampedDeltaRotation = <span class="built_in">DampDeltaRotation</span>(TempDeltaRotation, DeltaTime, AimPosition);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/** Apply damped delta rotation. */</span></span><br><span class="line">        <span class="built_in">GetOwningActor</span>()-&gt;<span class="built_in">AddActorLocalRotation</span>(<span class="built_in">FRotator</span>(DampedDeltaRotation.Pitch, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">        <span class="built_in">GetOwningActor</span>()-&gt;<span class="built_in">AddActorWorldRotation</span>(<span class="built_in">FRotator</span>(<span class="number">0</span>, DampedDeltaRotation.Yaw, <span class="number">0</span>));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">UTargetingAim::CheckIfTooClose</span><span class="params">(<span class="type">const</span> FVector&amp; AimPosition)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">float</span> Distance = UKismetMathLibrary::<span class="built_in">Vector_Distance</span>(<span class="built_in">GetOwningActor</span>()-&gt;<span class="built_in">GetActorLocation</span>(), AimPosition);</span><br><span class="line">	<span class="keyword">return</span> UKismetMathLibrary::<span class="built_in">NearlyEqual_FloatFloat</span>(Distance, <span class="number">0</span>, <span class="number">0.001</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">UTargetingAim::SetDeltaRotation</span><span class="params">(<span class="type">const</span> FVector&amp; AimPosition, FRotator&amp; TempDeltaRotation)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    FRotator CenteredDeltaRotation = UKismetMathLibrary::<span class="built_in">NormalizedDeltaRotator</span>(UKismetMathLibrary::<span class="built_in">FindLookAtRotation</span>(<span class="built_in">GetOwningActor</span>()-&gt;<span class="built_in">GetActorLocation</span>(), AimPosition), <span class="built_in">GetOwningActor</span>()-&gt;<span class="built_in">GetActorRotation</span>());</span><br><span class="line">    TempDeltaRotation.Yaw = CenteredDeltaRotation.Yaw - ScreenOffset.X * <span class="built_in">GetOwningCamera</span>()-&gt;FieldOfView;</span><br><span class="line">    TempDeltaRotation.Pitch = CenteredDeltaRotation.Pitch - ScreenOffset.Y * <span class="number">2.0f</span> * UKismetMathLibrary::<span class="built_in">DegAtan</span>(UKismetMathLibrary::<span class="built_in">DegTan</span>(<span class="built_in">GetOwningCamera</span>()-&gt;FieldOfView / <span class="number">2</span>) / <span class="built_in">GetOwningCamera</span>()-&gt;AspectRatio);</span><br><span class="line">    TempDeltaRotation.Roll = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">FRotator <span class="title">UTargetingAim::DampDeltaRotation</span><span class="params">(<span class="type">const</span> FRotator&amp; TempDeltaRotation, <span class="type">float</span> DeltaTime, <span class="type">const</span> FVector&amp; AimPosition)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	FRotator DampedDeltaRotation = <span class="built_in">FRotator</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	UMECameraLibrary::<span class="built_in">DamperRotatorWithDifferentDampTime</span>(DampMethod, DeltaTime, TempDeltaRotation, AimDamping, DampedDeltaRotation, DampResidual);</span><br><span class="line">	<span class="built_in">EnsureWithinBounds</span>(DampedDeltaRotation, AimPosition);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> DampedDeltaRotation;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">UTargetingAim::EnsureWithinBounds</span><span class="params">(FRotator&amp; DampedDeltaRotation, <span class="type">const</span> FVector&amp; AimPosition)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">double</span> VFieldOfView = <span class="number">2.0f</span> * UKismetMathLibrary::<span class="built_in">DegAtan</span>(UKismetMathLibrary::<span class="built_in">DegTan</span>(<span class="built_in">GetOwningCamera</span>()-&gt;FieldOfView / <span class="number">2</span>) / <span class="built_in">GetOwningCamera</span>()-&gt;AspectRatio);</span><br><span class="line">	<span class="type">double</span> LeftBound = (ScreenOffset.X + ScreenOffsetWidth.X) * <span class="built_in">GetOwningCamera</span>()-&gt;FieldOfView;</span><br><span class="line">	<span class="type">double</span> RightBound = (ScreenOffset.X + ScreenOffsetWidth.Y) * <span class="built_in">GetOwningCamera</span>()-&gt;FieldOfView;</span><br><span class="line">	<span class="type">double</span> BottomBound = (ScreenOffset.Y + ScreenOffsetHeight.X) * VFieldOfView;</span><br><span class="line">	<span class="type">double</span> TopBound = (ScreenOffset.Y + ScreenOffsetHeight.Y) * VFieldOfView;</span><br><span class="line"></span><br><span class="line">	FQuat DesiredQuat = <span class="built_in">GetOwningActor</span>()-&gt;<span class="built_in">GetActorRotation</span>().<span class="built_in">Quaternion</span>();</span><br><span class="line">	DesiredQuat = <span class="built_in">FQuat</span>(<span class="built_in">FRotator</span>(<span class="number">0</span>, DampedDeltaRotation.Yaw, <span class="number">0</span>)) * DesiredQuat * <span class="built_in">FQuat</span>(<span class="built_in">FRotator</span>(DampedDeltaRotation.Pitch, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">	FRotator DesiredRotation = DesiredQuat.<span class="built_in">Rotator</span>();</span><br><span class="line"></span><br><span class="line">	FRotator ResultRotationDiff = UKismetMathLibrary::<span class="built_in">NormalizedDeltaRotator</span>(UKismetMathLibrary::<span class="built_in">FindLookAtRotation</span>(<span class="built_in">GetOwningActor</span>()-&gt;<span class="built_in">GetActorLocation</span>(), AimPosition), DesiredRotation);</span><br><span class="line">	<span class="keyword">if</span> (ResultRotationDiff.Yaw &lt; LeftBound) DampedDeltaRotation.Yaw += ResultRotationDiff.Yaw - LeftBound;</span><br><span class="line">	<span class="keyword">if</span> (ResultRotationDiff.Yaw &gt; RightBound) DampedDeltaRotation.Yaw += ResultRotationDiff.Yaw - RightBound;</span><br><span class="line">	<span class="keyword">if</span> (ResultRotationDiff.Pitch &lt; BottomBound) DampedDeltaRotation.Pitch += ResultRotationDiff.Pitch - BottomBound;</span><br><span class="line">	<span class="keyword">if</span> (ResultRotationDiff.Pitch &gt; TopBound) DampedDeltaRotation.Pitch += ResultRotationDiff.Pitch - TopBound;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="use-in-unreal-engine">Use in Unreal Engine</h2>
+<p>Use in UE is really simple. What you need to do is:</p>
+<ul>
+<li>Create a new blueprint class inherited from MECameraBase;</li>
+<li>Set up the parameters in the CameraSettingsComponent component,
+e.g., set the <code>FollowComponent</code> as <code>FramingFollow</code>
+and <code>AimComponent</code> as <code>TargetingAim</code>;</li>
+<li>Use the <code>CallCamera</code> node in blueprint to instantiate an
+actor of the blueprint class you just created.</li>
+</ul>
+]]></content>
+      <categories>
+        <category>游戏 - 相机</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+        <tag>相机</tag>
+        <tag>UE</tag>
       </tags>
   </entry>
   <entry>
