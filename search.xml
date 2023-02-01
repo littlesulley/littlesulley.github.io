@@ -380,6 +380,24 @@ As a team, you need to agree on your guidelines</p>
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2020/09/07/23/00/</url>
+    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
+<span id="more"></span>
+<h1 id="测试">测试</h1>
+<h2 id="代码">代码</h2>
+<p>现在来测试一下代码</p>
+<details class="note info no-icon"><summary><p>This is a code test</p>
+</summary>
+<h4 id="details-and-code">Details and code</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
+
+</details>
+<h2 id="latex">Latex</h2>
+<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
+]]></content>
+  </entry>
+  <entry>
     <title>《Assassain&#39;s Creed Valhalla》玩后感</title>
     <url>/2020/11/12/23/23/</url>
     <content><![CDATA[<p><code>刺客信条：英灵殿</code>（Assassin's Creed
@@ -420,24 +438,6 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
         <tag>生活</tag>
         <tag>刺客信条</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/09/07/23/00/</url>
-    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
-<span id="more"></span>
-<h1 id="测试">测试</h1>
-<h2 id="代码">代码</h2>
-<p>现在来测试一下代码</p>
-<details class="note info no-icon"><summary><p>This is a code test</p>
-</summary>
-<h4 id="details-and-code">Details and code</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
-
-</details>
-<h2 id="latex">Latex</h2>
-<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
-]]></content>
   </entry>
   <entry>
     <title>无穷连根式求极限的充要条件</title>
@@ -1091,30 +1091,6 @@ class="math inline">\(f(1)=\mathrm{e}/2\)</span>。</p>
       </tags>
   </entry>
   <entry>
-    <title>十二月的花</title>
-    <url>/2020/12/22/09/29/</url>
-    <content><![CDATA[<p>埙吹响了海岸<br />
-琴穿梭叶间<br />
-笛在天空啼鸣<br />
-伴奏着雪花片片</p>
-<p>孩子们欢笑着相聚<br />
-踏着雪<br />
-吱吱嘎嘎</p>
-<p>把欢乐捏成一团团棉<br />
-随风起舞<br />
-在阳光下<br />
-雪爱上了花</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>向量绕任意轴旋转的简单推导</title>
     <url>/2021/06/07/08/38/</url>
     <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
@@ -1283,151 +1259,19 @@ CPU @ 2.90GHz。</p>
       </tags>
   </entry>
   <entry>
-    <title>根据角色体型和俯角自动确定FreeLook镜头参数</title>
-    <url>/2022/06/21/23/40/</url>
-    <content><![CDATA[<p>最近项目涉及到一个需求：如何自动确定镜头的参数（在Unity中即为轨道的高度和半径）。这个问题可以形式化为：给定角色身高<span
-class="math inline">\(X\)</span>、看向点偏移<span
-class="math inline">\(Y\)</span>、俯角<span
-class="math inline">\(A\)</span>和人物在画面中的占高比<span
-class="math inline">\(T\)</span>，自动计算出相机到看向点的距离<span
-class="math inline">\(D\)</span>、相机中轨的半径<span
-class="math inline">\(R\)</span>和相机中轨的高度<span
-class="math inline">\(H\)</span>。本文推导出该计算公式，实现镜头参数自动化处理。</p>
-<span id="more"></span>
-<h1
-id="角色高度看向点偏移俯角与相机参数">角色高度、看向点偏移、俯角与相机参数</h1>
-<p>我们的第一步目标是：给定角色高度<span
-class="math inline">\(X\)</span>、看向点偏移<span
-class="math inline">\(Y\)</span>和俯角<span
-class="math inline">\(A\)</span>，能够自动计算出相机距离、相机轨道的半径<span
-class="math inline">\(R\)</span>和高度<span
-class="math inline">\(H\)</span>。在此之前，首先需要明确几个概念：</p>
-<ul>
-<li>角色高度：角色模型在游戏中的实际高度，因为我们目前关心的角色在屏幕中的占高比，暂不考虑角色宽度；</li>
-<li>看向点偏移：从角色Root结点的Y轴偏移量，如果等于角色高度则位于角色头顶位置，等于零则位于Root位置；</li>
-<li>俯角：相机看向角色看向点时与XZ平面的夹角；</li>
-<li>相机距离：相机到看向点的距离；</li>
-<li>相机轨道高度：相机从角色Root点开始的Y轴高度；</li>
-<li>相机轨道半径：相机轨道在当前高度上的半径。</li>
-</ul>
-<p>这几个参数的关系可以用下图来表示：</p>
-<figure>
-<img data-src="/images/auto-camera-params/1.png"
-alt="几个参数之间的关系。X：角色高度，Y：看向点偏移，A：俯角，D：相机距离，H：相机高度，R：相机半径。" />
-<figcaption
-aria-hidden="true">几个参数之间的关系。X：角色高度，Y：看向点偏移，A：俯角，D：相机距离，H：相机高度，R：相机半径。</figcaption>
-</figure>
-<p>我们不难得出下面的关系：</p>
-<p><span class="math display">\[
-\begin{align}
-    R &amp;= \cos(A)D\\
-    H &amp;= \tan(A)R+Y
-\end{align}
-\]</span></p>
-<p>但这是对<span class="math inline">\(H\ge Y\)</span>的情况，当<span
-class="math inline">\(H&lt;Y\)</span>时，我们有：</p>
-<p><span class="math display">\[
-\begin{align}
-    R &amp;= \cos(A)D\\
-    H &amp;= -\tan(A)R+Y
-\end{align}
-\]</span></p>
-<p>但是由于我们在计算俯角时，以下方向为正方向，当<span
-class="math inline">\(H&lt;Y\)</span>时，俯角<span
-class="math inline">\(A\)</span>实际上是负值，所以也不需要加负号。于是，最终的公式仍然是统一的。</p>
-<h1
-id="人物高度人物占高比fov与相机距离">人物高度、人物占高比、FOV与相机距离</h1>
-<p>上述公式的一个前提是需要知道<span
-class="math inline">\(D\)</span>（<span
-class="math inline">\(A\)</span>可自定，<span
-class="math inline">\(Y=X/2\)</span>或<span
-class="math inline">\(Y=2X/3\)</span>），而我们实际上关注的是人物在整个画面中的占高比，而相机屏幕与FOV有关，所以为了计算<span
-class="math inline">\(D\)</span>，实际上就是要考虑通过FOV和人物高度、人物占高比计算出相机距离。</p>
-<p>现在我们假定人物占高比固定为<span
-class="math inline">\(1/3\)</span>，可以根据需求自行推导。</p>
-<figure>
-<img data-src="/images/auto-camera-params/2.png"
-alt="通过FOV和人物高度计算出相机距离。我们固定了1/3的人物占高比。" />
-<figcaption
-aria-hidden="true">通过FOV和人物高度计算出相机距离。我们固定了1/3的人物占高比。</figcaption>
-</figure>
-<p>如上图所示，相机投影的上半部分角度为FOV的一半，在这里我们假设FOV为<span
-class="math inline">\(55°\)</span>，那么一半就是<span
-class="math inline">\(55°/2\)</span>。设相机距离为<span
-class="math inline">\(D\)</span>，当角色高度的一半，即<span
-class="math inline">\(X/2\)</span>占屏幕上半的<span
-class="math inline">\(1/3\)</span>时，我们不难得到下述公式：</p>
-<p><span class="math display">\[
-\begin{equation}
-    D=\frac{1.5X}{\tan(55^\circ/2)}
-\end{equation}
-\]</span></p>
-<p>但是上述公式没有考虑俯角，这就会导致一定的误差。下面我们分<span
-class="math inline">\(A\le 55^\circ/2\)</span>和<span
-class="math inline">\(A&gt;55^\circ/2\)</span>两种情况讨论，如下图所示：</p>
-<figure>
-<img data-src="/images/auto-camera-params/3.png"
-alt="修正后的相机距离用俯角、FOV和人物高度计算得出。我们固定了1/3的人物占高比。" />
-<figcaption
-aria-hidden="true">修正后的相机距离用俯角、FOV和人物高度计算得出。我们固定了1/3的人物占高比。</figcaption>
-</figure>
-<p>角色半高在相机屏幕空间中的投影为<span
-class="math inline">\(\cos(A)X/2\)</span>。所以我们能够得到下述修正公式：</p>
-<p><span class="math display">\[
-D=\frac{1.5\cos(A)X}{\tan(55^\circ/2)}
-\]</span></p>
-<p>该公式对两种情况都是适用的。</p>
-<h1 id="总结">总结</h1>
-<p>总的来说，只要给定角色身高<span
-class="math inline">\(X\)</span>、看向点偏移<span
-class="math inline">\(Y\)</span>（一般来说设置为<span
-class="math inline">\(Y=X/2\)</span>或者<span
-class="math inline">\(Y=2X/3\)</span>）和俯角<span
-class="math inline">\(A\)</span>，在固定人物在画面中占高比<span
-class="math inline">\(1/3\)</span>和FOV为<span
-class="math inline">\(55^\circ\)</span>的前提下，就可以根据下述公式计算相机到看向点距离<span
-class="math inline">\(D\)</span>、相机中轨半径<span
-class="math inline">\(R\)</span>和相机中轨高度<span
-class="math inline">\(H\)</span>：</p>
-<p><span class="math display">\[
-\begin{align}
-D &amp;= \frac{1.5\cos(A)X}{\tan(55^\circ/2)}\\
-R &amp;= \cos(A)D\\
-H &amp;= \tan(A)R + Y
-\end{align}
-\]</span></p>
-<p>如果你需要改变人物在画面的占高比，或者相机的FOV，只需要按照上面的推导方法修改公式即可。</p>
-<p>当然，你也可以继续精细化上述公式，如考虑实际的看向点偏移，但一般来说差别不是很大，在此不再赘述。</p>
-]]></content>
-      <categories>
-        <category>游戏 - 相机</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-        <tag>随笔</tag>
-        <tag>数学</tag>
-        <tag>游戏</tag>
-        <tag>相机</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>樱花</title>
-    <url>/2021/06/29/00/24/</url>
-    <content><![CDATA[<p>昨夜 我收到一封书札<br />
-旧纸上 缀满了一朵樱花<br />
-风干的墨迹 渗透了陌生人的迷茫<br />
-我慢慢 把信合上</p>
-<p>昨夜 我写了一封书札<br />
-述说着 近日的苦闷衷肠<br />
-窗外的灯火 依旧那么辉煌<br />
-我贴上 一朵樱花珍藏</p>
-<p>同样的夜晚 走过了岁月多少锋芒<br />
-心中仍 呐喊着一个熟悉人的回响<br />
-把信 随风寄向远方<br />
-留给陌生的他 打开新的过往<br />
-愿他不要怯懦 续写昨夜的感慨<br />
-还有清晨的阳光</p>
-<p>案台旁 樱花在绽放</p>
+    <title>十二月的花</title>
+    <url>/2020/12/22/09/29/</url>
+    <content><![CDATA[<p>埙吹响了海岸<br />
+琴穿梭叶间<br />
+笛在天空啼鸣<br />
+伴奏着雪花片片</p>
+<p>孩子们欢笑着相聚<br />
+踏着雪<br />
+吱吱嘎嘎</p>
+<p>把欢乐捏成一团团棉<br />
+随风起舞<br />
+在阳光下<br />
+雪爱上了花</p>
 ]]></content>
       <categories>
         <category>随笔</category>
@@ -1660,6 +1504,162 @@ class="math inline">\(\mathfrak{P}_k\)</span>的表达式吗？</p>
       <tags>
         <tag>随笔</tag>
         <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>根据角色体型和俯角自动确定FreeLook镜头参数</title>
+    <url>/2022/06/21/23/40/</url>
+    <content><![CDATA[<p>最近项目涉及到一个需求：如何自动确定镜头的参数（在Unity中即为轨道的高度和半径）。这个问题可以形式化为：给定角色身高<span
+class="math inline">\(X\)</span>、看向点偏移<span
+class="math inline">\(Y\)</span>、俯角<span
+class="math inline">\(A\)</span>和人物在画面中的占高比<span
+class="math inline">\(T\)</span>，自动计算出相机到看向点的距离<span
+class="math inline">\(D\)</span>、相机中轨的半径<span
+class="math inline">\(R\)</span>和相机中轨的高度<span
+class="math inline">\(H\)</span>。本文推导出该计算公式，实现镜头参数自动化处理。</p>
+<span id="more"></span>
+<h1
+id="角色高度看向点偏移俯角与相机参数">角色高度、看向点偏移、俯角与相机参数</h1>
+<p>我们的第一步目标是：给定角色高度<span
+class="math inline">\(X\)</span>、看向点偏移<span
+class="math inline">\(Y\)</span>和俯角<span
+class="math inline">\(A\)</span>，能够自动计算出相机距离、相机轨道的半径<span
+class="math inline">\(R\)</span>和高度<span
+class="math inline">\(H\)</span>。在此之前，首先需要明确几个概念：</p>
+<ul>
+<li>角色高度：角色模型在游戏中的实际高度，因为我们目前关心的角色在屏幕中的占高比，暂不考虑角色宽度；</li>
+<li>看向点偏移：从角色Root结点的Y轴偏移量，如果等于角色高度则位于角色头顶位置，等于零则位于Root位置；</li>
+<li>俯角：相机看向角色看向点时与XZ平面的夹角；</li>
+<li>相机距离：相机到看向点的距离；</li>
+<li>相机轨道高度：相机从角色Root点开始的Y轴高度；</li>
+<li>相机轨道半径：相机轨道在当前高度上的半径。</li>
+</ul>
+<p>这几个参数的关系可以用下图来表示：</p>
+<figure>
+<img data-src="/images/auto-camera-params/1.png"
+alt="几个参数之间的关系。X：角色高度，Y：看向点偏移，A：俯角，D：相机距离，H：相机高度，R：相机半径。" />
+<figcaption
+aria-hidden="true">几个参数之间的关系。X：角色高度，Y：看向点偏移，A：俯角，D：相机距离，H：相机高度，R：相机半径。</figcaption>
+</figure>
+<p>我们不难得出下面的关系：</p>
+<p><span class="math display">\[
+\begin{align}
+    R &amp;= \cos(A)D\\
+    H &amp;= \tan(A)R+Y
+\end{align}
+\]</span></p>
+<p>但这是对<span class="math inline">\(H\ge Y\)</span>的情况，当<span
+class="math inline">\(H&lt;Y\)</span>时，我们有：</p>
+<p><span class="math display">\[
+\begin{align}
+    R &amp;= \cos(A)D\\
+    H &amp;= -\tan(A)R+Y
+\end{align}
+\]</span></p>
+<p>但是由于我们在计算俯角时，以下方向为正方向，当<span
+class="math inline">\(H&lt;Y\)</span>时，俯角<span
+class="math inline">\(A\)</span>实际上是负值，所以也不需要加负号。于是，最终的公式仍然是统一的。</p>
+<h1
+id="人物高度人物占高比fov与相机距离">人物高度、人物占高比、FOV与相机距离</h1>
+<p>上述公式的一个前提是需要知道<span
+class="math inline">\(D\)</span>（<span
+class="math inline">\(A\)</span>可自定，<span
+class="math inline">\(Y=X/2\)</span>或<span
+class="math inline">\(Y=2X/3\)</span>），而我们实际上关注的是人物在整个画面中的占高比，而相机屏幕与FOV有关，所以为了计算<span
+class="math inline">\(D\)</span>，实际上就是要考虑通过FOV和人物高度、人物占高比计算出相机距离。</p>
+<p>现在我们假定人物占高比固定为<span
+class="math inline">\(1/3\)</span>，可以根据需求自行推导。</p>
+<figure>
+<img data-src="/images/auto-camera-params/2.png"
+alt="通过FOV和人物高度计算出相机距离。我们固定了1/3的人物占高比。" />
+<figcaption
+aria-hidden="true">通过FOV和人物高度计算出相机距离。我们固定了1/3的人物占高比。</figcaption>
+</figure>
+<p>如上图所示，相机投影的上半部分角度为FOV的一半，在这里我们假设FOV为<span
+class="math inline">\(55°\)</span>，那么一半就是<span
+class="math inline">\(55°/2\)</span>。设相机距离为<span
+class="math inline">\(D\)</span>，当角色高度的一半，即<span
+class="math inline">\(X/2\)</span>占屏幕上半的<span
+class="math inline">\(1/3\)</span>时，我们不难得到下述公式：</p>
+<p><span class="math display">\[
+\begin{equation}
+    D=\frac{1.5X}{\tan(55^\circ/2)}
+\end{equation}
+\]</span></p>
+<p>但是上述公式没有考虑俯角，这就会导致一定的误差。下面我们分<span
+class="math inline">\(A\le 55^\circ/2\)</span>和<span
+class="math inline">\(A&gt;55^\circ/2\)</span>两种情况讨论，如下图所示：</p>
+<figure>
+<img data-src="/images/auto-camera-params/3.png"
+alt="修正后的相机距离用俯角、FOV和人物高度计算得出。我们固定了1/3的人物占高比。" />
+<figcaption
+aria-hidden="true">修正后的相机距离用俯角、FOV和人物高度计算得出。我们固定了1/3的人物占高比。</figcaption>
+</figure>
+<p>角色半高在相机屏幕空间中的投影为<span
+class="math inline">\(\cos(A)X/2\)</span>。所以我们能够得到下述修正公式：</p>
+<p><span class="math display">\[
+D=\frac{1.5\cos(A)X}{\tan(55^\circ/2)}
+\]</span></p>
+<p>该公式对两种情况都是适用的。</p>
+<h1 id="总结">总结</h1>
+<p>总的来说，只要给定角色身高<span
+class="math inline">\(X\)</span>、看向点偏移<span
+class="math inline">\(Y\)</span>（一般来说设置为<span
+class="math inline">\(Y=X/2\)</span>或者<span
+class="math inline">\(Y=2X/3\)</span>）和俯角<span
+class="math inline">\(A\)</span>，在固定人物在画面中占高比<span
+class="math inline">\(1/3\)</span>和FOV为<span
+class="math inline">\(55^\circ\)</span>的前提下，就可以根据下述公式计算相机到看向点距离<span
+class="math inline">\(D\)</span>、相机中轨半径<span
+class="math inline">\(R\)</span>和相机中轨高度<span
+class="math inline">\(H\)</span>：</p>
+<p><span class="math display">\[
+\begin{align}
+D &amp;= \frac{1.5\cos(A)X}{\tan(55^\circ/2)}\\
+R &amp;= \cos(A)D\\
+H &amp;= \tan(A)R + Y
+\end{align}
+\]</span></p>
+<p>如果你需要改变人物在画面的占高比，或者相机的FOV，只需要按照上面的推导方法修改公式即可。</p>
+<p>当然，你也可以继续精细化上述公式，如考虑实际的看向点偏移，但一般来说差别不是很大，在此不再赘述。</p>
+]]></content>
+      <categories>
+        <category>游戏 - 相机</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+        <tag>游戏</tag>
+        <tag>相机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>樱花</title>
+    <url>/2021/06/29/00/24/</url>
+    <content><![CDATA[<p>昨夜 我收到一封书札<br />
+旧纸上 缀满了一朵樱花<br />
+风干的墨迹 渗透了陌生人的迷茫<br />
+我慢慢 把信合上</p>
+<p>昨夜 我写了一封书札<br />
+述说着 近日的苦闷衷肠<br />
+窗外的灯火 依旧那么辉煌<br />
+我贴上 一朵樱花珍藏</p>
+<p>同样的夜晚 走过了岁月多少锋芒<br />
+心中仍 呐喊着一个熟悉人的回响<br />
+把信 随风寄向远方<br />
+留给陌生的他 打开新的过往<br />
+愿他不要怯懦 续写昨夜的感慨<br />
+还有清晨的阳光</p>
+<p>案台旁 樱花在绽放</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
