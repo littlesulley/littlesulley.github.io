@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>How are FBX files Imported in Unreal Engine</title>
+    <url>/2023/02/19/12/52/</url>
+    <content><![CDATA[<p>This post briefly introduces how FBX files are imported into Unreal
+Engine, particularly for animation sequences.</p>
+<span id="more"></span>
+<p>In <code>SkeletalMeshEdit.cpp</code>, you can find the function
+<code>bool UnFbx::UnFFbxImporter::ImportAnimation</code>, and this is
+where FBX import takes place.</p>
+<h1 id="find-valid-bone-names">Find Valid Bone Names</h1>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">TArray&lt;FName&gt; FbxRawBoneNames;</span><br><span class="line"><span class="built_in">FillAndVerifyBoneNames</span>(Skeleton, SortedLinks, FbxRawBoneNames, FileName);</span><br><span class="line"><span class="function">FAnimCurveImportSettings <span class="title">AnimImportSettings</span><span class="params">(DestSeq, NodeArray, SortedLinks, FbxRawBoneNames, AnimTimeSpan)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>Function <code>FillAndVerifyBoneNames</code> will copy all bone names
+into <code>FbxRawBoneNames</code> and verify whether they are duplicate
+or invalid. <code>FbxRawBoneNames</code> now contains all valid bone
+names.</p>
+<p><code>AnimImportSettings</code> is a helper structure to pass around
+the common animation parameters including the AnimationSequence asset
+reference, FBX nodes, bone names, and animation time span.</p>
+<h1 id="import-blend-shapes">Import Blend Shapes</h1>
+<p>Having everything prepared, we can import raw animation curves into
+the AnimationSequence asset. The first type of data we would like to
+import is the blend shape (morph target) curves. This is implemented by
+function <code>ImportBlendShapeCurves</code>.</p>
+<p>The function process can be described using the following pseudo
+code:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">foreach (FBXNode : FBXNodeArray) </span><br><span class="line">    foreach (BlendShape : FBXNode-&gt;BlendShapes)</span><br><span class="line">        foreach (Channel : BlendShape-&gt;BlendShapeChannels)</span><br><span class="line">        &#123;</span><br><span class="line">            FbxAnimCurve* Curve = GetShapeChannel (BlendShape, Channel)</span><br><span class="line">            if (ShouldImportCurve (Curve))</span><br><span class="line">            &#123;</span><br><span class="line">                int TargetShapeCount = Channel-&gt;GetTargetShapeCount()</span><br><span class="line">                if (TargetShapeCount &gt; 0)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (TargetShapeCount == 1)</span><br><span class="line">                    &#123;</span><br><span class="line">                        ImportCurveToAnimSequence (AnimSeq, Channel, Curve)</span><br><span class="line">                    &#125;</span><br><span class="line">                    else</span><br><span class="line">                    &#123;</span><br><span class="line">                        // Scale blend shapes values by 0.01</span><br><span class="line">                        Algo::Transform(FbxInbetweenFullWeights, InbetweenFullWeights, [](double Input)&#123; return Input * 0.01f; &#125;)</span><br><span class="line"></span><br><span class="line">                        // Collect inbetween shape names</span><br><span class="line">                        for (int32 InbetweenIndex = 0; InbetweenIndex &lt; InbetweenCount; ++InbetweenIndex)</span><br><span class="line">						&#123;</span><br><span class="line">							FbxShape* Shape = Channel-&gt;GetTargetShape(InbetweenIndex)</span><br><span class="line">							CurveNames.Add(MakeName(Shape-&gt;GetName()))</span><br><span class="line">						&#125;</span><br><span class="line"></span><br><span class="line">                        // Convert FBX curve into rich curve</span><br><span class="line">                        FRichCurve ChannelWeightCurve;</span><br><span class="line">						ImportCurve(Curve, ChannelWeightCurve)</span><br><span class="line">						if (AnimSeq)</span><br><span class="line">						&#123;</span><br><span class="line">							ChannelWeightCurve.BakeCurve(1.0f / AnimSeq-&gt;ImportResampleFramerate)</span><br><span class="line">						&#125;</span><br><span class="line"></span><br><span class="line">                        // Use the primary curve to generate inbetween shape curves + a modified primary curve</span><br><span class="line">                        TArray&lt;FRichCurve&gt; Results = ResolveWeightsForBlendShapeCurve(ChannelWeightCurve, InbetweenFullWeights)</span><br><span class="line">						if (ImportRichCurvesToAnimSequence(AnimSeq, CurveNames, Results, 0))</span><br><span class="line">						&#123;</span><br><span class="line">							for (const FString&amp; CurveName : CurveNames)</span><br><span class="line">								MySkeleton-&gt;AccumulateCurveMetaData(*CurveName, false, true)</span><br><span class="line">						&#125;	</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>The function <code>ImportRichCurvesToAnimSequence</code> is worth
+particular attention. It practically updates the AnimationSequence with
+the curves created and modified in function
+<code>ImportBlendShapeCurves</code>.</p>
+<p>Let's first examine the function
+<code>ImportRichCurvesToAnimSequence</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">foreach (CurveName : CurveNames)</span><br><span class="line">&#123;</span><br><span class="line">    // Add or retrieve curve</span><br><span class="line">    if (!SkeletonCurveMapping-&gt;Exists(CurveName))</span><br><span class="line">    &#123;</span><br><span class="line">        // Make skeleton dirty</span><br><span class="line">        Skeleton-&gt;Modify()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Get corresponding curve</span><br><span class="line">    FAnimationCurveIdentifier FloatCurveId (CurveName, ERawCurveTrackTypes::RCT_Float)</span><br><span class="line">    const FFloatCurve* TargetCurve = AnimSeq-&gt;GetDataModel()-&gt;FindFloatCurve(FloatCurveId)</span><br><span class="line"></span><br><span class="line">    // Update curve and set keys</span><br><span class="line">	AnimSeq-&gt;Controller.SetCurveKeys(FloatCurveId, RichCurves[CurveIndex].GetConstRefOfKeys())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Then, let's examine function <code>SetCurveKeys</code>, which is
+defined in <code>AnimDataContyroller.cpp</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// Get the curve according to curve id</span><br><span class="line">FRichCurve* RichCurve = Model-&gt;GetMutableRichCurve(CurveId)</span><br><span class="line"></span><br><span class="line">if (RichCurve)</span><br><span class="line">&#123;</span><br><span class="line">    // Set rich curve values</span><br><span class="line">	RichCurve-&gt;SetKeys(CurveKeys);</span><br><span class="line"></span><br><span class="line">    // On curve changed notify</span><br><span class="line">    FCurveChangedPayload Payload;</span><br><span class="line">	Payload.Identifier = CurveId;</span><br><span class="line">	Model-&gt;Notify(EAnimDataModelNotifyType::CurveChanged, Payload);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Finally, go to <code>RichCurve.cpp</code> and you will see the
+definition of function <code>SetKeys</code>:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">FRichCurve::SetKeys</span><span class="params">(<span class="type">const</span> TArray&lt;FRichCurveKey&gt;&amp; InKeys)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">Reset</span>();</span><br><span class="line"></span><br><span class="line">	Keys.<span class="built_in">SetNum</span>(InKeys.<span class="built_in">Num</span>());</span><br><span class="line">	KeyHandlesToIndices.<span class="built_in">SetKeyHandles</span>(InKeys.<span class="built_in">Num</span>());</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (int32 Index = <span class="number">0</span>; Index &lt; InKeys.<span class="built_in">Num</span>(); ++Index)</span><br><span class="line">	&#123;</span><br><span class="line">		Keys[Index] = InKeys[Index];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">AutoSetTangents</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>which is pretty straightforward.</p>
+<h1 id="import-animation">Import Animation</h1>
+<p>Function <code>UnFbx::FFbxImporter::ImportBoneTracks</code> is
+responsible for importing bone animation tracks. Its pseudo code is as
+follows.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">foreach (BoneName : FbxRawBoneNames)</span><br><span class="line">&#123;</span><br><span class="line">    CheckValidity (BoneName)</span><br><span class="line"></span><br><span class="line">    FRawAnimSequenceTrack RawTrack</span><br><span class="line">    for (CurTime = StartTime; CurTime &lt; EndTime; CurTime += TimeInc)</span><br><span class="line">    &#123;</span><br><span class="line">        LocalTransform = GetLocalTransformFromRawMatrixData (CurTime)</span><br><span class="line">        RawTrack.ScaleKeys.Add(FVector3f(LocalTransform.GetScale3D()))</span><br><span class="line">		RawTrack.PosKeys.Add(FVector3f(LocalTransform.GetTranslation()))</span><br><span class="line">		RawTrack.RotKeys.Add(FQuat4f(LocalTransform.GetRotation()))</span><br><span class="line"></span><br><span class="line">        if (Success)</span><br><span class="line">        &#123;</span><br><span class="line">            if (SkeletonHasBone (BoneName))</span><br><span class="line">            &#123;</span><br><span class="line">                // Add a new track</span><br><span class="line">                Controller.AddBoneTrack(BoneName)</span><br><span class="line">				Controller.SetBoneTrackKeys(BoneName, RawTrack.PosKeys, RawTrack.RotKeys, RawTrack.ScaleKeys)</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                // Create animation attribute and add the transform keys</span><br><span class="line">                UE::Anim::AddTypedCustomAttribute&lt;FTransformAnimationAttribute, FTransform&gt;(...)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="import-bone-metadata">Import Bone Metadata</h1>
+<p>The final step is to import the bone metadata. It simply calls the
+<code>ImportNodeCustomProperties(AnimSeq, SkeletonNode)</code> for each
+skeleton node.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">foreach (Property : NodeProperties)</span><br><span class="line">&#123;</span><br><span class="line">    MetadataTag = &quot;FBX.&quot; + NodeName + &quot;.&quot; + Property.GetName()</span><br><span class="line">    MetadataValue = GetFbxPropertyStringValue(Property)</span><br><span class="line">    AnimSeq-&gt;GetOutermost()-&gt;GetMetaData()-&gt;SetValue(AnimSeq, *MetadataTag, *MetadataValue)</span><br><span class="line"></span><br><span class="line">    foreach (ChildNode : NodeChildren)</span><br><span class="line">    &#123;</span><br><span class="line">        ImportNodeCustomProperties (AnimSeq, ChildNode)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>游戏 - 动画</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>游戏</tag>
+        <tag>UE</tag>
+        <tag>动画</tag>
+        <tag>编辑器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Bresenham算法画直线</title>
     <url>/2020/10/18/16/03/</url>
     <content><![CDATA[<p>Bresenham's
@@ -202,10 +264,10 @@ Matching基本知识的介绍，放在此备份。</p>
       </categories>
       <tags>
         <tag>计算机</tag>
+        <tag>游戏</tag>
+        <tag>动画</tag>
         <tag>随笔</tag>
         <tag>数学</tag>
-        <tag>动画</tag>
-        <tag>游戏</tag>
         <tag>机器学习</tag>
         <tag>深度学习</tag>
       </tags>
@@ -380,39 +442,6 @@ As a team, you need to agree on your guidelines</p>
       </tags>
   </entry>
   <entry>
-    <title>EasyCamera - A Simplified Camera System for You to Create Plentiful Gameplay Camera Movements and Effects</title>
-    <url>/2023/02/09/23/21/</url>
-    <content><![CDATA[<p><strong>EasyCamera</strong> is a simplified, extensible and
-designer-friendly camera system for Unreal Engine. It enhances the
-built-in spring arm and camera components in native Unreal editor across
-a wide variety of common gameplay camera behaviours such as keeping a
-target at a fixed screen position, moving on rail, and resolving
-occulusion in complex occasions, enabling you to easily create plentiful
-smooth camera movements and effects within only few minutes.</p>
-<p>Currently <strong>EasyCamera</strong> only supports Unreal Engine
-version 5.1. So before using this plugin, please upgrade your project to
-Unreal Engine 5.1. We are also working on migrating
-<strong>EasyCamera</strong> to Unreal Engine 5.0, but this may take some
-time.</p>
-<p>For manuals of <strong>EasyCamera</strong>, please refer to the <a
-href="https://sulleyyys-organization.gitbook.io/manuals-of-easycamera/">Manuals
-Of EasyCamera</a> page. This page will guide you through the basic uses
-and advanced features of <strong>EasyCamera</strong>, and it will also
-give you some examples showcasing what it can do and how to basically
-set up your own cameras.</p>
-]]></content>
-      <categories>
-        <category>游戏 - 相机</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>游戏</tag>
-        <tag>插件</tag>
-        <tag>UE</tag>
-        <tag>相机</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2020/09/07/23/00/</url>
     <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
@@ -466,8 +495,8 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
         <category>游戏 - 玩后感</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>游戏</tag>
+        <tag>随笔</tag>
         <tag>生活</tag>
         <tag>刺客信条</tag>
       </tags>
@@ -732,8 +761,41 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
         <category>游戏 - 游戏理论</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>游戏</tag>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>EasyCamera - A Simplified Camera System for You to Create Plentiful Gameplay Camera Movements and Effects</title>
+    <url>/2023/02/09/23/21/</url>
+    <content><![CDATA[<p><strong>EasyCamera</strong> is a simplified, extensible and
+designer-friendly camera system for Unreal Engine. It enhances the
+built-in spring arm and camera components in native Unreal editor across
+a wide variety of common gameplay camera behaviours such as keeping a
+target at a fixed screen position, moving on rail, and resolving
+occulusion in complex occasions, enabling you to easily create plentiful
+smooth camera movements and effects within only few minutes.</p>
+<p>Currently <strong>EasyCamera</strong> only supports Unreal Engine
+version 5.1. So before using this plugin, please upgrade your project to
+Unreal Engine 5.1. We are also working on migrating
+<strong>EasyCamera</strong> to Unreal Engine 5.0, but this may take some
+time.</p>
+<p>For manuals of <strong>EasyCamera</strong>, please refer to the <a
+href="https://sulleyyys-organization.gitbook.io/manuals-of-easycamera/">Manuals
+Of EasyCamera</a> page. This page will guide you through the basic uses
+and advanced features of <strong>EasyCamera</strong>, and it will also
+give you some examples showcasing what it can do and how to basically
+set up your own cameras.</p>
+]]></content>
+      <categories>
+        <category>游戏 - 相机</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>游戏</tag>
+        <tag>UE</tag>
+        <tag>插件</tag>
+        <tag>相机</tag>
       </tags>
   </entry>
   <entry>
@@ -1124,6 +1186,30 @@ Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷
       </tags>
   </entry>
   <entry>
+    <title>十二月的花</title>
+    <url>/2020/12/22/09/29/</url>
+    <content><![CDATA[<p>埙吹响了海岸<br />
+琴穿梭叶间<br />
+笛在天空啼鸣<br />
+伴奏着雪花片片</p>
+<p>孩子们欢笑着相聚<br />
+踏着雪<br />
+吱吱嘎嘎</p>
+<p>把欢乐捏成一团团棉<br />
+随风起舞<br />
+在阳光下<br />
+雪爱上了花</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>向量绕任意轴旋转的简单推导</title>
     <url>/2021/06/07/08/38/</url>
     <content><![CDATA[<p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p>
@@ -1289,158 +1375,6 @@ CPU @ 2.90GHz。</p>
         <tag>计算机</tag>
         <tag>随笔</tag>
         <tag>数学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>十二月的花</title>
-    <url>/2020/12/22/09/29/</url>
-    <content><![CDATA[<p>埙吹响了海岸<br />
-琴穿梭叶间<br />
-笛在天空啼鸣<br />
-伴奏着雪花片片</p>
-<p>孩子们欢笑着相聚<br />
-踏着雪<br />
-吱吱嘎嘎</p>
-<p>把欢乐捏成一团团棉<br />
-随风起舞<br />
-在阳光下<br />
-雪爱上了花</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>根据角色体型和俯角自动确定FreeLook镜头参数</title>
-    <url>/2022/06/21/23/40/</url>
-    <content><![CDATA[<p>最近项目涉及到一个需求：如何自动确定镜头的参数（在Unity中即为轨道的高度和半径）。这个问题可以形式化为：给定角色身高<span
-class="math inline">\(X\)</span>、看向点偏移<span
-class="math inline">\(Y\)</span>、俯角<span
-class="math inline">\(A\)</span>和人物在画面中的占高比<span
-class="math inline">\(T\)</span>，自动计算出相机到看向点的距离<span
-class="math inline">\(D\)</span>、相机中轨的半径<span
-class="math inline">\(R\)</span>和相机中轨的高度<span
-class="math inline">\(H\)</span>。本文推导出该计算公式，实现镜头参数自动化处理。</p>
-<span id="more"></span>
-<h1
-id="角色高度看向点偏移俯角与相机参数">角色高度、看向点偏移、俯角与相机参数</h1>
-<p>我们的第一步目标是：给定角色高度<span
-class="math inline">\(X\)</span>、看向点偏移<span
-class="math inline">\(Y\)</span>和俯角<span
-class="math inline">\(A\)</span>，能够自动计算出相机距离、相机轨道的半径<span
-class="math inline">\(R\)</span>和高度<span
-class="math inline">\(H\)</span>。在此之前，首先需要明确几个概念：</p>
-<ul>
-<li>角色高度：角色模型在游戏中的实际高度，因为我们目前关心的角色在屏幕中的占高比，暂不考虑角色宽度；</li>
-<li>看向点偏移：从角色Root结点的Y轴偏移量，如果等于角色高度则位于角色头顶位置，等于零则位于Root位置；</li>
-<li>俯角：相机看向角色看向点时与XZ平面的夹角；</li>
-<li>相机距离：相机到看向点的距离；</li>
-<li>相机轨道高度：相机从角色Root点开始的Y轴高度；</li>
-<li>相机轨道半径：相机轨道在当前高度上的半径。</li>
-</ul>
-<p>这几个参数的关系可以用下图来表示：</p>
-<figure>
-<img data-src="/images/auto-camera-params/1.png"
-alt="几个参数之间的关系。X：角色高度，Y：看向点偏移，A：俯角，D：相机距离，H：相机高度，R：相机半径。" />
-<figcaption
-aria-hidden="true">几个参数之间的关系。X：角色高度，Y：看向点偏移，A：俯角，D：相机距离，H：相机高度，R：相机半径。</figcaption>
-</figure>
-<p>我们不难得出下面的关系：</p>
-<p><span class="math display">\[
-\begin{align}
-    R &amp;= \cos(A)D\\
-    H &amp;= \tan(A)R+Y
-\end{align}
-\]</span></p>
-<p>但这是对<span class="math inline">\(H\ge Y\)</span>的情况，当<span
-class="math inline">\(H&lt;Y\)</span>时，我们有：</p>
-<p><span class="math display">\[
-\begin{align}
-    R &amp;= \cos(A)D\\
-    H &amp;= -\tan(A)R+Y
-\end{align}
-\]</span></p>
-<p>但是由于我们在计算俯角时，以下方向为正方向，当<span
-class="math inline">\(H&lt;Y\)</span>时，俯角<span
-class="math inline">\(A\)</span>实际上是负值，所以也不需要加负号。于是，最终的公式仍然是统一的。</p>
-<h1
-id="人物高度人物占高比fov与相机距离">人物高度、人物占高比、FOV与相机距离</h1>
-<p>上述公式的一个前提是需要知道<span
-class="math inline">\(D\)</span>（<span
-class="math inline">\(A\)</span>可自定，<span
-class="math inline">\(Y=X/2\)</span>或<span
-class="math inline">\(Y=2X/3\)</span>），而我们实际上关注的是人物在整个画面中的占高比，而相机屏幕与FOV有关，所以为了计算<span
-class="math inline">\(D\)</span>，实际上就是要考虑通过FOV和人物高度、人物占高比计算出相机距离。</p>
-<p>现在我们假定人物占高比固定为<span
-class="math inline">\(1/3\)</span>，可以根据需求自行推导。</p>
-<figure>
-<img data-src="/images/auto-camera-params/2.png"
-alt="通过FOV和人物高度计算出相机距离。我们固定了1/3的人物占高比。" />
-<figcaption
-aria-hidden="true">通过FOV和人物高度计算出相机距离。我们固定了1/3的人物占高比。</figcaption>
-</figure>
-<p>如上图所示，相机投影的上半部分角度为FOV的一半，在这里我们假设FOV为<span
-class="math inline">\(55°\)</span>，那么一半就是<span
-class="math inline">\(55°/2\)</span>。设相机距离为<span
-class="math inline">\(D\)</span>，当角色高度的一半，即<span
-class="math inline">\(X/2\)</span>占屏幕上半的<span
-class="math inline">\(1/3\)</span>时，我们不难得到下述公式：</p>
-<p><span class="math display">\[
-\begin{equation}
-    D=\frac{1.5X}{\tan(55^\circ/2)}
-\end{equation}
-\]</span></p>
-<p>但是上述公式没有考虑俯角，这就会导致一定的误差。下面我们分<span
-class="math inline">\(A\le 55^\circ/2\)</span>和<span
-class="math inline">\(A&gt;55^\circ/2\)</span>两种情况讨论，如下图所示：</p>
-<figure>
-<img data-src="/images/auto-camera-params/3.png"
-alt="修正后的相机距离用俯角、FOV和人物高度计算得出。我们固定了1/3的人物占高比。" />
-<figcaption
-aria-hidden="true">修正后的相机距离用俯角、FOV和人物高度计算得出。我们固定了1/3的人物占高比。</figcaption>
-</figure>
-<p>角色半高在相机屏幕空间中的投影为<span
-class="math inline">\(\cos(A)X/2\)</span>。所以我们能够得到下述修正公式：</p>
-<p><span class="math display">\[
-D=\frac{1.5\cos(A)X}{\tan(55^\circ/2)}
-\]</span></p>
-<p>该公式对两种情况都是适用的。</p>
-<h1 id="总结">总结</h1>
-<p>总的来说，只要给定角色身高<span
-class="math inline">\(X\)</span>、看向点偏移<span
-class="math inline">\(Y\)</span>（一般来说设置为<span
-class="math inline">\(Y=X/2\)</span>或者<span
-class="math inline">\(Y=2X/3\)</span>）和俯角<span
-class="math inline">\(A\)</span>，在固定人物在画面中占高比<span
-class="math inline">\(1/3\)</span>和FOV为<span
-class="math inline">\(55^\circ\)</span>的前提下，就可以根据下述公式计算相机到看向点距离<span
-class="math inline">\(D\)</span>、相机中轨半径<span
-class="math inline">\(R\)</span>和相机中轨高度<span
-class="math inline">\(H\)</span>：</p>
-<p><span class="math display">\[
-\begin{align}
-D &amp;= \frac{1.5\cos(A)X}{\tan(55^\circ/2)}\\
-R &amp;= \cos(A)D\\
-H &amp;= \tan(A)R + Y
-\end{align}
-\]</span></p>
-<p>如果你需要改变人物在画面的占高比，或者相机的FOV，只需要按照上面的推导方法修改公式即可。</p>
-<p>当然，你也可以继续精细化上述公式，如考虑实际的看向点偏移，但一般来说差别不是很大，在此不再赘述。</p>
-]]></content>
-      <categories>
-        <category>游戏 - 相机</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-        <tag>随笔</tag>
-        <tag>数学</tag>
-        <tag>游戏</tag>
-        <tag>相机</tag>
       </tags>
   </entry>
   <entry>
@@ -1665,6 +1599,134 @@ class="math inline">\(\mathfrak{P}_k\)</span>的表达式吗？</p>
       <tags>
         <tag>随笔</tag>
         <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>根据角色体型和俯角自动确定FreeLook镜头参数</title>
+    <url>/2022/06/21/23/40/</url>
+    <content><![CDATA[<p>最近项目涉及到一个需求：如何自动确定镜头的参数（在Unity中即为轨道的高度和半径）。这个问题可以形式化为：给定角色身高<span
+class="math inline">\(X\)</span>、看向点偏移<span
+class="math inline">\(Y\)</span>、俯角<span
+class="math inline">\(A\)</span>和人物在画面中的占高比<span
+class="math inline">\(T\)</span>，自动计算出相机到看向点的距离<span
+class="math inline">\(D\)</span>、相机中轨的半径<span
+class="math inline">\(R\)</span>和相机中轨的高度<span
+class="math inline">\(H\)</span>。本文推导出该计算公式，实现镜头参数自动化处理。</p>
+<span id="more"></span>
+<h1
+id="角色高度看向点偏移俯角与相机参数">角色高度、看向点偏移、俯角与相机参数</h1>
+<p>我们的第一步目标是：给定角色高度<span
+class="math inline">\(X\)</span>、看向点偏移<span
+class="math inline">\(Y\)</span>和俯角<span
+class="math inline">\(A\)</span>，能够自动计算出相机距离、相机轨道的半径<span
+class="math inline">\(R\)</span>和高度<span
+class="math inline">\(H\)</span>。在此之前，首先需要明确几个概念：</p>
+<ul>
+<li>角色高度：角色模型在游戏中的实际高度，因为我们目前关心的角色在屏幕中的占高比，暂不考虑角色宽度；</li>
+<li>看向点偏移：从角色Root结点的Y轴偏移量，如果等于角色高度则位于角色头顶位置，等于零则位于Root位置；</li>
+<li>俯角：相机看向角色看向点时与XZ平面的夹角；</li>
+<li>相机距离：相机到看向点的距离；</li>
+<li>相机轨道高度：相机从角色Root点开始的Y轴高度；</li>
+<li>相机轨道半径：相机轨道在当前高度上的半径。</li>
+</ul>
+<p>这几个参数的关系可以用下图来表示：</p>
+<figure>
+<img data-src="/images/auto-camera-params/1.png"
+alt="几个参数之间的关系。X：角色高度，Y：看向点偏移，A：俯角，D：相机距离，H：相机高度，R：相机半径。" />
+<figcaption
+aria-hidden="true">几个参数之间的关系。X：角色高度，Y：看向点偏移，A：俯角，D：相机距离，H：相机高度，R：相机半径。</figcaption>
+</figure>
+<p>我们不难得出下面的关系：</p>
+<p><span class="math display">\[
+\begin{align}
+    R &amp;= \cos(A)D\\
+    H &amp;= \tan(A)R+Y
+\end{align}
+\]</span></p>
+<p>但这是对<span class="math inline">\(H\ge Y\)</span>的情况，当<span
+class="math inline">\(H&lt;Y\)</span>时，我们有：</p>
+<p><span class="math display">\[
+\begin{align}
+    R &amp;= \cos(A)D\\
+    H &amp;= -\tan(A)R+Y
+\end{align}
+\]</span></p>
+<p>但是由于我们在计算俯角时，以下方向为正方向，当<span
+class="math inline">\(H&lt;Y\)</span>时，俯角<span
+class="math inline">\(A\)</span>实际上是负值，所以也不需要加负号。于是，最终的公式仍然是统一的。</p>
+<h1
+id="人物高度人物占高比fov与相机距离">人物高度、人物占高比、FOV与相机距离</h1>
+<p>上述公式的一个前提是需要知道<span
+class="math inline">\(D\)</span>（<span
+class="math inline">\(A\)</span>可自定，<span
+class="math inline">\(Y=X/2\)</span>或<span
+class="math inline">\(Y=2X/3\)</span>），而我们实际上关注的是人物在整个画面中的占高比，而相机屏幕与FOV有关，所以为了计算<span
+class="math inline">\(D\)</span>，实际上就是要考虑通过FOV和人物高度、人物占高比计算出相机距离。</p>
+<p>现在我们假定人物占高比固定为<span
+class="math inline">\(1/3\)</span>，可以根据需求自行推导。</p>
+<figure>
+<img data-src="/images/auto-camera-params/2.png"
+alt="通过FOV和人物高度计算出相机距离。我们固定了1/3的人物占高比。" />
+<figcaption
+aria-hidden="true">通过FOV和人物高度计算出相机距离。我们固定了1/3的人物占高比。</figcaption>
+</figure>
+<p>如上图所示，相机投影的上半部分角度为FOV的一半，在这里我们假设FOV为<span
+class="math inline">\(55°\)</span>，那么一半就是<span
+class="math inline">\(55°/2\)</span>。设相机距离为<span
+class="math inline">\(D\)</span>，当角色高度的一半，即<span
+class="math inline">\(X/2\)</span>占屏幕上半的<span
+class="math inline">\(1/3\)</span>时，我们不难得到下述公式：</p>
+<p><span class="math display">\[
+\begin{equation}
+    D=\frac{1.5X}{\tan(55^\circ/2)}
+\end{equation}
+\]</span></p>
+<p>但是上述公式没有考虑俯角，这就会导致一定的误差。下面我们分<span
+class="math inline">\(A\le 55^\circ/2\)</span>和<span
+class="math inline">\(A&gt;55^\circ/2\)</span>两种情况讨论，如下图所示：</p>
+<figure>
+<img data-src="/images/auto-camera-params/3.png"
+alt="修正后的相机距离用俯角、FOV和人物高度计算得出。我们固定了1/3的人物占高比。" />
+<figcaption
+aria-hidden="true">修正后的相机距离用俯角、FOV和人物高度计算得出。我们固定了1/3的人物占高比。</figcaption>
+</figure>
+<p>角色半高在相机屏幕空间中的投影为<span
+class="math inline">\(\cos(A)X/2\)</span>。所以我们能够得到下述修正公式：</p>
+<p><span class="math display">\[
+D=\frac{1.5\cos(A)X}{\tan(55^\circ/2)}
+\]</span></p>
+<p>该公式对两种情况都是适用的。</p>
+<h1 id="总结">总结</h1>
+<p>总的来说，只要给定角色身高<span
+class="math inline">\(X\)</span>、看向点偏移<span
+class="math inline">\(Y\)</span>（一般来说设置为<span
+class="math inline">\(Y=X/2\)</span>或者<span
+class="math inline">\(Y=2X/3\)</span>）和俯角<span
+class="math inline">\(A\)</span>，在固定人物在画面中占高比<span
+class="math inline">\(1/3\)</span>和FOV为<span
+class="math inline">\(55^\circ\)</span>的前提下，就可以根据下述公式计算相机到看向点距离<span
+class="math inline">\(D\)</span>、相机中轨半径<span
+class="math inline">\(R\)</span>和相机中轨高度<span
+class="math inline">\(H\)</span>：</p>
+<p><span class="math display">\[
+\begin{align}
+D &amp;= \frac{1.5\cos(A)X}{\tan(55^\circ/2)}\\
+R &amp;= \cos(A)D\\
+H &amp;= \tan(A)R + Y
+\end{align}
+\]</span></p>
+<p>如果你需要改变人物在画面的占高比，或者相机的FOV，只需要按照上面的推导方法修改公式即可。</p>
+<p>当然，你也可以继续精细化上述公式，如考虑实际的看向点偏移，但一般来说差别不是很大，在此不再赘述。</p>
+]]></content>
+      <categories>
+        <category>游戏 - 相机</category>
+      </categories>
+      <tags>
+        <tag>游戏</tag>
+        <tag>算法</tag>
+        <tag>随笔</tag>
+        <tag>数学</tag>
+        <tag>相机</tag>
       </tags>
   </entry>
   <entry>
@@ -2608,9 +2670,9 @@ href="https://www.cnblogs.com/tiancaiwrk/p/11132437.html">深入浅出之切空�
       </categories>
       <tags>
         <tag>计算机</tag>
+        <tag>游戏</tag>
         <tag>随笔</tag>
         <tag>数学</tag>
-        <tag>游戏</tag>
       </tags>
   </entry>
   <entry>
@@ -2962,8 +3024,8 @@ href="https://www.cnblogs.com/tiancaiwrk/p/11132437.html">深入浅出之切空�
         <category>游戏 - 游戏理论</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>游戏</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -3073,8 +3135,8 @@ aria-hidden="true">通关主线，从空荡的凯尔莫罕重新出发，寂寥�
         <category>游戏 - 玩后感</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>游戏</tag>
+        <tag>随笔</tag>
         <tag>生活</tag>
         <tag>巫师三</tag>
       </tags>
@@ -3196,8 +3258,8 @@ Designer画一个简单的行为树</h1>
         <category>游戏 - 游戏分析</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>游戏</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -4062,9 +4124,9 @@ actor of the blueprint class you just created.</li>
       </categories>
       <tags>
         <tag>计算机</tag>
+        <tag>UE</tag>
         <tag>随笔</tag>
         <tag>数学</tag>
-        <tag>UE</tag>
         <tag>相机</tag>
       </tags>
   </entry>
@@ -4211,8 +4273,8 @@ href="https://y.qq.com/n/yqq/album/0022kx9O4Oy0d9.html">QQ音乐</a>搜到，我
         <category>游戏 - 玩后感</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>游戏</tag>
+        <tag>随笔</tag>
         <tag>生活</tag>
         <tag>刺客信条</tag>
       </tags>
@@ -4972,8 +5034,8 @@ href="https://naidb.miraheze.org/wiki/Image_Generation">NovelAI图像生成注�
       </categories>
       <tags>
         <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>游戏</tag>
+        <tag>随笔</tag>
         <tag>深度学习</tag>
         <tag>工具</tag>
         <tag>绘画</tag>
@@ -8756,8 +8818,8 @@ logging, messaging filtering, object state</li>
         <category>游戏 - 游戏理论</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>游戏</tag>
+        <tag>随笔</tag>
         <tag>相机</tag>
         <tag>设计</tag>
       </tags>
@@ -9689,9 +9751,9 @@ class="math inline">\(k_d=0.00005\)</span>，则弹簧能够停止：</p>
       </categories>
       <tags>
         <tag>计算机</tag>
+        <tag>游戏</tag>
         <tag>随笔</tag>
         <tag>数学</tag>
-        <tag>游戏</tag>
         <tag>作业</tag>
       </tags>
   </entry>
