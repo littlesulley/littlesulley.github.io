@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/radahn-medium.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/radahn-medium.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/radahn-small.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="code-2oysa9iikh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,300italic,400,400italic,700,700italic%7CNoto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/black/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sulley.cc","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Given a stream of data formalized as \(x_1, x_2, \cdots, x_n, \cdots\), how will you randomly sample \(k\) of them when this stream ends. Apparently you cannot wait for the stream to end and cache a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="An Introduction to Reservoir Sampling (with Pseudo Code)">
+<meta property="og:url" content="http://sulley.cc/2023/05/28/17/00/index.html">
+<meta property="og:site_name" content="Sulley">
+<meta property="og:description" content="Given a stream of data formalized as \(x_1, x_2, \cdots, x_n, \cdots\), how will you randomly sample \(k\) of them when this stream ends. Apparently you cannot wait for the stream to end and cache a">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-28T09:00:21.000Z">
+<meta property="article:modified_time" content="2023-05-28T16:11:35.727Z">
+<meta property="article:author" content="Sulley">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="概率论">
+<meta property="article:tag" content="采样">
+<meta property="article:tag" content="蓄水池采样">
+<meta property="article:tag" content="随笔">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://sulley.cc/2023/05/28/17/00/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://sulley.cc/2023/05/28/17/00/","path":"2023/05/28/17/00/","title":"An Introduction to Reservoir Sampling (with Pseudo Code)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>An Introduction to Reservoir Sampling (with Pseudo Code) | Sulley</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sulley</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never Betray Yourself.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">28</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">32</span></a></li>
+        
+            
+  <li class="menu-item menu-item-相册"><a href="/photos/" rel="section"><i class="fa fa-camera fa-fw"></i>相册</a></li>
+
+
+      
+        <li class="menu-item menu-item-资源"><a href="/resources/" rel="section"><i class="fa fa-book fa-fw"></i>资源</a></li>
+        <li class="menu-item menu-item-留言"><a href="/comments/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#problem-definition"><span class="nav-number">1.</span> <span class="nav-text">Problem Definition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#priority-queue"><span class="nav-number">2.</span> <span class="nav-text">Priority Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#theory"><span class="nav-number">2.1.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pseudo-code"><span class="nav-number">2.2.</span> <span class="nav-text">Pseudo-code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#complexity"><span class="nav-number">2.3.</span> <span class="nav-text">Complexity</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reservoir-sampling"><span class="nav-number">3.</span> <span class="nav-text">Reservoir Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#theory-1"><span class="nav-number">3.1.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pseudo-code-1"><span class="nav-number">3.2.</span> <span class="nav-text">Pseudo Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#complexity-1"><span class="nav-number">3.3.</span> <span class="nav-text">Complexity</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#improved-reservoir-sampling"><span class="nav-number">4.</span> <span class="nav-text">Improved Reservoir Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#theory-2"><span class="nav-number">4.1.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pseudo-code-2"><span class="nav-number">4.2.</span> <span class="nav-text">Pseudo Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#complexity-2"><span class="nav-number">4.3.</span> <span class="nav-text">Complexity</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sulley"
+      src="/images/radahn-avatar.png">
+  <p class="site-author-name" itemprop="name">Sulley</p>
+  <div class="site-description" itemprop="description">珍惜眼前人</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/littlesulley" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;littlesulley" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qinghonghan97@gmail.com" title="E-Mail → mailto:qinghonghan97@gmail.com" rel="noopener" target="_blank"><i class="fa-solid fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/1631723" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;1631723" rel="noopener" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://steamcommunity.com/id/beingaway/" title="Steam → https:&#x2F;&#x2F;steamcommunity.com&#x2F;id&#x2F;beingaway&#x2F;" rel="noopener" target="_blank"><i class="fab fa-steam fa-fw"></i>Steam</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/han-qing-hong-33" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;han-qing-hong-33" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://kungtalon.github.io/" title="https:&#x2F;&#x2F;kungtalon.github.io&#x2F;" rel="noopener" target="_blank">Kungtalon</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kaesenudeln.github.io/" title="https:&#x2F;&#x2F;kaesenudeln.github.io&#x2F;" rel="noopener" target="_blank">Zecx</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://sulley.cc/2023/05/28/17/00/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/radahn-avatar.png">
+      <meta itemprop="name" content="Sulley">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sulley">
+      <meta itemprop="description" content="珍惜眼前人">
+    </span>
+    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="An Introduction to Reservoir Sampling (with Pseudo Code) | Sulley">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          An Introduction to Reservoir Sampling (with Pseudo Code)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-05-28 17:00:21" itemprop="dateCreated datePublished" datetime="2023-05-28T17:00:21+08:00">2023-05-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-05-29 00:11:35" itemprop="dateModified" datetime="2023-05-29T00:11:35+08:00">2023-05-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E5%AD%A6-%E6%A6%82%E7%8E%87%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">数学 - 概率论</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2023/05/28/17/00/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/05/28/17/00/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>9.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Given a stream of data formalized as <span class="math inline">\(x_1,
+x_2, \cdots, x_n, \cdots\)</span>, how will you randomly sample <span
+class="math inline">\(k\)</span> of them when this stream ends.
+Apparently you cannot wait for the stream to end and cache all data due
+to a underlying prohibitively large data scale, neither can you sample
+new <span class="math inline">\(k\)</span> pieces of data at each
+incoming step. Can we do this incrementally and guarantee that the
+sampled data are fully uniform? Yes, this leads us to the algorithm of
+Reservoir Samping.</p>
+<span id="more"></span>
+<h1 id="problem-definition">Problem Definition</h1>
+<p>Let me first give a formal definition to our problem:</p>
+<blockquote>
+<p>Let <span class="math inline">\(\{x_n\}\)</span> be a stream of data
+records where its length is unknown in advance. When the data stream
+finishes, return a set of <span class="math inline">\(k\)</span> data
+records uniformly sampled from <span
+class="math inline">\(\{x_n\}\)</span>.</p>
+</blockquote>
+<p>The most trivially solution is to store all data records and sample
+<span class="math inline">\(k\)</span> indices from the index set <span
+class="math inline">\(\{1, 2, \cdots, n\}\)</span>. But this is
+intractably storage-expensive as <span
+class="math inline">\(\{x_n\}\)</span> may exceed the maximum storaget
+limitation.</p>
+<p>Can we procedurally take samples without caching each incoming data
+record? The answer is yes. I will introduce three common solutions in
+the following sections, including the famous <em>Reservoir Sampling</em>
+algorithm.</p>
+<h1 id="priority-queue">Priority Queue</h1>
+<h2 id="theory">Theory</h2>
+<p>When current incoming index <span class="math inline">\(i\le
+k\)</span>, we just need to keep this data record <span
+class="math inline">\(x_i\)</span> and put it into the result set <span
+class="math inline">\(\mathcal{R}\gets\mathcal{R}\cup\{x_i\}\)</span>.
+When the index <span class="math inline">\(i&gt;k\)</span>, we must
+decide whether or not this data record should be stored into <span
+class="math inline">\(\mathcal{R}\)</span> and which existing data
+record in <span class="math inline">\(\mathcal{R}\)</span> should be
+replaced by <span class="math inline">\(x_i\)</span>.</p>
+<p>Because we want to <strong>uniformly</strong> sample data records, we
+can assign a unique <strong>uniform value</strong> <span
+class="math inline">\(u_i\)</span> sampled from <span
+class="math inline">\(\mathcal{U}[0,1]\)</span> to each incoming data
+record and compare this value to those already stored <span
+class="math inline">\(k\)</span> smallest values, denoted by <span
+class="math inline">\(\mathcal{P}=\{u_{j_1},u_{j_2},\cdots,
+u_{j_k}\}\)</span>. If <span class="math inline">\(u_i\)</span> is
+smaller than the largest of <span
+class="math inline">\(\mathcal{P}\)</span>, the newly sampled value
+<span class="math inline">\(u_i\)</span> will be inserted into <span
+class="math inline">\(\mathcal{P}\)</span>, and the old largest value
+will be pruned out.</p>
+<p>The theory behind is simple:</p>
+<blockquote>
+<p>Given <span class="math inline">\(n\)</span> random variables sampled
+from <span class="math inline">\(\mathcal{U}[0,1]\)</span>, the indices
+of the smallest <span class="math inline">\(k\)</span> of them is a
+uniform sample of the <span class="math inline">\(k\)</span>-subsets of
+<span class="math inline">\(\{1, 2, \cdots, n\}\)</span>.</p>
+</blockquote>
+<p>How can we efficiently insert a new value and maintain the largest
+one? Priority queue, or maximum heap serves our purpose well. By
+definition, we can maintain a priority queue <span
+class="math inline">\(\mathcal{P}\)</span> of size <span
+class="math inline">\(k\)</span> and at each incoming step we sample a
+value from <span class="math inline">\(\mathcal{U}[0,1]\)</span>. If the
+sampled value is smaller than the largest in <span
+class="math inline">\(\mathcal{P}\)</span>, we remove the largest and
+insert the new one as well as the associated data record, which can be
+done using a pair.</p>
+<h2 id="pseudo-code">Pseudo-code</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PriorityQueueSampling</span>(S[<span class="number">1</span>,<span class="number">2</span>,...])  <span class="comment">// S[1,2,...] is the streaming data with unknown length</span></span><br><span class="line">    P := <span class="keyword">new</span> PriorityQueue         <span class="comment">// Instantiate a new priority queue</span></span><br><span class="line">    <span class="keyword">while</span> S <span class="keyword">not</span> end:</span><br><span class="line">        r := <span class="built_in">random</span>(<span class="number">0</span>, <span class="number">1</span>)          <span class="comment">// Uniform sampling</span></span><br><span class="line">        <span class="keyword">if</span> P.Count &lt; k:</span><br><span class="line">            P.<span class="built_in">Insert</span>(r, S.New)</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> r &lt; P.Max:</span><br><span class="line">            P.<span class="built_in">Pop</span>()</span><br><span class="line">            P.<span class="built_in">Insert</span>(r, S.New)</span><br><span class="line">        S.<span class="built_in">WaitNext</span>()</span><br><span class="line">    <span class="keyword">return</span> P</span><br></pre></td></tr></table></figure>
+<h2 id="complexity">Complexity</h2>
+<p>The running time complexity can be divided into two parts (ignoring
+the first <span class="math inline">\(k\)</span> data records): one for
+when the sampled value <span class="math inline">\(r\)</span> is less
+than the current largest value in <span
+class="math inline">\(\mathcal{P}\)</span>; the other for each incoming
+data record. For the latter, as each data record has be to read, the
+total time complexity is <span
+class="math inline">\(\mathcal{O}(n)\)</span>; for the former, when the
+sampled value <span class="math inline">\(r\)</span> is less than the
+largest value in $, the whole priority queue needs to be re-arranged
+which makes it take an additional time complexity of <span
+class="math inline">\(\mathcal{O}(\log(k))\)</span>.</p>
+<p>The expected running complexity is: <span class="math display">\[
+\begin{equation}
+    \begin{aligned}
+        &amp;~~~~~n + \log(k)\sum_{i=k+1}^n\mathrm{Pr}(i~\text{is
+selected})\\
+        &amp;=n+\log(k)\sum_{i=k+1}^n\frac{k}{i}\\
+        &amp;=n+k\log(k)\log(n/k) + \mathcal{O}(1)
+    \end{aligned}
+\end{equation}
+\]</span></p>
+<p>The first equality holds because all records have the same chance to
+enter the priority queue and are uniformly sampled based on <span
+class="math inline">\(\mathcal{U}[0,1]\)</span>. For the <span
+class="math inline">\(i\)</span>-th record (<span
+class="math inline">\(i&gt;k\)</span>), it has a chance of <span
+class="math inline">\(k/i\)</span> to replace one value in the priority
+queue. So its probability being selected, or having a value less than
+the largest in the priority queue, is exactly <span
+class="math inline">\(k/i\)</span>.</p>
+<p>The second equality holds according to the formula <span
+class="math inline">\(\sum_{i=1}^n\frac{1}{i}=\log(n)+\mathcal{O}(1)\)</span>.</p>
+<p>Therefore, the final expected running complexity is <span
+class="math inline">\(\mathcal{O}(n+k\log(k)\log(n/k))\)</span>.</p>
+<h1 id="reservoir-sampling">Reservoir Sampling</h1>
+<h2 id="theory-1">Theory</h2>
+<p>Can we avoid using any external data structure, like priority queue,
+to uniformly sample what we want? Yes! And it can be much easier.</p>
+<p>It goes as follows:</p>
+<ol type="1">
+<li>Cache the first <span class="math inline">\(k\)</span> data records
+and store them into the result set <span
+class="math inline">\(\mathcal{R}\)</span>.</li>
+<li>For the current incoming step <span class="math inline">\(i
+(i&gt;k)\)</span>, sample an integer <span
+class="math inline">\(j\)</span> from <span class="math inline">\(\{1,
+2, \cdots, k, \cdots, i\}\)</span>. If <span class="math inline">\(j\in
+\{1, 2, \cdots, k\}\)</span>, set <span
+class="math inline">\(\mathcal{R}[j]=\mathcal{S}[i]\)</span>, otherwise
+we discard <span class="math inline">\(\mathcal{S}[i]\)</span> and
+proceed.</li>
+</ol>
+<p>That is, at each step we sample an index from the current index set.
+If the sampled integer is within the first <span
+class="math inline">\(k\)</span> indices, we replace the corresponding
+stored record with current incoming record; otherwise we do nothing.</p>
+<p>The core idea to prove it is to show at each step <span
+class="math inline">\(i\)</span>, the probability of each seen record
+<span class="math inline">\(x_1, x_2, \cdots, x_i\)</span> being
+selected is <span class="math inline">\(k/i\)</span>. Assume this holds
+for <span class="math inline">\(i\)</span> and we will prove it for
+<span class="math inline">\(i+1\)</span>.</p>
+<p>For an already selected data record, say <span
+class="math inline">\(x_j\)</span>, its probability being selected at
+step <span class="math inline">\(i\)</span> is <span
+class="math inline">\(k/i\)</span> by induction. At this turn (<span
+class="math inline">\(i+1\)</span>), the probability of <span
+class="math inline">\(x_j\)</span> still being selected is:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \begin{aligned}
+        \text{Pr}(x_j~\text{is still selected in next turn}) &amp;=
+\frac{k}{i}\left(1-\frac{k}{i+1}\right)+\frac{k}{i}\frac{k}{i+1}\frac{k-1}{k}\\
+        &amp;=\frac{k}{i}\frac{i}{i+1}\\
+        &amp;=\frac{k}{i+1}
+    \end{aligned}
+\end{equation}
+\]</span></p>
+<p>This closes our proof. The first term means <span
+class="math inline">\(x_{i+1}\)</span> is not selected and the second
+term means <span class="math inline">\(x_{i+1}\)</span> is selected but
+<span class="math inline">\(j\)</span> is not selected. Both cases lead
+to the remaining of <span class="math inline">\(x_j\)</span>.</p>
+<p>This algorithm is called <strong>Reservoir Sampling</strong>.</p>
+<p>*PS: I don't know why it's given this name, maybe because it stores
+<span class="math inline">\(k\)</span> samples from a population of data
+records like a reservoir?</p>
+<h2 id="pseudo-code-1">Pseudo Code</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ReservoirSampling</span>(S[<span class="number">1</span>,<span class="number">2</span>,...]])  <span class="comment">// S[1,2,...] is the streaming data with unknown length</span></span><br><span class="line">    R[<span class="number">1.</span>..k] := S[<span class="number">1.</span>..k]        <span class="comment">// Initialize result set R from the first k samples of S</span></span><br><span class="line">    <span class="keyword">while</span> S <span class="keyword">not</span> end:</span><br><span class="line">        j := <span class="built_in">RandomInt</span>(<span class="number">1</span>, i)</span><br><span class="line">        <span class="keyword">if</span> j &lt;= k:</span><br><span class="line">            R[j] := S[i]</span><br><span class="line">    <span class="keyword">return</span> R</span><br></pre></td></tr></table></figure>
+<h2 id="complexity-1">Complexity</h2>
+<p>Each incoming data record needs to be read from source streaming.
+Hence, the running complexity is <span
+class="math inline">\(\mathcal{O}(n)\)</span>.</p>
+<h1 id="improved-reservoir-sampling">Improved Reservoir Sampling</h1>
+<h2 id="theory-2">Theory</h2>
+<p>Can we further improve the vanilla reservoir sampling algorithm? You
+may ask, how can we achieve this if every record has to be read from
+streaming. Yes, the optimal complexity is <span
+class="math inline">\(\mathcal{O}(n)\)</span> if <strong>each</strong>
+record is read. But what if we skip some records and straightly locate
+to the next selected record? Well, with this in mind, we can indeed
+improve the original reservoir sampling algorithm.</p>
+<p>Going back to what we did in <a href="#priority-queue">priority
+queue</a>, we sample a value from the uniform distribution <span
+class="math inline">\(\mathcal{U}[0,1]\)</span> for each data record and
+compare it to existing cached largest value. In other words, denote the
+current maximum value by <span class="math inline">\(w\)</span>, the
+probability of selecting current data record <span
+class="math inline">\(x_{i+1}\)</span> will be <span
+class="math inline">\(w\)</span>, and the probability of not selecting
+it is <span class="math inline">\(1-w\)</span>. Extending it to <span
+class="math inline">\(l\)</span> steps further. The probability of
+selecting <span class="math inline">\(x_{i+l}\)</span> is <span
+class="math inline">\((1-w)^{l-1}w\)</span>, or in the form of <span
+class="math inline">\((1-w)^{l-1}-(1-w)^{l}\)</span>. Accumulate <span
+class="math inline">\(l\)</span> from <span
+class="math inline">\(1\)</span> to infinity, we have the following
+cumulative distribution function (CDF):</p>
+<p><span class="math display">\[F(x_{i+l}~\text{is
+selected})=\sum_{j=1}^l\text{Pr}(x_{i+j}~\text{is
+selected})=1-(1-w)^l\]</span></p>
+<p>With that being said, if <span class="math inline">\(x_i\)</span> is
+selected, we can sample a value <span
+class="math inline">\(r\sim\mathcal{U}[0,1]\)</span> and set <span
+class="math inline">\(r=1-(1-w)^l\)</span>. Then we successfully sample
+the next selection index <span
+class="math inline">\(l=\text{floor}\left(\dfrac{\log(r)}{\log(1-w)}\right)+1\)</span>.
+Here we set <span class="math inline">\(r\gets 1-r\)</span> since <span
+class="math inline">\(r\)</span> is uniformly sampled.</p>
+<p>Now that we obtain our next selection index <span
+class="math inline">\(i+l\)</span>, what is <span
+class="math inline">\(w\)</span> then? Apparently we cannot keep it as
+it is because the new sample <span
+class="math inline">\(w_{i+l}\)</span> must have a smaller value than
+<span class="math inline">\(w\)</span>. Well, actually <span
+class="math inline">\(w_{i+l}\)</span> has the same distribution as
+<span class="math inline">\(\max\{u_1,\cdots,u_k\}\)</span> where all
+<span class="math inline">\(u_1, \cdots,
+u_k\sim\mathcal{U}[0,w]\)</span> independenly. Here is the reason
+(without strict proof):</p>
+<ul>
+<li>Each stored record has the same chance to be replaced by <span
+class="math inline">\(x_{i+l}\)</span> as they are all randomly
+sampled.</li>
+<li>And each stored record's value <span class="math inline">\(u_j (j=1,
+\cdots, k)\)</span> is sampled from <span
+class="math inline">\(\mathcal{U}[0,w]\)</span> since we only know the
+maximum <span class="math inline">\(w\)</span> and the real value thus
+lies in a uniform distribution <span
+class="math inline">\(\mathcal{U}[0,w]\)</span>.</li>
+<li>We only care about the maximum of them and treat the maximum as the
+new <span class="math inline">\(w\)</span>, i.e., <span
+class="math inline">\(w=\max\{u_1,\cdots,u_k\}\)</span>.</li>
+</ul>
+<p>Now, calculating new <span class="math inline">\(w\)</span> reduces
+to the follow problem: given a uniformly and independently sampled value
+set <span class="math inline">\(\{u_1,\cdots,u_k\}\)</span> from <span
+class="math inline">\(\mathcal{U}[0,w]\)</span>, how to sample their
+maximum <span class="math inline">\(\max\{u_1,\cdots,u_k\}\)</span>.
+This can be done by first sampling a random value <span
+class="math inline">\(r\sim\mathcal{U}[0,1]\)</span> and then take <span
+class="math inline">\(w\cdot r^{1/k}\)</span>.</p>
+<p>Here is the proof:</p>
+<p>Denote the maximum by <span
+class="math inline">\(u=\max\{u_1,\cdots,u_k\}\)</span>, we have the
+following equation hold:</p>
+<p><span class="math display">\[\text{Pr}(u\le
+x)=\prod_{j=1}^k\text{Pr}(u_j\le x)=F_X(x)^k\]</span></p>
+<p>where <span class="math inline">\(F_X(x)\)</span> is the CDF of
+uniform distribution that is <span class="math inline">\(x/w\)</span>
+with <span class="math inline">\(x\in[0,w]\)</span>. Put it into <span
+class="math inline">\(\text{Pr}(u\le x)\)</span> we have:</p>
+<p><span class="math display">\[F_U(x)=\text{Pr}(u\le
+x)=\left(\frac{x}{w}\right)^k,x\in[0,w]\]</span></p>
+<p>We can then sample <span
+class="math inline">\(r\sim\mathcal{U}[0,1]\)</span> and set <span
+class="math inline">\(r=\left(\frac{x}{w}\right)^k\)</span>, which gives
+us the new <span class="math inline">\(w\gets w\cdot r^{1/k}\)</span>.
+Having obtained the next selection index <span
+class="math inline">\(i+l\)</span> and the new maximum value <span
+class="math inline">\(w\)</span>, we can iterative this procedure until
+end of stream. Compared to vanilla reservoir sampling, this method does
+not need to read each incoming data record and rather randomly skip some
+of them, directly finding the next selection.</p>
+<h2 id="pseudo-code-2">Pseudo Code</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ImprovedReservoirSampling</span>(S[<span class="number">1</span>,<span class="number">2</span>,...]])  <span class="comment">// S[1,2,...] is the streaming data with unknown length</span></span><br><span class="line">    R[<span class="number">1.</span>..k] := S[<span class="number">1.</span>..k]                <span class="comment">// Initialize result set R from the first k samples of S</span></span><br><span class="line">    w := <span class="built_in">exp</span>(<span class="built_in">log</span>(<span class="built_in">random</span>())/k)</span><br><span class="line">    <span class="keyword">while</span> S <span class="keyword">not</span> end:</span><br><span class="line">        i := i + <span class="built_in">floor</span>(<span class="built_in">log</span>(<span class="built_in">random</span>())/<span class="built_in">log</span>(<span class="number">1</span>-w)) + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &lt;= n:</span><br><span class="line">            R[<span class="built_in">RandomInt</span>(<span class="number">1</span>,k)] := S[i]</span><br><span class="line">            w := w * <span class="built_in">exp</span>(<span class="built_in">log</span>(<span class="built_in">random</span>())/k)</span><br><span class="line">    <span class="keyword">return</span> R</span><br></pre></td></tr></table></figure>
+<h2 id="complexity-2">Complexity</h2>
+<p>The complexity can be divided into two parts: one for the first <span
+class="math inline">\(k\)</span> records and the other for each upcoming
+record. For the first part, the complexity is fixed <span
+class="math inline">\(\mathcal{O}(k)\)</span>, and for the latter, the
+complexity is <span
+class="math inline">\(\mathcal{O}(k\log(n/k))\)</span> (the probability
+of selecting <span class="math inline">\(x_i\)</span> is <span
+class="math inline">\(k/i\)</span>, as stated in <a
+href="#complexity">priority queue</a>). Therefore, the overall
+complexity is <span
+class="math inline">\(\mathcal{O}(k+k\log(n/k))\)</span>.</p>
+<h1 id="references">References</h1>
+<p>Reservoir sampling:
+https://en.wikipedia.org/wiki/Reservoir_sampling#Statistical_properties<br />
+Reservoir-Sampling Algorithms of Time Complexity O(n(1+log(N/n))):
+https://dl.acm.org/doi/pdf/10.1145/198429.198435</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+        <div class="popular-posts-date">2022-06-26</div>
+      <div class="popular-posts-title"><a href="/2022/06/26/23/03/" rel="bookmark">用生成函数和复数巧解一道计数题</a></div>
+        <div class="popular-posts-excerpt"><p><p>对集合<span
+class="math inline">\(\{1,2,\cdots,2000\}\)</span>，求出其中有多少子集，使得子集中的元素和为5的倍数。本文对<a
+target="_blank" rel="noopener" href="https://youtu.be/bOXCLR3Wric">3Blue3Brown的解法</a>上进行总结，形成较为数学化的语言。本题背后有较为深刻的数学思想，故记载于此。</p></p></div>
+    </li>
+    <li class="popular-posts-item">
+        <div class="popular-posts-date">2022-10-20</div>
+      <div class="popular-posts-title"><a href="/2022/10/20/23/59/" rel="bookmark">一道有趣的概率题</a></div>
+        <div class="popular-posts-excerpt"><p><p>设<span class="math inline">\(X_1,X_2,\cdots\sim
+U(0,1)\)</span>独立同分布，令<span
+class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
+X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
+class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。换句话说，我们要求最先使得若干个独立同分布于<span
+class="math inline">\((0,1)\)</span>的随机变量之和大于<span
+class="math inline">\(1\)</span>的期望。</p></p></div>
+    </li>
+    <li class="popular-posts-item">
+        <div class="popular-posts-date">2020-09-09</div>
+      <div class="popular-posts-title"><a href="/2020/09/09/18/52/" rel="bookmark">无穷连根式求极限的充要条件</a></div>
+        <div class="popular-posts-excerpt"><p><p>在刷习题集或者考试的时候我们经常会遇到诸如<span
+class="math inline">\(\sqrt{1+\sqrt{2+\sqrt{3+\cdots}}}\)</span>或者<span
+class="math inline">\(\sqrt{2+\sqrt{2+\sqrt{2+\cdots}}}\)</span>的极限求解或极限存在性证明。解决此类问题的方法有很多，但都可以归结为一点：缩放。要么是两端缩放然后夹逼定理，要么是证明有界然后两边取极限。本文记录此类问题极限存在的一个充要条件，以供参阅。</p></p></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>原作者： </strong>Sulley
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://sulley.cc/2023/05/28/17/00/" title="An Introduction to Reservoir Sampling (with Pseudo Code)">http://sulley.cc/2023/05/28/17/00/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" rel="tag"># 概率论</a>
+              <a href="/tags/%E9%87%87%E6%A0%B7/" rel="tag"># 采样</a>
+              <a href="/tags/%E8%93%84%E6%B0%B4%E6%B1%A0%E9%87%87%E6%A0%B7/" rel="tag"># 蓄水池采样</a>
+              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/05/03/18/22/" rel="prev" title="Which Splines Do You Need? A Comprehensive Dive into Common Splines">
+                  <i class="fa fa-chevron-left"></i> Which Splines Do You Need? A Comprehensive Dive into Common Splines
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sulley</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">361k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:28</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.7/pdfobject.min.js","integrity":"sha256-ph3Dk89VmuTVXG6x/RDzk53SU9LPdAh1tpv0UvnDZ2I="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":"enable","theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"littlesulley","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
