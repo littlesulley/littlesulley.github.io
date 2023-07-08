@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/radahn-medium.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/radahn-medium.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/radahn-small.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="code-2oysa9iikh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,300italic,400,400italic,700,700italic%7CNoto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/black/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sulley.cc","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="If you are familiar with Cinemachine. you probably know there is a knotty problem with Cinemachine&#39; damping if you are using Framing Transposer or some other components to track a follow point. Tha">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Jittering Issue with Damping in Cinemachine and How to Tackle it">
+<meta property="og:url" content="http://sulley.cc/2023/07/08/18/22/index.html">
+<meta property="og:site_name" content="Sulley">
+<meta property="og:description" content="If you are familiar with Cinemachine. you probably know there is a knotty problem with Cinemachine&#39; damping if you are using Framing Transposer or some other components to track a follow point. Tha">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-1.gif">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/pic-1.png">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-2.gif">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-3.gif">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-4.gif">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-5.gif">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/pic-2.png">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-5-5.gif">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-6.gif">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-7.gif">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-8.gif">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-9.gif">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-10.gif">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-11.gif">
+<meta property="article:published_time" content="2023-07-08T10:22:33.000Z">
+<meta property="article:modified_time" content="2023-07-08T11:34:45.038Z">
+<meta property="article:author" content="Sulley">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="相机">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="Cinemachine">
+<meta property="article:tag" content="Damping">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sulley.cc/images/improvingdamping/gif-1.gif">
+
+
+<link rel="canonical" href="http://sulley.cc/2023/07/08/18/22/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://sulley.cc/2023/07/08/18/22/","path":"2023/07/08/18/22/","title":"The Jittering Issue with Damping in Cinemachine and How to Tackle it"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>The Jittering Issue with Damping in Cinemachine and How to Tackle it | Sulley</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sulley</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never Betray Yourself.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">33</span></a></li>
+        
+            
+  <li class="menu-item menu-item-相册"><a href="/photos/" rel="section"><i class="fa fa-camera fa-fw"></i>相册</a></li>
+
+
+      
+        <li class="menu-item menu-item-资源"><a href="/resources/" rel="section"><i class="fa fa-book fa-fw"></i>资源</a></li>
+        <li class="menu-item menu-item-留言"><a href="/comments/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#camera-jitters-with-damping-in-cinemachine"><span class="nav-number">1.</span> <span class="nav-text">Camera jitters with
+damping in Cinemachine</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#why-camera-jitters"><span class="nav-number">2.</span> <span class="nav-text">Why camera jitters</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#case-1-stable-fps-all-delta-ti-are-equal"><span class="nav-number">2.1.</span> <span class="nav-text">Case 1: Stable FPS,
+all \(\Delta T^{(i)}\) are equal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#case-2-unstable-fps-delta-ti-vary"><span class="nav-number">2.2.</span> <span class="nav-text">Case 2: Unstable FPS, \(\Delta T^{(i)}\) vary</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#solutions"><span class="nav-number">3.</span> <span class="nav-text">Solutions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#solution-1-imposing-an-invalid-range"><span class="nav-number">3.1.</span> <span class="nav-text">Solution 1: imposing an
+invalid range</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solution-2-infinite-impulse-response"><span class="nav-number">3.2.</span> <span class="nav-text">Solution 2: infinite
+impulse response</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sulley"
+      src="/images/radahn-avatar.png">
+  <p class="site-author-name" itemprop="name">Sulley</p>
+  <div class="site-description" itemprop="description">珍惜眼前人</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/littlesulley" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;littlesulley" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qinghonghan97@gmail.com" title="E-Mail → mailto:qinghonghan97@gmail.com" rel="noopener" target="_blank"><i class="fa-solid fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/1631723" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;1631723" rel="noopener" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://steamcommunity.com/id/beingaway/" title="Steam → https:&#x2F;&#x2F;steamcommunity.com&#x2F;id&#x2F;beingaway&#x2F;" rel="noopener" target="_blank"><i class="fab fa-steam fa-fw"></i>Steam</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/han-qing-hong-33" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;han-qing-hong-33" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i>Zhihu</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://kungtalon.github.io/" title="https:&#x2F;&#x2F;kungtalon.github.io&#x2F;" rel="noopener" target="_blank">Kungtalon</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kaesenudeln.github.io/" title="https:&#x2F;&#x2F;kaesenudeln.github.io&#x2F;" rel="noopener" target="_blank">Zecx</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://sulley.cc/2023/07/08/18/22/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/radahn-avatar.png">
+      <meta itemprop="name" content="Sulley">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sulley">
+      <meta itemprop="description" content="珍惜眼前人">
+    </span>
+    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="The Jittering Issue with Damping in Cinemachine and How to Tackle it | Sulley">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          The Jittering Issue with Damping in Cinemachine and How to Tackle it
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-07-08 18:22:33 / 修改时间：19:34:45" itemprop="dateCreated datePublished" datetime="2023-07-08T18:22:33+08:00">2023-07-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%B8%E6%88%8F-%E7%9B%B8%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">游戏 - 相机</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2023/07/08/18/22/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/07/08/18/22/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>18k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>17 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>If you are familiar with Cinemachine. you probably know there is a
+knotty problem with Cinemachine' damping if you are using
+<code>Framing Transposer</code> or some other components to track a
+follow point. That is, the camera jitters with damping enabled under
+unstable frame rate. The more unstable frame rate is, the more heavily
+camera will jitter. This post will discuss this phenomenon and proposes
+a workaround to solve this issue.</p>
+<h1 id="camera-jitters-with-damping-in-cinemachine">Camera jitters with
+damping in Cinemachine</h1>
+<p>Unity's Cinemachine has a notoriously severe problem that may cause
+the follow object to seemingly jitter when you are using the
+<code>Framing Transposer</code> component with damping enabled.</p>
+<p>To show this, I did a simple experiment. I created a new blank scene
+and spawned a new attached with the following script:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CubeMove</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">float</span> speed;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> fps;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">float</span> CurrentSpeed</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="keyword">return</span> currentSpeed; &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">float</span> elapsedTime = <span class="number">0.0f</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">float</span> currentSpeed;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (fps != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Application.targetFrameRate = fps;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        currentSpeed = speed;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        elapsedTime += Time.deltaTime;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (elapsedTime &gt;= <span class="number">5.0f</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (currentSpeed &gt; <span class="number">0.0f</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                currentSpeed = <span class="number">0.0f</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                currentSpeed = speed;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            elapsedTime = <span class="number">0.0f</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        transform.position += <span class="keyword">new</span> Vector3(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>) * currentSpeed * Time.deltaTime;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This script moves the cube for 5 seconds and then keeps it steady for
+another 5 seconds and continues moving. The move <code>speed</code> as
+well as the <code>fps</code> (frames per second) can be set for test
+under different conditions.</p>
+<p>A new virtual camera is then created with a
+<code>Framing Transposer</code> component following this cube. A default
+damping of 0.2 is used.</p>
+<p>Here is result with <code>speed</code> is 100 and <code>fps</code> is
+0 (when set to 0, the real fps is determined by Unity, may but
+unstable).</p>
+<p><img data-src="/images/improvingdamping/gif-1.gif" width="900" height="450"/></p>
+<p>The jitters are very clear. You can also notice that the frame rate
+(presented in the Statistics panel) is very unstable, and we will know
+soon it is the unstable fps that results in camera jitters.</p>
+<p>Cinemachine proposes a workaround to alleviate this problem, that is,
+to use the revised version of damping where they sub-divide each frame
+and simulates damping in the consecutive series of sub-frames. To enable
+this functionality, go to Edit -&gt; Project Settings -&gt; Player -&gt;
+Script Compilation and add the
+<code>CINEMACHINE_EXPERIMENTAL_DAMPING</code> marco to it.</p>
+<p><img data-src="/images/improvingdamping/pic-1.png" /></p>
+<p>OKay, now we have enabled the new damping algorithm and let's see how
+it will mitigate the jittering issue. Here is result with the same
+setting we used in our previous experiment, i.e., <code>speed</code> is
+100 and <code>fps</code> is 0.</p>
+<p><img data-src="/images/improvingdamping/gif-2.gif" width="900" height="450"/></p>
+<p>It is astonishing to see the jittering issue becomes even more
+severe. I conjecture that the variance of fps will significantly amplify
+camera jitters when this feature is enabled. In other words, the
+experimental damping algorithm responds to the variance of fps in a
+NON-linear way: when the variance is small, the experiment damping will
+reduce the gaps of camera location between contiguous frames; but when
+the variance is large, it will enlarge the gaps, leading to unacceptable
+jittering. (Note: I did not validate this conjecture. If you are
+interested, just review the code and test it yourself.)</p>
+<p>What about the expected result if fps is stable? Let's take more
+experiments!</p>
+<p>Here is result with <code>speed</code> is 100 and <code>fps</code> is
+120 (very high fps, which is usually prohibitive in shipped games).</p>
+<p><img data-src="/images/improvingdamping/gif-3.gif" width="900" height="450"/></p>
+<p>Very steady camera! What about setting fps to <code>60</code>? Here
+is the result.</p>
+<p><img data-src="/images/improvingdamping/gif-4.gif" width="900" height="450"/></p>
+<p>An fps of 60 performs equally well with 120, which is anticipated as
+fps is stable. Okay, let's try a final experiment where fps is set at an
+extreme value of 20.</p>
+<p><img data-src="/images/improvingdamping/gif-5.gif" width="900" height="450"/></p>
+<p>Even a low fps of 20 makes our camera stable, only if fps itself is
+stable.</p>
+<p>Now we can conclude that it is the instability of fps that induces
+camera jitters, regardless of the exact value of fps. But, why?</p>
+<h1 id="why-camera-jitters">Why camera jitters</h1>
+<p>Before answering this question, let us first take a look at the
+source of damping implemented in Cinemachine.</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">float</span> <span class="title">Damp</span>(<span class="params"><span class="built_in">float</span> initial, <span class="built_in">float</span> dampTime, <span class="built_in">float</span> deltaTime</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (dampTime &lt; Epsilon || Mathf.Abs(initial) &lt; Epsilon)</span><br><span class="line">        <span class="keyword">return</span> initial;</span><br><span class="line">    <span class="keyword">if</span> (deltaTime &lt; Epsilon)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">const</span> <span class="built_in">float</span> kNegligibleResidual = <span class="number">0.01f</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">float</span> kLogNegligibleResidual = <span class="number">-4.605170186f</span>; <span class="comment">// == math.Log(kNegligibleResidual=0.01f);</span></span><br><span class="line">    <span class="built_in">float</span> k = -kLogNegligibleResidual / dampTime; <span class="comment">//DecayConstant(dampTime, kNegligibleResidual);</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> CINEMACHINE_EXPERIMENTAL_DAMPING</span></span><br><span class="line">    <span class="comment">// Try to reduce damage caused by frametime variability</span></span><br><span class="line">    <span class="built_in">float</span> step = Time.fixedDeltaTime;</span><br><span class="line">    <span class="keyword">if</span> (deltaTime != step)</span><br><span class="line">        step /= <span class="number">5</span>;</span><br><span class="line">    <span class="built_in">int</span> numSteps = Mathf.FloorToInt(deltaTime / step);</span><br><span class="line">    <span class="built_in">float</span> vel = initial * step / deltaTime;</span><br><span class="line">    <span class="built_in">float</span> decayConstant = Mathf.Exp(-k * step);</span><br><span class="line">    <span class="built_in">float</span> r = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; numSteps; ++i)</span><br><span class="line">        r = (r + vel) * decayConstant;</span><br><span class="line">    <span class="built_in">float</span> d = deltaTime - (step * numSteps);</span><br><span class="line">    <span class="keyword">if</span> (d &gt; Epsilon)</span><br><span class="line">        r = Mathf.Lerp(r, (r + vel) * decayConstant, d / step);</span><br><span class="line">    <span class="keyword">return</span> initial - r;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    <span class="keyword">return</span> initial * (<span class="number">1</span> - Mathf.Exp(-k * deltaTime));</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Translating into mathematics, we have:</p>
+<p><span
+class="math display">\[\ell_\text{Damp}=\ell_\text{Input}\cdot\left(1-\exp\left(\ln(0.01)\frac{\Delta
+T}{T}\right)\right)\]</span></p>
+<p>where <span class="math inline">\(T\)</span> is the damp time
+parameter and <span class="math inline">\(\Delta T\)</span> the elapsed
+time in this frame. This equation decays the input <span
+class="math inline">\(\ell_\text{input}\)</span>, the distance for the
+camera to go to the desired position, by an exponential factor <span
+class="math inline">\(\exp\left(\ln(0.01)\frac{\Delta
+T}{T}\right)\)</span>. If <span class="math inline">\(\Delta
+T=T\)</span>, the residual will be <span
+class="math inline">\(0.01\ell_\text{input}\)</span>, meaning that at
+this frame, the camera will traverse 99% of the desired distance to go,
+only remaining 1% amount for future frames.</p>
+<p>OK, let's assume we've placed a cube in the origin and it moves along
+the x-axis at a fixed speed, say, <span class="math inline">\(v\)</span>
+m/s. A camera is placed to track the cube with damping where damp time
+<span class="math inline">\(T\not=0\)</span>. Let's further denote the
+delta time for each frame by <span class="math inline">\(\Delta
+T^{(k)}\)</span>, where <span class="math inline">\(k=0, 1, 2,
+\cdots\)</span> is the <span class="math inline">\(k\)</span>-th
+frame.</p>
+<p>Having all variables fully prepared, we can then simulate the object
+movement and camera track process.</p>
+<p>In the beginning of 0-th frame, the camera and the cube are both at
+the origin, i.e., (0, 0, 0). As the cube only moves along x-axis, we can
+emit the y and z dimensions and use a one-dimensional coordiante to
+represent cube and camera positions.</p>
+<p>At the 1-th frame, the cube moves to <span
+class="math inline">\(P^{(1)}=P^{(0\to1)}=v\Delta T^{(1)}\)</span>, the
+distance the camera traverses is <span
+class="math inline">\(Q^{(1)}=P^{(0\to1)}\left(1-\mathrm{e}^{m\frac{\Delta
+T^{(1)}}{T}}\right)\)</span>, and the residual is <span
+class="math inline">\(R^{(1)}=P^{(0\to1)}\mathrm{e}^{m\frac{\Delta
+T^{(1)}}{T}}\)</span>. We set <span
+class="math inline">\(m=\ln(0.01)\)</span> for simplicity.</p>
+<p>At the 2-th frame, the cube moves to <span
+class="math inline">\(P^{(2)}=P^{(0\to1)}+P^{(1\to2)}=v\Delta
+T^{(1)}+v\Delta T^{(2)}\)</span>, the distance the camera traverses is
+<span
+class="math inline">\(Q^{(2)}=(R^{(1)}+P^{(1\to2)})\left(1-\mathrm{e}^{m\frac{\Delta
+T^{(2)}}{T}}\right)\)</span>, and the residual is <span
+class="math inline">\(R^{(2)}=(R^{(1)}+P^{(1\to2)})\mathrm{e}^{m\frac{\Delta
+T^{(2)}}{T}}\)</span>.</p>
+<p>At the k-th frame, we have <span
+class="math inline">\(P^{(k)}=v\sum_{i=1}^k\Delta T^{(i)}\)</span>,
+<span class="math inline">\(Q^{(k)}=(R^{(k-1)}+P^{((k-1)\to
+k)})\left(1-\mathrm{e}^{m\frac{\Delta T^{(k)}}{T}}\right)\)</span>, and
+<span class="math inline">\(R^{(k)}=(R^{(k-1)}+P^{((k-1)\to
+k)})\mathrm{e}^{m\frac{\Delta T^{(k)}}{T}}\)</span>.</p>
+<p>Without loss of generality, we can set <span
+class="math inline">\(v=1\)</span>. The following sections will use this
+settings unless otherwise stated.</p>
+<p>For different combinations of <span class="math inline">\(\Delta
+T^{(i)}\)</span>, <span class="math inline">\(P^{(k)}, Q^{(k)},
+R^{(k)}\)</span> may have different results. Let's dive into <span
+class="math inline">\(\Delta T^{(i)}\)</span> and see how it influences
+the results.</p>
+<h2 id="case-1-stable-fps-all-delta-ti-are-equal">Case 1: Stable FPS,
+all <span class="math inline">\(\Delta T^{(i)}\)</span> are equal</h2>
+<p>When all <span class="math inline">\(\Delta T^{(i)}\)</span> are
+equal, say <span class="math inline">\(\Delta T\)</span>, our equations
+reduce to:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+P^{((k-1)\to k)}&amp;=\Delta T\\
+P^{(k)}&amp;=k\Delta T\\
+R^{(k)}&amp;=\Delta T\cdot\frac{\mathrm{e}^{m\frac{\Delta
+T}{T}}}{1-\mathrm{e}^{m\frac{\Delta
+T}{T}}}\cdot\left(1-\left(\mathrm{e}^{m\frac{\Delta
+T}{T}}\right)^{k+1}\right)\\
+Q^{(k)}&amp;=\Delta T\cdot\left(1-\left(\mathrm{e}^{m\frac{\Delta
+T}{T}}\right)^{k+1}\right)
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p><span class="math inline">\(R^{(k)}\)</span> apparently has a
+limitation of <span class="math inline">\(\mathfrak{R}=\Delta
+T\cdot\mathrm{e}^{m\frac{\Delta T}{T}}/(1-\mathrm{e}^{m\frac{\Delta
+T}{T}})\)</span> when <span class="math inline">\(k\to\infty\)</span>
+since <span class="math inline">\(m=\ln(0.01)&lt;0\)</span>. This
+explains why a camera with damping always has a maximum distance to its
+following target. There maximum distance, also the supremum, is exactly
+<span class="math inline">\(\mathfrak{R}\)</span>. When <span
+class="math inline">\(T\)</span> is larger, <span
+class="math inline">\(\mathfrak{R}\)</span> will be larger, implying the
+maximum distance between the camera and its following target will be
+larger.</p>
+<p>What if <span class="math inline">\(\Delta T^{(i)}\)</span> is
+mutable? In this case, we can assume there exists an upper bound <span
+class="math inline">\(\Delta T\)</span> such that all <span
+class="math inline">\(\Delta T^{(i)}\)</span> satisty <span
+class="math inline">\(|\Delta T^{(i)}|\le \Delta T\)</span>. Then we are
+able to derive the same conclusion.</p>
+<p>Another question is, why camera does not jitter when FPS is stable?
+We turn to examine the sign of <span
+class="math inline">\(R^{(k)}-R^{(k-1)}\)</span>:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+R^{(k)}-R^{(k-1)}&amp;=\Delta T\cdot\frac{\mathrm{e}^{m\frac{\Delta
+T}{T}}}{1-\mathrm{e}^{m\frac{\Delta
+T}{T}}}\cdot\left(1-\left(\mathrm{e}^{m\frac{\Delta
+T}{T}}\right)^{k+1}\right) - \Delta
+T\cdot\frac{\mathrm{e}^{m\frac{\Delta
+T}{T}}}{1-\mathrm{e}^{m\frac{\Delta
+T}{T}}}\cdot\left(1-\left(\mathrm{e}^{m\frac{\Delta
+T}{T}}\right)^{k}\right)\\
+&amp;=\Delta T\cdot\frac{\mathrm{e}^{m\frac{\Delta
+T}{T}}}{1-\mathrm{e}^{m\frac{\Delta
+T}{T}}}\left(\mathrm{e}^{m\frac{\Delta
+T}{T}}\right)^k\left(1-\mathrm{e}^{m\frac{\Delta T}{T}}\right)\\
+&amp;=\Delta T\cdot \left(\mathrm{e}^{m\frac{\Delta
+T}{T}}\right)^{k+1}\\
+&amp;&gt;0
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>Therefore, when FPS is stable, <span
+class="math inline">\(R^{(k)}\)</span> is always larger than <span
+class="math inline">\(R^{(k-1)}\)</span>, and jitter will never
+happen.</p>
+<h2 id="case-2-unstable-fps-delta-ti-vary">Case 2: Unstable FPS, <span
+class="math inline">\(\Delta T^{(i)}\)</span> vary</h2>
+<p>When FPS is unstable, where <span class="math inline">\(\Delta
+T^{(i)}\)</span> may mutate, how will the camera move in response to its
+following target? We can still examine the sign of <span
+class="math inline">\(R^{(k)}-R^{(k-1)}\)</span>, but in another
+way:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+R^{(k)}-R^{(k-1)}&amp;=(R^{(k-1)}+P^{((k-1)\to
+k)})\mathrm{e}^{m\frac{\Delta T^{(k)}}{T}}-R^{(k-1)}\\
+&amp;=P^{((k-1)\to k)}\mathrm{e}^{m\frac{\Delta T^{(k)}}{T}} -
+R^{(k-1)}\left(1-\mathrm{e}^{m\frac{\Delta T^{(k)}}{T}}\right)
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>This equation uncovers why camera jitters happen with unstable FPS.
+The residual at the k-th frame <span
+class="math inline">\(R^{(k)}\)</span> is essentially an interpolation
+between the following target's current position increment <span
+class="math inline">\(P^{((k-1)\to k)}\)</span> and the last frame's
+negative residual <span class="math inline">\(-R^{(k-1)}\)</span>, where
+the interpolation strength is the decaying factor <span
+class="math inline">\(\mathrm{e}^{m\frac{\Delta T^{(k)}}{T}}\)</span>.
+As both <span class="math inline">\(P^{((k-1)\to k)}\)</span> and <span
+class="math inline">\(-R^{(k-1)}\)</span> are fixed, a change in <span
+class="math inline">\(\Delta T^{(k)}\)</span> will incline the resulting
+residual <span class="math inline">\(R^{(k)}\)</span> to different ends,
+either <span class="math inline">\(P^{((k-1)\to k)}\)</span> or <span
+class="math inline">\(-R^{(k-1)}\)</span>.</p>
+<p>In our simplified case in which the target moves at a fixed speed in
+the direction of x-axis, <span class="math inline">\(P^{((k-1)\to
+k)}\)</span> will always be positive (though its magnitude can vary) and
+<span class="math inline">\(-R^{(k-1)}\)</span> will always be negative.
+A mutating <span class="math inline">\(\Delta T^{(k)}\)</span> thus has
+a chance to alter the sign of <span
+class="math inline">\(R^{(k)}-R^{(k-1)}\)</span>, which further brings
+about camera jitters.</p>
+<p>So when will camera jitter? From the above equation, we know that
+camera will jitter when the sign of <span
+class="math inline">\(R^{(k)}-R^{(k-1)}\)</span> consistently changes
+over time, i.e., the value of <span
+class="math inline">\(R^{(k)}-R^{(k-1)}\)</span> oscillates around zero.
+Let's make it equal to zero and see what we can find then.</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+R^{(k)}-R^{(k-1)}&amp;=0\\
+(R^{(k-1)}+P^{((k-1)\to k)})\mathrm{e}^{m\frac{\Delta
+T^{(k)}}{T}}-R^{(k-1)}&amp;=0\\
+\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}&amp;=\mathrm{e}^{m\frac{\Delta T^{(k)}}{T}}\\
+m\frac{\Delta
+T^{(k)}}{T}&amp;=\ln\left(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\right)\\
+\Delta
+T^{(k)}&amp;=\frac{T}{m}\ln\left(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\right)
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>This equation tells us when <span class="math inline">\(\Delta
+T^{(k)}\)</span> is near <span
+class="math inline">\(\frac{T}{m}\ln\left(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\right)\)</span>, camera will have a large chance to jitter. This
+motivates us to improve damping by filtering out the occasions where
+<span class="math inline">\(\Delta T^{(k)}\)</span> is very close to
+<span
+class="math inline">\(\frac{T}{m}\ln\left(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\right)\)</span>.</p>
+<p>What about going deeper? We can treat <span
+class="math inline">\(\Delta T^{(i)}\)</span> as variable, and all other
+as constants. This abstraction gives us a function of <span
+class="math inline">\(f(x)\)</span>:</p>
+<p><span class="math display">\[
+f(x)=x-a\ln\left(\frac{b}{b+vx}\right),~a\le0, b&gt; 0, v&gt;0, x&gt;0
+\]</span></p>
+<p>Taking the derivative of <span class="math inline">\(f(x)\)</span>,
+we know that <span class="math inline">\(f(x)\)</span> is monotonically
+decreasing when <span class="math inline">\(x\in(-\infty,
+(-av-b)/v)\)</span> and monotonically increasing when <span
+class="math inline">\(x\in((-av-b)/v,+\infty)\)</span>, and <span
+class="math inline">\(f(0)=0\)</span>. Hence, to make the sign of <span
+class="math inline">\(f(x)\)</span> mutable, <span
+class="math inline">\((-av-b)/v\)</span> must be positive and the
+minimum of <span class="math inline">\(f(x)\)</span> must be
+negative.</p>
+<p>The minimum of <span class="math inline">\(f(x)\)</span> can be
+easily computed:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+f(x)_\text{min}&amp;=f((-av-b)/v)\\
+&amp;=-a-\frac{b}{v}-a\ln\left(-\frac{b}{av}\right)\\
+&amp;=a\left(-1-\frac{b}{av}-\ln\left(-\frac{b}{av}\right)\right)\\
+&amp;\xlongequal{x\triangleq-b/av}a\left(-1+x-\ln(x)\right) ~(x\ge 0)\\
+&amp;\le 0
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>The last inequality holds because <span class="math inline">\(x-1\ge
+\ln x~(x&gt;0)\)</span>.</p>
+<p><img data-src="/images/improvingdamping/pic-2.png" /></p>
+<p>This reveals the fact that: when <span
+class="math inline">\((-av-b)/v&gt;0\)</span>, a variant <span
+class="math inline">\(\Delta T^{(k)}\)</span> is likely to cause <span
+class="math inline">\(R^{(k)}-R^{(k-1)}\)</span> to change its sign,
+thus resulting in camera jitters. Suppose <span
+class="math inline">\(\Delta T^{(k)}\)</span> is large enough, so then
+the k-th residual <span class="math inline">\(R^{(k)}\)</span> gets
+smaller than <span class="math inline">\(R^{(k-1)}\)</span> while <span
+class="math inline">\(f(x)^{(k)}\)</span> is positive. A smaller <span
+class="math inline">\(R^{(k)}\)</span> pushes <span
+class="math inline">\(b\)</span> to become smaller for the next frame,
+which further pushes the root of the function to become larger. In this
+case, even with the same delta time, <span
+class="math inline">\(f(x)^{(k)}\)</span> will have a larger chance wo
+fall in the negative area, i.e., <span class="math inline">\(\Delta
+T^{(k+1)}\)</span> is more likely to be less than the root.</p>
+<p><img data-src="/images/improvingdamping/gif-5-5.gif" width="900" height="450"/></p>
+<h1 id="solutions">Solutions</h1>
+<h2 id="solution-1-imposing-an-invalid-range">Solution 1: imposing an
+invalid range</h2>
+<p>Based on what we've discussed so far, wen can immediately come up
+with a simple solution: enforce <span class="math inline">\(\Delta
+T^{(k)}\)</span> to be <span
+class="math inline">\(\mathfrak{O}=\frac{T}{m}\ln\left(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\right)\)</span> if they are very close. That is to say, we use a
+small value <span class="math inline">\(\varepsilon\)</span>, if <span
+class="math inline">\(\Delta T^{(k)}/\mathfrak{O}\in(1-\varepsilon,
+1+\varepsilon)\)</span>, we just set <span class="math inline">\(\Delta
+T^{(k)}\)</span> to <span
+class="math inline">\(\mathfrak{O}\)</span>.</p>
+<p>Note that <span
+class="math inline">\(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\)</span> can be zero or negative. If this is the case, we keep the
+original <span class="math inline">\(\Delta T^{(k)}\)</span> without
+doing anything. Besides, you should be aware that <span
+class="math inline">\(\Delta T^{(k)}\)</span> here is not the time this
+frame actually takes, instead, it is just the duration used to calculate
+damping.</p>
+<p>Let us explain it more quantitatively. Suppose <span
+class="math inline">\(\Delta T^{(k)}/\mathfrak{O}=1-\delta\)</span>,
+where <span class="math inline">\(0&lt;\delta&lt;\varepsilon\)</span>.
+Then <span class="math inline">\(\Delta
+T^{(k)}\gets\mathfrak{O}\)</span> according to our algorithm. We then
+plug <span class="math inline">\(\Delta
+T^{(k)}_\delta=\mathfrak{O}(1-\delta)\)</span> into the original
+expression of <span
+class="math inline">\(R^{(k)}-R^{(k-1)}\)</span>:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+R^{(k)}_\delta-R^{(k)} &amp;= (R^{(k-1)}+P^{((k-1)\to
+k)})\mathrm{e}^{\frac{m}{T}(1-\delta)\frac{T}{m}\ln\left(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\right)}-R^{(k-1)}\\
+&amp;=\left(R^{(k-1)}+P^{((k-1)\to
+k)}\right)\cdot\left(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\right)^{1-\delta}-R^{(k-1)}\\
+&amp;=\left(R^{(k-1)}\right)^{1-\delta}\cdot
+\left(R^{(k-1)}+P^{((k-1)\to k)}\right)^{\delta}-R^{(k-1)}\\
+&amp;&gt;\left(R^{(k-1)}\right)^{1-\delta}\cdot\left(R^{(k-1)}\right)^{\delta}-R^{(k-1)}\\
+&amp;&gt;0
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>This demonstrates that now the camera lags behind its following
+target more than the previous frame since the residual is larger. After
+substituting <span class="math inline">\(\Delta T^{(k)}_\delta\)</span>
+with <span class="math inline">\(\mathfrak{O}\)</span>, <span
+class="math inline">\(R^{(k)}-R^{(k-1)}\)</span> would be zero, meaning
+that the camera now keeps the same frame as last frame. Camera does not
+jitter.</p>
+<p>Here comes the question: what if the following target slows down, or
+stops, or even turns back to the opposite direction and the camera still
+remains the same residual to it?</p>
+<p>It is quite a good question. But if we look carefully at the function
+of <span class="math inline">\(f(x)\)</span>, we will find this
+situation will never happen. Let's rewrite <span
+class="math inline">\(f(x)\)</span> here:</p>
+<p><span class="math display">\[
+f(x)=x-a\ln\left(\dfrac{b}{b+vx}\right), ~a\le 0, b&gt;0, x&gt;0
+\]</span></p>
+<p>This time, we do not constrain the value of <span
+class="math inline">\(v\)</span>, but at last frame, it's positive.</p>
+<p>When <span class="math inline">\(v\)</span> gets smaller but still
+positive, we observe the function gradually shifts leftwards, pushing
+the root towards zero. This implies that the area <span
+class="math inline">\((1-\varepsilon, 1+\varepsilon)\)</span> gets
+contracted and the probability of remaining the same residual gets
+smaller.</p>
+<p><img data-src="/images/improvingdamping/gif-6.gif" width="900" height="450"/></p>
+<p>When <span class="math inline">\(v\)</span> is zero where the
+following target stops, the current residual can be readily calculated
+as <span
+class="math inline">\(R^{(k)}=R^{(k-1)}\mathrm{e}^{m\frac{\Delta
+T^{(k)}}{T}}\)</span>, which closes the distance gap between the camera
+of the following target. The ratio, which is calculated as <span
+class="math inline">\(\Delta T^{(k)}/\mathfrak{O}\)</span>, would be
+devided by zero, outputting an infinite value.</p>
+<p>When <span class="math inline">\(v\)</span> is negative, <span
+class="math inline">\(P^{((k-1)\to k)}\)</span> will be negative. The
+ratio <span class="math inline">\(\Delta T^{(k)}/\mathfrak{O}\)</span>
+now becomes negative, also beyond the range of <span
+class="math inline">\((1-\varepsilon, 1+\varepsilon)\)</span>.</p>
+<p>We can implement this algorithm in less than 100 lines of code. You
+should modify three files in the official Cinemachine source code
+directory.</p>
+<p>First is <code>Predictor.cs</code>. Add a <code>ImprovedDamp</code>
+function:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">float</span> <span class="title">ImprovedDamp</span>(<span class="params"><span class="built_in">float</span> initial, <span class="built_in">float</span> dampTime, <span class="built_in">float</span> deltaTime, <span class="built_in">float</span> bonus</span>)</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (dampTime &lt; Epsilon || Mathf.Abs(initial) &lt; Epsilon)</span><br><span class="line">        <span class="keyword">return</span> initial;</span><br><span class="line">    <span class="keyword">if</span> (deltaTime &lt; Epsilon)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">float</span> tolerance = <span class="number">0.05f</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">float</span> alpha = Mathf.Log(bonus) * dampTime / kLogNegligibleResidual;</span><br><span class="line">    <span class="built_in">float</span> ratio = deltaTime / alpha;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (ratio &lt;= <span class="number">1.0f</span> + tolerance &amp;&amp; ratio &gt;= <span class="number">1.0f</span> - tolerance)</span><br><span class="line">    &#123;</span><br><span class="line">        deltaTime = alpha;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">float</span> k = -kLogNegligibleResidual / dampTime; <span class="comment">//DecayConstant(dampTime, kNegligibleResidual);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> initial * (<span class="number">1</span> - Mathf.Exp(-k * deltaTime));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The input <code>bonus</code> is <span
+class="math inline">\(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\)</span>. Parameter <code>tolerance</code> is what you should set
+as <span class="math inline">\(\varepsilon\)</span> we've introduced
+above.</p>
+<p>In file <code>CinemachineVirtualCameraBase.cs</code>, add a new
+function <code>ImprovedDetachedFollowTargetDamp</code>:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Vector3 <span class="title">ImprovedDetachedFollowTargetDamp</span>(<span class="params">Vector3 initial, Vector3 dampTime, <span class="built_in">float</span> deltaTime</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    GameObject go = GameObject.Find(<span class="string">&quot;Cube&quot;</span>);  <span class="comment">// Hard find our following target of interest, you should not do like this!</span></span><br><span class="line">    Vector3 deltaDistance = <span class="keyword">new</span> Vector3(<span class="number">100</span>, <span class="number">0</span>, <span class="number">0</span>) * deltaTime; <span class="comment">// Hard set the velocity, you should not do like this!</span></span><br><span class="line">    Vector3 residual = initial - deltaDistance;</span><br><span class="line">    Vector3 bonus = </span><br><span class="line">        <span class="keyword">new</span> Vector3(residual.x / (residual.x + deltaDistance.x + <span class="number">1e-7</span>f), </span><br><span class="line">                    residual.y / (residual.y + deltaDistance.y + <span class="number">1e-7</span>f), </span><br><span class="line">                    residual.z / (residual.z + deltaDistance.z + <span class="number">1e-7</span>f));</span><br><span class="line"></span><br><span class="line">    dampTime = Vector3.Lerp(Vector3.Max(Vector3.one, dampTime), dampTime, FollowTargetAttachment);</span><br><span class="line">    deltaTime = Mathf.Lerp(<span class="number">0</span>, deltaTime, FollowTargetAttachment);</span><br><span class="line">    <span class="keyword">return</span> Damper.ImprovedDamp(initial, dampTime, deltaTime, bonus);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This piece of code is very informal, and you should never write your
+code like this. The purpose of this function is to get <span
+class="math inline">\(R^{(k-1)}\)</span> and <span
+class="math inline">\(P^{((k-1)\to k)}\)</span>. I reckon the correct
+way to do this is to create a new (or two) variable in the
+<code>CinemachineVirtualCameraBase</code> class and update it in each
+tick. The code presented here is only for demonstration.</p>
+<p>In file <code>CinemachineFramingTransposer.cs</code>, change the
+called function for damping:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cameraOffset = VirtualCamera.ImprovedDetachedFollowTargetDamp(  <span class="comment">// Original is DetachedFollowTargetDamp</span></span><br><span class="line">    cameraOffset, <span class="keyword">new</span> Vector3(m_XDamping, m_YDamping, m_ZDamping), deltaTime);</span><br></pre></td></tr></table></figure>
+<p>You could also try other components, not just
+<code>FramingTransposer</code> here.</p>
+<p>With the default <code>tolerance=0.05</code>, the result is shown
+below.</p>
+<p><img data-src="/images/improvingdamping/gif-7.gif" width="900" height="450"/></p>
+<p>Camera jitters disappear. Note that the general fps is quite high
+(around 400~500). This is because our scene is quite simple, containing
+only a cube and a camera. In order to simulate a more real runtime game
+situation, I place 20k cubes in the scene and now the fps is around 30,
+but still unstable.</p>
+<p>Below is the result when using the raw damping algorithm.</p>
+<p><img data-src="/images/improvingdamping/gif-8.gif" width="900" height="450"/></p>
+<p>Camera jitters more severely due to a generally lower FPS. What about
+using the improved damping algorithm? Here is result with
+<code>tolerance=0.05</code>.</p>
+<p><img data-src="/images/improvingdamping/gif-9.gif" width="900" height="450"/></p>
+<p>Just as expected, camera jitters do not show up. Let's try different
+<code>tolerance</code>s. How will a small <code>tolerance</code> help
+alleviate jitters? Below is the result with
+<code>tolerance=0.01</code>.</p>
+<p><img data-src="/images/improvingdamping/gif-10.gif" width="900" height="450"/></p>
+<p>Camera jitters occur again! This suggests that an excessively small
+value cannot fully filter out actions that can lead to camera jitters.
+Let's try our final experiment with <code>tolerance=0.1</code>.</p>
+<p><img data-src="/images/improvingdamping/gif-11.gif" width="900" height="450"/></p>
+<p>Camera jitters disappear, but the camera motion seems a little
+stiff.</p>
+<p>We should set an approriate value of <code>tolerance</code>.</p>
+<h2 id="solution-2-infinite-impulse-response">Solution 2: infinite
+impulse response</h2>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+        <div class="popular-posts-date">2022-12-11</div>
+      <div class="popular-posts-title"><a href="/2022/12/11/09/16/" rel="bookmark">Implementing A Minimum 1V1 Camera in UE (akin to FramingTransposer + Composer in Cinemachine)</a></div>
+        <div class="popular-posts-excerpt"><p><p>The camera system inside Unreal Engine provides very basic functions.
+It merely enables the camera to follow a target with limited adjustable
+paramters such as offset, camera distance, lag, etc. We would like a
+more powerful camera system, like the Cinemachine toolset in Unity, to
+facilitate creating more interesting and compelling visual experience
+for gameplay. In most 3D adventure games, a 1v1 camera is required when
+you fight with a BOSS and you need to look at the BOSS however you move
+and cast skills. Unfortunately, 1v1 camera is not a built-in function in
+UE, so we have to implement our own version of 1v1 camera.</p>
+<p>In this post, I will share with you how to implement a minimum 1v1
+camera in UE using only blueprints, based on some simple mathematics. If
+you are more familiar with coding, you can also implement this 1v1
+camera with only few lines of code.</p></p></div>
+    </li>
+    <li class="popular-posts-item">
+        <div class="popular-posts-date">2023-02-09</div>
+      <div class="popular-posts-title"><a href="/2023/02/09/23/21/" rel="bookmark">ComponentCameraSystem - A Simplified Camera System for You to Create Plentiful Gameplay Camera Movements and Effects</a></div>
+    </li>
+    <li class="popular-posts-item">
+        <div class="popular-posts-date">2022-05-05</div>
+      <div class="popular-posts-title"><a href="/2022/05/05/21/40/" rel="bookmark">《Real-Time Cameras》笔记</a></div>
+        <div class="popular-posts-excerpt"><p><p>本文是《Real-Time Cameras: A Guide for Game Designers and
+Developers》的阅读笔记，放在此备份供参阅。</p></p></div>
+    </li>
+    <li class="popular-posts-item">
+        <div class="popular-posts-date">2022-10-12</div>
+      <div class="popular-posts-title"><a href="/2022/10/12/18/39/" rel="bookmark">Bump Mapping, Normal Mapping and Displacement Mapping</a></div>
+        <div class="popular-posts-excerpt"><p><p>凹凸贴图（Bump
+mapping）是图形学中一种常用的用于改变物体视觉凹凸性的方法，但是网上很多介绍对它的原理和变体都非常模糊，甚至包含一些关键概念的错误。本文将详细介绍凹凸贴图及其变体（Normal
+Mapping和Displacement
+Mapping）的原理，并在代码上加以实现，以便让读者更好地理解这项技术。</p></p></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>原作者： </strong>Sulley
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://sulley.cc/2023/07/08/18/22/" title="The Jittering Issue with Damping in Cinemachine and How to Tackle it">http://sulley.cc/2023/07/08/18/22/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+              <a href="/tags/%E7%9B%B8%E6%9C%BA/" rel="tag"># 相机</a>
+              <a href="/tags/Unity/" rel="tag"># Unity</a>
+              <a href="/tags/Cinemachine/" rel="tag"># Cinemachine</a>
+              <a href="/tags/Damping/" rel="tag"># Damping</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/05/28/17/00/" rel="prev" title="An Introduction to Reservoir Sampling (with Pseudo Code)">
+                  <i class="fa fa-chevron-left"></i> An Introduction to Reservoir Sampling (with Pseudo Code)
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sulley</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">379k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:45</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.7/pdfobject.min.js","integrity":"sha256-ph3Dk89VmuTVXG6x/RDzk53SU9LPdAh1tpv0UvnDZ2I="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":"enable","theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"littlesulley","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

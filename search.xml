@@ -650,6 +650,21 @@ Matching基本知识的介绍，放在此备份。</p>
       </tags>
   </entry>
   <entry>
+    <title>Which Splines Do You Need? A Comprehensive Dive into Common Splines</title>
+    <url>/2023/05/03/18/22/</url>
+    <content><![CDATA[
+]]></content>
+      <categories>
+        <category>数学 - 图形学</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>数学</tag>
+        <tag>随笔</tag>
+        <tag>Spline</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>A Brief Note on Version Control and Project Organization</title>
     <url>/2022/11/21/16/03/</url>
     <content><![CDATA[<p>This is a brief note about the e-book <a
@@ -819,21 +834,6 @@ As a team, you need to agree on your guidelines</p>
       </tags>
   </entry>
   <entry>
-    <title>Which Splines Do You Need? A Comprehensive Dive into Common Splines</title>
-    <url>/2023/05/03/18/22/</url>
-    <content><![CDATA[
-]]></content>
-      <categories>
-        <category>数学 - 图形学</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>数学</tag>
-        <tag>随笔</tag>
-        <tag>Spline</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《Assassain&#39;s Creed Valhalla》玩后感</title>
     <url>/2020/11/12/23/23/</url>
     <content><![CDATA[<p><code>刺客信条：英灵殿</code>（Assassin's Creed
@@ -873,39 +873,6 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
         <tag>游戏</tag>
         <tag>生活</tag>
         <tag>刺客信条</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ComponentCameraSystem - A Simplified Camera System for You to Create Plentiful Gameplay Camera Movements and Effects</title>
-    <url>/2023/02/09/23/21/</url>
-    <content><![CDATA[<p><strong>ComponentCameraSystem</strong> is a simplified, extensible
-and designer-friendly camera system for Unreal Engine. It enhances the
-built-in spring arm and camera components in native Unreal editor across
-a wide variety of common gameplay camera behaviours such as keeping a
-target at a fixed screen position, moving on rail, and resolving
-occulusion in complex occasions, enabling you to easily create plentiful
-smooth camera movements and effects within only few minutes. Go to the
-<a
-href="https://sulleyyys-organization.gitbook.io/manuals-of-ccs/">Documentation</a>
-for more details.</p>
-<p>Currently <strong>ComponentCameraSystem</strong> supports Unreal
-Engine versions &gt;= 5.0. So before using this plugin, please upgrade
-your project to Unreal Engine 5.0 at its minimum version
-requirement.</p>
-<p>You can buy this plugin at Unreal <a
-href="https://www.unrealengine.com/marketplace/en-US/product/component-camera-system">Marketplace</a>.
-Persistent upgrade will be made to make it more stable and support more
-features.</p>
-]]></content>
-      <categories>
-        <category>游戏 - 相机</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>游戏</tag>
-        <tag>UE</tag>
-        <tag>插件</tag>
-        <tag>相机</tag>
       </tags>
   </entry>
   <entry>
@@ -1163,6 +1130,187 @@ Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷
       <tags>
         <tag>数学</tag>
         <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一道有趣的概率题</title>
+    <url>/2022/10/20/23/59/</url>
+    <content><![CDATA[<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
+U(0,1)\)</span>独立同分布，令<span
+class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
+X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
+class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。换句话说，我们要求最先使得若干个独立同分布于<span
+class="math inline">\((0,1)\)</span>的随机变量之和大于<span
+class="math inline">\(1\)</span>的期望。</p>
+<span id="more"></span>
+<h1 id="问题定义">问题定义</h1>
+<p>这个问题的定义已经定义在上面了，这里再复述一遍：</p>
+<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
+U(0,1)\)</span>独立同分布，令<span
+class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
+X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
+class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。</p>
+<h1 id="引入函数">引入函数</h1>
+<p>乍一看这个题似乎无从下手，但是我们可以发现这里<span
+class="math inline">\(&gt;1\)</span>这个条件似乎可以换成任意一个<span
+class="math inline">\(&gt;t
+(t&gt;0)\)</span>，这启发我们用一个函数去表示我们要求的式子，然后通过求解一个“递推式”（实际上是一个微分方程）解出这个函数，进而得到某个具体点的值。</p>
+<p>从这个思路出发，我们不妨定义<span
+class="math inline">\(\tau_t:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le t
+\wedge X_1+\cdots+X_{n-1}+X_n&gt;t\}\)</span>，进而令<span
+class="math inline">\(f(t):=\mathbb{E}[X_1+\cdots+X_{\tau_t}]\)</span>。显然，我们的目标就是求<span
+class="math inline">\(f(1)\)</span>。</p>
+<h1 id="求解方程">求解方程</h1>
+<p>那么，怎么求出<span
+class="math inline">\(f(t)\)</span>呢？注意题目中的条件<span
+class="math inline">\(X_1,X_2,\cdots\sim
+U(0,1)\)</span>独立同分布，因此我们可以把<span
+class="math inline">\(f(t)\)</span>里面的<span
+class="math inline">\(X_1\)</span>拆出来，变成：</p>
+<p><span
+class="math display">\[f(t)=\mathbb{E}[X_1]+\mathbb{E}[X_2+\cdots+X_{\tau_t}]\]</span></p>
+<p>为了简便起见，我们不妨限定<span
+class="math inline">\(t&lt;1\)</span>。此时考虑两种情况：<span
+class="math inline">\(X_1=s&gt;t\)</span>和<span
+class="math inline">\(X_1=s\le t\)</span>。</p>
+<p>如果<span class="math inline">\(s&gt;t\)</span>，那么<span
+class="math inline">\(f(t)\)</span>就等于<span
+class="math inline">\(\mathbb{E}[X_1]\)</span>，所以这等价<span
+class="math inline">\(f(t|s&gt;t)=\mathbb{E}[X_1\vert
+X_1&gt;t]=\dfrac{1-t^2}{2}\)</span>。</p>
+<p>如果<span class="math inline">\(s\le
+t\)</span>，那么就相当于后面的<span
+class="math inline">\(X_2+\cdots+X_{\tau_t}&gt;t-s\)</span>且<span
+class="math inline">\(X_2+\cdots+X_{\tau_t-1}\le
+t-s\)</span>，再由独立同分布知道这就是<span
+class="math inline">\(f(t-s)\)</span>，但这是以<span
+class="math inline">\(X_t=s\le t\)</span>为条件的，所以实际上还要对<span
+class="math inline">\(s\)</span>求个积分，也就是：</p>
+<p><span class="math display">\[f(t|s\le
+t)=\frac{t^2}{2}+\int_{0}^tf(t-s)\mathrm{d}s\]</span></p>
+<p>把上面两个加起来，就有：</p>
+<p><span class="math display">\[f(t)=f(t|s\le
+t)+f(t|s&gt;t)=\frac{1}{2}+\int_0^tf(x)\mathrm{d}x\]</span></p>
+<p>进而得到微分方程及其初始值：</p>
+<p><span
+class="math display">\[f&#39;(t)=f(t),~~f(0)=\frac{1}{2}\]</span></p>
+<p>很容易求解得到<span
+class="math inline">\(f(t)=\mathrm{e}^t/2\)</span>，所以我们就能得到最终的答案<span
+class="math inline">\(f(1)=\mathrm{e}/2\)</span>。</p>
+]]></content>
+      <categories>
+        <category>数学 - 概率论</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>概率论</tag>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ComponentCameraSystem - A Simplified Camera System for You to Create Plentiful Gameplay Camera Movements and Effects</title>
+    <url>/2023/02/09/23/21/</url>
+    <content><![CDATA[<p><strong>ComponentCameraSystem</strong> is a simplified, extensible
+and designer-friendly camera system for Unreal Engine. It enhances the
+built-in spring arm and camera components in native Unreal editor across
+a wide variety of common gameplay camera behaviours such as keeping a
+target at a fixed screen position, moving on rail, and resolving
+occulusion in complex occasions, enabling you to easily create plentiful
+smooth camera movements and effects within only few minutes. Go to the
+<a
+href="https://sulleyyys-organization.gitbook.io/manuals-of-ccs/">Documentation</a>
+for more details.</p>
+<p>Currently <strong>ComponentCameraSystem</strong> supports Unreal
+Engine versions &gt;= 5.0. So before using this plugin, please upgrade
+your project to Unreal Engine 5.0 at its minimum version
+requirement.</p>
+<p>You can buy this plugin at Unreal <a
+href="https://www.unrealengine.com/marketplace/en-US/product/component-camera-system">Marketplace</a>.
+Persistent upgrade will be made to make it more stable and support more
+features.</p>
+]]></content>
+      <categories>
+        <category>游戏 - 相机</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>游戏</tag>
+        <tag>UE</tag>
+        <tag>插件</tag>
+        <tag>相机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>你为什么不笑了</title>
+    <url>/2022/10/29/00/35/</url>
+    <content><![CDATA[<p>你为什么不笑了？</p>
+<span id="more"></span>
+<p>奶奶，你为什么不笑了？<br />
+还记得，一年前的你，<br />
+走在春风里，<br />
+向着山顶慢慢登去。<br />
+你摘下路边的一朵浅梅，<br />
+捧在手心。<br />
+阳光洒下，<br />
+手中的梅花，也映衬出了你脸上的笑容。</p>
+<p>你的儿子女儿挽着你的手，<br />
+一步一步向山顶走去，<br />
+你看见一棵古树，<br />
+你说这是拍照好去处。<br />
+女儿扶着你，<br />
+你扶着树，<br />
+阳光洒下，<br />
+树上的绿叶，也甘愿陪衬你脸上的笑容。</p>
+<p>来到山顶，<br />
+黄花遍地，<br />
+你开心得像个孩子，<br />
+伸出双手，<br />
+比了两个大大的耶，<br />
+那时的你，真的好美。</p>
+<p>奶奶，从什么时候开始，你不笑了？<br />
+从拔掉爷爷呼吸机的那个夜晚开始，<br />
+你似乎一直睡得不好。<br />
+你还能梦见吗，<br />
+另一张空荡荡的床上，<br />
+曾经那个老人的模样？<br />
+从前他是那样健康，<br />
+如今却骨瘦嶙峋，<br />
+让时间风干了皮肤，<br />
+侵蚀了思想。<br />
+你还能看见吗，<br />
+那个明媚下午的阳光，<br />
+案前那个老人伏着阅读着，报刊也泛黄。</p>
+<p>奶奶，你为什么不笑了？<br />
+近日来，<br />
+你总是抱怨，<br />
+胸口有恙。<br />
+你变得啰嗦、唠叨，<br />
+总是对小事斤斤计量。<br />
+我好想你能多笑笑，<br />
+放下生活的疲劳，<br />
+忘却心中的郁结，<br />
+再回忆，<br />
+我们一起出游时，<br />
+小鸟的啼叫，<br />
+鲜花的绽放，<br />
+阳光的照耀，<br />
+我们手拉着手，<br />
+在田园中，聊些家常，传来欢笑。</p>
+<p>奶奶，时间真的很残酷，<br />
+也许当我走时，<br />
+这个世界便再无你的回响，<br />
+人生人寂，人来人往，<br />
+至我去时，此情已了，略无痕迹。</p>
+<p>奶奶，再让我看看你的笑，<br />
+那个阳光中，<br />
+像孩子般最天真的笑容。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
       </tags>
   </entry>
   <entry>
@@ -1430,81 +1578,6 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
       </tags>
   </entry>
   <entry>
-    <title>一道有趣的概率题</title>
-    <url>/2022/10/20/23/59/</url>
-    <content><![CDATA[<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
-U(0,1)\)</span>独立同分布，令<span
-class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
-X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
-class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。换句话说，我们要求最先使得若干个独立同分布于<span
-class="math inline">\((0,1)\)</span>的随机变量之和大于<span
-class="math inline">\(1\)</span>的期望。</p>
-<span id="more"></span>
-<h1 id="问题定义">问题定义</h1>
-<p>这个问题的定义已经定义在上面了，这里再复述一遍：</p>
-<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
-U(0,1)\)</span>独立同分布，令<span
-class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
-X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
-class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。</p>
-<h1 id="引入函数">引入函数</h1>
-<p>乍一看这个题似乎无从下手，但是我们可以发现这里<span
-class="math inline">\(&gt;1\)</span>这个条件似乎可以换成任意一个<span
-class="math inline">\(&gt;t
-(t&gt;0)\)</span>，这启发我们用一个函数去表示我们要求的式子，然后通过求解一个“递推式”（实际上是一个微分方程）解出这个函数，进而得到某个具体点的值。</p>
-<p>从这个思路出发，我们不妨定义<span
-class="math inline">\(\tau_t:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le t
-\wedge X_1+\cdots+X_{n-1}+X_n&gt;t\}\)</span>，进而令<span
-class="math inline">\(f(t):=\mathbb{E}[X_1+\cdots+X_{\tau_t}]\)</span>。显然，我们的目标就是求<span
-class="math inline">\(f(1)\)</span>。</p>
-<h1 id="求解方程">求解方程</h1>
-<p>那么，怎么求出<span
-class="math inline">\(f(t)\)</span>呢？注意题目中的条件<span
-class="math inline">\(X_1,X_2,\cdots\sim
-U(0,1)\)</span>独立同分布，因此我们可以把<span
-class="math inline">\(f(t)\)</span>里面的<span
-class="math inline">\(X_1\)</span>拆出来，变成：</p>
-<p><span
-class="math display">\[f(t)=\mathbb{E}[X_1]+\mathbb{E}[X_2+\cdots+X_{\tau_t}]\]</span></p>
-<p>为了简便起见，我们不妨限定<span
-class="math inline">\(t&lt;1\)</span>。此时考虑两种情况：<span
-class="math inline">\(X_1=s&gt;t\)</span>和<span
-class="math inline">\(X_1=s\le t\)</span>。</p>
-<p>如果<span class="math inline">\(s&gt;t\)</span>，那么<span
-class="math inline">\(f(t)\)</span>就等于<span
-class="math inline">\(\mathbb{E}[X_1]\)</span>，所以这等价<span
-class="math inline">\(f(t|s&gt;t)=\mathbb{E}[X_1\vert
-X_1&gt;t]=\dfrac{1-t^2}{2}\)</span>。</p>
-<p>如果<span class="math inline">\(s\le
-t\)</span>，那么就相当于后面的<span
-class="math inline">\(X_2+\cdots+X_{\tau_t}&gt;t-s\)</span>且<span
-class="math inline">\(X_2+\cdots+X_{\tau_t-1}\le
-t-s\)</span>，再由独立同分布知道这就是<span
-class="math inline">\(f(t-s)\)</span>，但这是以<span
-class="math inline">\(X_t=s\le t\)</span>为条件的，所以实际上还要对<span
-class="math inline">\(s\)</span>求个积分，也就是：</p>
-<p><span class="math display">\[f(t|s\le
-t)=\frac{t^2}{2}+\int_{0}^tf(t-s)\mathrm{d}s\]</span></p>
-<p>把上面两个加起来，就有：</p>
-<p><span class="math display">\[f(t)=f(t|s\le
-t)+f(t|s&gt;t)=\frac{1}{2}+\int_0^tf(x)\mathrm{d}x\]</span></p>
-<p>进而得到微分方程及其初始值：</p>
-<p><span
-class="math display">\[f&#39;(t)=f(t),~~f(0)=\frac{1}{2}\]</span></p>
-<p>很容易求解得到<span
-class="math inline">\(f(t)=\mathrm{e}^t/2\)</span>，所以我们就能得到最终的答案<span
-class="math inline">\(f(1)=\mathrm{e}/2\)</span>。</p>
-]]></content>
-      <categories>
-        <category>数学 - 概率论</category>
-      </categories>
-      <tags>
-        <tag>数学</tag>
-        <tag>概率论</tag>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>十二月的花</title>
     <url>/2020/12/22/09/29/</url>
     <content><![CDATA[<p>埙吹响了海岸<br />
@@ -1526,79 +1599,6 @@ class="math inline">\(f(1)=\mathrm{e}/2\)</span>。</p>
         <tag>随笔</tag>
         <tag>生活</tag>
         <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>你为什么不笑了</title>
-    <url>/2022/10/29/00/35/</url>
-    <content><![CDATA[<p>你为什么不笑了？</p>
-<span id="more"></span>
-<p>奶奶，你为什么不笑了？<br />
-还记得，一年前的你，<br />
-走在春风里，<br />
-向着山顶慢慢登去。<br />
-你摘下路边的一朵浅梅，<br />
-捧在手心。<br />
-阳光洒下，<br />
-手中的梅花，也映衬出了你脸上的笑容。</p>
-<p>你的儿子女儿挽着你的手，<br />
-一步一步向山顶走去，<br />
-你看见一棵古树，<br />
-你说这是拍照好去处。<br />
-女儿扶着你，<br />
-你扶着树，<br />
-阳光洒下，<br />
-树上的绿叶，也甘愿陪衬你脸上的笑容。</p>
-<p>来到山顶，<br />
-黄花遍地，<br />
-你开心得像个孩子，<br />
-伸出双手，<br />
-比了两个大大的耶，<br />
-那时的你，真的好美。</p>
-<p>奶奶，从什么时候开始，你不笑了？<br />
-从拔掉爷爷呼吸机的那个夜晚开始，<br />
-你似乎一直睡得不好。<br />
-你还能梦见吗，<br />
-另一张空荡荡的床上，<br />
-曾经那个老人的模样？<br />
-从前他是那样健康，<br />
-如今却骨瘦嶙峋，<br />
-让时间风干了皮肤，<br />
-侵蚀了思想。<br />
-你还能看见吗，<br />
-那个明媚下午的阳光，<br />
-案前那个老人伏着阅读着，报刊也泛黄。</p>
-<p>奶奶，你为什么不笑了？<br />
-近日来，<br />
-你总是抱怨，<br />
-胸口有恙。<br />
-你变得啰嗦、唠叨，<br />
-总是对小事斤斤计量。<br />
-我好想你能多笑笑，<br />
-放下生活的疲劳，<br />
-忘却心中的郁结，<br />
-再回忆，<br />
-我们一起出游时，<br />
-小鸟的啼叫，<br />
-鲜花的绽放，<br />
-阳光的照耀，<br />
-我们手拉着手，<br />
-在田园中，聊些家常，传来欢笑。</p>
-<p>奶奶，时间真的很残酷，<br />
-也许当我走时，<br />
-这个世界便再无你的回响，<br />
-人生人寂，人来人往，<br />
-至我去时，此情已了，略无痕迹。</p>
-<p>奶奶，再让我看看你的笑，<br />
-那个阳光中，<br />
-像孩子般最天真的笑容。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
       </tags>
   </entry>
   <entry>
@@ -1926,72 +1926,6 @@ H &amp;= \tan(A)R + Y
       </tags>
   </entry>
   <entry>
-    <title>电影《误杀》短评</title>
-    <url>/2020/09/08/16/18/</url>
-    <content><![CDATA[<p>《误杀》是一部不失水准的悬疑片。实际上，在看完电影得知这是一部翻拍（翻拍自2015年的印度电影《误杀瞒天记》。实际上，它还有更早的来源）后，我竟然有些失落：要是这是我们自己的剧本该多好。但无论如何，本片从剧情、人物、节奏、立意、表现手法等方法，都是在水准线之上的作品，其中的若干不足完全是瑕不掩瑜的。8分是我对本片的总体评价。
-之后我将围绕本片进行，而不讨论有关其原版《误杀瞒天记》的内容。</p>
-<span id="more"></span>
-<h1 id="剧情与讲述">剧情与讲述</h1>
-<p>一言蔽之，本片讲述了一个关于“误杀”的故事。但看到最后，观众会发现，实际上，“误杀”并不成立，称之为“谋杀”，也是不为过的。本片没有直接点明这一点，是为了进一步突出电影的戏剧化效果。</p>
-<p>在剧情方面，电影是成功的。除了讲述男主制造不在场证据和他与局长的博弈之外，男主与家人的心理刻画，两位母亲形象的表现，都是相当具有感染力的。值得一提的是，本片大量致敬了以往的经典电影：《肖申克的救赎》，《活埋》，《蒙太奇》，《控方证人》，
-《天才枪手》，《猫鼠游戏》，《杀人回忆》等。在这里面，需要重点介绍一下《活埋》、《蒙太奇》和《杀人回忆》三部电影在本片中的作用。</p>
-<p>就讲述手段来看，本片仍然有比较显著的缺点，这重点体现了电影的开头和结尾两个部分。如果说本片一开头就致敬《活埋》并且将其作为一个伏笔的话，也未免太过着急或显眼。这段回忆式的致敬，也即对《肖申克的救赎》和《活埋》场景的再现，让观众在看完本片之后，难免会产生着墨过多的冗余感。这导致了两个问题：（1）电影的引入太过生硬；（2）电影的节奏难以统一。在电影结尾部分，导演显然致敬了韩国电影《杀人回忆》，以此将话语权交换给观众，让观众发声。这样的处理自然没有问题，然而，在国产电影标注Happy
-Ending的设定下，影片的结尾部分显然出现了导演表现力上的断裂：一方面，导演想让观众自我评判电影及男主的行为，另一方面，受制于各种不可描述的环境，导演又不得不以“坏人自白”和“好人自首”来草草收尾，这必然导致电影中期紧张的节奏和后期好人齐唱社会好的慢节奏形成冲突，导演再次致敬《杀人回忆》的结尾，就有狗尾续貂之嫌。</p>
-<p>抛开这两点显著的不足来看，本片在故事的讲述上无疑是成功的。中期影片节奏把控得相当精准，既能保持较快的节奏，时刻抓住观众想要知道后续的心，又能娓娓道来，不遗漏重要细节。譬如影片中间，男主到现场看新警察局装修情况的桥段，就在短短几分钟的情节内告诉了观众几个重要的细节：（1）男主仔细观察了地上的坑，再联系最后说尸体埋藏地点不方便透露，观众可以很简单地猜测到埋藏地点；（2）被子弹射死的山羊，是成为“替罪羊”的关键之物；（3）警官公报私仇，与李维杰进一步结怨，成为后面他引发众怒的导火索。</p>
-<p>另外一个值得注意的细节是，本片多次出现白色山羊，这显然是导演有意为之。在此，我引用豆瓣上的一篇影评对此的分析（
-https://movie.douban.com/review/12076729/ ），摘录如下：</p>
-<p>电影中羊的四次出现：第一次在湖边看到男主抛车（知道男主有罪），第二次被警察打死（代替男主受罚），第三次开棺验尸（作为替罪羊，帮男主掩埋真相），第四次男主决定认罪后，活羊重新出现，寺庙响起钟声（都预示着男主释然，已经放下心结，决心认罪接受惩罚）。</p>
-<h1 id="画面与音乐">画面与音乐</h1>
-<p>导演非常擅长使用电影中画面和音乐的技巧。电影中的音乐是烘托气氛和人物内心活动的重要工具，而画面则直接决定了观众的视觉体验。由于笔者缺乏视听的专业知识，难以用简洁明了的话语概括，故在此引用豆瓣另一篇影评对此的分析（
-https://movie.douban.com/review/12090128/ ），摘录如下：</p>
-<h2 id="交叉蒙太奇">交叉蒙太奇</h2>
-<p>这版《误杀》将“听经”改为“泰拳”，在电影前半段，就有一段很精彩的拳赛段落，这段拳赛是和素察上门交叉剪辑在一起的。</p>
-<p>李维杰之所以利用看拳赛为全家制造不在场证明，是因为“误杀”这件事发生的同时，也就是2号晚上，他就在看拳赛。</p>
-<p>李维杰2号出差给罗统的酒店维修网络，晚上完工后看到酒店房间塞的小卡片，决定去看泰拳休闲娱乐。同时，官二代素察来到灿班镇李维杰家里调戏大女儿，并与察觉不对劲的妈妈阿玉产生冲突。</p>
-<p>在这同一时间，不同空间，李维杰在看泰拳纠打，阿玉和大女儿在和素察纠打。导演对这两段戏采用了交叉蒙太奇的手法。</p>
-<p>一边是泰拳拳手踢到肚子，一边素察踢到阿玉，一边拳手倒地，一边素察倒地……而且“拳赛”和“误杀”两边的镜头时长越来越短，镜头切换越来越快，节奏也越来越紧张。</p>
-<p>通过这一手段，导演将李维杰完全不知情的状态，与官二代对妻女的欺凌和误杀剪辑在一起，观众在这段观影过程中是全知视角，神经逐渐被绷紧。</p>
-<p>这段交叉蒙太奇，既完成了误杀官二代的过程，又给后知后觉的李维杰出了一个难题。观众在紧张过后，心理继续被剧情调动：接下来李维杰和全家该怎么办？</p>
-<h2 id="慢镜头">慢镜头</h2>
-<p>《误杀》中的“慢镜头”大概有10次以上。</p>
-<p>尤其是最后在大雨里开棺启尸那场终极对决，几乎整段都使用了慢动作镜头。</p>
-<p>使用慢镜头的目的大概分为“制造滑稽效果”、“强调心理对时间的感受”或“凸显某一重要时刻”等，这部电影多次使用慢镜头的目的肯定是后两个。</p>
-<p>比如李维杰销毁素察的车这段戏，当时人物心理非常紧张。李维杰看到高速路上警察设卡和牧羊人路过时，都用慢镜头来强化李维杰当时紧张的心情。</p>
-<p>最后大雨是全片的高潮。慢镜头配上暴雨的场面调度，雨滴的速度也被放慢，不仅制造出震撼的视觉效果，也通过刻意放慢速度，主观上加长寻找尸体的时间，提升李维杰最后一击的震惊感。</p>
-<h2 id="布光">布光</h2>
-<p>《误杀》中利用布光塑造人物和烘托氛围最明显的，就是陈冲饰演的女警察局长。</p>
-<p>女警察局长这个角色非常复杂，她既要在下属面前树威，又迟迟攻破不了李维杰的手段，还要忍受母亲失去儿子的巨大痛苦，同时还得顾忌丈夫竞选市长。</p>
-<p>所以，导演对陈冲出场戏份的布光特别丰富。有一个镜头是陈冲在灿班镇警察局，脸上是百叶窗投下的如钢锯般的光影。这种非常特殊的光影投射在人物脸上，体现出当时人物内心巨大的痛苦和矛盾。</p>
-<p>除了陈冲，导演对主角李维杰和阿玉的布光也做了精心安排。</p>
-<p>比如李维杰从罗统回到家后，得知大女儿被侮辱，妻女又把素察误杀，从此全片的影调全部变成低调光（low
-key）。</p>
-<p>李维杰在得知这一痛心+震惊的消息时，脸上几乎没有打光。这样处理，非常鲜明地表现了李维杰和一家人的生活从此陷入黑暗。他们要在一点点微光中，找寻希望。</p>
-<p>观影时可以注意，电影仅仅在前15分钟和后15分钟有比较明亮的打光，从误杀案后就再无亮光，全片影调变得非常暗。</p>
-<h2 id="特殊音效">特殊音效</h2>
-<p>如果仔细听，电影在很多重要时刻都加入了特殊音效来渲染气氛。比如电影最后开棺，当镜头中显示的尸体不是素察而是一只羊时，背景音给了一声巨响，用来增强观众此时的心理感受。</p>
-<h1 id="主题与立意">主题与立意</h1>
-<p>关于本片的主题与立意，不同的观众自然有不同的想法。在这里，我认为有以下三点是比较明显的，即“法律正义”、“子女教育”与“选择冲突”。</p>
-<h2 id="法律正义">法律正义</h2>
-<p>法律是不是代表了正义？这是一个没有答案的问题。如果法律保证了正义，那么为什么还会有如此多不正义的事情发生？李维杰一家是受害者，但却不得不背负着杀人偿命的罪煞费心机制造一系列不在场证明（尽管杀人的事实客观成立）；但如果说法律不是正义，那么从客观来讲，它的确是保障社会稳定的最有效方法。警长的公报私仇最终还是遭到了愤怒民众的惩罚，滥用私权的局长拉韫也被撤职，正义还是到了。然而，在这正义之下，我们看到的，只有一个双输的局面：局长方全面溃败，李维杰方全家也将面临牢狱之灾。在这种法律正义的庇护之下，没有任何一方的权益得到了满足，也没有任何一个人获得了切实的好处。</p>
-<p>追根到底，这还是法律正义性的缺陷导致的必然结果。如果素察不是局长的儿子，李维杰一家人会得到应有的正义吗？如果李维杰没有看过那么多电影，或者一开始就束手就擒，平平被侮辱的真相能得到审判吗？尽管我们想要去解决这个问题，但现实是，人性的复杂根本无法用简单的“正义”得以阐释。法律无法接纳家长对子女的爱与纵容，也无法兼容“理性的公义”与“感性的迁就”的平衡。</p>
-<h2 id="子女教育">子女教育</h2>
-<p>子女教育是本片第二个十分明确的立意。小女儿安安目睹了母亲和姐姐杀人埋尸的全过程，然而却在父亲的指导下学会了如何撒谎。这在本片结尾她篡改分数体现得淋漓尽致。本来应该是天真无邪的女儿，却因为自己做的这个事情熟练地学会了如何撒谎、如何欺骗，相比“误杀”，这让男主是更难以接受的。注意到在这个时候，此刻男主一家已经完全不会被追查了：拉韫一家无权无势，所有证据烟消云散，没有人证、没有物证，他完全可以选择逍遥法外。然而，男主最后竟然选择了自首，这岂不是让他之前做的一切都白费了吗？如此说不通的逻辑，是在两件事之后得到的转变：（1）女儿修改成绩的试卷：身为父亲却言传身教教会了女儿最不能学会的恶习，这在男主心中是难以承担的。通过路人的口，我们知道男主自幼丧亲，如何做人是他立身之本，他可以为了家人背叛他的原则（在影片开头，他向僧人布施的情节可以体现他是一个对自身要求很高的人），也可以为了家人（女儿）重拾他的原则；（2）寺庙里的醒悟：寺庙是男主最后的救赎。当他第二次向僧人布施遭到拒绝的时候，他实际上内心是煎熬的。但在最后，为了暴乱不再延续，为了子女成长，他选择了“挡在最前面”，得到内心的自由。</p>
-<p>在素察方面，由于其父亲的疏于管教，母亲的溺爱，其最终的结局无非是“大快人心”的。和现实结合的同时，观众也能感受到父母对子女教育的重要性。身为警长的母亲，掌握着执法权而选择了包庇有过错的儿子；身为政客的父亲，只能责打自己的儿子来管教他。无法用公平的武器制裁亲人的犯罪，无法用有效的裁断约束亲人的叛逆，这样的警官，这样的政客，你们敢信任吗？正如在影片最后，男主在囚车中的自白一样，最后他竟然以这样的方式取得女儿的信任，这是荒诞而遗憾的。无论他之前在教育中出现了如何的问题，至少在现在，他用自己的行为证明了，他是一个伟大的父亲。</p>
-<h2 id="选择冲突">选择冲突</h2>
-<p>另外一个值得注意的点是，男主的选择奠定了本片的基调。本片有一个重复提及的细节：一开始，素察被平平击昏时，并没有当场死去。理由如下：（1）女主推车出去时，镜头给了素察一个手部特写；（2）男主多次凝视棺材；（3）男主第二次向僧人布施时遭到了拒绝，并且镜头显示了男主十分惊慌的表情；（4）影片高潮，揭开棺材时，棺材板上血淋淋的抓痕（这是最直接的证据，这表明素察是活活被憋死，或者被男主直接杀害的）；（5）影片最后，男主对局长夫妇致歉；（6）男主最后自首。结合这些或明或暗的事实，我们不难推出：在仓库素察只是被击昏，而真正导致素察死亡的原因是男主，为了“不让自己的家人受到伤害”，所以他选择了杀死素察，或见死不救。这个地方影片也有充分的暗示，一是影片开头致敬电影《活埋》的桥段，可以认为素察是被“活埋”致死；二是镜头给了被子弹射死的山羊的特写。</p>
-<p>以男主的标准来看，他在救与不救之间是经过了痛苦的煎熬的：小女儿安安用叉子划桌子的声音和素察在棺材里绝望地用手划棺材盖的声音是相似的。但最终，他选择了保护家人，直接或间接地杀死了素察。在影片结尾，他选择自首这点上，他没有欺骗，只是除了他自己之外，任何人都不知道，他只能用这种方式，对局长夫妇、对无辜的被他利用的路人、对自己的家人，表达愧疚，与忏悔。</p>
-<p>男主是纯粹的，而往往纯粹的人最容易陷入万劫不复的矛盾之中。</p>
-]]></content>
-      <categories>
-        <category>电影 - 国产电影</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>影评</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>用生成函数和复数巧解一道计数题</title>
     <url>/2022/06/26/23/03/</url>
     <content><![CDATA[<p>对集合<span
@@ -2213,6 +2147,72 @@ class="math inline">\(\mathfrak{P}_k\)</span>的表达式吗？</p>
       <tags>
         <tag>数学</tag>
         <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电影《误杀》短评</title>
+    <url>/2020/09/08/16/18/</url>
+    <content><![CDATA[<p>《误杀》是一部不失水准的悬疑片。实际上，在看完电影得知这是一部翻拍（翻拍自2015年的印度电影《误杀瞒天记》。实际上，它还有更早的来源）后，我竟然有些失落：要是这是我们自己的剧本该多好。但无论如何，本片从剧情、人物、节奏、立意、表现手法等方法，都是在水准线之上的作品，其中的若干不足完全是瑕不掩瑜的。8分是我对本片的总体评价。
+之后我将围绕本片进行，而不讨论有关其原版《误杀瞒天记》的内容。</p>
+<span id="more"></span>
+<h1 id="剧情与讲述">剧情与讲述</h1>
+<p>一言蔽之，本片讲述了一个关于“误杀”的故事。但看到最后，观众会发现，实际上，“误杀”并不成立，称之为“谋杀”，也是不为过的。本片没有直接点明这一点，是为了进一步突出电影的戏剧化效果。</p>
+<p>在剧情方面，电影是成功的。除了讲述男主制造不在场证据和他与局长的博弈之外，男主与家人的心理刻画，两位母亲形象的表现，都是相当具有感染力的。值得一提的是，本片大量致敬了以往的经典电影：《肖申克的救赎》，《活埋》，《蒙太奇》，《控方证人》，
+《天才枪手》，《猫鼠游戏》，《杀人回忆》等。在这里面，需要重点介绍一下《活埋》、《蒙太奇》和《杀人回忆》三部电影在本片中的作用。</p>
+<p>就讲述手段来看，本片仍然有比较显著的缺点，这重点体现了电影的开头和结尾两个部分。如果说本片一开头就致敬《活埋》并且将其作为一个伏笔的话，也未免太过着急或显眼。这段回忆式的致敬，也即对《肖申克的救赎》和《活埋》场景的再现，让观众在看完本片之后，难免会产生着墨过多的冗余感。这导致了两个问题：（1）电影的引入太过生硬；（2）电影的节奏难以统一。在电影结尾部分，导演显然致敬了韩国电影《杀人回忆》，以此将话语权交换给观众，让观众发声。这样的处理自然没有问题，然而，在国产电影标注Happy
+Ending的设定下，影片的结尾部分显然出现了导演表现力上的断裂：一方面，导演想让观众自我评判电影及男主的行为，另一方面，受制于各种不可描述的环境，导演又不得不以“坏人自白”和“好人自首”来草草收尾，这必然导致电影中期紧张的节奏和后期好人齐唱社会好的慢节奏形成冲突，导演再次致敬《杀人回忆》的结尾，就有狗尾续貂之嫌。</p>
+<p>抛开这两点显著的不足来看，本片在故事的讲述上无疑是成功的。中期影片节奏把控得相当精准，既能保持较快的节奏，时刻抓住观众想要知道后续的心，又能娓娓道来，不遗漏重要细节。譬如影片中间，男主到现场看新警察局装修情况的桥段，就在短短几分钟的情节内告诉了观众几个重要的细节：（1）男主仔细观察了地上的坑，再联系最后说尸体埋藏地点不方便透露，观众可以很简单地猜测到埋藏地点；（2）被子弹射死的山羊，是成为“替罪羊”的关键之物；（3）警官公报私仇，与李维杰进一步结怨，成为后面他引发众怒的导火索。</p>
+<p>另外一个值得注意的细节是，本片多次出现白色山羊，这显然是导演有意为之。在此，我引用豆瓣上的一篇影评对此的分析（
+https://movie.douban.com/review/12076729/ ），摘录如下：</p>
+<p>电影中羊的四次出现：第一次在湖边看到男主抛车（知道男主有罪），第二次被警察打死（代替男主受罚），第三次开棺验尸（作为替罪羊，帮男主掩埋真相），第四次男主决定认罪后，活羊重新出现，寺庙响起钟声（都预示着男主释然，已经放下心结，决心认罪接受惩罚）。</p>
+<h1 id="画面与音乐">画面与音乐</h1>
+<p>导演非常擅长使用电影中画面和音乐的技巧。电影中的音乐是烘托气氛和人物内心活动的重要工具，而画面则直接决定了观众的视觉体验。由于笔者缺乏视听的专业知识，难以用简洁明了的话语概括，故在此引用豆瓣另一篇影评对此的分析（
+https://movie.douban.com/review/12090128/ ），摘录如下：</p>
+<h2 id="交叉蒙太奇">交叉蒙太奇</h2>
+<p>这版《误杀》将“听经”改为“泰拳”，在电影前半段，就有一段很精彩的拳赛段落，这段拳赛是和素察上门交叉剪辑在一起的。</p>
+<p>李维杰之所以利用看拳赛为全家制造不在场证明，是因为“误杀”这件事发生的同时，也就是2号晚上，他就在看拳赛。</p>
+<p>李维杰2号出差给罗统的酒店维修网络，晚上完工后看到酒店房间塞的小卡片，决定去看泰拳休闲娱乐。同时，官二代素察来到灿班镇李维杰家里调戏大女儿，并与察觉不对劲的妈妈阿玉产生冲突。</p>
+<p>在这同一时间，不同空间，李维杰在看泰拳纠打，阿玉和大女儿在和素察纠打。导演对这两段戏采用了交叉蒙太奇的手法。</p>
+<p>一边是泰拳拳手踢到肚子，一边素察踢到阿玉，一边拳手倒地，一边素察倒地……而且“拳赛”和“误杀”两边的镜头时长越来越短，镜头切换越来越快，节奏也越来越紧张。</p>
+<p>通过这一手段，导演将李维杰完全不知情的状态，与官二代对妻女的欺凌和误杀剪辑在一起，观众在这段观影过程中是全知视角，神经逐渐被绷紧。</p>
+<p>这段交叉蒙太奇，既完成了误杀官二代的过程，又给后知后觉的李维杰出了一个难题。观众在紧张过后，心理继续被剧情调动：接下来李维杰和全家该怎么办？</p>
+<h2 id="慢镜头">慢镜头</h2>
+<p>《误杀》中的“慢镜头”大概有10次以上。</p>
+<p>尤其是最后在大雨里开棺启尸那场终极对决，几乎整段都使用了慢动作镜头。</p>
+<p>使用慢镜头的目的大概分为“制造滑稽效果”、“强调心理对时间的感受”或“凸显某一重要时刻”等，这部电影多次使用慢镜头的目的肯定是后两个。</p>
+<p>比如李维杰销毁素察的车这段戏，当时人物心理非常紧张。李维杰看到高速路上警察设卡和牧羊人路过时，都用慢镜头来强化李维杰当时紧张的心情。</p>
+<p>最后大雨是全片的高潮。慢镜头配上暴雨的场面调度，雨滴的速度也被放慢，不仅制造出震撼的视觉效果，也通过刻意放慢速度，主观上加长寻找尸体的时间，提升李维杰最后一击的震惊感。</p>
+<h2 id="布光">布光</h2>
+<p>《误杀》中利用布光塑造人物和烘托氛围最明显的，就是陈冲饰演的女警察局长。</p>
+<p>女警察局长这个角色非常复杂，她既要在下属面前树威，又迟迟攻破不了李维杰的手段，还要忍受母亲失去儿子的巨大痛苦，同时还得顾忌丈夫竞选市长。</p>
+<p>所以，导演对陈冲出场戏份的布光特别丰富。有一个镜头是陈冲在灿班镇警察局，脸上是百叶窗投下的如钢锯般的光影。这种非常特殊的光影投射在人物脸上，体现出当时人物内心巨大的痛苦和矛盾。</p>
+<p>除了陈冲，导演对主角李维杰和阿玉的布光也做了精心安排。</p>
+<p>比如李维杰从罗统回到家后，得知大女儿被侮辱，妻女又把素察误杀，从此全片的影调全部变成低调光（low
+key）。</p>
+<p>李维杰在得知这一痛心+震惊的消息时，脸上几乎没有打光。这样处理，非常鲜明地表现了李维杰和一家人的生活从此陷入黑暗。他们要在一点点微光中，找寻希望。</p>
+<p>观影时可以注意，电影仅仅在前15分钟和后15分钟有比较明亮的打光，从误杀案后就再无亮光，全片影调变得非常暗。</p>
+<h2 id="特殊音效">特殊音效</h2>
+<p>如果仔细听，电影在很多重要时刻都加入了特殊音效来渲染气氛。比如电影最后开棺，当镜头中显示的尸体不是素察而是一只羊时，背景音给了一声巨响，用来增强观众此时的心理感受。</p>
+<h1 id="主题与立意">主题与立意</h1>
+<p>关于本片的主题与立意，不同的观众自然有不同的想法。在这里，我认为有以下三点是比较明显的，即“法律正义”、“子女教育”与“选择冲突”。</p>
+<h2 id="法律正义">法律正义</h2>
+<p>法律是不是代表了正义？这是一个没有答案的问题。如果法律保证了正义，那么为什么还会有如此多不正义的事情发生？李维杰一家是受害者，但却不得不背负着杀人偿命的罪煞费心机制造一系列不在场证明（尽管杀人的事实客观成立）；但如果说法律不是正义，那么从客观来讲，它的确是保障社会稳定的最有效方法。警长的公报私仇最终还是遭到了愤怒民众的惩罚，滥用私权的局长拉韫也被撤职，正义还是到了。然而，在这正义之下，我们看到的，只有一个双输的局面：局长方全面溃败，李维杰方全家也将面临牢狱之灾。在这种法律正义的庇护之下，没有任何一方的权益得到了满足，也没有任何一个人获得了切实的好处。</p>
+<p>追根到底，这还是法律正义性的缺陷导致的必然结果。如果素察不是局长的儿子，李维杰一家人会得到应有的正义吗？如果李维杰没有看过那么多电影，或者一开始就束手就擒，平平被侮辱的真相能得到审判吗？尽管我们想要去解决这个问题，但现实是，人性的复杂根本无法用简单的“正义”得以阐释。法律无法接纳家长对子女的爱与纵容，也无法兼容“理性的公义”与“感性的迁就”的平衡。</p>
+<h2 id="子女教育">子女教育</h2>
+<p>子女教育是本片第二个十分明确的立意。小女儿安安目睹了母亲和姐姐杀人埋尸的全过程，然而却在父亲的指导下学会了如何撒谎。这在本片结尾她篡改分数体现得淋漓尽致。本来应该是天真无邪的女儿，却因为自己做的这个事情熟练地学会了如何撒谎、如何欺骗，相比“误杀”，这让男主是更难以接受的。注意到在这个时候，此刻男主一家已经完全不会被追查了：拉韫一家无权无势，所有证据烟消云散，没有人证、没有物证，他完全可以选择逍遥法外。然而，男主最后竟然选择了自首，这岂不是让他之前做的一切都白费了吗？如此说不通的逻辑，是在两件事之后得到的转变：（1）女儿修改成绩的试卷：身为父亲却言传身教教会了女儿最不能学会的恶习，这在男主心中是难以承担的。通过路人的口，我们知道男主自幼丧亲，如何做人是他立身之本，他可以为了家人背叛他的原则（在影片开头，他向僧人布施的情节可以体现他是一个对自身要求很高的人），也可以为了家人（女儿）重拾他的原则；（2）寺庙里的醒悟：寺庙是男主最后的救赎。当他第二次向僧人布施遭到拒绝的时候，他实际上内心是煎熬的。但在最后，为了暴乱不再延续，为了子女成长，他选择了“挡在最前面”，得到内心的自由。</p>
+<p>在素察方面，由于其父亲的疏于管教，母亲的溺爱，其最终的结局无非是“大快人心”的。和现实结合的同时，观众也能感受到父母对子女教育的重要性。身为警长的母亲，掌握着执法权而选择了包庇有过错的儿子；身为政客的父亲，只能责打自己的儿子来管教他。无法用公平的武器制裁亲人的犯罪，无法用有效的裁断约束亲人的叛逆，这样的警官，这样的政客，你们敢信任吗？正如在影片最后，男主在囚车中的自白一样，最后他竟然以这样的方式取得女儿的信任，这是荒诞而遗憾的。无论他之前在教育中出现了如何的问题，至少在现在，他用自己的行为证明了，他是一个伟大的父亲。</p>
+<h2 id="选择冲突">选择冲突</h2>
+<p>另外一个值得注意的点是，男主的选择奠定了本片的基调。本片有一个重复提及的细节：一开始，素察被平平击昏时，并没有当场死去。理由如下：（1）女主推车出去时，镜头给了素察一个手部特写；（2）男主多次凝视棺材；（3）男主第二次向僧人布施时遭到了拒绝，并且镜头显示了男主十分惊慌的表情；（4）影片高潮，揭开棺材时，棺材板上血淋淋的抓痕（这是最直接的证据，这表明素察是活活被憋死，或者被男主直接杀害的）；（5）影片最后，男主对局长夫妇致歉；（6）男主最后自首。结合这些或明或暗的事实，我们不难推出：在仓库素察只是被击昏，而真正导致素察死亡的原因是男主，为了“不让自己的家人受到伤害”，所以他选择了杀死素察，或见死不救。这个地方影片也有充分的暗示，一是影片开头致敬电影《活埋》的桥段，可以认为素察是被“活埋”致死；二是镜头给了被子弹射死的山羊的特写。</p>
+<p>以男主的标准来看，他在救与不救之间是经过了痛苦的煎熬的：小女儿安安用叉子划桌子的声音和素察在棺材里绝望地用手划棺材盖的声音是相似的。但最终，他选择了保护家人，直接或间接地杀死了素察。在影片结尾，他选择自首这点上，他没有欺骗，只是除了他自己之外，任何人都不知道，他只能用这种方式，对局长夫妇、对无辜的被他利用的路人、对自己的家人，表达愧疚，与忏悔。</p>
+<p>男主是纯粹的，而往往纯粹的人最容易陷入万劫不复的矛盾之中。</p>
+]]></content>
+      <categories>
+        <category>电影 - 国产电影</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>影评</tag>
       </tags>
   </entry>
   <entry>
@@ -3065,6 +3065,477 @@ href="https://www.cnblogs.com/tiancaiwrk/p/11132437.html">深入浅出之切空�
         <tag>数学</tag>
         <tag>随笔</tag>
         <tag>游戏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>The Jittering Issue with Damping in Cinemachine and How to Tackle it</title>
+    <url>/2023/07/08/18/22/</url>
+    <content><![CDATA[<p>If you are familiar with Cinemachine. you probably know there is a
+knotty problem with Cinemachine' damping if you are using
+<code>Framing Transposer</code> or some other components to track a
+follow point. That is, the camera jitters with damping enabled under
+unstable frame rate. The more unstable frame rate is, the more heavily
+camera will jitter. This post will discuss this phenomenon and proposes
+a workaround to solve this issue.</p>
+<h1 id="camera-jitters-with-damping-in-cinemachine">Camera jitters with
+damping in Cinemachine</h1>
+<p>Unity's Cinemachine has a notoriously severe problem that may cause
+the follow object to seemingly jitter when you are using the
+<code>Framing Transposer</code> component with damping enabled.</p>
+<p>To show this, I did a simple experiment. I created a new blank scene
+and spawned a new attached with the following script:</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CubeMove</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">float</span> speed;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> fps;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">float</span> CurrentSpeed</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="keyword">return</span> currentSpeed; &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">float</span> elapsedTime = <span class="number">0.0f</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">float</span> currentSpeed;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (fps != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Application.targetFrameRate = fps;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        currentSpeed = speed;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        elapsedTime += Time.deltaTime;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (elapsedTime &gt;= <span class="number">5.0f</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (currentSpeed &gt; <span class="number">0.0f</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                currentSpeed = <span class="number">0.0f</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                currentSpeed = speed;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            elapsedTime = <span class="number">0.0f</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        transform.position += <span class="keyword">new</span> Vector3(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>) * currentSpeed * Time.deltaTime;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This script moves the cube for 5 seconds and then keeps it steady for
+another 5 seconds and continues moving. The move <code>speed</code> as
+well as the <code>fps</code> (frames per second) can be set for test
+under different conditions.</p>
+<p>A new virtual camera is then created with a
+<code>Framing Transposer</code> component following this cube. A default
+damping of 0.2 is used.</p>
+<p>Here is result with <code>speed</code> is 100 and <code>fps</code> is
+0 (when set to 0, the real fps is determined by Unity, may but
+unstable).</p>
+<p><img data-src="/images/improvingdamping/gif-1.gif" width="900" height="450"/></p>
+<p>The jitters are very clear. You can also notice that the frame rate
+(presented in the Statistics panel) is very unstable, and we will know
+soon it is the unstable fps that results in camera jitters.</p>
+<p>Cinemachine proposes a workaround to alleviate this problem, that is,
+to use the revised version of damping where they sub-divide each frame
+and simulates damping in the consecutive series of sub-frames. To enable
+this functionality, go to Edit -&gt; Project Settings -&gt; Player -&gt;
+Script Compilation and add the
+<code>CINEMACHINE_EXPERIMENTAL_DAMPING</code> marco to it.</p>
+<p><img data-src="/images/improvingdamping/pic-1.png" /></p>
+<p>OKay, now we have enabled the new damping algorithm and let's see how
+it will mitigate the jittering issue. Here is result with the same
+setting we used in our previous experiment, i.e., <code>speed</code> is
+100 and <code>fps</code> is 0.</p>
+<p><img data-src="/images/improvingdamping/gif-2.gif" width="900" height="450"/></p>
+<p>It is astonishing to see the jittering issue becomes even more
+severe. I conjecture that the variance of fps will significantly amplify
+camera jitters when this feature is enabled. In other words, the
+experimental damping algorithm responds to the variance of fps in a
+NON-linear way: when the variance is small, the experiment damping will
+reduce the gaps of camera location between contiguous frames; but when
+the variance is large, it will enlarge the gaps, leading to unacceptable
+jittering. (Note: I did not validate this conjecture. If you are
+interested, just review the code and test it yourself.)</p>
+<p>What about the expected result if fps is stable? Let's take more
+experiments!</p>
+<p>Here is result with <code>speed</code> is 100 and <code>fps</code> is
+120 (very high fps, which is usually prohibitive in shipped games).</p>
+<p><img data-src="/images/improvingdamping/gif-3.gif" width="900" height="450"/></p>
+<p>Very steady camera! What about setting fps to <code>60</code>? Here
+is the result.</p>
+<p><img data-src="/images/improvingdamping/gif-4.gif" width="900" height="450"/></p>
+<p>An fps of 60 performs equally well with 120, which is anticipated as
+fps is stable. Okay, let's try a final experiment where fps is set at an
+extreme value of 20.</p>
+<p><img data-src="/images/improvingdamping/gif-5.gif" width="900" height="450"/></p>
+<p>Even a low fps of 20 makes our camera stable, only if fps itself is
+stable.</p>
+<p>Now we can conclude that it is the instability of fps that induces
+camera jitters, regardless of the exact value of fps. But, why?</p>
+<h1 id="why-camera-jitters">Why camera jitters</h1>
+<p>Before answering this question, let us first take a look at the
+source of damping implemented in Cinemachine.</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">float</span> <span class="title">Damp</span>(<span class="params"><span class="built_in">float</span> initial, <span class="built_in">float</span> dampTime, <span class="built_in">float</span> deltaTime</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (dampTime &lt; Epsilon || Mathf.Abs(initial) &lt; Epsilon)</span><br><span class="line">        <span class="keyword">return</span> initial;</span><br><span class="line">    <span class="keyword">if</span> (deltaTime &lt; Epsilon)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">const</span> <span class="built_in">float</span> kNegligibleResidual = <span class="number">0.01f</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">float</span> kLogNegligibleResidual = <span class="number">-4.605170186f</span>; <span class="comment">// == math.Log(kNegligibleResidual=0.01f);</span></span><br><span class="line">    <span class="built_in">float</span> k = -kLogNegligibleResidual / dampTime; <span class="comment">//DecayConstant(dampTime, kNegligibleResidual);</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> CINEMACHINE_EXPERIMENTAL_DAMPING</span></span><br><span class="line">    <span class="comment">// Try to reduce damage caused by frametime variability</span></span><br><span class="line">    <span class="built_in">float</span> step = Time.fixedDeltaTime;</span><br><span class="line">    <span class="keyword">if</span> (deltaTime != step)</span><br><span class="line">        step /= <span class="number">5</span>;</span><br><span class="line">    <span class="built_in">int</span> numSteps = Mathf.FloorToInt(deltaTime / step);</span><br><span class="line">    <span class="built_in">float</span> vel = initial * step / deltaTime;</span><br><span class="line">    <span class="built_in">float</span> decayConstant = Mathf.Exp(-k * step);</span><br><span class="line">    <span class="built_in">float</span> r = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; numSteps; ++i)</span><br><span class="line">        r = (r + vel) * decayConstant;</span><br><span class="line">    <span class="built_in">float</span> d = deltaTime - (step * numSteps);</span><br><span class="line">    <span class="keyword">if</span> (d &gt; Epsilon)</span><br><span class="line">        r = Mathf.Lerp(r, (r + vel) * decayConstant, d / step);</span><br><span class="line">    <span class="keyword">return</span> initial - r;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    <span class="keyword">return</span> initial * (<span class="number">1</span> - Mathf.Exp(-k * deltaTime));</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Translating into mathematics, we have:</p>
+<p><span
+class="math display">\[\ell_\text{Damp}=\ell_\text{Input}\cdot\left(1-\exp\left(\ln(0.01)\frac{\Delta
+T}{T}\right)\right)\]</span></p>
+<p>where <span class="math inline">\(T\)</span> is the damp time
+parameter and <span class="math inline">\(\Delta T\)</span> the elapsed
+time in this frame. This equation decays the input <span
+class="math inline">\(\ell_\text{input}\)</span>, the distance for the
+camera to go to the desired position, by an exponential factor <span
+class="math inline">\(\exp\left(\ln(0.01)\frac{\Delta
+T}{T}\right)\)</span>. If <span class="math inline">\(\Delta
+T=T\)</span>, the residual will be <span
+class="math inline">\(0.01\ell_\text{input}\)</span>, meaning that at
+this frame, the camera will traverse 99% of the desired distance to go,
+only remaining 1% amount for future frames.</p>
+<p>OK, let's assume we've placed a cube in the origin and it moves along
+the x-axis at a fixed speed, say, <span class="math inline">\(v\)</span>
+m/s. A camera is placed to track the cube with damping where damp time
+<span class="math inline">\(T\not=0\)</span>. Let's further denote the
+delta time for each frame by <span class="math inline">\(\Delta
+T^{(k)}\)</span>, where <span class="math inline">\(k=0, 1, 2,
+\cdots\)</span> is the <span class="math inline">\(k\)</span>-th
+frame.</p>
+<p>Having all variables fully prepared, we can then simulate the object
+movement and camera track process.</p>
+<p>In the beginning of 0-th frame, the camera and the cube are both at
+the origin, i.e., (0, 0, 0). As the cube only moves along x-axis, we can
+emit the y and z dimensions and use a one-dimensional coordiante to
+represent cube and camera positions.</p>
+<p>At the 1-th frame, the cube moves to <span
+class="math inline">\(P^{(1)}=P^{(0\to1)}=v\Delta T^{(1)}\)</span>, the
+distance the camera traverses is <span
+class="math inline">\(Q^{(1)}=P^{(0\to1)}\left(1-\mathrm{e}^{m\frac{\Delta
+T^{(1)}}{T}}\right)\)</span>, and the residual is <span
+class="math inline">\(R^{(1)}=P^{(0\to1)}\mathrm{e}^{m\frac{\Delta
+T^{(1)}}{T}}\)</span>. We set <span
+class="math inline">\(m=\ln(0.01)\)</span> for simplicity.</p>
+<p>At the 2-th frame, the cube moves to <span
+class="math inline">\(P^{(2)}=P^{(0\to1)}+P^{(1\to2)}=v\Delta
+T^{(1)}+v\Delta T^{(2)}\)</span>, the distance the camera traverses is
+<span
+class="math inline">\(Q^{(2)}=(R^{(1)}+P^{(1\to2)})\left(1-\mathrm{e}^{m\frac{\Delta
+T^{(2)}}{T}}\right)\)</span>, and the residual is <span
+class="math inline">\(R^{(2)}=(R^{(1)}+P^{(1\to2)})\mathrm{e}^{m\frac{\Delta
+T^{(2)}}{T}}\)</span>.</p>
+<p>At the k-th frame, we have <span
+class="math inline">\(P^{(k)}=v\sum_{i=1}^k\Delta T^{(i)}\)</span>,
+<span class="math inline">\(Q^{(k)}=(R^{(k-1)}+P^{((k-1)\to
+k)})\left(1-\mathrm{e}^{m\frac{\Delta T^{(k)}}{T}}\right)\)</span>, and
+<span class="math inline">\(R^{(k)}=(R^{(k-1)}+P^{((k-1)\to
+k)})\mathrm{e}^{m\frac{\Delta T^{(k)}}{T}}\)</span>.</p>
+<p>Without loss of generality, we can set <span
+class="math inline">\(v=1\)</span>. The following sections will use this
+settings unless otherwise stated.</p>
+<p>For different combinations of <span class="math inline">\(\Delta
+T^{(i)}\)</span>, <span class="math inline">\(P^{(k)}, Q^{(k)},
+R^{(k)}\)</span> may have different results. Let's dive into <span
+class="math inline">\(\Delta T^{(i)}\)</span> and see how it influences
+the results.</p>
+<h2 id="case-1-stable-fps-all-delta-ti-are-equal">Case 1: Stable FPS,
+all <span class="math inline">\(\Delta T^{(i)}\)</span> are equal</h2>
+<p>When all <span class="math inline">\(\Delta T^{(i)}\)</span> are
+equal, say <span class="math inline">\(\Delta T\)</span>, our equations
+reduce to:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+P^{((k-1)\to k)}&amp;=\Delta T\\
+P^{(k)}&amp;=k\Delta T\\
+R^{(k)}&amp;=\Delta T\cdot\frac{\mathrm{e}^{m\frac{\Delta
+T}{T}}}{1-\mathrm{e}^{m\frac{\Delta
+T}{T}}}\cdot\left(1-\left(\mathrm{e}^{m\frac{\Delta
+T}{T}}\right)^{k+1}\right)\\
+Q^{(k)}&amp;=\Delta T\cdot\left(1-\left(\mathrm{e}^{m\frac{\Delta
+T}{T}}\right)^{k+1}\right)
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p><span class="math inline">\(R^{(k)}\)</span> apparently has a
+limitation of <span class="math inline">\(\mathfrak{R}=\Delta
+T\cdot\mathrm{e}^{m\frac{\Delta T}{T}}/(1-\mathrm{e}^{m\frac{\Delta
+T}{T}})\)</span> when <span class="math inline">\(k\to\infty\)</span>
+since <span class="math inline">\(m=\ln(0.01)&lt;0\)</span>. This
+explains why a camera with damping always has a maximum distance to its
+following target. There maximum distance, also the supremum, is exactly
+<span class="math inline">\(\mathfrak{R}\)</span>. When <span
+class="math inline">\(T\)</span> is larger, <span
+class="math inline">\(\mathfrak{R}\)</span> will be larger, implying the
+maximum distance between the camera and its following target will be
+larger.</p>
+<p>What if <span class="math inline">\(\Delta T^{(i)}\)</span> is
+mutable? In this case, we can assume there exists an upper bound <span
+class="math inline">\(\Delta T\)</span> such that all <span
+class="math inline">\(\Delta T^{(i)}\)</span> satisty <span
+class="math inline">\(|\Delta T^{(i)}|\le \Delta T\)</span>. Then we are
+able to derive the same conclusion.</p>
+<p>Another question is, why camera does not jitter when FPS is stable?
+We turn to examine the sign of <span
+class="math inline">\(R^{(k)}-R^{(k-1)}\)</span>:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+R^{(k)}-R^{(k-1)}&amp;=\Delta T\cdot\frac{\mathrm{e}^{m\frac{\Delta
+T}{T}}}{1-\mathrm{e}^{m\frac{\Delta
+T}{T}}}\cdot\left(1-\left(\mathrm{e}^{m\frac{\Delta
+T}{T}}\right)^{k+1}\right) - \Delta
+T\cdot\frac{\mathrm{e}^{m\frac{\Delta
+T}{T}}}{1-\mathrm{e}^{m\frac{\Delta
+T}{T}}}\cdot\left(1-\left(\mathrm{e}^{m\frac{\Delta
+T}{T}}\right)^{k}\right)\\
+&amp;=\Delta T\cdot\frac{\mathrm{e}^{m\frac{\Delta
+T}{T}}}{1-\mathrm{e}^{m\frac{\Delta
+T}{T}}}\left(\mathrm{e}^{m\frac{\Delta
+T}{T}}\right)^k\left(1-\mathrm{e}^{m\frac{\Delta T}{T}}\right)\\
+&amp;=\Delta T\cdot \left(\mathrm{e}^{m\frac{\Delta
+T}{T}}\right)^{k+1}\\
+&amp;&gt;0
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>Therefore, when FPS is stable, <span
+class="math inline">\(R^{(k)}\)</span> is always larger than <span
+class="math inline">\(R^{(k-1)}\)</span>, and jitter will never
+happen.</p>
+<h2 id="case-2-unstable-fps-delta-ti-vary">Case 2: Unstable FPS, <span
+class="math inline">\(\Delta T^{(i)}\)</span> vary</h2>
+<p>When FPS is unstable, where <span class="math inline">\(\Delta
+T^{(i)}\)</span> may mutate, how will the camera move in response to its
+following target? We can still examine the sign of <span
+class="math inline">\(R^{(k)}-R^{(k-1)}\)</span>, but in another
+way:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+R^{(k)}-R^{(k-1)}&amp;=(R^{(k-1)}+P^{((k-1)\to
+k)})\mathrm{e}^{m\frac{\Delta T^{(k)}}{T}}-R^{(k-1)}\\
+&amp;=P^{((k-1)\to k)}\mathrm{e}^{m\frac{\Delta T^{(k)}}{T}} -
+R^{(k-1)}\left(1-\mathrm{e}^{m\frac{\Delta T^{(k)}}{T}}\right)
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>This equation uncovers why camera jitters happen with unstable FPS.
+The residual at the k-th frame <span
+class="math inline">\(R^{(k)}\)</span> is essentially an interpolation
+between the following target's current position increment <span
+class="math inline">\(P^{((k-1)\to k)}\)</span> and the last frame's
+negative residual <span class="math inline">\(-R^{(k-1)}\)</span>, where
+the interpolation strength is the decaying factor <span
+class="math inline">\(\mathrm{e}^{m\frac{\Delta T^{(k)}}{T}}\)</span>.
+As both <span class="math inline">\(P^{((k-1)\to k)}\)</span> and <span
+class="math inline">\(-R^{(k-1)}\)</span> are fixed, a change in <span
+class="math inline">\(\Delta T^{(k)}\)</span> will incline the resulting
+residual <span class="math inline">\(R^{(k)}\)</span> to different ends,
+either <span class="math inline">\(P^{((k-1)\to k)}\)</span> or <span
+class="math inline">\(-R^{(k-1)}\)</span>.</p>
+<p>In our simplified case in which the target moves at a fixed speed in
+the direction of x-axis, <span class="math inline">\(P^{((k-1)\to
+k)}\)</span> will always be positive (though its magnitude can vary) and
+<span class="math inline">\(-R^{(k-1)}\)</span> will always be negative.
+A mutating <span class="math inline">\(\Delta T^{(k)}\)</span> thus has
+a chance to alter the sign of <span
+class="math inline">\(R^{(k)}-R^{(k-1)}\)</span>, which further brings
+about camera jitters.</p>
+<p>So when will camera jitter? From the above equation, we know that
+camera will jitter when the sign of <span
+class="math inline">\(R^{(k)}-R^{(k-1)}\)</span> consistently changes
+over time, i.e., the value of <span
+class="math inline">\(R^{(k)}-R^{(k-1)}\)</span> oscillates around zero.
+Let's make it equal to zero and see what we can find then.</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+R^{(k)}-R^{(k-1)}&amp;=0\\
+(R^{(k-1)}+P^{((k-1)\to k)})\mathrm{e}^{m\frac{\Delta
+T^{(k)}}{T}}-R^{(k-1)}&amp;=0\\
+\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}&amp;=\mathrm{e}^{m\frac{\Delta T^{(k)}}{T}}\\
+m\frac{\Delta
+T^{(k)}}{T}&amp;=\ln\left(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\right)\\
+\Delta
+T^{(k)}&amp;=\frac{T}{m}\ln\left(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\right)
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>This equation tells us when <span class="math inline">\(\Delta
+T^{(k)}\)</span> is near <span
+class="math inline">\(\frac{T}{m}\ln\left(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\right)\)</span>, camera will have a large chance to jitter. This
+motivates us to improve damping by filtering out the occasions where
+<span class="math inline">\(\Delta T^{(k)}\)</span> is very close to
+<span
+class="math inline">\(\frac{T}{m}\ln\left(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\right)\)</span>.</p>
+<p>What about going deeper? We can treat <span
+class="math inline">\(\Delta T^{(i)}\)</span> as variable, and all other
+as constants. This abstraction gives us a function of <span
+class="math inline">\(f(x)\)</span>:</p>
+<p><span class="math display">\[
+f(x)=x-a\ln\left(\frac{b}{b+vx}\right),~a\le0, b&gt; 0, v&gt;0, x&gt;0
+\]</span></p>
+<p>Taking the derivative of <span class="math inline">\(f(x)\)</span>,
+we know that <span class="math inline">\(f(x)\)</span> is monotonically
+decreasing when <span class="math inline">\(x\in(-\infty,
+(-av-b)/v)\)</span> and monotonically increasing when <span
+class="math inline">\(x\in((-av-b)/v,+\infty)\)</span>, and <span
+class="math inline">\(f(0)=0\)</span>. Hence, to make the sign of <span
+class="math inline">\(f(x)\)</span> mutable, <span
+class="math inline">\((-av-b)/v\)</span> must be positive and the
+minimum of <span class="math inline">\(f(x)\)</span> must be
+negative.</p>
+<p>The minimum of <span class="math inline">\(f(x)\)</span> can be
+easily computed:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+f(x)_\text{min}&amp;=f((-av-b)/v)\\
+&amp;=-a-\frac{b}{v}-a\ln\left(-\frac{b}{av}\right)\\
+&amp;=a\left(-1-\frac{b}{av}-\ln\left(-\frac{b}{av}\right)\right)\\
+&amp;\xlongequal{x\triangleq-b/av}a\left(-1+x-\ln(x)\right) ~(x\ge 0)\\
+&amp;\le 0
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>The last inequality holds because <span class="math inline">\(x-1\ge
+\ln x~(x&gt;0)\)</span>.</p>
+<p><img data-src="/images/improvingdamping/pic-2.png" /></p>
+<p>This reveals the fact that: when <span
+class="math inline">\((-av-b)/v&gt;0\)</span>, a variant <span
+class="math inline">\(\Delta T^{(k)}\)</span> is likely to cause <span
+class="math inline">\(R^{(k)}-R^{(k-1)}\)</span> to change its sign,
+thus resulting in camera jitters. Suppose <span
+class="math inline">\(\Delta T^{(k)}\)</span> is large enough, so then
+the k-th residual <span class="math inline">\(R^{(k)}\)</span> gets
+smaller than <span class="math inline">\(R^{(k-1)}\)</span> while <span
+class="math inline">\(f(x)^{(k)}\)</span> is positive. A smaller <span
+class="math inline">\(R^{(k)}\)</span> pushes <span
+class="math inline">\(b\)</span> to become smaller for the next frame,
+which further pushes the root of the function to become larger. In this
+case, even with the same delta time, <span
+class="math inline">\(f(x)^{(k)}\)</span> will have a larger chance wo
+fall in the negative area, i.e., <span class="math inline">\(\Delta
+T^{(k+1)}\)</span> is more likely to be less than the root.</p>
+<p><img data-src="/images/improvingdamping/gif-5-5.gif" width="900" height="450"/></p>
+<h1 id="solutions">Solutions</h1>
+<h2 id="solution-1-imposing-an-invalid-range">Solution 1: imposing an
+invalid range</h2>
+<p>Based on what we've discussed so far, wen can immediately come up
+with a simple solution: enforce <span class="math inline">\(\Delta
+T^{(k)}\)</span> to be <span
+class="math inline">\(\mathfrak{O}=\frac{T}{m}\ln\left(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\right)\)</span> if they are very close. That is to say, we use a
+small value <span class="math inline">\(\varepsilon\)</span>, if <span
+class="math inline">\(\Delta T^{(k)}/\mathfrak{O}\in(1-\varepsilon,
+1+\varepsilon)\)</span>, we just set <span class="math inline">\(\Delta
+T^{(k)}\)</span> to <span
+class="math inline">\(\mathfrak{O}\)</span>.</p>
+<p>Note that <span
+class="math inline">\(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\)</span> can be zero or negative. If this is the case, we keep the
+original <span class="math inline">\(\Delta T^{(k)}\)</span> without
+doing anything. Besides, you should be aware that <span
+class="math inline">\(\Delta T^{(k)}\)</span> here is not the time this
+frame actually takes, instead, it is just the duration used to calculate
+damping.</p>
+<p>Let us explain it more quantitatively. Suppose <span
+class="math inline">\(\Delta T^{(k)}/\mathfrak{O}=1-\delta\)</span>,
+where <span class="math inline">\(0&lt;\delta&lt;\varepsilon\)</span>.
+Then <span class="math inline">\(\Delta
+T^{(k)}\gets\mathfrak{O}\)</span> according to our algorithm. We then
+plug <span class="math inline">\(\Delta
+T^{(k)}_\delta=\mathfrak{O}(1-\delta)\)</span> into the original
+expression of <span
+class="math inline">\(R^{(k)}-R^{(k-1)}\)</span>:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+R^{(k)}_\delta-R^{(k)} &amp;= (R^{(k-1)}+P^{((k-1)\to
+k)})\mathrm{e}^{\frac{m}{T}(1-\delta)\frac{T}{m}\ln\left(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\right)}-R^{(k-1)}\\
+&amp;=\left(R^{(k-1)}+P^{((k-1)\to
+k)}\right)\cdot\left(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\right)^{1-\delta}-R^{(k-1)}\\
+&amp;=\left(R^{(k-1)}\right)^{1-\delta}\cdot
+\left(R^{(k-1)}+P^{((k-1)\to k)}\right)^{\delta}-R^{(k-1)}\\
+&amp;&gt;\left(R^{(k-1)}\right)^{1-\delta}\cdot\left(R^{(k-1)}\right)^{\delta}-R^{(k-1)}\\
+&amp;&gt;0
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>This demonstrates that now the camera lags behind its following
+target more than the previous frame since the residual is larger. After
+substituting <span class="math inline">\(\Delta T^{(k)}_\delta\)</span>
+with <span class="math inline">\(\mathfrak{O}\)</span>, <span
+class="math inline">\(R^{(k)}-R^{(k-1)}\)</span> would be zero, meaning
+that the camera now keeps the same frame as last frame. Camera does not
+jitter.</p>
+<p>Here comes the question: what if the following target slows down, or
+stops, or even turns back to the opposite direction and the camera still
+remains the same residual to it?</p>
+<p>It is quite a good question. But if we look carefully at the function
+of <span class="math inline">\(f(x)\)</span>, we will find this
+situation will never happen. Let's rewrite <span
+class="math inline">\(f(x)\)</span> here:</p>
+<p><span class="math display">\[
+f(x)=x-a\ln\left(\dfrac{b}{b+vx}\right), ~a\le 0, b&gt;0, x&gt;0
+\]</span></p>
+<p>This time, we do not constrain the value of <span
+class="math inline">\(v\)</span>, but at last frame, it's positive.</p>
+<p>When <span class="math inline">\(v\)</span> gets smaller but still
+positive, we observe the function gradually shifts leftwards, pushing
+the root towards zero. This implies that the area <span
+class="math inline">\((1-\varepsilon, 1+\varepsilon)\)</span> gets
+contracted and the probability of remaining the same residual gets
+smaller.</p>
+<p><img data-src="/images/improvingdamping/gif-6.gif" width="900" height="450"/></p>
+<p>When <span class="math inline">\(v\)</span> is zero where the
+following target stops, the current residual can be readily calculated
+as <span
+class="math inline">\(R^{(k)}=R^{(k-1)}\mathrm{e}^{m\frac{\Delta
+T^{(k)}}{T}}\)</span>, which closes the distance gap between the camera
+of the following target. The ratio, which is calculated as <span
+class="math inline">\(\Delta T^{(k)}/\mathfrak{O}\)</span>, would be
+devided by zero, outputting an infinite value.</p>
+<p>When <span class="math inline">\(v\)</span> is negative, <span
+class="math inline">\(P^{((k-1)\to k)}\)</span> will be negative. The
+ratio <span class="math inline">\(\Delta T^{(k)}/\mathfrak{O}\)</span>
+now becomes negative, also beyond the range of <span
+class="math inline">\((1-\varepsilon, 1+\varepsilon)\)</span>.</p>
+<p>We can implement this algorithm in less than 100 lines of code. You
+should modify three files in the official Cinemachine source code
+directory.</p>
+<p>First is <code>Predictor.cs</code>. Add a <code>ImprovedDamp</code>
+function:</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">float</span> <span class="title">ImprovedDamp</span>(<span class="params"><span class="built_in">float</span> initial, <span class="built_in">float</span> dampTime, <span class="built_in">float</span> deltaTime, <span class="built_in">float</span> bonus</span>)</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (dampTime &lt; Epsilon || Mathf.Abs(initial) &lt; Epsilon)</span><br><span class="line">        <span class="keyword">return</span> initial;</span><br><span class="line">    <span class="keyword">if</span> (deltaTime &lt; Epsilon)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">float</span> tolerance = <span class="number">0.05f</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">float</span> alpha = Mathf.Log(bonus) * dampTime / kLogNegligibleResidual;</span><br><span class="line">    <span class="built_in">float</span> ratio = deltaTime / alpha;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (ratio &lt;= <span class="number">1.0f</span> + tolerance &amp;&amp; ratio &gt;= <span class="number">1.0f</span> - tolerance)</span><br><span class="line">    &#123;</span><br><span class="line">        deltaTime = alpha;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">float</span> k = -kLogNegligibleResidual / dampTime; <span class="comment">//DecayConstant(dampTime, kNegligibleResidual);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> initial * (<span class="number">1</span> - Mathf.Exp(-k * deltaTime));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The input <code>bonus</code> is <span
+class="math inline">\(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\)</span>. Parameter <code>tolerance</code> is what you should set
+as <span class="math inline">\(\varepsilon\)</span> we've introduced
+above.</p>
+<p>In file <code>CinemachineVirtualCameraBase.cs</code>, add a new
+function <code>ImprovedDetachedFollowTargetDamp</code>:</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Vector3 <span class="title">ImprovedDetachedFollowTargetDamp</span>(<span class="params">Vector3 initial, Vector3 dampTime, <span class="built_in">float</span> deltaTime</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    GameObject go = GameObject.Find(<span class="string">&quot;Cube&quot;</span>);  <span class="comment">// Hard find our following target of interest, you should not do like this!</span></span><br><span class="line">    Vector3 deltaDistance = <span class="keyword">new</span> Vector3(<span class="number">100</span>, <span class="number">0</span>, <span class="number">0</span>) * deltaTime; <span class="comment">// Hard set the velocity, you should not do like this!</span></span><br><span class="line">    Vector3 residual = initial - deltaDistance;</span><br><span class="line">    Vector3 bonus = </span><br><span class="line">        <span class="keyword">new</span> Vector3(residual.x / (residual.x + deltaDistance.x + <span class="number">1e-7</span>f), </span><br><span class="line">                    residual.y / (residual.y + deltaDistance.y + <span class="number">1e-7</span>f), </span><br><span class="line">                    residual.z / (residual.z + deltaDistance.z + <span class="number">1e-7</span>f));</span><br><span class="line"></span><br><span class="line">    dampTime = Vector3.Lerp(Vector3.Max(Vector3.one, dampTime), dampTime, FollowTargetAttachment);</span><br><span class="line">    deltaTime = Mathf.Lerp(<span class="number">0</span>, deltaTime, FollowTargetAttachment);</span><br><span class="line">    <span class="keyword">return</span> Damper.ImprovedDamp(initial, dampTime, deltaTime, bonus);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This piece of code is very informal, and you should never write your
+code like this. The purpose of this function is to get <span
+class="math inline">\(R^{(k-1)}\)</span> and <span
+class="math inline">\(P^{((k-1)\to k)}\)</span>. I reckon the correct
+way to do this is to create a new (or two) variable in the
+<code>CinemachineVirtualCameraBase</code> class and update it in each
+tick. The code presented here is only for demonstration.</p>
+<p>In file <code>CinemachineFramingTransposer.cs</code>, change the
+called function for damping:</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">cameraOffset = VirtualCamera.ImprovedDetachedFollowTargetDamp(  <span class="comment">// Original is DetachedFollowTargetDamp</span></span><br><span class="line">    cameraOffset, <span class="keyword">new</span> Vector3(m_XDamping, m_YDamping, m_ZDamping), deltaTime);</span><br></pre></td></tr></table></figure>
+<p>You could also try other components, not just
+<code>FramingTransposer</code> here.</p>
+<p>With the default <code>tolerance=0.05</code>, the result is shown
+below.</p>
+<p><img data-src="/images/improvingdamping/gif-7.gif" width="900" height="450"/></p>
+<p>Camera jitters disappear. Note that the general fps is quite high
+(around 400~500). This is because our scene is quite simple, containing
+only a cube and a camera. In order to simulate a more real runtime game
+situation, I place 20k cubes in the scene and now the fps is around 30,
+but still unstable.</p>
+<p>Below is the result when using the raw damping algorithm.</p>
+<p><img data-src="/images/improvingdamping/gif-8.gif" width="900" height="450"/></p>
+<p>Camera jitters more severely due to a generally lower FPS. What about
+using the improved damping algorithm? Here is result with
+<code>tolerance=0.05</code>.</p>
+<p><img data-src="/images/improvingdamping/gif-9.gif" width="900" height="450"/></p>
+<p>Just as expected, camera jitters do not show up. Let's try different
+<code>tolerance</code>s. How will a small <code>tolerance</code> help
+alleviate jitters? Below is the result with
+<code>tolerance=0.01</code>.</p>
+<p><img data-src="/images/improvingdamping/gif-10.gif" width="900" height="450"/></p>
+<p>Camera jitters occur again! This suggests that an excessively small
+value cannot fully filter out actions that can lead to camera jitters.
+Let's try our final experiment with <code>tolerance=0.1</code>.</p>
+<p><img data-src="/images/improvingdamping/gif-11.gif" width="900" height="450"/></p>
+<p>Camera jitters disappear, but the camera motion seems a little
+stiff.</p>
+<p>We should set an approriate value of <code>tolerance</code>.</p>
+<h2 id="solution-2-infinite-impulse-response">Solution 2: infinite
+impulse response</h2>
+]]></content>
+      <categories>
+        <category>游戏 - 相机</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>数学</tag>
+        <tag>随笔</tag>
+        <tag>相机</tag>
+        <tag>Unity</tag>
+        <tag>Cinemachine</tag>
+        <tag>Damping</tag>
       </tags>
   </entry>
   <entry>
