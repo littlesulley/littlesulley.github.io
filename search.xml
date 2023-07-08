@@ -296,150 +296,6 @@ https://dl.acm.org/doi/pdf/10.1145/198429.198435</p>
       </tags>
   </entry>
   <entry>
-    <title>Customizing Actor&#39;s Details Panel and Accessing its CDO Components</title>
-    <url>/2023/03/02/10/53/</url>
-    <content><![CDATA[<p>Recently I've been writing a new functionality for my plugin. To
-facilitate its use, I want some buttons on the Details panel where these
-buttons will modify the blueprint class's CDO data. The first step,
-accessing the blueprint class's specific component, however is not as
-simple as I thought. You cannot use the
-<code>FindComponentByClass</code> function or its equivalents to access
-the component of the blueprint class at the CDO state. The second step,
-customizing the Details panel, requires me to create a new editor module
-and implements the <code>IDetailCustomization</code> interface in a very
-notoriously clumsy way. This post introduces how to customize actor's
-Details panel and access its CDO components.</p>
-<span id="more"></span>
-<h1
-id="step-1-create-a-new-class-implementing-idetailcustomization">Step 1:
-Create A New Class Implementing <code>IDetailCustomization</code></h1>
-<p>According to the <a
-href="https://docs.unrealengine.com/5.1/en-US/details-panel-customization-in-unreal-engine/">official
-documentation</a>, the <code>IDetailCustomization</code> interface can
-be used for any class that lays out details for its properties or
-functions.</p>
-<p>Start by creaing a new class implementing this interface:</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;IDetailCustomization.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FMyDetail</span> : <span class="keyword">public</span> IDetailCustomization</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// Used to create a singleton instance.</span></span><br><span class="line">    <span class="function"><span class="type">static</span> TSharedRef&lt;IDetailCustomization&gt; <span class="title">MakeInstance</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">// Used to specifically implement your customization.</span></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">CustomizeDetails</span><span class="params">(IDetailLayoutBuilder&amp; DetailBuilder)</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function">UActorSequenceComponent* <span class="title">GetActorSequenceComponent</span><span class="params">(AMyClass* Object)</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>Then in its <code>.cpp</code> file you should implement the two
-declared functions:</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;MyDetail.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;DetailLayoutBuilder.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;DetailCategoryBuilder.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;DetailWidgetRow.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Widgets/Input/SButton.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Engine/SCS_Node.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LOCTEXT_NAMESPACE <span class="string">&quot;MyDetail&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">TSharedRef&lt;IDetailCustomization&gt; <span class="title">FKeyframeExtensionDetail::MakeInstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">MakeShared</span>&lt;FKeyframeExtensionDetail&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">FKeyframeExtensionDetail::CustomizeDetails</span><span class="params">(IDetailLayoutBuilder&amp; DetailBuilder)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    TArray&lt; TWeakObjectPtr&lt;UObject&gt; &gt; Objects;</span><br><span class="line">    DetailBuilder.<span class="built_in">GetObjectsBeingCustomized</span>(Objects);</span><br><span class="line">    <span class="keyword">if</span> (Objects.<span class="built_in">Num</span>() != <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    AMyClass* Object = (AMyClass*)Objects[<span class="number">0</span>].<span class="built_in">Get</span>();</span><br><span class="line">    IDetailCategoryBuilder&amp; KeyframeCategory = DetailBuilder.<span class="built_in">EditCategory</span>(<span class="string">&quot;ECamera Actions&quot;</span>, <span class="built_in">FText</span>(), ECategoryPriority::Important);</span><br><span class="line"></span><br><span class="line">    KeyframeCategory.<span class="built_in">AddCustomRow</span>(FText::<span class="built_in">GetEmpty</span>())</span><br><span class="line">    .<span class="built_in">NameContent</span>()</span><br><span class="line">    [</span><br><span class="line">        <span class="built_in">SNew</span>(STextBlock)</span><br><span class="line">        .<span class="built_in">Text</span>(FText::<span class="built_in">FromString</span>(<span class="string">&quot;Keyframe Extension&quot;</span>))</span><br><span class="line">        .<span class="built_in">Font</span>(IDetailLayoutBuilder::<span class="built_in">GetDetailFont</span>())</span><br><span class="line">    ]</span><br><span class="line">    .<span class="built_in">ValueContent</span>()</span><br><span class="line">    [</span><br><span class="line">        <span class="built_in">SNew</span>(SHorizontalBox)</span><br><span class="line">        + SHorizontalBox::<span class="built_in">Slot</span>()</span><br><span class="line">        .<span class="built_in">Padding</span>(<span class="number">0</span>)</span><br><span class="line">        .<span class="built_in">AutoWidth</span>()</span><br><span class="line">        [</span><br><span class="line">            <span class="built_in">SNew</span>(SButton)</span><br><span class="line">            .<span class="built_in">ToolTipText</span>(FText::<span class="built_in">FromString</span>(<span class="string">&quot;Tootip here.&quot;</span>))</span><br><span class="line">            .<span class="built_in">Content</span>()</span><br><span class="line">            [</span><br><span class="line">                <span class="built_in">SNew</span>(STextBlock)</span><br><span class="line">                .<span class="built_in">Text</span>(FText::<span class="built_in">FromString</span>(<span class="string">&quot;Toss Sequence&quot;</span>))</span><br><span class="line">                .<span class="built_in">Font</span>(IDetailLayoutBuilder::<span class="built_in">GetDetailFont</span>())</span><br><span class="line">            ]</span><br><span class="line">            .<span class="built_in">IsEnabled_Lambda</span>([<span class="keyword">this</span>, Object]()-&gt;<span class="type">bool</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;)</span><br><span class="line">            .<span class="built_in">OnClicked_Lambda</span>([<span class="keyword">this</span>, Object]()</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (Object)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">// Access the CDO component. Will explain later.</span></span><br><span class="line">                    UActorSequenceComponent* ActorSequenceComponent = <span class="built_in">GetActorSequenceComponent</span>(Object);</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// If this object is currently in blueprint (CDO)</span></span><br><span class="line">                    <span class="keyword">if</span> (Object-&gt;<span class="built_in">IsTemplate</span>())</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="built_in">DoSomething</span>(ActorSequenceComponent);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">// If this object is currently in level (instance).</span></span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="built_in">DoSomething</span>();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">return</span> (FReply::<span class="built_in">Handled</span>());</span><br><span class="line">            &#125;)</span><br><span class="line">        ]</span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">undef</span> LOCTEXT_NAMESPACE</span></span><br></pre></td></tr></table></figure>
-<p>It is quite easy to understand the code. What I am basically doing is
-first to get all customized objects and get the one I'm interested in.
-Then I specify the actor's category I want to customize. Last under this
-category I add a new row that includes a button with showing text "Toss
-Sequence".</p>
-<p>The most core part is the action this button executes after you click
-it, defined in <code>.OnClicked_Lambda</code>. In my case I want to
-access the <code>UActorSequenceComponent</code> component, so I define a
-new function <code>GetActorSequenceComponent</code> and it returns a
-<code>UActorSequenceComponent</code> pointer. This component is exactly
-the one contained in the class's CDO. The next four lines first check
-whether this object is in blueprint or in level, and then execute
-different functions.</p>
-<h1 id="step-2-accessing-component-in-cdo">Step 2: Accessing Component
-in CDO</h1>
-<p>Function <code>GetActorSequenceComponent</code> implements accessing
-a specific component in CDO:</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">UActorSequenceComponent* <span class="title">FMyDetail::GetActorSequenceComponent</span><span class="params">(AMyClass* Object)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    UActorSequenceComponent* ActorSequenceComponent = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">if</span> (Object)</span><br><span class="line">    &#123;</span><br><span class="line">        UBlueprintGeneratedClass* CurrentBPClass = <span class="built_in">Cast</span>&lt;UBlueprintGeneratedClass&gt;(Object-&gt;<span class="built_in">GetClass</span>());</span><br><span class="line">        <span class="keyword">if</span> (CurrentBPClass &amp;&amp; CurrentBPClass-&gt;SimpleConstructionScript)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">const</span> USCS_Node* Component : CurrentBPClass-&gt;SimpleConstructionScript-&gt;<span class="built_in">GetAllNodes</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                UActorSequenceComponent* TemporaryComponent = <span class="built_in">Cast</span>&lt;UActorSequenceComponent&gt;(Component-&gt;ComponentTemplate);</span><br><span class="line">                <span class="keyword">if</span> (TemporaryComponent != <span class="literal">nullptr</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    ActorSequenceComponent = TemporaryComponent;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ActorSequenceComponent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>I don't want to dive into the details of each class and function
-mentioned above. To put it simply, this function first gets the
-blueprint generated class and then the
-<code>SimpleConstructionScript</code> member which is a graph describing
-the components to instantiate. Within SCS, we can visit each node and
-check if it is the component of interest. Last, we return the
-pointer.</p>
-<h1
-id="step-3-registering-the-customized-details-panel-in-.build.cs">Step
-3: Registering the Customized Details Panel in <em>.Build.cs</em></h1>
-<p>As the last step, you should register the custom class layout in the
-<em>.Build.cs</em> file. Basically this should be within the editor
-module rather than the runtime counterpart.</p>
-<p>Register is quite simple. In your <em>.Build.cs</em> file, add
-several lines in <code>StartupModule()</code> and
-<code>ShutdownModule()</code>.</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">FEasyCameraEditorModule::StartupModule</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">auto</span>&amp; PropertyModule = FModuleManager::<span class="built_in">LoadModuleChecked</span>&lt;FPropertyEditorModule&gt;(<span class="string">&quot;PropertyEditor&quot;</span>);</span><br><span class="line">    PropertyModule.<span class="built_in">RegisterCustomClassLayout</span>(</span><br><span class="line">        <span class="comment">// Drop all prefix such as U and A.</span></span><br><span class="line">        <span class="string">&quot;MyClass&quot;</span>, </span><br><span class="line">        FOnGetDetailCustomizationInstance::<span class="built_in">CreateStatic</span>(&amp;FMyDetail::MakeInstance)</span><br><span class="line">        );</span><br><span class="line">    PropertyModule.<span class="built_in">NotifyCustomizationModuleChanged</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">FEasyCameraEditorModule::ShutdownModule</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (FModuleManager::<span class="built_in">Get</span>().<span class="built_in">IsModuleLoaded</span>(<span class="string">&quot;PropertyEditor&quot;</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">auto</span>&amp; PropertyModule = FModuleManager::<span class="built_in">LoadModuleChecked</span>&lt;FPropertyEditorModule&gt;(<span class="string">&quot;PropertyEditor&quot;</span>);</span><br><span class="line">        PropertyModule.<span class="built_in">UnregisterCustomClassLayout</span>(<span class="string">&quot;MyClass&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="result">Result</h1>
-<p>Compile and open Unreal editor. In the blueprint Details panel, you
-can see three new buttons have been added (I add two more buttons). Each
-button, when clicked, successfully executes its behaviour as
-exptected.</p>
-<p><img data-src="/images/customizing-actors-details-panel/1.jpg" /></p>
-]]></content>
-      <categories>
-        <category>游戏 - 引擎</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>游戏</tag>
-        <tag>UE</tag>
-        <tag>蓝图</tag>
-        <tag>CDO</tag>
-        <tag>编辑器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>How are FBX files Imported in Unreal Engine</title>
-    <url>/2023/02/19/12/52/</url>
-    <content><![CDATA[<p>This post briefly introduces how FBX files are imported into Unreal
-Engine, particularly for animation sequences.</p>
-<span id="more"></span>
-<p>In <code>SkeletalMeshEdit.cpp</code>, you can find the function
-<code>bool UnFbx::UnFFbxImporter::ImportAnimation</code>, and this is
-where FBX import takes place.</p>
-<h1 id="find-valid-bone-names">Find Valid Bone Names</h1>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">TArray&lt;FName&gt; FbxRawBoneNames;</span><br><span class="line"><span class="built_in">FillAndVerifyBoneNames</span>(Skeleton, SortedLinks, FbxRawBoneNames, FileName);</span><br><span class="line"><span class="function">FAnimCurveImportSettings <span class="title">AnimImportSettings</span><span class="params">(DestSeq, NodeArray, SortedLinks, FbxRawBoneNames, AnimTimeSpan)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>Function <code>FillAndVerifyBoneNames</code> will copy all bone names
-into <code>FbxRawBoneNames</code> and verify whether they are duplicate
-or invalid. <code>FbxRawBoneNames</code> now contains all valid bone
-names.</p>
-<p><code>AnimImportSettings</code> is a helper structure to pass around
-the common animation parameters including the AnimationSequence asset
-reference, FBX nodes, bone names, and animation time span.</p>
-<h1 id="import-blend-shapes">Import Blend Shapes</h1>
-<p>Having everything prepared, we can import raw animation curves into
-the AnimationSequence asset. The first type of data we would like to
-import is the blend shape (morph target) curves. This is implemented by
-function <code>ImportBlendShapeCurves</code>.</p>
-<p>The function process can be described using the following pseudo
-code:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">foreach (FBXNode : FBXNodeArray) </span><br><span class="line">    foreach (BlendShape : FBXNode-&gt;BlendShapes)</span><br><span class="line">        foreach (Channel : BlendShape-&gt;BlendShapeChannels)</span><br><span class="line">        &#123;</span><br><span class="line">            FbxAnimCurve* Curve = GetShapeChannel (BlendShape, Channel)</span><br><span class="line">            if (ShouldImportCurve (Curve))</span><br><span class="line">            &#123;</span><br><span class="line">                int TargetShapeCount = Channel-&gt;GetTargetShapeCount()</span><br><span class="line">                if (TargetShapeCount &gt; 0)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (TargetShapeCount == 1)</span><br><span class="line">                    &#123;</span><br><span class="line">                        ImportCurveToAnimSequence (AnimSeq, Channel, Curve)</span><br><span class="line">                    &#125;</span><br><span class="line">                    else</span><br><span class="line">                    &#123;</span><br><span class="line">                        // Scale blend shapes values by 0.01</span><br><span class="line">                        Algo::Transform(FbxInbetweenFullWeights, InbetweenFullWeights, [](double Input)&#123; return Input * 0.01f; &#125;)</span><br><span class="line"></span><br><span class="line">                        // Collect inbetween shape names</span><br><span class="line">                        for (int32 InbetweenIndex = 0; InbetweenIndex &lt; InbetweenCount; ++InbetweenIndex)</span><br><span class="line">						&#123;</span><br><span class="line">							FbxShape* Shape = Channel-&gt;GetTargetShape(InbetweenIndex)</span><br><span class="line">							CurveNames.Add(MakeName(Shape-&gt;GetName()))</span><br><span class="line">						&#125;</span><br><span class="line"></span><br><span class="line">                        // Convert FBX curve into rich curve</span><br><span class="line">                        FRichCurve ChannelWeightCurve;</span><br><span class="line">						ImportCurve(Curve, ChannelWeightCurve)</span><br><span class="line">						if (AnimSeq)</span><br><span class="line">						&#123;</span><br><span class="line">							ChannelWeightCurve.BakeCurve(1.0f / AnimSeq-&gt;ImportResampleFramerate)</span><br><span class="line">						&#125;</span><br><span class="line"></span><br><span class="line">                        // Use the primary curve to generate inbetween shape curves + a modified primary curve</span><br><span class="line">                        TArray&lt;FRichCurve&gt; Results = ResolveWeightsForBlendShapeCurve(ChannelWeightCurve, InbetweenFullWeights)</span><br><span class="line">						if (ImportRichCurvesToAnimSequence(AnimSeq, CurveNames, Results, 0))</span><br><span class="line">						&#123;</span><br><span class="line">							for (const FString&amp; CurveName : CurveNames)</span><br><span class="line">								MySkeleton-&gt;AccumulateCurveMetaData(*CurveName, false, true)</span><br><span class="line">						&#125;	</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<p>The function <code>ImportRichCurvesToAnimSequence</code> is worth
-particular attention. It practically updates the AnimationSequence with
-the curves created and modified in function
-<code>ImportBlendShapeCurves</code>.</p>
-<p>Let's first examine the function
-<code>ImportRichCurvesToAnimSequence</code>.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">foreach (CurveName : CurveNames)</span><br><span class="line">&#123;</span><br><span class="line">    // Add or retrieve curve</span><br><span class="line">    if (!SkeletonCurveMapping-&gt;Exists(CurveName))</span><br><span class="line">    &#123;</span><br><span class="line">        // Make skeleton dirty</span><br><span class="line">        Skeleton-&gt;Modify()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Get corresponding curve</span><br><span class="line">    FAnimationCurveIdentifier FloatCurveId (CurveName, ERawCurveTrackTypes::RCT_Float)</span><br><span class="line">    const FFloatCurve* TargetCurve = AnimSeq-&gt;GetDataModel()-&gt;FindFloatCurve(FloatCurveId)</span><br><span class="line"></span><br><span class="line">    // Update curve and set keys</span><br><span class="line">	AnimSeq-&gt;Controller.SetCurveKeys(FloatCurveId, RichCurves[CurveIndex].GetConstRefOfKeys())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Then, let's examine function <code>SetCurveKeys</code>, which is
-defined in <code>AnimDataContyroller.cpp</code>.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// Get the curve according to curve id</span><br><span class="line">FRichCurve* RichCurve = Model-&gt;GetMutableRichCurve(CurveId)</span><br><span class="line"></span><br><span class="line">if (RichCurve)</span><br><span class="line">&#123;</span><br><span class="line">    // Set rich curve values</span><br><span class="line">	RichCurve-&gt;SetKeys(CurveKeys);</span><br><span class="line"></span><br><span class="line">    // On curve changed notify</span><br><span class="line">    FCurveChangedPayload Payload;</span><br><span class="line">	Payload.Identifier = CurveId;</span><br><span class="line">	Model-&gt;Notify(EAnimDataModelNotifyType::CurveChanged, Payload);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Finally, go to <code>RichCurve.cpp</code> and you will see the
-definition of function <code>SetKeys</code>:</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">FRichCurve::SetKeys</span><span class="params">(<span class="type">const</span> TArray&lt;FRichCurveKey&gt;&amp; InKeys)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">Reset</span>();</span><br><span class="line"></span><br><span class="line">	Keys.<span class="built_in">SetNum</span>(InKeys.<span class="built_in">Num</span>());</span><br><span class="line">	KeyHandlesToIndices.<span class="built_in">SetKeyHandles</span>(InKeys.<span class="built_in">Num</span>());</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (int32 Index = <span class="number">0</span>; Index &lt; InKeys.<span class="built_in">Num</span>(); ++Index)</span><br><span class="line">	&#123;</span><br><span class="line">		Keys[Index] = InKeys[Index];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">AutoSetTangents</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>which is pretty straightforward.</p>
-<h1 id="import-animation">Import Animation</h1>
-<p>Function <code>UnFbx::FFbxImporter::ImportBoneTracks</code> is
-responsible for importing bone animation tracks. Its pseudo code is as
-follows.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">foreach (BoneName : FbxRawBoneNames)</span><br><span class="line">&#123;</span><br><span class="line">    CheckValidity (BoneName)</span><br><span class="line"></span><br><span class="line">    FRawAnimSequenceTrack RawTrack</span><br><span class="line">    for (CurTime = StartTime; CurTime &lt; EndTime; CurTime += TimeInc)</span><br><span class="line">    &#123;</span><br><span class="line">        LocalTransform = GetLocalTransformFromRawMatrixData (CurTime)</span><br><span class="line">        RawTrack.ScaleKeys.Add(FVector3f(LocalTransform.GetScale3D()))</span><br><span class="line">		RawTrack.PosKeys.Add(FVector3f(LocalTransform.GetTranslation()))</span><br><span class="line">		RawTrack.RotKeys.Add(FQuat4f(LocalTransform.GetRotation()))</span><br><span class="line"></span><br><span class="line">        if (Success)</span><br><span class="line">        &#123;</span><br><span class="line">            if (SkeletonHasBone (BoneName))</span><br><span class="line">            &#123;</span><br><span class="line">                // Add a new track</span><br><span class="line">                Controller.AddBoneTrack(BoneName)</span><br><span class="line">				Controller.SetBoneTrackKeys(BoneName, RawTrack.PosKeys, RawTrack.RotKeys, RawTrack.ScaleKeys)</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                // Create animation attribute and add the transform keys</span><br><span class="line">                UE::Anim::AddTypedCustomAttribute&lt;FTransformAnimationAttribute, FTransform&gt;(...)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="import-bone-metadata">Import Bone Metadata</h1>
-<p>The final step is to import the bone metadata. It simply calls the
-<code>ImportNodeCustomProperties(AnimSeq, SkeletonNode)</code> for each
-skeleton node.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">foreach (Property : NodeProperties)</span><br><span class="line">&#123;</span><br><span class="line">    MetadataTag = &quot;FBX.&quot; + NodeName + &quot;.&quot; + Property.GetName()</span><br><span class="line">    MetadataValue = GetFbxPropertyStringValue(Property)</span><br><span class="line">    AnimSeq-&gt;GetOutermost()-&gt;GetMetaData()-&gt;SetValue(AnimSeq, *MetadataTag, *MetadataValue)</span><br><span class="line"></span><br><span class="line">    foreach (ChildNode : NodeChildren)</span><br><span class="line">    &#123;</span><br><span class="line">        ImportNodeCustomProperties (AnimSeq, ChildNode)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>游戏 - 动画</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>游戏</tag>
-        <tag>UE</tag>
-        <tag>编辑器</tag>
-        <tag>动画</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Bresenham算法画直线</title>
     <url>/2020/10/18/16/03/</url>
     <content><![CDATA[<p>Bresenham's
@@ -626,6 +482,150 @@ class="math inline">\(0&lt;k\le
         <tag>计算机</tag>
         <tag>算法</tag>
         <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Customizing Actor&#39;s Details Panel and Accessing its CDO Components</title>
+    <url>/2023/03/02/10/53/</url>
+    <content><![CDATA[<p>Recently I've been writing a new functionality for my plugin. To
+facilitate its use, I want some buttons on the Details panel where these
+buttons will modify the blueprint class's CDO data. The first step,
+accessing the blueprint class's specific component, however is not as
+simple as I thought. You cannot use the
+<code>FindComponentByClass</code> function or its equivalents to access
+the component of the blueprint class at the CDO state. The second step,
+customizing the Details panel, requires me to create a new editor module
+and implements the <code>IDetailCustomization</code> interface in a very
+notoriously clumsy way. This post introduces how to customize actor's
+Details panel and access its CDO components.</p>
+<span id="more"></span>
+<h1
+id="step-1-create-a-new-class-implementing-idetailcustomization">Step 1:
+Create A New Class Implementing <code>IDetailCustomization</code></h1>
+<p>According to the <a
+href="https://docs.unrealengine.com/5.1/en-US/details-panel-customization-in-unreal-engine/">official
+documentation</a>, the <code>IDetailCustomization</code> interface can
+be used for any class that lays out details for its properties or
+functions.</p>
+<p>Start by creaing a new class implementing this interface:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;IDetailCustomization.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FMyDetail</span> : <span class="keyword">public</span> IDetailCustomization</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// Used to create a singleton instance.</span></span><br><span class="line">    <span class="function"><span class="type">static</span> TSharedRef&lt;IDetailCustomization&gt; <span class="title">MakeInstance</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">// Used to specifically implement your customization.</span></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">CustomizeDetails</span><span class="params">(IDetailLayoutBuilder&amp; DetailBuilder)</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function">UActorSequenceComponent* <span class="title">GetActorSequenceComponent</span><span class="params">(AMyClass* Object)</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Then in its <code>.cpp</code> file you should implement the two
+declared functions:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;MyDetail.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;DetailLayoutBuilder.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;DetailCategoryBuilder.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;DetailWidgetRow.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Widgets/Input/SButton.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Engine/SCS_Node.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LOCTEXT_NAMESPACE <span class="string">&quot;MyDetail&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">TSharedRef&lt;IDetailCustomization&gt; <span class="title">FKeyframeExtensionDetail::MakeInstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">MakeShared</span>&lt;FKeyframeExtensionDetail&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">FKeyframeExtensionDetail::CustomizeDetails</span><span class="params">(IDetailLayoutBuilder&amp; DetailBuilder)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    TArray&lt; TWeakObjectPtr&lt;UObject&gt; &gt; Objects;</span><br><span class="line">    DetailBuilder.<span class="built_in">GetObjectsBeingCustomized</span>(Objects);</span><br><span class="line">    <span class="keyword">if</span> (Objects.<span class="built_in">Num</span>() != <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    AMyClass* Object = (AMyClass*)Objects[<span class="number">0</span>].<span class="built_in">Get</span>();</span><br><span class="line">    IDetailCategoryBuilder&amp; KeyframeCategory = DetailBuilder.<span class="built_in">EditCategory</span>(<span class="string">&quot;ECamera Actions&quot;</span>, <span class="built_in">FText</span>(), ECategoryPriority::Important);</span><br><span class="line"></span><br><span class="line">    KeyframeCategory.<span class="built_in">AddCustomRow</span>(FText::<span class="built_in">GetEmpty</span>())</span><br><span class="line">    .<span class="built_in">NameContent</span>()</span><br><span class="line">    [</span><br><span class="line">        <span class="built_in">SNew</span>(STextBlock)</span><br><span class="line">        .<span class="built_in">Text</span>(FText::<span class="built_in">FromString</span>(<span class="string">&quot;Keyframe Extension&quot;</span>))</span><br><span class="line">        .<span class="built_in">Font</span>(IDetailLayoutBuilder::<span class="built_in">GetDetailFont</span>())</span><br><span class="line">    ]</span><br><span class="line">    .<span class="built_in">ValueContent</span>()</span><br><span class="line">    [</span><br><span class="line">        <span class="built_in">SNew</span>(SHorizontalBox)</span><br><span class="line">        + SHorizontalBox::<span class="built_in">Slot</span>()</span><br><span class="line">        .<span class="built_in">Padding</span>(<span class="number">0</span>)</span><br><span class="line">        .<span class="built_in">AutoWidth</span>()</span><br><span class="line">        [</span><br><span class="line">            <span class="built_in">SNew</span>(SButton)</span><br><span class="line">            .<span class="built_in">ToolTipText</span>(FText::<span class="built_in">FromString</span>(<span class="string">&quot;Tootip here.&quot;</span>))</span><br><span class="line">            .<span class="built_in">Content</span>()</span><br><span class="line">            [</span><br><span class="line">                <span class="built_in">SNew</span>(STextBlock)</span><br><span class="line">                .<span class="built_in">Text</span>(FText::<span class="built_in">FromString</span>(<span class="string">&quot;Toss Sequence&quot;</span>))</span><br><span class="line">                .<span class="built_in">Font</span>(IDetailLayoutBuilder::<span class="built_in">GetDetailFont</span>())</span><br><span class="line">            ]</span><br><span class="line">            .<span class="built_in">IsEnabled_Lambda</span>([<span class="keyword">this</span>, Object]()-&gt;<span class="type">bool</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;)</span><br><span class="line">            .<span class="built_in">OnClicked_Lambda</span>([<span class="keyword">this</span>, Object]()</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (Object)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">// Access the CDO component. Will explain later.</span></span><br><span class="line">                    UActorSequenceComponent* ActorSequenceComponent = <span class="built_in">GetActorSequenceComponent</span>(Object);</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// If this object is currently in blueprint (CDO)</span></span><br><span class="line">                    <span class="keyword">if</span> (Object-&gt;<span class="built_in">IsTemplate</span>())</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="built_in">DoSomething</span>(ActorSequenceComponent);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">// If this object is currently in level (instance).</span></span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="built_in">DoSomething</span>();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">return</span> (FReply::<span class="built_in">Handled</span>());</span><br><span class="line">            &#125;)</span><br><span class="line">        ]</span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">undef</span> LOCTEXT_NAMESPACE</span></span><br></pre></td></tr></table></figure>
+<p>It is quite easy to understand the code. What I am basically doing is
+first to get all customized objects and get the one I'm interested in.
+Then I specify the actor's category I want to customize. Last under this
+category I add a new row that includes a button with showing text "Toss
+Sequence".</p>
+<p>The most core part is the action this button executes after you click
+it, defined in <code>.OnClicked_Lambda</code>. In my case I want to
+access the <code>UActorSequenceComponent</code> component, so I define a
+new function <code>GetActorSequenceComponent</code> and it returns a
+<code>UActorSequenceComponent</code> pointer. This component is exactly
+the one contained in the class's CDO. The next four lines first check
+whether this object is in blueprint or in level, and then execute
+different functions.</p>
+<h1 id="step-2-accessing-component-in-cdo">Step 2: Accessing Component
+in CDO</h1>
+<p>Function <code>GetActorSequenceComponent</code> implements accessing
+a specific component in CDO:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">UActorSequenceComponent* <span class="title">FMyDetail::GetActorSequenceComponent</span><span class="params">(AMyClass* Object)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    UActorSequenceComponent* ActorSequenceComponent = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">if</span> (Object)</span><br><span class="line">    &#123;</span><br><span class="line">        UBlueprintGeneratedClass* CurrentBPClass = <span class="built_in">Cast</span>&lt;UBlueprintGeneratedClass&gt;(Object-&gt;<span class="built_in">GetClass</span>());</span><br><span class="line">        <span class="keyword">if</span> (CurrentBPClass &amp;&amp; CurrentBPClass-&gt;SimpleConstructionScript)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">const</span> USCS_Node* Component : CurrentBPClass-&gt;SimpleConstructionScript-&gt;<span class="built_in">GetAllNodes</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                UActorSequenceComponent* TemporaryComponent = <span class="built_in">Cast</span>&lt;UActorSequenceComponent&gt;(Component-&gt;ComponentTemplate);</span><br><span class="line">                <span class="keyword">if</span> (TemporaryComponent != <span class="literal">nullptr</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    ActorSequenceComponent = TemporaryComponent;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ActorSequenceComponent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>I don't want to dive into the details of each class and function
+mentioned above. To put it simply, this function first gets the
+blueprint generated class and then the
+<code>SimpleConstructionScript</code> member which is a graph describing
+the components to instantiate. Within SCS, we can visit each node and
+check if it is the component of interest. Last, we return the
+pointer.</p>
+<h1
+id="step-3-registering-the-customized-details-panel-in-.build.cs">Step
+3: Registering the Customized Details Panel in <em>.Build.cs</em></h1>
+<p>As the last step, you should register the custom class layout in the
+<em>.Build.cs</em> file. Basically this should be within the editor
+module rather than the runtime counterpart.</p>
+<p>Register is quite simple. In your <em>.Build.cs</em> file, add
+several lines in <code>StartupModule()</code> and
+<code>ShutdownModule()</code>.</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">FEasyCameraEditorModule::StartupModule</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">auto</span>&amp; PropertyModule = FModuleManager::<span class="built_in">LoadModuleChecked</span>&lt;FPropertyEditorModule&gt;(<span class="string">&quot;PropertyEditor&quot;</span>);</span><br><span class="line">    PropertyModule.<span class="built_in">RegisterCustomClassLayout</span>(</span><br><span class="line">        <span class="comment">// Drop all prefix such as U and A.</span></span><br><span class="line">        <span class="string">&quot;MyClass&quot;</span>, </span><br><span class="line">        FOnGetDetailCustomizationInstance::<span class="built_in">CreateStatic</span>(&amp;FMyDetail::MakeInstance)</span><br><span class="line">        );</span><br><span class="line">    PropertyModule.<span class="built_in">NotifyCustomizationModuleChanged</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">FEasyCameraEditorModule::ShutdownModule</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (FModuleManager::<span class="built_in">Get</span>().<span class="built_in">IsModuleLoaded</span>(<span class="string">&quot;PropertyEditor&quot;</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">auto</span>&amp; PropertyModule = FModuleManager::<span class="built_in">LoadModuleChecked</span>&lt;FPropertyEditorModule&gt;(<span class="string">&quot;PropertyEditor&quot;</span>);</span><br><span class="line">        PropertyModule.<span class="built_in">UnregisterCustomClassLayout</span>(<span class="string">&quot;MyClass&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="result">Result</h1>
+<p>Compile and open Unreal editor. In the blueprint Details panel, you
+can see three new buttons have been added (I add two more buttons). Each
+button, when clicked, successfully executes its behaviour as
+exptected.</p>
+<p><img data-src="/images/customizing-actors-details-panel/1.jpg" /></p>
+]]></content>
+      <categories>
+        <category>游戏 - 引擎</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>游戏</tag>
+        <tag>UE</tag>
+        <tag>蓝图</tag>
+        <tag>CDO</tag>
+        <tag>编辑器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>How are FBX files Imported in Unreal Engine</title>
+    <url>/2023/02/19/12/52/</url>
+    <content><![CDATA[<p>This post briefly introduces how FBX files are imported into Unreal
+Engine, particularly for animation sequences.</p>
+<span id="more"></span>
+<p>In <code>SkeletalMeshEdit.cpp</code>, you can find the function
+<code>bool UnFbx::UnFFbxImporter::ImportAnimation</code>, and this is
+where FBX import takes place.</p>
+<h1 id="find-valid-bone-names">Find Valid Bone Names</h1>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">TArray&lt;FName&gt; FbxRawBoneNames;</span><br><span class="line"><span class="built_in">FillAndVerifyBoneNames</span>(Skeleton, SortedLinks, FbxRawBoneNames, FileName);</span><br><span class="line"><span class="function">FAnimCurveImportSettings <span class="title">AnimImportSettings</span><span class="params">(DestSeq, NodeArray, SortedLinks, FbxRawBoneNames, AnimTimeSpan)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>Function <code>FillAndVerifyBoneNames</code> will copy all bone names
+into <code>FbxRawBoneNames</code> and verify whether they are duplicate
+or invalid. <code>FbxRawBoneNames</code> now contains all valid bone
+names.</p>
+<p><code>AnimImportSettings</code> is a helper structure to pass around
+the common animation parameters including the AnimationSequence asset
+reference, FBX nodes, bone names, and animation time span.</p>
+<h1 id="import-blend-shapes">Import Blend Shapes</h1>
+<p>Having everything prepared, we can import raw animation curves into
+the AnimationSequence asset. The first type of data we would like to
+import is the blend shape (morph target) curves. This is implemented by
+function <code>ImportBlendShapeCurves</code>.</p>
+<p>The function process can be described using the following pseudo
+code:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">foreach (FBXNode : FBXNodeArray) </span><br><span class="line">    foreach (BlendShape : FBXNode-&gt;BlendShapes)</span><br><span class="line">        foreach (Channel : BlendShape-&gt;BlendShapeChannels)</span><br><span class="line">        &#123;</span><br><span class="line">            FbxAnimCurve* Curve = GetShapeChannel (BlendShape, Channel)</span><br><span class="line">            if (ShouldImportCurve (Curve))</span><br><span class="line">            &#123;</span><br><span class="line">                int TargetShapeCount = Channel-&gt;GetTargetShapeCount()</span><br><span class="line">                if (TargetShapeCount &gt; 0)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (TargetShapeCount == 1)</span><br><span class="line">                    &#123;</span><br><span class="line">                        ImportCurveToAnimSequence (AnimSeq, Channel, Curve)</span><br><span class="line">                    &#125;</span><br><span class="line">                    else</span><br><span class="line">                    &#123;</span><br><span class="line">                        // Scale blend shapes values by 0.01</span><br><span class="line">                        Algo::Transform(FbxInbetweenFullWeights, InbetweenFullWeights, [](double Input)&#123; return Input * 0.01f; &#125;)</span><br><span class="line"></span><br><span class="line">                        // Collect inbetween shape names</span><br><span class="line">                        for (int32 InbetweenIndex = 0; InbetweenIndex &lt; InbetweenCount; ++InbetweenIndex)</span><br><span class="line">						&#123;</span><br><span class="line">							FbxShape* Shape = Channel-&gt;GetTargetShape(InbetweenIndex)</span><br><span class="line">							CurveNames.Add(MakeName(Shape-&gt;GetName()))</span><br><span class="line">						&#125;</span><br><span class="line"></span><br><span class="line">                        // Convert FBX curve into rich curve</span><br><span class="line">                        FRichCurve ChannelWeightCurve;</span><br><span class="line">						ImportCurve(Curve, ChannelWeightCurve)</span><br><span class="line">						if (AnimSeq)</span><br><span class="line">						&#123;</span><br><span class="line">							ChannelWeightCurve.BakeCurve(1.0f / AnimSeq-&gt;ImportResampleFramerate)</span><br><span class="line">						&#125;</span><br><span class="line"></span><br><span class="line">                        // Use the primary curve to generate inbetween shape curves + a modified primary curve</span><br><span class="line">                        TArray&lt;FRichCurve&gt; Results = ResolveWeightsForBlendShapeCurve(ChannelWeightCurve, InbetweenFullWeights)</span><br><span class="line">						if (ImportRichCurvesToAnimSequence(AnimSeq, CurveNames, Results, 0))</span><br><span class="line">						&#123;</span><br><span class="line">							for (const FString&amp; CurveName : CurveNames)</span><br><span class="line">								MySkeleton-&gt;AccumulateCurveMetaData(*CurveName, false, true)</span><br><span class="line">						&#125;	</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>The function <code>ImportRichCurvesToAnimSequence</code> is worth
+particular attention. It practically updates the AnimationSequence with
+the curves created and modified in function
+<code>ImportBlendShapeCurves</code>.</p>
+<p>Let's first examine the function
+<code>ImportRichCurvesToAnimSequence</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">foreach (CurveName : CurveNames)</span><br><span class="line">&#123;</span><br><span class="line">    // Add or retrieve curve</span><br><span class="line">    if (!SkeletonCurveMapping-&gt;Exists(CurveName))</span><br><span class="line">    &#123;</span><br><span class="line">        // Make skeleton dirty</span><br><span class="line">        Skeleton-&gt;Modify()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Get corresponding curve</span><br><span class="line">    FAnimationCurveIdentifier FloatCurveId (CurveName, ERawCurveTrackTypes::RCT_Float)</span><br><span class="line">    const FFloatCurve* TargetCurve = AnimSeq-&gt;GetDataModel()-&gt;FindFloatCurve(FloatCurveId)</span><br><span class="line"></span><br><span class="line">    // Update curve and set keys</span><br><span class="line">	AnimSeq-&gt;Controller.SetCurveKeys(FloatCurveId, RichCurves[CurveIndex].GetConstRefOfKeys())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Then, let's examine function <code>SetCurveKeys</code>, which is
+defined in <code>AnimDataContyroller.cpp</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// Get the curve according to curve id</span><br><span class="line">FRichCurve* RichCurve = Model-&gt;GetMutableRichCurve(CurveId)</span><br><span class="line"></span><br><span class="line">if (RichCurve)</span><br><span class="line">&#123;</span><br><span class="line">    // Set rich curve values</span><br><span class="line">	RichCurve-&gt;SetKeys(CurveKeys);</span><br><span class="line"></span><br><span class="line">    // On curve changed notify</span><br><span class="line">    FCurveChangedPayload Payload;</span><br><span class="line">	Payload.Identifier = CurveId;</span><br><span class="line">	Model-&gt;Notify(EAnimDataModelNotifyType::CurveChanged, Payload);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Finally, go to <code>RichCurve.cpp</code> and you will see the
+definition of function <code>SetKeys</code>:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">FRichCurve::SetKeys</span><span class="params">(<span class="type">const</span> TArray&lt;FRichCurveKey&gt;&amp; InKeys)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">Reset</span>();</span><br><span class="line"></span><br><span class="line">	Keys.<span class="built_in">SetNum</span>(InKeys.<span class="built_in">Num</span>());</span><br><span class="line">	KeyHandlesToIndices.<span class="built_in">SetKeyHandles</span>(InKeys.<span class="built_in">Num</span>());</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (int32 Index = <span class="number">0</span>; Index &lt; InKeys.<span class="built_in">Num</span>(); ++Index)</span><br><span class="line">	&#123;</span><br><span class="line">		Keys[Index] = InKeys[Index];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">AutoSetTangents</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>which is pretty straightforward.</p>
+<h1 id="import-animation">Import Animation</h1>
+<p>Function <code>UnFbx::FFbxImporter::ImportBoneTracks</code> is
+responsible for importing bone animation tracks. Its pseudo code is as
+follows.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">foreach (BoneName : FbxRawBoneNames)</span><br><span class="line">&#123;</span><br><span class="line">    CheckValidity (BoneName)</span><br><span class="line"></span><br><span class="line">    FRawAnimSequenceTrack RawTrack</span><br><span class="line">    for (CurTime = StartTime; CurTime &lt; EndTime; CurTime += TimeInc)</span><br><span class="line">    &#123;</span><br><span class="line">        LocalTransform = GetLocalTransformFromRawMatrixData (CurTime)</span><br><span class="line">        RawTrack.ScaleKeys.Add(FVector3f(LocalTransform.GetScale3D()))</span><br><span class="line">		RawTrack.PosKeys.Add(FVector3f(LocalTransform.GetTranslation()))</span><br><span class="line">		RawTrack.RotKeys.Add(FQuat4f(LocalTransform.GetRotation()))</span><br><span class="line"></span><br><span class="line">        if (Success)</span><br><span class="line">        &#123;</span><br><span class="line">            if (SkeletonHasBone (BoneName))</span><br><span class="line">            &#123;</span><br><span class="line">                // Add a new track</span><br><span class="line">                Controller.AddBoneTrack(BoneName)</span><br><span class="line">				Controller.SetBoneTrackKeys(BoneName, RawTrack.PosKeys, RawTrack.RotKeys, RawTrack.ScaleKeys)</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                // Create animation attribute and add the transform keys</span><br><span class="line">                UE::Anim::AddTypedCustomAttribute&lt;FTransformAnimationAttribute, FTransform&gt;(...)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="import-bone-metadata">Import Bone Metadata</h1>
+<p>The final step is to import the bone metadata. It simply calls the
+<code>ImportNodeCustomProperties(AnimSeq, SkeletonNode)</code> for each
+skeleton node.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">foreach (Property : NodeProperties)</span><br><span class="line">&#123;</span><br><span class="line">    MetadataTag = &quot;FBX.&quot; + NodeName + &quot;.&quot; + Property.GetName()</span><br><span class="line">    MetadataValue = GetFbxPropertyStringValue(Property)</span><br><span class="line">    AnimSeq-&gt;GetOutermost()-&gt;GetMetaData()-&gt;SetValue(AnimSeq, *MetadataTag, *MetadataValue)</span><br><span class="line"></span><br><span class="line">    foreach (ChildNode : NodeChildren)</span><br><span class="line">    &#123;</span><br><span class="line">        ImportNodeCustomProperties (AnimSeq, ChildNode)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>游戏 - 动画</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>游戏</tag>
+        <tag>UE</tag>
+        <tag>编辑器</tag>
+        <tag>动画</tag>
       </tags>
   </entry>
   <entry>
@@ -1166,6 +1166,81 @@ Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷
       </tags>
   </entry>
   <entry>
+    <title>一道有趣的概率题</title>
+    <url>/2022/10/20/23/59/</url>
+    <content><![CDATA[<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
+U(0,1)\)</span>独立同分布，令<span
+class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
+X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
+class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。换句话说，我们要求最先使得若干个独立同分布于<span
+class="math inline">\((0,1)\)</span>的随机变量之和大于<span
+class="math inline">\(1\)</span>的期望。</p>
+<span id="more"></span>
+<h1 id="问题定义">问题定义</h1>
+<p>这个问题的定义已经定义在上面了，这里再复述一遍：</p>
+<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
+U(0,1)\)</span>独立同分布，令<span
+class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
+X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
+class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。</p>
+<h1 id="引入函数">引入函数</h1>
+<p>乍一看这个题似乎无从下手，但是我们可以发现这里<span
+class="math inline">\(&gt;1\)</span>这个条件似乎可以换成任意一个<span
+class="math inline">\(&gt;t
+(t&gt;0)\)</span>，这启发我们用一个函数去表示我们要求的式子，然后通过求解一个“递推式”（实际上是一个微分方程）解出这个函数，进而得到某个具体点的值。</p>
+<p>从这个思路出发，我们不妨定义<span
+class="math inline">\(\tau_t:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le t
+\wedge X_1+\cdots+X_{n-1}+X_n&gt;t\}\)</span>，进而令<span
+class="math inline">\(f(t):=\mathbb{E}[X_1+\cdots+X_{\tau_t}]\)</span>。显然，我们的目标就是求<span
+class="math inline">\(f(1)\)</span>。</p>
+<h1 id="求解方程">求解方程</h1>
+<p>那么，怎么求出<span
+class="math inline">\(f(t)\)</span>呢？注意题目中的条件<span
+class="math inline">\(X_1,X_2,\cdots\sim
+U(0,1)\)</span>独立同分布，因此我们可以把<span
+class="math inline">\(f(t)\)</span>里面的<span
+class="math inline">\(X_1\)</span>拆出来，变成：</p>
+<p><span
+class="math display">\[f(t)=\mathbb{E}[X_1]+\mathbb{E}[X_2+\cdots+X_{\tau_t}]\]</span></p>
+<p>为了简便起见，我们不妨限定<span
+class="math inline">\(t&lt;1\)</span>。此时考虑两种情况：<span
+class="math inline">\(X_1=s&gt;t\)</span>和<span
+class="math inline">\(X_1=s\le t\)</span>。</p>
+<p>如果<span class="math inline">\(s&gt;t\)</span>，那么<span
+class="math inline">\(f(t)\)</span>就等于<span
+class="math inline">\(\mathbb{E}[X_1]\)</span>，所以这等价<span
+class="math inline">\(f(t|s&gt;t)=\mathbb{E}[X_1\vert
+X_1&gt;t]=\dfrac{1-t^2}{2}\)</span>。</p>
+<p>如果<span class="math inline">\(s\le
+t\)</span>，那么就相当于后面的<span
+class="math inline">\(X_2+\cdots+X_{\tau_t}&gt;t-s\)</span>且<span
+class="math inline">\(X_2+\cdots+X_{\tau_t-1}\le
+t-s\)</span>，再由独立同分布知道这就是<span
+class="math inline">\(f(t-s)\)</span>，但这是以<span
+class="math inline">\(X_t=s\le t\)</span>为条件的，所以实际上还要对<span
+class="math inline">\(s\)</span>求个积分，也就是：</p>
+<p><span class="math display">\[f(t|s\le
+t)=\frac{t^2}{2}+\int_{0}^tf(t-s)\mathrm{d}s\]</span></p>
+<p>把上面两个加起来，就有：</p>
+<p><span class="math display">\[f(t)=f(t|s\le
+t)+f(t|s&gt;t)=\frac{1}{2}+\int_0^tf(x)\mathrm{d}x\]</span></p>
+<p>进而得到微分方程及其初始值：</p>
+<p><span
+class="math display">\[f&#39;(t)=f(t),~~f(0)=\frac{1}{2}\]</span></p>
+<p>很容易求解得到<span
+class="math inline">\(f(t)=\mathrm{e}^t/2\)</span>，所以我们就能得到最终的答案<span
+class="math inline">\(f(1)=\mathrm{e}/2\)</span>。</p>
+]]></content>
+      <categories>
+        <category>数学 - 概率论</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>概率论</tag>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《游戏设计的236个技巧》笔记</title>
     <url>/2021/08/17/01/07/</url>
     <content><![CDATA[<p>本文是《游戏设计的236个技巧：游戏机制、关卡设计和镜头窍门》的笔记。</p>
@@ -1430,78 +1505,27 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
       </tags>
   </entry>
   <entry>
-    <title>一道有趣的概率题</title>
-    <url>/2022/10/20/23/59/</url>
-    <content><![CDATA[<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
-U(0,1)\)</span>独立同分布，令<span
-class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
-X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
-class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。换句话说，我们要求最先使得若干个独立同分布于<span
-class="math inline">\((0,1)\)</span>的随机变量之和大于<span
-class="math inline">\(1\)</span>的期望。</p>
-<span id="more"></span>
-<h1 id="问题定义">问题定义</h1>
-<p>这个问题的定义已经定义在上面了，这里再复述一遍：</p>
-<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
-U(0,1)\)</span>独立同分布，令<span
-class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
-X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
-class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。</p>
-<h1 id="引入函数">引入函数</h1>
-<p>乍一看这个题似乎无从下手，但是我们可以发现这里<span
-class="math inline">\(&gt;1\)</span>这个条件似乎可以换成任意一个<span
-class="math inline">\(&gt;t
-(t&gt;0)\)</span>，这启发我们用一个函数去表示我们要求的式子，然后通过求解一个“递推式”（实际上是一个微分方程）解出这个函数，进而得到某个具体点的值。</p>
-<p>从这个思路出发，我们不妨定义<span
-class="math inline">\(\tau_t:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le t
-\wedge X_1+\cdots+X_{n-1}+X_n&gt;t\}\)</span>，进而令<span
-class="math inline">\(f(t):=\mathbb{E}[X_1+\cdots+X_{\tau_t}]\)</span>。显然，我们的目标就是求<span
-class="math inline">\(f(1)\)</span>。</p>
-<h1 id="求解方程">求解方程</h1>
-<p>那么，怎么求出<span
-class="math inline">\(f(t)\)</span>呢？注意题目中的条件<span
-class="math inline">\(X_1,X_2,\cdots\sim
-U(0,1)\)</span>独立同分布，因此我们可以把<span
-class="math inline">\(f(t)\)</span>里面的<span
-class="math inline">\(X_1\)</span>拆出来，变成：</p>
-<p><span
-class="math display">\[f(t)=\mathbb{E}[X_1]+\mathbb{E}[X_2+\cdots+X_{\tau_t}]\]</span></p>
-<p>为了简便起见，我们不妨限定<span
-class="math inline">\(t&lt;1\)</span>。此时考虑两种情况：<span
-class="math inline">\(X_1=s&gt;t\)</span>和<span
-class="math inline">\(X_1=s\le t\)</span>。</p>
-<p>如果<span class="math inline">\(s&gt;t\)</span>，那么<span
-class="math inline">\(f(t)\)</span>就等于<span
-class="math inline">\(\mathbb{E}[X_1]\)</span>，所以这等价<span
-class="math inline">\(f(t|s&gt;t)=\mathbb{E}[X_1\vert
-X_1&gt;t]=\dfrac{1-t^2}{2}\)</span>。</p>
-<p>如果<span class="math inline">\(s\le
-t\)</span>，那么就相当于后面的<span
-class="math inline">\(X_2+\cdots+X_{\tau_t}&gt;t-s\)</span>且<span
-class="math inline">\(X_2+\cdots+X_{\tau_t-1}\le
-t-s\)</span>，再由独立同分布知道这就是<span
-class="math inline">\(f(t-s)\)</span>，但这是以<span
-class="math inline">\(X_t=s\le t\)</span>为条件的，所以实际上还要对<span
-class="math inline">\(s\)</span>求个积分，也就是：</p>
-<p><span class="math display">\[f(t|s\le
-t)=\frac{t^2}{2}+\int_{0}^tf(t-s)\mathrm{d}s\]</span></p>
-<p>把上面两个加起来，就有：</p>
-<p><span class="math display">\[f(t)=f(t|s\le
-t)+f(t|s&gt;t)=\frac{1}{2}+\int_0^tf(x)\mathrm{d}x\]</span></p>
-<p>进而得到微分方程及其初始值：</p>
-<p><span
-class="math display">\[f&#39;(t)=f(t),~~f(0)=\frac{1}{2}\]</span></p>
-<p>很容易求解得到<span
-class="math inline">\(f(t)=\mathrm{e}^t/2\)</span>，所以我们就能得到最终的答案<span
-class="math inline">\(f(1)=\mathrm{e}/2\)</span>。</p>
+    <title>十二月的花</title>
+    <url>/2020/12/22/09/29/</url>
+    <content><![CDATA[<p>埙吹响了海岸<br />
+琴穿梭叶间<br />
+笛在天空啼鸣<br />
+伴奏着雪花片片</p>
+<p>孩子们欢笑着相聚<br />
+踏着雪<br />
+吱吱嘎嘎</p>
+<p>把欢乐捏成一团团棉<br />
+随风起舞<br />
+在阳光下<br />
+雪爱上了花</p>
 ]]></content>
       <categories>
-        <category>数学 - 概率论</category>
+        <category>随笔</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>概率论</tag>
         <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -1575,30 +1599,6 @@ class="math inline">\(f(1)=\mathrm{e}/2\)</span>。</p>
       <tags>
         <tag>随笔</tag>
         <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>十二月的花</title>
-    <url>/2020/12/22/09/29/</url>
-    <content><![CDATA[<p>埙吹响了海岸<br />
-琴穿梭叶间<br />
-笛在天空啼鸣<br />
-伴奏着雪花片片</p>
-<p>孩子们欢笑着相聚<br />
-踏着雪<br />
-吱吱嘎嘎</p>
-<p>把欢乐捏成一团团棉<br />
-随风起舞<br />
-在阳光下<br />
-雪爱上了花</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -2216,6 +2216,22 @@ key）。</p>
       </tags>
   </entry>
   <entry>
+    <title>西湖夜歌</title>
+    <url>/2021/07/09/22/55/</url>
+    <content><![CDATA[<p>霓光半遮影<br />
+湖波轻颤合韵起<br />
+半句寻谁去</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>矫正透视投影插值及属性插值详解</title>
     <url>/2021/08/14/23/31/</url>
     <content><![CDATA[<p>三角形是图形学的基本几何形状，空间中的三角形<span
@@ -2618,22 +2634,6 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <tag>计算机</tag>
         <tag>数学</tag>
         <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>西湖夜歌</title>
-    <url>/2021/07/09/22/55/</url>
-    <content><![CDATA[<p>霓光半遮影<br />
-湖波轻颤合韵起<br />
-半句寻谁去</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -3389,8 +3389,8 @@ T^{(k+1)}\)</span> is more likely to be less than the root.</p>
 <h1 id="solutions">Solutions</h1>
 <h2 id="solution-1-imposing-an-invalid-range">Solution 1: imposing an
 invalid range</h2>
-<p>Based on what we've discussed so far, wen can immediately come up
-with a simple solution: enforce <span class="math inline">\(\Delta
+<p>Based on what we've discussed so far, we can immediately come up with
+a simple solution: enforce <span class="math inline">\(\Delta
 T^{(k)}\)</span> to be <span
 class="math inline">\(\mathfrak{O}=\frac{T}{m}\ln\left(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
 k)}}\right)\)</span> if they are very close. That is to say, we use a
