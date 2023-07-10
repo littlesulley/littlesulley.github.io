@@ -2296,6 +2296,18 @@ href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <div class="popular-posts-excerpt"><p><p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p></p></div>
     </li>
     <li class="popular-posts-item">
+        <div class="popular-posts-date">2023-05-03</div>
+      <div class="popular-posts-title"><a href="/2023/05/03/18/22/" rel="bookmark">Which Splines Do You Need? A Comprehensive Dive into Common Splines</a></div>
+        <div class="popular-posts-excerpt"><p><p>This post introduces some widely used splines in computer games
+including Bezier curves, cubic Hermite splines, Catmull-Rom splines,
+B-splines, Kochanek–Bartels splines, etc. We show these splines can be
+bridged through re-formulation. Then, we focus on the extension and
+generalization of Bezier curves and introduce mathematical methods to
+create dynamic smooth splines. Last, we develop a simple Editor in
+Unreal Engine to enable easy creation of splines under different
+constraints and conditions.</p></p></div>
+    </li>
+    <li class="popular-posts-item">
         <div class="popular-posts-date">2022-10-12</div>
       <div class="popular-posts-title"><a href="/2022/10/12/18/39/" rel="bookmark">Bump Mapping, Normal Mapping and Displacement Mapping</a></div>
         <div class="popular-posts-excerpt"><p><p>凹凸贴图（Bump
@@ -2325,29 +2337,6 @@ UE, so we have to implement our own version of 1v1 camera.</p>
 camera in UE using only blueprints, based on some simple mathematics. If
 you are more familiar with coding, you can also implement this 1v1
 camera with only few lines of code.</p></p></div>
-    </li>
-    <li class="popular-posts-item">
-        <div class="popular-posts-date">2021-08-14</div>
-      <div class="popular-posts-title"><a href="/2021/08/14/23/31/" rel="bookmark">矫正透视投影插值及属性插值详解</a></div>
-        <div class="popular-posts-excerpt"><p><p>三角形是图形学的基本几何形状，空间中的三角形<span
-class="math inline">\(ABC\)</span>投射到屏幕空间中为<span
-class="math inline">\(A&#39;B&#39;C&#39;\)</span>。在<span
-class="math inline">\(A&#39;B&#39;C&#39;\)</span>内存在一点<span
-class="math inline">\(P&#39;\)</span>，它的某个属性<span
-class="math inline">\(S_{P&#39;}\)</span>常常用三个顶点的属性<span
-class="math inline">\(S_{A&#39;}, S_{B&#39;},
-S_{C&#39;}\)</span>的插值表示，即<strong>重心坐标</strong>（Barycentric
-coordinates）。然而，在屏幕空间中计算得出的<span
-class="math inline">\(P&#39;\)</span>点在三角形<span
-class="math inline">\(A&#39;B&#39;C&#39;\)</span>内的重心坐标<span
-class="math inline">\((x_{P&#39;},y_{P&#39;},z_{P&#39;})\)</span>却不一定等于投影前三维空间内<span
-class="math inline">\(P&#39;\)</span>对应点<span
-class="math inline">\(P\)</span>在三角形<span
-class="math inline">\(ABC\)</span>内的重心坐标<span
-class="math inline">\((x_{P},y_{P},z_{P})\)</span>。这是因为从三维空间到屏幕空间需要执行<strong>透视投影</strong>（Perspective
-Projection），这个投影是非线性的，因此变换前的重心坐标并不能和变换后的重心坐标保持线性关系，从而对三角形顶点的属性插值也不是线性关系。这就需要对透视投影下的重心坐标插值进行修正。本文从透视投影本身出发，说明其非线性性，并根据论文《Perspective-Correct
-Interpolation》<a href="#fn1" class="footnote-ref" id="fnref1"
-role="doc-noteref"><sup>1</sup></a> 给出修正插值。</p></p></div>
     </li>
   </ul>
 

@@ -799,6 +799,18 @@ target="_blank" rel="noopener" href="https://www.cnblogs.com/tiancaiwrk/p/111324
         <div class="popular-posts-excerpt"><p><p>图形学中有关旋转的一个问题是，一个（三维空间的）向量绕一个任意轴旋转若干角度后的角度是什么。本文简单进行推导，给出显式结果。</p></p></div>
     </li>
     <li class="popular-posts-item">
+        <div class="popular-posts-date">2023-05-03</div>
+      <div class="popular-posts-title"><a href="/2023/05/03/18/22/" rel="bookmark">Which Splines Do You Need? A Comprehensive Dive into Common Splines</a></div>
+        <div class="popular-posts-excerpt"><p><p>This post introduces some widely used splines in computer games
+including Bezier curves, cubic Hermite splines, Catmull-Rom splines,
+B-splines, Kochanek–Bartels splines, etc. We show these splines can be
+bridged through re-formulation. Then, we focus on the extension and
+generalization of Bezier curves and introduce mathematical methods to
+create dynamic smooth splines. Last, we develop a simple Editor in
+Unreal Engine to enable easy creation of splines under different
+constraints and conditions.</p></p></div>
+    </li>
+    <li class="popular-posts-item">
         <div class="popular-posts-date">2022-03-25</div>
       <div class="popular-posts-title"><a href="/2022/03/25/01/00/" rel="bookmark">四元数与旋转</a></div>
         <div class="popular-posts-excerpt"><p><p>图形学中的旋转（Rotation）非常重要，用欧拉角（Euler
@@ -845,23 +857,6 @@ class="math inline">\((x_{P},y_{P},z_{P})\)</span>。这是因为从三维空间
 Projection），这个投影是非线性的，因此变换前的重心坐标并不能和变换后的重心坐标保持线性关系，从而对三角形顶点的属性插值也不是线性关系。这就需要对透视投影下的重心坐标插值进行修正。本文从透视投影本身出发，说明其非线性性，并根据论文《Perspective-Correct
 Interpolation》<a href="#fn1" class="footnote-ref" id="fnref1"
 role="doc-noteref"><sup>1</sup></a> 给出修正插值。</p></p></div>
-    </li>
-    <li class="popular-posts-item">
-        <div class="popular-posts-date">2022-12-11</div>
-      <div class="popular-posts-title"><a href="/2022/12/11/09/16/" rel="bookmark">Implementing A Minimum 1V1 Camera in UE (akin to FramingTransposer + Composer in Cinemachine)</a></div>
-        <div class="popular-posts-excerpt"><p><p>The camera system inside Unreal Engine provides very basic functions.
-It merely enables the camera to follow a target with limited adjustable
-paramters such as offset, camera distance, lag, etc. We would like a
-more powerful camera system, like the Cinemachine toolset in Unity, to
-facilitate creating more interesting and compelling visual experience
-for gameplay. In most 3D adventure games, a 1v1 camera is required when
-you fight with a BOSS and you need to look at the BOSS however you move
-and cast skills. Unfortunately, 1v1 camera is not a built-in function in
-UE, so we have to implement our own version of 1v1 camera.</p>
-<p>In this post, I will share with you how to implement a minimum 1v1
-camera in UE using only blueprints, based on some simple mathematics. If
-you are more familiar with coding, you can also implement this 1v1
-camera with only few lines of code.</p></p></div>
     </li>
   </ul>
 
