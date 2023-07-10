@@ -819,21 +819,6 @@ As a team, you need to agree on your guidelines</p>
       </tags>
   </entry>
   <entry>
-    <title>Which Splines Do You Need? A Comprehensive Dive into Common Splines</title>
-    <url>/2023/05/03/18/22/</url>
-    <content><![CDATA[
-]]></content>
-      <categories>
-        <category>数学 - 图形学</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>数学</tag>
-        <tag>随笔</tag>
-        <tag>Spline</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《Assassain&#39;s Creed Valhalla》玩后感</title>
     <url>/2020/11/12/23/23/</url>
     <content><![CDATA[<p><code>刺客信条：英灵殿</code>（Assassin's Creed
@@ -873,6 +858,93 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
         <tag>游戏</tag>
         <tag>生活</tag>
         <tag>刺客信条</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Which Splines Do You Need? A Comprehensive Dive into Common Splines</title>
+    <url>/2023/05/03/18/22/</url>
+    <content><![CDATA[<p>This post introduces some widely used splines in computer games
+including Bezier curves, cubic Hermite splines, Catmull-Rom splines,
+B-splines, Kochanek–Bartels splines, etc. We show these splines can be
+bridged through re-formulation. Then, we focus on the extension and
+generalization of Bezier curves and introduce mathematical methods to
+create dynamic smooth splines. Last, we develop a simple Editor in
+Unreal Engine to enable easy creation of splines under different
+constraints and conditions.</p>
+<span id="more"></span>
+<h1 id="common-splines">Common Splines</h1>
+<h2 id="cubic-hermite-splines">Cubic Hermite splines</h2>
+<p>Cubic Hermite splines construct a curve based on two points along
+with their respecive tangents.</p>
+<p>Suppose the given starting point is <span
+class="math inline">\(\bm{p}_0\)</span> at <span
+class="math inline">\(t=0\)</span> and ending point <span
+class="math inline">\(\bm{p}_1\)</span> at <span
+class="math inline">\(t=1\)</span>, as well as the starting tangent
+<span class="math inline">\(\bm{d}_0\)</span> and <span
+class="math inline">\(\bm{d}_1\)</span>. The fitted cubic polynomial can
+be defined by:</p>
+<p><span
+class="math display">\[\bm{p}(t)=(2t^3-3t^2+1)\bm{p}_0+(t^3-2t^2+t)\bm{d}_0+(-2t^3+3t^2)\bm{p}_1+(t^3-t^2)\bm{d}_1\]</span></p>
+<p>Proof is quite simple. Assume our function is <span
+class="math inline">\(\bm{p}(t)=at^3+bt^2+ct+d\)</span>, and given that
+<span class="math inline">\(\bm{p}(0)=\bm{p}_0, \bm{p}(1)=\bm{p}_1,
+\bm{p}&#39;(0)=\bm{d}_0, \bm{p}&#39;(1)=\bm{d}_1\)</span>, we have:</p>
+<p><span class="math display">\[
+\begin{cases}
+d&amp;=~\bm{p}_0\\
+a+b+c+d&amp;=~\bm{p}_1\\
+c&amp;=~\bm{d}_0\\
+3a+2b+c&amp;=~\bm{d}_1
+\end{cases}
+\]</span></p>
+<p>Solving it gives us:</p>
+<p><span class="math display">\[
+\bm{p}(t)=(2\bm{p}_0-2\bm{p}_1+\bm{d}_0+\bm{d}_1)t^3+(-3\bm{p}_0+3\bm{p}_1-2\bm{d}_0-\bm{d}_1)t^2+\bm{d}_0t+\bm{p}_0
+\]</span></p>
+<p>Rearranging <span class="math inline">\(\bm{p}(t)\)</span> gives the
+equation proposed at the beginning.</p>
+<p>We can also reformulate <span
+class="math inline">\(\bm{p}(t)\)</span> in terms of Bezier curves with
+respect to the four control points <span class="math inline">\(\bm{p}_0,
+\bm{p}_0+\frac{1}{3}\bm{d}_0,
+\bm{p}_1-\frac{1}{3}\bm{d}_1,\bm{p}_1\)</span>. To show this, recall
+that a cubic Bezier curve can be expresses as:</p>
+<p><span class="math display">\[
+\bm{B}(t)=\sum_{i=0}^n\bm{p}_ib_{i,n}(t),
+~b_{i,n}(t)=\binom{n}{i}(1-t)^{n-i}t^i
+\]</span></p>
+<p>We can rewrite <span class="math inline">\(\bm{p}(t)\)</span> as
+follows:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\bm{p}(t)&amp;=(2t^3-3t^2+1)\bm{p}_0+(t^3-2t^2+t)\bm{d}_0+(-2t^3+3t^2)\bm{p}_1+(t^3-t^2)\bm{d}_1\\
+&amp;=(b_{0,3}(t)+b_{1,3}(t))\bm{p}_0+\frac{1}{3}b_{1,3}(t)\bm{d}_0+(b_{2,3}(t)+b_{3,3}(t))\bm{p}_1-\frac{1}{3}b_{2,3}(t)\bm{d}_1\\
+&amp;=b_{0,3}(t)\bm{p}_0+b_{1,3}(t)\left(\bm{p}_0+\frac{1}{3}\bm{d}_0\right)+b_{2,3}(t)\left(\bm{p}_1-\frac{1}{3}\bm{d}_1\right)+b_{3,3}(t)\bm{p}_1
+\end{aligned}
+\]</span></p>
+<p>This shows that a cubic Bezier curve that patches the control points
+in the middle determines the tangents of the interpolation curve at the
+respective outer points.<a href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a></p>
+<section class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"
+role="doc-endnote"><p>https://en.wikipedia.org/wiki/Cubic_Hermite_spline<a
+href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+]]></content>
+      <categories>
+        <category>数学 - 图形学</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>数学</tag>
+        <tag>随笔</tag>
+        <tag>Spline</tag>
       </tags>
   </entry>
   <entry>
@@ -1166,81 +1238,6 @@ Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷
       </tags>
   </entry>
   <entry>
-    <title>一道有趣的概率题</title>
-    <url>/2022/10/20/23/59/</url>
-    <content><![CDATA[<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
-U(0,1)\)</span>独立同分布，令<span
-class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
-X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
-class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。换句话说，我们要求最先使得若干个独立同分布于<span
-class="math inline">\((0,1)\)</span>的随机变量之和大于<span
-class="math inline">\(1\)</span>的期望。</p>
-<span id="more"></span>
-<h1 id="问题定义">问题定义</h1>
-<p>这个问题的定义已经定义在上面了，这里再复述一遍：</p>
-<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
-U(0,1)\)</span>独立同分布，令<span
-class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
-X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
-class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。</p>
-<h1 id="引入函数">引入函数</h1>
-<p>乍一看这个题似乎无从下手，但是我们可以发现这里<span
-class="math inline">\(&gt;1\)</span>这个条件似乎可以换成任意一个<span
-class="math inline">\(&gt;t
-(t&gt;0)\)</span>，这启发我们用一个函数去表示我们要求的式子，然后通过求解一个“递推式”（实际上是一个微分方程）解出这个函数，进而得到某个具体点的值。</p>
-<p>从这个思路出发，我们不妨定义<span
-class="math inline">\(\tau_t:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le t
-\wedge X_1+\cdots+X_{n-1}+X_n&gt;t\}\)</span>，进而令<span
-class="math inline">\(f(t):=\mathbb{E}[X_1+\cdots+X_{\tau_t}]\)</span>。显然，我们的目标就是求<span
-class="math inline">\(f(1)\)</span>。</p>
-<h1 id="求解方程">求解方程</h1>
-<p>那么，怎么求出<span
-class="math inline">\(f(t)\)</span>呢？注意题目中的条件<span
-class="math inline">\(X_1,X_2,\cdots\sim
-U(0,1)\)</span>独立同分布，因此我们可以把<span
-class="math inline">\(f(t)\)</span>里面的<span
-class="math inline">\(X_1\)</span>拆出来，变成：</p>
-<p><span
-class="math display">\[f(t)=\mathbb{E}[X_1]+\mathbb{E}[X_2+\cdots+X_{\tau_t}]\]</span></p>
-<p>为了简便起见，我们不妨限定<span
-class="math inline">\(t&lt;1\)</span>。此时考虑两种情况：<span
-class="math inline">\(X_1=s&gt;t\)</span>和<span
-class="math inline">\(X_1=s\le t\)</span>。</p>
-<p>如果<span class="math inline">\(s&gt;t\)</span>，那么<span
-class="math inline">\(f(t)\)</span>就等于<span
-class="math inline">\(\mathbb{E}[X_1]\)</span>，所以这等价<span
-class="math inline">\(f(t|s&gt;t)=\mathbb{E}[X_1\vert
-X_1&gt;t]=\dfrac{1-t^2}{2}\)</span>。</p>
-<p>如果<span class="math inline">\(s\le
-t\)</span>，那么就相当于后面的<span
-class="math inline">\(X_2+\cdots+X_{\tau_t}&gt;t-s\)</span>且<span
-class="math inline">\(X_2+\cdots+X_{\tau_t-1}\le
-t-s\)</span>，再由独立同分布知道这就是<span
-class="math inline">\(f(t-s)\)</span>，但这是以<span
-class="math inline">\(X_t=s\le t\)</span>为条件的，所以实际上还要对<span
-class="math inline">\(s\)</span>求个积分，也就是：</p>
-<p><span class="math display">\[f(t|s\le
-t)=\frac{t^2}{2}+\int_{0}^tf(t-s)\mathrm{d}s\]</span></p>
-<p>把上面两个加起来，就有：</p>
-<p><span class="math display">\[f(t)=f(t|s\le
-t)+f(t|s&gt;t)=\frac{1}{2}+\int_0^tf(x)\mathrm{d}x\]</span></p>
-<p>进而得到微分方程及其初始值：</p>
-<p><span
-class="math display">\[f&#39;(t)=f(t),~~f(0)=\frac{1}{2}\]</span></p>
-<p>很容易求解得到<span
-class="math inline">\(f(t)=\mathrm{e}^t/2\)</span>，所以我们就能得到最终的答案<span
-class="math inline">\(f(1)=\mathrm{e}/2\)</span>。</p>
-]]></content>
-      <categories>
-        <category>数学 - 概率论</category>
-      </categories>
-      <tags>
-        <tag>数学</tag>
-        <tag>概率论</tag>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《游戏设计的236个技巧》笔记</title>
     <url>/2021/08/17/01/07/</url>
     <content><![CDATA[<p>本文是《游戏设计的236个技巧：游戏机制、关卡设计和镜头窍门》的笔记。</p>
@@ -1505,27 +1502,78 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
       </tags>
   </entry>
   <entry>
-    <title>十二月的花</title>
-    <url>/2020/12/22/09/29/</url>
-    <content><![CDATA[<p>埙吹响了海岸<br />
-琴穿梭叶间<br />
-笛在天空啼鸣<br />
-伴奏着雪花片片</p>
-<p>孩子们欢笑着相聚<br />
-踏着雪<br />
-吱吱嘎嘎</p>
-<p>把欢乐捏成一团团棉<br />
-随风起舞<br />
-在阳光下<br />
-雪爱上了花</p>
+    <title>一道有趣的概率题</title>
+    <url>/2022/10/20/23/59/</url>
+    <content><![CDATA[<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
+U(0,1)\)</span>独立同分布，令<span
+class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
+X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
+class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。换句话说，我们要求最先使得若干个独立同分布于<span
+class="math inline">\((0,1)\)</span>的随机变量之和大于<span
+class="math inline">\(1\)</span>的期望。</p>
+<span id="more"></span>
+<h1 id="问题定义">问题定义</h1>
+<p>这个问题的定义已经定义在上面了，这里再复述一遍：</p>
+<p>设<span class="math inline">\(X_1,X_2,\cdots\sim
+U(0,1)\)</span>独立同分布，令<span
+class="math inline">\(\tau:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le1 \wedge
+X_1+\cdots+X_{n-1}+X_n&gt;1\}\)</span>，求<span
+class="math inline">\(\mathbb{E}[X_1+\cdots+X_\tau]\)</span>。</p>
+<h1 id="引入函数">引入函数</h1>
+<p>乍一看这个题似乎无从下手，但是我们可以发现这里<span
+class="math inline">\(&gt;1\)</span>这个条件似乎可以换成任意一个<span
+class="math inline">\(&gt;t
+(t&gt;0)\)</span>，这启发我们用一个函数去表示我们要求的式子，然后通过求解一个“递推式”（实际上是一个微分方程）解出这个函数，进而得到某个具体点的值。</p>
+<p>从这个思路出发，我们不妨定义<span
+class="math inline">\(\tau_t:=\min_n\{n\vert X_1+\cdots+X_{n-1}\le t
+\wedge X_1+\cdots+X_{n-1}+X_n&gt;t\}\)</span>，进而令<span
+class="math inline">\(f(t):=\mathbb{E}[X_1+\cdots+X_{\tau_t}]\)</span>。显然，我们的目标就是求<span
+class="math inline">\(f(1)\)</span>。</p>
+<h1 id="求解方程">求解方程</h1>
+<p>那么，怎么求出<span
+class="math inline">\(f(t)\)</span>呢？注意题目中的条件<span
+class="math inline">\(X_1,X_2,\cdots\sim
+U(0,1)\)</span>独立同分布，因此我们可以把<span
+class="math inline">\(f(t)\)</span>里面的<span
+class="math inline">\(X_1\)</span>拆出来，变成：</p>
+<p><span
+class="math display">\[f(t)=\mathbb{E}[X_1]+\mathbb{E}[X_2+\cdots+X_{\tau_t}]\]</span></p>
+<p>为了简便起见，我们不妨限定<span
+class="math inline">\(t&lt;1\)</span>。此时考虑两种情况：<span
+class="math inline">\(X_1=s&gt;t\)</span>和<span
+class="math inline">\(X_1=s\le t\)</span>。</p>
+<p>如果<span class="math inline">\(s&gt;t\)</span>，那么<span
+class="math inline">\(f(t)\)</span>就等于<span
+class="math inline">\(\mathbb{E}[X_1]\)</span>，所以这等价<span
+class="math inline">\(f(t|s&gt;t)=\mathbb{E}[X_1\vert
+X_1&gt;t]=\dfrac{1-t^2}{2}\)</span>。</p>
+<p>如果<span class="math inline">\(s\le
+t\)</span>，那么就相当于后面的<span
+class="math inline">\(X_2+\cdots+X_{\tau_t}&gt;t-s\)</span>且<span
+class="math inline">\(X_2+\cdots+X_{\tau_t-1}\le
+t-s\)</span>，再由独立同分布知道这就是<span
+class="math inline">\(f(t-s)\)</span>，但这是以<span
+class="math inline">\(X_t=s\le t\)</span>为条件的，所以实际上还要对<span
+class="math inline">\(s\)</span>求个积分，也就是：</p>
+<p><span class="math display">\[f(t|s\le
+t)=\frac{t^2}{2}+\int_{0}^tf(t-s)\mathrm{d}s\]</span></p>
+<p>把上面两个加起来，就有：</p>
+<p><span class="math display">\[f(t)=f(t|s\le
+t)+f(t|s&gt;t)=\frac{1}{2}+\int_0^tf(x)\mathrm{d}x\]</span></p>
+<p>进而得到微分方程及其初始值：</p>
+<p><span
+class="math display">\[f&#39;(t)=f(t),~~f(0)=\frac{1}{2}\]</span></p>
+<p>很容易求解得到<span
+class="math inline">\(f(t)=\mathrm{e}^t/2\)</span>，所以我们就能得到最终的答案<span
+class="math inline">\(f(1)=\mathrm{e}/2\)</span>。</p>
 ]]></content>
       <categories>
-        <category>随笔</category>
+        <category>数学 - 概率论</category>
       </categories>
       <tags>
+        <tag>数学</tag>
+        <tag>概率论</tag>
         <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -1599,6 +1647,30 @@ id="还原机器人动画的玩家角色动作设计技巧终极地带引导亡�
       <tags>
         <tag>随笔</tag>
         <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>十二月的花</title>
+    <url>/2020/12/22/09/29/</url>
+    <content><![CDATA[<p>埙吹响了海岸<br />
+琴穿梭叶间<br />
+笛在天空啼鸣<br />
+伴奏着雪花片片</p>
+<p>孩子们欢笑着相聚<br />
+踏着雪<br />
+吱吱嘎嘎</p>
+<p>把欢乐捏成一团团棉<br />
+随风起舞<br />
+在阳光下<br />
+雪爱上了花</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -2216,22 +2288,6 @@ key）。</p>
       </tags>
   </entry>
   <entry>
-    <title>西湖夜歌</title>
-    <url>/2021/07/09/22/55/</url>
-    <content><![CDATA[<p>霓光半遮影<br />
-湖波轻颤合韵起<br />
-半句寻谁去</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-        <tag>生活</tag>
-        <tag>打油诗</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>矫正透视投影插值及属性插值详解</title>
     <url>/2021/08/14/23/31/</url>
     <content><![CDATA[<p>三角形是图形学的基本几何形状，空间中的三角形<span
@@ -2634,6 +2690,22 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
         <tag>计算机</tag>
         <tag>数学</tag>
         <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>西湖夜歌</title>
+    <url>/2021/07/09/22/55/</url>
+    <content><![CDATA[<p>霓光半遮影<br />
+湖波轻颤合韵起<br />
+半句寻谁去</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>生活</tag>
+        <tag>打油诗</tag>
       </tags>
   </entry>
   <entry>
@@ -3524,8 +3596,89 @@ Let's try our final experiment with <code>tolerance=0.1</code>.</p>
 These experiments show that an appropriate value of
 <code>tolerance</code> to ensure the smoothness and robustness of the
 camera.</p>
-<h2 id="solution-2-infinite-impulse-response">Solution 2: infinite
-impulse response</h2>
+<h2 id="solution-2-adding-low-pass-filter">Solution 2: adding low-pass
+filter</h2>
+<p>Our improved samping perfectly solves camera jitters under unstable
+fps, but it looks very stiff when it reaches the boundary of max damping
+distance. Can we make it more realistic so that the object won't just
+look stolid? Yes of course, we can add low-pass filter, or moving
+average to our improved damping to achieve more smooth results.</p>
+<p>Recall the algorithm of the improved damping: if <span
+class="math inline">\(\Delta T^{(k)}/\mathfrak{O}\in(1-\varepsilon,
+1+\varepsilon)\)</span>, we just set <span class="math inline">\(\Delta
+T^{(k)}\)</span> to <span class="math inline">\(\mathfrak{O}\)</span>.
+Instead of hard setting <span class="math inline">\(\Delta
+T^{(k)}\)</span> to <span
+class="math inline">\(\mathcal{O}=\frac{T}{m}\ln\left(\frac{R^{(k-1)}}{R^{(k-1)}+P^{((k-1)\to
+k)}}\right)\)</span>, we introduce <span
+class="math inline">\(\Delta\hat{R}^{(k)}\)</span>, the smoothed version
+of the original delta residual <span class="math inline">\(\Delta
+R^{(k)}=R^{(k)}-R^{(k-1)}\)</span>. If <span
+class="math inline">\(\Delta T^{(k)}/\mathfrak{O}\in(1-\varepsilon,
+1+\varepsilon)\)</span> holds, we calculate <span
+class="math inline">\(\Delta\hat{R}^{(k)}\)</span> as an average of
+<span class="math inline">\(\Delta R^{(k)}\)</span> and <span
+class="math inline">\(\Delta \hat{R}^{(k-1)}\)</span>:</p>
+<p><span class="math display">\[
+\Delta \hat{R}^{(k)}=\beta \Delta R^{(k)} + (1-\beta)\Delta
+\hat{R}^{(k-1)}
+\]</span></p>
+<p>which can be iterated through a recursive form:</p>
+<p><span class="math display">\[
+\Delta \hat{R}\gets\beta \Delta R^{(k)} + (1-\beta)\Delta \hat{R}
+\]</span></p>
+<p>Note that <span class="math inline">\(\Delta \hat{R}\)</span> gets
+updated if and only if <span class="math inline">\(\Delta
+T^{(k)}/\mathfrak{O}\in(1-\varepsilon, 1+\varepsilon)\)</span> holds,
+i.e., when the camera lies in the <strong>unstable area</strong>. The
+use of <span class="math inline">\(\Delta \hat{R}\)</span> is similar to
+low-pass filters in the sense that they all filter out high-frequency
+signals.</p>
+<p>Below is s sample code implementation in file
+<code>Predictor.cs</code>:</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">CurrentResidual = initial * Mathf.Exp(-k * deltaTime);</span><br><span class="line">ResidualDifference = CurrentResidual - PreviousRedisual;</span><br><span class="line"></span><br><span class="line"><span class="built_in">float</span> result;</span><br><span class="line"></span><br><span class="line"><span class="built_in">float</span> tolerance = <span class="number">0.1f</span>;</span><br><span class="line"><span class="built_in">float</span> alpha = Mathf.Log(bonus) * dampTime / kLogNegligibleResidual;</span><br><span class="line"><span class="built_in">float</span> ratio = deltaTime / alpha;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (ratio &lt;= <span class="number">1.0f</span> + tolerance &amp;&amp; ratio &gt;= <span class="number">1.0f</span> - tolerance)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">float</span> beta = <span class="number">0.001f</span>;</span><br><span class="line">    CachedDeltaResidual = (<span class="number">1</span> - beta) * CachedDeltaResidual + beta * ResidualDifference;</span><br><span class="line">    result = initial - (CachedDeltaResidual + PreviousRedisual);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    result = initial - CurrentResidual;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Let's try it out! With damping time <span
+class="math inline">\(T=0.2\)</span> and <span
+class="math inline">\(\beta = 0.01\)</span>, we can achieve the
+following damping result with low-pass filter:</p>
+<p><img data-src="/images/improvingdamping/gif-12.gif" /></p>
+<p>Now the camera looks much more smooth and, flexible. What about
+trying a smaller damp time, say, <span
+class="math inline">\(T=0.1\)</span>? Here is the result:</p>
+<p><img data-src="/images/improvingdamping/gif-13.gif" /></p>
+<p>The result is ok but sometimes it's still jittering. It is because a
+smaller <span class="math inline">\(T\)</span> leads to a larger <span
+class="math inline">\(\Delta R\)</span> and thus a larger chance to
+cause jitters. To solve this issue, we can set a larger tolerance <span
+class="math inline">\(\varepsilon\)</span>, or we can have a smaller
+<span class="math inline">\(\beta\)</span>. We adopt a <span
+class="math inline">\(\beta\)</span> of <span
+class="math inline">\(0.001\)</span> and see how it performs.</p>
+<p><img data-src="/images/improvingdamping/gif-14.gif" /></p>
+<p>The camera now becomes smooth again.</p>
+<p>We can measure this sort of instability more quantitatively. Below is
+a graph plotting <span class="math inline">\(\Delta R^{(k)}\)</span>
+during five seconds of camera trace with damp time <span
+class="math inline">\(T=0.2\)</span>. The original curve (in blue)
+oscillates over time due to an instability of fps. The improved damping
+method eliminates all the oscillation and makes the curve absolutely
+plain. Empowered by low-pass filter, the curve becomes smooth without
+loss of stability.</p>
+<p><img data-src="/images/improvingdamping/pic-3.png" /></p>
+<p>Below is the graph with damp time <span
+class="math inline">\(T=0.1\)</span>. As can be seen, even with improved
+damping, the camera still has a chance to vibrate, and the original
+curve, oscillates much more intensely than with <span
+class="math inline">\(T=0.2\)</span>. Employing the low-pass filter
+gives a much smoother and stable camera motion curve, as expected.</p>
+<p><img data-src="/images/improvingdamping/pic-4.png" /></p>
+<p>Speaking of this, why can't we just <strong>soften</strong> our
+improved damping assignment <span class="math inline">\(\Delta
+T^{(k)}=\mathcal{O}\)</span> to <span class="math inline">\(\Delta
+T^{(k)}=\tau\mathcal{O}\)</span> where <span
+class="math inline">\(\tau(\delta;\varepsilon)\)</span> is a function of
+<span class="math inline">\(\delta\)</span> parameterized by <span
+class="math inline">\(\varepsilon\)</span>.</p>
 ]]></content>
       <categories>
         <category>游戏 - 相机</category>
