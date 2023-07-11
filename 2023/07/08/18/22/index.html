@@ -51,8 +51,15 @@
 <meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-14.gif">
 <meta property="og:image" content="http://sulley.cc/images/improvingdamping/pic-3.png">
 <meta property="og:image" content="http://sulley.cc/images/improvingdamping/pic-4.png">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-15.gif">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/pic-5.png">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-16.gif">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-17.gif">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-18.gif">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-19.gif">
+<meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-20.gif">
 <meta property="article:published_time" content="2023-07-08T10:22:33.000Z">
-<meta property="article:modified_time" content="2023-07-10T15:16:50.717Z">
+<meta property="article:modified_time" content="2023-07-11T14:36:21.838Z">
 <meta property="article:author" content="Sulley">
 <meta property="article:tag" content="计算机">
 <meta property="article:tag" content="数学">
@@ -330,7 +337,7 @@ proportional-integral-derivative (PID)</span></a></li></ol></li></ol></div>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-07-10 23:16:50" itemprop="dateModified" datetime="2023-07-10T23:16:50+08:00">2023-07-10</time>
+      <time title="修改时间：2023-07-11 22:36:21" itemprop="dateModified" datetime="2023-07-11T22:36:21+08:00">2023-07-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -370,14 +377,14 @@ proportional-integral-derivative (PID)</span></a></li></ol></li></ol></div>
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>22k</span>
+      <span>23k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>20 分钟</span>
+      <span>21 分钟</span>
     </span>
 </div>
 
@@ -925,6 +932,60 @@ T^{(k)}=\tau\mathcal{O}\)</span> where <span
 class="math inline">\(\tau(\delta;\varepsilon)\)</span> is a function of
 <span class="math inline">\(\delta\)</span> parameterized by <span
 class="math inline">\(\varepsilon\)</span>.</p>
+<p>Assume <span class="math inline">\(\varepsilon\ge\delta\ge0\)</span>,
+we first calculate <span
+class="math inline">\(\hat{\delta}\gets\exp(\delta\cdot\ln(1+\varepsilon)/\varepsilon)-1\)</span>;
+then calculate <span
+class="math inline">\(\hat{\delta}\gets\varepsilon\cdot(\hat{\delta}/\varepsilon)^p\)</span>;
+last, we have <span class="math inline">\(\tau=1+\hat{\delta}\)</span>.
+<span class="math inline">\(p\)</span> is a parameter controlling how
+fast the value of <span class="math inline">\(\hat{\delta}\)</span>
+grows from <span class="math inline">\(0\)</span> to <span
+class="math inline">\(\varepsilon\)</span>. The larger <span
+class="math inline">\(p\)</span> is, the larger mass will be
+concentrated on the <span class="math inline">\(\varepsilon\)</span>
+side.</p>
+<p>Below is the result with <span class="math inline">\(T=0.2\)</span>
+and <span class="math inline">\(p=3\)</span>:</p>
+<p><img data-src="/images/improvingdamping/gif-15.gif" width="900" height="450"/></p>
+<p>Not bad! The soft version of improved damping really makes the camere
+smoother and less stiff than the vanilla improved damping algorithm. The
+follow plot also shows that with soft parameterization, the camera
+trajectory is much more natural with neglectable amount of
+oscillation.</p>
+<p><img data-src="/images/improvingdamping/pic-5.png" /></p>
+<p>We also compare it to different <span
+class="math inline">\(T\)</span> and <span
+class="math inline">\(p\)</span>. Beolow is the result with <span
+class="math inline">\(T=0.2\)</span> and <span
+class="math inline">\(p=5\)</span>.</p>
+<p><img data-src="/images/improvingdamping/gif-16.gif" width="900" height="450"/></p>
+<p>A larger <span class="math inline">\(p\)</span> makes the camera more
+stiff, but is still better than the original improved damping
+algorithm.</p>
+<p>Below is the result with <span class="math inline">\(T=0.2\)</span>
+and <span class="math inline">\(p=1\)</span>.</p>
+<p><img data-src="/images/improvingdamping/gif-17.gif" width="900" height="450"/></p>
+<p><span class="math inline">\(p=1\)</span> is less effective as the
+magnitude of attenuation it applies to <span
+class="math inline">\(\mathfrak{O}\)</span> is not enough to compensate
+for the osciallation the unstable fps brings about.</p>
+<p>Let's try another damp time. The result with <span
+class="math inline">\(T=0.1\)</span> and <span
+class="math inline">\(p=1\)</span> shows as follows.</p>
+<p><img data-src="/images/improvingdamping/gif-18.gif" width="900" height="450"/></p>
+<p>When <span class="math inline">\(T=0.1\)</span>, the oscillation is
+more severe, as we've already stated above. What about <span
+class="math inline">\(p=3\)</span>?</p>
+<p><img data-src="/images/improvingdamping/gif-19.gif" width="900" height="450"/></p>
+<p>Better, but still not sufficient to mitigate the oscillation. Let's
+try <span class="math inline">\(p=5\)</span>.</p>
+<p><img data-src="/images/improvingdamping/gif-20.gif" width="900" height="450"/></p>
+<p>Almost perfect. We can conclude that a smaller <span
+class="math inline">\(T\)</span> needs a larger <span
+class="math inline">\(p\)</span> to offset the intense jitters resulted
+from unstable fps. Besides, you can combine the soft improved damping
+method and low-pass filters to achieve a smoother transition.</p>
 <h2 id="solution-3-proportional-integral-derivative-pid">Solution 3:
 proportional-integral-derivative (PID)</h2>
 
@@ -1047,13 +1108,13 @@ Algorithm是计算机图形学中用于画直线的算法，它只涉及整型�
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">385k</span>
+    <span title="站点总字数">386k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:50</span>
+    <span title="站点阅读时长">5:51</span>
   </span>
 </div>
 <div class="busuanzi-count">
