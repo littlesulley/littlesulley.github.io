@@ -59,11 +59,11 @@
 <meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-19.gif">
 <meta property="og:image" content="http://sulley.cc/images/improvingdamping/gif-20.gif">
 <meta property="article:published_time" content="2023-07-08T10:22:33.000Z">
-<meta property="article:modified_time" content="2023-07-11T14:36:21.838Z">
+<meta property="article:modified_time" content="2023-07-11T14:55:49.574Z">
 <meta property="article:author" content="Sulley">
 <meta property="article:tag" content="计算机">
-<meta property="article:tag" content="数学">
 <meta property="article:tag" content="随笔">
+<meta property="article:tag" content="数学">
 <meta property="article:tag" content="相机">
 <meta property="article:tag" content="Unity">
 <meta property="article:tag" content="Cinemachine">
@@ -337,7 +337,7 @@ proportional-integral-derivative (PID)</span></a></li></ol></li></ol></div>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-07-11 22:36:21" itemprop="dateModified" datetime="2023-07-11T22:36:21+08:00">2023-07-11</time>
+      <time title="修改时间：2023-07-11 22:55:49" itemprop="dateModified" datetime="2023-07-11T22:55:49+08:00">2023-07-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -932,15 +932,19 @@ T^{(k)}=\tau\mathcal{O}\)</span> where <span
 class="math inline">\(\tau(\delta;\varepsilon)\)</span> is a function of
 <span class="math inline">\(\delta\)</span> parameterized by <span
 class="math inline">\(\varepsilon\)</span>.</p>
-<p>Assume <span class="math inline">\(\varepsilon\ge\delta\ge0\)</span>,
-we first calculate <span
+<p>Assume <span class="math inline">\(\varepsilon\ge\delta\ge0\)</span>
+and <span class="math inline">\(\Delta
+T^{(k)}/\mathfrak{O}=1+\delta\)</span>, we first calculate <span
 class="math inline">\(\hat{\delta}\gets\exp(\delta\cdot\ln(1+\varepsilon)/\varepsilon)-1\)</span>;
 then calculate <span
 class="math inline">\(\hat{\delta}\gets\varepsilon\cdot(\hat{\delta}/\varepsilon)^p\)</span>;
 last, we have <span class="math inline">\(\tau=1+\hat{\delta}\)</span>.
-<span class="math inline">\(p\)</span> is a parameter controlling how
-fast the value of <span class="math inline">\(\hat{\delta}\)</span>
-grows from <span class="math inline">\(0\)</span> to <span
+For <span class="math inline">\(\Delta
+T^{(k)}/\mathfrak{O}=1-\delta\)</span>, we obtain <span
+class="math inline">\(\tau=1-\hat{\delta}\)</span>. <span
+class="math inline">\(p\)</span> is a parameter controlling how fast the
+value of <span class="math inline">\(\hat{\delta}\)</span> grows from
+<span class="math inline">\(0\)</span> to <span
 class="math inline">\(\varepsilon\)</span>. The larger <span
 class="math inline">\(p\)</span> is, the larger mass will be
 concentrated on the <span class="math inline">\(\varepsilon\)</span>
@@ -1055,8 +1059,8 @@ Algorithm是计算机图形学中用于画直线的算法，它只涉及整型�
 
           <div class="post-tags">
               <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
-              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
               <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
               <a href="/tags/%E7%9B%B8%E6%9C%BA/" rel="tag"># 相机</a>
               <a href="/tags/Unity/" rel="tag"># Unity</a>
               <a href="/tags/Cinemachine/" rel="tag"># Cinemachine</a>
