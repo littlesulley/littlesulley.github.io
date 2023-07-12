@@ -1,195 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Bresenham算法画直线</title>
-    <url>/2020/10/18/16/03/</url>
-    <content><![CDATA[<p>Bresenham's
-Algorithm是计算机图形学中用于画直线的算法，它只涉及整型数值的乘法和加法，在底层运算上提高了效率。本文介绍Bresenham算法的思路与扩展。</p>
-<span id="more"></span>
-<p>我们用显示器看到的各种图像都是由一个一个像素组成的，比如计算机要在显示器上显示一条线段，那么就要决定哪些像素填色，哪些不填色，如下图所示。下面我们假定像素点坐标为<span
-class="math inline">\((x_i,y_i)\)</span>且坐标为整数，所给线段的两端点为<span
-class="math inline">\((x&#39;,y&#39;),(x&#39;&#39;,y&#39;&#39;)\)</span>，且坐标也为整数。</p>
-<p><img data-src="/images/bresenham/1.png" /></p>
-<h1 id="naive-algorithm">Naive Algorithm</h1>
-<p>显然，线段所在的直线的斜率是<span
-class="math inline">\(k=\frac{y&#39;&#39;-y&#39;}{x&#39;&#39;-x&#39;}\)</span>，直线的方程就能够显式地写出来：<span
-class="math inline">\(y=kx+b\)</span>，其中<span
-class="math inline">\(b=y&#39;-kx&#39;\)</span>。</p>
-<p>于是我们可以得到一个非常朴素的算法：从点<span
-class="math inline">\((x_1,y_1)=(x&#39;,y&#39;)\)</span>开始，每次让横坐标加一，即<span
-class="math inline">\(x_2=x_1+1,x_3=x_2+1,\cdots\)</span>，然后依次把横坐标代入到直线方程中，得到纵坐标<span
-class="math inline">\(f(x_i)=kx_i+b\)</span>，然后去找离它最近的<span
-class="math inline">\(y_i\)</span>，可以表达为<span
-class="math inline">\(y_i=\lfloor
-f(x_i)+0.5\rfloor\)</span>，从而点<span
-class="math inline">\((x_i,y_i)\)</span>就是要填色的像素。接下来考虑<span
-class="math inline">\(f(x_{i+1})\)</span>，重复这个过程，直到<span
-class="math inline">\(x_i\ge x&#39;&#39;+1\)</span>。</p>
-<p>这个方法如下图所示，注意红色线段和蓝色线段部分是直线上的变化：</p>
-<figure>
-<img data-src="/images/bresenham/2.png"
-alt="给定线段的两点，可以得到它的直线方程，然后依次增大像素点的横坐标，求出对应横坐标的函数值，判断它的纵坐标是什么，得到填充点" />
-<figcaption
-aria-hidden="true">给定线段的两点，可以得到它的直线方程，然后依次增大像素点的横坐标，求出对应横坐标的函数值，判断它的纵坐标是什么，得到填充点</figcaption>
-</figure>
-<p>当然这个算法可以再高效一点，因为上面在算<span
-class="math inline">\(f(x_i)\)</span>的时候是用直线方程去算，每次计算都有一个加法和一个乘法，我们可以迭代地去做：<span
-class="math inline">\(f(x_i)=kx_i+b=k(x_{i-1}+1)+b=f(x_{i-1})+k\)</span>。现在，计算<span
-class="math inline">\(f(x_i)\)</span>就只需要一次加法即可。</p>
-<p>这个算法的好处在于，只要直线不是<span
-class="math inline">\(x=a\)</span>，无论<span
-class="math inline">\(k\)</span>是多少，两个点的位置如何，这个算法都适用。当然，<span
-class="math inline">\(x=a\)</span>的情况特殊考虑即可，问题不大。</p>
-<p>但是这个算法的问题在于，斜率<span
-class="math inline">\(k\)</span>往往是浮点数（即使端点都是整型），而计算机计算浮点数的效率远没有计算整型快，而在图形学中，需要进行大量的即时演算，我们希望能够尽量避免浮点运算。而且，在求<span
-class="math inline">\(y_i=\lfloor
-f(x_i)+0.5\rfloor\)</span>时必不可少需要取整，这进一步降低了运算的效率。</p>
-<h1 id="bresenham-algorithm">Bresenham Algorithm</h1>
-<p>下面我们介绍Bresenham算法，一种基于Naive算法的改进版本，它不需要使用取整函数，而且大部分的加法与乘法运算都是基于整型，在运算效率上大大提高。下面我们假设直线斜率<span
-class="math inline">\(0&lt;k\le 1\)</span>且<span
-class="math inline">\(x&#39;&lt;x&#39;&#39;\)</span>，原因及一般的情况我们在下面会介绍。</p>
-<p>现在我们仔细观察Naive算法，会发现其计算瓶颈主要由<span
-class="math inline">\(f(x_i)=f(x_{i+1})+k\)</span>和<span
-class="math inline">\(\lfloor
-f(x_i)+0.5\rfloor\)</span>带来，换句话说，Naive算法假定我们对每一个<span
-class="math inline">\(x_i\)</span>都要去计算它在直线上的精确位置<span
-class="math inline">\(f(x_i)\)</span>，而且还要直接计算它离哪个纵坐标更近。</p>
-<p>假定我们现在已经着色了点<span
-class="math inline">\((x_i,y_i)\)</span>，如下图所示。</p>
-<figure>
-<img data-src="/images/bresenham/3.png"
-alt="Bresenhan算法相比Naive算法的改进之处在于，在求像素纵坐标的时候，不直接用取整函数，而是考虑上下相邻两个像素点与函数值的距离，小的那个才是真正需要着色的，于是就把问题转为了两段距离的大小比较" />
-<figcaption
-aria-hidden="true">Bresenhan算法相比Naive算法的改进之处在于，在求像素纵坐标的时候，不直接用取整函数，而是考虑上下相邻两个像素点与函数值的距离，小的那个才是真正需要着色的，于是就把问题转为了两段距离的大小比较</figcaption>
-</figure>
-<p>由于我们的假定<span
-class="math inline">\(k&lt;1\)</span>，所以下一个要着色的点只能是<span
-class="math inline">\((x_{i+1},y_i)\)</span>或者<span
-class="math inline">\((x_{i+1},y_{i+1})\)</span>，也就等价于计算<span
-class="math inline">\(y_{i+1}-f(x_{i+1})\)</span>和<span
-class="math inline">\(f(x_{i+1})-y_i\)</span>的大小，我们把它们分别记为<span
-class="math inline">\(d_\text{upper}\)</span>和<span
-class="math inline">\(d_\text{lower}\)</span>。现在对它们做差，就得到：</p>
-<p><span
-class="math display">\[d_\text{upper}-d_\text{lower}=y_{i+1}+y_i-2f(x_{i+1})=2y_i+1-2[k(x_i+1)+b]=2y_i-2kx_i+B\]</span></p>
-<p>上面，<span class="math inline">\(B=1-2k-2b\)</span>是与<span
-class="math inline">\(x_i,y_i\)</span>无关的常量。所以，现在我们就只关心<span
-class="math inline">\(d_\text{upper}-d_\text{lower}\)</span>的正负如何，但是上式还是有<span
-class="math inline">\(k\)</span>，我们记<span
-class="math inline">\(\Delta y=y&#39;&#39;-y&#39;,\Delta
-x=x&#39;&#39;-x&#39;\)</span>，于是<span class="math inline">\(k=\Delta
-y/\Delta x\)</span>，代入到上式，就得到了：</p>
-<p><span
-class="math display">\[d_\text{upper}-d_\text{lower}=2y_i-2\frac{\Delta
-y}{\Delta x}x_i+B\Rightarrow \Delta
-x(d_\text{upper}-d_\text{lower})=2\Delta x y_i-2\Delta y x_i+\Delta
-xB\]</span></p>
-<p>由于我们又假设了<span
-class="math inline">\(x&#39;&lt;x&#39;&#39;\)</span>，所以<span
-class="math inline">\(\Delta x\)</span>为正，要判断<span
-class="math inline">\(d_\text{upper}-d_\text{lower}\)</span>的符号也就是要判断<span
-class="math inline">\(2\Delta x y_i-2\Delta y x_i+\Delta
-xB\)</span>的符号，此刻我们记<span class="math inline">\(p_i=2\Delta x
-y_i-2\Delta y x_i+\Delta xB\)</span>。所以，只要判断<span
-class="math inline">\(p_i\)</span>是大于0还是小于0，就可以判断对横坐标<span
-class="math inline">\(x_{i+1}\)</span>而言，是要选<span
-class="math inline">\(y_i\)</span>还是<span
-class="math inline">\(y_{i+1}\)</span>为纵坐标了。</p>
-<p>现在我们把<span
-class="math inline">\(x&#39;\)</span>代入，就得到初始值<span
-class="math inline">\(p_0\)</span>: <span class="math display">\[
-p_0=2\Delta x(kx&#39;+b)-2\Delta y x&#39;+\Delta x(1-2k-2b)=2\Delta
-xkx&#39;+2\Delta x b-2\Delta yx&#39;+\Delta x-2\Delta xk-2\Delta x b\\\\
-=2x&#39;\Delta y-2x&#39;\Delta y+\Delta x-2\Delta y=\Delta x-2\Delta y
-\]</span></p>
-<p>虽然上式已经成功去掉了计算<span
-class="math inline">\(f(x_{i+1})\)</span>，但是要计算<span
-class="math inline">\(p_i\)</span>还需要每次都加常数项<span
-class="math inline">\(B\)</span>，而它仍然包含了浮点数<span
-class="math inline">\(k,b\)</span>，我们还是想要不计算它们。但是我们观察到，<span
-class="math inline">\(p_{i+1},p_i\)</span>都包含常数项<span
-class="math inline">\(\Delta x
-B\)</span>，所以我们对它们做差就可以消去常数项，得到:</p>
-<p><span class="math display">\[p_{i+1}-p_i=(2\Delta xy_i-2\Delta
-yx_i)-(2\Delta xy_{i+1}-2\Delta yx_{i+1})=2\Delta x(y_i-y_{i+1})-2\Delta
-y\]</span></p>
-<p>或者写成下面的递推形式：</p>
-<p><span class="math display">\[p_{i+1}=p_i+2\Delta
-x(y_i-y_{i+1})-2\Delta y\]</span></p>
-<p>现在，已经不用再计算浮点数<span
-class="math inline">\(k,b\)</span>了。我们前面已经说了，可以用<span
-class="math inline">\(p_i\)</span>去判断<span
-class="math inline">\(y_{i+1}\)</span>和<span
-class="math inline">\(y_i\)</span>的关系，然后，就可以把<span
-class="math inline">\(y_{i+1}-y_i\)</span>代入上式，计算出<span
-class="math inline">\(p_{i+1}\)</span>了。</p>
-<p><strong>所以</strong>，当<span
-class="math inline">\(p_i&gt;0\)</span>的时候，<span
-class="math inline">\(d_\text{upper}&gt;d_\text{lower}\)</span>，<span
-class="math inline">\(y_{i+1}\)</span>等于<span
-class="math inline">\(y_i\)</span>，此时计算得<span
-class="math inline">\(p_{i+1}=p_i-2\Delta y\)</span>；当<span
-class="math inline">\(p_i&lt;0\)</span>时，<span
-class="math inline">\(d_\text{upper}&lt;d_\text{lower}\)</span>，<span
-class="math inline">\(y_{i+1}=y_i+1\)</span>，此时计算得<span
-class="math inline">\(p_{i+1}=p_i+2\Delta x-2\Delta
-y\)</span>。然后再用<span
-class="math inline">\(p_{i+1}\)</span>去判断<span
-class="math inline">\(y_{i+2}\)</span>，从而可以计算<span
-class="math inline">\(p_{i+2}\)</span>，一直下去，直到<span
-class="math inline">\(x_i\ge x&#39;&#39;+1\)</span>。</p>
-<p>注意我们的两个前提<span class="math inline">\(k&lt;1\)</span>和<span
-class="math inline">\(x&#39;&lt;x&#39;&#39;\)</span>，前者保证了<span
-class="math inline">\(y_i\)</span>每次最多增加1，后者保证了<span
-class="math inline">\(\Delta x\)</span>为正。</p>
-<p>总结来说，Bresenham算法的流程是： <span class="math display">\[
-p_0 \rightarrow(x_1,\hat{y}\_1) \rightarrow p_1
-\rightarrow(x_2,\hat{y}\_2) \rightarrow \cdots \rightarrow p_n
-\rightarrow (x_{n+1},\hat{y}_{n+1})
-\]</span> 这里的<span
-class="math inline">\(\hat{y}_i\)</span>根据计算结果选择。</p>
-<p>下面是一个例子，设给定的两点是<span
-class="math inline">\((1,3),(10,5)\)</span>，从而<span
-class="math inline">\(\Delta x=9,\Delta y=2, p_0=\Delta-2\Delta
-y=5,2\Delta y=4, 2\Delta x-2\Delta
-y=14\)</span>，把这些都计算好之后，首先填充<span
-class="math inline">\((1,3)\)</span>这个像素，然后发现<span
-class="math inline">\(p_0=5&gt;0\)</span>，则下一个点的纵坐标还是3，于是填色像素<span
-class="math inline">\((2,3)\)</span>，计算<span
-class="math inline">\(p_1=p_0-2\Delta
-y=1&gt;0\)</span>；发现又为正，则下一个像素是<span
-class="math inline">\((3,3)\)</span>，计算<span
-class="math inline">\(p_2=p_1-2\Delta
-y=-3\)</span>；此时发现为负，则向上移动一格，要填充的像素是<span
-class="math inline">\((4,4)\)</span>，再计算<span
-class="math inline">\(p_3=p_2+2\Delta x-2\Delta
-y=11\)</span>；以此类推。</p>
-<figure>
-<img data-src="/images/bresenham/4.png"
-alt="一个使用Bresenhan算法画线的实例" />
-<figcaption
-aria-hidden="true">一个使用Bresenhan算法画线的实例</figcaption>
-</figure>
-<p>由于线段没有方向性，所以我们可以始终将第一个点设为第二个点的左侧，即<span
-class="math inline">\(x&#39;&lt;x&#39;&#39;\)</span>。那么现在的问题就是要解决<span
-class="math inline">\(k\le 0\)</span>和<span
-class="math inline">\(k&gt;1\)</span>的问题了。可以发现，不同的<span
-class="math inline">\(k\)</span>其实对应了平面的不同区域，根据对角线与坐标轴可以分为四个区域。现在，只需要对<span
-class="math inline">\(k\le 0\)</span>和<span
-class="math inline">\(k&gt;1\)</span>对应的线段进行对称操作，就可以转换为<span
-class="math inline">\(0&lt;k\le
-1\)</span>的情况。在求得所有填色的像素之后，再把这些像素对称回去即可。</p>
-]]></content>
-      <categories>
-        <category>数学 - 图形学</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>算法</tag>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>An Introduction to Reservoir Sampling (with Pseudo Code)</title>
     <url>/2023/05/28/17/00/</url>
     <content><![CDATA[<p>Given a stream of data formalized as <span class="math inline">\(x_1,
@@ -477,11 +288,200 @@ https://dl.acm.org/doi/pdf/10.1145/198429.198435</p>
       <tags>
         <tag>计算机</tag>
         <tag>算法</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
         <tag>概率论</tag>
         <tag>采样</tag>
         <tag>蓄水池采样</tag>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Bresenham算法画直线</title>
+    <url>/2020/10/18/16/03/</url>
+    <content><![CDATA[<p>Bresenham's
+Algorithm是计算机图形学中用于画直线的算法，它只涉及整型数值的乘法和加法，在底层运算上提高了效率。本文介绍Bresenham算法的思路与扩展。</p>
+<span id="more"></span>
+<p>我们用显示器看到的各种图像都是由一个一个像素组成的，比如计算机要在显示器上显示一条线段，那么就要决定哪些像素填色，哪些不填色，如下图所示。下面我们假定像素点坐标为<span
+class="math inline">\((x_i,y_i)\)</span>且坐标为整数，所给线段的两端点为<span
+class="math inline">\((x&#39;,y&#39;),(x&#39;&#39;,y&#39;&#39;)\)</span>，且坐标也为整数。</p>
+<p><img data-src="/images/bresenham/1.png" /></p>
+<h1 id="naive-algorithm">Naive Algorithm</h1>
+<p>显然，线段所在的直线的斜率是<span
+class="math inline">\(k=\frac{y&#39;&#39;-y&#39;}{x&#39;&#39;-x&#39;}\)</span>，直线的方程就能够显式地写出来：<span
+class="math inline">\(y=kx+b\)</span>，其中<span
+class="math inline">\(b=y&#39;-kx&#39;\)</span>。</p>
+<p>于是我们可以得到一个非常朴素的算法：从点<span
+class="math inline">\((x_1,y_1)=(x&#39;,y&#39;)\)</span>开始，每次让横坐标加一，即<span
+class="math inline">\(x_2=x_1+1,x_3=x_2+1,\cdots\)</span>，然后依次把横坐标代入到直线方程中，得到纵坐标<span
+class="math inline">\(f(x_i)=kx_i+b\)</span>，然后去找离它最近的<span
+class="math inline">\(y_i\)</span>，可以表达为<span
+class="math inline">\(y_i=\lfloor
+f(x_i)+0.5\rfloor\)</span>，从而点<span
+class="math inline">\((x_i,y_i)\)</span>就是要填色的像素。接下来考虑<span
+class="math inline">\(f(x_{i+1})\)</span>，重复这个过程，直到<span
+class="math inline">\(x_i\ge x&#39;&#39;+1\)</span>。</p>
+<p>这个方法如下图所示，注意红色线段和蓝色线段部分是直线上的变化：</p>
+<figure>
+<img data-src="/images/bresenham/2.png"
+alt="给定线段的两点，可以得到它的直线方程，然后依次增大像素点的横坐标，求出对应横坐标的函数值，判断它的纵坐标是什么，得到填充点" />
+<figcaption
+aria-hidden="true">给定线段的两点，可以得到它的直线方程，然后依次增大像素点的横坐标，求出对应横坐标的函数值，判断它的纵坐标是什么，得到填充点</figcaption>
+</figure>
+<p>当然这个算法可以再高效一点，因为上面在算<span
+class="math inline">\(f(x_i)\)</span>的时候是用直线方程去算，每次计算都有一个加法和一个乘法，我们可以迭代地去做：<span
+class="math inline">\(f(x_i)=kx_i+b=k(x_{i-1}+1)+b=f(x_{i-1})+k\)</span>。现在，计算<span
+class="math inline">\(f(x_i)\)</span>就只需要一次加法即可。</p>
+<p>这个算法的好处在于，只要直线不是<span
+class="math inline">\(x=a\)</span>，无论<span
+class="math inline">\(k\)</span>是多少，两个点的位置如何，这个算法都适用。当然，<span
+class="math inline">\(x=a\)</span>的情况特殊考虑即可，问题不大。</p>
+<p>但是这个算法的问题在于，斜率<span
+class="math inline">\(k\)</span>往往是浮点数（即使端点都是整型），而计算机计算浮点数的效率远没有计算整型快，而在图形学中，需要进行大量的即时演算，我们希望能够尽量避免浮点运算。而且，在求<span
+class="math inline">\(y_i=\lfloor
+f(x_i)+0.5\rfloor\)</span>时必不可少需要取整，这进一步降低了运算的效率。</p>
+<h1 id="bresenham-algorithm">Bresenham Algorithm</h1>
+<p>下面我们介绍Bresenham算法，一种基于Naive算法的改进版本，它不需要使用取整函数，而且大部分的加法与乘法运算都是基于整型，在运算效率上大大提高。下面我们假设直线斜率<span
+class="math inline">\(0&lt;k\le 1\)</span>且<span
+class="math inline">\(x&#39;&lt;x&#39;&#39;\)</span>，原因及一般的情况我们在下面会介绍。</p>
+<p>现在我们仔细观察Naive算法，会发现其计算瓶颈主要由<span
+class="math inline">\(f(x_i)=f(x_{i+1})+k\)</span>和<span
+class="math inline">\(\lfloor
+f(x_i)+0.5\rfloor\)</span>带来，换句话说，Naive算法假定我们对每一个<span
+class="math inline">\(x_i\)</span>都要去计算它在直线上的精确位置<span
+class="math inline">\(f(x_i)\)</span>，而且还要直接计算它离哪个纵坐标更近。</p>
+<p>假定我们现在已经着色了点<span
+class="math inline">\((x_i,y_i)\)</span>，如下图所示。</p>
+<figure>
+<img data-src="/images/bresenham/3.png"
+alt="Bresenhan算法相比Naive算法的改进之处在于，在求像素纵坐标的时候，不直接用取整函数，而是考虑上下相邻两个像素点与函数值的距离，小的那个才是真正需要着色的，于是就把问题转为了两段距离的大小比较" />
+<figcaption
+aria-hidden="true">Bresenhan算法相比Naive算法的改进之处在于，在求像素纵坐标的时候，不直接用取整函数，而是考虑上下相邻两个像素点与函数值的距离，小的那个才是真正需要着色的，于是就把问题转为了两段距离的大小比较</figcaption>
+</figure>
+<p>由于我们的假定<span
+class="math inline">\(k&lt;1\)</span>，所以下一个要着色的点只能是<span
+class="math inline">\((x_{i+1},y_i)\)</span>或者<span
+class="math inline">\((x_{i+1},y_{i+1})\)</span>，也就等价于计算<span
+class="math inline">\(y_{i+1}-f(x_{i+1})\)</span>和<span
+class="math inline">\(f(x_{i+1})-y_i\)</span>的大小，我们把它们分别记为<span
+class="math inline">\(d_\text{upper}\)</span>和<span
+class="math inline">\(d_\text{lower}\)</span>。现在对它们做差，就得到：</p>
+<p><span
+class="math display">\[d_\text{upper}-d_\text{lower}=y_{i+1}+y_i-2f(x_{i+1})=2y_i+1-2[k(x_i+1)+b]=2y_i-2kx_i+B\]</span></p>
+<p>上面，<span class="math inline">\(B=1-2k-2b\)</span>是与<span
+class="math inline">\(x_i,y_i\)</span>无关的常量。所以，现在我们就只关心<span
+class="math inline">\(d_\text{upper}-d_\text{lower}\)</span>的正负如何，但是上式还是有<span
+class="math inline">\(k\)</span>，我们记<span
+class="math inline">\(\Delta y=y&#39;&#39;-y&#39;,\Delta
+x=x&#39;&#39;-x&#39;\)</span>，于是<span class="math inline">\(k=\Delta
+y/\Delta x\)</span>，代入到上式，就得到了：</p>
+<p><span
+class="math display">\[d_\text{upper}-d_\text{lower}=2y_i-2\frac{\Delta
+y}{\Delta x}x_i+B\Rightarrow \Delta
+x(d_\text{upper}-d_\text{lower})=2\Delta x y_i-2\Delta y x_i+\Delta
+xB\]</span></p>
+<p>由于我们又假设了<span
+class="math inline">\(x&#39;&lt;x&#39;&#39;\)</span>，所以<span
+class="math inline">\(\Delta x\)</span>为正，要判断<span
+class="math inline">\(d_\text{upper}-d_\text{lower}\)</span>的符号也就是要判断<span
+class="math inline">\(2\Delta x y_i-2\Delta y x_i+\Delta
+xB\)</span>的符号，此刻我们记<span class="math inline">\(p_i=2\Delta x
+y_i-2\Delta y x_i+\Delta xB\)</span>。所以，只要判断<span
+class="math inline">\(p_i\)</span>是大于0还是小于0，就可以判断对横坐标<span
+class="math inline">\(x_{i+1}\)</span>而言，是要选<span
+class="math inline">\(y_i\)</span>还是<span
+class="math inline">\(y_{i+1}\)</span>为纵坐标了。</p>
+<p>现在我们把<span
+class="math inline">\(x&#39;\)</span>代入，就得到初始值<span
+class="math inline">\(p_0\)</span>: <span class="math display">\[
+p_0=2\Delta x(kx&#39;+b)-2\Delta y x&#39;+\Delta x(1-2k-2b)=2\Delta
+xkx&#39;+2\Delta x b-2\Delta yx&#39;+\Delta x-2\Delta xk-2\Delta x b\\\\
+=2x&#39;\Delta y-2x&#39;\Delta y+\Delta x-2\Delta y=\Delta x-2\Delta y
+\]</span></p>
+<p>虽然上式已经成功去掉了计算<span
+class="math inline">\(f(x_{i+1})\)</span>，但是要计算<span
+class="math inline">\(p_i\)</span>还需要每次都加常数项<span
+class="math inline">\(B\)</span>，而它仍然包含了浮点数<span
+class="math inline">\(k,b\)</span>，我们还是想要不计算它们。但是我们观察到，<span
+class="math inline">\(p_{i+1},p_i\)</span>都包含常数项<span
+class="math inline">\(\Delta x
+B\)</span>，所以我们对它们做差就可以消去常数项，得到:</p>
+<p><span class="math display">\[p_{i+1}-p_i=(2\Delta xy_i-2\Delta
+yx_i)-(2\Delta xy_{i+1}-2\Delta yx_{i+1})=2\Delta x(y_i-y_{i+1})-2\Delta
+y\]</span></p>
+<p>或者写成下面的递推形式：</p>
+<p><span class="math display">\[p_{i+1}=p_i+2\Delta
+x(y_i-y_{i+1})-2\Delta y\]</span></p>
+<p>现在，已经不用再计算浮点数<span
+class="math inline">\(k,b\)</span>了。我们前面已经说了，可以用<span
+class="math inline">\(p_i\)</span>去判断<span
+class="math inline">\(y_{i+1}\)</span>和<span
+class="math inline">\(y_i\)</span>的关系，然后，就可以把<span
+class="math inline">\(y_{i+1}-y_i\)</span>代入上式，计算出<span
+class="math inline">\(p_{i+1}\)</span>了。</p>
+<p><strong>所以</strong>，当<span
+class="math inline">\(p_i&gt;0\)</span>的时候，<span
+class="math inline">\(d_\text{upper}&gt;d_\text{lower}\)</span>，<span
+class="math inline">\(y_{i+1}\)</span>等于<span
+class="math inline">\(y_i\)</span>，此时计算得<span
+class="math inline">\(p_{i+1}=p_i-2\Delta y\)</span>；当<span
+class="math inline">\(p_i&lt;0\)</span>时，<span
+class="math inline">\(d_\text{upper}&lt;d_\text{lower}\)</span>，<span
+class="math inline">\(y_{i+1}=y_i+1\)</span>，此时计算得<span
+class="math inline">\(p_{i+1}=p_i+2\Delta x-2\Delta
+y\)</span>。然后再用<span
+class="math inline">\(p_{i+1}\)</span>去判断<span
+class="math inline">\(y_{i+2}\)</span>，从而可以计算<span
+class="math inline">\(p_{i+2}\)</span>，一直下去，直到<span
+class="math inline">\(x_i\ge x&#39;&#39;+1\)</span>。</p>
+<p>注意我们的两个前提<span class="math inline">\(k&lt;1\)</span>和<span
+class="math inline">\(x&#39;&lt;x&#39;&#39;\)</span>，前者保证了<span
+class="math inline">\(y_i\)</span>每次最多增加1，后者保证了<span
+class="math inline">\(\Delta x\)</span>为正。</p>
+<p>总结来说，Bresenham算法的流程是： <span class="math display">\[
+p_0 \rightarrow(x_1,\hat{y}\_1) \rightarrow p_1
+\rightarrow(x_2,\hat{y}\_2) \rightarrow \cdots \rightarrow p_n
+\rightarrow (x_{n+1},\hat{y}_{n+1})
+\]</span> 这里的<span
+class="math inline">\(\hat{y}_i\)</span>根据计算结果选择。</p>
+<p>下面是一个例子，设给定的两点是<span
+class="math inline">\((1,3),(10,5)\)</span>，从而<span
+class="math inline">\(\Delta x=9,\Delta y=2, p_0=\Delta-2\Delta
+y=5,2\Delta y=4, 2\Delta x-2\Delta
+y=14\)</span>，把这些都计算好之后，首先填充<span
+class="math inline">\((1,3)\)</span>这个像素，然后发现<span
+class="math inline">\(p_0=5&gt;0\)</span>，则下一个点的纵坐标还是3，于是填色像素<span
+class="math inline">\((2,3)\)</span>，计算<span
+class="math inline">\(p_1=p_0-2\Delta
+y=1&gt;0\)</span>；发现又为正，则下一个像素是<span
+class="math inline">\((3,3)\)</span>，计算<span
+class="math inline">\(p_2=p_1-2\Delta
+y=-3\)</span>；此时发现为负，则向上移动一格，要填充的像素是<span
+class="math inline">\((4,4)\)</span>，再计算<span
+class="math inline">\(p_3=p_2+2\Delta x-2\Delta
+y=11\)</span>；以此类推。</p>
+<figure>
+<img data-src="/images/bresenham/4.png"
+alt="一个使用Bresenhan算法画线的实例" />
+<figcaption
+aria-hidden="true">一个使用Bresenhan算法画线的实例</figcaption>
+</figure>
+<p>由于线段没有方向性，所以我们可以始终将第一个点设为第二个点的左侧，即<span
+class="math inline">\(x&#39;&lt;x&#39;&#39;\)</span>。那么现在的问题就是要解决<span
+class="math inline">\(k\le 0\)</span>和<span
+class="math inline">\(k&gt;1\)</span>的问题了。可以发现，不同的<span
+class="math inline">\(k\)</span>其实对应了平面的不同区域，根据对角线与坐标轴可以分为四个区域。现在，只需要对<span
+class="math inline">\(k\le 0\)</span>和<span
+class="math inline">\(k&gt;1\)</span>对应的线段进行对称操作，就可以转换为<span
+class="math inline">\(0&lt;k\le
+1\)</span>的情况。在求得所有填色的像素之后，再把这些像素对称回去即可。</p>
+]]></content>
+      <categories>
+        <category>数学 - 图形学</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>算法</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -641,8 +641,8 @@ Matching基本知识的介绍，放在此备份。</p>
       </categories>
       <tags>
         <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
         <tag>游戏</tag>
         <tag>动画</tag>
         <tag>机器学习</tag>
@@ -902,8 +902,8 @@ href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
       </categories>
       <tags>
         <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
         <tag>Spline</tag>
       </tags>
   </entry>
@@ -948,6 +948,24 @@ id="总结长路漫漫终将至共邀朝阳行远方">总结：长路漫漫终�
         <tag>生活</tag>
         <tag>刺客信条</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/09/07/23/00/</url>
+    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
+<span id="more"></span>
+<h1 id="测试">测试</h1>
+<h2 id="代码">代码</h2>
+<p>现在来测试一下代码</p>
+<details class="note info no-icon"><summary><p>This is a code test</p>
+</summary>
+<h4 id="details-and-code">Details and code</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
+
+</details>
+<h2 id="latex">Latex</h2>
+<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
+]]></content>
   </entry>
   <entry>
     <title>ComponentCameraSystem - A Simplified Camera System for You to Create Plentiful Gameplay Camera Movements and Effects</title>
@@ -1217,27 +1235,9 @@ Radicals）两种，这里重点讨论的是右无穷根式的情况，左无穷
         <category>数学 - 数学分析</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/09/07/23/00/</url>
-    <content><![CDATA[<p>之前因为重装系统，所以hexo源文件全都消失了，包括写的所有文章（/(ㄒoㄒ)/~~），于是重新部署了一下Blog，换了个更清新的，也是新的一年新的盼头吧！这告诫我们，一定要备份！</p>
-<span id="more"></span>
-<h1 id="测试">测试</h1>
-<h2 id="代码">代码</h2>
-<p>现在来测试一下代码</p>
-<details class="note info no-icon"><summary><p>This is a code test</p>
-</summary>
-<h4 id="details-and-code">Details and code</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string)</span><br></pre></td></tr></table></figure>
-
-</details>
-<h2 id="latex">Latex</h2>
-<p><span class="math display">\[f(x)=\sum_{k=1}^N k^2\]</span></p>
-]]></content>
   </entry>
   <entry>
     <title>《游戏设计的236个技巧》笔记</title>
@@ -1573,9 +1573,9 @@ class="math inline">\(f(1)=\mathrm{e}/2\)</span>。</p>
         <category>数学 - 概率论</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>数学</tag>
         <tag>概率论</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -1839,8 +1839,8 @@ CPU @ 2.90GHz。</p>
       </categories>
       <tags>
         <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -1965,8 +1965,8 @@ H &amp;= \tan(A)R + Y
       </categories>
       <tags>
         <tag>算法</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
         <tag>游戏</tag>
         <tag>相机</tag>
       </tags>
@@ -2219,8 +2219,8 @@ class="math inline">\(\mathfrak{P}_k\)</span>的表达式吗？</p>
         <category>数学 - 分析</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -2690,8 +2690,8 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
       </categories>
       <tags>
         <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -3136,8 +3136,8 @@ href="https://www.cnblogs.com/tiancaiwrk/p/11132437.html">深入浅出之切空�
       </categories>
       <tags>
         <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
         <tag>游戏</tag>
       </tags>
   </entry>
@@ -3739,16 +3739,14 @@ class="math inline">\(T\)</span> needs a larger <span
 class="math inline">\(p\)</span> to offset the intense jitters resulted
 from unstable fps. Besides, you can combine the soft improved damping
 method and low-pass filters to achieve a smoother transition.</p>
-<h2 id="solution-3-proportional-integral-derivative-pid">Solution 3:
-proportional-integral-derivative (PID)</h2>
 ]]></content>
       <categories>
         <category>游戏 - 相机</category>
       </categories>
       <tags>
         <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
         <tag>相机</tag>
         <tag>Unity</tag>
         <tag>Cinemachine</tag>
@@ -5206,8 +5204,8 @@ actor of the blueprint class you just created.</li>
       </categories>
       <tags>
         <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
         <tag>UE</tag>
         <tag>相机</tag>
       </tags>
@@ -8039,8 +8037,8 @@ href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
       </categories>
       <tags>
         <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -10833,8 +10831,8 @@ class="math inline">\(k_d=0.00005\)</span>，则弹簧能够停止：</p>
       </categories>
       <tags>
         <tag>计算机</tag>
-        <tag>随笔</tag>
         <tag>数学</tag>
+        <tag>随笔</tag>
         <tag>游戏</tag>
         <tag>作业</tag>
       </tags>
