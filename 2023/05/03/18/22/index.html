@@ -25,15 +25,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sulley.cc","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="This post introduces some widely used splines in computer games including Bezier curves, cubic Hermite splines, Catmull-Rom splines, B-splines, Kochanek–Bartels splines, etc. We show these splines c">
+    <meta name="description" content="This post introduces some widely used splines in computer games including Bézier curves, cubic Hermite splines, Catmull-Rom splines, B-splines, Kochanek–Bartels splines, etc. We show these splines c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Which Splines Do You Need? A Comprehensive Dive into Common Splines">
 <meta property="og:url" content="http://sulley.cc/2023/05/03/18/22/index.html">
 <meta property="og:site_name" content="Sulley">
-<meta property="og:description" content="This post introduces some widely used splines in computer games including Bezier curves, cubic Hermite splines, Catmull-Rom splines, B-splines, Kochanek–Bartels splines, etc. We show these splines c">
+<meta property="og:description" content="This post introduces some widely used splines in computer games including Bézier curves, cubic Hermite splines, Catmull-Rom splines, B-splines, Kochanek–Bartels splines, etc. We show these splines c">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-03T10:22:33.000Z">
-<meta property="article:modified_time" content="2023-07-12T15:20:55.283Z">
+<meta property="article:modified_time" content="2023-07-16T09:24:00.029Z">
 <meta property="article:author" content="Sulley">
 <meta property="article:tag" content="计算机">
 <meta property="article:tag" content="数学">
@@ -170,7 +170,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#common-splines"><span class="nav-number">1.</span> <span class="nav-text">Common Splines</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bezier-curve"><span class="nav-number">1.1.</span> <span class="nav-text">Bezier Curve</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cubic-hermite-splines"><span class="nav-number">1.2.</span> <span class="nav-text">Cubic Hermite splines</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#common-splines"><span class="nav-number">1.</span> <span class="nav-text">Common Splines</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#b%C3%A9zier-curve"><span class="nav-number">1.1.</span> <span class="nav-text">Bézier Curve</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#degree-elevation"><span class="nav-number">1.1.1.</span> <span class="nav-text">Degree elevation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#composite-b%C3%A9zier-curves"><span class="nav-number">1.1.2.</span> <span class="nav-text">Composite Bézier curves</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rational-b%C3%A9zier-curves"><span class="nav-number">1.1.3.</span> <span class="nav-text">Rational Bézier curves</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cubic-hermite-splines"><span class="nav-number">1.2.</span> <span class="nav-text">Cubic Hermite splines</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#b-splines"><span class="nav-number">1.3.</span> <span class="nav-text">B-splines</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#non-uniform-rational-b-spline-nurbs"><span class="nav-number">1.3.1.</span> <span class="nav-text">Non-uniform rational
+B-spline (NURBS)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#beta-splines"><span class="nav-number">1.4.</span> <span class="nav-text">Beta-splines</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#catmull-rom-splines"><span class="nav-number">1.5.</span> <span class="nav-text">Catmull-Rom splines</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#connections-between-splines"><span class="nav-number">2.</span> <span class="nav-text">Connections between Splines</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -306,7 +307,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-07-12 23:20:55" itemprop="dateModified" datetime="2023-07-12T23:20:55+08:00">2023-07-12</time>
+      <time title="修改时间：2023-07-16 17:24:00" itemprop="dateModified" datetime="2023-07-16T17:24:00+08:00">2023-07-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -346,14 +347,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.5k</span>
+      <span>8.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>8 分钟</span>
     </span>
 </div>
 
@@ -365,16 +366,188 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>This post introduces some widely used splines in computer games
-including Bezier curves, cubic Hermite splines, Catmull-Rom splines,
+including Bézier curves, cubic Hermite splines, Catmull-Rom splines,
 B-splines, Kochanek–Bartels splines, etc. We show these splines can be
 bridged through re-formulation. Then, we focus on the extension and
-generalization of Bezier curves and introduce mathematical methods to
+generalization of Bézier curves and introduce mathematical methods to
 create dynamic smooth splines. Last, we develop a simple Editor in
 Unreal Engine to enable easy creation of splines under different
 constraints and conditions.</p>
 <span id="more"></span>
 <h1 id="common-splines">Common Splines</h1>
-<h2 id="bezier-curve">Bezier Curve</h2>
+<h2 id="bézier-curve">Bézier Curve</h2>
+<p>The most typical and widely-used spline might be Bézier curves.
+Bézier curve leverages a set of control points to define a smooth and
+continuous curve generated by interpolation between these control
+points. Using the De Casteljau's algorithm,<a href="#fn1"
+class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> we
+can easily express a Bézier curve in terms of a sum of Bernstein
+polynomials:</p>
+<p><span class="math display">\[
+\mathbf{B}(t)=\sum_{i=0}^n\mathbf{p}_ib_{i,n}(t),
+~b_{i,n}(t)=\binom{n}{i}(1-t)^{n-i}t^i
+\]</span></p>
+<p>When there are four control points, the generated curve is called
+cubic Bézier curve. A cubic Bézier curve can be expanded as:</p>
+<p><span class="math display">\[
+\mathbf{B}(t)=(1-t)^3\mathbf{p}_0+3(1-t)^2t\mathbf{p}_1+3(1-t)t^2\mathbf{p}_2+t^3\mathbf{p}_3,~0\le
+t\le 1
+\]</span></p>
+<p>The derivative of an <span class="math inline">\(n\)</span>-th order
+curve is:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+\mathbf{B}&#39;(t)&amp;=\left(\sum_{i=0}^n\mathbf{p}_ib_{i,n}(t)\right)&#39;\\
+&amp;=\sum_{i=0}^n\mathbf{p}_i\binom{n}{i}\left((1-t)^{n-i}t^i\right)&#39;\\
+&amp;=\sum_{i=0}^n\mathbf{p}_i\binom{n}{i}\left(-(n-i)(1-t)^{n-i-1}t^i+i(1-t)^{n-i}t^{i-1}\right)\\
+&amp;=n\sum_{i=0}^{n-1}b_{i,n-1}(t)(\mathbf{p}_{i+1}-\mathbf{p}_i)
+\nonumber
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>Similarly, we can obtain the second-order derivative:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+\mathbf{B}&#39;&#39;(t)&amp;=n\sum_{i=0}^{n-1}\left(b_{i,n-1}(t)\right)&#39;(\mathbf{p}_{i+1}-\mathbf{p}_i)\\
+&amp;=n\sum_{i=0}^{n-1}(\mathbf{p}_{i+1}-\mathbf{p}_i)\left(-(n-1-i)\binom{n-1}{i}(1-t)^{n-2-i}t^i+i\binom{n-1}{i}(1-t)^{n-1-i}t^{i-1}\right)\\
+&amp;=n(n-1)\sum_{i=0}^{n-2}b_{i,n-2}(t)(\mathbf{p}_{i+2}-2\mathbf{p}_{i+1}+\mathbf{p}_i)
+\nonumber
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>We will use these results later soon.</p>
+<h3 id="degree-elevation">Degree elevation</h3>
+<p>Suppose <span class="math inline">\(\mathbf{B}(t)\)</span> is an
+<span class="math inline">\(n\)</span>-th order Bézier curve and we want
+to elevate its degree to <span class="math inline">\(n+1\)</span>. We
+can do this via the following process:</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{aligned}
+\mathbf{B}(t)&amp;=(1-t)\mathbf{B}(t)+t\mathbf{B}(t)\\
+&amp;=(1-t)\sum_{i=0}^n\mathbf{p}_ib_{i,n}(t)+t\sum_{i=0}^n\mathbf{p}_ib_{i,n}(t)\\
+&amp;=\sum_{i=0}^n\frac{n+1-i}{n+1}b_{i,n+1}(t)\mathbf{p}_i +
+\sum_{i=0}^n\frac{i+1}{n+1}b_{i+1,n+1}(t)\mathbf{p}_i\\
+&amp;=\sum_{i=0}^{n+1}\left(\frac{n+1-i}{n+1}\mathbf{p}_i+\frac{i}{n+1}\mathbf{p}_{i-1}\right)b_{i,n+1}(t)\\
+&amp;=\sum_{i=0}^{n+1}\mathbf{p}&#39;_{i}b_{i,n+1}~~\left(\mathbf{p}&#39;_{i}=\frac{n+1-i}{n+1}\mathbf{p}_i+\frac{i}{n+1}\mathbf{p}_{i-1}\right)
+\nonumber
+\end{aligned}
+\end{equation}
+\]</span></p>
+<p>Note that when <span class="math inline">\(i=0\)</span>, <span
+class="math inline">\(\mathbf{p}&#39;_0=\mathbf{p}_0\)</span>, and when
+<span class="math inline">\(i=n+1\)</span>, <span
+class="math inline">\(\mathbf{p}&#39;_{n+1}=\mathbf{p}_n\)</span>. So
+<span class="math inline">\(\mathbf{p}_{-1}\)</span> and <span
+class="math inline">\(\mathbf{p}_{n+1}\)</span> can be arbitrary. We
+simply set them to zero.</p>
+<h3 id="composite-bézier-curves">Composite Bézier curves</h3>
+<p>A composite Bézier curve is a series of Bézier curves joined end to
+end where the first point of one curve coincides with the last point of
+the previous curve. If a Bézier curve is composite, we say it's <span
+class="math inline">\(\mathsf{C}^0\)</span> continuous.</p>
+<p>However, sometimes we want higher degrees of continuity than <span
+class="math inline">\(\mathsf{C}^0\)</span> at the joint of Bézier
+curves (note that individual curves are <span
+class="math inline">\(\mathsf{C}^\infty\)</span> within their own
+inteval, and the discontinuity only happens at the meetings of
+consecutive curves).</p>
+<p>Given two Bézier curves <span
+class="math inline">\([\mathbf{p}_0,\mathbf{p}_1,\mathbf{p}_2,\mathbf{p}_3]\)</span>
+and <span
+class="math inline">\([\mathbf{p}_3,\mathbf{p}_4,\mathbf{p}_5,\mathbf{p}_6]\)</span>,
+we can define different degrees of continuity at <span
+class="math inline">\(\mathbf{p}_3\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\(\mathsf{C}^0/\mathsf{G}^0\)</span>
+(positional continuity): consecutive Bézier curves meet at the same
+point. This holds by definition. In this case, it's <span
+class="math inline">\(\mathbf{p}_3\)</span>.</p></li>
+<li><p><span class="math inline">\(\mathsf{C}^1\)</span> (velocity
+continuity): the incoming and outgoing derivatives of <span
+class="math inline">\(\mathbf{p}_3\)</span> are the same, vouching for a
+smooth transition from the first curve to the second. To show this, we
+let <span
+class="math inline">\(\mathbf{B}&#39;(1)_\text{first}=\mathbf{B}&#39;(0)_\text{second}\)</span>,
+and the solution is <span
+class="math inline">\(3(\mathbf{p}_3-\mathbf{p}_2)=3(\mathbf{p}_4-\mathbf{p}_3)\)</span>.
+This gives us <span
+class="math inline">\(2\mathbf{p}_3=\mathbf{p}_2+\mathbf{p}_4\)</span>.
+This equation tells us that <span
+class="math inline">\(\mathbf{p}_2\)</span> and <span
+class="math inline">\(\mathbf{p}_4\)</span> are not only colinear with
+respect to <span class="math inline">\(\mathbf{p}_3\)</span>, but their
+vector lengths are also the same. Rewriting this equation to <span
+class="math inline">\(\mathbf{p}_4 = 2\mathbf{p}_3-\mathbf{p}_2\)</span>
+suggests <span class="math inline">\(\mathbf{p}_4\)</span> is fully
+determined by <span class="math inline">\(\mathbf{p}_2\)</span> and
+<span class="math inline">\(\mathbf{p}_3\)</span> if we want <span
+class="math inline">\(\mathsf{C}^1\)</span> continuity.</p></li>
+<li><p><span class="math inline">\(\mathsf{G}^1\)</span> (tangent
+continuity): <span class="math inline">\(\mathbf{p}_2\)</span> and <span
+class="math inline">\(\mathbf{p}_4\)</span> are colinear but not
+requiring their vector lengths to be equal. Thus, we say <span
+class="math inline">\(\mathsf{G}^1\)</span> is less strict than <span
+class="math inline">\(\mathsf{C}^1\)</span>. If a composite curve is
+<span class="math inline">\(\mathsf{C}^1\)</span>, then it must be <span
+class="math inline">\(\mathsf{G}^1\)</span>. To guarantee <span
+class="math inline">\(\mathsf{G}^1\)</span>, we just add an extra degree
+of freedom to the vector length: <span
+class="math inline">\(\mathbf{p}_4=\mathbf{p}_3+\beta(\mathbf{p}_3-\mathbf{p}_2)~(\beta&gt;0)\)</span>.
+<span class="math inline">\(\mathsf{G}^1\)</span> means the two curves
+share a common tangent direction at the join point.</p></li>
+<li><p><span class="math inline">\(\mathsf{C}^2\)</span> (acceleration
+continuity): following a similar process to <span
+class="math inline">\(\mathsf{C}^1\)</span> continuity, the <span
+class="math inline">\(\mathsf{C}^2\)</span> continuity can be defined by
+<span
+class="math inline">\(\mathbf{p}_5=\mathbf{p}_1+4(\mathbf{p}_3-\mathbf{p}_2)\)</span>.
+That is to say, <span class="math inline">\(\mathbf{p}_5\)</span> is
+fully determined by <span class="math inline">\(\mathbf{p}_1,
+\mathbf{p}_2\)</span> and <span
+class="math inline">\(\mathbf{p}_3\)</span>. You should be very careful
+of using <span class="math inline">\(\mathsf{C}^2\)</span> continuity:
+the <span class="math inline">\(\mathsf{C}^2\)</span> continuity causes
+a loss of two control points <span
+class="math inline">\(\mathbf{p}_4\)</span> and <span
+class="math inline">\(\mathbf{p}_5\)</span>, leaving only one free
+control point <span class="math inline">\(\mathbf{p}_6\)</span>. You
+perhaps cannot get the curve shape you expect. If you do not want to
+loss control over these points, you can use uniform B-splines, which
+will be introduced later.</p></li>
+<li><p><span class="math inline">\(\mathsf{G}^2\)</span> (curvature
+continuity): this type of continuity requires <span
+class="math inline">\(k\mathbf{B}&#39;&#39;(1)_\text{first}=\mathbf{B}&#39;&#39;(0)_\text{second}~(k&gt;0)\)</span>
+except requiring <span class="math inline">\(\mathsf{G}^1\)</span>,
+i.e., satisfying <span
+class="math inline">\(\mathbf{p}_5=\mathbf{p}_3+(\mathbf{p}_3-\mathbf{p}_2)(2\beta_1+\beta_1^2+\beta_2/2)+(\mathbf{p}_1-\mathbf{p}_2)\beta^2_1\)</span>.
+To obtain this result, first expand <span
+class="math inline">\(k\mathbf{B}&#39;&#39;(1)_\text{first}=\mathbf{B}&#39;&#39;(0)_\text{second}\)</span>
+and then plug <span
+class="math inline">\(\mathbf{p}_4=\mathbf{p}_3+\beta(\mathbf{p}_3-\mathbf{p}_2)\)</span>
+in. Last, substitute for <span class="math inline">\(k\)</span> with
+<span class="math inline">\(\beta_1^2\)</span> and <span
+class="math inline">\(\beta\)</span> with <span
+class="math inline">\(\beta_1+\beta_2/4\)</span>, and you will get the
+right formula. Curvature continuity implies that the curves share a
+common center of curvature at the join point.</p></li>
+<li><p><span class="math inline">\(\mathsf{C}^3\)</span> (jolt
+continuity): if a composite Bézier curve is <span
+class="math inline">\(\mathsf{C}^3\)</span>, it satisfies <span
+class="math inline">\(\mathbf{p}_6=\mathbf{p}_3+(\mathbf{p}_3-\mathbf{p}_0)+6(\mathbf{p}_1-2\mathbf{p}_2+\mathbf{p}_3)\)</span>.
+In this case, the fist curve full determines the second curve and thus
+the third, forth curve, etc. Now we say the generated composite Bézier
+curve is <span class="math inline">\(\mathsf{C}^\infty\)</span> as there
+is indeed no joins.</p></li>
+</ul>
+<p>If a curve is <span class="math inline">\(\mathsf{C}^n\)</span>, then
+it must be <span class="math inline">\(\mathsf{G}^n\)</span>. If a curve
+is <span class="math inline">\(\mathsf{C}^n/\mathsf{G}^n\)</span>, then
+it must be <span
+class="math inline">\(\mathsf{C}^{n-1}/\mathsf{G}^{n-1}\)</span>.</p>
+<h3 id="rational-bézier-curves">Rational Bézier curves</h3>
 <h2 id="cubic-hermite-splines">Cubic Hermite splines</h2>
 <p>Cubic Hermite splines construct a curve based on two points along
 with their respecive tangents.</p>
@@ -408,12 +581,12 @@ c&amp;=~\mathbf{d}_0\\
 <p>Rearranging <span class="math inline">\(\mathbf{p}(t)\)</span> gives
 the equation proposed at the beginning.</p>
 <p>We can also reformulate <span
-class="math inline">\(\mathbf{p}(t)\)</span> in terms of Bezier curves
+class="math inline">\(\mathbf{p}(t)\)</span> in terms of Bézier curves
 with respect to the four control points <span
 class="math inline">\(\mathbf{p}_0,
 \mathbf{p}_0+\frac{1}{3}\mathbf{d}_0,
 \mathbf{p}_1-\frac{1}{3}\mathbf{d}_1,\mathbf{p}_1\)</span>. To show
-this, recall that a cubic Bezier curve can be expresses as:</p>
+this, recall that a cubic Bézier curve can be expresses as:</p>
 <p><span class="math display">\[
 \mathbf{B}(t)=\sum_{i=0}^n\mathbf{p}_ib_{i,n}(t),
 ~b_{i,n}(t)=\binom{n}{i}(1-t)^{n-i}t^i
@@ -427,17 +600,26 @@ follows:</p>
 &amp;=b_{0,3}(t)\mathbf{p}_0+b_{1,3}(t)\left(\mathbf{p}_0+\frac{1}{3}\mathbf{d}_0\right)+b_{2,3}(t)\left(\mathbf{p}_1-\frac{1}{3}\mathbf{d}_1\right)+b_{3,3}(t)\mathbf{p}_1
 \end{aligned}
 \]</span></p>
-<p>This shows that a cubic Bezier curve that patches the control points
+<p>This shows that a cubic Bézier curve that patches the control points
 in the middle determines the tangents of the interpolation curve at the
-respective outer points.<a href="#fn1" class="footnote-ref" id="fnref1"
-role="doc-noteref"><sup>1</sup></a></p>
+respective outer points.<a href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a></p>
+<h2 id="b-splines">B-splines</h2>
+<h3 id="non-uniform-rational-b-spline-nurbs">Non-uniform rational
+B-spline (NURBS)</h3>
+<h2 id="beta-splines">Beta-splines</h2>
+<h2 id="catmull-rom-splines">Catmull-Rom splines</h2>
+<h1 id="connections-between-splines">Connections between Splines</h1>
 <section class="footnotes footnotes-end-of-document"
 role="doc-endnotes">
 <hr />
 <ol>
 <li id="fn1"
-role="doc-endnote"><p>https://en.wikipedia.org/wiki/Cubic_Hermite_spline<a
+role="doc-endnote"><p>https://en.wikipedia.org/wiki/De_Casteljau%27s_algorithm<a
 href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"
+role="doc-endnote"><p>https://en.wikipedia.org/wiki/Cubic_Hermite_spline<a
+href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -590,13 +772,13 @@ role="doc-noteref"><sup>1</sup></a> 给出修正插值。</p></p></div>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">395k</span>
+    <span title="站点总字数">402k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:59</span>
+    <span title="站点阅读时长">6:05</span>
   </span>
 </div>
 <div class="busuanzi-count">
