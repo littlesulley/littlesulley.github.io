@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
-
+<link rel="preconnect" href="https://fonts.loli.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -12,12 +13,13 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Roboto+Slab:300,300italic,400,400italic,700,700italic%7CRoboto+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"sulley.cc","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sulley.cc","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":10,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:type" content="website">
@@ -63,6 +65,9 @@
       <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -78,15 +83,46 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-相册"><a href="/photos/" rel="section">相册</a></li><li class="menu-item menu-item-资源"><a href="/resources/" rel="section">资源</a></li><li class="menu-item menu-item-留言"><a href="/comments/" rel="section">留言</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </header>
         
@@ -134,18 +170,60 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/littlesulley" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;littlesulley" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qinghonghan97@gmail.com" title="E-Mail → mailto:qinghonghan97@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
         </div>
       </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
     </div>
 
     
+        <div class="pjax">
+        </div>
   </aside>
 
 
     </div>
 
     <div class="main-inner page posts-expand">
+    <ul class="sub-menu menu">
+      
+  <li class="menu-item menu-item-游戏"><a href="/photos/games/" rel="section">游戏</a></li>
+
+
+      
+  <li class="menu-item menu-item-剪爱"><a href="/photos/love/" rel="section">剪爱</a></li>
+
+
+      
+  <li class="menu-item menu-item-月影"><a href="/photos/moon/" rel="section">月影</a></li>
+
+
+      
+  <li class="menu-item menu-item-听海"><a href="/photos/seas/" rel="section">听海</a></li>
+
+
+      
+  <li class="menu-item menu-item-观景"><a href="/photos/tour/" rel="section">观景</a></li>
+
+
+    </ul>
+    <ul class="sub-menu menu">
+      
+  <li class="menu-item menu-item-家人"><a href="/photos/love/family/" rel="section">家人</a></li>
+
+
+    </ul>
 
 
     
@@ -158,9 +236,9 @@
 
 <div class="post-meta-container">
   <ul class="breadcrumb">
-            <li><a href="/photos/">PHOTOS</a></li>
-            <li><a href="/photos/love/">LOVE</a></li>
-          <li>FAMILY</li>
+            <li><a href="/photos/">相册</a></li>
+            <li><a href="/photos/love/">剪爱</a></li>
+          <li>家人</li>
   </ul>
 </div>
 
@@ -170,7 +248,7 @@
       
       <div class="post-body">
           <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="562c2f4da25b40e40461fc31bd60e59093eb4540b9ae67a043a73baeb0447433">4f626a570b2154de245ad5c5f2631ac1391d9b851bd89c36ebb47e74f1f56a50562c9720a16867fe6018a89a3882f601b18096b878566d17d8f6ecd44b4cfc6c2d43fd2668027ec724ae9ea068503a5edfded57a5418d7e2be011ebd90adfc4f6957abc25c441a89599b85872ce64d80514588d576b92aa9da21c351e3955e18862c5fdee7bed1c6e565e23cd931ac53a9d6b0564c5c44695618332bce823b325afad64edd6250f3a3b789f7061c0723563aea82f2bc7990894646eef000ae71b0016a6725ae39e73d168438251512e6ed0c40c065b92d9f2ddfb176b903cb65075db47cf1ea948990f5b4fd5066c63d719c2e7892fca564aead7b2e531adccdda139169a3d602e5a1433fbabc0f3f1663610556982f8d1bcfc8a90f2fc6d957a768c5e82546c3692c08cd1cbd60eb0141668d50c49920ffce1f3bc16a0655b737442d95762115fe0a7449fdb158e9ff05d8dd4f0ca882224062109d983870520d273ca9a80f7d3ca1b247828492ae3145733d4b85b4045efd7c1a1f046c6b8ffb1561e726a0152db9795e782f949c7367dc8f67e14eca12ab80f9e266a144905a8df395076ddcbb51f799c2d96bfde69a80e0e4b6f9858578cfde119041a1dc6a1517ab4668cdde377c5e0b031b5859117d27f36a718049911228bc56f856e374a29a040c1dd3711d86e46a1fdf03549257519baca1ab5cc846ff3191646bf9c220a6f2e603141ddf026a94bbdc440ba27caebb6e4c8553bbf5369af7413452a80ea0f6c76bb2b0e18e7aec28f0feb2d9abe4c039f1e34e3fb0ecced6f644ebfc6c36863df6e59249aec5d434892fc77d542c60b81960bcd68f51ca8d26bc450f9519920b56d86c033a67911b3249931f17320ac517b727e0f7d826988ea44122973a7d03c1649b0b7f4962e9c324765e81fc53066a105a0a6a13d002ec5828a2a572e35626e628c81cd668921b98b6ff0c71fe928e8e3067fc5e09b7cabf1dbc04f63b26f5d4ca5026cac0d97512a28923da39c0519caeca40e75f0cc817039547e12320f08e35a11bcdf0f0cb3524015a7c72f47c2393936d2e330dfa8975bc18959e69147a797a8f3a4efa9860d112284f7c4adcab54876deb4dd4c8e0285ddb2cfdef14b98b331e77fba67d550757c307f07584d194cfed88b1955faa9f83e774ec84a8d08c13b88915c6fb4f3c71c0904c303fcdbb88ffdaba1791acf4df66c2359b4df29f104c86e6b5fb793c81bfa2e3b119359350d951ed76b1e5c59da79786e69f8b6a5f0dd5dfcc555e3d00da19705c87e6f1fe8cc6463e7353b78fac66f105d928e07ab9d374ef7adb7d84ef7d02050cb149abe76f70f6a9ed76ca88a4776d88b8f4892fba8d11e226a719964ca7b4306025f8c34a7825747182</script>
+  <script id="hbeData" type="hbeData" data-hmacdigest="d81355af94579b937bc44bc721ea2643c5aaad8b9cbf72133edeb98d40e47ce0">4f626a570b2154de245ad5c5f2631ac1391d9b851bd89c36ebb47e74f1f56a50562c9720a16867fe6018a89a3882f601b18096b878566d17d8f6ecd44b4cfc6c2d43fd2668027ec724ae9ea068503a5edfded57a5418d7e2be011ebd90adfc4f6957abc25c441a89599b85872ce64d80470d93097adf99cf894659b77602af76b564b9abf892c69fbefab0b1bd53074c447f240478aab61e73fa019d61a378e60fecf972a784dd6a583ce39a011ffe75f7dd4bcdee8b4e2498c91a2638aa7f0da3f3bb1522e6fdae214655fbee834ea48d210796726071d8126a519ebd399416d08cd1490dede06ffef67572c4e737b7cf61dd01f1728f88094b5b263521461dcec97c298c74115fa4352dacf6ca15d2a37b44d9e7fb11fa26dc6373b64298555b1eb33a4cf4a1619eb79af3ba7f67881c3ee239620e9da0bd5ec4d2344b70403a90420d727502aadb47ab213333b6f77db5be70608a5c0a99f7f8d1a44117a101d68e5b3129831176b8b342ea02e1e6cf13ea671a6ac77ee72930c53361603714f90bedd65b1605545eadb325d34d0806ddd55a0452f26d44748a9dc6867f3ecbd08a39630e6645257352027add4b590b216737907ea8fbab19b7739422166853a645db65f6777079437172dba873a3b23822f3c4ca3a698fc1c9a4b30ae53d92be18ff010248babfe509ad6db921703ab2e47ac3500f745954e65b8f1a6bc428bc95f4be66efe5687eb5c125c26b38eae4e4bd47fc7020fe0fd83cb0bd744a8035c09ab9178a0edb2826ea4b8c222cf4626dd7392b0b408579bf1c0e52f6913e9b1c24cb55dcba6005b1eb476966c075a2d1c8ed9acfa50845a9acdbbf8fb69c99a5510e29ee03c341d75253570ef1d83d6411c9ecf65f44daaeb39f05a625f5fb2016c36d6bfab0c5a973911c975ab6ec4d71377aabb4319adc17b64599200cd1d2cd80053b16b8b915a86d905570eebfb2f4a67d02ae4be3af693d6b146f6504ca56939f43ff4310e899471ddbff9aaee4e1c0e7b0dc85bd97a7bd9212b9864f0967969ae98dc8a2acd92830709d0a539fb8cd34f41ab2478332dd6933eac4b097d62832b0f7b8430a63aa7694f6ad818c8b6d5fcaa73537718ec896384ba04f6666c1f4dfc4d4d8bed05a63dbe96c8084015585f5388c1513d4b5f0ed5773fab020ebabc312782b787a18d04a6c692564e47d207244be5a663140495b87a7b79c6843f20baef70e2c334247a1523a725d7d2deb07e3da0151e96e908e292a405c1a8729f4ecf1a2f62cda4d37b49565fe1d362574375f3692175df4b7319fbb711580fdca019d0b40d2d38e6f0d02fcd9b9cff26ce239d0c07605f3a3d4cfdbb3db5ec36fd4965faeae7b67d898990fed384410c5615f123ce0f19f3c8fbeb677193a14140df2bd657d50c8de31ad905c81ea741e986aca1e5b3e1e24ada10824fc71bb54ed26a1335cb69e390a</script>
   <div class="hbe hbe-content">
     <div class="hbe hbe-input hbe-input-default">
       <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
@@ -187,15 +265,20 @@
       
     </div>
   <ul class="breadcrumb">
-            <li><a href="/photos/">PHOTOS</a></li>
-            <li><a href="/photos/love/">LOVE</a></li>
-          <li>FAMILY</li>
+            <li><a href="/photos/">相册</a></li>
+            <li><a href="/photos/love/">剪爱</a></li>
+          <li>家人</li>
   </ul>
 
     
     
 
 
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
 </div>
   </main>
 
@@ -224,23 +307,15 @@
     <span title="站点阅读时长">6:05</span>
   </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
     </div>
   </footer>
 
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="sidebar-dimmer"></div>
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
@@ -249,20 +324,37 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
 
   
 
 
 
 
-
-
   
 
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
-
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"sulley","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
 
 </body>
 </html>

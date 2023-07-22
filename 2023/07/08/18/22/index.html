@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
-
+<link rel="preconnect" href="https://fonts.loli.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -12,12 +13,13 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Roboto+Slab:300,300italic,400,400italic,700,700italic%7CRoboto+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"sulley.cc","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sulley.cc","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":10,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="If you are familiar with Cinemachine. you probably know there is a knotty problem with Cinemachine&#39; damping if you are using Framing Transposer or some other components to track a follow point. Tha">
 <meta property="og:type" content="article">
@@ -108,6 +110,9 @@
       <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -123,15 +128,46 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-相册"><a href="/photos/" rel="section">相册</a></li><li class="menu-item menu-item-资源"><a href="/resources/" rel="section">资源</a></li><li class="menu-item menu-item-留言"><a href="/comments/" rel="section">留言</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </header>
         
@@ -185,12 +221,64 @@ residual</span></a></li></ol></li></ol></div>
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/littlesulley" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;littlesulley" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qinghonghan97@gmail.com" title="E-Mail → mailto:qinghonghan97@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
         </div>
       </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
     </div>
 
     
+        <div class="pjax">
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2022/12/11/09/16/" rel="bookmark">
+        <time class="popular-posts-time">2022-12-11</time>
+        <br>
+      Implementing A Minimum 1V1 Camera in UE (akin to FramingTransposer + Composer in Cinemachine)
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2022/10/12/18/39/" rel="bookmark">
+        <time class="popular-posts-time">2022-10-12</time>
+        <br>
+      Bump Mapping, Normal Mapping and Displacement Mapping
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2020/10/18/16/03/" rel="bookmark">
+        <time class="popular-posts-time">2020-10-18</time>
+        <br>
+      Bresenham算法画直线
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2023/02/09/23/21/" rel="bookmark">
+        <time class="popular-posts-time">2023-02-09</time>
+        <br>
+      ComponentCameraSystem - A Simplified Camera System for You to Create Plentiful Gameplay Camera Movements and Effects
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
+        </div>
   </aside>
 
 
@@ -256,6 +344,20 @@ residual</span></a></li></ol></li></ol></div>
     </span>
 
   
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2023/07/08/18/22/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/07/08/18/22/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="本文字数">
       <span class="post-meta-item-icon">
@@ -305,7 +407,7 @@ damping of 0.2 is used.</p>
 <p>Here is result with <code>speed</code> is 100 and <code>fps</code> is
 0 (when set to 0, the real fps is determined by Unity, may but
 unstable).</p>
-<p><img src="/images/improvingdamping/gif-1.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-1.gif" width="900" height="450"/></p>
 <p>The jitters are very clear. You can also notice that the frame rate
 (presented in the Statistics panel) is very unstable, and we will know
 soon it is the unstable fps that results in camera jitters.</p>
@@ -315,12 +417,12 @@ and simulates damping in the consecutive series of sub-frames. To enable
 this functionality, go to Edit -&gt; Project Settings -&gt; Player -&gt;
 Script Compilation and add the
 <code>CINEMACHINE_EXPERIMENTAL_DAMPING</code> marco to it.</p>
-<p><img src="/images/improvingdamping/pic-1.png" /></p>
+<p><img data-src="/images/improvingdamping/pic-1.png" /></p>
 <p>OKay, now we have enabled the new damping algorithm and let's see how
 it will mitigate the jittering issue. Here is result with the same
 setting we used in our previous experiment, i.e., <code>speed</code> is
 100 and <code>fps</code> is 0.</p>
-<p><img src="/images/improvingdamping/gif-2.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-2.gif" width="900" height="450"/></p>
 <p>It is astonishing to see the jittering issue becomes even more
 severe. I conjecture that the variance of fps will significantly amplify
 camera jitters when this feature is enabled. In other words, the
@@ -334,14 +436,14 @@ interested, just review the code and test it yourself.)</p>
 experiments!</p>
 <p>Here is result with <code>speed</code> is 100 and <code>fps</code> is
 120 (very high fps, which is usually prohibitive in shipped games).</p>
-<p><img src="/images/improvingdamping/gif-3.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-3.gif" width="900" height="450"/></p>
 <p>Very steady camera! What about setting fps to <code>60</code>? Here
 is the result.</p>
-<p><img src="/images/improvingdamping/gif-4.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-4.gif" width="900" height="450"/></p>
 <p>An fps of 60 performs equally well with 120, which is anticipated as
 fps is stable. Okay, let's try a final experiment where fps is set at an
 extreme value of 20.</p>
-<p><img src="/images/improvingdamping/gif-5.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-5.gif" width="900" height="450"/></p>
 <p>Even a low fps of 20 makes our camera stable, only if fps itself is
 stable.</p>
 <p>Now we can conclude that it is the instability of fps that induces
@@ -577,7 +679,7 @@ f(x)_\text{min}&amp;=f((-av-b)/v)\\
 \]</span></p>
 <p>The last inequality holds because <span class="math inline">\(x-1\ge
 \ln x~(x&gt;0)\)</span>.</p>
-<p><img src="/images/improvingdamping/pic-2.png" /></p>
+<p><img data-src="/images/improvingdamping/pic-2.png" /></p>
 <p>This reveals the fact that: when <span
 class="math inline">\((-av-b)/v&gt;0\)</span>, a variant <span
 class="math inline">\(\Delta T^{(k)}\)</span> is likely to cause <span
@@ -594,7 +696,7 @@ case, even with the same delta time, <span
 class="math inline">\(f(x)^{(k)}\)</span> will have a larger chance wo
 fall in the negative area, i.e., <span class="math inline">\(\Delta
 T^{(k+1)}\)</span> is more likely to be less than the root.</p>
-<p><img src="/images/improvingdamping/gif-5-5.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-5-5.gif" width="900" height="450"/></p>
 <h1 id="solutions">Solutions</h1>
 <h2 id="solution-1-imposing-an-invalid-range">Solution 1: imposing an
 invalid range</h2>
@@ -666,7 +768,7 @@ the root towards zero. This implies that the area <span
 class="math inline">\((1-\varepsilon, 1+\varepsilon)\)</span> gets
 contracted and the probability of remaining the same residual gets
 smaller.</p>
-<p><img src="/images/improvingdamping/gif-6.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-6.gif" width="900" height="450"/></p>
 <p>When <span class="math inline">\(v\)</span> is zero where the
 following target stops, the current residual can be readily calculated
 as <span
@@ -708,27 +810,27 @@ called function for damping:</p>
 <code>FramingTransposer</code> here.</p>
 <p>With the default <code>tolerance=0.05</code>, the result is shown
 below.</p>
-<p><img src="/images/improvingdamping/gif-7.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-7.gif" width="900" height="450"/></p>
 <p>Camera jitters disappear. Note that the general fps is quite high
 (around 400~500). This is because our scene is quite simple, containing
 only a cube and a camera. In order to simulate a more real runtime game
 situation, I place 20k cubes in the scene and now the fps is around 30,
 but still unstable.</p>
 <p>Below is the result when using the raw damping algorithm.</p>
-<p><img src="/images/improvingdamping/gif-8.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-8.gif" width="900" height="450"/></p>
 <p>Camera jitters more severely due to a generally lower FPS. What about
 using the improved damping algorithm? Here is result with
 <code>tolerance=0.05</code>.</p>
-<p><img src="/images/improvingdamping/gif-9.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-9.gif" width="900" height="450"/></p>
 <p>Just as expected, camera jitters do not show up. Let's try different
 <code>tolerance</code>s. How will a small <code>tolerance</code> help
 alleviate jitters? Below is the result with
 <code>tolerance=0.01</code>.</p>
-<p><img src="/images/improvingdamping/gif-10.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-10.gif" width="900" height="450"/></p>
 <p>Camera jitters occur again! This suggests that an excessively small
 value cannot fully filter out actions that can lead to camera jitters.
 Let's try our final experiment with <code>tolerance=0.1</code>.</p>
-<p><img src="/images/improvingdamping/gif-11.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-11.gif" width="900" height="450"/></p>
 <p>Camera jitters disappear, but the camera motion seems a little stiff.
 These experiments show that an appropriate value of
 <code>tolerance</code> to ensure the smoothness and robustness of the
@@ -778,11 +880,11 @@ signals.</p>
 class="math inline">\(T=0.2\)</span> and <span
 class="math inline">\(\beta = 0.01\)</span>, we can achieve the
 following damping result with low-pass filter:</p>
-<p><img src="/images/improvingdamping/gif-12.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-12.gif" width="900" height="450"/></p>
 <p>Now the camera looks much more smooth and, flexible. What about
 trying a smaller damp time, say, <span
 class="math inline">\(T=0.1\)</span>? Here is the result:</p>
-<p><img src="/images/improvingdamping/gif-13.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-13.gif" width="900" height="450"/></p>
 <p>The result is ok but sometimes it's still jittering. It is because a
 smaller <span class="math inline">\(T\)</span> leads to a larger <span
 class="math inline">\(\Delta R\)</span> and thus a larger chance to
@@ -791,7 +893,7 @@ class="math inline">\(\varepsilon\)</span>, or we can have a smaller
 <span class="math inline">\(\beta\)</span>. We adopt a <span
 class="math inline">\(\beta\)</span> of <span
 class="math inline">\(0.001\)</span> and see how it performs.</p>
-<p><img src="/images/improvingdamping/gif-14.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-14.gif" width="900" height="450"/></p>
 <p>The camera now becomes smooth again.</p>
 <p>We can measure this sort of instability more quantitatively. Below is
 a graph plotting <span class="math inline">\(\Delta R^{(k)}\)</span>
@@ -801,14 +903,14 @@ oscillates over time due to an instability of fps. The improved damping
 method eliminates all the oscillation and makes the curve absolutely
 plain. Empowered by low-pass filter, the curve becomes smooth without
 loss of stability.</p>
-<p><img src="/images/improvingdamping/pic-3.png" /></p>
+<p><img data-src="/images/improvingdamping/pic-3.png" /></p>
 <p>Below is the graph with damp time <span
 class="math inline">\(T=0.1\)</span>. As can be seen, even with improved
 damping, the camera still has a chance to vibrate, and the original
 curve, oscillates much more intensely than with <span
 class="math inline">\(T=0.2\)</span>. Employing the low-pass filter
 gives a much smoother and stable camera motion curve, as expected.</p>
-<p><img src="/images/improvingdamping/pic-4.png" /></p>
+<p><img data-src="/images/improvingdamping/pic-4.png" /></p>
 <p>Speaking of this, why can't we just <strong>soften</strong> our
 improved damping assignment <span class="math inline">\(\Delta
 T^{(k)}=\mathcal{O}\)</span> to <span class="math inline">\(\Delta
@@ -835,25 +937,25 @@ concentrated on the <span class="math inline">\(\varepsilon\)</span>
 side.</p>
 <p>Below is the result with <span class="math inline">\(T=0.2\)</span>
 and <span class="math inline">\(p=3\)</span>:</p>
-<p><img src="/images/improvingdamping/gif-15.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-15.gif" width="900" height="450"/></p>
 <p>Not bad! The soft version of improved damping really makes the camere
 smoother and less stiff than the vanilla improved damping algorithm. The
 follow plot also shows that with soft parameterization, the camera
 trajectory is much more natural with neglectable amount of
 oscillation.</p>
-<p><img src="/images/improvingdamping/pic-5.png" /></p>
+<p><img data-src="/images/improvingdamping/pic-5.png" /></p>
 <p>We also compare it to different <span
 class="math inline">\(T\)</span> and <span
 class="math inline">\(p\)</span>. Beolow is the result with <span
 class="math inline">\(T=0.2\)</span> and <span
 class="math inline">\(p=5\)</span>.</p>
-<p><img src="/images/improvingdamping/gif-16.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-16.gif" width="900" height="450"/></p>
 <p>A larger <span class="math inline">\(p\)</span> makes the camera more
 stiff, but is still better than the original improved damping
 algorithm.</p>
 <p>Below is the result with <span class="math inline">\(T=0.2\)</span>
 and <span class="math inline">\(p=1\)</span>.</p>
-<p><img src="/images/improvingdamping/gif-17.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-17.gif" width="900" height="450"/></p>
 <p><span class="math inline">\(p=1\)</span> is less effective as the
 magnitude of attenuation it applies to <span
 class="math inline">\(\mathfrak{O}\)</span> is not enough to compensate
@@ -861,14 +963,14 @@ for the osciallation the unstable fps brings about.</p>
 <p>Let's try another damp time. The result with <span
 class="math inline">\(T=0.1\)</span> and <span
 class="math inline">\(p=1\)</span> shows as follows.</p>
-<p><img src="/images/improvingdamping/gif-18.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-18.gif" width="900" height="450"/></p>
 <p>When <span class="math inline">\(T=0.1\)</span>, the oscillation is
 more severe, as we've already stated above. What about <span
 class="math inline">\(p=3\)</span>?</p>
-<p><img src="/images/improvingdamping/gif-19.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-19.gif" width="900" height="450"/></p>
 <p>Better, but still not sufficient to mitigate the oscillation. Let's
 try <span class="math inline">\(p=5\)</span>.</p>
-<p><img src="/images/improvingdamping/gif-20.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-20.gif" width="900" height="450"/></p>
 <p>Almost perfect. We can conclude that a smaller <span
 class="math inline">\(T\)</span> needs a larger <span
 class="math inline">\(p\)</span> to offset the intense jitters resulted
@@ -1033,19 +1135,19 @@ use to approximate the residual difference. <span
 class="math inline">\(n=1\)</span> means that we only use <span
 class="math inline">\(\Delta T\)</span> in the coefficient term. Here is
 the result:</p>
-<p><img src="/images/improvingdamping/gif-21.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-21.gif" width="900" height="450"/></p>
 <p>Looks nice! What about setting <span
 class="math inline">\(n=2\)</span>?</p>
-<p><img src="/images/improvingdamping/gif-22.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-22.gif" width="900" height="450"/></p>
 <p>Not much difference, but a little bit smoother. Let's try <span
 class="math inline">\(T=0.1\)</span> respectively with <span
 class="math inline">\(n=1\)</span> and <span
 class="math inline">\(n=2\)</span>. First comes <span
 class="math inline">\(n=1\)</span>.</p>
-<p><img src="/images/improvingdamping/gif-23.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-23.gif" width="900" height="450"/></p>
 <p>It's okay but it seems too fast when the cube comes back to
 stillness. How about <span class="math inline">\(n=2\)</span>?</p>
-<p><img src="/images/improvingdamping/gif-24.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-24.gif" width="900" height="450"/></p>
 <p>Now everything gets worked! Next, let's set <span
 class="math inline">\(T\)</span> smaller, which generally won't be used
 in actual gameplay but as a test it's worth a try. We set <span
@@ -1053,23 +1155,23 @@ class="math inline">\(T=0.05\)</span> and try different <span
 class="math inline">\(n\)</span> to see how they influence our camera
 trajectory.</p>
 <p>Here is the result with <span class="math inline">\(n=1\)</span>:</p>
-<p><img src="/images/improvingdamping/gif-25.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-25.gif" width="900" height="450"/></p>
 <p>Okay... a total mess. Try <span
 class="math inline">\(n=2\)</span>:</p>
-<p><img src="/images/improvingdamping/gif-26.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-26.gif" width="900" height="450"/></p>
 <p>Unfortunately, the cube always stays behind the camera. Now <span
 class="math inline">\(n=3\)</span>:</p>
-<p><img src="/images/improvingdamping/gif-27.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-27.gif" width="900" height="450"/></p>
 <p>Forget about it ... Let's try <span
 class="math inline">\(n=4\)</span>:</p>
-<p><img src="/images/improvingdamping/gif-28.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-28.gif" width="900" height="450"/></p>
 <p>Things are getting better! At least it does not shake anymore and
 begins to stay at the right position. I bet <span
 class="math inline">\(n=5\)</span> is better:</p>
-<p><img src="/images/improvingdamping/gif-29.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-29.gif" width="900" height="450"/></p>
 <p>It's close! Last, we try <span
 class="math inline">\(n=6\)</span>:</p>
-<p><img src="/images/improvingdamping/gif-30.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-30.gif" width="900" height="450"/></p>
 <p>Finally, the camera disposes everything well. As we can see from the
 process, a small <span class="math inline">\(T\)</span> requires a large
 <span class="math inline">\(n\)</span> to reach the minimum acceptable
@@ -1150,7 +1252,7 @@ We also notice that a smaller <span class="math inline">\(A\)</span>,
 derived from a smaller <span class="math inline">\(T\)</span>, pushes
 the function leftwards, which also makes it more vulnerable to
 inputs.</p>
-<p><img src="/images/improvingdamping/gif-31.gif" width="900" height="450"/></p>
+<p><img data-src="/images/improvingdamping/gif-31.gif" width="900" height="450"/></p>
 <p>Below is a comparison between five damping algorithms introduced in
 this article, including the original damping. Damp time <span
 class="math inline">\(T\)</span> is set to 0.2. We observe significant
@@ -1161,7 +1263,7 @@ unstable is your fps? What is the damp time <span
 class="math inline">\(T\)</span>? How is the tracked object moving? You
 should experiment with these algorithms and choose the one that best
 suits your needs.</p>
-<p><img src="/images/improvingdamping/pic-6.png" /></p>
+<p><img data-src="/images/improvingdamping/pic-6.png" /></p>
 
     </div>
 
@@ -1170,6 +1272,23 @@ suits your needs.</p>
     
 
     <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>原作者： </strong>Sulley
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://sulley.cc/2023/07/08/18/22/" title="The Jittering Issue with Damping in Cinemachine and How to Tackle it">http://sulley.cc/2023/07/08/18/22/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/en" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
           <div class="post-tags">
               <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
               <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
@@ -1200,6 +1319,11 @@ suits your needs.</p>
 
 
 
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
 </div>
   </main>
 
@@ -1228,23 +1352,15 @@ suits your needs.</p>
     <span title="站点阅读时长">6:05</span>
   </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
     </div>
   </footer>
 
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="sidebar-dimmer"></div>
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
@@ -1253,20 +1369,37 @@ suits your needs.</p>
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
 
   
 
 
 
 
-
-
   
 
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
-
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"sulley","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
 
 </body>
 </html>

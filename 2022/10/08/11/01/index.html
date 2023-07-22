@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
-
+<link rel="preconnect" href="https://fonts.loli.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -12,12 +13,13 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Roboto+Slab:300,300italic,400,400italic,700,700italic%7CRoboto+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"sulley.cc","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sulley.cc","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":10,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="很早之前就想跟着做完GAMES101，但是拖延症一直让我拖到了现在，我决定不再鸽下去！本篇Blog主要记录在GAMES101学习中遇到的疑难问题，整理Bonus Material，以及详解每一课的作业（含提高题）。如有任何错误、遗漏，欢迎读者指出赐教！">
 <meta property="og:type" content="article">
@@ -97,6 +99,9 @@
       <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -112,15 +117,46 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-相册"><a href="/photos/" rel="section">相册</a></li><li class="menu-item menu-item-资源"><a href="/resources/" rel="section">资源</a></li><li class="menu-item menu-item-留言"><a href="/comments/" rel="section">留言</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </header>
         
@@ -205,12 +241,71 @@ Verlet and adding Vetlet damping</span></a></li></ol></li></ol></div>
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/littlesulley" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;littlesulley" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qinghonghan97@gmail.com" title="E-Mail → mailto:qinghonghan97@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
         </div>
       </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
     </div>
 
     
+        <div class="pjax">
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2021/06/07/08/38/" rel="bookmark">
+        <time class="popular-posts-time">2021-06-07</time>
+        <br>
+      向量绕任意轴旋转的简单推导
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2023/05/03/18/22/" rel="bookmark">
+        <time class="popular-posts-time">2023-05-03</time>
+        <br>
+      Which Splines Do You Need? A Comprehensive Dive into Common Splines
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2022/10/12/18/39/" rel="bookmark">
+        <time class="popular-posts-time">2022-10-12</time>
+        <br>
+      Bump Mapping, Normal Mapping and Displacement Mapping
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2022/03/25/01/00/" rel="bookmark">
+        <time class="popular-posts-time">2022-03-25</time>
+        <br>
+      四元数与旋转
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2021/08/14/23/31/" rel="bookmark">
+        <time class="popular-posts-time">2021-08-14</time>
+        <br>
+      矫正透视投影插值及属性插值详解
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
+        </div>
   </aside>
 
 
@@ -275,6 +370,20 @@ Verlet and adding Vetlet damping</span></a></li></ol></li></ol></div>
         </span>
     </span>
 
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2022/10/08/11/01/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/10/08/11/01/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
   
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="本文字数">
@@ -342,8 +451,8 @@ href="https://sulley.cc/2021/08/14/23/31/">矫正透视投影插值及属性插�
 <p>代码 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (need_recompute_color)</span><br><span class="line">&#123;</span><br><span class="line">    Vector3f color = (frame_sample[index] + frame_sample[index + <span class="number">1</span>] + frame_sample[index + <span class="number">2</span>] + frame_sample[index + <span class="number">3</span>]) / <span class="number">4.0f</span>;</span><br><span class="line">    depth_buf[<span class="built_in">get_index</span>(x, y)] = std::<span class="built_in">min</span>(pixel_depth, depth_buf[<span class="built_in">get_index</span>(x, y)]); <span class="comment">// in fact, depth_buf is now useless when using MSAA</span></span><br><span class="line">    <span class="built_in">set_pixel</span>(<span class="built_in">Vector3f</span>(x, y, <span class="number">1.0f</span>), color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 把当前大像素内所有小像素的颜色平均起来，就是最终呈现在屏幕上的颜色。</p>
 <p>下面的两图对比了无MSAA和有MSAA的效果，可以看到没有MSAA时，蓝色三角形有明显锯齿，而加了MSAA之后，锯齿得到了显著改善。</p>
-<p><img src="/images/games101/2-1.png" width = "800" height = "500" alt="无MSAA"/>
-<img src="/images/games101/2-2.png" width = "800" height = "500" alt="有MSAA"/></p>
+<p><img data-src="/images/games101/2-1.png" width = "800" height = "500" alt="无MSAA"/>
+<img data-src="/images/games101/2-2.png" width = "800" height = "500" alt="有MSAA"/></p>
 <h1 id="作业三">作业三</h1>
 <p>本次作业要求实现：</p>
 <ul>
@@ -506,7 +615,7 @@ space中的深度值，然后把这所有的信息都存到<code>fragment_shader
 class="math inline">\([0,1]\)</span>，然后再乘以<span
 class="math inline">\(255\)</span>作为颜色值输出。</p>
 <p>我们可以通过在终端输入<code>./Rasterizer output.png normal</code>查看结果，如下图所示：</p>
-<p><img src="/images/games101/3-1.png" /></p>
+<p><img data-src="/images/games101/3-1.png" /></p>
 <p>我们可以把指令中的<code>normal</code>参数替换为其他参数：</p>
 <ul>
 <li><code>texture</code>:
@@ -534,13 +643,13 @@ l)+k_s(I/r^2)\max(0,n\cdot h)^p\]</span></p>
 <p>此外，最后得到的<code>result_color</code>有可能某个分量的值大于1，理论上讲需要将其裁到<span
 class="math inline">\([0,1]\)</span>的范围，但是后面用到的OpenCV可能会进行这个操作，所以这里就不进行裁剪了。</p>
 <p>下图是blinn-Phong着色器得到的结果：</p>
-<p><img src="/images/games101/3-2.png" /></p>
+<p><img data-src="/images/games101/3-2.png" /></p>
 <h3 id="texture-shader">Texture shader</h3>
 <p><code>texture_fragment_shader</code>的代码如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (payload.texture)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// The (u, v) texture coordinate of the current pixel</span></span><br><span class="line">    Vector2f tex_coord = payload.tex_coords;</span><br><span class="line">    <span class="comment">// Get the color from texture</span></span><br><span class="line">    return_color = payload.texture-&gt;<span class="built_in">getColor</span> (tex_coord[<span class="number">0</span>], tex_coord[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line">Eigen::Vector3f texture_color;</span><br><span class="line">texture_color &lt;&lt; return_color.<span class="built_in">x</span>(), return_color.<span class="built_in">y</span>(), return_color.<span class="built_in">z</span>();</span><br><span class="line">...</span><br><span class="line">Eigen::Vector3f kd = texture_color / <span class="number">255.f</span>;</span><br></pre></td></tr></table></figure>
 <p>和<code>phong_fragment_shader</code>唯一的不同在于这里的漫反射系数<code>kd</code>是通过纹理上的颜色设置的，其他计算过程都完全一致。</p>
 <p>下图是<code>texture_fragment_shader</code>得到的结果：</p>
-<p><img src="/images/games101/3-3.png" /></p>
+<p><img data-src="/images/games101/3-3.png" /></p>
 <h3 id="bump-shader">Bump shader</h3>
 <p>Bump mapping之后会写一篇文章介绍，在这里直接搬运<a
 target="_blank" rel="noopener" href="https://www.yuque.com/gaoshanliushui-mbfny/sst4c5/hr2dgd">别人的代码</a>如下（注:
@@ -548,7 +657,7 @@ target="_blank" rel="noopener" href="https://www.yuque.com/gaoshanliushui-mbfny/
 href="https://sulley.cc/2022/10/12/18/39/">凹凸贴图的详解</a>）：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Eigen::Vector3f <span class="title">bump_fragment_shader</span><span class="params">(<span class="type">const</span> fragment_shader_payload&amp; payload)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    </span><br><span class="line">    Eigen::Vector3f ka = Eigen::<span class="built_in">Vector3f</span>(<span class="number">0.005</span>, <span class="number">0.005</span>, <span class="number">0.005</span>);</span><br><span class="line">    Eigen::Vector3f kd = payload.color;</span><br><span class="line">    Eigen::Vector3f ks = Eigen::<span class="built_in">Vector3f</span>(<span class="number">0.7937</span>, <span class="number">0.7937</span>, <span class="number">0.7937</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> l1 = light&#123;&#123;<span class="number">20</span>, <span class="number">20</span>, <span class="number">20</span>&#125;, &#123;<span class="number">500</span>, <span class="number">500</span>, <span class="number">500</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">auto</span> l2 = light&#123;&#123;<span class="number">-20</span>, <span class="number">20</span>, <span class="number">0</span>&#125;, &#123;<span class="number">500</span>, <span class="number">500</span>, <span class="number">500</span>&#125;&#125;;</span><br><span class="line">e</span><br><span class="line">    std::vector&lt;light&gt; lights = &#123;l1, l2&#125;;</span><br><span class="line">    Eigen::Vector3f amb_light_intensity&#123;<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>&#125;;</span><br><span class="line">    Eigen::Vector3f eye_pos&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> p = <span class="number">150</span>;</span><br><span class="line"></span><br><span class="line">    Eigen::Vector3f color = payload.color; </span><br><span class="line">    Eigen::Vector3f point = payload.view_pos;</span><br><span class="line">    Eigen::Vector3f normal = payload.normal;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="type">float</span> kh = <span class="number">0.2</span>, kn = <span class="number">0.1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    Vector3f n = normal.<span class="built_in">normalized</span>();</span><br><span class="line">    <span class="type">float</span> d = <span class="built_in">sqrt</span>(n.<span class="built_in">x</span>() * n.<span class="built_in">x</span>() + n.<span class="built_in">z</span>() * n.<span class="built_in">z</span>());</span><br><span class="line">    <span class="function">Vector3f <span class="title">t</span> <span class="params">(n.x() * n.y() / d, d, n.z() * n.y() / d)</span></span>;</span><br><span class="line">    Vector3f b = n.<span class="built_in">cross</span>(t);</span><br><span class="line"></span><br><span class="line">    Matrix3f TBN;</span><br><span class="line">    TBN.<span class="built_in">col</span>(<span class="number">0</span>) = t, TBN.<span class="built_in">col</span>(<span class="number">1</span>) = b, TBN.<span class="built_in">col</span>(<span class="number">2</span>) = n;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> u = payload.tex_coords.<span class="built_in">x</span>(), v = payload.tex_coords.<span class="built_in">y</span>();</span><br><span class="line">    <span class="type">float</span> w = payload.texture-&gt;width, h = payload.texture-&gt;height;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> dU = kh * kn * (payload.texture-&gt;<span class="built_in">getColor</span>(u + <span class="number">1.0f</span> / w, v).<span class="built_in">norm</span>() - payload.texture-&gt;<span class="built_in">getColor</span>(u, v).<span class="built_in">norm</span>());</span><br><span class="line">    <span class="type">float</span> dV = kh * kn * (payload.texture-&gt;<span class="built_in">getColor</span>(u, v + <span class="number">1.0f</span> / h).<span class="built_in">norm</span>() - payload.texture-&gt;<span class="built_in">getColor</span>(u, v).<span class="built_in">norm</span>());</span><br><span class="line"></span><br><span class="line">    <span class="function">Vector3f <span class="title">ln</span> <span class="params">(-dU, -dV, <span class="number">1</span>)</span></span>;</span><br><span class="line">    normal = TBN * ln;</span><br><span class="line"></span><br><span class="line">    Eigen::Vector3f result_color = normal.<span class="built_in">normalized</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result_color * <span class="number">255.f</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>下图是<code>bump_fragment_shader</code>得到的结果：</p>
-<p><img src="/images/games101/3-4.png" /></p>
+<p><img data-src="/images/games101/3-4.png" /></p>
 <h3 id="displacement-shader">Displacement shader</h3>
 <p>同bump mapping，在这里直接搬运<a
 target="_blank" rel="noopener" href="https://www.yuque.com/gaoshanliushui-mbfny/sst4c5/hr2dgd">别人的代码</a>如下：</p>
@@ -556,7 +665,7 @@ target="_blank" rel="noopener" href="https://www.yuque.com/gaoshanliushui-mbfny/
 <p>可以看到，displacement mapping基本上就是bump mapping +
 blinn-phong，核心在于通过凹凸贴图改变真实空间中的位置<code>point</code>及其法向量<code>normal</code>，然后再应用常规的blinn-phong着色。</p>
 <p>下图是<code>displacement_fragment_shader</code>得到的结果：</p>
-<p><img src="/images/games101/3-5.png" /></p>
+<p><img data-src="/images/games101/3-5.png" /></p>
 <p>通过上面的一系列代码，我们其实能知道，我们的着色频率是Phong
 Shading，也就是<strong>逐像素着色</strong>，因为<code>fragment_shader_payload</code>里面存的是每个像素的信息。</p>
 <h2 id="bonus-bilinear-interpolation">Bonus: bilinear interpolation</h2>
@@ -564,8 +673,8 @@ Shading，也就是<strong>逐像素着色</strong>，因为<code>fragment_shade
 <p>直接在<code>Texture</code>类中增加方法<code>getColorBilinear</code>:
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Eigen::Vector3f <span class="title">getColorBilinear</span> <span class="params">(<span class="type">float</span> u, <span class="type">float</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    u = std::<span class="built_in">fmin</span>(<span class="number">1</span>, std::<span class="built_in">fmax</span>(u, <span class="number">0</span>));</span><br><span class="line">    v = std::<span class="built_in">fmin</span>(<span class="number">1</span>, std::<span class="built_in">fmax</span>(v, <span class="number">0</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// The real (u, v) position on texture</span></span><br><span class="line">    <span class="keyword">auto</span> u_img = u * width;</span><br><span class="line">    <span class="keyword">auto</span> v_img = (<span class="number">1</span> - v) * height;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Calculate the nearest four integer coordinates</span></span><br><span class="line">    <span class="type">float</span> u0 = std::<span class="built_in">round</span>(u_img - <span class="number">0.5f</span>);</span><br><span class="line">    <span class="type">float</span> u1 = std::<span class="built_in">round</span>(u_img + <span class="number">0.5f</span>); </span><br><span class="line">    <span class="type">float</span> v0 = std::<span class="built_in">round</span>(v_img - <span class="number">0.5f</span>);</span><br><span class="line">    <span class="type">float</span> v1 = std::<span class="built_in">round</span>(v_img + <span class="number">0.5f</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// The interpolation coefficient</span></span><br><span class="line">    <span class="type">float</span> s = (u_img - u0) / (u1 - u0);</span><br><span class="line">    <span class="type">float</span> t = (v_img - v0) / (v1 - v0);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> c00 = image_data.<span class="built_in">at</span>&lt;cv::Vec3b&gt;(v0, u0);</span><br><span class="line">    <span class="keyword">auto</span> c01 = image_data.<span class="built_in">at</span>&lt;cv::Vec3b&gt;(v0, u1);</span><br><span class="line">    <span class="keyword">auto</span> c10 = image_data.<span class="built_in">at</span>&lt;cv::Vec3b&gt;(v1, u0);</span><br><span class="line">    <span class="keyword">auto</span> c11 = image_data.<span class="built_in">at</span>&lt;cv::Vec3b&gt;(v1, u1);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> c0 = c00 + s * (c01 - c00);</span><br><span class="line">    <span class="keyword">auto</span> c1 = c10 + s * (c11 - c10);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> color = c0 + t * (c1 - c0);</span><br><span class="line">    <span class="keyword">return</span> Eigen::<span class="built_in">Vector3f</span>(color[<span class="number">0</span>], color[<span class="number">1</span>], color[<span class="number">2</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>得到的图片和原来差不太多，有可能是因为纹理图的分辨率还是比较高的。我替换了一张低分辨率的纹理图，得到了下面的两张对比图。注意牛的后腿，显然能发现使用bilinear的更加平滑，这说明bilinear插值能对低分辨率纹理图有比较好的效果。</p>
-<p><img src="/images/games101/3-6.png" width = "300" height = "400" alt="无Bilinear"/>
-<img src="/images/games101/3-7.png" width = "300" height = "400" alt="有Bilinear"/></p>
+<p><img data-src="/images/games101/3-6.png" width = "300" height = "400" alt="无Bilinear"/>
+<img data-src="/images/games101/3-7.png" width = "300" height = "400" alt="有Bilinear"/></p>
 <h2 id="summary-the-shading-pipeline">Summary: the shading pipeline</h2>
 <p>最后来总结一下我们是怎样实现整个着色过程的：</p>
 <ol type="1">
@@ -596,15 +705,15 @@ class="math inline">\(\tbinom{n}{i}\)</span>：</p>
 <p><span
 class="math display">\[\binom{n}{m}=\binom{n}{m-1}\cdot\frac{n-m+1}{m}\]</span></p>
 <p>随便画一画，结果是正确的：</p>
-<p><img src="/images/games101/4-1.png" /></p>
+<p><img data-src="/images/games101/4-1.png" /></p>
 <h2 id="bonus-antialiasing">Bonus: antialiasing</h2>
 <p>根据作业提示，在着色一个像素的时候，还要根据周围八个像素到当前点的距离去着色这八个点。我们把<code>bezier</code>稍作修改即可：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">bezier</span><span class="params">(<span class="type">const</span> std::vector&lt;cv::Point2f&gt; &amp;control_points, cv::Mat &amp;window)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> epsilon = <span class="number">0.001</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">float</span> t = <span class="number">0.0f</span>; t &lt;= <span class="number">1.0f</span>; t += epsilon)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">auto</span> point = <span class="built_in">recursive_bezier</span> (control_points, t);</span><br><span class="line">        window.<span class="built_in">at</span>&lt;cv::Vec3b&gt;(point.y, point.x)[<span class="number">1</span>] = <span class="number">255</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// The actual shading point (x,y)</span></span><br><span class="line">        <span class="type">int</span> x = point.x;</span><br><span class="line">        <span class="type">int</span> y = point.y;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// This is used to normalize the color</span></span><br><span class="line">        <span class="type">float</span> normalization = <span class="number">3.0f</span> / std::<span class="built_in">sqrt</span>(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// For each adjacent pixel</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> dx = <span class="number">-1</span>; dx &lt;= <span class="number">1</span>; ++dx)</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> dy = <span class="number">-1</span>; dy &lt;= <span class="number">1</span>; ++dy)</span><br><span class="line">            &#123;   </span><br><span class="line">                <span class="comment">// Should be within the bound</span></span><br><span class="line">                <span class="keyword">if</span> (x + dx &gt;= <span class="number">700</span> || x + dx &lt; <span class="number">0</span> || y + dy &gt;= <span class="number">700</span> || y + dy &lt; <span class="number">0</span>)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// Calculate the distance to the actual shading point</span></span><br><span class="line">                <span class="type">float</span> distance = cv::<span class="built_in">norm</span>((point - cv::<span class="built_in">Point2f</span>(x + dx + <span class="number">0.5</span>, y + dy + <span class="number">0.5</span>)));</span><br><span class="line">                <span class="comment">// Normalize according to the distance</span></span><br><span class="line">                <span class="type">float</span> ratio = <span class="number">1</span> - distance / normalization;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// Shading</span></span><br><span class="line">                window.<span class="built_in">at</span>&lt;cv::Vec3b&gt; (point.y + dy, point.x + dx)[<span class="number">1</span>] = std::<span class="built_in">fmax</span> (window.<span class="built_in">at</span>&lt;cv::Vec3b&gt; (point.y + dy, point.x + dx)[<span class="number">1</span>], <span class="number">255</span> * ratio);</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里需要注意的是我们对求出来的距离<code>distance</code>进行了归一化，归一化系数<code>normalization</code>是当前着色点到它相邻点的最大距离，也就是<span
 class="math inline">\(3/\sqrt{2}\)</span>。</p>
 <p>反走样前后对比如下：</p>
-<p><img src="/images/games101/4-2.png" width = "800" height = "400" alt="无反走样"/>
-<img src="/images/games101/4-3.png" width = "800" height = "400" alt="有反走样"/></p>
+<p><img data-src="/images/games101/4-2.png" width = "800" height = "400" alt="无反走样"/>
+<img data-src="/images/games101/4-3.png" width = "800" height = "400" alt="有反走样"/></p>
 <h1 id="作业五">作业五</h1>
 <p>本次作业也非常简单，主要是实现光线投射和光线与三角形相交。</p>
 <h2 id="framework">Framework</h2>
@@ -788,7 +897,7 @@ Rule</a>。所以，上述线性方程组的解我们可以写出来是：</p>
 <p>根据上面的公式，我们很容易能写出下面的代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">rayTriangleIntersect</span><span class="params">(<span class="type">const</span> Vector3f&amp; v0, <span class="type">const</span> Vector3f&amp; v1, <span class="type">const</span> Vector3f&amp; v2, <span class="type">const</span> Vector3f&amp; orig, <span class="type">const</span> Vector3f&amp; dir, <span class="type">float</span>&amp; tnear, <span class="type">float</span>&amp; u, <span class="type">float</span>&amp; v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Vector3f S = orig - v0;</span><br><span class="line">    Vector3f E1 = v1 - v0;</span><br><span class="line">    Vector3f E2 = v2 - v0;</span><br><span class="line">    Vector3f S1 = <span class="built_in">crossProduct</span> (dir, E2);</span><br><span class="line">    Vector3f S2 = <span class="built_in">crossProduct</span> (S, E1);</span><br><span class="line">    <span class="type">float</span> S1_dot_E1 = <span class="built_in">dotProduct</span> (S1, E1);</span><br><span class="line"></span><br><span class="line">    tnear = <span class="built_in">dotProduct</span> (S2, E2) / S1_dot_E1;</span><br><span class="line">    u = <span class="built_in">dotProduct</span> (S1, S) / S1_dot_E1;</span><br><span class="line">    v = <span class="built_in">dotProduct</span> (S2, dir) / S1_dot_E1;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> tnear &gt; <span class="number">0</span> &amp;&amp; u &gt;= <span class="number">0</span> &amp;&amp; u &lt;= <span class="number">1</span> &amp;&amp; v &gt;= <span class="number">0</span> &amp;&amp; v &lt;= <span class="number">1</span> &amp;&amp; u + v &lt;= <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>最后生成的图是：</p>
-<p><img src="/images/games101/5-1.png" /></p>
+<p><img data-src="/images/games101/5-1.png" /></p>
 <h1 id="作业六">作业六</h1>
 <p>本节课主要实现Bounding Volume Hierarchy (BVH) 和 Surface Area
 Heuristic (SAH)
@@ -865,7 +974,7 @@ add model and light</h3>
 <p><code>Renderer.cpp</code>中唯一的函数是<code>Renderer::Render</code>，其作用就是从每个像素射出光线，也就是调用<code>scene.castRay</code>的函数。这里和上次作业的代码略有差别，但也很容易写出来：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vector3f dir = <span class="built_in">normalize</span>(<span class="built_in">Vector3f</span>(x, y, <span class="number">-1</span>)); </span><br><span class="line"><span class="function">Ray <span class="title">ray</span> <span class="params">(eye_pos, dir, <span class="number">0</span>)</span></span>;</span><br><span class="line">framebuffer[m++] = scene.<span class="built_in">castRay</span>(ray, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
 <p>下图是使用BVH执行的结果：</p>
-<p><img src="/images/games101/6-1.png" /></p>
+<p><img data-src="/images/games101/6-1.png" /></p>
 <h2 id="bonus-surface-area-heuristic-sah">Bonus: Surface Area Heuristic
 (SAH)</h2>
 <p>本次作业的提高题是要使用另一种场景加速方法，称为Surface Area
@@ -873,7 +982,7 @@ Heuristic (SAH)。</p>
 <h3 id="fundamentals-of-sah">Fundamentals of SAH</h3>
 <p>在上面我们构造BVH时，对每个非叶子结点，我们是采取了<strong>中间</strong>的物体对所有物体划分为左右两个部分。但是这种策略在物体分布及其不均匀的时候是不合理的。</p>
 <p>如下图所示，大量的三角形分布在右上角，只有一个三角形分布在左下角。按照我们上面的划分策略，我们会采取第二张图的方法，但是显然，更好的方法是图三，也就是希望<strong>越小的包围盒里有越多的物体</strong>。这是我们使用SAH的基本想法。</p>
-<p><img src="/images/games101/6-2.png" /></p>
+<p><img data-src="/images/games101/6-2.png" /></p>
 <p>也就是说，SAH是一种划分子结点的方法，对应的是我们上面取中间物体的划分方法。记住，我们的最终目标是<strong>找到与光线相交的物体</strong>，也就是要尽可能少地遍历树，找到对应物体的叶子结点，那么显然，只有当<strong>包围盒里包含更多的物体</strong>，或者说<strong>相同多的物体被更小的包围盒包围</strong>时，才有可能更少地遍历树，因为此时有更大的概率不通过包围盒相交检测。</p>
 <p>那么怎么才能划分当前结点的物体，让左右两边各自的包围盒更小，同时也能包含更多物体呢？我们可以引入一个经验公式，对每个可能的划分，根据经验公式计算它的划分代价，然后选择代价最小的一个划分作为我们选定的划分。</p>
 <p>根据<a
@@ -913,7 +1022,7 @@ class="math inline">\(A\)</span>相交的概率是它们的表面积之比，即
 <p>这也是SAH名字的由来。</p>
 <p>下图是我们假设<span
 class="math inline">\(t_\text{traversal}=1,t_\text{intersect}=2\)</span>时，使用SAH进行划分计算得到的值，可以看到，与我们的猜想相符，第三种划分结果最好：</p>
-<p><img src="/images/games101/6-3.png" /></p>
+<p><img data-src="/images/games101/6-3.png" /></p>
 <p>下面我们用代码实现SAH。</p>
 <h3 id="implementing-sah">Implementing SAH</h3>
 <p>我们需要重新定义几个函数。</p>
@@ -963,7 +1072,7 @@ target="_blank" rel="noopener" href="https://www.pbr-book.org/3ed-2018/Primitive
 <p>最后还要在<code>MeshTriangle</code>的构造函数里把内部的BVH构造方法改为SAH：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bvh = new BVHAccel(ptrs);</span></span><br><span class="line">bvh = <span class="keyword">new</span> <span class="built_in">BVHAccel</span>(ptrs, <span class="number">1</span>, BVHAccel::SplitMethod::SAH);</span><br></pre></td></tr></table></figure>
 <p>下图是使用SAH的效果图：</p>
-<p><img src="/images/games101/6-4.png" /></p>
+<p><img data-src="/images/games101/6-4.png" /></p>
 <p>然后是BVH和SAH的效率对比。为了使NAIVE BVH和SAH
 BVH效率对比更加突出，我在<code>main.cpp</code>中连续调用了100次<code>r.Render(scene)</code>，然后再看二者所花费的时间。结果如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">NAIVE:</span><br><span class="line">Time taken: <span class="number">0</span> hours</span><br><span class="line">          : <span class="number">5</span> minutes</span><br><span class="line">          : <span class="number">328</span> seconds</span><br><span class="line"></span><br><span class="line">SAH:</span><br><span class="line">Time taken: <span class="number">0</span> hours</span><br><span class="line">          : <span class="number">5</span> minutes</span><br><span class="line">          : <span class="number">300</span> seconds</span><br></pre></td></tr></table></figure>
@@ -1044,12 +1153,12 @@ BVH都增加了一个成员变量<code>area</code>表示面光源的面积，和
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Vector3f <span class="title">Scene::castRay</span><span class="params">(<span class="type">const</span> Ray &amp;ray, <span class="type">int</span> depth)</span> <span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">// Part 1: check if the ray collides with something</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    Intersection inter = <span class="built_in">intersect</span>(ray);</span><br><span class="line">    <span class="comment">// If not, there is no light coming in</span></span><br><span class="line">    <span class="keyword">if</span> (!inter.happened) <span class="keyword">return</span> <span class="built_in">Vector3f</span>();</span><br><span class="line">    <span class="comment">// If hitting a light, return the light emission</span></span><br><span class="line">    <span class="keyword">if</span> (inter.m-&gt;<span class="built_in">hasEmission</span>()) <span class="keyword">return</span> inter.m-&gt;<span class="built_in">getEmission</span>();</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">// Part 2: sample light (direct light)</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">// Define variables</span></span><br><span class="line">    Vector3f l_dir;</span><br><span class="line">    Intersection lightPos;</span><br><span class="line">    <span class="type">float</span> lightPdf = <span class="number">0.0f</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Sample light, now `lightPos` stores the light pos information</span></span><br><span class="line">    <span class="built_in">sampleLight</span> (lightPos, lightPdf);</span><br><span class="line">    <span class="comment">// Calculate the inter-to-light direction</span></span><br><span class="line">    Vector3f toLightDir = (lightPos.coords - inter.coords).<span class="built_in">normalized</span>();</span><br><span class="line">    <span class="comment">// Calculate the distance</span></span><br><span class="line">    <span class="type">float</span> toLightDisSquare = (lightPos.coords - inter.coords).<span class="built_in">squareNorm</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check if the ray collides with something else except the light</span></span><br><span class="line">    <span class="function">Ray <span class="title">toLightRay</span> <span class="params">(inter.coords, toLightDir)</span></span>;</span><br><span class="line">    Intersection interBeforeLight = <span class="built_in">intersect</span>(toLightRay);</span><br><span class="line">    <span class="comment">// Does not collision!</span></span><br><span class="line">    <span class="keyword">if</span> (std::<span class="built_in">sqrt</span>(toLightDisSquare) - interBeforeLight.distance &lt; EPSILON)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Calculate the directional light</span></span><br><span class="line">        l_dir = lightPos.emit * inter.m-&gt;<span class="built_in">eval</span>(toLightDir, -ray.direction, inter.normal) * <span class="built_in">dotProduct</span>(toLightDir, inter.normal) * <span class="built_in">dotProduct</span>(-toLightDir, lightPos.normal) / toLightDisSquare / lightPdf;  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">// Part 3: sample ray from intersection (indirect light)</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">// Define variables</span></span><br><span class="line">    Vector3f l_indir;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Russian Roulette test</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">get_random_float</span>() &gt; RussianRoulette) <span class="keyword">return</span> l_dir;</span><br><span class="line">    <span class="comment">// Get a sample ray</span></span><br><span class="line">    Vector3f sampledDir = inter.m-&gt;<span class="built_in">sample</span>(ray.direction, inter.normal).<span class="built_in">normalized</span>();</span><br><span class="line">    <span class="function">Ray <span class="title">sampledRay</span> <span class="params">(inter.coords, sampledDir)</span></span>;</span><br><span class="line">    <span class="comment">// Intersection test</span></span><br><span class="line">    Intersection sampleInter = <span class="built_in">intersect</span>(sampledRay);</span><br><span class="line">    <span class="comment">// If ray hits a non-emitting object</span></span><br><span class="line">    <span class="keyword">if</span> (sampleInter.happened &amp;&amp; !sampleInter.m-&gt;<span class="built_in">hasEmission</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">float</span> pdf = inter.m-&gt;<span class="built_in">pdf</span>(ray.direction, sampledDir, inter.normal);</span><br><span class="line">        l_indir = <span class="built_in">castRay</span>(sampledRay, depth + <span class="number">1</span>) * inter.m-&gt;<span class="built_in">eval</span>(sampledDir, -ray.direction, inter.normal) * <span class="built_in">dotProduct</span>(sampledDir, inter.normal) / pdf / RussianRoulette;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> l_dir + l_indir;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>代码里添加了注释帮助理解。整体流程是比较清楚的：首先当前光线检查是否和场景中的物体相交，如果相交，是否是光源，则说明该位置可以直接被光源照射，此时返回光源的颜色即可；然后计算直接光照，从光源采样光线，计算光线打到相交点接受的能量有多少，注意要检查采样的光线到相交点之间是否有阻挡；第三步计算间接光照，从相交点随机采样一条向外的光线，打到一个非光源物体上，递归地计算该光线接受到的能量；最后把直接光和间接光相加即可。</p>
 <p>这里需要理解一点：为什么间接光照要检查是<strong>非发光物体</strong>。这是因为如果不考虑是否发光，那么当光线打到发光物体时，相当于是计算了两次直接光照，最后得到的画面会很奇怪。如下图所示：</p>
-<p><img src="/images/games101/7-1.png" /></p>
+<p><img data-src="/images/games101/7-1.png" /></p>
 <p>你还会注意到，背后的墙上有很多黑色的横向条纹，这是因为背面墙的颜色基本都来自顶上光源的直接光照，而在计算直接光照的时候我们判定了它们之间是否有阻挡，即<code>std::sqrt(toLightDisSquare) - interBeforeLight.distance &lt; EPSILON</code>，这里的<code>EPSILON</code>在原始代码中很小，这就会因精度问题将其误判为中间存在阻挡。所以，只要把<code>EPSILON</code>稍微调大点即可。</p>
 <p>下图是设置<code>EPSILON=0.001</code>并在计算间接光照时判断是否为发光体时生成的结果：</p>
-<p><img src="/images/games101/7-2.png" /></p>
+<p><img data-src="/images/games101/7-2.png" /></p>
 <p>上面都设置<code>SPP=10</code>，所以你会看到噪点比较多。下面是设置<code>SPP=128</code>时的结果：</p>
-<p><img src="/images/games101/7-3.png" /></p>
+<p><img data-src="/images/games101/7-3.png" /></p>
 <p>所用的时间是：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Time taken: <span class="number">1</span> hours</span><br><span class="line">          : <span class="number">100</span> minutes</span><br><span class="line">          : <span class="number">6004</span> seconds</span><br></pre></td></tr></table></figure>
 <h2 id="the-sample-function">The <code>Sample</code> function</h2>
@@ -1090,7 +1199,7 @@ target="_blank" rel="noopener" href="https://www.enseignement.polytechnique.fr/i
 <p>现在，在开64个线程时，<code>SPP=128</code>花的时间只有：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Time taken: <span class="number">0</span> hours</span><br><span class="line">          : <span class="number">27</span> minutes</span><br><span class="line">          : <span class="number">1629</span> seconds</span><br></pre></td></tr></table></figure>
 <p>得到的结果和没用多线程时是一样的：</p>
-<p><img src="/images/games101/7-4.png" /></p>
+<p><img data-src="/images/games101/7-4.png" /></p>
 <h2 id="bonus-microfacet">Bonus: Microfacet</h2>
 <p>根据课上所讲的内容，我们可以得到下面的微表面模型BRDF公式：</p>
 <p><span class="math display">\[
@@ -1142,7 +1251,7 @@ class="math inline">\(F(\mathbf{i},\mathbf{n})\)</span>代码框架已经给出�
 <p>最后，在<code>main.cpp</code>里修改物体的材质：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create a diffuse material, it does not induce reflection light</span></span><br><span class="line">Material* material_diffuse =  <span class="keyword">new</span> <span class="built_in">Material</span>(DIFFUSE, <span class="built_in">Vector3f</span>(<span class="number">0.0f</span>));</span><br><span class="line">material_diffuse-&gt;Kd = <span class="built_in">Vector3f</span>(<span class="number">0.725f</span>, <span class="number">0.71f</span>, <span class="number">0.68f</span>);</span><br><span class="line"><span class="comment">// Create a microfacet material, it has both reflect and diffuse lights</span></span><br><span class="line">Material* material_microfacet = <span class="keyword">new</span> <span class="built_in">Material</span>(MICROFACET, <span class="built_in">Vector3f</span>(<span class="number">0.0f</span>));</span><br><span class="line">material_microfacet-&gt;Kd = <span class="built_in">Vector3f</span>(<span class="number">0.3f</span>, <span class="number">0.3f</span>, <span class="number">0.3f</span>); <span class="comment">// lean to red diffuse</span></span><br><span class="line">material_microfacet-&gt;Ks = <span class="built_in">Vector3f</span>(<span class="number">0.45f</span>, <span class="number">0.45f</span>, <span class="number">0.45f</span>); </span><br><span class="line">material_microfacet-&gt;ior = <span class="number">1.0f</span>;</span><br><span class="line"></span><br><span class="line"><span class="function">MeshTriangle <span class="title">floor</span><span class="params">(<span class="string">&quot;../models/cornellbox/floor.obj&quot;</span>, white)</span></span>;</span><br><span class="line"><span class="function">MeshTriangle <span class="title">shortbox</span><span class="params">(<span class="string">&quot;../models/cornellbox/shortbox.obj&quot;</span>, material_microfacet)</span></span>;</span><br><span class="line"><span class="function">MeshTriangle <span class="title">tallbox</span><span class="params">(<span class="string">&quot;../models/cornellbox/tallbox.obj&quot;</span>, material_microfacet)</span></span>;</span><br><span class="line"><span class="function">MeshTriangle <span class="title">left</span><span class="params">(<span class="string">&quot;../models/cornellbox/left.obj&quot;</span>, red)</span></span>;</span><br><span class="line"><span class="function">MeshTriangle <span class="title">right</span><span class="params">(<span class="string">&quot;../models/cornellbox/right.obj&quot;</span>, green)</span></span>;</span><br><span class="line"><span class="function">MeshTriangle <span class="title">light_</span><span class="params">(<span class="string">&quot;../models/cornellbox/light.obj&quot;</span>, light)</span></span>;</span><br></pre></td></tr></table></figure>
 <p>在<code>SPP=128</code>下能得到下面的图：</p>
-<p><img src="/images/games101/7-5.png" /></p>
+<p><img data-src="/images/games101/7-5.png" /></p>
 <p>这里两个立方体比较黑是因为反射率<span
 class="math inline">\(K_s,K_d\)</span>设置得比较小，将其增大，即吸收的光越少，可以得到更明亮的结果。</p>
 <h3 id="using-sphere-to-explore-the-effect-of-roughness">Using sphere to
@@ -1151,11 +1260,11 @@ explore the effect of <code>roughness</code></h3>
 <p>在<code>main.cpp</code>中加入一个球并调整材质的<code>Kd</code>和<code>Ks</code>：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Material* material_microfacet = <span class="keyword">new</span> <span class="built_in">Material</span>(MICROFACET, <span class="built_in">Vector3f</span>(<span class="number">0.0f</span>));</span><br><span class="line">material_microfacet-&gt;Kd = <span class="built_in">Vector3f</span>(<span class="number">0.3f</span>, <span class="number">0.3f</span>, <span class="number">0.3f</span>); <span class="comment">// lean to green diffuse</span></span><br><span class="line">material_microfacet-&gt;Ks = <span class="built_in">Vector3f</span>(<span class="number">0.5f</span>, <span class="number">0.5f</span>, <span class="number">0.5f</span>); </span><br><span class="line">material_microfacet-&gt;ior = <span class="number">1.1f</span>;</span><br><span class="line"></span><br><span class="line"><span class="function">Sphere <span class="title">sphere</span> <span class="params">(Vector3f(<span class="number">150</span>, <span class="number">100</span>, <span class="number">300</span>), <span class="number">100</span>, material_microfacet)</span></span>;</span><br><span class="line">scene.<span class="built_in">Add</span>(&amp;sphere);</span><br></pre></td></tr></table></figure>
 <p>先设置<code>roughness = 0.1f</code>，下图是结果：</p>
-<p><img src="/images/games101/7-6.png" /></p>
+<p><img data-src="/images/games101/7-6.png" /></p>
 <p>再设置<code>roughness = 0.5f</code>：</p>
-<p><img src="/images/games101/7-7.png" /></p>
+<p><img data-src="/images/games101/7-7.png" /></p>
 <p>最后看<code>roughness = 0.95f</code>：</p>
-<p><img src="/images/games101/7-8.png" /></p>
+<p><img data-src="/images/games101/7-8.png" /></p>
 <p>可以看到，<code>roughness</code>越小，高光越集中，否则越分散。粗糙度越接近1，效果越接近漫反射。</p>
 <h2 id="summary-1">Summary</h2>
 <p>最后，还是按照惯例总结一下加入BRDF的光线追踪算法：</p>
@@ -1187,7 +1296,7 @@ class="math inline">\(k_s\)</span>。</li>
 <p>代码如下:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Rope::<span class="built_in">Rope</span>(Vector2D start, Vector2D end, <span class="type">int</span> num_nodes, <span class="type">float</span> node_mass, <span class="type">float</span> k, vector&lt;<span class="type">int</span>&gt; pinned_nodes)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// TODO (Part 1): Create a rope starting at `start`, ending at `end`, and containing `num_nodes` nodes.</span></span><br><span class="line">    Vector2D step = (end - start) / (num_nodes - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    vector&lt;Mass *&gt; _masses;</span><br><span class="line">    vector&lt;Spring *&gt; _springs;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; num_nodes; ++i) &#123;</span><br><span class="line">        Mass* mass = <span class="keyword">new</span> <span class="built_in">Mass</span>(start + i * step, node_mass, <span class="literal">false</span>);</span><br><span class="line">        _masses.<span class="built_in">push_back</span>(mass);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; num_nodes - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        Spring* spring = <span class="keyword">new</span> <span class="built_in">Spring</span>(_masses[i], _masses[i + <span class="number">1</span>], k);</span><br><span class="line">        _springs.<span class="built_in">push_back</span>(spring);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;i : pinned_nodes) &#123;</span><br><span class="line">        _masses[i]-&gt;pinned = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    masses = _masses;</span><br><span class="line">    springs = _springs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>编译之后可以得到下图的结果：</p>
-<p><img src="/images/games101/8-1.png" /></p>
+<p><img data-src="/images/games101/8-1.png" /></p>
 <h2 id="simulation-via-euler-method">Simulation via euler method</h2>
 <p>接下来实现显式欧拉和半隐式欧拉方法模拟弹簧运动。胡克定律：</p>
 <p><span class="math display">\[\mathbf{f}_{\mathbf{b}\to
@@ -1200,7 +1309,7 @@ class="math inline">\(\ell\)</span>是弹簧没有任何拉伸时的长度。</p
 <p>为了让质点下降的速度慢一些，可以在<code>application.h</code>中把<code>gravity</code>改小一点：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gravity = <span class="built_in">Vector2D</span>(<span class="number">0</span>, <span class="number">-0.1</span>);</span><br></pre></td></tr></table></figure>
 <p>得到的结果如下（蓝色）：</p>
-<p><img src="/images/games101/8-2.png" /></p>
+<p><img data-src="/images/games101/8-2.png" /></p>
 <h2 id="simulation-via-verlet-and-adding-vetlet-damping">Simulation via
 Verlet and adding Vetlet damping</h2>
 <p>使用Verlet模拟，公式如下：</p>
@@ -1212,10 +1321,10 @@ class="math inline">\(k_d\)</span>是阻尼系数。我们不难写出下面的�
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Rope::simulateVerlet</span><span class="params">(<span class="type">float</span> <span class="type">delta_t</span>, Vector2D gravity)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;s : springs)</span><br><span class="line">    &#123;</span><br><span class="line">        Vector2D vec = s-&gt;m2-&gt;position - s-&gt;m1-&gt;position;</span><br><span class="line">        Vector2D force = -s-&gt;k * vec.<span class="built_in">unit</span>() * (vec.<span class="built_in">norm</span>() - s-&gt;rest_length);</span><br><span class="line"></span><br><span class="line">        s-&gt;m2-&gt;forces += force;</span><br><span class="line">        s-&gt;m1-&gt;forces += -force;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;m : masses)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!m-&gt;pinned)</span><br><span class="line">        &#123;</span><br><span class="line">            m-&gt;forces += gravity * m-&gt;mass;</span><br><span class="line">            Vector2D <span class="type">a_t</span> = m-&gt;forces / m-&gt;mass;</span><br><span class="line"></span><br><span class="line">            Vector2D temp_position = m-&gt;position;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// TODO (Part 3.1): Set the new position of the rope mass</span></span><br><span class="line">            <span class="comment">// TODO (Part 4): Add global Verlet damping</span></span><br><span class="line">            <span class="type">double</span> damping_factor = <span class="number">0.00005</span>;</span><br><span class="line"></span><br><span class="line">            m-&gt;position = m-&gt;position + (<span class="number">1</span> - damping_factor) * (m-&gt;position - m-&gt;last_position) + <span class="type">a_t</span> * <span class="type">delta_t</span> * <span class="type">delta_t</span>;</span><br><span class="line">            m-&gt;last_position = temp_position;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Reset all forces on each mass</span></span><br><span class="line">        m-&gt;forces = <span class="built_in">Vector2D</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果我们置<span
 class="math inline">\(k_d=0\)</span>，则弹簧永远不会停下来：</p>
-<p><img src="/images/games101/8-3.png" /></p>
+<p><img data-src="/images/games101/8-3.png" /></p>
 <p>如果令<span
 class="math inline">\(k_d=0.00005\)</span>，则弹簧能够停止：</p>
-<p><img src="/images/games101/8-4.png" /></p>
+<p><img data-src="/images/games101/8-4.png" /></p>
 <p>至此，我们已完成了GAMES101 所有作业！完结撒花！</p>
 
     </div>
@@ -1225,6 +1334,23 @@ class="math inline">\(k_d=0.00005\)</span>，则弹簧能够停止：</p>
     
 
     <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>原作者： </strong>Sulley
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://sulley.cc/2022/10/08/11/01/" title="GAMES101疑难点及作业详解">http://sulley.cc/2022/10/08/11/01/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/en" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
           <div class="post-tags">
               <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
               <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
@@ -1256,6 +1382,11 @@ class="math inline">\(k_d=0.00005\)</span>，则弹簧能够停止：</p>
 
 
 
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
 </div>
   </main>
 
@@ -1284,23 +1415,15 @@ class="math inline">\(k_d=0.00005\)</span>，则弹簧能够停止：</p>
     <span title="站点阅读时长">6:05</span>
   </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
     </div>
   </footer>
 
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="sidebar-dimmer"></div>
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
@@ -1309,20 +1432,37 @@ class="math inline">\(k_d=0.00005\)</span>，则弹簧能够停止：</p>
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
 
   
 
 
 
 
-
-
   
 
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
-
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"sulley","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
 
 </body>
 </html>
