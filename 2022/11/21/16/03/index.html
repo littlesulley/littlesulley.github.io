@@ -21,12 +21,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sulley.cc","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":10,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="This is a brief note about the e-book Version Control and Project Organization Best Practice Guide present at Unite 2022. In this book, we can learn fundamental concepts of version control and some be">
+    <meta name="description" content="This is a brief note about the e-book Version Control and Project Organization Best Practice Guide present at Unite 2022. In this book, we can learn fundamental concepts of version control and some">
 <meta property="og:type" content="article">
 <meta property="og:title" content="A Brief Note on Version Control and Project Organization">
 <meta property="og:url" content="http://sulley.cc/2022/11/21/16/03/index.html">
 <meta property="og:site_name" content="Sulley">
-<meta property="og:description" content="This is a brief note about the e-book Version Control and Project Organization Best Practice Guide present at Unite 2022. In this book, we can learn fundamental concepts of version control and some be">
+<meta property="og:description" content="This is a brief note about the e-book Version Control and Project Organization Best Practice Guide present at Unite 2022. In this book, we can learn fundamental concepts of version control and some">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://sulley.cc/images/vcs/1.png">
 <meta property="article:published_time" content="2022-11-21T08:03:21.000Z">
@@ -145,7 +145,10 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#foundational-concepts"><span class="nav-number">1.</span> <span class="nav-text"> Foundational concepts</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#best-practices-for-organizing-a-unity-project"><span class="nav-number">2.</span> <span class="nav-text"> Best practices for organizing a Unity project</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#version-control-systems"><span class="nav-number">3.</span> <span class="nav-text"> Version control systems</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#settings-up-unity-to-work-with-version-control"><span class="nav-number">4.</span> <span class="nav-text"> Settings up Unity to work with version control</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#best-practices-for-version-control"><span class="nav-number">5.</span> <span class="nav-text"> Best practices for version control</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#foundational-concepts"><span class="nav-number">1.</span> <span class="nav-text">Foundational concepts</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#best-practices-for-organizing-a-unity-project"><span class="nav-number">2.</span> <span class="nav-text">Best practices
+for organizing a Unity project</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#version-control-systems"><span class="nav-number">3.</span> <span class="nav-text">Version control systems</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#settings-up-unity-to-work-with-version-control"><span class="nav-number">4.</span> <span class="nav-text">Settings up
+Unity to work with version control</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#best-practices-for-version-control"><span class="nav-number">5.</span> <span class="nav-text">Best practices for version
+control</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -310,45 +313,56 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>This is a brief note about the e-book <a target="_blank" rel="noopener" href="https://resources.unity.com/games/version-control-project-organization-best-practices-ebook">Version Control and Project Organization Best Practice Guide</a> present at Unite 2022. In this book, we can learn fundamental concepts of version control and some best practices for organizing a Unity project. If you are new to Unity, or you prepare to set up a larger scale Unity project, this may be what you need.</p>
+    <div class="post-body" itemprop="articleBody"><p>This is a brief note about the e-book <a
+target="_blank" rel="noopener" href="https://resources.unity.com/games/version-control-project-organization-best-practices-ebook">Version
+Control and Project Organization Best Practice Guide</a> present at
+Unite 2022. In this book, we can learn fundamental concepts of version
+control and some best practices for organizing a Unity project. If you
+are new to Unity, or you prepare to set up a larger scale Unity project,
+this may be what you need.</p>
 <span id="more"></span>
-<h1 id="foundational-concepts"><a class="markdownIt-Anchor" href="#foundational-concepts"></a> Foundational concepts</h1>
+<h1 id="foundational-concepts">Foundational concepts</h1>
 <ul>
-<li><strong>Version control</strong> enables you to keep a historical track of your entire project. It facilitates your collaboration with your team through trackable and revertible commits organized in the form of timeline.</li>
+<li><strong>Version control</strong> enables you to keep a historical
+track of your entire project. It facilitates your collaboration with
+your team through trackable and revertible commits organized in the form
+of timeline.</li>
 <li><strong>Why use version control</strong>
 <ul>
 <li>Useful for making experimental changes</li>
 <li>Easy iteration</li>
 <li>Avoid conflict</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>Centralized vs. distributed version control</strong>
 <ul>
-<li>Centralized: repository is resided in a dedicated server, and changes are fetched from and sent to the repository directly. To avoid conflicts, users can lock files for modification, which is known as checking out the file.</li>
-<li>Distributed: users have local copy of the project and submit changes whenever they want without always working on the latest files like on a centralized system. But it costs a lot of space to store the entire history changes.</li>
-</ul>
-</li>
+<li>Centralized: repository is resided in a dedicated server, and
+changes are fetched from and sent to the repository directly. To avoid
+conflicts, users can lock files for modification, which is known as
+checking out the file.</li>
+<li>Distributed: users have local copy of the project and submit changes
+whenever they want without always working on the latest files like on a
+centralized system. But it costs a lot of space to store the entire
+history changes.</li>
+</ul></li>
 <li><strong>Typical workflow</strong>
 <ul>
 <li>Centralized
-<ol>
+<ol type="1">
 <li>Update your working copy with changes from the server</li>
 <li>Make your changes</li>
 <li>Commit your changes to the central server</li>
-</ol>
-</li>
+</ol></li>
 <li>Distributed
-<ol>
+<ol type="1">
 <li>Pull any remote changes into your local repo</li>
 <li>Make changes</li>
 <li>Commit changes</li>
 <li>Push changes back to the remote repo</li>
-</ol>
-</li>
+</ol></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h1 id="best-practices-for-organizing-a-unity-project"><a class="markdownIt-Anchor" href="#best-practices-for-organizing-a-unity-project"></a> Best practices for organizing a Unity project</h1>
+<h1 id="best-practices-for-organizing-a-unity-project">Best practices
+for organizing a Unity project</h1>
 <ul>
 <li><strong>Folder structure</strong>
 <ul>
@@ -356,15 +370,15 @@
 <ul>
 <li>Document your naming conventions and folder structure.</li>
 <li>Be consistent with your naming convention.</li>
-<li>Don’t use spaces in file and folder names.</li>
+<li>Don't use spaces in file and folder names.</li>
 <li>Separate testing or sandbox areas.</li>
 <li>Avoid extra folders at the root level.</li>
 <li>Keep your internal assets from third-party ones.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>The <code>.meta</code> file: it holds information about the file which it is associated with, e.g., Textures, meshes, audio clips that have particular import settings.</li>
+</ul></li>
+</ul></li>
+<li>The <code>.meta</code> file: it holds information about the file
+which it is associated with, e.g., Textures, meshes, audio clips that
+have particular import settings.</li>
 <li><strong>Naming standards</strong>:
 <ul>
 <li>Use descriptive names, not abbreviate.</li>
@@ -372,67 +386,90 @@
 <li>Use underscore sparingly.</li>
 <li>Use number suffixes to denote a sequence.</li>
 <li>Follow document naming.</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>Workflow optimization</strong>:
 <ul>
-<li>Split up your assets: break levels into smaller scenes, using <code>SceneManager.LoadSceneAsync</code>; break work up into Prefabs where possible.</li>
+<li>Split up your assets: break levels into smaller scenes, using
+<code>SceneManager.LoadSceneAsync</code>; break work up into Prefabs
+where possible.</li>
 <li>Use <code>Preset</code> to save asset settings.</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>Code standards</strong>
 <ul>
 <li>Decide a code standard and stick with it.</li>
-<li>When using namespace, break your folder structure up by the namespace for better organization.</li>
+<li>When using namespace, break your folder structure up by the
+namespace for better organization.</li>
 <li>Using a standard header.</li>
-<li>Using script templates by creating an <code>Assets/ScriptTemplates</code> folder.</li>
-<li>You can also use your own keywords and replace them with an Editor script<br />
-implementing the <code>OnWillCreateAsset</code> method.</li>
+<li>Using script templates by creating an
+<code>Assets/ScriptTemplates</code> folder.</li>
+<li>You can also use your own keywords and replace them with an Editor
+script implementing the <code>OnWillCreateAsset</code> method.
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /*-------------------------------------------</span></span><br><span class="line"><span class="comment">// ---------------------------------------------</span></span><br><span class="line"><span class="comment">// Creation Date: #DATETIME#</span></span><br><span class="line"><span class="comment">// Author: #DEVELOPER#</span></span><br><span class="line"><span class="comment">// Description: #PROJECTNAME#</span></span><br><span class="line"><span class="comment">// ---------------------------------------------</span></span><br><span class="line"><span class="comment">// -------------------------------------------*/</span></span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UnityEditor;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">KeywordReplace</span> : <span class="title">UnityEditor</span> .<span class="title">AssetModificationProcessor</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">OnWillCreateAsset</span> (<span class="params"><span class="built_in">string</span> path</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        path = path.Replace(<span class="string">&quot;.meta&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">        <span class="built_in">int</span> index = path.LastIndexOf(<span class="string">&quot;.&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">string</span> file = path.Substring(index);</span><br><span class="line">        <span class="keyword">if</span> (file != <span class="string">&quot;.cs&quot;</span> &amp;&amp; file != <span class="string">&quot;.js&quot;</span> &amp;&amp; file != <span class="string">&quot;.boo&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        index = Application.dataPath.LastIndexOf(<span class="string">&quot;Assets&quot;</span>);</span><br><span class="line">        path = Application.dataPath.Substring(<span class="number">0</span>, index) + path;</span><br><span class="line">        <span class="keyword">if</span> (!System.IO.File.Exists(path))</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">string</span> fileContent = System.IO.File.ReadAllText(path);</span><br><span class="line"></span><br><span class="line">        fileContent = fileContent.Replace(<span class="string">&quot;#CREATIONDATE#&quot;</span>, System.DateTime.Today.ToString(<span class="string">&quot;dd/MM/yy&quot;</span>) + <span class="string">&quot;&quot;</span>);</span><br><span class="line">        fileContent = fileContent.Replace(<span class="string">&quot;#PROJECTNAME#&quot;</span>, PlayerSettings.product-Name);</span><br><span class="line">        fileContent = fileContent.Replace(<span class="string">&quot;#DEVELOPER#&quot;</span>, System.Environment.User-Name);</span><br><span class="line"></span><br><span class="line">        System.IO.File.WriteAllText(path, fileContent);</span><br><span class="line">        AssetDatabase.Refresh();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /*-------------------------------------------</span></span><br><span class="line"><span class="comment">// ---------------------------------------------</span></span><br><span class="line"><span class="comment">// Creation Date: #DATETIME#</span></span><br><span class="line"><span class="comment">// Author: #DEVELOPER#</span></span><br><span class="line"><span class="comment">// Description: #PROJECTNAME#</span></span><br><span class="line"><span class="comment">// ---------------------------------------------</span></span><br><span class="line"><span class="comment">// -------------------------------------------*/</span></span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UnityEditor;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">KeywordReplace</span> : <span class="title">UnityEditor</span> .<span class="title">AssetModificationProcessor</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">OnWillCreateAsset</span> (<span class="params"><span class="built_in">string</span> path</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        path = path.Replace(<span class="string">&quot;.meta&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">        <span class="built_in">int</span> index = path.LastIndexOf(<span class="string">&quot;.&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">string</span> file = path.Substring(index);</span><br><span class="line">        <span class="keyword">if</span> (file != <span class="string">&quot;.cs&quot;</span> &amp;&amp; file != <span class="string">&quot;.js&quot;</span> &amp;&amp; file != <span class="string">&quot;.boo&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        index = Application.dataPath.LastIndexOf(<span class="string">&quot;Assets&quot;</span>);</span><br><span class="line">        path = Application.dataPath.Substring(<span class="number">0</span>, index) + path;</span><br><span class="line">        <span class="keyword">if</span> (!System.IO.File.Exists(path))</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">string</span> fileContent = System.IO.File.ReadAllText(path);</span><br><span class="line"></span><br><span class="line">        fileContent = fileContent.Replace(<span class="string">&quot;#CREATIONDATE#&quot;</span>, System.DateTime.Today.ToString(<span class="string">&quot;dd/MM/yy&quot;</span>) + <span class="string">&quot;&quot;</span>);</span><br><span class="line">        fileContent = fileContent.Replace(<span class="string">&quot;#PROJECTNAME#&quot;</span>, PlayerSettings.product-Name);</span><br><span class="line">        fileContent = fileContent.Replace(<span class="string">&quot;#DEVELOPER#&quot;</span>, System.Environment.User-Name);</span><br><span class="line"></span><br><span class="line">        System.IO.File.WriteAllText(path, fileContent);</span><br><span class="line">        AssetDatabase.Refresh();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="version-control-systems"><a class="markdownIt-Anchor" href="#version-control-systems"></a> Version control systems</h1>
+<h1 id="version-control-systems">Version control systems</h1>
 <ul>
 <li>Git: Fork, GitKraken, VS Code, VS, SourceTree, Sublime Merge.</li>
-<li>Perforce (Helix Core): see <a target="_blank" rel="noopener" href="https://www.perforce.com/blog/vcs/how-to-use-unity-version-control">here</a> to learn how to integrate Perforce into Unity.</li>
+<li>Perforce (Helix Core): see <a
+target="_blank" rel="noopener" href="https://www.perforce.com/blog/vcs/how-to-use-unity-version-control">here</a>
+to learn how to integrate Perforce into Unity.</li>
 <li>Apache Subversion (SVN)</li>
-<li>Plastic SCM: see <a target="_blank" rel="noopener" href="https://unity.com/products/plastic-scm">here</a> to learn more about Plastic SCM.</li>
+<li>Plastic SCM: see <a
+target="_blank" rel="noopener" href="https://unity.com/products/plastic-scm">here</a> to learn more
+about Plastic SCM.</li>
 </ul>
-<p><img data-src="/images/vcs/1.png" alt="" /></p>
-<h1 id="settings-up-unity-to-work-with-version-control"><a class="markdownIt-Anchor" href="#settings-up-unity-to-work-with-version-control"></a> Settings up Unity to work with version control</h1>
+<p><img data-src="/images/vcs/1.png" /></p>
+<h1 id="settings-up-unity-to-work-with-version-control">Settings up
+Unity to work with version control</h1>
 <ul>
 <li><strong>Editor project settings</strong>
 <ul>
-<li>Perforce: Edit -&gt; Project Settings -&gt; Version Control -&gt; Mode.</li>
-<li>Plastic SCM: click the Plastic SCM icon in the toolbar on the top right in Unity Editor.</li>
+<li>Perforce: Edit -&gt; Project Settings -&gt; Version Control -&gt;
+Mode.</li>
+<li>Plastic SCM: click the Plastic SCM icon in the toolbar on the top
+right in Unity Editor.</li>
+</ul></li>
+<li>What to ignore: Do not commit the <code>Library</code> folder, as
+well as the <code>.exe</code> or <code>.apk</code> files.</li>
+<li>Work with large files: teams prefer a centralized workflow where
+large binary files would only on a central server with individual users
+only accessing the latest version on their machines, rather than a
+distributed one where many copies of historical files are stored on
+local machines. If using Git, be sure to include Git LFS.</li>
 </ul>
-</li>
-<li>What to ignore: Do not commit the <code>Library</code> folder, as well as the <code>.exe</code> or <code>.apk</code> files.</li>
-<li>Work with large files: teams prefer a centralized workflow where large binary files would only on a central server with individual users only accessing the latest version on their machines, rather than a distributed one where many copies of historical files are stored on local machines. If using Git, be sure to include Git LFS.</li>
-</ul>
-<h1 id="best-practices-for-version-control"><a class="markdownIt-Anchor" href="#best-practices-for-version-control"></a> Best practices for version control</h1>
+<h1 id="best-practices-for-version-control">Best practices for version
+control</h1>
 <p>Some suggestions you may need to make teamwork more efficient:</p>
 <ul>
 <li>Commit little, commit often.</li>
 <li>Keep commit messages clean.</li>
-<li>Avoid indiscriminate commits. It is important to understand that you should only commit what you have changed in the project.</li>
+<li>Avoid indiscriminate commits. It is important to understand that you
+should only commit what you have changed in the project.</li>
 <li>Get the latest
 <ul>
-<li>Git: pull -&gt; edit -&gt; pull -&gt; commit -&gt; pull -&gt; push.</li>
-<li>Perforce: get latest -&gt; check out files -&gt; edit -&gt; submit</li>
-</ul>
-</li>
+<li>Git: pull -&gt; edit -&gt; pull -&gt; commit -&gt; pull -&gt;
+push.</li>
+<li>Perforce: get latest -&gt; check out files -&gt; edit -&gt;
+submit</li>
+</ul></li>
 <li>Know your toolset
 <ul>
 <li>Git: UI client</li>
 <li>Plastic SCM: Gluon</li>
 <li>Perforce Helix Core: built-in Unity Editor tools</li>
+</ul></li>
+<li>Feature branches and Git Flow: main, hotfix, release, develop, etc.
+Both Plastic SCM and Perforce have automated tools to help manage
+merging branches back into mainline. Plastic SCM does this with the help
+of <a
+target="_blank" rel="noopener" href="https://www.plasticscm.com/mergebot-devops?utm_source=demand-gen&amp;utm_medium=PDF&amp;utm_campaign=asset-links-gmg-achieve-quality&amp;utm_content=version-control-and-project-organization-ebook">MergeBot</a>,
+and Perforce uses <a
+target="_blank" rel="noopener" href="https://www.perforce.com/products/helix-swarm">Helix Swarm</a> for
+managing code reviews that can also be set up with automated
+testing.</li>
 </ul>
-</li>
-<li>Feature branches and Git Flow: main, hotfix, release, develop, etc. Both Plastic SCM and Perforce have automated tools to help manage merging branches back into mainline. Plastic SCM does this with the help of <a target="_blank" rel="noopener" href="https://www.plasticscm.com/mergebot-devops?utm_source=demand-gen&amp;utm_medium=PDF&amp;utm_campaign=asset-links-gmg-achieve-quality&amp;utm_content=version-control-and-project-organization-ebook">MergeBot</a>, and Perforce uses <a target="_blank" rel="noopener" href="https://www.perforce.com/products/helix-swarm">Helix Swarm</a> for managing code reviews that can also be set up with automated testing.</li>
-</ul>
-<p>The biggest takeaway is the importance of clear team communication. As a team, you need to agree on your guidelines</p>
+<p>The biggest takeaway is the importance of clear team communication.
+As a team, you need to agree on your guidelines</p>
 
     </div>
 
@@ -510,13 +547,13 @@ implementing the <code>OnWillCreateAsset</code> method.</li>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">453k</span>
+    <span title="Word count total">405k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">6:51</span>
+    <span title="Reading time total">6:08</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>

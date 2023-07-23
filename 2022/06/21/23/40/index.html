@@ -21,12 +21,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sulley.cc","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":10,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="最近项目涉及到一个需求：如何自动确定镜头的参数（在Unity中即为轨道的高度和半径）。这个问题可以形式化为：给定角色身高XXX、看向点偏移YYY、俯角AAA和人物在画面中的占高比TTT，自动计算出相机到看向点的距离DDD、相机中轨的半径RRR和相机中轨的高度HHH。本文推导出该计算公式，实现镜头参数自动化处理。">
+    <meta name="description" content="最近项目涉及到一个需求：如何自动确定镜头的参数（在Unity中即为轨道的高度和半径）。这个问题可以形式化为：给定角色身高\(X\)、看向点偏移\(Y\)、俯角\(A\)和人物在画面中的占高比\(T\)，自动计算出相机到看向点的距离\(D\)、相机中轨的半径\(R\)和相机中轨的高度\(H\)。本文推导出该计算公式，实现镜头参数自动化处理。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="根据角色体型和俯角自动确定FreeLook镜头参数">
 <meta property="og:url" content="http://sulley.cc/2022/06/21/23/40/index.html">
 <meta property="og:site_name" content="Sulley">
-<meta property="og:description" content="最近项目涉及到一个需求：如何自动确定镜头的参数（在Unity中即为轨道的高度和半径）。这个问题可以形式化为：给定角色身高XXX、看向点偏移YYY、俯角AAA和人物在画面中的占高比TTT，自动计算出相机到看向点的距离DDD、相机中轨的半径RRR和相机中轨的高度HHH。本文推导出该计算公式，实现镜头参数自动化处理。">
+<meta property="og:description" content="最近项目涉及到一个需求：如何自动确定镜头的参数（在Unity中即为轨道的高度和半径）。这个问题可以形式化为：给定角色身高\(X\)、看向点偏移\(Y\)、俯角\(A\)和人物在画面中的占高比\(T\)，自动计算出相机到看向点的距离\(D\)、相机中轨的半径\(R\)和相机中轨的高度\(H\)。本文推导出该计算公式，实现镜头参数自动化处理。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://sulley.cc/images/auto-camera-params/1.png">
 <meta property="og:image" content="http://sulley.cc/images/auto-camera-params/2.png">
@@ -150,7 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%92%E8%89%B2%E9%AB%98%E5%BA%A6-%E7%9C%8B%E5%90%91%E7%82%B9%E5%81%8F%E7%A7%BB-%E4%BF%AF%E8%A7%92%E4%B8%8E%E7%9B%B8%E6%9C%BA%E5%8F%82%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text"> 角色高度、看向点偏移、俯角与相机参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%BA%E7%89%A9%E9%AB%98%E5%BA%A6-%E4%BA%BA%E7%89%A9%E5%8D%A0%E9%AB%98%E6%AF%94-fov%E4%B8%8E%E7%9B%B8%E6%9C%BA%E8%B7%9D%E7%A6%BB"><span class="nav-number">2.</span> <span class="nav-text"> 人物高度、人物占高比、FOV与相机距离</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text"> 总结</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%92%E8%89%B2%E9%AB%98%E5%BA%A6%E7%9C%8B%E5%90%91%E7%82%B9%E5%81%8F%E7%A7%BB%E4%BF%AF%E8%A7%92%E4%B8%8E%E7%9B%B8%E6%9C%BA%E5%8F%82%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">角色高度、看向点偏移、俯角与相机参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%BA%E7%89%A9%E9%AB%98%E5%BA%A6%E4%BA%BA%E7%89%A9%E5%8D%A0%E9%AB%98%E6%AF%94fov%E4%B8%8E%E7%9B%B8%E6%9C%BA%E8%B7%9D%E7%A6%BB"><span class="nav-number">2.</span> <span class="nav-text">人物高度、人物占高比、FOV与相机距离</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -287,7 +287,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>1.7k</span>
+      <span>1.8k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -304,10 +304,23 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>最近项目涉及到一个需求：如何自动确定镜头的参数（在Unity中即为轨道的高度和半径）。这个问题可以形式化为：给定角色身高<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span></span></span></span>、看向点偏移<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span></span></span></span>、俯角<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span>和人物在画面中的占高比<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span>，自动计算出相机到看向点的距离<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span>、相机中轨的半径<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span>和相机中轨的高度<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span></span></span></span>。本文推导出该计算公式，实现镜头参数自动化处理。</p>
+    <div class="post-body" itemprop="articleBody"><p>最近项目涉及到一个需求：如何自动确定镜头的参数（在Unity中即为轨道的高度和半径）。这个问题可以形式化为：给定角色身高<span
+class="math inline">\(X\)</span>、看向点偏移<span
+class="math inline">\(Y\)</span>、俯角<span
+class="math inline">\(A\)</span>和人物在画面中的占高比<span
+class="math inline">\(T\)</span>，自动计算出相机到看向点的距离<span
+class="math inline">\(D\)</span>、相机中轨的半径<span
+class="math inline">\(R\)</span>和相机中轨的高度<span
+class="math inline">\(H\)</span>。本文推导出该计算公式，实现镜头参数自动化处理。</p>
 <span id="more"></span>
-<h1 id="角色高度-看向点偏移-俯角与相机参数"><a class="markdownIt-Anchor" href="#角色高度-看向点偏移-俯角与相机参数"></a> 角色高度、看向点偏移、俯角与相机参数</h1>
-<p>我们的第一步目标是：给定角色高度<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span></span></span></span>、看向点偏移<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span></span></span></span>和俯角<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span>，能够自动计算出相机距离、相机轨道的半径<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span>和高度<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span></span></span></span>。在此之前，首先需要明确几个概念：</p>
+<h1
+id="角色高度看向点偏移俯角与相机参数">角色高度、看向点偏移、俯角与相机参数</h1>
+<p>我们的第一步目标是：给定角色高度<span
+class="math inline">\(X\)</span>、看向点偏移<span
+class="math inline">\(Y\)</span>和俯角<span
+class="math inline">\(A\)</span>，能够自动计算出相机距离、相机轨道的半径<span
+class="math inline">\(R\)</span>和高度<span
+class="math inline">\(H\)</span>。在此之前，首先需要明确几个概念：</p>
 <ul>
 <li>角色高度：角色模型在游戏中的实际高度，因为我们目前关心的角色在屏幕中的占高比，暂不考虑角色宽度；</li>
 <li>看向点偏移：从角色Root结点的Y轴偏移量，如果等于角色高度则位于角色头顶位置，等于零则位于Root位置；</li>
@@ -317,47 +330,91 @@
 <li>相机轨道半径：相机轨道在当前高度上的半径。</li>
 </ul>
 <p>这几个参数的关系可以用下图来表示：</p>
-<p><img data-src="/images/auto-camera-params/1.png" alt="几个参数之间的关系。X：角色高度，Y：看向点偏移，A：俯角，D：相机距离，H：相机高度，R：相机半径。" /></p>
+<figure>
+<img data-src="/images/auto-camera-params/1.png"
+alt="几个参数之间的关系。X：角色高度，Y：看向点偏移，A：俯角，D：相机距离，H：相机高度，R：相机半径。" />
+<figcaption
+aria-hidden="true">几个参数之间的关系。X：角色高度，Y：看向点偏移，A：俯角，D：相机距离，H：相机高度，R：相机半径。</figcaption>
+</figure>
 <p>我们不难得出下面的关系：</p>
-<p class='katex-block katex-error' title='ParseError: KaTeX parse error: No such environment: align at position 7: \begin{̲a̲l̲i̲g̲n̲}̲
-    R &amp;= \cos(…'>\begin{align}
+<p><span class="math display">\[
+\begin{align}
     R &amp;= \cos(A)D\\
     H &amp;= \tan(A)R+Y
 \end{align}
-</p>
-<p>但这是对<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>≥</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">H\ge Y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8193em;vertical-align:-0.13597em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span></span></span></span>的情况，当<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>&lt;</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">H&lt;Y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span></span></span></span>时，我们有：</p>
-<p class='katex-block katex-error' title='ParseError: KaTeX parse error: No such environment: align at position 7: \begin{̲a̲l̲i̲g̲n̲}̲
-    R &amp;= \cos(…'>\begin{align}
+\]</span></p>
+<p>但这是对<span class="math inline">\(H\ge Y\)</span>的情况，当<span
+class="math inline">\(H&lt;Y\)</span>时，我们有：</p>
+<p><span class="math display">\[
+\begin{align}
     R &amp;= \cos(A)D\\
     H &amp;= -\tan(A)R+Y
 \end{align}
-</p>
-<p>但是由于我们在计算俯角时，以下方向为正方向，当<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>&lt;</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">H&lt;Y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span></span></span></span>时，俯角<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span>实际上是负值，所以也不需要加负号。于是，最终的公式仍然是统一的。</p>
-<h1 id="人物高度-人物占高比-fov与相机距离"><a class="markdownIt-Anchor" href="#人物高度-人物占高比-fov与相机距离"></a> 人物高度、人物占高比、FOV与相机距离</h1>
-<p>上述公式的一个前提是需要知道<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span>（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span>可自定，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mi>X</mi><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">Y=X/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mord">/</span><span class="mord">2</span></span></span></span>或<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mn>2</mn><mi>X</mi><mi mathvariant="normal">/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">Y=2X/3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mord">/</span><span class="mord">3</span></span></span></span>），而我们实际上关注的是人物在整个画面中的占高比，而相机屏幕与FOV有关，所以为了计算<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span>，实际上就是要考虑通过FOV和人物高度、人物占高比计算出相机距离。</p>
-<p>现在我们假定人物占高比固定为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">1/3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord">3</span></span></span></span>，可以根据需求自行推导。</p>
-<p><img data-src="/images/auto-camera-params/2.png" alt="通过FOV和人物高度计算出相机距离。我们固定了1/3的人物占高比。" /></p>
-<p>如上图所示，相机投影的上半部分角度为FOV的一半，在这里我们假设FOV为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>55</mn><mi mathvariant="normal">°</mi></mrow><annotation encoding="application/x-tex">55°</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord">5</span><span class="mord">5</span><span class="mord">°</span></span></span></span>，那么一半就是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>55</mn><mi mathvariant="normal">°</mi><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">55°/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">5</span><span class="mord">5</span><span class="mord">°</span><span class="mord">/</span><span class="mord">2</span></span></span></span>。设相机距离为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span>，当角色高度的一半，即<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">X/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mord">/</span><span class="mord">2</span></span></span></span>占屏幕上半的<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">1/3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord">3</span></span></span></span>时，我们不难得到下述公式：</p>
-<p class='katex-block katex-error' title='ParseError: KaTeX parse error: No such environment: equation at position 7: \begin{̲e̲q̲u̲a̲t̲i̲o̲n̲}̲
-    D=\frac{1.…'>\begin{equation}
+\]</span></p>
+<p>但是由于我们在计算俯角时，以下方向为正方向，当<span
+class="math inline">\(H&lt;Y\)</span>时，俯角<span
+class="math inline">\(A\)</span>实际上是负值，所以也不需要加负号。于是，最终的公式仍然是统一的。</p>
+<h1
+id="人物高度人物占高比fov与相机距离">人物高度、人物占高比、FOV与相机距离</h1>
+<p>上述公式的一个前提是需要知道<span
+class="math inline">\(D\)</span>（<span
+class="math inline">\(A\)</span>可自定，<span
+class="math inline">\(Y=X/2\)</span>或<span
+class="math inline">\(Y=2X/3\)</span>），而我们实际上关注的是人物在整个画面中的占高比，而相机屏幕与FOV有关，所以为了计算<span
+class="math inline">\(D\)</span>，实际上就是要考虑通过FOV和人物高度、人物占高比计算出相机距离。</p>
+<p>现在我们假定人物占高比固定为<span
+class="math inline">\(1/3\)</span>，可以根据需求自行推导。</p>
+<figure>
+<img data-src="/images/auto-camera-params/2.png"
+alt="通过FOV和人物高度计算出相机距离。我们固定了1/3的人物占高比。" />
+<figcaption
+aria-hidden="true">通过FOV和人物高度计算出相机距离。我们固定了1/3的人物占高比。</figcaption>
+</figure>
+<p>如上图所示，相机投影的上半部分角度为FOV的一半，在这里我们假设FOV为<span
+class="math inline">\(55°\)</span>，那么一半就是<span
+class="math inline">\(55°/2\)</span>。设相机距离为<span
+class="math inline">\(D\)</span>，当角色高度的一半，即<span
+class="math inline">\(X/2\)</span>占屏幕上半的<span
+class="math inline">\(1/3\)</span>时，我们不难得到下述公式：</p>
+<p><span class="math display">\[
+\begin{equation}
     D=\frac{1.5X}{\tan(55^\circ/2)}
 \end{equation}
-</p>
-<p>但是上述公式没有考虑俯角，这就会导致一定的误差。下面我们分<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>≤</mo><mn>5</mn><msup><mn>5</mn><mo>∘</mo></msup><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">A\le 55^\circ/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8193em;vertical-align:-0.13597em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">5</span><span class="mord"><span class="mord">5</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.674115em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span><span class="mord">/</span><span class="mord">2</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>&gt;</mo><mn>5</mn><msup><mn>5</mn><mo>∘</mo></msup><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">A&gt;55^\circ/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">5</span><span class="mord"><span class="mord">5</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.674115em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span><span class="mord">/</span><span class="mord">2</span></span></span></span>两种情况讨论，如下图所示：</p>
-<p><img data-src="/images/auto-camera-params/3.png" alt="修正后的相机距离用俯角、FOV和人物高度计算得出。我们固定了1/3的人物占高比。" /></p>
-<p>角色半高在相机屏幕空间中的投影为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mi>X</mi><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">\cos(A)X/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">cos</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mord">/</span><span class="mord">2</span></span></span></span>。所以我们能够得到下述修正公式：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>D</mi><mo>=</mo><mfrac><mrow><mn>1.5</mn><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mi>X</mi></mrow><mrow><mi>tan</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>5</mn><msup><mn>5</mn><mo>∘</mo></msup><mi mathvariant="normal">/</mi><mn>2</mn><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">D=\frac{1.5\cos(A)X}{\tan(55^\circ/2)}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop">tan</span><span class="mopen">(</span><span class="mord">5</span><span class="mord"><span class="mord">5</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.600115em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span><span class="mord">/</span><span class="mord">2</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mord">.</span><span class="mord">5</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">cos</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+\]</span></p>
+<p>但是上述公式没有考虑俯角，这就会导致一定的误差。下面我们分<span
+class="math inline">\(A\le 55^\circ/2\)</span>和<span
+class="math inline">\(A&gt;55^\circ/2\)</span>两种情况讨论，如下图所示：</p>
+<figure>
+<img data-src="/images/auto-camera-params/3.png"
+alt="修正后的相机距离用俯角、FOV和人物高度计算得出。我们固定了1/3的人物占高比。" />
+<figcaption
+aria-hidden="true">修正后的相机距离用俯角、FOV和人物高度计算得出。我们固定了1/3的人物占高比。</figcaption>
+</figure>
+<p>角色半高在相机屏幕空间中的投影为<span
+class="math inline">\(\cos(A)X/2\)</span>。所以我们能够得到下述修正公式：</p>
+<p><span class="math display">\[
+D=\frac{1.5\cos(A)X}{\tan(55^\circ/2)}
+\]</span></p>
 <p>该公式对两种情况都是适用的。</p>
-<h1 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h1>
-<p>总的来说，只要给定角色身高<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span></span></span></span>、看向点偏移<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span></span></span></span>（一般来说设置为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mi>X</mi><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">Y=X/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mord">/</span><span class="mord">2</span></span></span></span>或者<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mn>2</mn><mi>X</mi><mi mathvariant="normal">/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">Y=2X/3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mord">/</span><span class="mord">3</span></span></span></span>）和俯角<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span>，在固定人物在画面中占高比<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">1/3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord">3</span></span></span></span>和FOV为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><msup><mn>5</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">55^\circ</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.674115em;vertical-align:0em;"></span><span class="mord">5</span><span class="mord"><span class="mord">5</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.674115em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span></span></span></span>的前提下，就可以根据下述公式计算相机到看向点距离<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span>、相机中轨半径<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span>和相机中轨高度<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span></span></span></span>：</p>
-<p class='katex-block katex-error' title='ParseError: KaTeX parse error: No such environment: align at position 7: \begin{̲a̲l̲i̲g̲n̲}̲
-D &amp;= \frac{1.5…'>\begin{align}
+<h1 id="总结">总结</h1>
+<p>总的来说，只要给定角色身高<span
+class="math inline">\(X\)</span>、看向点偏移<span
+class="math inline">\(Y\)</span>（一般来说设置为<span
+class="math inline">\(Y=X/2\)</span>或者<span
+class="math inline">\(Y=2X/3\)</span>）和俯角<span
+class="math inline">\(A\)</span>，在固定人物在画面中占高比<span
+class="math inline">\(1/3\)</span>和FOV为<span
+class="math inline">\(55^\circ\)</span>的前提下，就可以根据下述公式计算相机到看向点距离<span
+class="math inline">\(D\)</span>、相机中轨半径<span
+class="math inline">\(R\)</span>和相机中轨高度<span
+class="math inline">\(H\)</span>：</p>
+<p><span class="math display">\[
+\begin{align}
 D &amp;= \frac{1.5\cos(A)X}{\tan(55^\circ/2)}\\
 R &amp;= \cos(A)D\\
 H &amp;= \tan(A)R + Y
 \end{align}
-</p>
+\]</span></p>
 <p>如果你需要改变人物在画面的占高比，或者相机的FOV，只需要按照上面的推导方法修改公式即可。</p>
 <p>当然，你也可以继续精细化上述公式，如考虑实际的看向点偏移，但一般来说差别不是很大，在此不再赘述。</p>
 
@@ -440,13 +497,13 @@ H &amp;= \tan(A)R + Y
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">453k</span>
+    <span title="Word count total">405k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">6:51</span>
+    <span title="Reading time total">6:08</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
