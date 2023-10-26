@@ -836,14 +836,14 @@ body {
   padding-right: 2rem;
   max-width: 20em;
   max-height: calc(95vh - 7rem);
-  text-align: right;
+  text-align: left;
 }
 #header-post #toc a:hover {
   color: #2bbc8a;
 }
 #header-post #toc .toc-level-1 {
   color: #363533;
-  font-size: 0.1rem;
+  font-size: 0.8rem;
 }
 #header-post #toc .toc-level-1:before {
   color: #d44375;
@@ -851,7 +851,7 @@ body {
 }
 #header-post #toc .toc-level-2 {
   color: #363533;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
 }
 #header-post #toc .toc-level-2:before {
   color: #d44375;
@@ -859,7 +859,7 @@ body {
 }
 #header-post #toc .toc-level-3 {
   color: #666;
-  font-size: 0.7rem;
+  font-size: 0.5rem;
 }
 #header-post #toc .toc-level-4 {
   color: #525252;
@@ -1028,7 +1028,7 @@ body {
 }
 #footer-post #toc-footer .toc-level-1 {
   color: #363533;
-  font-size: 0.1rem;
+  font-size: 0.8rem;
 }
 #footer-post #toc-footer .toc-level-1:before {
   color: #d44375;
@@ -1036,7 +1036,7 @@ body {
 }
 #footer-post #toc-footer .toc-level-2 {
   color: #363533;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
 }
 #footer-post #toc-footer .toc-level-2:before {
   color: #d44375;
@@ -1044,7 +1044,7 @@ body {
 }
 #footer-post #toc-footer .toc-level-3 {
   color: #666;
-  font-size: 0.7rem;
+  font-size: 0.5rem;
   line-height: 15px;
 }
 #footer-post #toc-footer .toc-level-4 {
