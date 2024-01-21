@@ -4,7 +4,7 @@
   <url>
     <loc>http://sulley.cc/2024/01/11/20/06/</loc>
     
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -770,14 +770,14 @@
   </url>
   
   <url>
-    <loc>http://sulley.cc/tags/%E5%B7%AB%E5%B8%88%E4%B8%89/</loc>
+    <loc>http://sulley.cc/tags/%E8%AE%BE%E8%AE%A1/</loc>
     <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://sulley.cc/tags/%E8%AE%BE%E8%AE%A1/</loc>
+    <loc>http://sulley.cc/tags/%E5%B7%AB%E5%B8%88%E4%B8%89/</loc>
     <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -849,7 +849,7 @@
   </url>
   
   <url>
-    <loc>http://sulley.cc/categories/%E6%B8%B8%E6%88%8F-%E6%B8%B8%E6%88%8F%E7%90%86%E8%AE%BA/</loc>
+    <loc>http://sulley.cc/categories/%E6%95%B0%E5%AD%A6-%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/</loc>
     <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -863,7 +863,7 @@
   </url>
   
   <url>
-    <loc>http://sulley.cc/categories/%E6%95%B0%E5%AD%A6-%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/</loc>
+    <loc>http://sulley.cc/categories/%E6%B8%B8%E6%88%8F-%E6%B8%B8%E6%88%8F%E7%90%86%E8%AE%BA/</loc>
     <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
