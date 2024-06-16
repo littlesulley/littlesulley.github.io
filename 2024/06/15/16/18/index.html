@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="offsetof is a built-in macro in C++ used to evaluate the layout relative offset of a non-static data member in a class. Unfortunately, using the macro in C++ comes with some fundamental problems that">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Offset Of Class Members">
+<meta property="og:url" content="http://sulley.cc/2024/06/15/16/18/index.html">
+<meta property="og:site_name" content="Sulley">
+<meta property="og:description" content="offsetof is a built-in macro in C++ used to evaluate the layout relative offset of a non-static data member in a class. Unfortunately, using the macro in C++ comes with some fundamental problems that">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-06-15T08:18:55.000Z">
+<meta property="article:modified_time" content="2024-06-16T13:16:44.732Z">
+<meta property="article:author" content="Sulley">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Offset">
+<meta property="article:tag" content="成员变量">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Offset Of Class Members</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/resources/">Resources</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/06/01/20/06/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://sulley.cc/2024/06/15/16/18/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://sulley.cc/2024/06/15/16/18/&text=Offset Of Class Members"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://sulley.cc/2024/06/15/16/18/&title=Offset Of Class Members"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://sulley.cc/2024/06/15/16/18/&is_video=false&description=Offset Of Class Members"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Offset Of Class Members&body=Check out this article: http://sulley.cc/2024/06/15/16/18/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://sulley.cc/2024/06/15/16/18/&title=Offset Of Class Members"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://sulley.cc/2024/06/15/16/18/&title=Offset Of Class Members"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://sulley.cc/2024/06/15/16/18/&title=Offset Of Class Members"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://sulley.cc/2024/06/15/16/18/&title=Offset Of Class Members"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://sulley.cc/2024/06/15/16/18/&name=Offset Of Class Members&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://sulley.cc/2024/06/15/16/18/&t=Offset Of Class Members"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#the-built-in-offsetof"><span class="toc-number">1.</span> <span class="toc-text"> The Built-in offsetof</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#pointer-to-member-and-template-argument-deduction"><span class="toc-number">2.</span> <span class="toc-text"> Pointer-to-member and Template Argument Deduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#conclusion"><span class="toc-number">3.</span> <span class="toc-text"> Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#reference"><span class="toc-number">4.</span> <span class="toc-text"> Reference</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Offset Of Class Members
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sulley</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-06-15T08:18:55.000Z" class="dt-published" itemprop="datePublished">2024-06-15</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E7%A8%8B%E5%BA%8F-C/">程序 - C++</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/C/" rel="tag">C++</a>, <a class="p-category" href="/tags/Offset/" rel="tag">Offset</a>, <a class="p-category" href="/tags/%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F/" rel="tag">成员变量</a>, <a class="p-category" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a>, <a class="p-category" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a>, <a class="p-category" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p><code>offsetof</code> is a built-in macro in C++ used to evaluate the layout relative offset of a non-static data member in a class.<br>
+Unfortunately, using the macro in C++ comes with some fundamental problems that prevent uses of it.<br>
+This blog post tries to mitigate these problems and provide a generic workaround of <code>offsetof</code>.</p>
+<p>All code is based on C++20.</p>
+<h1 id="the-built-in-offsetof"><a class="markdownIt-Anchor" href="#the-built-in-offsetof"></a> The Built-in <code>offsetof</code></h1>
+<p>Let’s start with formalizing the problem. Given a class type <code>T</code> and a non-static data member <code>m</code>, the built-in macro <code>offsetof</code> receives both <code>T</code> and <code>m</code> to return <code>m</code>’s relative offset inside <code>T</code>, for example:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">T</span> {</span><br><span class="line">  <span class="type">char</span> c;</span><br><span class="line">  <span class="type">int</span> i;</span><br><span class="line">  <span class="type">double</span> d;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="built_in">offsetof</span>(T, c);   <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">offsetof</span>(T, i);   <span class="comment">// 4</span></span><br><span class="line"><span class="built_in">offsetof</span>(T, d);   <span class="comment">// 8</span></span><br></pre></td></tr></table></figure>
+<p>However, if <code>T</code> is not a POD <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/language/classes#Standard-layout_class">standard-layout</a> type, the result of <code>offsetof</code> is undefined and use of it is conditionally-supported. This means we should not use <code>offsetof</code> for non standard-layout types.</p>
+<p>Here is the code sample: <a target="_blank" rel="noopener" href="https://godbolt.org/z/zhxWKaW93">https://godbolt.org/z/zhxWKaW93</a>. When you compile it, the compiler will complain that <code>'offsetof' within non-standard-layout type 'ab' is conditionally-supported</code> though it does compile successfully. This is because the standard stipulates that <code>offsetof</code> only works perfectly for standard-layout types and also it’s up to the compiler to implement this macro for non-POD non-standard-layout types.</p>
+<p>Besides, as seen in the code sample, <code>offsetof</code> does not support virtual inheritance. If you try to access the offset of a data member in a virtually inherited class, you will get an error <code>invalid access to non-static data member in virtual base of NULL object</code>.</p>
+<p>It’s worth noting that the <code>offsetof</code> macros expands to an integral constant expression of type <code>std::size_t</code>. This means that its value is determined at compile time. This is quite important because</p>
+<h1 id="pointer-to-member-and-template-argument-deduction"><a class="markdownIt-Anchor" href="#pointer-to-member-and-template-argument-deduction"></a> Pointer-to-member and Template Argument Deduction</h1>
+<p>So what can we do to eliminate these warnings, even further solving the virtual inheritance problem? The first try is using the pointer-to-member syntax and template argument deducation. We can write the following code:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Version 1 </span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C, <span class="keyword">typename</span> M&gt;</span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> std::<span class="type">size_t</span> <span class="title">OffsetOf</span><span class="params">(M C::* p)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  <span class="keyword">return</span> (<span class="type">char</span>*)&amp;(((C*)<span class="literal">nullptr</span>)-&gt;*p) - (<span class="type">char</span>*)<span class="literal">nullptr</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> offset = <span class="built_in">OffsetOf</span>(&amp;T::c);</span><br></pre></td></tr></table></figure>
+<p>However, this will give us an error saying that ‘reinterpret_cast’ is not a constant expression, as stipulated by the <a target="_blank" rel="noopener" href="https://timsong-cpp.github.io/cppwp/n4868/expr.const#5.15">standard</a>. This means you cannot evaluate <code>offset</code> at compile time, nor can you add the <code>constexpr</code> specifier. Except for the compile time pitfall, this snippet of code cannot deal with multiple inheritance. For example:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span> {</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">float</span> b;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">B</span> {</span><br><span class="line">    <span class="type">double</span> c;</span><br><span class="line">    <span class="type">int</span> d;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">X</span> : A, B {};</span><br><span class="line"></span><br><span class="line"><span class="built_in">OffsetOf</span>(&amp;X::c); <span class="comment">// 0, Wrong!</span></span><br></pre></td></tr></table></figure>
+<p>In this case, <code>OffsetOf</code> outputs <code>0</code> while the correct output should be <code>8</code>. This is because when you feed <code>&amp;X::c</code> as the argument, the template arguments are actually deduced to <code>C=B</code> and <code>M=double</code>, therefore the instantiated template function is <code>OffsetOf(double B::* p)</code>. To this end, we need to provide an additional template parameter <code>B</code>, to indicate the real class of interest.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Version 2</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> B = <span class="type">void</span>, <span class="keyword">typename</span> C, <span class="keyword">typename</span> M&gt;</span><br><span class="line"><span class="keyword">constexpr</span> std::<span class="type">size_t</span> <span class="built_in">OffsetOf</span>(M C::* p)</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">using</span> Base = <span class="keyword">typename</span> std::conditional&lt;std::is_same_v&lt;B, <span class="type">void</span>&gt;, C, B&gt;::type;</span><br><span class="line">    <span class="keyword">return</span> (<span class="type">char</span>*)&amp;((Base*)<span class="literal">nullptr</span>-&gt;*p) - (<span class="type">char</span>*)<span class="literal">nullptr</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span> {</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">float</span> b;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">B</span> {</span><br><span class="line">    <span class="type">double</span> c;</span><br><span class="line">    <span class="type">int</span> d;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">X</span> : A, B {};</span><br><span class="line"></span><br><span class="line"><span class="built_in">OffsetOf</span>(&amp;A::a);    <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">OffsetOf</span>(&amp;A::b);    <span class="comment">// 4</span></span><br><span class="line"><span class="built_in">OffsetOf</span>(&amp;B::c);    <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">OffsetOf</span>(&amp;B::d);    <span class="comment">// 8</span></span><br><span class="line"><span class="built_in">OffsetOf</span>&lt;X&gt;(&amp;X::a); <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">OffsetOf</span>&lt;X&gt;(&amp;X::b); <span class="comment">// 4</span></span><br><span class="line"><span class="built_in">OffsetOf</span>&lt;X&gt;(&amp;X::c); <span class="comment">// 8</span></span><br><span class="line"><span class="built_in">OffsetOf</span>&lt;X&gt;(&amp;X::d); <span class="comment">// 16</span></span><br></pre></td></tr></table></figure>
+<p>Good! Now <code>OffsetOf</code> receives an extra argument with default <code>void</code>. If it’s not provided, then the regular argument deduction will happen, otherwise it will use the provided argument for type casting.</p>
+<p>The problems of compile-time evaluation and virtual inheritance still remain, because <code>(char*)</code> is a <code>reinterpret_cast</code>, which cannot be used in constant expression, and we are casting a <code>nullptr</code> instead of a real pointer to object of type <code>Base</code>, which violates the rule of virtual inheritance.</p>
+<p>To solve the virtual inheritance issue, we can create a dummy object of type <code>Base</code> and use this object to get the relative offset. In this way, we are leveraging a real object rather than a fake <code>nullptr</code> pointer.</p>
+<p>We can write the following version 3 code:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Version 3</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T v&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ClassMemberTraits</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C, <span class="keyword">typename</span> M, M C::* v&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ClassMemberTraits</span>&lt;M C::*, v&gt;</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">using</span> ClassType = C;</span><br><span class="line">    <span class="keyword">using</span> MemberType = M;</span><br><span class="line">    <span class="keyword">constexpr</span> <span class="type">static</span> M C::* value = v;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;</span><br><span class="line">    <span class="keyword">typename</span> Traits, </span><br><span class="line">    <span class="keyword">typename</span> B = <span class="type">void</span>,</span><br><span class="line">    <span class="keyword">typename</span> M = <span class="keyword">typename</span> Traits::MemberType, </span><br><span class="line">    <span class="keyword">typename</span> C = <span class="keyword">typename</span> Traits::ClassType, </span><br><span class="line">    M C::* p   = Traits::value &gt;</span><br><span class="line"><span class="keyword">struct</span> OffsetHelper</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">using</span> Base = <span class="keyword">typename</span> std::conditional&lt;std::is_same_v&lt;B, <span class="type">void</span>&gt;, C, B&gt;::type;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">union</span> <span class="title class_">U</span></span><br><span class="line">    {</span><br><span class="line">        <span class="type">char</span> c;</span><br><span class="line">        Base base;</span><br><span class="line">        <span class="function"><span class="keyword">constexpr</span> <span class="title">U</span><span class="params">()</span> <span class="keyword">noexcept</span> : c{</span>} {};</span><br><span class="line">        <span class="keyword">constexpr</span> ~<span class="built_in">U</span>() <span class="keyword">noexcept</span> {};</span><br><span class="line">    };</span><br><span class="line">    <span class="keyword">constexpr</span> <span class="type">static</span> U dummy {};</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">constexpr</span> <span class="type">static</span> std::<span class="type">size_t</span> <span class="title">GetOffsetOf</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">return</span> (<span class="type">char</span>*)&amp;(dummy.base.*p) - (<span class="type">char</span>*)&amp;dummy;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">auto</span> MemberPtr, <span class="keyword">typename</span> B = <span class="type">void</span>&gt;</span><br><span class="line">std::<span class="type">size_t</span> GetOffsetOf = OffsetHelper&lt;ClassMemberTraits&lt;<span class="keyword">decltype</span>(MemberPtr), MemberPtr&gt;, B&gt;::<span class="built_in">GetOffsetOf</span>();</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OffsetOf(C, M) GetOffsetOf<span class="string">&lt;&amp;C::M, C&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span> {</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">float</span> b;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">B</span> {</span><br><span class="line">    <span class="type">double</span> c;</span><br><span class="line">    <span class="type">int</span> d;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">X</span> : A, B {};</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">AA</span> { <span class="type">int</span> a; };</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">BB</span> : <span class="keyword">public</span> <span class="keyword">virtual</span> AA   { <span class="type">int</span> b; };</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CC</span> : <span class="keyword">public</span> <span class="keyword">virtual</span> AA   { <span class="type">int</span> c; };</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">DD</span> : <span class="keyword">public</span> BB, <span class="keyword">public</span> CC { <span class="type">int</span> d; };</span><br><span class="line"></span><br><span class="line"><span class="built_in">OffsetOf</span>(A, a);    <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">OffsetOf</span>(A, b);    <span class="comment">// 4</span></span><br><span class="line"><span class="built_in">OffsetOf</span>(B, c);    <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">OffsetOf</span>(B, d);    <span class="comment">// 8</span></span><br><span class="line"><span class="built_in">OffsetOf</span>(X, a);    <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">OffsetOf</span>(X, b);    <span class="comment">// 4</span></span><br><span class="line"><span class="built_in">OffsetOf</span>(X, c);    <span class="comment">// 8</span></span><br><span class="line"><span class="built_in">OffsetOf</span>(X, d);    <span class="comment">// 16</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">OffsetOf</span>(DD, a);   <span class="comment">// 32</span></span><br><span class="line"><span class="built_in">OffsetOf</span>(DD, b);   <span class="comment">// 8</span></span><br><span class="line"><span class="built_in">OffsetOf</span>(DD, c);   <span class="comment">// 24</span></span><br><span class="line"><span class="built_in">OffsetOf</span>(DD, d);   <span class="comment">// 28</span></span><br></pre></td></tr></table></figure>
+<p>Things are getting more compilicated. Let’s go through the ideas:</p>
+<ul>
+<li>Our goal is to create a <em>real</em> object of type <code>Base</code> when accessing its member, so we need to use template class (struct) to store such an object. Of course, we should also try to maintain its constexpr-ness. The <code>OffsetHelper</code> struct is then defined to accomplish this goal.</li>
+<li>As now it’s a class rather than a function, we cannot pass in a pointer-to-member function to let the template to deduce the arguments. Rather, we must pass in the template arguments by hand. We need <code>Base</code>, <code>MemberType</code>, <code>ClassType</code> and the pointer-to-member object <code>p</code>. To faciliate extracting types and values, we use another template class <code>ClassMemberTraits</code>, functioning similarly to the template function to store types and the pointer-to-member object. Use of it is quite simple: the first argument receives a type of pointer-to-member, and the second argument is a corresponding value. <code>decltype</code> will serve this purpose.</li>
+<li>Inside <code>OffsetHelper</code>, we still define the <code>Base</code> type according to the passed-in argument <code>B</code>. Then we define a union <code>U</code>, containing a <code>char</code> and a <code>Base</code> object, and create a <code>constexpr static U</code> object <code>dummy</code>. You may ask why we don’t directly create a constexpr <code>Base</code> object? Well, this is because when <code>Base</code> is virtually inherited, we cannot instantiate it with a constexpr constructor. You can use <code>static inline Base base{}</code> to bypass the need of a union, but it, including the union version, will tangibly create an object of type <code>Base</code> due to a non-constexpress-ness. Not a good idea.</li>
+<li>Then, we access the address of <code>dummy</code> in function <code>GetOffsetOf</code> and use a macro <code>OffsetOf()</code> and a helper variable template <code>GetOffsetOf</code> to obtain the offset.</li>
+</ul>
+<p>The next step, of course, is to make it <code>constexpr</code>! The difficulty is the <code>reinterpret_cast</code> of <code>(char*)</code>. Note that in the expression <code>(char*)&amp;(dummy.base.*p) - (char*)&amp;dummy</code>, we are actullay comparing two addresses, but with different types (e.g., <code>int*</code> and <code>float*</code>). However, C++ disallows subtracting two pointers of different types. So we need to maintain not only an object of type <code>Base</code>, but also its member of interest. Our goal is to have the address of pointer-to-member object equal to the address of the maintained member.</p>
+<p>We can write the following code:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Version 4</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, T v&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ClassMemberTraits</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C, <span class="keyword">typename</span> M, M C::* v&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ClassMemberTraits</span>&lt;M C::*, v&gt;</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">using</span> ClassType = C;</span><br><span class="line">    <span class="keyword">using</span> MemberType = M;</span><br><span class="line">    <span class="keyword">constexpr</span> <span class="type">static</span> M C::* value = v;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> pack(push, 1)</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> M, std::<span class="type">size_t</span> Offset&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MemberAt</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">char</span> padding[Offset];</span><br><span class="line">    M member;</span><br><span class="line">};</span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> pack(pop)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> M&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MemberAt</span>&lt;M, <span class="number">0</span>&gt;</span><br><span class="line">{</span><br><span class="line">    M member;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> B, <span class="keyword">typename</span> M, std::<span class="type">size_t</span> Offset&gt;</span><br><span class="line"><span class="keyword">union</span> <span class="title class_">PaddedUnion</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">char</span> c;</span><br><span class="line">    B base;</span><br><span class="line">    MemberAt&lt;M, Offset&gt; member;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;</span><br><span class="line">    <span class="keyword">typename</span> Traits, </span><br><span class="line">    <span class="keyword">typename</span> B,</span><br><span class="line">    <span class="keyword">typename</span> M = <span class="keyword">typename</span> Traits::MemberType, </span><br><span class="line">    <span class="keyword">typename</span> C = <span class="keyword">typename</span> Traits::ClassType, </span><br><span class="line">    M C::* p   = Traits::value,</span><br><span class="line">    std::<span class="type">size_t</span> Offset = <span class="number">0</span> &gt;</span><br><span class="line"><span class="keyword">struct</span> OffsetHelper</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">constexpr</span> <span class="type">static</span> PaddedUnion&lt;B, M, Offset&gt; dummy{};</span><br><span class="line">    <span class="function"><span class="keyword">constexpr</span> <span class="type">static</span> std::<span class="type">size_t</span> <span class="title">GetOffsetOf</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(&amp;(dummy.base.*p) &gt; &amp;dummy.member.member)</span></span></span><br><span class="line"><span class="function">        </span>{</span><br><span class="line">            <span class="keyword">return</span> OffsetHelper&lt;Traits, B, M, C, p, Offset + <span class="built_in">sizeof</span>(M)&gt;::<span class="built_in">GetOffsetOf</span>();</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">return</span> Offset;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">auto</span> MemberPtr, <span class="keyword">typename</span> B&gt;</span><br><span class="line"><span class="keyword">constexpr</span> std::<span class="type">size_t</span> GetOffsetOf = OffsetHelper&lt;ClassMemberTraits&lt;<span class="keyword">decltype</span>(MemberPtr), MemberPtr&gt;, B&gt;::<span class="built_in">GetOffsetOf</span>();</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OffsetOf(C, M) GetOffsetOf<span class="string">&lt;&amp;C::M, C&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span> {</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">float</span> b;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">B</span> {</span><br><span class="line">    <span class="type">double</span> c;</span><br><span class="line">    <span class="type">int</span> d;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">X</span> : A, B {};</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">AA</span> { <span class="type">int</span> a; };</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">BB</span> : <span class="keyword">public</span> <span class="keyword">virtual</span> AA   { <span class="type">int</span> b; };</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CC</span> : <span class="keyword">public</span> <span class="keyword">virtual</span> AA   { <span class="type">int</span> c; };</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">DD</span> : <span class="keyword">public</span> BB, <span class="keyword">public</span> CC { <span class="type">int</span> d; };</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> A_a =  <span class="built_in">OffsetOf</span>(A, a);</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> A_b =  <span class="built_in">OffsetOf</span>(A, b);</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> B_c =  <span class="built_in">OffsetOf</span>(B, c);</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> B_d =  <span class="built_in">OffsetOf</span>(B, d);</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> X_a =  <span class="built_in">OffsetOf</span>(X, a);</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> X_b =  <span class="built_in">OffsetOf</span>(X, b);</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> X_c =  <span class="built_in">OffsetOf</span>(X, c);</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> X_d =  <span class="built_in">OffsetOf</span>(X, d);</span><br><span class="line"></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> DD_a =  <span class="built_in">OffsetOf</span>(DD, a);</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> DD_b =  <span class="built_in">OffsetOf</span>(DD, b);</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> DD_c =  <span class="built_in">OffsetOf</span>(DD, c);</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> DD_d =  <span class="built_in">OffsetOf</span>(DD, d);</span><br><span class="line"></span><br><span class="line"><span class="built_in">static_assert</span>(<span class="built_in">OffsetOf</span>(A, a) == <span class="number">0</span>, <span class="string">""</span>);</span><br><span class="line"><span class="built_in">static_assert</span>(<span class="built_in">OffsetOf</span>(A, b) == <span class="number">4</span>, <span class="string">""</span>);</span><br><span class="line"><span class="built_in">static_assert</span>(<span class="built_in">OffsetOf</span>(B, c) == <span class="number">0</span>, <span class="string">""</span>);</span><br><span class="line"><span class="built_in">static_assert</span>(<span class="built_in">OffsetOf</span>(B, d) == <span class="number">8</span>, <span class="string">""</span>);</span><br><span class="line"><span class="built_in">static_assert</span>(<span class="built_in">OffsetOf</span>(X, a) == <span class="number">0</span>, <span class="string">""</span>);</span><br><span class="line"><span class="built_in">static_assert</span>(<span class="built_in">OffsetOf</span>(X, b) == <span class="number">4</span>, <span class="string">""</span>);</span><br><span class="line"><span class="built_in">static_assert</span>(<span class="built_in">OffsetOf</span>(X, c) == <span class="number">8</span>, <span class="string">""</span>);</span><br><span class="line"><span class="built_in">static_assert</span>(<span class="built_in">OffsetOf</span>(X, d) == <span class="number">16</span>, <span class="string">""</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">static_assert</span>(<span class="built_in">OffsetOf</span>(DD, a) == <span class="number">32</span>, <span class="string">""</span>);</span><br><span class="line"><span class="built_in">static_assert</span>(<span class="built_in">OffsetOf</span>(DD, b) == <span class="number">8</span>, <span class="string">""</span>);</span><br><span class="line"><span class="built_in">static_assert</span>(<span class="built_in">OffsetOf</span>(DD, c) == <span class="number">24</span>, <span class="string">""</span>);</span><br><span class="line"><span class="built_in">static_assert</span>(<span class="built_in">OffsetOf</span>(DD, d) == <span class="number">28</span>, <span class="string">""</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Now it’s computed at compile time and work for multiple inheritance as well as virtual inheritance! But unfortunately, it fails on special layout types, e.g., types with array, <code>#pragma pack</code> or <code>alignas</code>. You can see the fail cases at <a target="_blank" rel="noopener" href="https://godbolt.org/z/9xE8azGrG">https://godbolt.org/z/9xE8azGrG</a>. This is because inside the <code>OffsetHelper</code> struct, we recursively compute the offset by adding <code>sizeof(M)</code>, the size of the member type. When the type layout is special, such as including array members, adding a <code>sizeof(M)</code> offset will induce the wrong result.</p>
+<p>What about changing it to <code>sizeof(M) &lt; alignof(C) ? sizeof(M) : alignof(C)</code>? Still wrong for the assertion <code>static_assert(OffsetOf(al, arr) == 10, "")</code> due to a mismatch between member size of type alignment.</p>
+<p>Before moving to the next version, let’s step into the details of this version of code.</p>
+<ul>
+<li>As before, we use <code>ClassMemberTraits</code> to extract the class type, member type and pointer-to-member object.</li>
+<li>We define a union <code>PaddedUnion</code> to represent a <code>Base</code> type object and a data member of type <code>M</code> with a specified offset <code>Offset</code>. Note that the <code>Offset</code> is used to indicate how relatively far of the data member is currently away from <code>base</code>. It may be any non-negative value and recursively incremented as long as <code>&amp;(dummy.base.*p) &gt; &amp;dummy.member.member</code> is satisfied. That is, the current offset of <code>member</code> still does not reach the <strong>real</strong> offset of it, and the distance is exactly <code>&amp;(dummy.base.*p) - &amp;dummy.member.member</code>. Okay, why doesn’t we just use <code>&amp;(dummy.base.*p) - &amp;dummy.member.member</code>. It’s because it’s not a constant expression (they’re not pointing to the same array or to the same object), and you cannot use <code>static_cast</code> to cast it to <code>char*</code> either.</li>
+<li>What we can only do is to <strong>try</strong> to increment <code>Offset</code> and see if it’s equal to the real offset of the data member, i.e., <code>&amp;(dummy.base.*p)</code>. So we use a <code>if constexpr</code> to check the condition and recursively try it.</li>
+<li>Last, we use a utility macro <code>OffsetOf(C, M)</code> to align its use with the built-in macro <code>offsetof</code>.</li>
+</ul>
+<p>Yes, the core idea is to <strong>guess</strong> the offset. The guess will stop if <code>&amp;(dummy.base.*p) == &amp;dummy.member.member</code>. Now that we use guess, we can guess it more efficiently, by leveraging the binary partitioning algorithm.</p>
+<p>We have the following version 5 code (test cases at <a target="_blank" rel="noopener" href="https://godbolt.org/z/7MGKrePKc">https://godbolt.org/z/7MGKrePKc</a>):</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Version 5</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ClassMemberTraits</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C, <span class="keyword">typename</span> M&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ClassMemberTraits</span>&lt;M C::*&gt;</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">using</span> ClassType = C;</span><br><span class="line">    <span class="keyword">using</span> MemberType = M;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> pack(push, 1)</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> M, std::<span class="type">size_t</span> Offset&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MemberAt</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">char</span> padding[Offset];</span><br><span class="line">    M member;</span><br><span class="line">};</span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> pack(pop)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> M&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MemberAt</span>&lt;M, <span class="number">0</span>&gt;</span><br><span class="line">{</span><br><span class="line">    M member;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> B, <span class="keyword">typename</span> M, std::<span class="type">size_t</span> Offset&gt;</span><br><span class="line"><span class="keyword">union</span> <span class="title class_">PaddedUnion</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">char</span> c;</span><br><span class="line">    B base;</span><br><span class="line">    MemberAt&lt;M, Offset&gt; member;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// ~~~~~ Begin core modification ~~~~~</span></span><br><span class="line"><span class="keyword">template</span> &lt;</span><br><span class="line">    <span class="keyword">auto</span> MemberPtr,</span><br><span class="line">    <span class="keyword">typename</span> B,</span><br><span class="line">    std::<span class="type">size_t</span> Low,</span><br><span class="line">    std::<span class="type">size_t</span> High,</span><br><span class="line">    std::<span class="type">size_t</span> Mid = (Low + High) / <span class="number">2</span>&gt;</span><br><span class="line"><span class="keyword">struct</span> OffsetHelper</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">using</span> M = ClassMemberTraits&lt;<span class="keyword">decltype</span>(MemberPtr)&gt;::MemberType;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">constexpr</span> <span class="type">static</span> PaddedUnion&lt;B, M, Mid&gt; dummy{};</span><br><span class="line">    <span class="function"><span class="keyword">constexpr</span> <span class="type">static</span> std::<span class="type">size_t</span> <span class="title">GetOffsetOf</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(&amp;(dummy.base.*MemberPtr) &gt; &amp;dummy.member.member)</span></span></span><br><span class="line"><span class="function">        </span>{</span><br><span class="line">            <span class="keyword">return</span> OffsetHelper&lt;MemberPtr, B, Mid + <span class="number">1</span>, High&gt;::<span class="built_in">GetOffsetOf</span>();</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> <span class="built_in">constexpr</span> (&amp;(dummy.base.*MemberPtr) &lt; &amp;dummy.member.member)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">return</span> OffsetHelper&lt;MemberPtr, B, Low, Mid&gt;::<span class="built_in">GetOffsetOf</span>();</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">return</span> Mid;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"><span class="comment">// ~~~~~ End core modification ~~~~~</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">auto</span> MemberPtr, <span class="keyword">typename</span> B&gt;</span><br><span class="line"><span class="keyword">constexpr</span> std::<span class="type">size_t</span> GetOffsetOf = OffsetHelper&lt;MemberPtr, B, <span class="number">0</span>, <span class="built_in">sizeof</span>(B)&gt;::<span class="built_in">GetOffsetOf</span>();</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OffsetOf(C, M) GetOffsetOf<span class="string">&lt;&amp;C::M, C&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>If you meet an error saying that <code>constexpr variable cannot have non-literal type</code>, you can add the following constexpr constructor and destructor to <code>PaddedUnion</code>:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="title">PaddedUnion</span><span class="params">()</span> <span class="keyword">noexcept</span> : c{</span>} {}</span><br><span class="line"><span class="keyword">constexpr</span> ~<span class="built_in">PaddedUnion</span>() <span class="keyword">noexcept</span> {}</span><br></pre></td></tr></table></figure>
+<p>The core idea is simple: using binary search to guess the offset. We just need to slightly modify the <code>OffsetHelper</code> struct and the definition of <code>GetOffsetOf()</code>. Now, all tests passed! Congratulations to you, and to me!</p>
+<h1 id="conclusion"><a class="markdownIt-Anchor" href="#conclusion"></a> Conclusion</h1>
+<p>To get a robust and generic <code>offsetof</code> is really really hard in C++. Although the built-in macro <code>offsetof</code> has a compiler-wise implementation, it should be your choice for most of the time. If you do care about the warnings, or you want to calculate the offset for virtual inheritance, our final version code may appeal to you.</p>
+<h1 id="reference"><a class="markdownIt-Anchor" href="#reference"></a> Reference</h1>
+<p><a target="_blank" rel="noopener" href="https://gist.github.com/graphitemaster/494f21190bb2c63c5516">https://gist.github.com/graphitemaster/494f21190bb2c63c5516</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Categories</a></li>
+        
+          <li><a href="/resources/">Resources</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#the-built-in-offsetof"><span class="toc-number">1.</span> <span class="toc-text"> The Built-in offsetof</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#pointer-to-member-and-template-argument-deduction"><span class="toc-number">2.</span> <span class="toc-text"> Pointer-to-member and Template Argument Deduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#conclusion"><span class="toc-number">3.</span> <span class="toc-text"> Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#reference"><span class="toc-number">4.</span> <span class="toc-text"> Reference</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://sulley.cc/2024/06/15/16/18/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://sulley.cc/2024/06/15/16/18/&text=Offset Of Class Members"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://sulley.cc/2024/06/15/16/18/&title=Offset Of Class Members"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://sulley.cc/2024/06/15/16/18/&is_video=false&description=Offset Of Class Members"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Offset Of Class Members&body=Check out this article: http://sulley.cc/2024/06/15/16/18/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://sulley.cc/2024/06/15/16/18/&title=Offset Of Class Members"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://sulley.cc/2024/06/15/16/18/&title=Offset Of Class Members"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://sulley.cc/2024/06/15/16/18/&title=Offset Of Class Members"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://sulley.cc/2024/06/15/16/18/&title=Offset Of Class Members"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://sulley.cc/2024/06/15/16/18/&name=Offset Of Class Members&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://sulley.cc/2024/06/15/16/18/&t=Offset Of Class Members"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2024
+    Sulley
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/resources/">Resources</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
