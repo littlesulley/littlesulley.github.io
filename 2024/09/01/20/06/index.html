@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="This post is an archive for my personal solutions to the ten labs for the CMU 15213 course. You can access the self-study labs at the CSAPP official website.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Solutions to CMU 15213 Labs">
+<meta property="og:url" content="http://sulley.cc/2024/09/01/20/06/index.html">
+<meta property="og:site_name" content="Sulley">
+<meta property="og:description" content="This post is an archive for my personal solutions to the ten labs for the CMU 15213 course. You can access the self-study labs at the CSAPP official website.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-09-01T12:06:21.000Z">
+<meta property="article:modified_time" content="2024-09-01T16:12:18.454Z">
+<meta property="article:author" content="Sulley">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="汇编">
+<meta property="article:tag" content="硬件">
+<meta property="article:tag" content="CSAPP">
+<meta property="article:tag" content="CMU15213">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Solutions to CMU 15213 Labs</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/resources/">Resources</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/06/18/20/06/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://sulley.cc/2024/09/01/20/06/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://sulley.cc/2024/09/01/20/06/&text=Solutions to CMU 15213 Labs"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://sulley.cc/2024/09/01/20/06/&title=Solutions to CMU 15213 Labs"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://sulley.cc/2024/09/01/20/06/&is_video=false&description=Solutions to CMU 15213 Labs"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Solutions to CMU 15213 Labs&body=Check out this article: http://sulley.cc/2024/09/01/20/06/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://sulley.cc/2024/09/01/20/06/&title=Solutions to CMU 15213 Labs"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://sulley.cc/2024/09/01/20/06/&title=Solutions to CMU 15213 Labs"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://sulley.cc/2024/09/01/20/06/&title=Solutions to CMU 15213 Labs"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://sulley.cc/2024/09/01/20/06/&title=Solutions to CMU 15213 Labs"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://sulley.cc/2024/09/01/20/06/&name=Solutions to CMU 15213 Labs&description=&lt;p&gt;This post is an archive for my personal solutions to the ten labs for
+the CMU 15213 course. You can access the self-study labs at the CSAPP
+official &lt;a href=&#34;https://csapp.cs.cmu.edu/3e/labs.html&#34;&gt;website&lt;/a&gt;.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://sulley.cc/2024/09/01/20/06/&t=Solutions to CMU 15213 Labs"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-1-data-lab"><span class="toc-number">1.</span> <span class="toc-text">Lab 1: Data Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-2-bomb-lab"><span class="toc-number">2.</span> <span class="toc-text">Lab 2: Bomb Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-3-attack-lab"><span class="toc-number">3.</span> <span class="toc-text">Lab 3: Attack Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-4-buffer-lab"><span class="toc-number">4.</span> <span class="toc-text">Lab 4: Buffer Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-5-architecture-lab"><span class="toc-number">5.</span> <span class="toc-text">Lab 5: Architecture Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-6-cache-lab"><span class="toc-number">6.</span> <span class="toc-text">Lab 6: Cache Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-7-performance-lab"><span class="toc-number">7.</span> <span class="toc-text">Lab 7: Performance Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-8-shell-lab"><span class="toc-number">8.</span> <span class="toc-text">Lab 8: Shell Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-9-malloc-lab"><span class="toc-number">9.</span> <span class="toc-text">Lab 9: Malloc Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-10-proxy-lab"><span class="toc-number">10.</span> <span class="toc-text">Lab 10: Proxy Lab</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Solutions to CMU 15213 Labs
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sulley</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-09-01T12:06:21.000Z" class="dt-published" itemprop="datePublished">2024-09-01</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA-%E5%9F%BA%E7%A1%80/">计算机 - 基础</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CMU15213/" rel="tag">CMU15213</a>, <a class="p-category" href="/tags/CSAPP/" rel="tag">CSAPP</a>, <a class="p-category" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a>, <a class="p-category" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a>, <a class="p-category" href="/tags/%E7%A1%AC%E4%BB%B6/" rel="tag">硬件</a>, <a class="p-category" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a>, <a class="p-category" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>This post is an archive for my personal solutions to the ten labs for
+the CMU 15213 course. You can access the self-study labs at the CSAPP
+official <a target="_blank" rel="noopener" href="https://csapp.cs.cmu.edu/3e/labs.html">website</a>.</p>
+<span id="more"></span>
+<h1 id="lab-1-data-lab">Lab 1: Data Lab</h1>
+<p>This lab instructs you to write functions using bit-wise
+operations.</p>
+<p><strong>bixXor</strong></p>
+<p>Implements <code>xor</code> using only <code>~</code> and
+<code>&amp;</code>. The key is to notice that
+<code>x | y == ~(~x &amp; ~y)</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int bitXor(int x, int y) {</span><br><span class="line">  return ~(~(~x &amp; y) &amp; ~(x &amp; ~y));</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p><strong>tmin</strong></p>
+<p>Returns the minimum two's complement integer.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int tmin(void) {</span><br><span class="line">  return 1 &lt;&lt; 31;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p><strong>isTmax</strong></p>
+<p>Checks if the input is the maximum two's complement integer. Notice
+that the maximum integer has a leading <code>0</code> and all remaining
+bits are <code>1</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int isTmax(int x) {</span><br><span class="line">  return !((x + 1) ^ ~x) &amp; !!(x ^ ~0);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>Another way to think the maximum integer is, it's the only number
+that equals to <code>0</code> when adding
+<code>(1 &lt;&lt; 31) + 1</code>. So we can also use the following
+simpler code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int isTmax(int x) {</span><br><span class="line">  return !(x + (1 &lt;&lt; 31) + 1);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p><strong>allOddBits</strong></p>
+<p>Checks if all odd index bits are set to 1. You can create a mask to
+detect the pattern.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int allOddBits(int x) {</span><br><span class="line">  int m = (0xAA &lt;&lt; 8) + 0xAA;</span><br><span class="line">  m = (m &lt;&lt; 16) + m;</span><br><span class="line">  return !(m ^ (m &amp; x));</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p><strong>negate</strong></p>
+<p>Negates the input.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int negate(int x) {</span><br><span class="line">  return ~x + 1;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p><strong>isAsciiDigit</strong></p>
+<p>Checks if the input is an ASCII digit, e.g., hex representation
+between <code>0x30</code> and <code>0x39</code>. We can divide the
+pattern into the parts. The first part is <code>0x30</code>, and the
+second is <code>0x0?</code> where <code>?</code> can be <code>0</code>
+to <code>9</code>. When examining the second part, the least significant
+byte either does not exceed <code>1000</code> (<code>0x8</code>), or is
+exactly <code>0x8</code> or <code>0x9</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int isAsciiDigit(int x) {</span><br><span class="line">  int y = 0xF &amp; x;</span><br><span class="line">  return !((0x30 ^ x) &gt;&gt; 4) &amp; (!(0x8 &amp; y) | !(0x8 ^ y) | !(0x9 ^ y));</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p><strong>conditional</strong></p>
+<p>Implements the conditional operator <code>x ? x : y</code>. Just use
+mask to achieve it.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int conditional(int x, int y, int z) {</span><br><span class="line">  int m = ~(!x) + 1;</span><br><span class="line">  return (~m &amp; y) | (m &amp; z);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p><strong>isLessOrEqual</strong></p>
+<p>Checks if the first argument is less or equal than the second
+argument. You can use <code>-x == ~x + 1</code> and examine the sign
+bit.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int isLessOrEqual(int x, int y) {</span><br><span class="line">  return !(((~x + 1) + y) &gt;&gt; 31);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p><strong>logicalNeg</strong></p>
+<p>Implements the <code>!</code> operator. That's, for any non-zero
+number, it returns <code>0</code> and for zero it returns
+<code>1</code>. If the input is negative (the sign bit is
+<code>1</code>), or the input added with <code>-1</code> overflows then
+the input is non-zero.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int logicalNeg(int x) {</span><br><span class="line">  return (((x &gt;&gt; 31) ^ 0x1) &amp; 0x1) &amp; ((((x + (~1 + 1)) &gt;&gt; 31) ^ 0x0) &amp; 0x1);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p><strong>howManyBits</strong></p>
+<p>Returns the minimum number of bits required to represent the input
+integer. Note that a positive integer implies a leading <code>0</code>
+and a negative integer implies a leading <code>1</code>. Therefore in
+either case, we must at least have a sign bit. We can safely invert all
+bits of a negative integer and from the most significant bit to the
+least significant bit find the index at which the bit is
+<code>1</code>.</p>
+<p>The trick here is to binary-search such index. To do this, we must
+create several masks, shown as in the following code. For example,
+<code>Mask_16 = 0xFFFF0000</code> detects whether any of the most
+significant 16 bits is <code>1</code>. If so, it means the result is
+<em>at least</em> 16. Then we can right shift the number 16 bits to
+recursively examine the most significant 16 bits by applying
+<code>Mask_8 = 0xFF00</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">int howManyBits(int x) {</span><br><span class="line">  int ToPositive = x ^ (x &gt;&gt; 31);</span><br><span class="line">  int Mask_0 = 0x1;</span><br><span class="line">  int Mask_1 = 0x2;</span><br><span class="line">  int Mask_2 = 0xC;</span><br><span class="line">  int Mask_4 = 0xF0;</span><br><span class="line">  int Mask_8 = 0xFF &lt;&lt; 8;</span><br><span class="line">  int Mask_16 = (Mask_8 | 0xFF) &lt;&lt; 16;</span><br><span class="line"></span><br><span class="line">  int Count, Result = 1;</span><br><span class="line">  Count = !!(ToPositive &amp; Mask_16) &lt;&lt; 4;</span><br><span class="line">  Result += Count;</span><br><span class="line">  ToPositive = ToPositive &gt;&gt; Count;</span><br><span class="line"></span><br><span class="line">  Count = !!(ToPositive &amp; Mask_8) &lt;&lt; 3;</span><br><span class="line">  Result += Count;</span><br><span class="line">  ToPositive = ToPositive &gt;&gt; Count;</span><br><span class="line"></span><br><span class="line">  Count = !!(ToPositive &amp; Mask_4) &lt;&lt; 2;</span><br><span class="line">  Result += Count;</span><br><span class="line">  ToPositive = ToPositive &gt;&gt; Count;</span><br><span class="line"></span><br><span class="line">  Count = !!(ToPositive &amp; Mask_2) &lt;&lt; 1;</span><br><span class="line">  Result += Count;</span><br><span class="line">  ToPositive = ToPositive &gt;&gt; Count;</span><br><span class="line"></span><br><span class="line">  Count = !!(ToPositive &amp; Mask_1);</span><br><span class="line">  Result += Count;</span><br><span class="line">  ToPositive = ToPositive &gt;&gt; Count;</span><br><span class="line"></span><br><span class="line">  Count = !!(ToPositive &amp; Mask_0);</span><br><span class="line">  Result += Count;</span><br><span class="line"></span><br><span class="line">  return Result;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p><strong>floatScale2</strong></p>
+<p>Returns <code>2*f</code> where the input is interpreted as a
+floating-point number. You should be careful about the border cases. If
+the input number is NaN or infinity (i.e. the exponent is all ones), the
+function returns the input as required. If the input is denormalized
+(i.e. the exponent is all zeros), the input will be shifted left 1 bit.
+If it's normalized (i.e. the exponent is neither all zeros nor all
+zeros), we just add one to the exponent.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">unsigned floatScale2(unsigned uf) {</span><br><span class="line">  int MantissaMask = 0x7FFFFF,   Mantissa = MantissaMask &amp; uf;</span><br><span class="line">  int ExponentMask = 0xFF &lt;&lt; 23, Exponent = ExponentMask &amp; uf; </span><br><span class="line">  int Sign = (0x1 &lt;&lt; 31) &amp; uf;</span><br><span class="line"></span><br><span class="line">  int IsNaNOrInfinity = !(ExponentMask ^ Exponent);</span><br><span class="line">  int IsDenormalized = !(ExponentMask &amp; Exponent);</span><br><span class="line">  if (IsNaNOrInfinity) </span><br><span class="line">  {</span><br><span class="line">    return uf;</span><br><span class="line">  }</span><br><span class="line">  else if (IsDenormalized)</span><br><span class="line">  {</span><br><span class="line">    int ExceptSign = uf &lt;&lt; 1;</span><br><span class="line">    return Sign | ExceptSign;</span><br><span class="line">  }</span><br><span class="line">  else </span><br><span class="line">  {</span><br><span class="line">    int NewExponent = ExponentMask &amp; (Exponent + (1 &lt;&lt; 23));</span><br><span class="line">    return Sign | NewExponent | Mantissa;</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p><strong>floatFloat2Int</strong></p>
+<p>Returns bit-level equivalent of <code>(int) x</code> where
+<code>x</code> is interpreted as a floating number. Be aware of the
+border cases: (1) if the input is zero, the function also returns zero;
+(2) if the input is NaN or infinity, it returns <code>0x80000000u</code>
+as required; (3) if the input is denormalized, it returns zero; (4) if
+the input is normalized, determine the result by checking the
+exponent.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">int floatFloat2Int(unsigned uf) {</span><br><span class="line">  int MantissaMask = 0x007FFFFF, Mantissa = MantissaMask &amp; uf;</span><br><span class="line">  int ExponentMask = 0x7F800000, Exponent = ExponentMask &amp; uf; </span><br><span class="line">  int SignMask     = 0x80000000, Sign     = SignMask &amp; uf;</span><br><span class="line">  </span><br><span class="line">  int Exp = (Exponent &gt;&gt; 23) - 127, Result, i, BitMask; </span><br><span class="line">      </span><br><span class="line">  int IsNaNOrInfinity = !(ExponentMask ^ Exponent);</span><br><span class="line">  int IsDenormalized = !(ExponentMask &amp; Exponent);</span><br><span class="line">  int IsNegative = !(SignMask ^ Sign);</span><br><span class="line"></span><br><span class="line">  // Is +0 or -0</span><br><span class="line">  if (!(uf &lt;&lt; 1))</span><br><span class="line">  {</span><br><span class="line">    return 0;</span><br><span class="line">  }</span><br><span class="line">  </span><br><span class="line">  // Is NaN or infinity.</span><br><span class="line">  if (IsNaNOrInfinity)</span><br><span class="line">  {</span><br><span class="line">    return 0x80000000u;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  // Is denormalized</span><br><span class="line">  if (IsDenormalized)</span><br><span class="line">  {</span><br><span class="line">    return 0;</span><br><span class="line">  }</span><br><span class="line">  </span><br><span class="line">  // Is normalized</span><br><span class="line">  if (Exp &lt; 0)</span><br><span class="line">  {</span><br><span class="line">    return 0;</span><br><span class="line">  }</span><br><span class="line">  if (Exp &gt;= 31)</span><br><span class="line">  {</span><br><span class="line">    return 0x80000000u;</span><br><span class="line">  }</span><br><span class="line">  </span><br><span class="line">  Result = 1 &lt;&lt; Exp;</span><br><span class="line">  Exp -= 1;</span><br><span class="line">  for (i = 22; i &gt;= 0 &amp;&amp; Exp &gt;= 0; --i, --Exp)</span><br><span class="line">  {</span><br><span class="line">    BitMask = !!(Mantissa &amp; (1 &lt;&lt; i));</span><br><span class="line">    Result += BitMask * (1 &lt;&lt; Exp);</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  if (IsNegative)</span><br><span class="line">  {</span><br><span class="line">    Result = -Result;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  return Result;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p><strong>floatPower2</strong></p>
+<p>Returns <code>2.0^x</code> for any given integer <code>x</code>. The
+smallest non-zero floating (denormalized) number is
+<code>2^(-126+23)=2^(-149)</code>. So if the input is smaller than
+<code>-149</code>, the functions should return <code>0</code>. The
+largest denormalized floating number in the form of <code>2.0^x</code>
+is <code>x^(-127)</code>. In the range of <code>-149</code> and
+<code>-127</code>, we just left shift one by <code>x+149</code>. The
+smallest normalized number (also, in the form of <code>2.0^x</code>) is
+<code>2^(-126)</code> and the largest is
+<code>2^(254-127)=2^(127)</code>. In this case, we left shift
+<code>x+127</code> by <code>23</code> to occupy the exponent part. If
+<code>x</code> exceeds <code>127</code>, the function returns
+<code>+INF</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">unsigned floatPower2(int x) {</span><br><span class="line">  if (x &lt; -149)</span><br><span class="line">  {</span><br><span class="line">    return 0;</span><br><span class="line">  }</span><br><span class="line">  else if (x &lt;= -127)</span><br><span class="line">  {</span><br><span class="line">    return 1 &lt;&lt; (x + 149);</span><br><span class="line">  }</span><br><span class="line">  else if (x &lt;= 127)</span><br><span class="line">  {</span><br><span class="line">    return (x + 127) &lt;&lt; 23;</span><br><span class="line">  }</span><br><span class="line">  else // x &gt; 127</span><br><span class="line">  {</span><br><span class="line">    return 0x7F800000;</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h1 id="lab-2-bomb-lab">Lab 2: Bomb Lab</h1>
+<h1 id="lab-3-attack-lab">Lab 3: Attack Lab</h1>
+<h1 id="lab-4-buffer-lab">Lab 4: Buffer Lab</h1>
+<h1 id="lab-5-architecture-lab">Lab 5: Architecture Lab</h1>
+<h1 id="lab-6-cache-lab">Lab 6: Cache Lab</h1>
+<h1 id="lab-7-performance-lab">Lab 7: Performance Lab</h1>
+<h1 id="lab-8-shell-lab">Lab 8: Shell Lab</h1>
+<h1 id="lab-9-malloc-lab">Lab 9: Malloc Lab</h1>
+<h1 id="lab-10-proxy-lab">Lab 10: Proxy Lab</h1>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Categories</a></li>
+        
+          <li><a href="/resources/">Resources</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-1-data-lab"><span class="toc-number">1.</span> <span class="toc-text">Lab 1: Data Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-2-bomb-lab"><span class="toc-number">2.</span> <span class="toc-text">Lab 2: Bomb Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-3-attack-lab"><span class="toc-number">3.</span> <span class="toc-text">Lab 3: Attack Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-4-buffer-lab"><span class="toc-number">4.</span> <span class="toc-text">Lab 4: Buffer Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-5-architecture-lab"><span class="toc-number">5.</span> <span class="toc-text">Lab 5: Architecture Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-6-cache-lab"><span class="toc-number">6.</span> <span class="toc-text">Lab 6: Cache Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-7-performance-lab"><span class="toc-number">7.</span> <span class="toc-text">Lab 7: Performance Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-8-shell-lab"><span class="toc-number">8.</span> <span class="toc-text">Lab 8: Shell Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-9-malloc-lab"><span class="toc-number">9.</span> <span class="toc-text">Lab 9: Malloc Lab</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab-10-proxy-lab"><span class="toc-number">10.</span> <span class="toc-text">Lab 10: Proxy Lab</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://sulley.cc/2024/09/01/20/06/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://sulley.cc/2024/09/01/20/06/&text=Solutions to CMU 15213 Labs"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://sulley.cc/2024/09/01/20/06/&title=Solutions to CMU 15213 Labs"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://sulley.cc/2024/09/01/20/06/&is_video=false&description=Solutions to CMU 15213 Labs"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Solutions to CMU 15213 Labs&body=Check out this article: http://sulley.cc/2024/09/01/20/06/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://sulley.cc/2024/09/01/20/06/&title=Solutions to CMU 15213 Labs"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://sulley.cc/2024/09/01/20/06/&title=Solutions to CMU 15213 Labs"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://sulley.cc/2024/09/01/20/06/&title=Solutions to CMU 15213 Labs"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://sulley.cc/2024/09/01/20/06/&title=Solutions to CMU 15213 Labs"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://sulley.cc/2024/09/01/20/06/&name=Solutions to CMU 15213 Labs&description=&lt;p&gt;This post is an archive for my personal solutions to the ten labs for
+the CMU 15213 course. You can access the self-study labs at the CSAPP
+official &lt;a href=&#34;https://csapp.cs.cmu.edu/3e/labs.html&#34;&gt;website&lt;/a&gt;.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://sulley.cc/2024/09/01/20/06/&t=Solutions to CMU 15213 Labs"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2024
+    Sulley
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/resources/">Resources</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
