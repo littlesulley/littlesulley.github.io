@@ -14,7 +14,7 @@
 <meta property="og:description" content="This post is an archive for my personal solutions to the ten labs for the CMU 15213 course. You can access the self-study labs at the CSAPP official website.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-09-01T12:06:21.000Z">
-<meta property="article:modified_time" content="2024-09-01T16:12:18.454Z">
+<meta property="article:modified_time" content="2024-09-03T16:43:04.642Z">
 <meta property="article:author" content="Sulley">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="随笔">
@@ -404,6 +404,106 @@ smallest normalized number (also, in the form of <code>2.0^x</code>) is
 <code>+INF</code>.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">unsigned floatPower2(int x) {</span><br><span class="line">  if (x &lt; -149)</span><br><span class="line">  {</span><br><span class="line">    return 0;</span><br><span class="line">  }</span><br><span class="line">  else if (x &lt;= -127)</span><br><span class="line">  {</span><br><span class="line">    return 1 &lt;&lt; (x + 149);</span><br><span class="line">  }</span><br><span class="line">  else if (x &lt;= 127)</span><br><span class="line">  {</span><br><span class="line">    return (x + 127) &lt;&lt; 23;</span><br><span class="line">  }</span><br><span class="line">  else // x &gt; 127</span><br><span class="line">  {</span><br><span class="line">    return 0x7F800000;</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
 <h1 id="lab-2-bomb-lab">Lab 2: Bomb Lab</h1>
+<p>The answers to the six phases are respectively:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Border relations with Canada have never been better.</span><br><span class="line">1 2 4 8 16 32</span><br><span class="line">0 207</span><br><span class="line">7 0</span><br><span class="line">iOnUvW</span><br><span class="line">4 3 2 1 6 5</span><br></pre></td></tr></table></figure>
+<p>If we deciphered the secret phase, the answers will be (adding string
+<code>DrEvil</code> after the third line):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Border relations with Canada have never been better.</span><br><span class="line">1 2 4 8 16 32</span><br><span class="line">0 207</span><br><span class="line">7 0 DrEvil</span><br><span class="line">iOnUvW</span><br><span class="line">4 3 2 1 6 5</span><br></pre></td></tr></table></figure>
+<p>Note that some of the answers are not unique. Let's quickly go
+through these phases.</p>
+<p><strong>Phase 1</strong></p>
+<p>Find the string at address <code>0x402400</code>. You can use
+<code>x/s 402400</code> to extract it!</p>
+<p><strong>Phase 2</strong></p>
+<p>The key to solve this phase is know the functionality of each
+register:</p>
+<ul>
+<li><code>%rdi</code>: the first argument.</li>
+<li><code>%rsi</code>: the second argument.</li>
+<li><code>%rdx</code>: the third argument.</li>
+<li><code>%rcx</code>: the forth argument.</li>
+<li><code>%r8</code>: the fifth argument.</li>
+<li><code>%r9</code>: the sixth argument.</li>
+</ul>
+<p>More arguments are stored in stack. Know at which positions these
+arguments are stored in stack and you'll get the answer!</p>
+<p><strong>Phase 3</strong></p>
+<p>This function reads two integers and switches to the address
+accroding to the first integer. If the destination address has a value
+same as the second integer, the phase passes.</p>
+<p>This phase has multiple answers. You can choose one of the
+followings:</p>
+<ul>
+<li><code>0 207</code></li>
+<li><code>1 311</code></li>
+<li><code>2 707</code></li>
+<li><code>3 256</code></li>
+<li><code>4 389</code></li>
+<li><code>5 206</code></li>
+<li><code>6 682</code></li>
+<li><code>7 327</code></li>
+</ul>
+<p><strong>Phase 4</strong></p>
+<p>The key is to decode <code>func4(x, s, e)</code> and understand it
+returns some numbers of steps to find <code>x</code> between
+<code>[s, e]</code> using binary search. <code>s=0</code> and
+<code>e=14</code>. The function returns <code>0</code> if it finds
+<code>x</code> in the very first step. So <code>x=7</code>.</p>
+<p><strong>Phase 5</strong></p>
+<p>This phase executes the following steps:</p>
+<ul>
+<li>The answer string length is 6.</li>
+<li>Reads a string from <code>0x4024b0</code> and compares it to the
+string at <code>0x40245e</code>, which is <code>flyers</code>.</li>
+<li>The string at <code>0x4024b0</code> is
+<code>maduiersnfotvbylSo you think you can stop the bomb with ctrl-c, do you?</code>.</li>
+<li>The indices respectively for <code>f</code>, <code>l</code>,
+<code>y</code>, <code>e</code>, <code>r</code>, <code>s</code> at
+<code>0x4024b0</code> is 9, 15, 14, 5, 6, 7. The hex representations are
+<code>9</code>, <code>f</code>, <code>e</code>, <code>5</code>,
+<code>6</code>, <code>7</code>.</li>
+<li>Find in the ASCII table those characters whose low hex
+representation is <code>9</code>, <code>f</code>, <code>e</code>,
+<code>5</code>, <code>6</code> and <code>7</code>. So there are multiple
+possible answers.</li>
+</ul>
+<p><strong>Phase 6</strong></p>
+<p>This is the most difficult phase (including the secret one), in terms
+of it's length of assembly... Be patient and take a careful look at the
+assembly. You'll find this phase does the following things:</p>
+<ul>
+<li>It reads six integers and stores them in stack from the bottom
+up.</li>
+<li>Each integer is different and all are smaller or equal than 6.</li>
+<li>Subtracts each integer from 7. For example, 6 turns into 1.</li>
+<li>According to the result integer, this function jumps to the target
+address from <code>0x6032d0</code> and reads the value. This value is
+also an address. The results are stored from <code>%rsp+32</code> to
+<code>%rsp+72</code>, amounting to totally eight addresses.</li>
+<li>Sets <code>*(*(%rsp+t)+8)=*(%rsp+t+8)</code>, where
+<code>t=32, 3a, 42, ..., 6a</code>. For <code>t=72</code>, the target
+value is zero.</li>
+<li>It actually implements a linked list, likely implemented as follows:
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">struct node {</span><br><span class="line">  int value;</span><br><span class="line">  node* next;</span><br><span class="line">};</span><br></pre></td></tr></table></figure></li>
+<li>This linked list has a list of non-ascending values.</li>
+<li>Find the indices in a non-ascending order and restore the input
+indices.</li>
+</ul>
+<p><strong>Secret Phase</strong></p>
+<p>Disassembling the <code>phase_defused</code> function and you will
+find a secret <code>secret_phase</code> function. This is the hidden
+phase of this lab. The <code>secret_phase</code> function does:</p>
+<ul>
+<li>Receives an integer less or equal than 1001.</li>
+<li>Calls function <code>fun7(int* s, int x)</code> and returns 2.</li>
+<li>The <code>fun7(int* s, int x)</code> function receives a pointer
+<code>s</code> to a binary search tree node and finds value
+<code>x</code> in the tree.</li>
+<li>Your goal is to find in this tree a value that returns 2, according
+to the calculation rules.</li>
+</ul>
+<p>This binary search tree node looks like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">         36</span><br><span class="line">       /    \</span><br><span class="line">      /      \</span><br><span class="line">     /        \</span><br><span class="line">    8          50</span><br><span class="line">   / \       /    \</span><br><span class="line">  6   22    45    100</span><br><span class="line"> / \  / \   / \   / \</span><br><span class="line">1  7 20 35 40 47 99 1001</span><br></pre></td></tr></table></figure>
 <h1 id="lab-3-attack-lab">Lab 3: Attack Lab</h1>
 <h1 id="lab-4-buffer-lab">Lab 4: Buffer Lab</h1>
 <h1 id="lab-5-architecture-lab">Lab 5: Architecture Lab</h1>
