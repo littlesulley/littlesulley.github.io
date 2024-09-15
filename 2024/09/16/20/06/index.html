@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="In this blog post, I will introduce leveraing UFUNCTION specifiers Latent, LatentInfo, ExpandEnumAsExecs and CustomThunk to implement an async object blending blueprint function.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Async Object Blending in Unreal Engine 5">
+<meta property="og:url" content="http://sulley.cc/2024/09/16/20/06/index.html">
+<meta property="og:site_name" content="Sulley">
+<meta property="og:description" content="In this blog post, I will introduce leveraing UFUNCTION specifiers Latent, LatentInfo, ExpandEnumAsExecs and CustomThunk to implement an async object blending blueprint function.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://sulley.cc/images/objectblendingasync/1.png">
+<meta property="og:image" content="http://sulley.cc/images/objectblendingasync/2.png">
+<meta property="og:image" content="http://sulley.cc/images/objectblendingasync/example.gif">
+<meta property="article:published_time" content="2024-09-16T12:06:21.000Z">
+<meta property="article:modified_time" content="2024-09-15T16:16:10.120Z">
+<meta property="article:author" content="Sulley">
+<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="UE">
+<meta property="article:tag" content="相机">
+<meta property="article:tag" content="插值">
+<meta property="article:tag" content="蓝图">
+<meta property="article:tag" content="Async">
+<meta property="article:tag" content="Latent">
+<meta property="article:tag" content="Blending">
+<meta property="article:tag" content="虚幻">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sulley.cc/images/objectblendingasync/1.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Async Object Blending in Unreal Engine 5</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/resources/">Resources</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/09/01/20/06/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://sulley.cc/2024/09/16/20/06/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://sulley.cc/2024/09/16/20/06/&text=Async Object Blending in Unreal Engine 5"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://sulley.cc/2024/09/16/20/06/&title=Async Object Blending in Unreal Engine 5"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://sulley.cc/2024/09/16/20/06/&is_video=false&description=Async Object Blending in Unreal Engine 5"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Async Object Blending in Unreal Engine 5&body=Check out this article: http://sulley.cc/2024/09/16/20/06/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://sulley.cc/2024/09/16/20/06/&title=Async Object Blending in Unreal Engine 5"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://sulley.cc/2024/09/16/20/06/&title=Async Object Blending in Unreal Engine 5"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://sulley.cc/2024/09/16/20/06/&title=Async Object Blending in Unreal Engine 5"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://sulley.cc/2024/09/16/20/06/&title=Async Object Blending in Unreal Engine 5"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://sulley.cc/2024/09/16/20/06/&name=Async Object Blending in Unreal Engine 5&description=&lt;p&gt;In this blog post, I will introduce leveraing &lt;code&gt;UFUNCTION&lt;/code&gt;
+specifiers &lt;code&gt;Latent&lt;/code&gt;, &lt;code&gt;LatentInfo&lt;/code&gt;,
+&lt;code&gt;ExpandEnumAsExecs&lt;/code&gt; and &lt;code&gt;CustomThunk&lt;/code&gt; to implement
+an async object blending blueprint function.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://sulley.cc/2024/09/16/20/06/&t=Async Object Blending in Unreal Engine 5"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#goal"><span class="toc-number">1.</span> <span class="toc-text">Goal</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#implementation"><span class="toc-number">2.</span> <span class="toc-text">Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#blueprint-function-declaration"><span class="toc-number">2.1.</span> <span class="toc-text">Blueprint Function
+Declaration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#latent-action-class-definition-part-1"><span class="toc-number">2.2.</span> <span class="toc-text">Latent Action Class
+Definition (Part 1)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#recursive-property-lookup"><span class="toc-number">2.3.</span> <span class="toc-text">Recursive Property Lookup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#custom-thunk-implementation"><span class="toc-number">2.4.</span> <span class="toc-text">Custom Thunk Implementation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#latent-action-class-definition-part-2"><span class="toc-number">2.5.</span> <span class="toc-text">Latent Action Class
+Definition (Part 2)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#example"><span class="toc-number">3.</span> <span class="toc-text">Example</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Async Object Blending in Unreal Engine 5
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sulley</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-09-16T12:06:21.000Z" class="dt-published" itemprop="datePublished">2024-09-16</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B8%B8%E6%88%8F-%E5%BC%95%E6%93%8E/">游戏 - 引擎</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Async/" rel="tag">Async</a>, <a class="p-category" href="/tags/Blending/" rel="tag">Blending</a>, <a class="p-category" href="/tags/Latent/" rel="tag">Latent</a>, <a class="p-category" href="/tags/UE/" rel="tag">UE</a>, <a class="p-category" href="/tags/%E6%8F%92%E5%80%BC/" rel="tag">插值</a>, <a class="p-category" href="/tags/%E7%9B%B8%E6%9C%BA/" rel="tag">相机</a>, <a class="p-category" href="/tags/%E8%93%9D%E5%9B%BE/" rel="tag">蓝图</a>, <a class="p-category" href="/tags/%E8%99%9A%E5%B9%BB/" rel="tag">虚幻</a>, <a class="p-category" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a>, <a class="p-category" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>In this blog post, I will introduce leveraing <code>UFUNCTION</code>
+specifiers <code>Latent</code>, <code>LatentInfo</code>,
+<code>ExpandEnumAsExecs</code> and <code>CustomThunk</code> to implement
+an async object blending blueprint function.</p>
+<span id="more"></span>
+<h1 id="goal">Goal</h1>
+<p>Have you ever used the <code>Delay</code> node in Unreal Engine? It's
+a really powerful node to allow you to perform an action with a delayed
+time duration. It's called a <code>Latent</code> function or
+<code>Async Latent</code> action.</p>
+<p><img src="/images/objectblendingasync/1.png"></p>
+<p>Basically there are three ways to customize an async action:</p>
+<ol type="1">
+<li>Defining a <code>UFUNCTION</code> with meta specifiers
+<code>Latent</code> and <code>LatenInfo</code>, e.g., <code>Delay</code>
+and <code>Delay Until Next Tick</code>.</li>
+<li>Inheriting the <code>UBlueprintAsyncActionBase</code> class, e.g.,
+<code>Move Component To</code>.</li>
+<li>Inheriting the <code>UK2Node_BaseAsyncTask</code> class, e.g.,
+<code>AI Move To</code>.</li>
+</ol>
+<p>This post aims to implement a custom async action which sets any
+property of a given object with blending. Blending means the source
+property value will gradullay shift to the target property value. For
+example, if the property of interest is an <code>int</code> and its
+original value is <code>0</code>. With a target value of <code>1</code>
+and a blending duration of 2 seconds, the property will smoothly
+transits its value from <code>0</code> to <code>1</code> within 2
+seconds, depending on how the blending curve is specified.</p>
+<p>As shown in the following figure, we are going to implement a
+blueprint node named <code>Set Property By Name</code>, which takes six
+arguments:</p>
+<ul>
+<li><strong>Object</strong>: The obejct you would like to modify the
+property of.</li>
+<li><strong>Property Name</strong>: The property you would like to set.
+It can be nested, i.e., {Property A}.{Property B}...</li>
+<li><strong>Value</strong>: The target property value. It's a wildcard
+parameter so you should ensure its type matches the property's
+type.</li>
+<li><strong>Duration</strong>: Blending duration.</li>
+<li><strong>Func</strong>: Blending curve function controlling the
+blending process.</li>
+<li><strong>Exp</strong>: Blending curve function exponential. It's used
+to control the steepness of the curve.</li>
+</ul>
+<p><img src="/images/objectblendingasync/2.png"></p>
+<p>As we'd like our blueprint node to be as generic as possible, we
+won't restrict the type of the input object and the property. This
+requires us to receive a wildcard argument <code>Value</code> and
+attempt to match its type with the one specified by <code>Object</code>
+and <code>Property</code>. We must find the corresponding instance to
+the object's property through the chain of properties via reflection,
+cache the source values and perform blending at each tick.</p>
+<p>Besides, this node should also provide the ability of callbacks,
+allowing us to customize what we can do when it completes blending, when
+it ticks at each frame, and when it's interrupted.</p>
+<p>Generally, we must meet the following requirements:</p>
+<ul>
+<li>It should receive a wildcard argument as the target property
+value.</li>
+<li>It should be conceptually generic to all <code>UObject</code> types
+and all primitive and composite types for property.</li>
+<li>It should be able to cache the source property values.</li>
+<li>It should provide customizable callbacks when it ticks at each
+frame, when it's completed and when it's interrupted.</li>
+</ul>
+<h1 id="implementation">Implementation</h1>
+<p>Before we start, we must decide which async method fits in our
+demands. Because we have a wildcard input pin, the best choice in our
+case would be the <code>UFUNCTION</code> approach in that we can easily
+implement a <code>CustomThunk</code> function to process the wildcard
+input.</p>
+<p>Let's dive into the details of our implementation.</p>
+<h2 id="blueprint-function-declaration">Blueprint Function
+Declaration</h2>
+<p>Our first step is to declare a function that can be called in
+blueprint. The <code>BlueprintCallable</code> specifier serves this
+purpose. As we need to receive a wildcard input argument, we must add
+the <code>CustomThunk</code> specifier. In addition, the function should
+be latent. This requires us to add a <code>Latent</code> and
+<code>LatentInfo</code> specifier. Last, adding a
+<code>ExpandEnumAsExecs</code> specifier allows us to have multiple
+output execute pins.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Callable: makes this function callable in blueprint.</span></span><br><span class="line"><span class="comment">// CustomThunk: requires implementing a custom thunk function that is executed by blueprint.</span></span><br><span class="line"><span class="comment">// Latent: indicates a latent function.</span></span><br><span class="line"><span class="comment">// LatentInfo: specifies which parameter serves as the latent info structure.</span></span><br><span class="line"><span class="comment">// CustomStructureParam: specifies which parameter serves as the wildcard input.</span></span><br><span class="line"><span class="comment">// ExpandEnumAsExecs: specifies which parameter defines the output execute pins.</span></span><br><span class="line"><span class="built_in">UFUNCTION</span>(BlueprintCallable, CustomThunk, meta = (Latent, LatentInfo = <span class="string">"LatentInfo"</span>, WorldContext = <span class="string">"WorldContextObject"</span>, CustomStructureParam = <span class="string">"Value"</span>, ExpandEnumAsExecs = <span class="string">"OutPin"</span>, AdvancedDisplay = <span class="number">4</span>))</span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">SetPropertyByName</span><span class="params">(<span class="type">const</span> UObject* WorldContextObject, UObject* Object, FName PropertyName, <span class="type">const</span> int32&amp; Value, <span class="type">double</span> Duration, TEnumAsByte&lt;EEasingFunc::Type&gt; Func, <span class="type">double</span> Exp, FLatentActionInfo LatentInfo, ELatentOutputPins&amp; OutPin)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>As the declaration tells, this function receives six visible
+arguments, other parameters <code>WorldContextObject</code>,
+<code>LatentInfo</code> are automatically assigned. <code>Object</code>
+is the object of which we set the desired property,
+<code>PropertyName</code> is the property of interest, which can be
+nested using <code>.</code>, <code>Value</code> is a wildcard input
+serving as the target value. It can be any type (except
+<code>UObject</code> and container types in the current form) but should
+match the type of the property of <code>Object</code>.
+<code>Duration</code>, <code>Func</code> and <code>Exp</code> are
+parameters relating to property value blending.</p>
+<p>It's worth introducing <code>LatentInfo</code> and
+<code>OutPin</code>. <code>LatentInfo</code> is a structure of type
+<code>FLatentActionInfo</code>. It stores some basic information of this
+latent action needed to notify the next function when this latent action
+finishes its task. <code>OutputPin</code> is a powerful keyword allowing
+you to explicitly designate which output pin this function should
+execute. It's commonly used in conjunction with some conditions you'd
+like to check before choosing a correct output pin. Combining
+<code>LatentInfo</code> and <code>OutputPin</code> enables us to
+dynamically switch between output pins conditioned on the current state
+of our latent action. We will see this soon later.</p>
+<h2 id="latent-action-class-definition-part-1">Latent Action Class
+Definition (Part 1)</h2>
+<p>To use <code>Latent</code> and <code>LatentInfo</code>, you must
+create your own <code>FPendingLatentAction</code> class.
+<code>FDelayAction</code> is a good example to start with.
+<code>FInterpolateComponentToAction</code> is a more complex example but
+it has the same basic logic. The core part of this class is to implement
+your own <code>UpdateOperation</code> function. It's called every frame
+and you should determine if this latent action should finish or continue
+executing.</p>
+<p>For our purpose, we define our custom class named
+<code>FESetPropertyLatentAction</code>. This class should several
+critical members:</p>
+<ul>
+<li><code>Object</code>: The object given as input in the blueprint
+function.</li>
+<li><code>SrcProperty</code>: The property of interest to modify.</li>
+<li><code>SrcPtr</code>: The pointer that points to the object that has
+the <code>SrcProperty</code>.</li>
+<li><code>OutPin</code>: The current output pin for this latent action.
+Note that it must be a reference to control the execution flow of the
+blueprint function. It's defined as:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">UENUM()</span><br><span class="line">enum class ELatentOutputPins : uint8</span><br><span class="line">{</span><br><span class="line">    /** Execute each tick. */</span><br><span class="line">    OnTick,</span><br><span class="line">    /** Execute when the function completes its work. */</span><br><span class="line">    OnComplete,</span><br><span class="line">    /** Execute when the function is interrupted. */</span><br><span class="line">    OnInterrupt</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Blending variables.</li>
+<li>Latent info variables.</li>
+<li>A boolean indicating if this latent action should be
+interrupted.</li>
+</ul>
+<p>All these members are initialized in the constructor. Besides, the
+constructor also receives two additional arguments:
+<code>InValueProperty</code> and <code>InValuePtr</code>, the
+counterparts of <code>SrcProperty</code> and <code>SrcPtr</code> for the
+target value.</p>
+<p>The function <code>RecursivelyFindPropertyValue</code> will
+recursively find nested properties and store them in some containers.
+The details will be introduced later.</p>
+<p>Finally, the <code>UpdateOperation</code> function is overridden to
+set the ouput pin through <code>OutPin</code> at each frame, and trigger
+the corresponding link (execute the corresponding callback).</p>
+<p>The function <code>UpdateAllPropertyValues</code> updates all
+property values at each frame. We will visit this function later.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FESetPropertyLatentAction</span> : <span class="keyword">public</span> FPendingLatentAction</span><br><span class="line">{	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="comment">// Container object</span></span><br><span class="line">	UObject* Object;</span><br><span class="line">	FProperty* SrcProperty;</span><br><span class="line">	<span class="type">void</span>* SrcPtr;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Blend variables</span></span><br><span class="line">	<span class="type">float</span> BlendDuration;</span><br><span class="line">	TEnumAsByte&lt;EEasingFunc::Type&gt; BlendFunc;</span><br><span class="line">	<span class="type">float</span> BlendExp;</span><br><span class="line">	<span class="type">float</span> ElapsedTime;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Latent info</span></span><br><span class="line">	ELatentOutputPins&amp; OutPin;</span><br><span class="line">	FName ExecutionFunction;</span><br><span class="line">	int32 OutputLink;</span><br><span class="line">	FWeakObjectPtr CallbackTarget;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Internal variables</span></span><br><span class="line">	<span class="type">bool</span> bInterrupted { <span class="literal">false</span> };</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">DECLARE_MULTICAST_DELEGATE</span>(FOnActionCompletedOrInterrupted);</span><br><span class="line">    FOnActionCompletedOrInterrupted OnActionCompletedOrInterrupted;</span><br><span class="line">	<span class="built_in">FESetPropertyLatentAction</span>(</span><br><span class="line">				UObject* InObject,                           <span class="comment">// Input object</span></span><br><span class="line">				FProperty* InSrcProperty,                    <span class="comment">// Input source property, can only be FNumericProperty or FStructProperty</span></span><br><span class="line">				<span class="type">void</span>* InSrcPtr,                              <span class="comment">// Input source value address</span></span><br><span class="line">				FProperty* InValueProperty,                  <span class="comment">// Input target property</span></span><br><span class="line">				<span class="type">void</span>* InValuePtr,                            <span class="comment">// Input target value address</span></span><br><span class="line">				<span class="type">double</span> InBlendDuration,                      <span class="comment">// Blend time</span></span><br><span class="line">				TEnumAsByte&lt;EEasingFunc::Type&gt; InBlendFunc,  <span class="comment">// Blend function</span></span><br><span class="line">				<span class="type">double</span> InBlendExp,                           <span class="comment">// Blend exponential</span></span><br><span class="line">				ELatentOutputPins&amp; OutPin,                   <span class="comment">// Output execution pin</span></span><br><span class="line">				<span class="type">const</span> FLatentActionInfo&amp; LatentInfo          <span class="comment">// Latent info</span></span><br><span class="line">		)</span><br><span class="line">		: <span class="built_in">Object</span> (InObject)</span><br><span class="line">		, <span class="built_in">SrcProperty</span> (InSrcProperty)</span><br><span class="line">		, <span class="built_in">SrcPtr</span> (InSrcPtr)</span><br><span class="line">		, <span class="built_in">BlendDuration</span> (InBlendDuration)</span><br><span class="line">		, <span class="built_in">BlendFunc</span> (InBlendFunc)</span><br><span class="line">		, <span class="built_in">BlendExp</span> (InBlendExp)</span><br><span class="line">		, <span class="built_in">ElapsedTime</span> (<span class="number">0</span>)</span><br><span class="line">		, <span class="built_in">OutPin</span> (OutPin)</span><br><span class="line">		, <span class="built_in">ExecutionFunction</span> (LatentInfo.ExecutionFunction)</span><br><span class="line">		, <span class="built_in">OutputLink</span> (LatentInfo.Linkage)</span><br><span class="line">		, <span class="built_in">CallbackTarget</span> (LatentInfo.CallbackTarget)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">if</span> (BlendDuration &lt;= <span class="number">0</span>)</span><br><span class="line">		{</span><br><span class="line">			BlendDuration = UE_KINDA_SMALL_NUMBER;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Recursively find nested properties and store them in some container</span></span><br><span class="line">		<span class="built_in">RecursivelyFindPropertyValue</span>(InSrcProperty, InValueProperty, InSrcPtr, InValuePtr);</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">RecursivelyFindPropertyValue</span><span class="params">(FProperty* InSrcProperty, FProperty* InValueProperty, <span class="type">void</span>* InSrcPtr, <span class="type">void</span>* InValuePtr)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="comment">// How to define this function?</span></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">UpdateOperation</span><span class="params">(FLatentResponse&amp; Response)</span> <span class="keyword">override</span></span></span><br><span class="line"><span class="function">	</span>{</span><br><span class="line">		ElapsedTime = FMath::<span class="built_in">Clamp</span>(ElapsedTime + Response.<span class="built_in">ElapsedTime</span>(), <span class="number">0</span>, BlendDuration);</span><br><span class="line">		<span class="type">bool</span> bCompleted = ElapsedTime &gt;= BlendDuration;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (bInterrupted || !<span class="built_in">IsValid</span>(Object))</span><br><span class="line">		{</span><br><span class="line">			OutPin = ELatentOutputPins::OnInterrupt;</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		{</span><br><span class="line">			<span class="comment">// On each tick, updates property values</span></span><br><span class="line">			<span class="built_in">UpdateAllPropertyValues</span>(ElapsedTime / BlendDuration, BlendExp, BlendFunc);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (bCompleted)</span><br><span class="line">			{</span><br><span class="line">				OutPin = ELatentOutputPins::OnComplete;</span><br><span class="line">			}</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			{</span><br><span class="line">				OutPin = ELatentOutputPins::OnTick;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (bCompleted || bInterrupted)</span><br><span class="line">		{</span><br><span class="line">			OnActionCompletedOrInterrupted.<span class="built_in">Broadcast</span>();</span><br><span class="line">			Response.<span class="built_in">FinishAndTriggerIf</span>(<span class="literal">true</span>, ExecutionFunction, OutputLink, CallbackTarget);</span><br><span class="line"></span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		{</span><br><span class="line">			Response.<span class="built_in">TriggerLink</span>(ExecutionFunction, OutputLink, CallbackTarget);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+<h2 id="recursive-property-lookup">Recursive Property Lookup</h2>
+<p>Let's go back to our blueprint function <code>SetPropertyName</code>.
+The biggest problem for now is that how can we find the object with the
+given property name from the given source object. It's particularly
+noteworthy that the property name can be nested in the format of
+<code>A.B.C</code>. To this end, let's define a function
+<code>GetNestedPropertyFromObject</code> to find the property of
+interest and the pointer that points to the object owning this
+property.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">static</span> std::pair&lt;FProperty*, <span class="type">void</span>*&gt; <span class="title">GetNestedPropertyFromObject</span><span class="params">(UObject* Object, FName PropertyName)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">if</span> (!<span class="built_in">IsValid</span>(Object))</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">"Input Object is invalid when calling function GetNestedPropertyFromObject."</span>));</span><br><span class="line">		<span class="keyword">return</span> std::<span class="built_in">make_pair</span>(<span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">GetNestedPropertyFromObjectStruct</span>(Object, Object-&gt;<span class="built_in">GetClass</span>(), PropertyName.<span class="built_in">ToString</span>());</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>The <code>GetNestedPropertyFromObjectStruct</code> is defined as
+follows.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">static</span> std::pair&lt;FProperty*, <span class="type">void</span>*&gt; <span class="title">GetNestedPropertyFromObjectStruct</span><span class="params">(<span class="type">void</span>* Object, UStruct* Struct, <span class="type">const</span> FString&amp; PropertyName)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">int</span> FoundIndex;</span><br><span class="line">	FString CurrentProperty;</span><br><span class="line">	FString NextProperty;</span><br><span class="line">	<span class="type">bool</span> bFoundSeparator = PropertyName.<span class="built_in">FindChar</span>(<span class="string">'.'</span>, FoundIndex);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (bFoundSeparator)</span><br><span class="line">	{</span><br><span class="line">		CurrentProperty = PropertyName.<span class="built_in">Mid</span>(<span class="number">0</span>, FoundIndex);</span><br><span class="line">		NextProperty = PropertyName.<span class="built_in">Mid</span>(FoundIndex + <span class="number">1</span>, PropertyName.<span class="built_in">Len</span>() - FoundIndex - <span class="number">1</span>);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	{</span><br><span class="line">		CurrentProperty = PropertyName;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	FProperty* Property = <span class="built_in">FindFProperty</span>&lt;FProperty&gt;(Struct, <span class="built_in">FName</span>(CurrentProperty));</span><br><span class="line">	<span class="keyword">if</span> (Property != <span class="literal">nullptr</span>)</span><br><span class="line">	{</span><br><span class="line">		<span class="type">void</span>* Value = Property-&gt;<span class="built_in">ContainerPtrToValuePtr</span>&lt;<span class="type">void</span>&gt;(Object);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (NextProperty.<span class="built_in">IsEmpty</span>())</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (Property-&gt;<span class="built_in">IsA</span>&lt;FNumericProperty&gt;() || Property-&gt;<span class="built_in">IsA</span>&lt;FStructProperty&gt;())</span><br><span class="line">			{</span><br><span class="line">				<span class="keyword">return</span> std::<span class="built_in">make_pair</span>(Property, Value);</span><br><span class="line">			}</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			{</span><br><span class="line">				<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">"Terminate property can only be numeric/struct type. Current type is %s."</span>), *Property-&gt;<span class="built_in">GetClass</span>()-&gt;<span class="built_in">GetName</span>());</span><br><span class="line">				<span class="keyword">return</span> std::<span class="built_in">make_pair</span>(<span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		{</span><br><span class="line">			<span class="type">const</span> FStructProperty* PropAsStruct = <span class="built_in">CastField</span>&lt;FStructProperty&gt;(Property);</span><br><span class="line">			<span class="type">const</span> FObjectProperty* PropAsObject = <span class="built_in">CastField</span>&lt;FObjectProperty&gt;(Property);</span><br><span class="line">			<span class="type">const</span> FArrayProperty* PropAsArray = <span class="built_in">CastField</span>&lt;FArrayProperty&gt;(Property);</span><br><span class="line">			<span class="type">const</span> FSetProperty* PropAsSet = <span class="built_in">CastField</span>&lt;FSetProperty&gt;(Property);</span><br><span class="line">			<span class="type">const</span> FMapProperty* PropAsMap = <span class="built_in">CastField</span>&lt;FMapProperty&gt;(Property);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (PropAsArray != <span class="literal">nullptr</span> || PropAsSet != <span class="literal">nullptr</span> || PropAsMap != <span class="literal">nullptr</span>)</span><br><span class="line">			{</span><br><span class="line">				<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">"Function GetNestedPropertyFromObjectStruct currently does not support container type."</span>));</span><br><span class="line">			}</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (PropAsStruct != <span class="literal">nullptr</span>)</span><br><span class="line">			{</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">GetNestedPropertyFromObjectStruct</span>(Value, PropAsStruct-&gt;Struct, NextProperty);</span><br><span class="line">			}</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (PropAsObject != <span class="literal">nullptr</span>)</span><br><span class="line">			{</span><br><span class="line">				<span class="comment">// Now Value points to the pointer that points to the real object. Must let it point to the object instead of the pointer. Ref: DiffUtils.cpp</span></span><br><span class="line">				UObject* PropObject = *((UObject* <span class="type">const</span>*)Value);</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">GetNestedPropertyFromObjectStruct</span>(PropObject, PropObject-&gt;<span class="built_in">GetClass</span>(), NextProperty);</span><br><span class="line">			}</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			{</span><br><span class="line">				<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">"Invalid property: %s. Non-terminal property can only be an object or struct."</span>), *<span class="built_in">FString</span>(CurrentProperty));</span><br><span class="line">			}</span><br><span class="line"></span><br><span class="line">			<span class="keyword">return</span> std::<span class="built_in">make_pair</span>(<span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">"Cannot find property %s from UStruct %s."</span>), *<span class="built_in">FString</span>(CurrentProperty), *Struct-&gt;<span class="built_in">GetName</span>());</span><br><span class="line">		<span class="keyword">return</span> std::<span class="built_in">make_pair</span>(<span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>There are several steps in this function:</p>
+<ol type="1">
+<li>We parse the input <code>PropertyName</code> to find the names of
+the current property and the next property. If we find a valid property,
+we go to the next step. Otherwise, the input property name is invalid
+and a warning message is thrown.</li>
+<li>Once the current property of type <code>FProperty*</code> is found,
+its object pointer can be obtained by calling
+<code>Property-&gt;ContainerPtrToValuePtr</code>. We then check if we
+may have next property. If this is the last property, we return the
+<code>[property pointer, value pointer]</code> pair if the current
+property is of a numeric or struct type, otherwise we throw a warning.
+In this step, we are restricting that the target property should be
+either of a numeric (float, double, int, etc) type or a struct type. We
+can in fact extend to an objecy type. You can implement this for your
+interest.</li>
+<li>If this is not the destination property to find, we must check its
+actual property type and recursively call the function. More concretely,
+if the property is a struct type, we can use
+<code>Property-&gt;Struct</code> to get its meta type information. If
+the property is an object type, we should use
+<code>Property-&gt;GetClass()</code> to obtain its meta information. If
+the property is neither of above types, it will be invalid. The
+container types (i.e., array, set, map) are not implemented here but
+it's feasible.</li>
+<li>Repeat this process and recursively find the target property and its
+value pointer. The resulting value will be a pair of type
+<code>[FProperty*, void*]</code>. The first element is a pointer to the
+source property of interest, and the second element is a pointer that
+points to the instance object owning this property.</li>
+</ol>
+<h2 id="custom-thunk-implementation">Custom Thunk Implementation</h2>
+<p>A wildcard input requires us to implement our own custom thunk
+function, that is, a function executed by blueprint. I won't dive into
+the details of the "magic" macros and the mechanism of the blueprint
+virtual machine. It's always good practice to take a look at the
+official code where these macros and custom thunk functions are
+used.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">DECLARE_FUNCTION</span>(execSetPropertyByName)</span><br><span class="line">{</span><br><span class="line">	<span class="built_in">P_GET_OBJECT</span>(UObject, WorldContextObject);</span><br><span class="line">	<span class="built_in">P_GET_OBJECT</span>(UObject, Object);</span><br><span class="line">	<span class="built_in">P_GET_PROPERTY</span>(FNameProperty, PropertyName);</span><br><span class="line">	Stack.<span class="built_in">StepCompiledIn</span>&lt;FProperty&gt;(<span class="literal">NULL</span>);</span><br><span class="line">	<span class="type">void</span>* ValuePtr = Stack.MostRecentPropertyAddress;</span><br><span class="line">	FProperty* ValueProperty = Stack.MostRecentProperty;</span><br><span class="line">	<span class="built_in">P_GET_PROPERTY</span>(FDoubleProperty, Duration);</span><br><span class="line">	<span class="built_in">P_GET_PROPERTY</span>(FByteProperty, Func);</span><br><span class="line">	<span class="built_in">P_GET_PROPERTY</span>(FDoubleProperty, Exp);</span><br><span class="line">	<span class="built_in">P_GET_STRUCT</span>(FLatentActionInfo, LatentInfo);</span><br><span class="line">	<span class="built_in">P_GET_ENUM_REF</span>(ELatentOutputPins, OutPin);</span><br><span class="line">	</span><br><span class="line">	P_FINISH;</span><br><span class="line">	P_NATIVE_BEGIN;</span><br><span class="line">	<span class="keyword">auto</span> [SrcProperty, SrcPtr] = <span class="built_in">GetNestedPropertyFromObject</span>(Object, PropertyName);</span><br><span class="line">	<span class="keyword">if</span> (SrcProperty == <span class="literal">nullptr</span> || ValueProperty == <span class="literal">nullptr</span>)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="type">bool</span> bSameType = SrcProperty-&gt;<span class="built_in">SameType</span>(ValueProperty);</span><br><span class="line">	<span class="type">bool</span> bFloatType = SrcProperty-&gt;<span class="built_in">IsA</span>&lt;FFloatProperty&gt;() &amp;&amp; ValueProperty-&gt;<span class="built_in">IsA</span>&lt;FDoubleProperty&gt;();</span><br><span class="line">	<span class="keyword">if</span> (bSameType || bFloatType)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">if</span> (UWorld* World = GEngine-&gt;<span class="built_in">GetWorldFromContextObject</span>(WorldContextObject, EGetWorldErrorMode::LogAndReturnNull))</span><br><span class="line">		{</span><br><span class="line">			TArray&lt;FESetPropertyLatentAction*&gt;&amp; ActionList = <span class="built_in">GetActionList</span>&lt;FESetPropertyLatentAction&gt;();</span><br><span class="line">			FESetPropertyLatentAction** ActionPtr = ActionList.<span class="built_in">FindByPredicate</span>([SrcProperty = SrcProperty, SrcPtr = SrcPtr](FESetPropertyLatentAction* ThisAction) { <span class="keyword">return</span> ThisAction-&gt;<span class="built_in">IsSameProperty</span>(SrcProperty, SrcPtr); });</span><br><span class="line">			FESetPropertyLatentAction* Action = ActionPtr == <span class="literal">nullptr</span> ? <span class="literal">nullptr</span> : *ActionPtr;</span><br><span class="line">			<span class="keyword">if</span> (Action != <span class="literal">nullptr</span>)</span><br><span class="line">			{</span><br><span class="line">				Action-&gt;<span class="built_in">SetInterrupt</span>(<span class="literal">true</span>);</span><br><span class="line">			}</span><br><span class="line"></span><br><span class="line">			Action = <span class="keyword">new</span> <span class="built_in">FESetPropertyLatentAction</span>(Object, SrcProperty, SrcPtr, ValueProperty, ValuePtr, Duration, EEasingFunc::<span class="built_in">Type</span>(Func), Exp, OutPin, LatentInfo);</span><br><span class="line">			Action-&gt;OnActionCompletedOrInterrupted.<span class="built_in">AddLambda</span>([&amp;ActionList, &amp;Action]() { ActionList.<span class="built_in">Remove</span>(Action); });</span><br><span class="line">			ActionList.<span class="built_in">Add</span>(Action);</span><br><span class="line">			World-&gt;<span class="built_in">GetLatentActionManager</span>().<span class="built_in">AddNewAction</span>(LatentInfo.CallbackTarget, LatentInfo.UUID, Action);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">"The found property %s does not has the same type as given property %s, respectively are %s and %s"</span>),</span><br><span class="line">			*SrcProperty-&gt;NamePrivate.<span class="built_in">ToString</span>(), *ValueProperty-&gt;NamePrivate.<span class="built_in">ToString</span>(), *SrcProperty-&gt;<span class="built_in">GetCPPType</span>(), *ValueProperty-&gt;<span class="built_in">GetCPPType</span>());</span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	P_NATIVE_END;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>Briefly speaking, this function does the following things:</p>
+<ol type="1">
+<li>Retrieve arguments from the runtime virtual machine stack in the
+order they're declared in our <code>SetPropertyByName</code> function.
+Note that when we access the wildcard <code>Value</code> argument, we
+simultaneously retrieve its target value pointer and target property
+pointer.</li>
+<li>We use the <code>GetNestedPropertyFromObject</code> function to get
+the source property pointer and the corresponding value pointer.</li>
+<li>After that, we check whether the source property has the same type
+as the target property. There is a special case: as blueprint only
+supports <code>double</code> for floating-point types, we must check if
+the source property type is <code>float</code>. The test will also be
+passed if it is.</li>
+<li>If the source property matches the target property type, we then get
+existing latent actions that are performing property blending. Function
+<code>GetActionList</code> get the full list of latent actions, and
+<code>FindByPredicate</code> finds any action that is operating on the
+same object and property. If such one is found, we view the old action
+as interrupted.</li>
+<li>Otherwise, we create a new <code>FEsetPropertyLatentAction</code>
+and add it to the list. We also add a callback for when it gets complete
+or interrupted.</li>
+</ol>
+<p>The <code>GetActionList</code> function is defined as follows:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> ActionType&gt;</span></span><br><span class="line"><span class="function"><span class="type">static</span> TArray&lt;ActionType*&gt;&amp; <span class="title">GetActionList</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">static</span> TArray&lt;ActionType*&gt; ActionList {};</span><br><span class="line">	<span class="keyword">return</span> ActionList;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h2 id="latent-action-class-definition-part-2">Latent Action Class
+Definition (Part 2)</h2>
+<p>We're very close to finish! The last ingredient is to complete our
+definition of class <code>FESetPropertyLatentAction</code>. Since we've
+already found the source property (pointer), the source value pointer,
+the target property (pointer) and the target value pointer, and the
+source property must match the target property, we can now analyze the
+type information encapsulated by the property, retrieving all the
+primitive types (float, double, int, bool, etc) nested inside the
+property, and cache them in some container data structures. Why do we
+need to retrieve primitive types? Two reasons. First, we can only blend
+on primitive types. We can not directly blend a struct before we know
+what it is made up of. Second, all composite types are composed of
+primitive types. We can decompose our target of blending a struct into
+blending all primitive type subobjects within it.</p>
+<p>We now finish the definition of
+<code>FESetPropertyLatentAction</code>:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FESetPropertyLatentAction</span> : <span class="keyword">public</span> FPendingLatentAction</span><br><span class="line">{</span><br><span class="line">    <span class="comment">// Member variables as before</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="comment">// Constructor as before</span></span><br><span class="line">    <span class="comment">// ...	</span></span><br><span class="line">    <span class="comment">// UpdateOperation(FLatentResponse&amp; Response) as before</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// What else here?</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">RecursivelyFindPropertyValue</span><span class="params">(FProperty* InSrcProperty, FProperty* InValueProperty, <span class="type">void</span>* InSrcPtr, <span class="type">void</span>* InValuePtr)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="comment">// Definition</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p><strong>Step 1: Create a container class used for storing values for
+each primitive type.</strong></p>
+<p>We leverage template to achieve this goal. The template argument is a
+property type, and its type trait defines its corresponding primitive
+type.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> PropertyType&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">FPropertyValuePack</span></span><br><span class="line">{</span><br><span class="line">	<span class="keyword">using</span> TCppType = <span class="keyword">typename</span> PropertyType::TCppType;</span><br><span class="line"></span><br><span class="line">	UObject* ContainerObject;</span><br><span class="line">	FProperty* SourceProperty;</span><br><span class="line"></span><br><span class="line">	TCppType SourceValue;</span><br><span class="line">	TCppType TargetValue;</span><br><span class="line">	TCppType* SourceValuePtr;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">UpdateValue</span><span class="params">(<span class="type">const</span> <span class="type">float</span>&amp; Progress, <span class="type">const</span> <span class="type">float</span>&amp; Exp, <span class="type">const</span> TEnumAsByte&lt;EEasingFunc::Type&gt;&amp; Func)</span></span></span><br><span class="line"><span class="function">	</span>{</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">IsValid</span>(ContainerObject))</span><br><span class="line">		{</span><br><span class="line">			*SourceValuePtr = (TCppType)UKismetMathLibrary::<span class="built_in">Ease</span>(SourceValue, TargetValue, Progress, Func, Exp);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> TArray&lt;FPropertyValuePack&lt;FFloatProperty&gt;&gt;  FFloatPropertyList;</span><br><span class="line"><span class="keyword">typedef</span> TArray&lt;FPropertyValuePack&lt;FDoubleProperty&gt;&gt; FDoublePropertyList;</span><br><span class="line"><span class="keyword">typedef</span> TArray&lt;FPropertyValuePack&lt;FUInt64Property&gt;&gt; FUInt64PropertyList;</span><br><span class="line"><span class="keyword">typedef</span> TArray&lt;FPropertyValuePack&lt;FUInt32Property&gt;&gt; FUInt32PropertyList;</span><br><span class="line"><span class="keyword">typedef</span> TArray&lt;FPropertyValuePack&lt;FUInt16Property&gt;&gt; FUInt16PropertyList;</span><br><span class="line"><span class="keyword">typedef</span> TArray&lt;FPropertyValuePack&lt;FInt64Property&gt;&gt;  FInt64PropertyList;</span><br><span class="line"><span class="keyword">typedef</span> TArray&lt;FPropertyValuePack&lt;FIntProperty&gt;&gt;    FIntPropertyList;</span><br><span class="line"><span class="keyword">typedef</span> TArray&lt;FPropertyValuePack&lt;FInt16Property&gt;&gt;  FInt16PropertyList;</span><br><span class="line"><span class="keyword">typedef</span> TArray&lt;FPropertyValuePack&lt;FInt8Property&gt;&gt;   FInt8PropertyList;</span><br><span class="line"><span class="keyword">typedef</span> TArray&lt;FPropertyValuePack&lt;FByteProperty&gt;&gt;   FBytePropertyList;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Member variables as before plus container members</span></span><br><span class="line">FFloatPropertyList  FloatPropertyList{};</span><br><span class="line">FDoublePropertyList DoublePropertyList{};</span><br><span class="line">FUInt64PropertyList UInt64PropertyList{};</span><br><span class="line">FUInt32PropertyList UInt32PropertyList{};</span><br><span class="line">FUInt16PropertyList UInt16PropertyList{};</span><br><span class="line">FInt64PropertyList  Int64PropertyList{};</span><br><span class="line">FIntPropertyList    IntPropertyList{};</span><br><span class="line">FInt16PropertyList  Int16PropertyList{};</span><br><span class="line">FInt8PropertyList   Int8PropertyList{};</span><br><span class="line">FBytePropertyList   BytePropertyList{};</span><br></pre></td></tr></table></figure>
+<p>When it's constructed, we store the source value, target value and
+the source value pointer. The <code>UpdateValue</code> function does all
+the blending work.</p>
+<p>The last few lines define ten primitive types used by Unreal. Then we
+add new container member variables.</p>
+<p><strong>Step 2: Recursively find all primitive types and their
+values.</strong></p>
+<p><code>RecursivelyFindPropertyValue</code> does this work for us.
+Given source/target property pointer and source/target value pointer, we
+must recursively find all primitive types and their source/target
+values, store them in the containers we just defined, and iterate
+through them at each frame to blend the values.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">RecursivelyFindPropertyValue</span><span class="params">(FProperty* InSrcProperty, FProperty* InValueProperty, <span class="type">void</span>* InSrcPtr, <span class="type">void</span>* InValuePtr)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">if</span> (InSrcProperty-&gt;<span class="built_in">IsA</span>&lt;FStructProperty&gt;())</span><br><span class="line">	{</span><br><span class="line">		<span class="type">const</span> FStructProperty* SrcPropAsStruct = <span class="built_in">CastField</span>&lt;FStructProperty&gt;(InSrcProperty);</span><br><span class="line">		<span class="type">const</span> FStructProperty* ValPropAsStruct = <span class="built_in">CastField</span>&lt;FStructProperty&gt;(InValueProperty);</span><br><span class="line">		<span class="keyword">if</span> (SrcPropAsStruct-&gt;Struct == ValPropAsStruct-&gt;Struct)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">for</span> (TFieldIterator&lt;FProperty&gt; <span class="built_in">PropertyIt</span>(SrcPropAsStruct-&gt;Struct); PropertyIt; ++PropertyIt)</span><br><span class="line">			{</span><br><span class="line">				FProperty* StructProp = *PropertyIt;</span><br><span class="line">				<span class="keyword">if</span> (StructProp-&gt;<span class="built_in">IsA</span>&lt;FNumericProperty&gt;() || StructProp-&gt;<span class="built_in">IsA</span>&lt;FStructProperty&gt;())</span><br><span class="line">				{</span><br><span class="line">					<span class="type">void</span>* SubSrcPtr = StructProp-&gt;<span class="built_in">ContainerPtrToValuePtr</span>&lt;<span class="type">void</span>&gt;(InSrcPtr);</span><br><span class="line">					<span class="type">void</span>* SubValPtr = StructProp-&gt;<span class="built_in">ContainerPtrToValuePtr</span>&lt;<span class="type">void</span>&gt;(InValuePtr);</span><br><span class="line">					<span class="built_in">RecursivelyFindPropertyValue</span>(StructProp, StructProp, SubSrcPtr, SubValPtr);</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (InSrcProperty-&gt;<span class="built_in">IsA</span>&lt;FFloatProperty&gt;())</span><br><span class="line">	{</span><br><span class="line">		FFloatProperty::TCppType SourceValue = <span class="built_in">CastField</span>&lt;FFloatProperty&gt;(InSrcProperty)-&gt;<span class="built_in">GetPropertyValue</span>(InSrcPtr);</span><br><span class="line">		FFloatProperty::TCppType TargetValue </span><br><span class="line">			              = InValueProperty-&gt;<span class="built_in">IsA</span>&lt;FDoubleProperty&gt;()</span><br><span class="line">			              ? <span class="built_in">CastField</span>&lt;FDoubleProperty&gt;(InValueProperty)-&gt;<span class="built_in">GetPropertyValue</span>(InValuePtr)</span><br><span class="line">						  : <span class="built_in">CastField</span>&lt;FFloatProperty&gt;(InValueProperty)-&gt;<span class="built_in">GetPropertyValue</span>(InValuePtr);</span><br><span class="line"></span><br><span class="line">		FPropertyValuePack&lt;FFloatProperty&gt; PropertyValuePack </span><br><span class="line">		{ </span><br><span class="line">			.ContainerObject = Object, </span><br><span class="line">			.SourceProperty = InSrcProperty,</span><br><span class="line">			.SourceValue = SourceValue, </span><br><span class="line">			.TargetValue = TargetValue, </span><br><span class="line">			.SourceValuePtr = (FFloatProperty::TCppType*)InSrcPtr</span><br><span class="line">		};</span><br><span class="line">		FloatPropertyList.<span class="built_in">Add</span>(PropertyValuePack);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (InSrcProperty-&gt;<span class="built_in">IsA</span>&lt;FDoubleProperty&gt;())</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">ConvertAndAddPropertyValuePack</span>(<span class="built_in">CastField</span>&lt;FDoubleProperty&gt;(InSrcProperty), <span class="built_in">CastField</span>&lt;FDoubleProperty&gt;(InValueProperty), InSrcPtr, InValuePtr);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (InSrcProperty-&gt;<span class="built_in">IsA</span>&lt;FUInt64Property&gt;())</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">ConvertAndAddPropertyValuePack</span>(<span class="built_in">CastField</span>&lt;FUInt64Property&gt;(InSrcProperty), <span class="built_in">CastField</span>&lt;FUInt64Property&gt;(InValueProperty), InSrcPtr, InValuePtr);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (InSrcProperty-&gt;<span class="built_in">IsA</span>&lt;FUInt32Property&gt;())</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">ConvertAndAddPropertyValuePack</span>(<span class="built_in">CastField</span>&lt;FUInt32Property&gt;(InSrcProperty), <span class="built_in">CastField</span>&lt;FUInt32Property&gt;(InValueProperty), InSrcPtr, InValuePtr);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (InSrcProperty-&gt;<span class="built_in">IsA</span>&lt;FUInt16Property&gt;())</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">ConvertAndAddPropertyValuePack</span>(<span class="built_in">CastField</span>&lt;FUInt16Property&gt;(InSrcProperty), <span class="built_in">CastField</span>&lt;FUInt16Property&gt;(InValueProperty), InSrcPtr, InValuePtr);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (InSrcProperty-&gt;<span class="built_in">IsA</span>&lt;FInt64Property&gt;())</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">ConvertAndAddPropertyValuePack</span>(<span class="built_in">CastField</span>&lt;FInt64Property&gt;(InSrcProperty), <span class="built_in">CastField</span>&lt;FInt64Property&gt;(InValueProperty), InSrcPtr, InValuePtr);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (InSrcProperty-&gt;<span class="built_in">IsA</span>&lt;FIntProperty&gt;())</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">ConvertAndAddPropertyValuePack</span>(<span class="built_in">CastField</span>&lt;FIntProperty&gt;(InSrcProperty), <span class="built_in">CastField</span>&lt;FIntProperty&gt;(InValueProperty), InSrcPtr, InValuePtr);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (InSrcProperty-&gt;<span class="built_in">IsA</span>&lt;FInt16Property&gt;())</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">ConvertAndAddPropertyValuePack</span>(<span class="built_in">CastField</span>&lt;FInt16Property&gt;(InSrcProperty), <span class="built_in">CastField</span>&lt;FInt16Property&gt;(InValueProperty), InSrcPtr, InValuePtr);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (InSrcProperty-&gt;<span class="built_in">IsA</span>&lt;FInt8Property&gt;())</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">ConvertAndAddPropertyValuePack</span>(<span class="built_in">CastField</span>&lt;FInt8Property&gt;(InSrcProperty), <span class="built_in">CastField</span>&lt;FInt8Property&gt;(InValueProperty), InSrcPtr, InValuePtr);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (InSrcProperty-&gt;<span class="built_in">IsA</span>&lt;FByteProperty&gt;())</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">ConvertAndAddPropertyValuePack</span>(<span class="built_in">CastField</span>&lt;FByteProperty&gt;(InSrcProperty), <span class="built_in">CastField</span>&lt;FByteProperty&gt;(InValueProperty), InSrcPtr, InValuePtr);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">"Cannot cast propert %s to numeric or struct property tye."</span>), *InSrcProperty-&gt;<span class="built_in">GetName</span>());</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>Overall it's very easy to understand. All we need is to take care of
+two special cases.</p>
+<ul>
+<li>If the current visited property is a struct, we need to iterate
+through all its inner properties and recursively call this
+function.</li>
+<li>If the source property is <code>float</code>, we must check the type
+of the target property (<code>float</code> or <code>double</code>) and
+cast the value accordingly. Then we create a
+<code>FPropertyValuePack&lt;FFloatProperty&gt;</code> value and add it
+to the list.</li>
+</ul>
+<p>For all other types, we simply call the
+<code>ConvertAndAddPropertyValuePack</code> function to create a new
+<code>FPropertyValuePack</code> instance and add it to the correct
+container.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> PropertyType&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ConvertAndAddPropertyValuePack</span><span class="params">(PropertyType* InSrcProperty, PropertyType* InValueProperty, <span class="type">void</span>* InSrcPtr, <span class="type">void</span>* InValuePtr)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">typename</span> PropertyType::TCppType SourceValue = InSrcProperty-&gt;<span class="built_in">GetPropertyValue</span>(InSrcPtr);</span><br><span class="line">	<span class="keyword">typename</span> PropertyType::TCppType TargetValue = InValueProperty-&gt;<span class="built_in">GetPropertyValue</span>(InValuePtr);</span><br><span class="line">	FPropertyValuePack&lt;PropertyType&gt; PropertyValuePack</span><br><span class="line">	{</span><br><span class="line">		.ContainerObject = Object,</span><br><span class="line">		.SourceProperty = InSrcProperty,</span><br><span class="line">		.SourceValue = SourceValue,</span><br><span class="line">		.TargetValue = TargetValue,</span><br><span class="line">		.SourceValuePtr = (<span class="keyword">typename</span> PropertyType::TCppType*)InSrcPtr</span><br><span class="line">	};</span><br><span class="line">	<span class="built_in">GetSpecificPropertyList</span>(InSrcProperty).<span class="built_in">Add</span>(PropertyValuePack);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>The <code>GetSpecificPropertyList</code> function returns the correct
+container of a given type (deduced from the input argument):</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> PropertyType&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span>&amp;&amp; <span class="title">GetSpecificPropertyList</span><span class="params">(PropertyType* Property)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(std::is_same_v&lt;PropertyType, FFloatProperty&gt;)</span></span></span><br><span class="line"><span class="function">	</span>{</span><br><span class="line">		<span class="keyword">return</span> FloatPropertyList;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> <span class="built_in">constexpr</span> (std::is_same_v&lt;PropertyType, FDoubleProperty&gt;)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">return</span> DoublePropertyList;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> <span class="built_in">constexpr</span> (std::is_same_v&lt;PropertyType, FUInt64Property&gt;)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">return</span> UInt64PropertyList;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> <span class="built_in">constexpr</span> (std::is_same_v&lt;PropertyType, FUInt32Property&gt;)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">return</span> UInt32PropertyList;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> <span class="built_in">constexpr</span> (std::is_same_v&lt;PropertyType, FUInt16Property&gt;)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">return</span> UInt16PropertyList;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> <span class="built_in">constexpr</span> (std::is_same_v&lt;PropertyType, FInt64Property&gt;)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">return</span> Int64PropertyList;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> <span class="built_in">constexpr</span> (std::is_same_v&lt;PropertyType, FIntProperty&gt;)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">return</span> IntPropertyList;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> <span class="built_in">constexpr</span> (std::is_same_v&lt;PropertyType, FInt16Property&gt;)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">return</span> Int16PropertyList;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> <span class="built_in">constexpr</span> (std::is_same_v&lt;PropertyType, FInt8Property&gt;)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">return</span> Int8PropertyList;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> <span class="built_in">constexpr</span> (std::is_same_v&lt;PropertyType, FByteProperty&gt;)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">return</span> BytePropertyList;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">"Cannot find matching numeric or struct property type for property %s."</span>), *Property-&gt;<span class="built_in">GetName</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p><strong>Step 3: Blending at each frame.</strong></p>
+<p>The last step is to implement function
+<code>UpdateAllPropertyValues</code>, which is called at each frame to
+blend on each item in each container.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">UpdateAllPropertyValues</span><span class="params">(<span class="type">const</span> <span class="type">float</span>&amp; Progress, <span class="type">const</span> <span class="type">float</span>&amp; Exp, <span class="type">const</span> TEnumAsByte&lt;EEasingFunc::Type&gt;&amp; Func)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span>&amp; PropertyValue : FloatPropertyList)</span><br><span class="line">	{</span><br><span class="line">		PropertyValue.<span class="built_in">UpdateValue</span>(Progress, Exp, Func);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span>&amp; PropertyValue : DoublePropertyList)</span><br><span class="line">	{</span><br><span class="line">		PropertyValue.<span class="built_in">UpdateValue</span>(Progress, Exp, Func);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span>&amp; PropertyValue : UInt64PropertyList)</span><br><span class="line">	{</span><br><span class="line">		PropertyValue.<span class="built_in">UpdateValue</span>(Progress, Exp, Func);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span>&amp; PropertyValue : UInt32PropertyList)</span><br><span class="line">	{</span><br><span class="line">		PropertyValue.<span class="built_in">UpdateValue</span>(Progress, Exp, Func);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span>&amp; PropertyValue : UInt16PropertyList)</span><br><span class="line">	{</span><br><span class="line">		PropertyValue.<span class="built_in">UpdateValue</span>(Progress, Exp, Func);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span>&amp; PropertyValue : Int64PropertyList)</span><br><span class="line">	{</span><br><span class="line">		PropertyValue.<span class="built_in">UpdateValue</span>(Progress, Exp, Func);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span>&amp; PropertyValue : IntPropertyList)</span><br><span class="line">	{</span><br><span class="line">		PropertyValue.<span class="built_in">UpdateValue</span>(Progress, Exp, Func);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span>&amp; PropertyValue : Int16PropertyList)</span><br><span class="line">	{</span><br><span class="line">		PropertyValue.<span class="built_in">UpdateValue</span>(Progress, Exp, Func);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span>&amp; PropertyValue : Int8PropertyList)</span><br><span class="line">	{</span><br><span class="line">		PropertyValue.<span class="built_in">UpdateValue</span>(Progress, Exp, Func);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span>&amp; PropertyValue : BytePropertyList)</span><br><span class="line">	{</span><br><span class="line">		PropertyValue.<span class="built_in">UpdateValue</span>(Progress, Exp, Func);</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>We're all done!</p>
+<h1 id="example">Example</h1>
+<p>One use case of this function is that you want the camera to zoom in
+or out when the player enters some areas. Note that we are not changing
+to a new camera. It's still the same camera in use with blending
+property values.</p>
+<p><img src="/images/objectblendingasync/example.gif"></p>
+<p>But hold on... Why don't you just define a function somewhere which
+implements custom blending and call that function whenever you want?</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>DO NOT use this heavily in your project. The runtime reflection can
+be very time-consuming and should NEVER be extensively used in
+production. The aim of this post is to teach the audience how to define
+a flexible async latent action for blending any type. If you refer to
+use it at runtime, you shoud do sufficient optimization and profiling to
+make sure everything is under budget.</p>
+<p>Code is available at <a href="/resources/code/SetPropertyLatentAction.h">SetPropertyLatentAction.h</a>
+and <a href="/resources/code/SetPropertyByName.h">SetPropertyByName.h</a>.</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Categories</a></li>
+        
+          <li><a href="/resources/">Resources</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#goal"><span class="toc-number">1.</span> <span class="toc-text">Goal</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#implementation"><span class="toc-number">2.</span> <span class="toc-text">Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#blueprint-function-declaration"><span class="toc-number">2.1.</span> <span class="toc-text">Blueprint Function
+Declaration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#latent-action-class-definition-part-1"><span class="toc-number">2.2.</span> <span class="toc-text">Latent Action Class
+Definition (Part 1)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#recursive-property-lookup"><span class="toc-number">2.3.</span> <span class="toc-text">Recursive Property Lookup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#custom-thunk-implementation"><span class="toc-number">2.4.</span> <span class="toc-text">Custom Thunk Implementation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#latent-action-class-definition-part-2"><span class="toc-number">2.5.</span> <span class="toc-text">Latent Action Class
+Definition (Part 2)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#example"><span class="toc-number">3.</span> <span class="toc-text">Example</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://sulley.cc/2024/09/16/20/06/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://sulley.cc/2024/09/16/20/06/&text=Async Object Blending in Unreal Engine 5"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://sulley.cc/2024/09/16/20/06/&title=Async Object Blending in Unreal Engine 5"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://sulley.cc/2024/09/16/20/06/&is_video=false&description=Async Object Blending in Unreal Engine 5"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Async Object Blending in Unreal Engine 5&body=Check out this article: http://sulley.cc/2024/09/16/20/06/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://sulley.cc/2024/09/16/20/06/&title=Async Object Blending in Unreal Engine 5"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://sulley.cc/2024/09/16/20/06/&title=Async Object Blending in Unreal Engine 5"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://sulley.cc/2024/09/16/20/06/&title=Async Object Blending in Unreal Engine 5"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://sulley.cc/2024/09/16/20/06/&title=Async Object Blending in Unreal Engine 5"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://sulley.cc/2024/09/16/20/06/&name=Async Object Blending in Unreal Engine 5&description=&lt;p&gt;In this blog post, I will introduce leveraing &lt;code&gt;UFUNCTION&lt;/code&gt;
+specifiers &lt;code&gt;Latent&lt;/code&gt;, &lt;code&gt;LatentInfo&lt;/code&gt;,
+&lt;code&gt;ExpandEnumAsExecs&lt;/code&gt; and &lt;code&gt;CustomThunk&lt;/code&gt; to implement
+an async object blending blueprint function.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://sulley.cc/2024/09/16/20/06/&t=Async Object Blending in Unreal Engine 5"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2024
+    Sulley
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/resources/">Resources</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
