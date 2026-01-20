@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Implementing Camera Path Navigation Transition in UE5 In the previous post, I introduced how to implement inertialized camera transitions in UE5. This type of transition guarantees that velocity and">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Path Guided Camera Transition">
+<meta property="og:url" content="http://sulley.cc/2026/01/20/09/16/index.html">
+<meta property="og:site_name" content="Sulley">
+<meta property="og:description" content="Implementing Camera Path Navigation Transition in UE5 In the previous post, I introduced how to implement inertialized camera transitions in UE5. This type of transition guarantees that velocity and">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://sulley.cc/images/pathguided/0.png">
+<meta property="og:image" content="http://sulley.cc/images/pathguided/3.png">
+<meta property="og:image" content="http://sulley.cc/images/pathguided/1.gif">
+<meta property="og:image" content="http://sulley.cc/images/pathguided/2.gif">
+<meta property="og:image" content="http://sulley.cc/images/pathguided/4.png">
+<meta property="og:image" content="http://sulley.cc/images/pathguided/5.gif">
+<meta property="article:published_time" content="2026-01-20T01:16:34.000Z">
+<meta property="article:modified_time" content="2026-01-20T14:42:04.159Z">
+<meta property="article:author" content="Sulley">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="UE">
+<meta property="article:tag" content="相机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sulley.cc/images/pathguided/0.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Path Guided Camera Transition</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/resources/">Resources</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/10/27/09/16/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://sulley.cc/2026/01/20/09/16/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://sulley.cc/2026/01/20/09/16/&text=Path Guided Camera Transition"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://sulley.cc/2026/01/20/09/16/&title=Path Guided Camera Transition"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://sulley.cc/2026/01/20/09/16/&is_video=false&description=Path Guided Camera Transition"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Path Guided Camera Transition&body=Check out this article: http://sulley.cc/2026/01/20/09/16/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://sulley.cc/2026/01/20/09/16/&title=Path Guided Camera Transition"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://sulley.cc/2026/01/20/09/16/&title=Path Guided Camera Transition"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://sulley.cc/2026/01/20/09/16/&title=Path Guided Camera Transition"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://sulley.cc/2026/01/20/09/16/&title=Path Guided Camera Transition"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://sulley.cc/2026/01/20/09/16/&name=Path Guided Camera Transition&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://sulley.cc/2026/01/20/09/16/&t=Path Guided Camera Transition"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#implementing-camera-path-navigation-transition-in-ue5"><span class="toc-number">1.</span> <span class="toc-text"> Implementing Camera Path Navigation Transition in UE5</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#method-1-inertialized-transition-as-a-bridge"><span class="toc-number">2.</span> <span class="toc-text"> Method 1: Inertialized Transition As A Bridge</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#method-2-construct-full-path-transition-trajectory"><span class="toc-number">3.</span> <span class="toc-text"> Method 2: Construct Full-Path Transition Trajectory</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#reference-code"><span class="toc-number">4.</span> <span class="toc-text"> Reference Code</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#summary"><span class="toc-number">5.</span> <span class="toc-text"> Summary</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Path Guided Camera Transition
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sulley</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-01-20T01:16:34.000Z" class="dt-published" itemprop="datePublished">2026-01-20</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B8%B8%E6%88%8F-%E7%9B%B8%E6%9C%BA/">游戏 - 相机</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/UE/" rel="tag">UE</a>, <a class="p-category" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a>, <a class="p-category" href="/tags/%E7%9B%B8%E6%9C%BA/" rel="tag">相机</a>, <a class="p-category" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a>, <a class="p-category" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="implementing-camera-path-navigation-transition-in-ue5"><a class="markdownIt-Anchor" href="#implementing-camera-path-navigation-transition-in-ue5"></a> Implementing Camera Path Navigation Transition in UE5</h1>
+<p>In the <a href="https://sulley.cc/2025/07/19/09/16/">previous post</a>, I introduced how to implement inertialized camera transitions in UE5. This type of transition guarantees that velocity and acceleration are continuous at both the start and the end, making it highly suitable for transitions between Gameplay cameras and Cinematic cameras.</p>
+<p>However, in actual game development, we often need to use an explicitly provided path (Spline) to <strong>guide</strong> the camera transition path, similar to a PathNode. This is usually done for two reasons:</p>
+<ol>
+<li>To avoid collisions during the transition process.</li>
+<li>To ensure the camera moves along a specific path to satisfy a particular design requirement.</li>
+</ol>
+<p>For example, in the image below, given a specific Spline section, we want the camera to move along this Spline as much as possible.</p>
+<p><img src="/images/pathguided/0.png" alt=""></p>
+<p>However, this raises two additional problems:</p>
+<ol>
+<li>The starting point of the camera is often not fixed. How do we ensure a natural connection from the starting point to the Spline?</li>
+<li>How do we ensure smooth camera movement throughout the entire transition process, rather than having it speed up and slow down erratically?</li>
+</ol>
+<p>This article will introduce two methods to implement a <strong>Path Guided Transition</strong>.</p>
+<h1 id="method-1-inertialized-transition-as-a-bridge"><a class="markdownIt-Anchor" href="#method-1-inertialized-transition-as-a-bridge"></a> Method 1: Inertialized Transition As A Bridge</h1>
+<p>Since we want the camera to remain smooth throughout the transition, the natural question is: can we utilize the Inertialized Camera Transition to achieve this smoothness?</p>
+<p>Yes, we certainly can. If we create a Virtual Camera on the Spline provided by the designer and have this camera move according to a specified movement curve, we can then utilize two Inertialized Transitions to achieve an overall smooth transition.</p>
+<p>The first Inertialized Transition occurs between the Source Camera and the Virtual Camera, ensuring a smooth transition from the initial camera to the Virtual Camera. The second Inertialized Transition occurs between the Virtual Camera and the Target Camera, ensuring a smooth transition from the Virtual Camera to the destination camera.</p>
+<p>To do this, we need to specify the following parameters:</p>
+<ol>
+<li><strong>Driving Transition:</strong> The transition that drives the progression from Source Camera to Target Camera (typically a Smooth/Linear/Cubic Transition).</li>
+<li><strong>Rail:</strong> The Spline provided by the designer.</li>
+<li><strong>Guide Range:</strong> The timing for entering the Virtual Camera from the Source Camera, and the timing for exiting the Virtual Camera to transition to the Target Camera. Time is normalized to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span>.</li>
+<li><strong>Spline Move Curve:</strong> How the Virtual Camera moves along the Spline. Time is normalized to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span>.</li>
+</ol>
+<p><img src="/images/pathguided/3.png" alt=""></p>
+<p>Below is the resulting effect:</p>
+<p><img src="/images/pathguided/1.gif" alt=""></p>
+<p>And the generated path:</p>
+<p><img src="/images/pathguided/2.gif" alt=""></p>
+<p>It looks pretty good. However, this method requires precise fine-tuning of several parameters, especially the <strong>Spline Move Curve</strong>, to ensure overall velocity smoothness.</p>
+<h1 id="method-2-construct-full-path-transition-trajectory"><a class="markdownIt-Anchor" href="#method-2-construct-full-path-transition-trajectory"></a> Method 2: Construct Full-Path Transition Trajectory</h1>
+<p>The first method requires too many parameters. Can we avoid manual tuning? In other words, can the designer simply configure a Driving Transition, and the camera automatically moves along the path at the specified speed?</p>
+<p>Naturally, this is possible. We just need to construct the <strong>complete transition path</strong> at the moment the transition begins. The designer provides a part of the path, and we need to fill in the missing segments at the beginning and the end.</p>
+<p>Unreal’s Spline uses Cubic Hermite Splines by default. Each Spline segment is defined by two target points <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="bold">p</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi mathvariant="bold">p</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\mathbf{p}_0, \mathbf{p}_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.63888em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">p</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">p</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> and their corresponding tangents <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="bold">d</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi mathvariant="bold">d</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\mathbf{d}_0,\mathbf{d}_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">d</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">d</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>. Since we already know the Spline provided by the designer, as well as the positions of the initial camera and the target camera, we can construct optimized start and end segments. By stitching these with the designer-provided Spline, we form a complete camera movement path.</p>
+<p>The constructed path is as follows:</p>
+<p><img src="/images/pathguided/4.png" alt=""></p>
+<p>The actual movement is as follows:</p>
+<p><img src="/images/pathguided/5.gif" alt=""></p>
+<p>However, a drawback of this method is that the endpoint of the path is determined when the Transition starts. If the target camera moves during this process, a “pop” or sudden jump will occur at the end of the transition. Of course, we could dynamically modify the constructed Spline during the transition, but the overhead of using Unreal’s default functions is too high, so we might need to use empirical methods for a more efficient implementation. Secondly, when constructing the start and end segments, the corresponding tangent <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">d</mi></mrow><annotation encoding="application/x-tex">\mathbf{d}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbf">d</span></span></span></span></span> uses the camera’s own velocity. The Spline constructed this way may not necessarily yield the best path globally, so more global factors need to be considered when selecting tangents.</p>
+<h1 id="reference-code"><a class="markdownIt-Anchor" href="#reference-code"></a> Reference Code</h1>
+<p><code>PathGuidedTransition.h</code>:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Copyright Sulley. All rights reserved.</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"CoreMinimal.h"</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"ComposableCameraTransitionBase.h"</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"ComposableCameraPathGuidedTransition.generated.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">USplineComponent</span>;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ACameraRig_Rail</span>;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UComposableCameraInertializedTransition</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">UENUM</span>()</span><br><span class="line"><span class="keyword">enum class</span> <span class="title class_">EComposableCameraPathGuidedTransitionType</span> : uint8</span><br><span class="line">{</span><br><span class="line">	<span class="comment">// Use inertialized camera as a bridge to achieve path guided transition.</span></span><br><span class="line">	Inertialized,</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// Use auto-generated splines to achieve path guided transition. \n</span></span><br><span class="line">	<span class="comment">// @<span class="doctag">NOTE:</span> This type won't update TargetCameraPose, so if the target camera is moving during transition, DO NOT use this type.</span></span><br><span class="line">	Auto</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A transition which utilizes a path　(spline) to guide its position during transition.</span></span><br><span class="line"><span class="comment"> * This transition leverages two InertializedTransitions to achieve smoothness.</span></span><br><span class="line"><span class="comment"> * An intermediate camera will be spawned as a wrapper for the spline.</span></span><br><span class="line"><span class="comment"> * So this transition will be more expensive than other transitions.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="built_in">UCLASS</span>(ClassGroup = ComposableCameraSystem)</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">COMPOSABLECAMERASYSTEM_API</span> UComposableCameraPathGuidedTransition : <span class="keyword">public</span> UComposableCameraTransitionBase</span><br><span class="line">{</span><br><span class="line">	<span class="built_in">GENERATED_BODY</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">OnBeginPlay_Implementation</span><span class="params">(<span class="type">float</span> DeltaTime, <span class="type">const</span> FComposableCameraPose&amp; CurrentTargetPose)</span> <span class="keyword">override</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> FComposableCameraPose <span class="title">OnEvaluate_Implementation</span><span class="params">(<span class="type">float</span> DeltaTime, <span class="type">const</span> FComposableCameraPose&amp; CurrentTargetPose)</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">// Driving transition for base camera transition. Used for both Inertialized and Auto.</span></span><br><span class="line">	<span class="built_in">UPROPERTY</span>(EditAnywhere, BlueprintReadWrite, Instanced)</span><br><span class="line">	UComposableCameraTransitionBase* DrivingTransition;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Type of path guided transition.</span></span><br><span class="line">	<span class="built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere)</span><br><span class="line">	EComposableCameraPathGuidedTransitionType Type { EComposableCameraPathGuidedTransitionType::Inertialized };</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// The rail actor thet contains the desired guiding spline. The tangents of the spline should not be too small nor too large.</span></span><br><span class="line">	<span class="built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere, meta = (EditCondition = <span class="string">"Type == EComposableCameraPathGuidedTransitionType::Inertialized"</span>, EditConditionHides))</span><br><span class="line">	TSoftObjectPtr&lt;ACameraRig_Rail&gt; RailActor;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Normalized timestamps to start/end guide. It's recommended to set a not-close-to-one end timestamp ensuring the camera can return to the desired target position smoothly.</span></span><br><span class="line">	<span class="built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere, meta = (ClampMin = <span class="string">"0"</span>, ClampMax = <span class="string">"1"</span>, EditCondition = <span class="string">"Type == EComposableCameraPathGuidedTransitionType::Inertialized"</span>, EditConditionHides))</span><br><span class="line">	FVector2D GuideRange { <span class="number">0.25</span>, <span class="number">0.75</span> };</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// How the virtual camera should move on spline. This curve is normalized. Input range is [0,1], start c[0]=0, c[1]=1.</span></span><br><span class="line">	<span class="built_in">UPROPERTY</span>(BlueprintReadWrite, EditAnywhere, meta = (EditCondition = <span class="string">"Type == EComposableCameraPathGuidedTransitionType::Inertialized"</span>, EditConditionHides))</span><br><span class="line">	UCurveFloat* SplineMoveCurve;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">UPROPERTY</span>()</span><br><span class="line">	AComposableCameraCameraBase* IntermediateCamera { <span class="literal">nullptr</span> };</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">UPROPERTY</span>()</span><br><span class="line">	ACameraRig_Rail* Rail;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">UPROPERTY</span>()</span><br><span class="line">	UComposableCameraInertializedTransition* EnterTransition { <span class="literal">nullptr</span> };</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">UPROPERTY</span>()</span><br><span class="line">	UComposableCameraInertializedTransition* ExitTransition { <span class="literal">nullptr</span> };</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">UPROPERTY</span>()</span><br><span class="line">	USplineComponent* InternalSpline;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">UPROPERTY</span>()</span><br><span class="line">	AActor* DebugSplineActor;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">DrawDebugSplinePoints</span><span class="params">(<span class="type">const</span> TArray&lt;FVector&gt;&amp; SplinePoints)</span></span>;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">BuildInternalSpline</span><span class="params">(<span class="type">const</span> FComposableCameraPose&amp; CurrentTargetPose, <span class="type">float</span> DeltaTime)</span></span>;</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+<p><code>PathGuidedTransition.cpp</code>:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Copyright Sulley. All rights reserved.</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"Transitions/ComposableCameraPathGuidedTransition.h"</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"Transitions/ComposableCameraInertializedTransition.h"</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"CameraRig_Rail.h"</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"ComposableCameraSystemModule.h"</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"Components/SplineComponent.h"</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"Core/ComposableCameraPlayerCamaraManager.h"</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"Kismet/GameplayStatics.h"</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"Nodes/ComposableCameraSplineNode.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">UComposableCameraPathGuidedTransition::OnBeginPlay_Implementation</span><span class="params">(<span class="type">float</span> DeltaTime,</span></span></span><br><span class="line"><span class="params"><span class="function">                                                                       <span class="type">const</span> FComposableCameraPose&amp; CurrentTargetPose)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">if</span> (DrivingTransition)</span><br><span class="line">	{</span><br><span class="line">		DrivingTransition-&gt;<span class="built_in">TransitionEnabled</span>(SourceCamera, TargetCamera, StartCameraPose);</span><br><span class="line">		DrivingTransition-&gt;<span class="built_in">SetTransitionTime</span>(TransitionTime);</span><br><span class="line">		DrivingTransition-&gt;<span class="built_in">ResetTransitionState</span>();</span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (RailActor.<span class="built_in">IsValid</span>())</span><br><span class="line">	{</span><br><span class="line">		Rail = RailActor.<span class="built_in">Get</span>();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">switch</span> (Type)</span><br><span class="line">	{</span><br><span class="line">	<span class="keyword">case</span> EComposableCameraPathGuidedTransitionType::Inertialized:</span><br><span class="line">		{</span><br><span class="line">			<span class="comment">// IntermediateCamera</span></span><br><span class="line">			IntermediateCamera = <span class="built_in">GetWorld</span>()-&gt;<span class="built_in">SpawnActorDeferred</span>&lt;AComposableCameraCameraBase&gt;(AComposableCameraCameraBase::<span class="built_in">StaticClass</span>(), FTransform{});</span><br><span class="line">			IntermediateCamera-&gt;bIsRunning = <span class="literal">true</span>;</span><br><span class="line">			IntermediateCamera-&gt;bIsTransient = <span class="literal">false</span>;</span><br><span class="line">			IntermediateCamera-&gt;LifeTime = <span class="number">-1.f</span>;</span><br><span class="line">			IntermediateCamera-&gt;RemainingLifeTime = <span class="number">-1.f</span>;</span><br><span class="line">			IntermediateCamera-&gt;<span class="built_in">Initialize</span>(SourceCamera-&gt;<span class="built_in">GetOwningPlayerCameraManager</span>(), <span class="literal">nullptr</span>);</span><br><span class="line">	</span><br><span class="line">			UComposableCameraSplineNode* SplineNode = <span class="built_in">NewObject</span>&lt;UComposableCameraSplineNode&gt;(IntermediateCamera, UComposableCameraSplineNode::<span class="built_in">StaticClass</span>());</span><br><span class="line">			SplineNode-&gt;SplineType = EComposableCameraSplineNodeSplineType::BuiltInSpline;</span><br><span class="line">			SplineNode-&gt;Rail = Rail;</span><br><span class="line">			SplineNode-&gt;MoveMethod = EComposableCameraSplineNodeMoveMethod::Automatic;</span><br><span class="line">			SplineNode-&gt;AutomaticMoveCurve = SplineMoveCurve;</span><br><span class="line">			SplineNode-&gt;Duration = TransitionTime;</span><br><span class="line">			IntermediateCamera-&gt;CameraNodes.<span class="built_in">Add</span>(SplineNode);</span><br><span class="line">			IntermediateCamera-&gt;<span class="built_in">FinishSpawning</span>(FTransform{});</span><br><span class="line">			IntermediateCamera-&gt;<span class="built_in">Rename</span>(<span class="built_in">TEXT</span>(<span class="string">"PathGuidedTransition_IntermediateCameraOnSpline"</span>));</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> WITH_EDITOR</span></span><br><span class="line">			IntermediateCamera-&gt;<span class="built_in">SetActorLabel</span>(</span><br><span class="line">				<span class="built_in">TEXT</span>(<span class="string">"PathGuidedTransition_IntermediateCameraOnSpline"</span>),</span><br><span class="line">				<span class="literal">false</span></span><br><span class="line">			);</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}	</span><br><span class="line">	<span class="keyword">case</span> EComposableCameraPathGuidedTransitionType::Auto:</span><br><span class="line">		{</span><br><span class="line">			</span><br><span class="line">			DebugSplineActor = <span class="built_in">GetWorld</span>()-&gt;<span class="built_in">SpawnActor</span>&lt;AActor&gt;();</span><br><span class="line">			USceneComponent* Root = <span class="built_in">NewObject</span>&lt;USceneComponent&gt;(DebugSplineActor, USceneComponent::<span class="built_in">StaticClass</span>(), <span class="built_in">TEXT</span>(<span class="string">"RootComponent"</span>));</span><br><span class="line">			Root-&gt;<span class="built_in">RegisterComponent</span>();</span><br><span class="line">			DebugSplineActor-&gt;<span class="built_in">SetRootComponent</span>(Root);</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">BuildInternalSpline</span>(CurrentTargetPose, DeltaTime);</span><br><span class="line">			DebugSplineActor-&gt;<span class="built_in">Rename</span>(<span class="built_in">TEXT</span>(<span class="string">"PathGuidedTransition_DebugSplineActor"</span>));</span><br><span class="line">	<span class="meta">#<span class="keyword">if</span> WITH_EDITOR</span></span><br><span class="line">			DebugSplineActor-&gt;<span class="built_in">SetActorLabel</span>(</span><br><span class="line">				<span class="built_in">TEXT</span>(<span class="string">"PathGuidedTransition_DebugSplineActor"</span>),</span><br><span class="line">				<span class="literal">false</span></span><br><span class="line">			);</span><br><span class="line">	<span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">			</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function">FComposableCameraPose <span class="title">UComposableCameraPathGuidedTransition::OnEvaluate_Implementation</span><span class="params">(<span class="type">float</span> DeltaTime,</span></span></span><br><span class="line"><span class="params"><span class="function">	<span class="type">const</span> FComposableCameraPose&amp; CurrentTargetPose)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">if</span> (!DrivingTransition)</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">UE_LOG</span>(LogComposableCameraSystem, Warning, <span class="built_in">TEXT</span>(<span class="string">"DrivingTransition is not valid in ComposableCameraPathGuidedTransition."</span>));</span><br><span class="line">		<span class="keyword">return</span> CurrentTargetPose;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">if</span> (!Rail)</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">UE_LOG</span>(LogComposableCameraSystem, Warning, <span class="built_in">TEXT</span>(<span class="string">"SplineActor is not valid in ComposableCameraPathGuidedTransition."</span>));</span><br><span class="line">		<span class="keyword">return</span> CurrentTargetPose;</span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	<span class="type">float</span> DurationPct = (<span class="built_in">GetTransitionTime</span>() - <span class="built_in">GetRemainingTime</span>()) / <span class="built_in">GetTransitionTime</span>();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Base pose.</span></span><br><span class="line">	FComposableCameraPose BasePose = DrivingTransition-&gt;<span class="built_in">Evaluate</span>(DeltaTime, CurrentTargetPose);</span><br><span class="line">	FComposableCameraPose ResultPose = BasePose;</span><br><span class="line">	Percentage = DrivingTransition-&gt;<span class="built_in">GetPercentage</span>();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">switch</span> (Type)</span><br><span class="line">	{</span><br><span class="line">	<span class="keyword">case</span> EComposableCameraPathGuidedTransitionType::Inertialized:</span><br><span class="line">		{</span><br><span class="line">			FComposableCameraPose SplinePose = IntermediateCamera-&gt;<span class="built_in">TickCamera</span>(DeltaTime);</span><br><span class="line">			<span class="keyword">if</span> (DurationPct &lt; GuideRange.X)</span><br><span class="line">			{</span><br><span class="line">				<span class="keyword">if</span> (!EnterTransition)</span><br><span class="line">				{</span><br><span class="line">					EnterTransition = <span class="built_in">NewObject</span>&lt;UComposableCameraInertializedTransition&gt;(<span class="keyword">this</span>, UComposableCameraInertializedTransition::<span class="built_in">StaticClass</span>());</span><br><span class="line">					EnterTransition-&gt;<span class="built_in">TransitionEnabled</span>(SourceCamera, IntermediateCamera, SplinePose);</span><br><span class="line">					EnterTransition-&gt;<span class="built_in">SetTransitionTime</span>(GuideRange.X * TransitionTime);</span><br><span class="line">					EnterTransition-&gt;<span class="built_in">ResetTransitionState</span>();</span><br><span class="line">				}</span><br><span class="line">		</span><br><span class="line">				FComposableCameraPose EnterPose = EnterTransition-&gt;<span class="built_in">Evaluate</span>(DeltaTime, SplinePose);</span><br><span class="line">				ResultPose.Position = EnterPose.Position;</span><br><span class="line">			}</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (DurationPct &lt;= GuideRange.Y)</span><br><span class="line">			{</span><br><span class="line">				ResultPose.Position = SplinePose.Position;</span><br><span class="line">			}</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			{</span><br><span class="line">				<span class="keyword">if</span> (!ExitTransition)</span><br><span class="line">				{</span><br><span class="line">					ExitTransition = <span class="built_in">NewObject</span>&lt;UComposableCameraInertializedTransition&gt;(<span class="keyword">this</span>, UComposableCameraInertializedTransition::<span class="built_in">StaticClass</span>());</span><br><span class="line">					ExitTransition-&gt;<span class="built_in">TransitionEnabled</span>(IntermediateCamera, TargetCamera, CurrentTargetPose);</span><br><span class="line">					ExitTransition-&gt;<span class="built_in">SetTransitionTime</span>(<span class="built_in">GetTransitionTime</span>() * (<span class="number">1.f</span> - GuideRange.Y));</span><br><span class="line">					ExitTransition-&gt;<span class="built_in">ResetTransitionState</span>();</span><br><span class="line">					OnTransitionFinishesDelegate.<span class="built_in">AddLambda</span>(</span><br><span class="line">						[InCamera = IntermediateCamera]()</span><br><span class="line">						{</span><br><span class="line">							<span class="keyword">if</span> (InCamera)</span><br><span class="line">							{</span><br><span class="line">								InCamera-&gt;<span class="built_in">Destroy</span>();</span><br><span class="line">							}</span><br><span class="line">						});</span><br><span class="line">				}</span><br><span class="line">		</span><br><span class="line">				FComposableCameraPose ExitPose = ExitTransition-&gt;<span class="built_in">Evaluate</span>(DeltaTime, CurrentTargetPose <span class="comment">/*BasePose*/</span>);</span><br><span class="line">				ResultPose.Position = ExitPose.Position;</span><br><span class="line">			}</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}	</span><br><span class="line">	<span class="keyword">case</span> EComposableCameraPathGuidedTransitionType::Auto:</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (!InternalSpline)</span><br><span class="line">			{</span><br><span class="line">				<span class="built_in">UE_LOG</span>(LogComposableCameraSystem, Warning, <span class="built_in">TEXT</span>(<span class="string">"InternalSpline is not valid in ComposableCameraPathGuidedTransition."</span>));</span><br><span class="line">				<span class="keyword">return</span> CurrentTargetPose;</span><br><span class="line">			}</span><br><span class="line">			</span><br><span class="line">			<span class="type">const</span> <span class="type">float</span> SplineLen = InternalSpline-&gt;<span class="built_in">GetSplineLength</span>();</span><br><span class="line">			<span class="type">const</span> FVector Position = InternalSpline-&gt;<span class="built_in">GetLocationAtDistanceAlongSpline</span>(Percentage * SplineLen, ESplineCoordinateSpace::World);</span><br><span class="line">			ResultPose.Position = Position;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Draw debug spline.</span></span><br><span class="line">	<span class="keyword">if</span> (TargetCamera &amp;&amp; TargetCamera-&gt;<span class="built_in">GetOwningPlayerCameraManager</span>())</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">if</span> (TargetCamera-&gt;<span class="built_in">GetOwningPlayerCameraManager</span>()-&gt;bDrawDebugInformation)</span><br><span class="line">		{</span><br><span class="line">			<span class="built_in">DrawDebugSplinePoints</span>(TArray{ ResultPose.Position });</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ResultPose;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">UComposableCameraPathGuidedTransition::DrawDebugSplinePoints</span><span class="params">(<span class="type">const</span> TArray&lt;FVector&gt;&amp; SplinePoints)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">const</span> FVector&amp; Point : SplinePoints)</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">DrawDebugPoint</span>(<span class="built_in">GetWorld</span>(), Point, <span class="number">8.f</span>, FColor::Cyan, <span class="literal">false</span>, <span class="number">2.f</span>, <span class="number">1.f</span>);</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">UComposableCameraPathGuidedTransition::BuildInternalSpline</span><span class="params">(<span class="type">const</span> FComposableCameraPose&amp; CurrentTargetPose, <span class="type">float</span> DeltaTime)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	InternalSpline = <span class="built_in">DuplicateObject</span>(Rail-&gt;<span class="built_in">GetRailSplineComponent</span>(), DebugSplineActor, <span class="built_in">TEXT</span>(<span class="string">"InternalSplineForPathGuidedTransition"</span>));</span><br><span class="line">	InternalSpline-&gt;<span class="built_in">RegisterComponent</span>();</span><br><span class="line">	DebugSplineActor-&gt;<span class="built_in">SetActorTransform</span>(Rail-&gt;<span class="built_in">GetActorTransform</span>());</span><br><span class="line">	DebugSplineActor-&gt;<span class="built_in">AddInstanceComponent</span>(InternalSpline);</span><br><span class="line">	InternalSpline-&gt;<span class="built_in">AttachToComponent</span>(</span><br><span class="line">		DebugSplineActor-&gt;<span class="built_in">GetRootComponent</span>(),</span><br><span class="line">		FAttachmentTransformRules::KeepRelativeTransform</span><br><span class="line">	);</span><br><span class="line">	InternalSpline-&gt;<span class="built_in">SetRelativeTransform</span>(FTransform::Identity);</span><br><span class="line">	</span><br><span class="line">	TArray&lt;FSplinePoint&gt; Points;</span><br><span class="line">	Points.<span class="built_in">Reserve</span>(<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line">	int32 Num = InternalSpline-&gt;<span class="built_in">GetNumberOfSplinePoints</span>();</span><br><span class="line">	<span class="keyword">for</span> (int32 i = <span class="number">0</span>; i &lt; Num; ++i)</span><br><span class="line">	{</span><br><span class="line">		Points.<span class="built_in">Add</span>(</span><br><span class="line">			InternalSpline-&gt;<span class="built_in">GetSplinePointAt</span>(i, ESplineCoordinateSpace::Local)</span><br><span class="line">		);</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	InternalSpline-&gt;<span class="built_in">ClearSplinePoints</span>(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Prepend and append control points (as long as their tangents)</span></span><br><span class="line">	FVector P0 = Points[<span class="number">1</span>].Position;</span><br><span class="line">	FVector P1 = Points[<span class="number">0</span>].Position;</span><br><span class="line">	FVector P2 = UKismetMathLibrary::<span class="built_in">InverseTransformLocation</span>(DebugSplineActor-&gt;<span class="built_in">GetActorTransform</span>(), StartCameraPose.Position);</span><br><span class="line">	FVector P3 = UKismetMathLibrary::<span class="built_in">InverseTransformLocation</span>(DebugSplineActor-&gt;<span class="built_in">GetActorTransform</span>(), SourceCamera-&gt;LastFrameCameraPose.Position);</span><br><span class="line"></span><br><span class="line">	FSplinePoint FirstPoint;</span><br><span class="line">	FirstPoint.Position = P2;</span><br><span class="line">	FirstPoint.LeaveTangent = (P2 - P3) / DeltaTime;</span><br><span class="line">	FirstPoint.ArriveTangent = FirstPoint.LeaveTangent;</span><br><span class="line">	FirstPoint.Type = ESplinePointType::CurveCustomTangent;</span><br><span class="line">	Points.<span class="built_in">Insert</span>(FirstPoint, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	Num = Points.<span class="built_in">Num</span>();</span><br><span class="line">	P0 = Points[Num - <span class="number">2</span>].Position;</span><br><span class="line">	P1 = Points[Num - <span class="number">1</span>].Position;</span><br><span class="line">	P2 = UKismetMathLibrary::<span class="built_in">InverseTransformLocation</span>(DebugSplineActor-&gt;<span class="built_in">GetActorTransform</span>(), CurrentTargetPose.Position);</span><br><span class="line">	P3 = UKismetMathLibrary::<span class="built_in">InverseTransformLocation</span>(DebugSplineActor-&gt;<span class="built_in">GetActorTransform</span>(), TargetCamera-&gt;LastFrameCameraPose.Position);</span><br><span class="line"></span><br><span class="line">	FSplinePoint LastPoint;</span><br><span class="line">	LastPoint.Position = P2;</span><br><span class="line">	LastPoint.ArriveTangent = (P2 - P3) / DeltaTime;</span><br><span class="line">	LastPoint.LeaveTangent = LastPoint.ArriveTangent;</span><br><span class="line">	LastPoint.Type = ESplinePointType::CurveCustomTangent;</span><br><span class="line">	Points.<span class="built_in">Add</span>(LastPoint);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Re-add points</span></span><br><span class="line">	<span class="keyword">for</span> (Num = <span class="number">0</span>; <span class="keyword">auto</span>&amp; P : Points)</span><br><span class="line">	{</span><br><span class="line">		P.InputKey = Num;</span><br><span class="line">		InternalSpline-&gt;<span class="built_in">AddPoint</span>(P, <span class="literal">false</span>);</span><br><span class="line">		++Num;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	InternalSpline-&gt;<span class="built_in">UpdateSpline</span>();</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h1 id="summary"><a class="markdownIt-Anchor" href="#summary"></a> Summary</h1>
+<p>This article briefly introduced two methods for camera path-guided transitions, achieving the initial requirements. Clearly, there is still much room for optimization, such as:</p>
+<ol>
+<li>Smoother movement at the boundaries.</li>
+<li>Constructing better movement paths.</li>
+<li>Supporting Mutable Source/Target Cameras.</li>
+</ol>
+<p>This article serves as a starting point for further discussion, and I do believe improvements can be made to achieve better results and easier use.</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">Categories</a></li>
+        
+          <li><a href="/resources/">Resources</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#implementing-camera-path-navigation-transition-in-ue5"><span class="toc-number">1.</span> <span class="toc-text"> Implementing Camera Path Navigation Transition in UE5</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#method-1-inertialized-transition-as-a-bridge"><span class="toc-number">2.</span> <span class="toc-text"> Method 1: Inertialized Transition As A Bridge</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#method-2-construct-full-path-transition-trajectory"><span class="toc-number">3.</span> <span class="toc-text"> Method 2: Construct Full-Path Transition Trajectory</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#reference-code"><span class="toc-number">4.</span> <span class="toc-text"> Reference Code</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#summary"><span class="toc-number">5.</span> <span class="toc-text"> Summary</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://sulley.cc/2026/01/20/09/16/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://sulley.cc/2026/01/20/09/16/&text=Path Guided Camera Transition"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://sulley.cc/2026/01/20/09/16/&title=Path Guided Camera Transition"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://sulley.cc/2026/01/20/09/16/&is_video=false&description=Path Guided Camera Transition"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Path Guided Camera Transition&body=Check out this article: http://sulley.cc/2026/01/20/09/16/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://sulley.cc/2026/01/20/09/16/&title=Path Guided Camera Transition"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://sulley.cc/2026/01/20/09/16/&title=Path Guided Camera Transition"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://sulley.cc/2026/01/20/09/16/&title=Path Guided Camera Transition"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://sulley.cc/2026/01/20/09/16/&title=Path Guided Camera Transition"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://sulley.cc/2026/01/20/09/16/&name=Path Guided Camera Transition&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://sulley.cc/2026/01/20/09/16/&t=Path Guided Camera Transition"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2026
+    Sulley
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/resources/">Resources</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
