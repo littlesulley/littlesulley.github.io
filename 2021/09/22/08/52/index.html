@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="作为一个典型的ROUGE-like ACT游戏，BOSS在Hades的游戏体验中占据非常重要的地位。一次完整的游戏流程需要经历四个BOSS：复仇三姐妹中的一个，九头蛇，装逼双雄和最终BOSS Hades。每个BOSS的设计都很有特色，">
+    <meta name="description" content="作为一个典型的ROUGE-like ACT游戏，BOSS在Hades的游戏体验中占据非常重要的地位。一次完整的游戏流程需要经历四个BOSS：复仇三姐妹中的一个，九头蛇，装逼双雄和最终BOSS Hades。每个BOSS的设计都很有特色，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈Hades最终BOSS的AI设计">
 <meta property="og:url" content="http://sulley.cc/2021/09/22/08/52/index.html">
 <meta property="og:site_name" content="Sulley">
-<meta property="og:description" content="作为一个典型的ROUGE-like ACT游戏，BOSS在Hades的游戏体验中占据非常重要的地位。一次完整的游戏流程需要经历四个BOSS：复仇三姐妹中的一个，九头蛇，装逼双雄和最终BOSS Hades。每个BOSS的设计都很有特色，">
+<meta property="og:description" content="作为一个典型的ROUGE-like ACT游戏，BOSS在Hades的游戏体验中占据非常重要的地位。一次完整的游戏流程需要经历四个BOSS：复仇三姐妹中的一个，九头蛇，装逼双雄和最终BOSS Hades。每个BOSS的设计都很有特色，">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://sulley.cc/images/hades-AI/idle.png">
 <meta property="og:image" content="http://sulley.cc/images/hades-AI/move.png">
@@ -254,7 +254,9 @@ mjx-container[display="true"] + br {
   <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://sulley.cc/2021/09/22/08/52/&title=浅谈Hades最终BOSS的AI设计"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://sulley.cc/2021/09/22/08/52/&title=浅谈Hades最终BOSS的AI设计"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://sulley.cc/2021/09/22/08/52/&title=浅谈Hades最终BOSS的AI设计"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://sulley.cc/2021/09/22/08/52/&name=浅谈Hades最终BOSS的AI设计&description=&lt;p&gt;作为一个典型的ROUGE-like ACT游戏，BOSS在Hades的游戏体验中占据非常重要的地位。一次完整的游戏流程需要经历四个BOSS：复仇三姐妹中的一个，九头蛇，装逼双雄和最终BOSS Hades。每个BOSS的设计都很有特色，&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://sulley.cc/2021/09/22/08/52/&name=浅谈Hades最终BOSS的AI设计&description=&lt;p&gt;作为一个典型的ROUGE-like
+ACT游戏，BOSS在Hades的游戏体验中占据非常重要的地位。一次完整的游戏流程需要经历四个BOSS：复仇三姐妹中的一个，九头蛇，装逼双雄和最终BOSS
+Hades。每个BOSS的设计都很有特色，&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://sulley.cc/2021/09/22/08/52/&t=浅谈Hades最终BOSS的AI设计"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
@@ -262,7 +264,8 @@ mjx-container[display="true"] + br {
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD%E4%B8%8E%E7%8E%A9%E5%AE%B6%E4%BD%93%E9%AA%8C"><span class="toc-number">1.</span> <span class="toc-text"> 核心技能与玩家体验</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.</span> <span class="toc-text"> 第一阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.</span> <span class="toc-text"> 第一阶段总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5"><span class="toc-number">1.3.</span> <span class="toc-text"> 第二阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text"> 第二阶段总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91"><span class="toc-number">2.</span> <span class="toc-text"> 实现逻辑</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-2"><span class="toc-number">2.1.</span> <span class="toc-text"> 第一阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5-2"><span class="toc-number">2.2.</span> <span class="toc-text"> 第二阶段</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%A8behavior-designer%E7%94%BB%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E8%A1%8C%E4%B8%BA%E6%A0%91"><span class="toc-number">3.</span> <span class="toc-text"> 用Behavior Designer画一个简单的行为树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-3"><span class="toc-number">3.1.</span> <span class="toc-text"> 第一阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5-3"><span class="toc-number">3.2.</span> <span class="toc-text"> 第二阶段</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD%E4%B8%8E%E7%8E%A9%E5%AE%B6%E4%BD%93%E9%AA%8C"><span class="toc-number">1.</span> <span class="toc-text">核心技能与玩家体验</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.</span> <span class="toc-text">第一阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.</span> <span class="toc-text">第一阶段总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5"><span class="toc-number">1.3.</span> <span class="toc-text">第二阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">第二阶段总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91"><span class="toc-number">2.</span> <span class="toc-text">实现逻辑</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5-1"><span class="toc-number">2.1.</span> <span class="toc-text">第二阶段</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%A8behavior-designer%E7%94%BB%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E8%A1%8C%E4%B8%BA%E6%A0%91"><span class="toc-number">3.</span> <span class="toc-text">用Behavior
+Designer画一个简单的行为树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-1"><span class="toc-number">3.1.</span> <span class="toc-text">第一阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5-2"><span class="toc-number">3.2.</span> <span class="toc-text">第二阶段</span></a></li></ol></li></ol>
       </div>
     
   </span>
@@ -312,110 +315,90 @@ mjx-container[display="true"] + br {
   
 
   <div class="content e-content" itemprop="articleBody">
-    <p>作为一个典型的ROUGE-like ACT游戏，BOSS在Hades的游戏体验中占据非常重要的地位。一次完整的游戏流程需要经历四个BOSS：复仇三姐妹中的一个，九头蛇，装逼双雄和最终BOSS Hades。每个BOSS的设计都很有特色，</p>
+    <p>作为一个典型的ROUGE-like
+ACT游戏，BOSS在Hades的游戏体验中占据非常重要的地位。一次完整的游戏流程需要经历四个BOSS：复仇三姐妹中的一个，九头蛇，装逼双雄和最终BOSS
+Hades。每个BOSS的设计都很有特色，</p>
 <span id="more"></span>
-<h1 id="核心技能与玩家体验"><a class="markdownIt-Anchor" href="#核心技能与玩家体验"></a> 核心技能与玩家体验</h1>
+<h1 id="核心技能与玩家体验">核心技能与玩家体验</h1>
 <p>Hades分为两个阶段，第二阶段在第一阶段的基础上删减/增加了若干技能。下面介绍两个阶段的核心技能与对应的玩家体验。这里暂时没有逐帧拆解动作，之后有时间了会更新。</p>
-<h2 id="第一阶段"><a class="markdownIt-Anchor" href="#第一阶段"></a> 第一阶段</h2>
+<h2 id="第一阶段">第一阶段</h2>
 <ul>
-<li>
-<p>站立（Idle）<br>
-站在原地不动，一般是在释放技能后。该技能的作用有三：（1）成为其他伤害型技能释放的中继点，避免一直释放技能造成难度较大，带给玩家不好的游戏体验；（2）木桩模式为玩家提供free attack的时间窗口，是得到输出正反馈的最佳时间段；（3）等待恢复技能CD或Counter。<br>
-<img src="/images/hades-AI/idle.png" alt=""></p>
-</li>
-<li>
-<p>移动冲刺（Move）<br>
-向前移动一段距离。作用有二：（1）等待恢复技能CD或Counter；（2）缩小与玩家之间的距离（该技能只出现在与玩家距离过远时），提升BOSS战的压迫与紧张感。<br>
-<img src="/images/hades-AI/move.png" alt=""></p>
-</li>
-<li>
-<p>回旋击<br>
-以自身为圆心挥舞两圈武器，范围较大，发动后不会改变前进方向。大范围AOE，并且有连续两次连击，因此如果玩家在两次攻击的范围内，用闪避不能全部躲过去，至少吃一发，换句话说，“回旋击的攻击时间&gt;闪避的无敌时间”。但该技能的特性在于，在较长的技能前摇，在前摇期内BOSS会锁定当前玩家的方向，然后两次攻击都会向着那个方向前进。所以躲避这个技能的关键在于：较快地判断BOSS攻击的方向并朝着反方向闪避移动。这实际上考验了玩家的观察能力和反应能力，并且由于该技能攻击范围较大，所以又提高了对玩家的要求。除了这一点玩家体验之外，这个技能还有一个作用：逼迫玩家拉远与BOSS的距离，避免长时间与BOSS肉搏（当然这个还与武器有关），形成较好的攻防节奏。<br>
-<img src="/images/hades-AI/spin.png" alt=""></p>
-</li>
-<li>
-<p>突刺击<br>
-向前突刺，距离较短，普通的伤害技能。该技能要求玩家有一定的闪避技巧，但难度不大。<br>
-<img src="/images/hades-AI/spike.png" alt=""></p>
-</li>
-<li>
-<p>突刺击-Ex<br>
-距离较远的突刺击。同上，对闪避有一定要求，但难度不大。<br>
-<img src="/images/hades-AI/spike-Ex.png" alt=""></p>
-</li>
-<li>
-<p>遁形<br>
-进入隐身状态持续一段时间，之后在雪地上连续出现两次脚印，标志着BOSS的移动轨迹，最后将在角色附近突然出现并执行单次大范围回旋击。该主要考核了玩家观察BOSS行为轨迹并进行预判的能力，需要提前使用闪避快速远离可能的目标地点。注意这个技能最后的回旋击范围是所有技能中最大的，如果不幸BOSS就闪现在身边，单次闪避是没有办法逃离AOE范围的，除非是连续多次闪避或提前预判位置走开。这个技能的作用有：（1）长时间BOSS的无攻击期方便BOSS重置技能CD或Counter；（2）方便玩家清理场上的小怪或者Bomb；（3）形成一个较长时间的Combat break，缓解了一下紧张的战斗节奏。<br>
-<img src="/images/hades-AI/escape-1.png" alt=""><br>
-<img src="/images/hades-AI/escape-2.png" alt=""></p>
-</li>
-<li>
-<p>发射Bomb<br>
-向前发射一个Bomb，如果直接撞到主角会产生伤害并附带“沸腾之血”Debuff，否则经过一段时间的滑行或撞到墙之后停下，并开始5秒倒计时。如果没在倒计时结束前打破Bomb，则Bomb会爆炸产生超大范围的缓慢全屏光圈攻击，需要闪避躲过去或远离Bomb。该技能和前面的纯粹伤害型技能都不同，它产生了一个额外的敌人，而在已知该敌人会造成较大威胁的前提下，驱使玩家转而攻击Bomb，当然玩家如果对自己的技术有信心，也可以无视它继续攻击Boss，这就增强了游戏的策略性：如果自己当前状态不健康，上策必然是打掉Bomb；否则攻击BOSS会更快结束战斗。这个技能还有一个比较特殊的地方在于，它往往是连续多次出现的，这就进一步增强了玩家临时的决策要求：多个Bomb存在时会指数级地增大游戏的风险，这时候即使自己状态比较健康也会更加慎重地进行选择。该技能的另外一个好处在于，它将单纯的BOSS combat转为了Battlefield clear模式，即优先清理小怪。两种战斗模式的切换也能增强游戏的多样性。<br>
-<img src="/images/hades-AI/bomb.png" alt=""></p>
-</li>
-<li>
-<p>发射Bomb-Ex<br>
-发射前向高速移动的Bomb，撞到墙才会停止，其他机制与发射Bomb相同。该技能的作用同上，但是由于该技能伤害更高，更难躲避，因此更加考验玩家的反应和观察力。<br>
-<img src="/images/hades-AI/bomb-Ex.png" alt=""></p>
-</li>
-<li>
-<p>召唤<br>
-在第一阶段2/3和1/3血量处时使用召唤技能，进入短暂无敌状态并随机召唤几个较为强力的小怪。每一次召唤之后上述所有技能的使用频率都会发生变化。<strong>假设为三个子阶段，在第一个子阶段，回旋击、突刺击和突刺击-Ex使用较多，遁形、发射Bomb和发射Bomb-Ex使用较少，且整体的攻击频率很低（也即一个连续的攻击集合中包含的攻击技能较少，一般只有1~2个，集合之间通过Idle、遁形实现暂停）。在第二个子阶段，依旧以回旋击、突刺击和突刺击-Ex为主，但是发射Bomb和发射Bomb-Ex频率开始增加，整体攻击频率开始增加（一个攻击集合中的技能数量增加，为2~4个，集合之间的Idle持续时间开始缩短）。在第三个子阶段，所有技能的使用频率基本相同，变得更有节奏感，即使用一套技能之后进行遁形，然后再使用一套技能（此时一个攻击集合中的技能数量变为2~5个，集合之间的Idle持续时间进一步缩短）</strong>。该技能的作用本质和发射Bomb是一致的，但是Battlefield clear的意图更加明显，玩家这时候不得不优先清理小怪而不是像对待Bomb那样可选可不选，因为小怪非常强力并且极具干扰。在Battlefield clear期间，BOSS也会照常攻击玩家，这个时候是最紧张刺激的阶段，直到清理完所有小怪。<br>
-<img src="/images/hades-AI/summon.png" alt=""></p>
-</li>
+<li><p>站立（Idle）
+站在原地不动，一般是在释放技能后。该技能的作用有三：（1）成为其他伤害型技能释放的中继点，避免一直释放技能造成难度较大，带给玩家不好的游戏体验；（2）木桩模式为玩家提供free
+attack的时间窗口，是得到输出正反馈的最佳时间段；（3）等待恢复技能CD或Counter。
+<img src="/images/hades-AI/idle.png"></p></li>
+<li><p>移动冲刺（Move）
+向前移动一段距离。作用有二：（1）等待恢复技能CD或Counter；（2）缩小与玩家之间的距离（该技能只出现在与玩家距离过远时），提升BOSS战的压迫与紧张感。
+<img src="/images/hades-AI/move.png"></p></li>
+<li><p>回旋击
+以自身为圆心挥舞两圈武器，范围较大，发动后不会改变前进方向。大范围AOE，并且有连续两次连击，因此如果玩家在两次攻击的范围内，用闪避不能全部躲过去，至少吃一发，换句话说，“回旋击的攻击时间&gt;闪避的无敌时间”。但该技能的特性在于，在较长的技能前摇，在前摇期内BOSS会锁定当前玩家的方向，然后两次攻击都会向着那个方向前进。所以躲避这个技能的关键在于：较快地判断BOSS攻击的方向并朝着反方向闪避移动。这实际上考验了玩家的观察能力和反应能力，并且由于该技能攻击范围较大，所以又提高了对玩家的要求。除了这一点玩家体验之外，这个技能还有一个作用：逼迫玩家拉远与BOSS的距离，避免长时间与BOSS肉搏（当然这个还与武器有关），形成较好的攻防节奏。
+<img src="/images/hades-AI/spin.png"></p></li>
+<li><p>突刺击
+向前突刺，距离较短，普通的伤害技能。该技能要求玩家有一定的闪避技巧，但难度不大。
+<img src="/images/hades-AI/spike.png"></p></li>
+<li><p>突刺击-Ex 距离较远的突刺击。同上，对闪避有一定要求，但难度不大。
+<img src="/images/hades-AI/spike-Ex.png"></p></li>
+<li><p>遁形
+进入隐身状态持续一段时间，之后在雪地上连续出现两次脚印，标志着BOSS的移动轨迹，最后将在角色附近突然出现并执行单次大范围回旋击。该主要考核了玩家观察BOSS行为轨迹并进行预判的能力，需要提前使用闪避快速远离可能的目标地点。注意这个技能最后的回旋击范围是所有技能中最大的，如果不幸BOSS就闪现在身边，单次闪避是没有办法逃离AOE范围的，除非是连续多次闪避或提前预判位置走开。这个技能的作用有：（1）长时间BOSS的无攻击期方便BOSS重置技能CD或Counter；（2）方便玩家清理场上的小怪或者Bomb；（3）形成一个较长时间的Combat
+break，缓解了一下紧张的战斗节奏。 <img src="/images/hades-AI/escape-1.png"> <img src="/images/hades-AI/escape-2.png"></p></li>
+<li><p>发射Bomb
+向前发射一个Bomb，如果直接撞到主角会产生伤害并附带“沸腾之血”Debuff，否则经过一段时间的滑行或撞到墙之后停下，并开始5秒倒计时。如果没在倒计时结束前打破Bomb，则Bomb会爆炸产生超大范围的缓慢全屏光圈攻击，需要闪避躲过去或远离Bomb。该技能和前面的纯粹伤害型技能都不同，它产生了一个额外的敌人，而在已知该敌人会造成较大威胁的前提下，驱使玩家转而攻击Bomb，当然玩家如果对自己的技术有信心，也可以无视它继续攻击Boss，这就增强了游戏的策略性：如果自己当前状态不健康，上策必然是打掉Bomb；否则攻击BOSS会更快结束战斗。这个技能还有一个比较特殊的地方在于，它往往是连续多次出现的，这就进一步增强了玩家临时的决策要求：多个Bomb存在时会指数级地增大游戏的风险，这时候即使自己状态比较健康也会更加慎重地进行选择。该技能的另外一个好处在于，它将单纯的BOSS
+combat转为了Battlefield
+clear模式，即优先清理小怪。两种战斗模式的切换也能增强游戏的多样性。 <img src="/images/hades-AI/bomb.png"></p></li>
+<li><p>发射Bomb-Ex
+发射前向高速移动的Bomb，撞到墙才会停止，其他机制与发射Bomb相同。该技能的作用同上，但是由于该技能伤害更高，更难躲避，因此更加考验玩家的反应和观察力。
+<img src="/images/hades-AI/bomb-Ex.png"></p></li>
+<li><p>召唤
+在第一阶段2/3和1/3血量处时使用召唤技能，进入短暂无敌状态并随机召唤几个较为强力的小怪。每一次召唤之后上述所有技能的使用频率都会发生变化。<strong>假设为三个子阶段，在第一个子阶段，回旋击、突刺击和突刺击-Ex使用较多，遁形、发射Bomb和发射Bomb-Ex使用较少，且整体的攻击频率很低（也即一个连续的攻击集合中包含的攻击技能较少，一般只有1~2个，集合之间通过Idle、遁形实现暂停）。在第二个子阶段，依旧以回旋击、突刺击和突刺击-Ex为主，但是发射Bomb和发射Bomb-Ex频率开始增加，整体攻击频率开始增加（一个攻击集合中的技能数量增加，为2~4个，集合之间的Idle持续时间开始缩短）。在第三个子阶段，所有技能的使用频率基本相同，变得更有节奏感，即使用一套技能之后进行遁形，然后再使用一套技能（此时一个攻击集合中的技能数量变为2~5个，集合之间的Idle持续时间进一步缩短）</strong>。该技能的作用本质和发射Bomb是一致的，但是Battlefield
+clear的意图更加明显，玩家这时候不得不优先清理小怪而不是像对待Bomb那样可选可不选，因为小怪非常强力并且极具干扰。在Battlefield
+clear期间，BOSS也会照常攻击玩家，这个时候是最紧张刺激的阶段，直到清理完所有小怪。
+<img src="/images/hades-AI/summon.png"></p></li>
 </ul>
-<h2 id="第一阶段总结"><a class="markdownIt-Anchor" href="#第一阶段总结"></a> 第一阶段总结</h2>
-<p>总的来说，BOSS的第一阶段攻击招式非常多样，不但有直接伤害型技能，还有召唤型技能，不但有持续的攻击输出，还有间或出现的木桩模式、Attack break模式，给持续紧张的战斗带来一点点休息的空隙。即使在同一个技能模板下，也有两个不同的强弱版本，这当然不是制作组偷懒（或许也有这个因素），更多的是同一套技能模板下的不同变体既能帮助玩家辨识该技能的前摇、释放、后摇是怎样的，又能增强玩家在游戏体验上的丰富度，何乐而不为呢。</p>
+<h2 id="第一阶段总结">第一阶段总结</h2>
+<p>总的来说，BOSS的第一阶段攻击招式非常多样，不但有直接伤害型技能，还有召唤型技能，不但有持续的攻击输出，还有间或出现的木桩模式、Attack
+break模式，给持续紧张的战斗带来一点点休息的空隙。即使在同一个技能模板下，也有两个不同的强弱版本，这当然不是制作组偷懒（或许也有这个因素），更多的是同一套技能模板下的不同变体既能帮助玩家辨识该技能的前摇、释放、后摇是怎样的，又能增强玩家在游戏体验上的丰富度，何乐而不为呢。</p>
 <p>BOSS的第一阶段尤其值得注意的是，所有技能都对玩家使用“闪避”的能力提出了较高的要求，无论是直截了当的突刺击、突刺击-Ex，还是遁形后的回旋击、发射Bomb、发射Bomb-Ex，都要求玩家能在极短时间内做出闪避这个动作。并且随着BOSS第一阶段的血量降低，BOSS发动上述技能的频率会显著增加，即木桩模式的持续时间几乎趋于零，更多地是以遁形代替，这样的设计充满了游戏开发者的恶意：“想靠遁形休息一下？没门儿！接着闪避吧。”</p>
-<h2 id="第二阶段"><a class="markdownIt-Anchor" href="#第二阶段"></a> 第二阶段</h2>
-<p>第二阶段没有第一阶段“遁形”、 “召唤”、“突刺击”、“发射Bomb”这四个技能，其他技能都有。除了第一阶段的技能之外，第二阶段增加了四个新技能（不算初始爆发），介绍如下：</p>
+<h2 id="第二阶段">第二阶段</h2>
+<p>第二阶段没有第一阶段“遁形”、
+“召唤”、“突刺击”、“发射Bomb”这四个技能，其他技能都有。除了第一阶段的技能之外，第二阶段增加了四个新技能（不算初始爆发），介绍如下：</p>
 <ul>
-<li>
-<p>初始爆发<br>
-在第二阶段一开始会以自身为圆心创造缓慢全屏光圈攻击，需要闪避躲过去。这个不多说了，只是一个阶段变化的标志而已。<br>
-<img src="/images/hades-AI/init.png" alt=""></p>
-</li>
-<li>
-<p>局部光束<br>
-在面朝的方向发射三个光束，缓慢旋转，幅度大约为90度。该技能前摇非常明显，主要考察玩家的观察能力，甚至不太考察玩家的反应、闪避能力。<br>
-<img src="/images/hades-AI/local.png" alt=""></p>
-</li>
-<li>
-<p>全局光束<br>
-发射全屏光束。该技能前摇时间较长，约为2秒左右，因此玩家在看到前摇动作的时候，需要快速找到掩体进行防御，因此考察了玩家的反应能力。该技能的另外一个作用和遁形类似：创造一段时间的Combat break，缓解高强度战斗节奏。<br>
-<img src="/images/hades-AI/global.png" alt=""></p>
-</li>
-<li>
-<p>阴间柱子<br>
-在地图上随机生成9个绿色阴间柱子，打破后会有地狱之手将角色控制，持续约2秒。在打掉所有柱子之前不会再产生新的阴间柱子。在产生柱子之后，会有一定的时间间隔释放基本技能，之后会释放局部光束或全局光束。然后继续释放基本技能，直到下次阴间柱子的产生，循环此过程。光束和阴间柱子这两个技能是BOSS第二阶段的核心，在下面的总结部分进行详细介绍。<br>
-<img src="/images/hades-AI/pillar-1.png" alt=""><br>
-<img src="/images/hades-AI/pillar-2.png" alt=""></p>
-</li>
-<li>
-<p>斩击<br>
-向前发动两次较大范围的斩击。该技能和“回旋击”基本是一致的，只不过每次斩击的范围只局限在前半身而不是360度范围。该技能同样考察了玩家的闪避和反应能力，但难度较低。<br>
-<img src="/images/hades-AI/slash.png" alt=""></p>
-</li>
+<li><p>初始爆发
+在第二阶段一开始会以自身为圆心创造缓慢全屏光圈攻击，需要闪避躲过去。这个不多说了，只是一个阶段变化的标志而已。
+<img src="/images/hades-AI/init.png"></p></li>
+<li><p>局部光束
+在面朝的方向发射三个光束，缓慢旋转，幅度大约为90度。该技能前摇非常明显，主要考察玩家的观察能力，甚至不太考察玩家的反应、闪避能力。
+<img src="/images/hades-AI/local.png"></p></li>
+<li><p>全局光束
+发射全屏光束。该技能前摇时间较长，约为2秒左右，因此玩家在看到前摇动作的时候，需要快速找到掩体进行防御，因此考察了玩家的反应能力。该技能的另外一个作用和遁形类似：创造一段时间的Combat
+break，缓解高强度战斗节奏。 <img src="/images/hades-AI/global.png"></p></li>
+<li><p>阴间柱子
+在地图上随机生成9个绿色阴间柱子，打破后会有地狱之手将角色控制，持续约2秒。在打掉所有柱子之前不会再产生新的阴间柱子。在产生柱子之后，会有一定的时间间隔释放基本技能，之后会释放局部光束或全局光束。然后继续释放基本技能，直到下次阴间柱子的产生，循环此过程。光束和阴间柱子这两个技能是BOSS第二阶段的核心，在下面的总结部分进行详细介绍。
+<img src="/images/hades-AI/pillar-1.png"> <img src="/images/hades-AI/pillar-2.png"></p></li>
+<li><p>斩击
+向前发动两次较大范围的斩击。该技能和“回旋击”基本是一致的，只不过每次斩击的范围只局限在前半身而不是360度范围。该技能同样考察了玩家的闪避和反应能力，但难度较低。
+<img src="/images/hades-AI/slash.png"></p></li>
 </ul>
-<h2 id="第二阶段总结"><a class="markdownIt-Anchor" href="#第二阶段总结"></a> 第二阶段总结</h2>
+<h2 id="第二阶段总结">第二阶段总结</h2>
 <p>如果是BOSS第一阶段重点考察了玩家的闪避能力，那么BOSS第二阶段就考察了玩家的综合能力：观察、反应、策略，当然还有要求更高的闪避。这是因为，第二阶段取消的技能非常有代表性，除了“召唤”之外，“遁形”“突刺击”“发射Bomb”都是在考察玩家的基本闪避能力，这时候只需要使用它们的Ex版本就好了。取而代之的技能有“局部光束”“全局光束”“阴间柱子”“斩击”。“斩击”相当于是另一个版本的“回旋击”，同样考察了玩家的观察、反应和闪避能力，实际上这个技能我个人认为做的比较失败，因为在定位上和回旋击是基本一致的。接下来就是很关键的“局部光束”“全局光束”“阴间柱子”，这三个技能，或者说两个，往往是搭配出现的，这就是第二阶段重策略和反应的核心。</p>
 <p>BOSS的释放逻辑是：（1）首先召唤9个阴间柱子；（2）上来对玩家进行一套技能；（3）突然释放“局部光束”或者“全局光束”。这一套逻辑的点在于：（1）召唤的9个阴间柱子不能马上打掉，一是因为数量比较多，二是BOSS在骚扰；（2）BOSS的骚扰会被迫让玩家进入与BOSS的战斗节奏而没有及时清理周围的阴间柱子；（3）BOSS突然释放伤害极高的光束，会让玩家迅速寻找掩体，但是由于玩家之前被BOSS拖住没有及时清理柱子，所以就有相当的概率会在寻找掩体的过程中失误，被阴间柱子缠住，这时候BOSS的光束打中玩家，造成大量伤害甚至秒杀。</p>
-<p>可以发现，上面的一套逻辑下来，目的就是要让玩家“第一时间打掉阴间柱子”，即使这个BOSS在骚扰，也要尽可能无视它优先尽快清理柱子，否则之后BOSS释放光束会非常棘手。如果玩家没有意识到这一点，就一定会被BOSS屡试不爽，这也就考察了玩家的反应和决策能力。当然阴间柱子怎么清理呢，如果是远程武器就很简单了，但是如果是拳套，就可以通过丢标或者闪避伤害去清理，当然也可以引导BOSS去打掉柱子。选择很多，关键还是要临场反应。其他剩下的技能就是在更多地考察进阶的闪避能力了，本质上和BOSS第一阶段是一样的。<br>
-<img src="/images/hades-AI/summary.png" alt=""></p>
-<h1 id="实现逻辑"><a class="markdownIt-Anchor" href="#实现逻辑"></a> 实现逻辑</h1>
-<p>通过观察可以猜测下面的（可能的）AI设计逻辑。</p>
-<h2 id="第一阶段-2"><a class="markdownIt-Anchor" href="#第一阶段-2"></a> 第一阶段</h2>
-<p>整体的技能AI涉及到几个参数：技能集合大小随机数randomSetSize，每个技能出现在技能集合中的概率p[i]（i=回旋击、突刺击、突刺击-Ex、发射Bomb、发射Bomb-Ex）及对应的最大出现次数t[i]，Idle持续时间idleTime，技能集合之间的过渡选择概率p[move]、p[Idle]和p[escape]，分别表示用“冲刺移动”、“站立”和“遁形”承接两个相邻的技能集合。</p>
+<p>可以发现，上面的一套逻辑下来，目的就是要让玩家“第一时间打掉阴间柱子”，即使这个BOSS在骚扰，也要尽可能无视它优先尽快清理柱子，否则之后BOSS释放光束会非常棘手。如果玩家没有意识到这一点，就一定会被BOSS屡试不爽，这也就考察了玩家的反应和决策能力。当然阴间柱子怎么清理呢，如果是远程武器就很简单了，但是如果是拳套，就可以通过丢标或者闪避伤害去清理，当然也可以引导BOSS去打掉柱子。选择很多，关键还是要临场反应。其他剩下的技能就是在更多地考察进阶的闪避能力了，本质上和BOSS第一阶段是一样的。
+<img src="/images/hades-AI/summary.png"></p>
+<h1 id="实现逻辑">实现逻辑</h1>
+<p>通过观察可以猜测下面的（可能的）AI设计逻辑。 ## 第一阶段
+整体的技能AI涉及到几个参数：技能集合大小随机数randomSetSize，每个技能出现在技能集合中的概率p[i]（i=回旋击、突刺击、突刺击-Ex、发射Bomb、发射Bomb-Ex）及对应的最大出现次数t[i]，Idle持续时间idleTime，技能集合之间的过渡选择概率p[move]、p[Idle]和p[escape]，分别表示用“冲刺移动”、“站立”和“遁形”承接两个相邻的技能集合。</p>
 <p>具体的AI逻辑如下：</p>
 <ul>
-<li>血量判断：当分别为2/3, 1/3血量的时候，释放技能“召唤”并进入下一个子阶段。每个子阶段上述的所有参数都会有所变动。</li>
+<li>血量判断：当分别为2/3,
+1/3血量的时候，释放技能“召唤”并进入下一个子阶段。每个子阶段上述的所有参数都会有所变动。</li>
 <li>距离判断：当玩家和BOSS的距离超过一定距离的时候，会依据p[move]来接近玩家。</li>
-<li>第一个子阶段：在满足血量和距离的前提下，生成随机数randomSetSize ∈[1,2]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。之后，根据idleTime执行站立动作（此时没有用到p[Idle]，因为这个阶段idle是一定执行的）。然后根据p[escape]选择是否执行“遁形”技能。最后回到距离判断。</li>
-<li>第二个子阶段：在满足血量和距离的前提下，生成随机数randomSetSize ∈[2,4]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。注意这个时候p[i]应该有所调整，具体来说，是将发射Bomb和发射Bomb-Ex的概率增大，突刺击和突刺击-Ex的概率降低，回旋击不变或适度增大。之后，根据idleTime执行站立动作（此时没有用到p[Idle]，因为这个阶段idle是一定执行的，同时相比第一个子阶段，idleTime适当减小）。然后根据p[escape]选择是否执行“遁形”技能，p[escape]此时相比上一个子阶段适当增大。最后回到距离判断。</li>
-<li>第三个子阶段：在满足血量和距离的前提下，生成随机数randomSetSize ∈[2,5]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。注意这个时候p[i]应该相比上一个子阶段进一步调整，具体来说，是将发射Bomb和发射Bomb-Ex的概率进一步增大，突刺击和突刺击-Ex的概率进一步降低，回旋击不变或适度增大，最终效果应以Bomb为主，回旋击次之，突刺击为辅。之后，根据p[Idle]决定是否执行站立动作，站立时间为idleTime，相比上一个子阶段时间再次适当缩短。p[Idle]原则上应该比较大(&gt;=80%)。之后，执行“遁形”技能。最后回到距离判断。</li>
+<li>第一个子阶段：在满足血量和距离的前提下，生成随机数randomSetSize
+∈[1,2]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。之后，根据idleTime执行站立动作（此时没有用到p[Idle]，因为这个阶段idle是一定执行的）。然后根据p[escape]选择是否执行“遁形”技能。最后回到距离判断。</li>
+<li>第二个子阶段：在满足血量和距离的前提下，生成随机数randomSetSize
+∈[2,4]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。注意这个时候p[i]应该有所调整，具体来说，是将发射Bomb和发射Bomb-Ex的概率增大，突刺击和突刺击-Ex的概率降低，回旋击不变或适度增大。之后，根据idleTime执行站立动作（此时没有用到p[Idle]，因为这个阶段idle是一定执行的，同时相比第一个子阶段，idleTime适当减小）。然后根据p[escape]选择是否执行“遁形”技能，p[escape]此时相比上一个子阶段适当增大。最后回到距离判断。</li>
+<li>第三个子阶段：在满足血量和距离的前提下，生成随机数randomSetSize
+∈[2,5]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。注意这个时候p[i]应该相比上一个子阶段进一步调整，具体来说，是将发射Bomb和发射Bomb-Ex的概率进一步增大，突刺击和突刺击-Ex的概率进一步降低，回旋击不变或适度增大，最终效果应以Bomb为主，回旋击次之，突刺击为辅。之后，根据p[Idle]决定是否执行站立动作，站立时间为idleTime，相比上一个子阶段时间再次适当缩短。p[Idle]原则上应该比较大(&gt;=80%)。之后，执行“遁形”技能。最后回到距离判断。</li>
 </ul>
-<h2 id="第二阶段-2"><a class="markdownIt-Anchor" href="#第二阶段-2"></a> 第二阶段</h2>
+<h2 id="第二阶段-1">第二阶段</h2>
 <p>由于第二阶段内部只包含一个子阶段，因此AI逻辑相比第一阶段更加简单。</p>
 <p>整体的技能AI涉及几个参数：技能集合大小随机数randomSetSize，每个技能出现在技能集合中的概率p[i]（i=回旋击、突刺击-Ex、发射Bomb-Ex、斩击）及对应的最大出现次数t[i]，发射局部光束的概率p[local]，发射全局光束的概率p[global]，发动阴间柱子的概率p[hell]，站立的概率p[Idle]，移动的概率p[move]，站立的持续时间idleTime。</p>
 <p>具体的AI逻辑如下（不考虑进入第二阶段开始的初始爆发）：</p>
@@ -423,17 +406,19 @@ mjx-container[display="true"] + br {
 <li>距离判断：当玩家和BOSS的距离超过一定距离的时候，会依据p[move]来接近玩家。</li>
 <li>根据p[hell]决定是否释放阴间柱子。如果释放，则进入“阴间模式”，否则为“普通模式”。
 <ul>
-<li>在“阴间模式”下，生成随机数randomSetSize ∈[2,5]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。之后，根据p[local]和p[global]选择执行“局部光束”或者“全局光束”。之后，根据p[Idle]决定是否执行站立动作，站立时间为idleTime，该值小于BOSS第一阶段的对应值。“阴间模式”结束，减小p[hell]，如果当前是第三次释放阴间柱子，则设置p[hell]=0。最后回到距离判断。</li>
-<li>在“普通模式”下，生成随机数randomSetSize ∈[2,5]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。之后，根据p[Idle]决定是否执行站立动作，站立时间为idleTime，该值小于BOSS第一阶段的对应值。“普通模式”结束，回到距离判断。</li>
+<li>在“阴间模式”下，生成随机数randomSetSize
+∈[2,5]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。之后，根据p[local]和p[global]选择执行“局部光束”或者“全局光束”。之后，根据p[Idle]决定是否执行站立动作，站立时间为idleTime，该值小于BOSS第一阶段的对应值。“阴间模式”结束，减小p[hell]，如果当前是第三次释放阴间柱子，则设置p[hell]=0。最后回到距离判断。</li>
+<li>在“普通模式”下，生成随机数randomSetSize
+∈[2,5]，并根据p[i]和t[i]的限制选择技能集合中的技能，然后执行该技能集合。之后，根据p[Idle]决定是否执行站立动作，站立时间为idleTime，该值小于BOSS第一阶段的对应值。“普通模式”结束，回到距离判断。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h1 id="用behavior-designer画一个简单的行为树"><a class="markdownIt-Anchor" href="#用behavior-designer画一个简单的行为树"></a> 用Behavior Designer画一个简单的行为树</h1>
+<h1 id="用behavior-designer画一个简单的行为树">用Behavior
+Designer画一个简单的行为树</h1>
 <p>按照上述逻辑可以设计如下的简化版BD，直接展现图，就不过多文字描述了。</p>
-<h2 id="第一阶段-3"><a class="markdownIt-Anchor" href="#第一阶段-3"></a> 第一阶段</h2>
-<p><img src="/images/hades-AI/bt-1.png" alt=""></p>
-<h2 id="第二阶段-3"><a class="markdownIt-Anchor" href="#第二阶段-3"></a> 第二阶段</h2>
-<p><img src="/images/hades-AI/bt-2.png" alt=""></p>
+<h2 id="第一阶段-1">第一阶段</h2>
+<p><img src="/images/hades-AI/bt-1.png"></p>
+<h2 id="第二阶段-2">第二阶段</h2>
+<p><img src="/images/hades-AI/bt-2.png"></p>
 
   </div>
 </article>
@@ -465,7 +450,8 @@ mjx-container[display="true"] + br {
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD%E4%B8%8E%E7%8E%A9%E5%AE%B6%E4%BD%93%E9%AA%8C"><span class="toc-number">1.</span> <span class="toc-text"> 核心技能与玩家体验</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.</span> <span class="toc-text"> 第一阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.</span> <span class="toc-text"> 第一阶段总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5"><span class="toc-number">1.3.</span> <span class="toc-text"> 第二阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text"> 第二阶段总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91"><span class="toc-number">2.</span> <span class="toc-text"> 实现逻辑</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-2"><span class="toc-number">2.1.</span> <span class="toc-text"> 第一阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5-2"><span class="toc-number">2.2.</span> <span class="toc-text"> 第二阶段</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%A8behavior-designer%E7%94%BB%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E8%A1%8C%E4%B8%BA%E6%A0%91"><span class="toc-number">3.</span> <span class="toc-text"> 用Behavior Designer画一个简单的行为树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-3"><span class="toc-number">3.1.</span> <span class="toc-text"> 第一阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5-3"><span class="toc-number">3.2.</span> <span class="toc-text"> 第二阶段</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD%E4%B8%8E%E7%8E%A9%E5%AE%B6%E4%BD%93%E9%AA%8C"><span class="toc-number">1.</span> <span class="toc-text">核心技能与玩家体验</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.</span> <span class="toc-text">第一阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.</span> <span class="toc-text">第一阶段总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5"><span class="toc-number">1.3.</span> <span class="toc-text">第二阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">第二阶段总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91"><span class="toc-number">2.</span> <span class="toc-text">实现逻辑</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5-1"><span class="toc-number">2.1.</span> <span class="toc-text">第二阶段</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%A8behavior-designer%E7%94%BB%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E8%A1%8C%E4%B8%BA%E6%A0%91"><span class="toc-number">3.</span> <span class="toc-text">用Behavior
+Designer画一个简单的行为树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-1"><span class="toc-number">3.1.</span> <span class="toc-text">第一阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5-2"><span class="toc-number">3.2.</span> <span class="toc-text">第二阶段</span></a></li></ol></li></ol>
       </div>
     
 
@@ -480,7 +466,9 @@ mjx-container[display="true"] + br {
   <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://sulley.cc/2021/09/22/08/52/&title=浅谈Hades最终BOSS的AI设计"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://sulley.cc/2021/09/22/08/52/&title=浅谈Hades最终BOSS的AI设计"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://sulley.cc/2021/09/22/08/52/&title=浅谈Hades最终BOSS的AI设计"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://sulley.cc/2021/09/22/08/52/&name=浅谈Hades最终BOSS的AI设计&description=&lt;p&gt;作为一个典型的ROUGE-like ACT游戏，BOSS在Hades的游戏体验中占据非常重要的地位。一次完整的游戏流程需要经历四个BOSS：复仇三姐妹中的一个，九头蛇，装逼双雄和最终BOSS Hades。每个BOSS的设计都很有特色，&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://sulley.cc/2021/09/22/08/52/&name=浅谈Hades最终BOSS的AI设计&description=&lt;p&gt;作为一个典型的ROUGE-like
+ACT游戏，BOSS在Hades的游戏体验中占据非常重要的地位。一次完整的游戏流程需要经历四个BOSS：复仇三姐妹中的一个，九头蛇，装逼双雄和最终BOSS
+Hades。每个BOSS的设计都很有特色，&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://sulley.cc/2021/09/22/08/52/&t=浅谈Hades最终BOSS的AI设计"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
