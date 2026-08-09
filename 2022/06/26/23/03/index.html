@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang=en>
+<html lang=&#34;en&#34;>
 <head>
     <!-- so meta -->
     <meta charset="utf-8">
@@ -47,9 +47,7 @@
 
 
     <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
+    <link rel="stylesheet" href="/css/style.css?v=20260808">
     <!-- persian styles -->
     
     <!-- rss -->
@@ -182,6 +180,7 @@ mjx-container[display="true"] + br {
 </style></head>
 
 <body class="max-width mx-auto px3 ltr">
+    <a class="skip-link" href="#main-content">Skip to content</a>
     
       <div id="header-post">
   <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
@@ -251,7 +250,8 @@ mjx-container[display="true"] + br {
     
     <div class="content index py4 ">
         
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+        <main id="main-content">
+          <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
@@ -355,6 +355,7 @@ mjx-container[display="true"] + br {
 
 
 
+        </main>
         
           <div id="footer-post-container">
   <div id="footer-post">
@@ -451,7 +452,10 @@ mjx-container[display="true"] + br {
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
-    <!-- jquery -->
+    <!-- search -->
+
+
+<!-- jquery -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
 
@@ -466,9 +470,9 @@ mjx-container[display="true"] + br {
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    var btn = "<button type=\"button\" class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
     btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
+    btn += '</button>';
     // mount it!
     $(".highlight table").before(btn);
     var clip = new ClipboardJS('.btn-copy', {
@@ -483,11 +487,7 @@ mjx-container[display="true"] + br {
   })
   </script>
 
-
-<script src="/js/main.js"></script>
-
-<!-- search -->
-
+<script src="/js/main.js?v=20260808"></script>
 <!-- Baidu Analytics -->
 
 <!-- Cloudflare Analytics -->
@@ -495,6 +495,7 @@ mjx-container[display="true"] + br {
 <!-- Disqus Comments -->
 
 <!-- utterances Comments -->
+
 
 </body>
 </html>

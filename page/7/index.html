@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang=en>
+<html lang=&#34;en&#34;>
 <head>
     <!-- so meta -->
     <meta charset="utf-8">
@@ -43,9 +43,7 @@
 
 
     <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
+    <link rel="stylesheet" href="/css/style.css?v=20260808">
     <!-- persian styles -->
     
     <!-- rss -->
@@ -178,6 +176,7 @@ mjx-container[display="true"] + br {
 </style></head>
 
 <body class="max-width mx-auto px3 ltr">
+    <a class="skip-link" href="#main-content">Skip to content</a>
     
     <div class="content index py4 h-card">
         
@@ -192,10 +191,11 @@ mjx-container[display="true"] + br {
       <h1 class="p-name">Sulley</h1>
     </div>
   </a>
-  <div id="nav">
-    <ul>
+  <nav id="nav" aria-label="Primary navigation">
+    <ul id="site-nav-links">
       <li class="icon">
-        <a href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-2x"></i></a>
+        <button class="nav-toggle" type="button" aria-label="Menu"
+          aria-controls="site-nav-links" aria-expanded="false"><i class="fa-solid fa-bars fa-2x" aria-hidden="true"></i></button>
       </li>
       <!--
      --><li><a href="/">Home</a></li><!--
@@ -211,11 +211,12 @@ mjx-container[display="true"] + br {
      --><li><a href="/search/">Search</a></li><!--
    -->
     </ul>
-  </div>
+  </nav>
 </header>
 
         
-        <section id="about" class="p-note">
+        <main id="main-content">
+          <section id="about" class="p-note">
   
     <p>Through a sea of petals will I see a road to the heaven far away.</p>
 
@@ -708,6 +709,7 @@ property by name.</p>
 </section>
 
 
+        </main>
         
         <footer id="footer">
   <div class="footer-left">
@@ -746,7 +748,10 @@ property by name.</p>
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
-    <!-- jquery -->
+    <!-- search -->
+
+
+<!-- jquery -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
 
@@ -755,11 +760,7 @@ property by name.</p>
 
 <!-- clipboard -->
 
-
-<script src="/js/main.js"></script>
-
-<!-- search -->
-
+<script src="/js/main.js?v=20260808"></script>
 <!-- Baidu Analytics -->
 
 <!-- Cloudflare Analytics -->
@@ -767,6 +768,7 @@ property by name.</p>
 <!-- Disqus Comments -->
 
 <!-- utterances Comments -->
+
 
 </body>
 </html>

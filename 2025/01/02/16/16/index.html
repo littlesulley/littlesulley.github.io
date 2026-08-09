@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang=en>
+<html lang=&#34;en&#34;>
 <head>
     <!-- so meta -->
     <meta charset="utf-8">
@@ -61,9 +61,7 @@
 
 
     <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
+    <link rel="stylesheet" href="/css/style.css?v=20260808">
     <!-- persian styles -->
     
     <!-- rss -->
@@ -196,6 +194,7 @@ mjx-container[display="true"] + br {
 </style></head>
 
 <body class="max-width mx-auto px3 ltr">
+    <a class="skip-link" href="#main-content">Skip to content</a>
     
       <div id="header-post">
   <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
@@ -282,7 +281,8 @@ Anime Face Generation</span></a></li></ol></li><li class="toc-item toc-level-1">
     
     <div class="content index py4 ">
         
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+        <main id="main-content">
+          <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
@@ -502,8 +502,8 @@ required packages.</p>
 <p>However, training VAEs is not a trivial thing. As shown in the
 following figures, the generated images are quite blurry, missing
 details and lacking diversity.</p>
-<p><img src="/images/diffusion/1.png"><br>
-<img src="/images/diffusion/2.png"></p>
+<p><img alt="" decoding="async" loading="lazy" src="/images/diffusion/1.png"><br>
+<img alt="" decoding="async" loading="lazy" src="/images/diffusion/2.png"></p>
 <p>You can try yourself with the provided code, tune the loss weight for
 KL divergence. This may add some diversity but still, the generated
 images suffer from intensive blurs.</p>
@@ -662,8 +662,8 @@ after training but it does not mean the generated images are good
 enough. Instead, As training proceeds, the results are getting better.
 Here are some results after training for two epochs on my laptop. If you
 will, you can train the model longer for higher-quality images.</p>
-<p><img src="/images/diffusion/3.png"><br>
-<img src="/images/diffusion/4.png"></p>
+<p><img alt="" decoding="async" loading="lazy" src="/images/diffusion/3.png"><br>
+<img alt="" decoding="async" loading="lazy" src="/images/diffusion/4.png"></p>
 <h1 id="conclusion">Conclusion</h1>
 <p>In this post, we revisited the basic concepts and principles of
 auto-encoders, variational auto-encoders and diffusion models, and how
@@ -683,6 +683,7 @@ the near future.</p>
 
 
 
+        </main>
         
           <div id="footer-post-container">
   <div id="footer-post">
@@ -796,7 +797,10 @@ provides a simple application of generative models.&lt;/p&gt;"><i class="fab fa-
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
-    <!-- jquery -->
+    <!-- search -->
+
+
+<!-- jquery -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
 
@@ -811,9 +815,9 @@ provides a simple application of generative models.&lt;/p&gt;"><i class="fab fa-
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    var btn = "<button type=\"button\" class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
     btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
+    btn += '</button>';
     // mount it!
     $(".highlight table").before(btn);
     var clip = new ClipboardJS('.btn-copy', {
@@ -828,11 +832,7 @@ provides a simple application of generative models.&lt;/p&gt;"><i class="fab fa-
   })
   </script>
 
-
-<script src="/js/main.js"></script>
-
-<!-- search -->
-
+<script src="/js/main.js?v=20260808"></script>
 <!-- Baidu Analytics -->
 
 <!-- Cloudflare Analytics -->
@@ -840,6 +840,7 @@ provides a simple application of generative models.&lt;/p&gt;"><i class="fab fa-
 <!-- Disqus Comments -->
 
 <!-- utterances Comments -->
+
 
 </body>
 </html>

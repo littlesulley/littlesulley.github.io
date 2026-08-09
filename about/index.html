@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang=en>
+<html lang=&#34;en&#34;>
 <head>
     <!-- so meta -->
     <meta charset="utf-8">
@@ -45,9 +45,7 @@
 
 
     <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
+    <link rel="stylesheet" href="/css/style.css?v=20260808">
     <!-- persian styles -->
     
     <!-- rss -->
@@ -68,6 +66,7 @@
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
+    <a class="skip-link" href="#main-content">Skip to content</a>
     
     <div class="content index py4 ">
         
@@ -82,15 +81,16 @@
       <h1 class="p-name">Sulley</h1>
     </div>
   </a>
-  <div id="nav">
-    <ul>
+  <nav id="nav" aria-label="Primary navigation">
+    <ul id="site-nav-links">
       <li class="icon">
-        <a href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-2x"></i></a>
+        <button class="nav-toggle" type="button" aria-label="Menu"
+          aria-controls="site-nav-links" aria-expanded="false"><i class="fa-solid fa-bars fa-2x" aria-hidden="true"></i></button>
       </li>
       <!--
      --><li><a href="/">Home</a></li><!--
    --><!--
-     --><li><a href="/about/">About</a></li><!--
+     --><li><a href="/about/" aria-current="page">About</a></li><!--
    --><!--
      --><li><a href="/archives/">Writing</a></li><!--
    --><!--
@@ -101,11 +101,12 @@
      --><li><a href="/search/">Search</a></li><!--
    -->
     </ul>
-  </div>
+  </nav>
 </header>
 
         
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <main id="main-content">
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   
 
   <div class="content" itemprop="articleBody">
@@ -135,6 +136,7 @@ Games, Mathematics, Movies, Music, Writing, Hiking</p>
   </div>
 </article>
 
+        </main>
         
         <footer id="footer">
   <div class="footer-left">
@@ -173,7 +175,10 @@ Games, Mathematics, Movies, Music, Writing, Hiking</p>
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
-    <!-- jquery -->
+    <!-- search -->
+
+
+<!-- jquery -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
 
@@ -182,11 +187,7 @@ Games, Mathematics, Movies, Music, Writing, Hiking</p>
 
 <!-- clipboard -->
 
-
-<script src="/js/main.js"></script>
-
-<!-- search -->
-
+<script src="/js/main.js?v=20260808"></script>
 <!-- Baidu Analytics -->
 
 <!-- Cloudflare Analytics -->
@@ -194,6 +195,7 @@ Games, Mathematics, Movies, Music, Writing, Hiking</p>
 <!-- Disqus Comments -->
 
 <!-- utterances Comments -->
+
 
 </body>
 </html>

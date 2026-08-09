@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang=en>
+<html lang=&#34;en&#34;>
 <head>
     <!-- so meta -->
     <meta charset="utf-8">
@@ -57,9 +57,7 @@
 
 
     <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
+    <link rel="stylesheet" href="/css/style.css?v=20260808">
     <!-- persian styles -->
     
     <!-- rss -->
@@ -192,6 +190,7 @@ mjx-container[display="true"] + br {
 </style></head>
 
 <body class="max-width mx-auto px3 ltr">
+    <a class="skip-link" href="#main-content">Skip to content</a>
     
       <div id="header-post">
   <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
@@ -304,7 +303,8 @@ Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-4">
     
     <div class="content index py4 ">
         
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+        <main id="main-content">
+          <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
@@ -374,12 +374,12 @@ Developers》的阅读笔记，放在此备份供参阅。</p>
 <li>……</li>
 </ul>
 <figure>
-<img src="/images/realtime_cameras/1-1.png" alt="游戏各系统之间的联系。">
+<img decoding="async" loading="lazy" src="/images/realtime_cameras/1-1.png" alt="游戏各系统之间的联系。">
 <figcaption aria-hidden="true">游戏各系统之间的联系。</figcaption>
 </figure>
 <p>游戏的每个系统都有相对固定的更新顺序，如下图所示：</p>
 <figure>
-<img src="/images/realtime_cameras/1-2.png" alt="游戏各系统的更新顺序。">
+<img decoding="async" loading="lazy" src="/images/realtime_cameras/1-2.png" alt="游戏各系统的更新顺序。">
 <figcaption aria-hidden="true">游戏各系统的更新顺序。</figcaption>
 </figure>
 <p>对于每个步骤的介绍如下：</p>
@@ -528,7 +528,7 @@ avoidance两个问题</li>
 </ul></li>
 </ul>
 <figure>
-<img src="/images/realtime_cameras/2-1.png" alt="简化的渲染流程。">
+<img decoding="async" loading="lazy" src="/images/realtime_cameras/2-1.png" alt="简化的渲染流程。">
 <figcaption aria-hidden="true">简化的渲染流程。</figcaption>
 </figure>
 <p>在上述步骤中，与相机系统直接相关的有：view frustum, view
@@ -632,7 +632,7 @@ of thirds）</li>
 </ul></li>
 </ul>
 <figure>
-<img src="/images/realtime_cameras/3-1.png" alt="Rule of thirds示意。">
+<img decoding="async" loading="lazy" src="/images/realtime_cameras/3-1.png" alt="Rule of thirds示意。">
 <figcaption aria-hidden="true">Rule of thirds示意。</figcaption>
 </figure>
 <h3 id="tools">Tools</h3>
@@ -978,9 +978,9 @@ Length，filter or rendering effects, fog distance等</li>
 <li>First person scripting: 有一些情况也需要对FP相机进行动态控制，比如
 <ul>
 <li>Traversing up or down ramps or other significantly sloped surfaces:
-在上下坡的时候线相机要和坡度一致 <img src="/images/realtime_cameras/6-6.png" alt="根据玩家位置自动pitch。"></li>
-<li>Jumping: 在高距离跳跃时，能够对准落脚点的方向，但幅度不宜过大 <img src="/images/realtime_cameras/6-7.png" alt="玩家跳跃时自动pitch。"></li>
-<li>View locking: 锁定目标时相机要朝向目标点 <img src="/images/realtime_cameras/6-8.png" alt="玩家锁定目标。"></li>
+在上下坡的时候线相机要和坡度一致 <img decoding="async" loading="lazy" src="/images/realtime_cameras/6-6.png" alt="根据玩家位置自动pitch。"></li>
+<li>Jumping: 在高距离跳跃时，能够对准落脚点的方向，但幅度不宜过大 <img decoding="async" loading="lazy" src="/images/realtime_cameras/6-7.png" alt="玩家跳跃时自动pitch。"></li>
+<li>View locking: 锁定目标时相机要朝向目标点 <img decoding="async" loading="lazy" src="/images/realtime_cameras/6-8.png" alt="玩家锁定目标。"></li>
 </ul></li>
 <li>Non-interactive movie scripting:
 最常用的就是位置和朝向的scripting</li>
@@ -2172,6 +2172,7 @@ logging, messaging filtering, object state</li>
 
 
 
+        </main>
         
           <div id="footer-post-container">
   <div id="footer-post">
@@ -2311,7 +2312,10 @@ Developers》的阅读笔记，放在此备份供参阅。&lt;/p&gt;"><i class="
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
-    <!-- jquery -->
+    <!-- search -->
+
+
+<!-- jquery -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
 
@@ -2326,9 +2330,9 @@ Developers》的阅读笔记，放在此备份供参阅。&lt;/p&gt;"><i class="
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    var btn = "<button type=\"button\" class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
     btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
+    btn += '</button>';
     // mount it!
     $(".highlight table").before(btn);
     var clip = new ClipboardJS('.btn-copy', {
@@ -2343,11 +2347,7 @@ Developers》的阅读笔记，放在此备份供参阅。&lt;/p&gt;"><i class="
   })
   </script>
 
-
-<script src="/js/main.js"></script>
-
-<!-- search -->
-
+<script src="/js/main.js?v=20260808"></script>
 <!-- Baidu Analytics -->
 
 <!-- Cloudflare Analytics -->
@@ -2355,6 +2355,7 @@ Developers》的阅读笔记，放在此备份供参阅。&lt;/p&gt;"><i class="
 <!-- Disqus Comments -->
 
 <!-- utterances Comments -->
+
 
 </body>
 </html>
